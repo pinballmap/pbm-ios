@@ -1,0 +1,38 @@
+//
+//  LocationViewController.h
+//  Portland Pinball Map
+//
+//  Created by Karri on 11/12/09.
+//  Copyright 2009 __MyCompanyName__. All rights reserved.
+//
+
+#import <UIKit/UIKit.h>
+#import "XMLTable.h"
+
+
+@interface LocationViewController : XMLTable {
+	NSDictionary *names;
+	NSArray      *keys;
+	NSMutableArray *neighborhoods;
+	
+	NSMutableArray *tempNeighborhood;
+	NSMutableString *currentNeighborhood;
+	
+	NSMutableArray *regionNames;
+	
+	//For XML Parsing
+	NSMutableDictionary *temp_machines;
+	NSMutableString     *temp_machine_name;
+	NSMutableString     *temp_machine_id;
+
+}
+
+@property (nonatomic,retain) NSDictionary *names;
+@property (nonatomic,retain) NSArray *keys;
+
+@property (nonatomic,retain) NSMutableArray *neighborhoods;
+@property (nonatomic,retain) NSMutableArray *tempNeighborhood;
+@property (nonatomic,retain) NSMutableArray *regionNames;
+@property (nonatomic,retain) NSMutableString *currentNeighborhood;
+
+@end

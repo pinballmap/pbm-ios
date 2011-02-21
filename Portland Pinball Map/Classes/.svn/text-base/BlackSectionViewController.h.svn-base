@@ -1,0 +1,22 @@
+//
+//  BlackSectionViewController.h
+//  Portland Pinball Map
+//
+//  Created by Isaac Ruiz on 11/23/09.
+//  Copyright 2009 __MyCompanyName__. All rights reserved.
+//
+
+#import "BlackTableViewController.h"
+
+#import <UIKit/UIKit.h>
+
+
+@interface BlackSectionViewController : BlackTableViewController
+{
+	NSInteger            headerHeight;
+	NSArray				*alphabet;
+}
+
+@property (nonatomic,retain) NSArray *alphabet;
+
+@end

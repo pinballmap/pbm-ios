@@ -1,0 +1,441 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 45;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		1D60589B0D05DD56006BFB54 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; };
+		1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
+		1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
+		2892E4100DC94CBA00A64D0F /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2892E40F0DC94CBA00A64D0F /* CoreGraphics.framework */; };
+		28AD73600D9D9599002E5188 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28AD735F0D9D9599002E5188 /* MainWindow.xib */; };
+		28F335F11007B36200424DE2 /* RootViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28F335F01007B36200424DE2 /* RootViewController.xib */; };
+		466A453710AE668F00AB7A2B /* PPMDoubleTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 466A453610AE668F00AB7A2B /* PPMDoubleTableCell.m */; };
+		466A453910AE675000AB7A2B /* PPMDoubleTextCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 466A453810AE675000AB7A2B /* PPMDoubleTextCell.xib */; };
+		46A3834D10AD4FD300414035 /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 46A3834510AD4FD300414035 /* RootViewController.m */; };
+		46A3834E10AD4FD300414035 /* Portland_Pinball_MapAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 46A3834710AD4FD300414035 /* Portland_Pinball_MapAppDelegate.m */; };
+		46A3835010AD4FD300414035 /* MachineViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 46A3834C10AD4FD300414035 /* MachineViewController.m */; };
+		46A3837110AD521800414035 /* ppm_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 46A3837010AD521800414035 /* ppm_icon.png */; };
+		46A3838810AD5F9000414035 /* RSSViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 46A3838710AD5F9000414035 /* RSSViewController.m */; };
+		6A030343110E8E9E0042CAF8 /* splash.png in Resources */ = {isa = PBXBuildFile; fileRef = 6A030342110E8E9E0042CAF8 /* splash.png */; };
+		6A030373110E94020042CAF8 /* Default_old.png in Resources */ = {isa = PBXBuildFile; fileRef = 6A030372110E94020042CAF8 /* Default_old.png */; };
+		6A0782AF10C4F857006EA7E3 /* MachineObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A0782AE10C4F857006EA7E3 /* MachineObject.m */; };
+		6A07ABCE10B000510090BDCB /* XMLTable.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A07ABCD10B000510090BDCB /* XMLTable.m */; };
+		6A07AD8310B01C6B0090BDCB /* XMLTableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6A07AD8110B01C6B0090BDCB /* XMLTableView.xib */; };
+		6A10D0981120EF9A00A81A8B /* ClosestLocations.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A10D0971120EF9A00A81A8B /* ClosestLocations.m */; };
+		6A26B3F110AFEAA000F07F0A /* BlackTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A26B3F010AFEAA000F07F0A /* BlackTableViewController.m */; };
+		6A26B45F10AFF3F000F07F0A /* PPMTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A26B45E10AFF3F000F07F0A /* PPMTableCell.m */; };
+		6A26B46110AFF4EB00F07F0A /* PPMTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6A26B46010AFF4EB00F07F0A /* PPMTableCell.xib */; };
+		6A47866A10E5ED9200F563E4 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6A47866910E5ED9200F563E4 /* MapKit.framework */; };
+		6A47868E10E5F03400F563E4 /* LocationMap.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A47868D10E5F03400F563E4 /* LocationMap.m */; };
+		6A50C77211238F1D00F02F99 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 6A50C77111238F1D00F02F99 /* Default.png */; };
+		6A50C77811238F8600F02F99 /* splash_town.png in Resources */ = {isa = PBXBuildFile; fileRef = 6A50C77711238F8600F02F99 /* splash_town.png */; };
+		6A5EFE1D111541F7009ACC93 /* arrow3.png in Resources */ = {isa = PBXBuildFile; fileRef = 6A5EFE1C111541F7009ACC93 /* arrow3.png */; };
+		6A61E21E10B7BD4100DFD9BE /* ZonesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A61E21D10B7BD4100DFD9BE /* ZonesViewController.m */; };
+		6A61E2A310B7C64E00DFD9BE /* LocationFilterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A61E2A210B7C64E00DFD9BE /* LocationFilterView.m */; };
+		6A64E93B1124EA9300F2499B /* PPM-Icon-03.png in Resources */ = {isa = PBXBuildFile; fileRef = 6A64E93A1124EA9300F2499B /* PPM-Icon-03.png */; };
+		6A669FC010B549F30041BF1E /* LocationProfile.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6A669FBF10B549F30041BF1E /* LocationProfile.xib */; };
+		6A6A7BB610E41716002C9909 /* AboutView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6A6A7BB510E41716002C9909 /* AboutView.xib */; };
+		6A6A7BC010E41766002C9909 /* AboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A6A7BBF10E41766002C9909 /* AboutViewController.m */; };
+		6A73455D10CCD657005D089C /* MachineFilterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A73455C10CCD657005D089C /* MachineFilterView.m */; };
+		6A73FF7F10B3DE5A000C4802 /* arrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 6A73FF7E10B3DE5A000C4802 /* arrow.png */; };
+		6A73FFEA10B3EB12000C4802 /* LocationProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A73FFE910B3EB12000C4802 /* LocationProfileViewController.m */; };
+		6A9FC52310BE430F00927165 /* LocationObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A9FC52210BE430F00927165 /* LocationObject.m */; };
+		6AB12FAF10E71E3D002CB85F /* LocationPin.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AB12FAE10E71E3D002CB85F /* LocationPin.m */; };
+		6AC9D56410BBB67C00EEA3F7 /* BlackSectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AC9D56310BBB67C00EEA3F7 /* BlackSectionViewController.m */; };
+		6AC9D6A510BBC6D100EEA3F7 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6AC9D6A410BBC6D100EEA3F7 /* CoreLocation.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		1D30AB110D05D00D00671497 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		1D6058910D05DD3D006BFB54 /* Portland Pinball Map.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Portland Pinball Map.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		1DF5F4DF0D08C38300B7A737 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		2892E40F0DC94CBA00A64D0F /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		28A0AAE50D9B0CCF005BE974 /* Portland_Pinball_Map_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Portland_Pinball_Map_Prefix.pch; sourceTree = "<group>"; };
+		28AD735F0D9D9599002E5188 /* MainWindow.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MainWindow.xib; sourceTree = "<group>"; };
+		28F335F01007B36200424DE2 /* RootViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RootViewController.xib; sourceTree = "<group>"; };
+		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		466A453510AE668F00AB7A2B /* PPMDoubleTableCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PPMDoubleTableCell.h; sourceTree = "<group>"; };
+		466A453610AE668F00AB7A2B /* PPMDoubleTableCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PPMDoubleTableCell.m; sourceTree = "<group>"; };
+		466A453810AE675000AB7A2B /* PPMDoubleTextCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PPMDoubleTextCell.xib; sourceTree = "<group>"; };
+		46A3834510AD4FD300414035 /* RootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RootViewController.m; sourceTree = "<group>"; };
+		46A3834610AD4FD300414035 /* RootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RootViewController.h; sourceTree = "<group>"; };
+		46A3834710AD4FD300414035 /* Portland_Pinball_MapAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Portland_Pinball_MapAppDelegate.m; sourceTree = "<group>"; };
+		46A3834810AD4FD300414035 /* Portland_Pinball_MapAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Portland_Pinball_MapAppDelegate.h; sourceTree = "<group>"; };
+		46A3834910AD4FD300414035 /* MachineViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MachineViewController.h; sourceTree = "<group>"; };
+		46A3834C10AD4FD300414035 /* MachineViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MachineViewController.m; sourceTree = "<group>"; };
+		46A3837010AD521800414035 /* ppm_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ppm_icon.png; sourceTree = "<group>"; };
+		46A3838610AD5F9000414035 /* RSSViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RSSViewController.h; sourceTree = "<group>"; };
+		46A3838710AD5F9000414035 /* RSSViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RSSViewController.m; sourceTree = "<group>"; };
+		6A030342110E8E9E0042CAF8 /* splash.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = splash.png; sourceTree = "<group>"; };
+		6A030372110E94020042CAF8 /* Default_old.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default_old.png; sourceTree = "<group>"; };
+		6A0782AD10C4F857006EA7E3 /* MachineObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MachineObject.h; sourceTree = "<group>"; };
+		6A0782AE10C4F857006EA7E3 /* MachineObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MachineObject.m; sourceTree = "<group>"; };
+		6A07ABCC10B000510090BDCB /* XMLTable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMLTable.h; sourceTree = "<group>"; };
+		6A07ABCD10B000510090BDCB /* XMLTable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMLTable.m; sourceTree = "<group>"; };
+		6A07AD8110B01C6B0090BDCB /* XMLTableView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = XMLTableView.xib; path = Classes/XMLTableView.xib; sourceTree = "<group>"; };
+		6A10D0961120EF9A00A81A8B /* ClosestLocations.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClosestLocations.h; sourceTree = "<group>"; };
+		6A10D0971120EF9A00A81A8B /* ClosestLocations.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClosestLocations.m; sourceTree = "<group>"; };
+		6A26B3EF10AFEAA000F07F0A /* BlackTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BlackTableViewController.h; sourceTree = "<group>"; };
+		6A26B3F010AFEAA000F07F0A /* BlackTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BlackTableViewController.m; sourceTree = "<group>"; };
+		6A26B45D10AFF3F000F07F0A /* PPMTableCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PPMTableCell.h; path = ../PPMTableCell.h; sourceTree = "<group>"; };
+		6A26B45E10AFF3F000F07F0A /* PPMTableCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PPMTableCell.m; path = ../PPMTableCell.m; sourceTree = "<group>"; };
+		6A26B46010AFF4EB00F07F0A /* PPMTableCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PPMTableCell.xib; sourceTree = "<group>"; };
+		6A47866910E5ED9200F563E4 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		6A47868C10E5F03400F563E4 /* LocationMap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationMap.h; sourceTree = "<group>"; };
+		6A47868D10E5F03400F563E4 /* LocationMap.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocationMap.m; sourceTree = "<group>"; };
+		6A50C77111238F1D00F02F99 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
+		6A50C77711238F8600F02F99 /* splash_town.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = splash_town.png; sourceTree = "<group>"; };
+		6A5EFE1C111541F7009ACC93 /* arrow3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = arrow3.png; sourceTree = "<group>"; };
+		6A61E21C10B7BD4100DFD9BE /* ZonesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZonesViewController.h; sourceTree = "<group>"; };
+		6A61E21D10B7BD4100DFD9BE /* ZonesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZonesViewController.m; sourceTree = "<group>"; };
+		6A61E2A110B7C64E00DFD9BE /* LocationFilterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationFilterView.h; sourceTree = "<group>"; };
+		6A61E2A210B7C64E00DFD9BE /* LocationFilterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocationFilterView.m; sourceTree = "<group>"; };
+		6A64E93A1124EA9300F2499B /* PPM-Icon-03.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "PPM-Icon-03.png"; sourceTree = "<group>"; };
+		6A669FBF10B549F30041BF1E /* LocationProfile.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LocationProfile.xib; sourceTree = "<group>"; };
+		6A6A7BB510E41716002C9909 /* AboutView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AboutView.xib; sourceTree = "<group>"; };
+		6A6A7BBE10E41766002C9909 /* AboutViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AboutViewController.h; sourceTree = "<group>"; };
+		6A6A7BBF10E41766002C9909 /* AboutViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AboutViewController.m; sourceTree = "<group>"; };
+		6A73455B10CCD657005D089C /* MachineFilterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MachineFilterView.h; sourceTree = "<group>"; };
+		6A73455C10CCD657005D089C /* MachineFilterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MachineFilterView.m; sourceTree = "<group>"; };
+		6A73FF7E10B3DE5A000C4802 /* arrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = arrow.png; sourceTree = "<group>"; };
+		6A73FFE810B3EB12000C4802 /* LocationProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationProfileViewController.h; sourceTree = "<group>"; };
+		6A73FFE910B3EB12000C4802 /* LocationProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocationProfileViewController.m; sourceTree = "<group>"; };
+		6A9FC52110BE430F00927165 /* LocationObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationObject.h; sourceTree = "<group>"; };
+		6A9FC52210BE430F00927165 /* LocationObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocationObject.m; sourceTree = "<group>"; };
+		6AB12FAD10E71E3D002CB85F /* LocationPin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationPin.h; sourceTree = "<group>"; };
+		6AB12FAE10E71E3D002CB85F /* LocationPin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocationPin.m; sourceTree = "<group>"; };
+		6AC9D56210BBB67C00EEA3F7 /* BlackSectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BlackSectionViewController.h; sourceTree = "<group>"; };
+		6AC9D56310BBB67C00EEA3F7 /* BlackSectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BlackSectionViewController.m; sourceTree = "<group>"; };
+		6AC9D6A410BBC6D100EEA3F7 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		8D1107310486CEB800E47090 /* Portland_Pinball_Map-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Portland_Pinball_Map-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		1D60588F0D05DD3D006BFB54 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */,
+				1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */,
+				2892E4100DC94CBA00A64D0F /* CoreGraphics.framework in Frameworks */,
+				6AC9D6A510BBC6D100EEA3F7 /* CoreLocation.framework in Frameworks */,
+				6A47866A10E5ED9200F563E4 /* MapKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		080E96DDFE201D6D7F000001 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				6A73456610CCE038005D089C /* tableSuperClasses */,
+				6A73453410CCD340005D089C /* cellControllers */,
+				46A3834810AD4FD300414035 /* Portland_Pinball_MapAppDelegate.h */,
+				46A3834710AD4FD300414035 /* Portland_Pinball_MapAppDelegate.m */,
+				46A3834610AD4FD300414035 /* RootViewController.h */,
+				46A3834510AD4FD300414035 /* RootViewController.m */,
+				46A3838610AD5F9000414035 /* RSSViewController.h */,
+				46A3838710AD5F9000414035 /* RSSViewController.m */,
+				6A61E21C10B7BD4100DFD9BE /* ZonesViewController.h */,
+				6A61E21D10B7BD4100DFD9BE /* ZonesViewController.m */,
+				6A61E2A110B7C64E00DFD9BE /* LocationFilterView.h */,
+				6A61E2A210B7C64E00DFD9BE /* LocationFilterView.m */,
+				6A73FFE810B3EB12000C4802 /* LocationProfileViewController.h */,
+				6A73FFE910B3EB12000C4802 /* LocationProfileViewController.m */,
+				6A9FC52110BE430F00927165 /* LocationObject.h */,
+				6A9FC52210BE430F00927165 /* LocationObject.m */,
+				6A0782AD10C4F857006EA7E3 /* MachineObject.h */,
+				6A0782AE10C4F857006EA7E3 /* MachineObject.m */,
+				46A3834910AD4FD300414035 /* MachineViewController.h */,
+				46A3834C10AD4FD300414035 /* MachineViewController.m */,
+				6A73455B10CCD657005D089C /* MachineFilterView.h */,
+				6A73455C10CCD657005D089C /* MachineFilterView.m */,
+				6A6A7BBE10E41766002C9909 /* AboutViewController.h */,
+				6A6A7BBF10E41766002C9909 /* AboutViewController.m */,
+				6A47868C10E5F03400F563E4 /* LocationMap.h */,
+				6A47868D10E5F03400F563E4 /* LocationMap.m */,
+				6AB12FAD10E71E3D002CB85F /* LocationPin.h */,
+				6AB12FAE10E71E3D002CB85F /* LocationPin.m */,
+				6A10D0961120EF9A00A81A8B /* ClosestLocations.h */,
+				6A10D0971120EF9A00A81A8B /* ClosestLocations.m */,
+			);
+			path = Classes;
+			sourceTree = "<group>";
+		};
+		19C28FACFE9D520D11CA2CBB /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				1D6058910D05DD3D006BFB54 /* Portland Pinball Map.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		29B97314FDCFA39411CA2CEA /* CustomTemplate */ = {
+			isa = PBXGroup;
+			children = (
+				080E96DDFE201D6D7F000001 /* Classes */,
+				29B97315FDCFA39411CA2CEA /* Other Sources */,
+				29B97317FDCFA39411CA2CEA /* Resources */,
+				29B97323FDCFA39411CA2CEA /* Frameworks */,
+				19C28FACFE9D520D11CA2CBB /* Products */,
+			);
+			name = CustomTemplate;
+			sourceTree = "<group>";
+		};
+		29B97315FDCFA39411CA2CEA /* Other Sources */ = {
+			isa = PBXGroup;
+			children = (
+				28A0AAE50D9B0CCF005BE974 /* Portland_Pinball_Map_Prefix.pch */,
+				29B97316FDCFA39411CA2CEA /* main.m */,
+			);
+			name = "Other Sources";
+			sourceTree = "<group>";
+		};
+		29B97317FDCFA39411CA2CEA /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				8D1107310486CEB800E47090 /* Portland_Pinball_Map-Info.plist */,
+				6A50C77711238F8600F02F99 /* splash_town.png */,
+				6A50C77111238F1D00F02F99 /* Default.png */,
+				6A64E93A1124EA9300F2499B /* PPM-Icon-03.png */,
+				6A5EFE1C111541F7009ACC93 /* arrow3.png */,
+				6A030372110E94020042CAF8 /* Default_old.png */,
+				6A030342110E8E9E0042CAF8 /* splash.png */,
+				6A73FF7E10B3DE5A000C4802 /* arrow.png */,
+				6A07AD8110B01C6B0090BDCB /* XMLTableView.xib */,
+				46A3837010AD521800414035 /* ppm_icon.png */,
+				28F335F01007B36200424DE2 /* RootViewController.xib */,
+				28AD735F0D9D9599002E5188 /* MainWindow.xib */,
+				6A669FBF10B549F30041BF1E /* LocationProfile.xib */,
+				6A6A7BB510E41716002C9909 /* AboutView.xib */,
+				466A453810AE675000AB7A2B /* PPMDoubleTextCell.xib */,
+				6A26B46010AFF4EB00F07F0A /* PPMTableCell.xib */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				6AC9D6A410BBC6D100EEA3F7 /* CoreLocation.framework */,
+				1DF5F4DF0D08C38300B7A737 /* UIKit.framework */,
+				1D30AB110D05D00D00671497 /* Foundation.framework */,
+				2892E40F0DC94CBA00A64D0F /* CoreGraphics.framework */,
+				6A47866910E5ED9200F563E4 /* MapKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		6A73453410CCD340005D089C /* cellControllers */ = {
+			isa = PBXGroup;
+			children = (
+				6A26B45D10AFF3F000F07F0A /* PPMTableCell.h */,
+				6A26B45E10AFF3F000F07F0A /* PPMTableCell.m */,
+				466A453510AE668F00AB7A2B /* PPMDoubleTableCell.h */,
+				466A453610AE668F00AB7A2B /* PPMDoubleTableCell.m */,
+			);
+			name = cellControllers;
+			sourceTree = "<group>";
+		};
+		6A73456610CCE038005D089C /* tableSuperClasses */ = {
+			isa = PBXGroup;
+			children = (
+				6A26B3EF10AFEAA000F07F0A /* BlackTableViewController.h */,
+				6A26B3F010AFEAA000F07F0A /* BlackTableViewController.m */,
+				6AC9D56210BBB67C00EEA3F7 /* BlackSectionViewController.h */,
+				6AC9D56310BBB67C00EEA3F7 /* BlackSectionViewController.m */,
+				6A07ABCC10B000510090BDCB /* XMLTable.h */,
+				6A07ABCD10B000510090BDCB /* XMLTable.m */,
+			);
+			name = tableSuperClasses;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		1D6058900D05DD3D006BFB54 /* Portland Pinball Map */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1D6058960D05DD3E006BFB54 /* Build configuration list for PBXNativeTarget "Portland Pinball Map" */;
+			buildPhases = (
+				1D60588D0D05DD3D006BFB54 /* Resources */,
+				1D60588E0D05DD3D006BFB54 /* Sources */,
+				1D60588F0D05DD3D006BFB54 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Portland Pinball Map";
+			productName = "Portland Pinball Map";
+			productReference = 1D6058910D05DD3D006BFB54 /* Portland Pinball Map.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		29B97313FDCFA39411CA2CEA /* Project object */ = {
+			isa = PBXProject;
+			buildConfigurationList = C01FCF4E08A954540054247B /* Build configuration list for PBXProject "Portland Pinball Map" */;
+			compatibilityVersion = "Xcode 3.1";
+			hasScannedForEncodings = 1;
+			knownRegions = (
+				English,
+				Japanese,
+				French,
+				German,
+				en,
+			);
+			mainGroup = 29B97314FDCFA39411CA2CEA /* CustomTemplate */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				1D6058900D05DD3D006BFB54 /* Portland Pinball Map */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		1D60588D0D05DD3D006BFB54 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				28AD73600D9D9599002E5188 /* MainWindow.xib in Resources */,
+				28F335F11007B36200424DE2 /* RootViewController.xib in Resources */,
+				46A3837110AD521800414035 /* ppm_icon.png in Resources */,
+				466A453910AE675000AB7A2B /* PPMDoubleTextCell.xib in Resources */,
+				6A26B46110AFF4EB00F07F0A /* PPMTableCell.xib in Resources */,
+				6A07AD8310B01C6B0090BDCB /* XMLTableView.xib in Resources */,
+				6A73FF7F10B3DE5A000C4802 /* arrow.png in Resources */,
+				6A669FC010B549F30041BF1E /* LocationProfile.xib in Resources */,
+				6A6A7BB610E41716002C9909 /* AboutView.xib in Resources */,
+				6A030343110E8E9E0042CAF8 /* splash.png in Resources */,
+				6A030373110E94020042CAF8 /* Default_old.png in Resources */,
+				6A5EFE1D111541F7009ACC93 /* arrow3.png in Resources */,
+				6A50C77211238F1D00F02F99 /* Default.png in Resources */,
+				6A50C77811238F8600F02F99 /* splash_town.png in Resources */,
+				6A64E93B1124EA9300F2499B /* PPM-Icon-03.png in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		1D60588E0D05DD3D006BFB54 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1D60589B0D05DD56006BFB54 /* main.m in Sources */,
+				46A3834D10AD4FD300414035 /* RootViewController.m in Sources */,
+				46A3834E10AD4FD300414035 /* Portland_Pinball_MapAppDelegate.m in Sources */,
+				46A3835010AD4FD300414035 /* MachineViewController.m in Sources */,
+				46A3838810AD5F9000414035 /* RSSViewController.m in Sources */,
+				466A453710AE668F00AB7A2B /* PPMDoubleTableCell.m in Sources */,
+				6A26B3F110AFEAA000F07F0A /* BlackTableViewController.m in Sources */,
+				6A26B45F10AFF3F000F07F0A /* PPMTableCell.m in Sources */,
+				6A07ABCE10B000510090BDCB /* XMLTable.m in Sources */,
+				6A73FFEA10B3EB12000C4802 /* LocationProfileViewController.m in Sources */,
+				6A61E21E10B7BD4100DFD9BE /* ZonesViewController.m in Sources */,
+				6A61E2A310B7C64E00DFD9BE /* LocationFilterView.m in Sources */,
+				6AC9D56410BBB67C00EEA3F7 /* BlackSectionViewController.m in Sources */,
+				6A9FC52310BE430F00927165 /* LocationObject.m in Sources */,
+				6A0782AF10C4F857006EA7E3 /* MachineObject.m in Sources */,
+				6A73455D10CCD657005D089C /* MachineFilterView.m in Sources */,
+				6A6A7BC010E41766002C9909 /* AboutViewController.m in Sources */,
+				6A47868E10E5F03400F563E4 /* LocationMap.m in Sources */,
+				6AB12FAF10E71E3D002CB85F /* LocationPin.m in Sources */,
+				6A10D0981120EF9A00A81A8B /* ClosestLocations.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		1D6058940D05DD3E006BFB54 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Isaac Ruiz (NBCAAZHB26)";
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = Portland_Pinball_Map_Prefix.pch;
+				INFOPLIST_FILE = "Portland_Pinball_Map-Info.plist";
+				PRODUCT_NAME = "Portland Pinball Map";
+				PROVISIONING_PROFILE = "";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "E28F552B-B5E8-4512-8D93-529AB8688F75";
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		1D6058950D05DD3E006BFB54 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = Portland_Pinball_Map_Prefix.pch;
+				INFOPLIST_FILE = "Portland_Pinball_Map-Info.plist";
+				PRODUCT_NAME = "Portland Pinball Map";
+			};
+			name = Release;
+		};
+		C01FCF4F08A954540054247B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				GCC_C_LANGUAGE_STANDARD = c99;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 3.0;
+				PREBINDING = NO;
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
+				SDKROOT = iphoneos3.1.2;
+			};
+			name = Debug;
+		};
+		C01FCF5008A954540054247B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				GCC_C_LANGUAGE_STANDARD = c99;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				PREBINDING = NO;
+				SDKROOT = iphoneos3.1.2;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		1D6058960D05DD3E006BFB54 /* Build configuration list for PBXNativeTarget "Portland Pinball Map" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1D6058940D05DD3E006BFB54 /* Debug */,
+				1D6058950D05DD3E006BFB54 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C01FCF4E08A954540054247B /* Build configuration list for PBXProject "Portland Pinball Map" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C01FCF4F08A954540054247B /* Debug */,
+				C01FCF5008A954540054247B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 29B97313FDCFA39411CA2CEA /* Project object */;
+}
