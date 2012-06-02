@@ -1,12 +1,3 @@
-//
-//  EventsViewController.h
-//  Portland Pinball Map
-//
-//  Created By Isaac Ruiz on 11/13/09.
-//  Copyright 2009 __MyCompanyName__. All rights reserved.
-//
-
-#import <UIKit/UIKit.h>
 #import "XMLTable.h"
 #import "PPMTableCell.h"
 #import "LocationProfileViewController.h"
@@ -14,9 +5,7 @@
 #import "EventObject.h"
 #import "EventProfileViewController.h"
 
-
-@interface EventsViewController : XMLTable
-{
+@interface EventsViewController : XMLTable {
 	EventObject *eventObject;
 	EventProfileViewController *eventProfile;
 	
@@ -24,16 +13,14 @@
 	
 	NSArray *weekdayTitles;
 	
-	NSMutableString     *current_id;
-	NSMutableString     *current_name;
-	NSMutableString     *current_longDesc;
-	NSMutableString     *current_link;
-	NSMutableString     *current_categoryNo;
-	NSMutableString     *current_startDate;
-	NSMutableString     *current_endDate;
-	NSMutableString     *current_locationNo;
-	
-	//NSString *currentElement;
+	NSMutableString *current_id;
+	NSMutableString *current_name;
+	NSMutableString *current_longDesc;
+	NSMutableString *current_link;
+	NSMutableString *current_categoryNo;
+	NSMutableString *current_startDate;
+	NSMutableString *current_endDate;
+	NSMutableString *current_locationNo;
 	
 	NSRange dayRange;
 	NSRange monthRange;
@@ -49,14 +36,15 @@
 	LocationProfileViewController *childController;
 }
 
-- (int)differenceInDaysFrom:(NSDate *)startDate to:(NSDate *)toDate;
--(NSString *)formatDate:(NSString*)dateString;
--(NSDate *)getDateFromString:(NSString *)dateString;
-
 @property (nonatomic,retain) UILabel        *noEventsLabel;
 @property (nonatomic,retain) NSArray		*weekdayTitles;
 @property (nonatomic,retain) NSDate         *today;
 @property (nonatomic,retain) NSMutableArray *sectionArray;
 @property (nonatomic,retain) NSMutableArray *sectionTitles;
 @property (nonatomic,retain) EventProfileViewController *eventProfile;
+
+- (int)differenceInDaysFrom:(NSDate *)startDate to:(NSDate *)toDate;
+- (NSString *)formatDate:(NSString *)dateString;
+- (NSDate *)getDateFromString:(NSString *)dateString;
+
 @end

@@ -1,38 +1,9 @@
-//
-//  EventObject.m
-//  Portland Pinball Map
-//
-//  Created by Isaac Ruiz on 6/26/10.
-//  Copyright 2010 __MyCompanyName__. All rights reserved.
-//
-
 #import "EventObject.h"
 
-
 @implementation EventObject
-@synthesize name;
-@synthesize id_number;
-@synthesize longDesc;
-@synthesize link;
-@synthesize categoryNo;
-@synthesize startDate;
-@synthesize endDate;
-@synthesize locationNo;
-@synthesize location;
-@synthesize displayDate;
-@synthesize displayName;
+@synthesize name, id_number, longDesc, link, categoryNo, startDate, endDate, locationNo, location, displayDate, displayName;
 
-- init
-{
-    if ((self = [super init]))
-	{
-		
-	}
-    return self;
-}
-
--(void)dealloc
-{
+-(void)dealloc {
 	[id_number release];
 	[name release];
 	[longDesc release];
@@ -46,4 +17,5 @@
 	[displayName release];
 	[super dealloc];
 }
+
 @end

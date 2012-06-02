@@ -1,13 +1,4 @@
-//
-//  RegionObject.h
-//  Portland Pinball Map
-//
-//  Created by Isaac Ruiz on 6/6/10.
-//  Copyright 2010 __MyCompanyName__. All rights reserved.
-//
-
 #import <Foundation/Foundation.h>
-
 
 @interface RegionObject : NSObject {
 	NSString *id_number;
@@ -16,7 +7,6 @@
 	NSString *subdir;
 	NSString *lat;
 	NSString *lon;
-	
 	NSString *machineFilter;
 	NSString *machineFilterString;
 	
@@ -25,21 +15,12 @@
 	
 	NSMutableArray *primaryZones;
 	NSMutableArray *secondaryZones;
-	
-	// RSS Stuff
 	NSMutableArray *rssArray;
 	NSMutableArray *rssTitles;
-	
-	// Event Stuff
 	NSMutableArray *eventArray;
 	NSMutableArray *eventTitles;
 	
-	//Closest Stuff
-	//NSMutableArray *closestArray
-	
-	// Machine Locations
 	NSMutableDictionary *loadedMachines;
-
 }
 
 @property (nonatomic,retain) NSMutableDictionary *loadedMachines;

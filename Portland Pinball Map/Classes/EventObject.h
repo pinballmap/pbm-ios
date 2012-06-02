@@ -1,14 +1,5 @@
-//
-//  EventObject.h
-//  Portland Pinball Map
-//
-//  Created by Isaac Ruiz on 6/26/10.
-//  Copyright 2010 __MyCompanyName__. All rights reserved.
-//
-
 #import <Foundation/Foundation.h>
 #import "LocationObject.h"
-
 
 @interface EventObject : NSObject {
 	NSString *id_number;
@@ -19,11 +10,10 @@
 	NSString *startDate;
 	NSString *endDate;
 	NSString *locationNo;
-	
-	LocationObject *location;
 	NSString *displayDate;
 	NSString *displayName;
-		
+    
+    LocationObject *location;
 }
 
 @property (nonatomic,retain) NSString *id_number;
@@ -34,9 +24,10 @@
 @property (nonatomic,retain) NSString *startDate;
 @property (nonatomic,retain) NSString *endDate;
 @property (nonatomic,retain) NSString *locationNo;
-
-@property (nonatomic,retain) LocationObject *location;
 @property (nonatomic,retain) NSString *displayDate;
 @property (nonatomic,retain) NSString *displayName;
+
+@property (nonatomic,retain) LocationObject *location;
+
 
 @end

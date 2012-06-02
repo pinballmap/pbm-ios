@@ -406,8 +406,8 @@
 		6A73453410CCD340005D089C /* cellControllers */ = {
 			isa = PBXGroup;
 			children = (
-				6A26B45E10AFF3F000F07F0A /* PPMTableCell.m */,
 				6A26B45D10AFF3F000F07F0A /* PPMTableCell.h */,
+				6A26B45E10AFF3F000F07F0A /* PPMTableCell.m */,
 				466A453510AE668F00AB7A2B /* PPMDoubleTableCell.h */,
 				466A453610AE668F00AB7A2B /* PPMDoubleTableCell.m */,
 				6A89775E11B63FD800C97FBB /* LocationProfileCell.h */,

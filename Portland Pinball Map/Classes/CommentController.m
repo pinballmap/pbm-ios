@@ -1,35 +1,19 @@
-//
-//  CommentController.m
-//  Portland Pinball Map
-//
-//  Created by Isaac Ruiz on 6/1/10.
-//  Copyright 2010 __MyCompanyName__. All rights reserved.
-//
-
 #import "CommentController.h"
 #import "Portland_Pinball_MapAppDelegate.h"
-#import "MachineProfileViewController.h";
-
+#import "MachineProfileViewController.h"
 
 @implementation CommentController
-@synthesize submitButton;
-@synthesize cancelButton;
-@synthesize textview;
-@synthesize machine;
-@synthesize location;
+@synthesize submitButton, cancelButton, textview, machine, location;
 
--(void) viewWillAppear:(BOOL)animated
-{
+- (void)viewWillAppear:(BOOL)animated {
 	self.title = machine.name;
 	textview.text = machine.condition;
 	[textview becomeFirstResponder];
 	[super viewWillAppear:animated];
 }
 
-- (void)textViewDidBeginEditing:(UITextView *)textView
-{
-	if(savedConditionText != nil)
-	{
+- (void)textViewDidBeginEditing:(UITextView *)textView {
+	if(savedConditionText != nil) {
 		savedConditionText = nil;
 		[savedConditionText release];
 	}
@@ -37,8 +21,7 @@
 	savedConditionText = [[NSString alloc] initWithString:textview.text];
 }
 
--(IBAction)onSubmitTap:(id)sender
-{
+- (IBAction)onSubmitTap:(id)sender {
 	Portland_Pinball_MapAppDelegate *appDelegate = (Portland_Pinball_MapAppDelegate *)[[UIApplication sharedApplication] delegate];
 	
 	UIApplication* app = [UIApplication sharedApplication];
@@ -47,7 +30,6 @@
 	NSString *newComment = ([textview.text isEqual:@""]) ? @" " : textview.text;
 	
 	NSString *encodedCondition = [MachineProfileViewController urlEncodeValue:newComment];
-	//NSLog(@"encoded condition %@",encodedCondition);
 	
 	NSString *urlstr = [[NSString alloc] initWithFormat:@"%@location_no=%@&machine_no=%@&condition=%@",
 						appDelegate.rootURL,
@@ -59,21 +41,14 @@
 	NSString *test = [NSString stringWithContentsOfURL:url
 											  encoding:NSUTF8StringEncoding
 												 error:&error];
-	
-	//NSLog(@"url: %@",urlstr);
-	
+		
 	[urlstr release];
 	[url release];
 	
-	
-	//NSLog(@"php returned: %@",test);
-	
-	//If Success, throw thank you
 	NSString *addsuccess = [[NSString alloc] initWithString:@"success"];
 	NSRange range = [test rangeOfString:addsuccess];
 	
-	if(range.length > 0)
-	{
+	if(range.length > 0) {
 		NSDate *today = [NSDate date];
 		NSDateFormatter *inputFormatter = [[NSDateFormatter alloc] init];
 		[inputFormatter setDateFormat:@"yyyy-MM-dd"];
@@ -86,9 +61,7 @@
 		app.networkActivityIndicatorVisible = NO;
 		
 		[self.navigationController popViewControllerAnimated:YES];
-	}
-	else 
-	{
+	} else  {
 		NSString *alertString2 = [[NSString alloc] initWithString:@"Machine condition could not be updated at this time, please try again later."];
 		UIAlertView *alert2 = [[UIAlertView alloc]
 							   initWithTitle:@"Sorry"
@@ -105,41 +78,29 @@
 	
 	[addsuccess release];
 	
-	if(savedConditionText != nil)
-	{
+	if(savedConditionText != nil) {
 		savedConditionText = nil;
 		[savedConditionText release];
-	}
-	
+	}	
 }
 	
--(IBAction)onCancelTap:(id)sender
-{
+- (IBAction)onCancelTap:(id)sender {
 	[self.navigationController popViewControllerAnimated:YES];
 }
 
 
--(void) viewDidDisappear:(BOOL)animated
-{
+- (void)viewDidDisappear:(BOOL)animated {
 	[textview resignFirstResponder];
 	[super viewDidDisappear:animated];
 }
 
-- (void)didReceiveMemoryWarning
-{
-	 [super didReceiveMemoryWarning];
-}
-
-- (void)viewDidUnload
-{
+- (void)viewDidUnload {
 	self.textview = nil;
 	self.submitButton = nil;
 	self.cancelButton = nil;
 }
 
-
-- (void)dealloc
-{
+- (void)dealloc {
 	[location release];
 	[machine release];
 	[submitButton release];
@@ -147,6 +108,5 @@
 	[textview release];
     [super dealloc];
 }
-
 
 @end
