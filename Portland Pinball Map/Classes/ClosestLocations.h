@@ -1,24 +1,24 @@
 #import "LocationMap.h"
 #import "RegionObject.h"
-#import "Portland_Pinball_MapAppDelegate.h"
 #import "BlackTableViewController.h"
 
-#define kNumberOfLocationsToShowInMap 25
+#define MAX_NUMBER_OF_LOCATIONS_TO_SHOW_IN_MAP 25
 
 @interface ClosestLocations : BlackTableViewController {
-	NSMutableArray *sectionArray;
-	NSMutableArray *sectionTitles;
+    LocationMap	*mapView;
 	RegionObject *lastViewedRegion;
-	LocationMap	*mapView;
-	NSMutableArray *allSortedLocations;
+	NSMutableArray *sectionLocations;
+	NSMutableArray *sectionTitles;
+    NSMutableArray *allSortedLocations;
 }
 
-@property (nonatomic,retain) NSMutableArray *allSortedLocations;
 @property (nonatomic,retain) LocationMap *mapView;
 @property (nonatomic,retain) RegionObject *lastViewedRegion;
-@property (nonatomic,retain) NSMutableArray *sectionArray;
+@property (nonatomic,retain) NSMutableArray *allSortedLocations;
+@property (nonatomic,retain) NSMutableArray *sectionLocations;
 @property (nonatomic,retain) NSMutableArray *sectionTitles;
 
+- (void)cleanupRegionData;
 - (IBAction)onMapButtonTapped:(id)sender;
 
 @end
