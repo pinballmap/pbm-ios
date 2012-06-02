@@ -3,53 +3,33 @@
 @implementation AboutViewController
 @synthesize drewButton, ryanButton, scottButton, isaacButton, ppmButton, webview;
 
--(void)viewURL:(NSString*)url withTitle:(NSString*)string {
-	if (webview == nil)
-		webview = [[WebViewController alloc] initWithNibName:@"WebViewController" bundle:nil];
+- (void)viewURL:(NSString *)url withTitle:(NSString *)title {
+    webview = [[WebViewController alloc] initWithNibName:@"WebViewController" bundle:nil];
 	
-	webview.title = string;
-	webview.newURL = [NSString stringWithString:url];
-	
+	[webview setTitle:title];
+	[webview setNewURL:url];
+    
 	[self.navigationController pushViewController:webview animated:YES];
 }
 
 - (IBAction)drewButtonPress:(id)sender {
-	NSString *url = [[NSString alloc] initWithString:@"http://www.workbydrew.com"];
-	[self viewURL:url withTitle:@"Drew Marshall"];
-	[url release];
-	
+	[self viewURL:@"http://www.workbydrew.com" withTitle:@"Drew Marshall"];
 }
 
 - (IBAction)scottButtonPress:(id)sender {
-	NSString *url = [[NSString alloc] initWithString:@"http://scottwainstock.com/"];
-	[self viewURL:url withTitle:@"Scott Wainstock"];
-	[url release];
+	[self viewURL:@"http://scottwainstock.com/" withTitle:@"Scott Wainstock"];
 }
 
 - (IBAction)ryanButtonPress:(id)sender {
-	NSString *url = [[NSString alloc] initWithString:@"http://blueskiesabove.us/"];
-	[self viewURL:url withTitle:@"Ryan Gratzer"];
-	[url release];
+	[self viewURL:@"http://blueskiesabove.us/" withTitle:@"Ryan Gratzer"];
 }
 
 - (IBAction)isaacButtonPress:(id)sender {
-	NSString *url = [[NSString alloc] initWithString:@"http://isaacruiz.net/"];
-	[self viewURL:url withTitle:@"Isaac Ruiz"];
-	[url release];
+	[self viewURL:@"http://isaacruiz.net/" withTitle:@"Isaac Ruiz"];
 }
 
 - (IBAction)ppmButtonPress:(id)sender {
-	NSString *url = [[NSString alloc] initWithString:@"http://pinballmap.com/"];
-	[self viewURL:url withTitle:@"PinballMap.com"];
-	[url release];	
-}
-
-- (void)viewDidUnload {
-	self.drewButton = nil;
-	self.isaacButton = nil;
-	self.ryanButton = nil;
-	self.ppmButton = nil;
-	self.scottButton = nil;
+	[self viewURL:@"http://pinballmap.com/" withTitle:@"PinballMap.com"];
 }
 
 - (void)dealloc {

@@ -22,6 +22,6 @@
 - (IBAction)ryanButtonPress:(id)sender;
 - (IBAction)scottButtonPress:(id)sender;
 - (IBAction)isaacButtonPress:(id)sender;
-- (void)viewURL:(NSString*)url withTitle:(NSString*)string;
+- (void)viewURL:(NSString *)url withTitle:(NSString *)title;
 
 @end

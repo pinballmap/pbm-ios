@@ -276,8 +276,8 @@
 				6ACA3CFB11BC583D00F64051 /* objects */,
 				6AF208AA11839D2B002FBE1F /* maps */,
 				6AF208A911839D12002FBE1F /* single pages */,
-				6A73456610CCE038005D089C /* tableSuperClasses */,
-				6A73453410CCD340005D089C /* cellControllers */,
+				6A73456610CCE038005D089C /* table base classes */,
+				6A73453410CCD340005D089C /* cell controllers */,
 				46A3834810AD4FD300414035 /* Portland_Pinball_MapAppDelegate.h */,
 				46A3834710AD4FD300414035 /* Portland_Pinball_MapAppDelegate.m */,
 				46A3834610AD4FD300414035 /* RootViewController.h */,
@@ -403,7 +403,7 @@
 			name = buttons;
 			sourceTree = "<group>";
 		};
-		6A73453410CCD340005D089C /* cellControllers */ = {
+		6A73453410CCD340005D089C /* cell controllers */ = {
 			isa = PBXGroup;
 			children = (
 				6A26B45D10AFF3F000F07F0A /* PPMTableCell.h */,
@@ -413,10 +413,10 @@
 				6A89775E11B63FD800C97FBB /* LocationProfileCell.h */,
 				6A89775F11B63FD800C97FBB /* LocationProfileCell.m */,
 			);
-			name = cellControllers;
+			name = "cell controllers";
 			sourceTree = "<group>";
 		};
-		6A73456610CCE038005D089C /* tableSuperClasses */ = {
+		6A73456610CCE038005D089C /* table base classes */ = {
 			isa = PBXGroup;
 			children = (
 				6A26B3EF10AFEAA000F07F0A /* BlackTableViewController.h */,
@@ -424,7 +424,7 @@
 				6A07ABCC10B000510090BDCB /* XMLTable.h */,
 				6A07ABCD10B000510090BDCB /* XMLTable.m */,
 			);
-			name = tableSuperClasses;
+			name = "table base classes";
 			sourceTree = "<group>";
 		};
 		6A82F29B1208B8AD00245178 /* splash */ = {
