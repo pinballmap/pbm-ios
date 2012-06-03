@@ -12,5 +12,4 @@
 	self.contactButton = nil;
 }
 
-
 @end
