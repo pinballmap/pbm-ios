@@ -307,7 +307,7 @@
 				
 				ZoneObject *zone = [[ZoneObject alloc] init];
 				zone.name = current_name;
-				zone.id_number = current_id;
+				zone.idNumber = current_id;
 				zone.shortName = current_shortName;
 				zone.isPrimary = current_isPrimary;
 				

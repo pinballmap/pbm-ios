@@ -2,13 +2,13 @@
 
 @interface ZoneObject : NSObject {
 	NSString *name;
-	NSString *id_number;
+	NSString *idNumber;
 	NSString *shortName;
 	NSString *isPrimary;
 }
 
 @property (nonatomic,strong) NSString *name;
-@property (nonatomic,strong) NSString *id_number;
+@property (nonatomic,strong) NSString *idNumber;
 @property (nonatomic,strong) NSString *shortName;
 @property (nonatomic,strong) NSString *isPrimary;
 

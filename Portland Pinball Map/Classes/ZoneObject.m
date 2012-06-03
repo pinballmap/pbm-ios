@@ -1,7 +1,6 @@
 #import "ZoneObject.h"
 
 @implementation ZoneObject
-@synthesize name, id_number, shortName, isPrimary;
-
+@synthesize name, idNumber, shortName, isPrimary;
 
 @end
