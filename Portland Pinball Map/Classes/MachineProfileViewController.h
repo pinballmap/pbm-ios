@@ -48,10 +48,8 @@
 - (IBAction)onReturnTap:(id)sender;
 - (IBAction)onIPDBTap:(id)sender;
 - (IBAction)onOtherLocationsTap:(id)sender;
-- (IBAction) onEditButtonPressed:(id)sender;
+- (IBAction)onEditButtonPressed:(id)sender;
 - (void)hideControllButtons:(BOOL)doHide;
 - (void)removeMachineWithURL:(NSString *)urlstr;
-
-+ (NSString *)urlEncodeValue:(NSString *)url;
 
 @end

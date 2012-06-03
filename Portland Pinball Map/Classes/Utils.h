@@ -8,7 +8,7 @@
 }
 
 + (BOOL)stringIsBlank:(NSString *)string;
-+ (NSString *)urlencode:(NSString *)url;
++ (NSString *)urlEncode:(NSString *)url;
 + (NSString *)formatDateFromString:(NSString *)dateString;
 + (NSDate *)getDateFromString:(NSString *)dateString;
 

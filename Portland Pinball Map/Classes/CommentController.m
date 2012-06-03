@@ -1,14 +1,15 @@
 #import "CommentController.h"
 #import "Portland_Pinball_MapAppDelegate.h"
-#import "MachineProfileViewController.h"
+#import "Utils.h"
 
 @implementation CommentController
 @synthesize submitButton, cancelButton, textview, machine, location;
 
 - (void)viewWillAppear:(BOOL)animated {
-	self.title = machine.name;
-	textview.text = machine.condition;
+	[self setTitle:machine.name];
+	[textview setText:machine.condition];
 	[textview becomeFirstResponder];
+    
 	[super viewWillAppear:animated];
 }
 
@@ -28,7 +29,7 @@
 	
 	NSString *newComment = ([textview.text isEqual:@""]) ? @" " : textview.text;
 	
-	NSString *encodedCondition = [MachineProfileViewController urlEncodeValue:newComment];
+	NSString *encodedCondition = [Utils urlEncode:newComment];
 	
 	NSString *urlstr = [[NSString alloc] initWithFormat:@"%@location_no=%@&machine_no=%@&condition=%@",
 						appDelegate.rootURL,
@@ -91,6 +92,5 @@
 	self.submitButton = nil;
 	self.cancelButton = nil;
 }
-
 
 @end

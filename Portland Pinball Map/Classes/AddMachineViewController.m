@@ -100,11 +100,6 @@
 	self.loaderIcon = nil;
 }
 
-
-+ (NSString *)urlEncodeValue:(NSString *)url {
-    return [url stringByAddingPercentEscapesUsingEncoding:NSASCIIStringEncoding];
-}
-
 -(void)addMachineFromTextfield {
 	UIApplication* app = [UIApplication sharedApplication];
 	Portland_Pinball_MapAppDelegate *appDelegate = (Portland_Pinball_MapAppDelegate *)[[UIApplication sharedApplication] delegate];
@@ -133,7 +128,7 @@
 		textfield.text = finalString;
 	}
      
-	NSString* escapedUrl = [AddMachineViewController urlEncodeValue:finalString];//[textfield.text stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]; 
+	NSString* escapedUrl = [Utils urlEncode:finalString];
 	NSString *urlstr = [[NSString alloc] initWithFormat:@"%@modify_location=%@&action=add_machine&machine_name=%@",
 						appDelegate.rootURL,
 						location.id_number,

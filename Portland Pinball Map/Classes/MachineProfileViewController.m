@@ -1,5 +1,4 @@
 #import "Utils.h"
-#import "MachineProfileViewController.h"
 #import "Portland_Pinball_MapAppDelegate.h"
 #import "LocationProfileViewController.h"
 
@@ -161,7 +160,7 @@
 		webview = [[WebViewController alloc] initWithNibName:@"WebViewController" bundle:nil];	
 	
 	webview.title = @"Internet Pinball Database";
-	webview.theNewURL = [NSString stringWithFormat:@"http://ipdb.org/search.pl?name=%@&qh=checked&searchtype=advanced",[MachineProfileViewController urlEncodeValue:machine.name]];
+	webview.theNewURL = [NSString stringWithFormat:@"http://ipdb.org/search.pl?name=%@&qh=checked&searchtype=advanced",[Utils urlEncode:machine.name]];
 	
 	[self.navigationController pushViewController:webview animated:YES];
 }
@@ -169,7 +168,6 @@
 - (IBAction)onOtherLocationsTap:(id)sender {
 	if(machineFilter == nil) {
 		machineFilter = [[MachineFilterView alloc] initWithStyle:UITableViewStylePlain];
-		
 	}
     
 	machineFilter.resetNavigationStackOnLocationSelect = YES;
@@ -183,10 +181,6 @@
 		location.isLoaded = NO;
 		[self.navigationController popViewControllerAnimated:YES];
 	}
-}
-
-+ (NSString *)urlEncodeValue:(NSString *)url {
-    return [url stringByAddingPercentEscapesUsingEncoding:NSASCIIStringEncoding];
 }
 
 - (void)viewDidUnload {

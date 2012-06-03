@@ -1,5 +1,5 @@
-@class MachineObject;
-@class LocationObject;
+#import "MachineObject.h"
+#import "LocationObject.h"
 
 @interface CommentController : UIViewController <UITextViewDelegate,UIAlertViewDelegate> {
 	UIButton *submitButton;
