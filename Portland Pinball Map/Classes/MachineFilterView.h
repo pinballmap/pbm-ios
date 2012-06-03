@@ -1,15 +1,14 @@
 #import "XMLTable.h"
 #import "LocationMap.h"
-#import "LocationObject.h"
 #import <Foundation/Foundation.h>
 
 @interface MachineFilterView : XMLTable {	
-	NSMutableArray *locationArray;
-	NSMutableArray *tempLocationArray;
+	NSMutableArray *locations;
+	NSMutableArray *tempLocations;
 	
 	NSString *machineID;
 	NSString *machineName;
-	NSMutableString *temp_location_id;
+	NSMutableString *tempLocationID;
 	
 	UILabel *noLocationsLabel;
 	
@@ -18,13 +17,14 @@
 	
 	LocationMap *mapView;
 }
+
 @property (nonatomic,assign) BOOL didAbortParsing;
 @property (nonatomic,assign) BOOL resetNavigationStackOnLocationSelect;
-@property (nonatomic,strong) NSMutableArray *tempLocationArray;
+@property (nonatomic,strong) NSMutableArray *tempLocations;
 @property (nonatomic,strong) UILabel *noLocationsLabel;
 @property (nonatomic,strong) LocationMap *mapView;
-@property (nonatomic,strong) NSString *temp_location_id;
-@property (nonatomic,strong) NSArray *locationArray;
+@property (nonatomic,strong) NSString *tempLocationID;
+@property (nonatomic,strong) NSArray *locations;
 @property (nonatomic,strong) NSString *machineID;
 @property (nonatomic,strong) NSString *machineName;
 

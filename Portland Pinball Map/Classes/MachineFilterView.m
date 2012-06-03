@@ -1,49 +1,46 @@
 #import "MachineFilterView.h"
 #import "LocationProfileViewController.h"
 #import "RootViewController.h"
-#import "Portland_Pinball_MapAppDelegate.h"
 
 @implementation MachineFilterView
-@synthesize locationArray, machineID, machineName, temp_location_id, mapView, resetNavigationStackOnLocationSelect, noLocationsLabel, tempLocationArray, didAbortParsing;
+@synthesize locations, machineID, machineName, tempLocationID, mapView, resetNavigationStackOnLocationSelect, noLocationsLabel, tempLocations, didAbortParsing;
+
+Portland_Pinball_MapAppDelegate *appDelegate;
 
 - (void)viewDidLoad {
+    appDelegate = (Portland_Pinball_MapAppDelegate *)[[UIApplication sharedApplication] delegate];
+
 	noLocationsLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 130, 320, 30)];
-	noLocationsLabel.text = @"(no locations)";
-	noLocationsLabel.backgroundColor = [UIColor blackColor];
-	noLocationsLabel.textColor       = [UIColor whiteColor];
-	noLocationsLabel.font            = [UIFont boldSystemFontOfSize:20];
-	noLocationsLabel.textAlignment   = UITextAlignmentCenter;
+	[noLocationsLabel setText:@"(no locations)"];
+	[noLocationsLabel setBackgroundColor:[UIColor blackColor]];
+	[noLocationsLabel setTextColor:[UIColor whiteColor]];
+	[noLocationsLabel setFont:[UIFont boldSystemFontOfSize:20]];
+	[noLocationsLabel setTextAlignment:UITextAlignmentCenter];
 	
 	[super viewDidLoad];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
-	Portland_Pinball_MapAppDelegate *appDelegate = (Portland_Pinball_MapAppDelegate *)[[UIApplication sharedApplication] delegate];
-	self.title = machineName;
+	[self setTitle:machineName];
 	
 	if(appDelegate.activeRegion.loadedMachines == nil)
 		appDelegate.activeRegion.loadedMachines = [[NSMutableDictionary alloc] init];
 	
-	locationArray = (NSMutableArray *)[appDelegate.activeRegion.loadedMachines objectForKey:machineID];
+	locations = (NSMutableArray *)[appDelegate.activeRegion.loadedMachines objectForKey:machineID];
 		
-	self.tableView.contentOffset = CGPointZero;
+	[self.tableView setContentOffset:CGPointZero];
 	
 	[self reloadLocationData];
 	[super viewWillAppear:animated];
 }	
 
 - (void)viewDidAppear:(BOOL)animated {
-	Portland_Pinball_MapAppDelegate *appDelegate = (Portland_Pinball_MapAppDelegate *)[[UIApplication sharedApplication] delegate];
-
-	if (locationArray == nil) {
+	if (locations == nil) {
 		didAbortParsing = NO;
 		
-		if(tempLocationArray != nil) {
-			tempLocationArray = nil;
-		}
-		tempLocationArray = [[NSMutableArray alloc] init];
+		tempLocations = [[NSMutableArray alloc] init];
 		
-		NSString *url = [[NSString alloc] initWithFormat:@"%@get_machine=%@",appDelegate.rootURL,machineID];
+		NSString *url = [[NSString alloc] initWithFormat:@"%@get_machine=%@", appDelegate.rootURL, machineID];
 		
 		@autoreleasepool {
 			[self performSelectorInBackground:@selector(parseXMLFileAtURL:) withObject:url];
@@ -65,16 +62,14 @@
 	noLocationsLabel = nil;
 }
 
-
-
 - (void)onMapPress:(id)sender {
 	if(mapView == nil) {
 		mapView = [[LocationMap alloc] init];
-		mapView.showProfileButtons = YES;
+		[mapView setShowProfileButtons:YES];
 	}
 	
-	mapView.locationsToShow = locationArray;
-	mapView.title = self.title;
+	[mapView setLocationsToShow:locations];
+	[mapView setTitle:self.title];
 	
 	[self.navigationController pushViewController:mapView animated:YES];
 }
@@ -83,11 +78,12 @@
 	currentElement = [elementName copy];
 	
 	if ([elementName isEqualToString:@"id"])
-        temp_location_id = [[NSMutableString alloc] init];
+        tempLocationID = [[NSMutableString alloc] init];
 }
 
 - (void)parser:(NSXMLParser *)parser foundCharacters:(NSString *)string {
-	if ([currentElement isEqualToString:@"id"]) [temp_location_id appendString:string];
+	if ([currentElement isEqualToString:@"id"])
+        [tempLocationID appendString:string];
 }
 
 - (void)parser:(NSXMLParser *)parser didEndElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qName {	
@@ -96,13 +92,11 @@
 	
 	currentElement = @"";
 	
-	if ([elementName isEqualToString:@"id"]) {
-		Portland_Pinball_MapAppDelegate *appDelegate = (Portland_Pinball_MapAppDelegate *)[[UIApplication sharedApplication] delegate];
-		
-		LocationObject *location = (LocationObject *)[appDelegate.activeRegion.locations objectForKey:temp_location_id];
+	if ([elementName isEqualToString:@"id"]) {		
+		LocationObject *location = (LocationObject *)[appDelegate.activeRegion.locations objectForKey:tempLocationID];
 		if(location != nil) {
 			[location updateDistance];
-			[tempLocationArray addObject:location];
+			[tempLocations addObject:location];
 		}
 	}
 }
@@ -111,8 +105,8 @@
 	Portland_Pinball_MapAppDelegate *appDelegate = (Portland_Pinball_MapAppDelegate *)[[UIApplication sharedApplication] delegate];
 	
 	if(didAbortParsing == NO) {
-		locationArray = tempLocationArray;
-		[appDelegate.activeRegion.loadedMachines setObject:locationArray forKey:machineID];	
+		locations = tempLocations;
+		[appDelegate.activeRegion.loadedMachines setObject:locations forKey:machineID];	
 		[self reloadLocationData];
 	}
 	
@@ -125,28 +119,28 @@
 }
 
 -(void)reloadLocationData {
-	
-	if (locationArray == nil) {
+	if (locations == nil) {
 		[noLocationsLabel removeFromSuperview];
 		[self showLoaderIconLarge];
 		
-		self.navigationItem.rightBarButtonItem = nil;
-	} else if ([locationArray count] == 0) {
-		self.tableView.separatorColor = [UIColor blackColor];
+		[self.navigationItem setRightBarButtonItem:nil];
+	} else if ([locations count] == 0) {
+		[self.tableView setSeparatorColor:[UIColor blackColor]];
 		[self.view addSubview:noLocationsLabel];
-		self.navigationItem.rightBarButtonItem = nil;
+        
+		[self.navigationItem setRightBarButtonItem:nil];
 	} else {
-		self.tableView.separatorColor = [UIColor darkGrayColor];
+		[self.tableView setSeparatorColor:[UIColor darkGrayColor]];
 		[noLocationsLabel removeFromSuperview];
-		self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Map" style:UIBarButtonItemStyleBordered target:self action:@selector(onMapPress:)];
+		[self.navigationItem setRightBarButtonItem:[[UIBarButtonItem alloc] initWithTitle:@"Map" style:UIBarButtonItemStyleBordered target:self action:@selector(onMapPress:)]];
 		
 		NSSortDescriptor *nameSortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"distance" ascending:YES selector:@selector(compare:)];
-		for (int i = 0 ; i < [locationArray count]; i++) {
-			LocationObject *locobj = (LocationObject *)[locationArray objectAtIndex:i];
+		for (int i = 0 ; i < [locations count]; i++) {
+			LocationObject *locobj = (LocationObject *)[locations objectAtIndex:i];
 			[locobj updateDistance];
 		}
         
-		[locationArray sortUsingDescriptors:[NSArray arrayWithObjects:nameSortDescriptor, nil]];
+		[locations sortUsingDescriptors:[NSArray arrayWithObjects:nameSortDescriptor, nil]];
 	}
 	
 	[self.tableView reloadData];
@@ -157,7 +151,7 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return [locationArray count];
+    return [locations count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {    
@@ -167,33 +161,26 @@
     if (cell == nil)
 		cell = [self getDoubleCell];
     
-	NSUInteger row = [indexPath row];
-	LocationObject *location = [locationArray objectAtIndex:row];
-	cell.nameLabel.text = location.name;
-	
-	Portland_Pinball_MapAppDelegate *appDelegate = (Portland_Pinball_MapAppDelegate *)[[UIApplication sharedApplication] delegate];
-	cell.subLabel.text = (appDelegate.showUserLocation == YES) ? location.distanceString : @"";
+	LocationObject *location = [locations objectAtIndex:[indexPath row]];
+	[cell.nameLabel setText:location.name];
+	[cell.subLabel setText:(appDelegate.showUserLocation == YES) ? location.distanceString : @""];
 	
     return cell;
 }
 
-
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-	NSUInteger row = [indexPath row];
-	LocationObject *location = [locationArray objectAtIndex:row];
+	LocationObject *location = [locations objectAtIndex:[indexPath row]];
 	
 	if(NO) {
 		RootViewController *rootController = (RootViewController *)[self.navigationController.viewControllers objectAtIndex:0];
 		LocationProfileViewController *locationProfileView = [self getLocationProfile];
 		
-		locationProfileView.showMapButton = YES;
-		locationProfileView.activeLocationObject = location;
+		[locationProfileView setShowMapButton:YES];
+		[locationProfileView setActiveLocationObject:location];
 		
-		
-		NSArray *quickArray = [[NSArray alloc] initWithObjects:rootController,self,locationProfileView,nil];
-		[self.navigationController setViewControllers:quickArray animated:NO];
+		[self.navigationController setViewControllers:[NSArray arrayWithObjects:rootController, self, locationProfileView, nil] animated:NO];
 	} else {
-		[self showLocationProfile:location  withMapButton:YES];
+		[self showLocationProfile:location withMapButton:YES];
 	}
 }
 
