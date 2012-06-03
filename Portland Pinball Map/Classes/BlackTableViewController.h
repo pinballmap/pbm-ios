@@ -8,12 +8,10 @@
 	UIActivityIndicatorView *activityView;
 	UILabel *loadingLabel;
 	NSInteger headerHeight;
-	NSArray *alphabet;
 }
 
 @property (nonatomic,strong) UIActivityIndicatorView *activityView;
 @property (nonatomic,strong) UILabel *loadingLabel;
-@property (nonatomic,strong) NSArray *alphabet;
 @property (nonatomic,assign) NSInteger headerHeight;
 
 NSInteger sortOnDistance(id obj1, id obj2, void *context);

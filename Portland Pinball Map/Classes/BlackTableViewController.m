@@ -1,27 +1,27 @@
-#import "Portland_Pinball_MapAppDelegate.h"
 #import "BlackTableViewController.h"
 #import "LocationProfileViewController.h"
 
 @implementation BlackTableViewController
-@synthesize alphabet, headerHeight, activityView, loadingLabel;
+@synthesize headerHeight, activityView, loadingLabel;
+
+Portland_Pinball_MapAppDelegate *appDelegate;
 
 - (void)viewDidLoad {
-	self.tableView.separatorColor = [UIColor darkGrayColor];
-	self.view.backgroundColor = [UIColor blackColor];
+    appDelegate = (Portland_Pinball_MapAppDelegate *)[[UIApplication sharedApplication] delegate];
+
+	[self.tableView setSeparatorColor:[UIColor darkGrayColor]];
+	[self.view setBackgroundColor:[UIColor blackColor]];
 	
 	activityView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
-	activityView.frame = CGRectMake(70,130,30,30);
+	[activityView setFrame:CGRectMake(70,130,30,30)];
 	[self.view addSubview:activityView];
 	
 	loadingLabel = [[UILabel alloc] initWithFrame:CGRectMake(40 + 70, 130, 320, 30)];
-	loadingLabel.text = @"Loading...";
-	loadingLabel.backgroundColor = [UIColor blackColor];
-	loadingLabel.textColor = [UIColor whiteColor];
-	loadingLabel.font = [UIFont boldSystemFontOfSize:24];
+	[loadingLabel setText:@"Loading..."];
+	[loadingLabel setBackgroundColor:[UIColor blackColor]];
+	[loadingLabel setTextColor:[UIColor whiteColor]];
+	[loadingLabel setFont:[UIFont boldSystemFontOfSize:24]];
 	
-	alphabet = [[NSArray alloc] initWithObjects:@"#",@"a",@"b",@"c",@"d",@"e",@"f",@"g",@"h",@"i",@"j",
-				@"k",@"l",@"m",@"n",@"o",@"p",@"q",@"r",@"s",@"t",
-				@"u",@"v",@"w",@"x",@"y",@"z",nil];
 	headerHeight = 20;
 	
 	[super viewDidLoad];
@@ -47,16 +47,13 @@
 	return nil;	
 }
 
-NSInteger sortOnName(LocationObject *obj1, LocationObject *obj2, void *context) {
-    NSString * v1 = obj1.name;
-    NSString * v2 = obj2.name;
-		
-	return [v1 localizedCompare:v2];
+NSInteger sortOnName(LocationObject *obj1, LocationObject *obj2, void *context) {		
+	return [obj1.name localizedCompare:obj2.name];
 }
 
 NSInteger sortOnDistance(id obj1, id obj2, void *context) {
-    double  v1 = [[obj1 valueForKey:@"distance"] doubleValue];
-    double  v2 = [[obj2 valueForKey:@"distance"] doubleValue];
+    double v1 = [[obj1 valueForKey:@"distance"] doubleValue];
+    double v2 = [[obj2 valueForKey:@"distance"] doubleValue];
 	
     if (v1 < v2)
         return NSOrderedAscending;
@@ -83,27 +80,27 @@ NSInteger sortOnDistance(id obj1, id obj2, void *context) {
 - (void)refreshPage {}
 
 - (void)showLoaderIcon {
-	UIApplication* app = [UIApplication sharedApplication];
-	app.networkActivityIndicatorVisible = YES;	
+	UIApplication *app = [UIApplication sharedApplication];
+	[app setNetworkActivityIndicatorVisible:YES];	
 }
 
 - (void)showLoaderIconLarge {
-	self.tableView.separatorColor = [UIColor blackColor];
+	[self.tableView setSeparatorColor:[UIColor blackColor]];
 	[self.view addSubview:loadingLabel];
 	[activityView startAnimating];	
 }
 
 - (void)hideLoaderIcon {
-	UIApplication* app = [UIApplication sharedApplication];
-	app.networkActivityIndicatorVisible = NO;
+	UIApplication *app = [UIApplication sharedApplication];
+	[app setNetworkActivityIndicatorVisible:NO];
 	
-	self.tableView.separatorColor = [UIColor darkGrayColor];
+	[self.tableView setSeparatorColor:[UIColor darkGrayColor]];
 	[activityView stopAnimating];
 	[loadingLabel removeFromSuperview];
 }
 
 - (void)hideLoaderIconLarge {
-	self.tableView.separatorColor = [UIColor darkGrayColor];
+	[self.tableView setSeparatorColor:[UIColor darkGrayColor]];
 	[activityView stopAnimating];
 	[loadingLabel removeFromSuperview];
 }
@@ -111,29 +108,26 @@ NSInteger sortOnDistance(id obj1, id obj2, void *context) {
 - (void)showLocationProfile:(LocationObject*)location withMapButton:(BOOL)showMapButton {
 	LocationProfileViewController *locationProfileView = [self getLocationProfile];
 	
-	locationProfileView.showMapButton        = showMapButton;
-	locationProfileView.activeLocationObject = location;
+	[locationProfileView setShowMapButton:showMapButton];
+	[locationProfileView setActiveLocationObject:location];
 	
 	[self.navigationController pushViewController:locationProfileView animated:YES];
 }
 
 - (LocationProfileViewController *) getLocationProfile {
-	Portland_Pinball_MapAppDelegate *appDelegate = (Portland_Pinball_MapAppDelegate *)[[UIApplication sharedApplication] delegate];
 	LocationProfileViewController *locationProfileView = appDelegate.locationProfileView;
 	
 	if(locationProfileView == nil) {
-		locationProfileView = [[LocationProfileViewController alloc]  initWithStyle:UITableViewStylePlain];
+		locationProfileView = [[LocationProfileViewController alloc] initWithStyle:UITableViewStylePlain];
 	}
 	
 	return locationProfileView;
 }
 
-- (void)motionEnded:(UIEventSubtype)motion withEvent:(UIEvent *)event {
-	Portland_Pinball_MapAppDelegate *appDelegate = (Portland_Pinball_MapAppDelegate *)[[UIApplication sharedApplication] delegate];
-	
+- (void)motionEnded:(UIEventSubtype)motion withEvent:(UIEvent *)event {	
 	if (event.type == UIEventSubtypeMotionShake) {
-		UIApplication* app = [UIApplication sharedApplication];
-		if(app.networkActivityIndicatorVisible == YES) {
+		UIApplication *app = [UIApplication sharedApplication];
+		if (app.networkActivityIndicatorVisible == YES) {
 			return;
 		} 
 				
@@ -160,18 +154,19 @@ NSInteger sortOnDistance(id obj1, id obj2, void *context) {
 		int r = arc4random() % [value_array count];
 		LocationObject *loc = [appDelegate.activeRegion.locations objectForKey:[value_array objectAtIndex:r]];
 		
-		NSArray *vcarray = self.navigationController.viewControllers;
-		LocationProfileViewController *vc = (LocationProfileViewController *)[vcarray objectAtIndex:[vcarray count] - 1];
+		NSArray *viewControllers = self.navigationController.viewControllers;
+		LocationProfileViewController *vc = (LocationProfileViewController *)[viewControllers objectAtIndex:[viewControllers count] - 1];
 		if([vc isKindOfClass:[LocationProfileViewController class]]) {
 			vc.activeLocationObject = loc;
 			[vc refreshAndReload];
 		} else {
 			LocationProfileViewController *locationProfileView123 = [self getLocationProfile];
-			locationProfileView123.title = @"Mystery";
-			locationProfileView123.showMapButton = YES;
-			locationProfileView123.activeLocationObject = loc;
+			[locationProfileView123 setTitle:@"Mystery"];
+            [locationProfileView123 setShowMapButton:YES];
+			[locationProfileView123 setActiveLocationObject:loc];
 			
 			NSArray *quickArray1234 = [[NSArray alloc] initWithObjects:[self.navigationController.viewControllers objectAtIndex:0],locationProfileView123,nil];
+
 			[self.navigationController setViewControllers:quickArray1234 animated:NO];
 		}
 		
@@ -187,26 +182,23 @@ NSInteger sortOnDistance(id obj1, id obj2, void *context) {
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger) section {
-	NSString *returnString = @"no section title";
-	return returnString;
+	return @"no section title";
 }
 
-- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
-	NSString *sectionTitle = [self tableView:tableView titleForHeaderInSection:section];
-	NSString *extraString = [[NSString alloc] initWithFormat:@"%@",sectionTitle];
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {    
 	UILabel *label = [[UILabel alloc] init];
-	label.frame = CGRectMake(10, 0, 320, headerHeight);
-	label.backgroundColor = [UIColor clearColor];
-	label.textColor = [UIColor blackColor];
-	label.font = [UIFont boldSystemFontOfSize:18];
-	label.text = extraString;
-	
+	[label setFrame:CGRectMake(10, 0, 320, headerHeight)];
+	[label setBackgroundColor:[UIColor clearColor]];
+	[label setTextColor:[UIColor blackColor]];
+	[label setFont:[UIFont boldSystemFontOfSize:18]];
+	[label setText:[self tableView:tableView titleForHeaderInSection:section]];
 	
 	UIView *view = [[UIView alloc] initWithFrame:CGRectMake(10, 0, 320, headerHeight)];
-	view.alpha = 0.9;
-	view.backgroundColor = [UIColor whiteColor];
+	[view setAlpha:0.9];
+	[view setBackgroundColor:[UIColor whiteColor]];
 	[view addSubview:label];
-	return view;	
+	
+    return view;	
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {    
@@ -215,12 +207,10 @@ NSInteger sortOnDistance(id obj1, id obj2, void *context) {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
-		
 	}
     	
     return cell;
 }
-
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {}
 
@@ -231,6 +221,5 @@ NSInteger sortOnDistance(id obj1, id obj2, void *context) {
 		
 	return headerHeight ;
 }
-
 
 @end
