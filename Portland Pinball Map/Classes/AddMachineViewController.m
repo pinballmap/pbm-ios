@@ -198,11 +198,7 @@
 			if(locationArray != nil) {
 				[locationArray addObject:location];
 			}
-			
-			Portland_Pinball_MapAppDelegate *appDelegate = (Portland_Pinball_MapAppDelegate *)[[UIApplication sharedApplication] delegate];
-			NSString* erstr = [NSString stringWithFormat:@"| CODE 0002 | %@ | %@ was added to %@ (%@)",appDelegate.activeRegion.formalName, newName, location.name, location.id_number];
-			[Utils sendErrorReport:erstr];
-		} else {
+        } else {
 			NSString *alertString2 = [[NSString alloc] initWithString:@"Machine could not be added at this time, please try again later."];
 			UIAlertView *alert2 = [[UIAlertView alloc]
 								   initWithTitle:@"Sorry"

@@ -20,10 +20,6 @@
 	
 	WebViewController *webview;
 	
-	NSRange dayRange2;
-	NSRange monthRange2;
-	NSRange yearRange2;
-	
 	CommentController *commentController;
 	
 	LocationObject *location;
@@ -55,7 +51,6 @@
 - (IBAction) onEditButtonPressed:(id)sender;
 - (void)hideControllButtons:(BOOL)doHide;
 - (void)removeMachineWithURL:(NSString *)urlstr;
-- (NSString *)formatDateFromString:(NSString *)string;
 
 + (NSString *)urlEncodeValue:(NSString *)url;
 

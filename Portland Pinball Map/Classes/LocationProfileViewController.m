@@ -358,10 +358,6 @@
 														cancelButtonTitle:@"OK" 
 														otherButtonTitles:nil];
 		[errorAlert show];
-		
-		Portland_Pinball_MapAppDelegate *appDelegate = (Portland_Pinball_MapAppDelegate *)[[UIApplication sharedApplication] delegate];
-		NSString* erstr = [NSString stringWithFormat:@"| CODE 0001 | %@ | %@ (%@) did not load",appDelegate.activeRegion.formalName, activeLocationObject.name,activeLocationObject.id_number];
-		[Utils sendErrorReport:erstr];
 	}
 }
 

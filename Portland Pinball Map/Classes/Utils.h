@@ -1,10 +1,15 @@
 #import <Foundation/Foundation.h>
 
+#define DAY_RANGE   NSMakeRange(8, 2)
+#define YEAR_RANGE  NSMakeRange(0, 4)
+#define MONTH_RANGE NSMakeRange(5, 2)
+
 @interface Utils : NSObject {
 }
 
-+ (BOOL) stringIsBlank:(NSString *)string;
-+ (void)sendErrorReport:(NSString *)string;
++ (BOOL)stringIsBlank:(NSString *)string;
 + (NSString *)urlencode:(NSString *)url;
++ (NSString *)formatDateFromString:(NSString *)dateString;
++ (NSDate *)getDateFromString:(NSString *)dateString;
 
 @end

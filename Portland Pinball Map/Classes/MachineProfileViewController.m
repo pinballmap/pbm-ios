@@ -14,19 +14,6 @@
 	[self becomeFirstResponder];
 }
 
-- (void)viewDidLoad {
-	dayRange2.location = 8;
-	dayRange2.length = 2;
-	
-	monthRange2.location = 5;
-	monthRange2.length = 2;
-	
-	yearRange2.location = 0;
-	yearRange2.length = 4;
-    
-	[super viewDidLoad];
-}
-
 - (void)viewWillAppear:(BOOL)animated {
 	self.title = location.name;
 	
@@ -37,7 +24,7 @@
 	if([machine.dateAdded isEqualToString:@""]) {
 		locationLabel.text  = @"";
 	} else {
-		locationLabel.text  = [NSString stringWithFormat:@"added %@",[self formatDateFromString:machine.dateAdded]];
+		locationLabel.text  = [NSString stringWithFormat:@"added %@",[Utils formatDateFromString:machine.dateAdded]];
 	}
 	
 	if([Utils stringIsBlank:machine.condition]) {
@@ -49,7 +36,7 @@
 	}
 	
 	if(machine.condition_date != nil) {
-		conditionLabel.text = [NSString stringWithFormat:@"Last Updated - %@", [self formatDateFromString:machine.condition_date]];
+		conditionLabel.text = [NSString stringWithFormat:@"Last Updated - %@", [Utils formatDateFromString:machine.condition_date]];
 	} else { 
 		conditionLabel.text = @"";
     }
@@ -193,11 +180,6 @@
 
 - (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex {
 	if([alertView.title isEqualToString:@"Thank You!"]) {
-		Portland_Pinball_MapAppDelegate *appDelegate = (Portland_Pinball_MapAppDelegate *)[[UIApplication sharedApplication] delegate];
-		NSString *erstr = [NSString stringWithFormat:@"| CODE 0003 | %@ | %@ was removed from %@ (%@).",
-						  appDelegate.activeRegion.formalName, machine.name,location.name,location.id_number];
-		[Utils sendErrorReport:erstr];
-		
 		location.isLoaded = NO;
 		[self.navigationController popViewControllerAnimated:YES];
 	}
@@ -216,75 +198,6 @@
 	self.conditionLabel = nil;
 	self.locationLabel = nil;
 	self.updateConditionButton = nil;
-}
-
-
-
-- (NSString *)formatDateFromString:(NSString *)dateString {	
-	NSString *year  = [[NSString alloc] initWithString:[dateString substringWithRange:yearRange2]];
-	
-	NSString *month = [[NSString alloc] initWithString:[dateString substringWithRange:monthRange2]];
-	NSString *displayMonth;
-	
-	if ([month isEqualToString:@"01"]) {
-          displayMonth = [[NSString alloc] initWithString:@"Jan"];
-	} else if ([month isEqualToString:@"02"]) {
-          displayMonth = [[NSString alloc] initWithString:@"Feb"];
-	} else if ([month isEqualToString:@"03"]) {
-          displayMonth = [[NSString alloc] initWithString:@"March"];
-	} else if ([month isEqualToString:@"04"]) {
-          displayMonth = [[NSString alloc] initWithString:@"April"];
-	} else if ([month isEqualToString:@"05"]) {
-          displayMonth = [[NSString alloc] initWithString:@"May"];
-        } else if ([month isEqualToString:@"06"]) {
-          displayMonth = [[NSString alloc] initWithString:@"June"];
-	} else if ([month isEqualToString:@"07"]) {
-          displayMonth = [[NSString alloc] initWithString:@"July"];
-	} else if ([month isEqualToString:@"08"]) {
-          displayMonth = [[NSString alloc] initWithString:@"Aug"];
-	} else if ([month isEqualToString:@"09"]) {
-          displayMonth = [[NSString alloc] initWithString:@"Sep"];
-	} else if ([month isEqualToString:@"10"]) {
-          displayMonth = [[NSString alloc] initWithString:@"Oct"];
-	} else if ([month isEqualToString:@"11"]) {
-          displayMonth = [[NSString alloc] initWithString:@"Nov"];
-	} else {
-          displayMonth = [[NSString alloc] initWithString:@"Dec"];
-    }
-	
-	NSRange digit;
-	digit.length = 1;
-	digit.location = 1;
-	
-	NSString *day = [[NSString alloc] initWithString:[dateString substringWithRange:dayRange2]];
-	NSString *lastDigit = [[NSString alloc] initWithString:[day substringWithRange:digit]];
-	NSString *extra;
-
-	if ([day isEqualToString:@"11"]) {
-          extra = [[NSString alloc] initWithString:@"th"];
-	} else if ([day isEqualToString:@"12"]) {
-          extra = [[NSString alloc] initWithString:@"th"];
-	} else if ([day isEqualToString:@"13"]) {
-          extra = [[NSString alloc] initWithString:@"th"];
-	} else if ([lastDigit isEqualToString:@"1"]) {
-          extra = [[NSString alloc] initWithString:@"st"];
-	} else if ([lastDigit isEqualToString:@"2"]) {
-          extra = [[NSString alloc] initWithString:@"nd"];
-	} else if ([lastDigit isEqualToString:@"3"]) {
-          extra = [[NSString alloc] initWithString:@"rd"];
-	} else {
-          extra = [[NSString alloc] initWithString:@"th"];
-        }
-	
-	NSString *dayString = [NSString stringWithFormat:@"%i%@",[day intValue],extra];
-	NSDateFormatter *inputFormatter = [[NSDateFormatter alloc] init];
-	[inputFormatter setDateFormat:@"yyyy-MM-dd"];
-
-	NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
-	NSString *returnString = [[NSString alloc] initWithFormat:@"%@ %@, %@",displayMonth,dayString,year];
-	
-
-	return returnString;
 }
 
 @end
