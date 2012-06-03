@@ -1,5 +1,4 @@
 #import "ZonesViewController.h"
-#import "Portland_Pinball_MapAppDelegate.h"
 #import "ZoneObject.h"
 
 @implementation ZonesViewController
@@ -7,23 +6,20 @@
 
 - (void)viewWillAppear:(BOOL)animated {
 	Portland_Pinball_MapAppDelegate *appDelegate = (Portland_Pinball_MapAppDelegate *)[[UIApplication sharedApplication] delegate];
-	NSLog(@"Zones View Controller Load %@",appDelegate.activeRegion);
 	
-	NSArray *array1 = [[NSArray alloc] initWithObjects:@"All",appDelegate.activeRegion.machineFilterString,@"< 1 mile",nil];
-	NSArray *array2 = [[NSArray alloc] initWithArray:appDelegate.activeRegion.primaryZones];
-	NSArray *array3 = [[NSArray alloc] initWithArray:appDelegate.activeRegion.secondaryZones];
+	NSArray *allZones = [[NSArray alloc] initWithObjects:@"All", appDelegate.activeRegion.machineFilterString, @"< 1 mile", nil];
+	NSArray *primaryZones = [[NSArray alloc] initWithArray:appDelegate.activeRegion.primaryZones];
+	NSArray *secondaryZones = [[NSArray alloc] initWithArray:appDelegate.activeRegion.secondaryZones];
 	
-	NSString *regionTitle = [NSString stringWithString:appDelegate.activeRegion.name];
+	NSString *regionTitle = appDelegate.activeRegion.name;
 	
-    
-	zones = [[NSDictionary alloc] initWithObjectsAndKeys:array3,@"Suburbs",array2,regionTitle,array1,@"Filter by",nil];
-	titles = [[NSArray alloc] initWithObjects:@"Filter by",regionTitle,@"Suburbs",nil];
+	zones = [[NSDictionary alloc] initWithObjectsAndKeys:secondaryZones,@"Suburbs", primaryZones, regionTitle, allZones, @"Filter by", nil];
+	titles = [[NSArray alloc] initWithObjects:@"Filter by", regionTitle, @"Suburbs", nil];
 	
-	
-	self.title = @"Locations";
+	[self setTitle:@"Locations"];
 	
 	if(locationFilter != nil)
-		locationFilter.currentZoneID = @" ";
+		[locationFilter setCurrentZoneID:@" "];
 	
 	[self.tableView reloadData];
 	
@@ -31,7 +27,8 @@
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
-	self.title = @"back";
+	[self setTitle:@"back"];
+    
 	[super viewWillDisappear:animated];
 }
 
@@ -39,10 +36,10 @@
     return [zones count];
 }
 
-
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     NSString *keyAtSection = [titles objectAtIndex:section];
 	NSArray *array = (NSArray*)[zones objectForKey:keyAtSection];
+    
 	return [array count];
 }
 
@@ -59,10 +56,10 @@
 	NSArray *array = (NSArray*)[zones objectForKey:keyAtSection];
 	
 	if(section == 0) {
-		cell.nameLabel.text = [array objectAtIndex:row];
+		[cell.nameLabel setText:[array objectAtIndex:row]];
 	} else {
 		ZoneObject *zone = (ZoneObject*)[array objectAtIndex:row];
-		cell.nameLabel.text = [[NSString alloc] initWithString:zone.name];
+		[cell.nameLabel setText:zone.name];
 	}
 
     return cell;
@@ -83,16 +80,15 @@
 	NSArray *array = (NSArray*)[zones objectForKey:keyAtSection];
 	
 	if(section == 0) {
-		locationFilter.zoneID = [array objectAtIndex:row];
+		[locationFilter setZoneID:[array objectAtIndex:row]];
 	} else {
 		ZoneObject *zone = (ZoneObject*)[array objectAtIndex:row];
-		NSString *newString = [[NSString alloc] initWithString:zone.name];
-		locationFilter.zoneID = newString;
-		locationFilter.theNewZone = zone;
+        
+		[locationFilter setZoneID:zone.name];
+		[locationFilter setTheNewZone:zone];
 	}
 	
-	[self.navigationController pushViewController:locationFilter  animated:YES];	
+	[self.navigationController pushViewController:locationFilter animated:YES];	
 }
-
 
 @end
