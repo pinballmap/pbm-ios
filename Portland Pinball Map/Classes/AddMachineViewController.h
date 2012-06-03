@@ -1,22 +1,22 @@
-@class LocationObject;
+#import "LocationObject.h"
 
 @interface AddMachineViewController : UIViewController <UIPickerViewDelegate,UIActionSheetDelegate,UIAlertViewDelegate> {
 	UITextField *textfield;
 	UIPickerView *picker;
 	UIButton *submitButton;
 	UIButton *returnButton;
-	NSMutableArray *machineArray;
+	NSMutableArray *machines;
 	
 	UIActivityIndicatorView *loaderIcon;
 	
 	LocationObject *location;
 	NSString *locationName;
 	NSString *locationId;
-    NSString *selected_machine_id;
+    NSString *selectedMachineID;
 }
 
 @property (nonatomic,strong) LocationObject *location;
-@property (nonatomic,strong) NSString *selected_machine_id;
+@property (nonatomic,strong) NSString *selectedMachineID;
 @property (nonatomic,strong) NSString *locationName;
 @property (nonatomic,strong) NSString *locationId;
 
@@ -30,6 +30,5 @@
 - (IBAction)onSumbitTap:(id)sender;
 - (void)addMachineFromTextfield;
 - (void)addMachineWithURL:(NSString *)urlstr;
-- (NSString *)stripString:(NSString *)string;
 
 @end

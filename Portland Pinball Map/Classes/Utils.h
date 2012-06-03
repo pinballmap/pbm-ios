@@ -11,5 +11,6 @@
 + (NSString *)urlEncode:(NSString *)url;
 + (NSString *)formatDateFromString:(NSString *)dateString;
 + (NSDate *)getDateFromString:(NSString *)dateString;
++ (NSString *)stripString:(NSString *)string;
 
 @end

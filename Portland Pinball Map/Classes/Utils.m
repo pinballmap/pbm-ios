@@ -88,4 +88,27 @@
 	return [inputFormatter dateFromString:[NSString stringWithFormat:@"%@-%@-%@", year, month, day]];
 }
 
++ (NSString *)stripString:(NSString *)string {
+	NSArray *escapeChars = [NSArray arrayWithObjects:
+							@";", @"/", @"?", @":",
+							@"@", @"&", @"=", @"+",
+							@"$", @",", @"[", @"]",
+							@"#", @"!", @"|", @"(", 
+							@"-",
+							@")", @"*", @"'", @" ", nil];
+	
+	int len = [escapeChars count];
+    NSMutableString *temp  = [string mutableCopy];
+	NSMutableString *temp2 = [[temp lowercaseString] mutableCopy];
+    
+	for(int i = 0; i < len; i++) {
+        [temp2 replaceOccurrencesOfString: [escapeChars objectAtIndex:i]
+                               withString: @""
+                                  options: NSLiteralSearch
+                                    range: NSMakeRange(0, [temp2 length])];
+    }
+	
+    return temp2;
+}
+
 @end
