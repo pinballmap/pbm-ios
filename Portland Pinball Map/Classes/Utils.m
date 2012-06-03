@@ -111,4 +111,16 @@
     return temp2;
 }
 
++ (NSString *)directoryFirstLetter:(NSString *)string {
+    NSString *firstLetter = [[string substringToIndex:1] lowercaseString];
+	NSString *searchString = [[NSString alloc] initWithString:@"abcdefghijklmnopqrstuvwxyz"];
+    
+	NSRange letterRange = [searchString rangeOfString:firstLetter];
+	if (letterRange.length == 0) {
+		firstLetter = @"#";
+	}
+    
+    return firstLetter;
+}
+
 @end

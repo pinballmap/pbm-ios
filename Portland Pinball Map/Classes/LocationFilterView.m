@@ -1,90 +1,70 @@
 #import "LocationFilterView.h"
+#import "Utils.h"
 
 @implementation LocationFilterView
-
 @synthesize filteredLocations, keys, mapView, locationArray, zoneID, theNewZone, currentZone, currentZoneID;
 
+Portland_Pinball_MapAppDelegate *appDelegate;
+
 - (void)viewDidLoad {
-	emptyArray = [[NSArray alloc] init];
+    appDelegate = (Portland_Pinball_MapAppDelegate *)[[UIApplication sharedApplication] delegate];
 	
     [super viewDidLoad];	
 }
 
-
 - (void)viewWillAppear:(BOOL)animated {
-	if(![zoneID isEqualToString:currentZoneID]) {
-		Portland_Pinball_MapAppDelegate *appDelegate = (Portland_Pinball_MapAppDelegate *)[[UIApplication sharedApplication] delegate];
-		
-		self.tableView.contentOffset = CGPointZero;
+	if(![zoneID isEqualToString:currentZoneID]) {		
+		[self.tableView setContentOffset:CGPointZero];
 		
 		totalLocations = 0;
 		filteredLocations = [[NSMutableDictionary alloc] init];
 		locationArray = [[NSMutableArray alloc] init];
 		
-		for(id key in appDelegate.activeRegion.locations) {
+		for (id key in appDelegate.activeRegion.locations) {
 			LocationObject *location = [appDelegate.activeRegion.locations valueForKey:key];
-			NSString *neighborhood = location.neighborhood;
 			
-			if([zoneID isEqualToString:@"All"]) {
+			if ([zoneID isEqualToString:@"All"]) {
                 [self addToFilterDictionary:location];
 			} else if([zoneID isEqualToString:@"< 1 mile"] && appDelegate.showUserLocation == YES) {
 				[location updateDistance];
 				if(location.distanceRounded <= 1.0)
                     [self addToFilterDictionary:location];
 			} else if([zoneID isEqualToString:appDelegate.activeRegion.machineFilterString]) {
-				NSInteger numMachines = location.totalMachines;
-				if(numMachines >= [appDelegate.activeRegion.machineFilter intValue]) [self addToFilterDictionary:location];
-				
-			} else if([neighborhood isEqualToString:theNewZone.shortName]) {
+				if(location.totalMachines >= [appDelegate.activeRegion.machineFilter intValue])
+                    [self addToFilterDictionary:location];
+			} else if([location.neighborhood isEqualToString:theNewZone.shortName]) {
                 [self addToFilterDictionary:location];
             }
 		}
 		
-		for(id key in filteredLocations) {
-			NSMutableArray *orig_array = [filteredLocations objectForKey:key];
-			NSSortDescriptor *nameSortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"name" ascending:YES selector:@selector(compare:)];
-			[orig_array sortUsingDescriptors:[NSArray arrayWithObjects:nameSortDescriptor, nil]];
-		}
-		
-		headerHeight = (totalLocations > 25) ? 20 : 0;
-		
-		NSArray *array = [[filteredLocations allKeys] sortedArrayUsingSelector:@selector(compare:)];
-		self.keys = array;
+		headerHeight = (totalLocations > 25) ? 20 : 0;		
+		self.keys = [[filteredLocations allKeys] sortedArrayUsingSelector:@selector(compare:)];
 		
 		[self.tableView reloadData];
 	}
-	
+
+	currentZoneID = zoneID;
     
-	currentZoneID = [[NSString alloc] initWithString:zoneID];
-	        
-	self.title = [NSString stringWithFormat:[NSString stringWithFormat:@"%@", [zoneID isEqualToString:@"All"] ? @"All Locations" : zoneID]];
+	[self setTitle:[NSString stringWithFormat:[NSString stringWithFormat:@"%@", [zoneID isEqualToString:@"All"] ? @"All Locations" : zoneID]]];
 	
-	if ([keys count] > 0) {
-		self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Map" style:UIBarButtonItemStyleBordered target:self action:@selector(onMapPress:)];
-    } else { 
-		self.navigationItem.rightBarButtonItem = nil;
-	}
+    [self.navigationItem setRightBarButtonItem:([keys count] > 0) ?
+        [[UIBarButtonItem alloc] initWithTitle:@"Map" style:UIBarButtonItemStyleBordered target:self action:@selector(onMapPress:)] :
+        nil
+    ];
         
 	[super viewWillAppear:animated];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
-	self.title = @"back";
+	[self setTitle:@"back"];
+    
 	[super viewWillDisappear:animated];
 }
 
 - (void)addToFilterDictionary:(LocationObject *)location {
 	totalLocations++;
-	NSString *locationName = location.name;
-	NSString *firstLetter = [[NSString alloc] initWithString:[[locationName substringToIndex:1] lowercaseString]];
-	
-	NSString *searchString = [[NSString alloc] initWithString:@"abcdefghijklmnopqrstuvwxyz"];
-	NSRange letterRange = [searchString rangeOfString:firstLetter];
-	if (letterRange.length == 0) {
-		firstLetter = [[NSString alloc] initWithString:@"#"];
-	}
-	
-	
+	NSString *firstLetter = [Utils directoryFirstLetter:location.name];
+    
 	NSMutableArray *letterArray = [filteredLocations objectForKey:firstLetter];
 	if(letterArray == nil) {
 		NSMutableArray *newLetterArray = [[NSMutableArray alloc] init];
@@ -94,52 +74,45 @@
 	
 	[letterArray addObject:location];
 	[locationArray addObject:location];
-	
 }
 
 - (void)onMapPress:(id)sender {
 	if (mapView == nil) {
 		mapView = [[LocationMap alloc] init];
-		mapView.showProfileButtons = YES;
+		[mapView setShowProfileButtons:YES];
 	}
 	
-	mapView.locationsToShow = locationArray;
-	mapView.title = self.title;
+	[mapView setLocationsToShow:locationArray];
+	[mapView setTitle:self.title];
 	
 	if (NO) {
 		[UIView beginAnimations:nil context:NULL];
 		[UIView setAnimationDuration: 1];
 		[UIView setAnimationTransition:UIViewAnimationTransitionFlipFromRight forView:self.navigationController.view cache:NO];
-		[self.navigationController pushViewController:mapView animated:YES];
-		[UIView commitAnimations];	
-	} else {
-		[self.navigationController pushViewController:mapView animated:YES];
+        [UIView commitAnimations];
 	}
+    
+    [self.navigationController pushViewController:mapView animated:YES];
 }
 
-
-
-- (void)viewDidUnload {
-}
+- (void)viewDidUnload {}
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return [keys count];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-	NSString *key = [keys objectAtIndex:section];
-	NSDictionary *nameSection = [filteredLocations objectForKey:key];
+	NSDictionary *nameSection = [filteredLocations objectForKey:[keys objectAtIndex:section]];
     
     return [nameSection count];
 }
 
 -(NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger) section {
-	NSString *key = [keys objectAtIndex:section];
-	return key;
+	return [keys objectAtIndex:section];
 }
 
 - (NSArray *)sectionIndexTitlesForTableView:(UITableView *)tableView {
-    return (headerHeight > 0) ? keys : emptyArray;
+    return (headerHeight > 0) ? keys : [[NSArray alloc] init];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -150,29 +123,21 @@
 		cell = [self getDoubleCell];
     }
 	
-	NSUInteger row = [indexPath row];
-	NSUInteger section = [indexPath section];
-	NSString *keyAtSection = [keys objectAtIndex:section];
+	NSString *keyAtSection = [keys objectAtIndex:[indexPath section]];
 	NSArray *letterArray = (NSArray*)[filteredLocations objectForKey:keyAtSection];
-	LocationObject *location = [letterArray objectAtIndex:row];
-	cell.nameLabel.text = location.name;
-	
-	Portland_Pinball_MapAppDelegate *appDelegate = (Portland_Pinball_MapAppDelegate *)[[UIApplication sharedApplication] delegate];
-	cell.subLabel.text = (appDelegate.showUserLocation == YES) ? location.distanceString : @"";
+	LocationObject *location = [letterArray objectAtIndex:[indexPath row]];
+    [cell.nameLabel setText:location.name];
+	[cell.subLabel setText:(appDelegate.showUserLocation == YES) ? location.distanceString : @""];
 
     return cell;
 }
 
-
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-	NSUInteger row = [indexPath row];
-	NSUInteger section = [indexPath section];
-	NSString *keyAtSection = [keys objectAtIndex:section];
+	NSString *keyAtSection = [keys objectAtIndex:[indexPath section]];
 	NSArray *letterArray = (NSArray*)[filteredLocations objectForKey:keyAtSection];
-	LocationObject *location = [letterArray objectAtIndex:row];
+	LocationObject *location = [letterArray objectAtIndex:[indexPath row]];
 	
-	[self showLocationProfile:location  withMapButton:YES];
+	[self showLocationProfile:location withMapButton:YES];
 }
-
 
 @end

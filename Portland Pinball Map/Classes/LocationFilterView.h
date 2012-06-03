@@ -3,16 +3,12 @@
 #import "LocationMap.h"
 #import "ZoneObject.h"
 
-@class LocationProfileViewController;
-@class Portland_Pinball_MapAppDelegate;
-
 @interface LocationFilterView : BlackTableViewController {
 	NSInteger totalLocations;
 	NSMutableDictionary *filteredLocations;
     
 	NSMutableArray *locationArray;
 	NSArray *keys;	
-	NSArray	*emptyArray;
 	
 	ZoneObject *theNewZone;
 	ZoneObject *currentZone;

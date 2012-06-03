@@ -1,4 +1,5 @@
 #import "MachineViewController.h"
+#import "Utils.h"
 
 @implementation MachineViewController
 @synthesize sortedMachines, keys, machineFilter;
@@ -23,15 +24,10 @@
 		NSDictionary *machine = [appDelegate.activeRegion.machines valueForKey:key];
 		NSString *machineName = [machine valueForKey:@"name"];
 		
-		NSString *firstLetter = [[machineName substringToIndex:1] lowercaseString];
-		
+		NSString *firstLetter = [Utils directoryFirstLetter:machineName];
+        
 		NSRange range = [machineName rangeOfString:@"no more pinball"];		
 		if (range.length == 0) {
-			NSRange letterRange = [@"abcdefghijklmnopqrstuvwxyz" rangeOfString:firstLetter];
-			if (letterRange.length == 0) {
-				firstLetter = @"#";
-			}		
-			
 			NSMutableArray *letterArray = [sortedMachines objectForKey:firstLetter];
 			if (letterArray == nil) {
 				NSMutableArray *newLetterArray = [[NSMutableArray alloc] init];
