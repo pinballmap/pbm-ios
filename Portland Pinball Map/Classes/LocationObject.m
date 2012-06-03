@@ -8,28 +8,24 @@
     if ((self = [super init])) {
        self.isLoaded = NO;
     }
+    
     return self;
 }
 
 - (void)updateDistance {
 	Portland_Pinball_MapAppDelegate *appDelegate = (Portland_Pinball_MapAppDelegate *)[[UIApplication sharedApplication] delegate];
 	
-	CLLocationDistance quickDist = [appDelegate.userLocation getDistanceFrom:coords] / 1609.344;
+	CLLocationDistance mDistance = [appDelegate.userLocation getDistanceFrom:coords] / 1609.344;
 	
-	NSNumber *distNum = [[NSNumber alloc] initWithDouble:quickDist]; 
+	NSNumber *distanceNumber = [[NSNumber alloc] initWithDouble:mDistance]; 
 	NSNumberFormatter *numberFormat = [[NSNumberFormatter alloc] init];
 	[numberFormat setMinimumIntegerDigits:1];	
 	[numberFormat setMaximumFractionDigits:1];
 	[numberFormat setMinimumFractionDigits:1];
 	
-	distance = quickDist;
-	distanceRounded = [[numberFormat stringFromNumber:distNum] doubleValue];
-	if(distanceString != nil) {
-		distanceString = nil;
-	}
-	distanceString = [[NSString alloc] initWithFormat:@"%@ mi", [numberFormat stringFromNumber:distNum]];
-	
+	distance = mDistance;
+	distanceRounded = [[numberFormat stringFromNumber:distanceNumber] doubleValue];    
+	distanceString = [[NSString alloc] initWithFormat:@"%@ mi", [numberFormat stringFromNumber:distanceNumber]];
 }
-
 
 @end
