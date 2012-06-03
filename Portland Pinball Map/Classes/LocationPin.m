@@ -4,7 +4,7 @@
 @synthesize coordinate, location;
 
 - (NSString *)subtitle {	 
-	return location.street1;
+    return location.street1;
 }
 
 - (NSString *)title {
@@ -13,13 +13,13 @@
 
 - (id)initWithLocation:(LocationObject *)newLocation {
 	location = newLocation;
+
 	return [self initWithCoordinate:location.coords.coordinate];
 }
 
-- (id)initWithCoordinate:(CLLocationCoordinate2D)c {
- 	coordinate = c;
+- (id)initWithCoordinate:(CLLocationCoordinate2D)newCoordinate {
+ 	coordinate = newCoordinate;
 	return self;
 }
-
 
 @end
