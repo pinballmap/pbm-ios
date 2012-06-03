@@ -5,22 +5,22 @@
 @synthesize nameLabel, locationLabel, timeLabel, webButton, locationButton, descText, eventObject, webview;
 
 - (void)viewDidLoad {
-	self.title = @"Events";
-	descText.editable = NO;
+	[self setTitle:@"Events"];
+	[descText setEditable:NO];
 	
 	[super viewDidLoad];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
-	if ([eventObject.name isEqualToString:@""]) {
-		nameLabel.text = [NSString stringWithFormat:@"%@ Tournament",eventObject.location.name];
-	} else { 
-		nameLabel.text = [NSString stringWithString:eventObject.name];
-    }
-        
-	locationLabel.text = [NSString stringWithFormat:@"@ %@",eventObject.location.name];
-	timeLabel.text = eventObject.displayDate;
-	descText.text = eventObject.longDesc;
+    [nameLabel setText:[NSString stringWithFormat:@"%@", [eventObject.name isEqualToString:@""] ?
+        [NSString stringWithFormat:@"%@ Tournament", eventObject.location.name] :
+        eventObject.name
+    ]];
+     
+	[locationLabel setText:[NSString stringWithFormat:@"@ %@",eventObject.location.name]];
+	[timeLabel setText:eventObject.displayDate];
+	[descText setText:eventObject.longDesc];
+    
 	[super viewWillAppear:animated];
 }
 
@@ -29,11 +29,11 @@
 	LocationProfileViewController *locationProfileView = appDelegate.locationProfileView;
 	
 	if (locationProfileView == nil) {
-		locationProfileView = [[LocationProfileViewController alloc]  initWithStyle:UITableViewStylePlain];
+		locationProfileView = [[LocationProfileViewController alloc] initWithStyle:UITableViewStylePlain];
 	}
 	
-	locationProfileView.showMapButton = YES;
-	locationProfileView.activeLocationObject = eventObject.location;
+	[locationProfileView setShowMapButton:YES];
+	[locationProfileView setActiveLocationObject:eventObject.location];
 	
 	[self.navigationController pushViewController:locationProfileView animated:YES];
 }
@@ -42,8 +42,8 @@
 	if(webview == nil)
 		webview = [[WebViewController alloc] initWithNibName:@"WebViewController" bundle:nil];	
 	
-	webview.title = nameLabel.text;
-	webview.theNewURL = [NSString stringWithString:eventObject.link];
+	[webview setTitle:nameLabel.text];
+	[webview setTheNewURL:eventObject.link];
 	
 	[self.navigationController pushViewController:webview animated:YES];
 }
@@ -56,6 +56,5 @@
 	self.locationButton = nil;
 	self.descText = nil;
 }
-
 
 @end
