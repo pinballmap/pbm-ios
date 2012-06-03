@@ -1,5 +1,4 @@
 #import "XMLTable.h"
-#import "LocationProfileViewController.h"
 
 @implementation XMLTable
 @synthesize loadingPage, tableView2, isParsing;
@@ -13,7 +12,6 @@
 	self.loadingPage = nil;
 	self.tableView2 = nil;
 }
-
 
 - (void)parseXMLFileAtURL:(NSString *)URL {
 	[self showLoaderIcon];
@@ -40,15 +38,18 @@
 
 - (void)parser:(NSXMLParser *)parser parseErrorOccurred:(NSError *)parseError {
 	[self hideLoaderIcon];
-	NSString *errorString = [NSString stringWithFormat:@"Error %i, Description: %@, Line: %i, Column: %i", [parseError code], [[parser parserError] localizedDescription], [parser lineNumber],	[parser columnNumber]];
+    
+	NSString *errorString = [NSString stringWithFormat:@"Error %i, Description: %@, Line: %i, Column: %i", [parseError code], [[parser parserError] localizedDescription], [parser lineNumber], [parser columnNumber]];
 		
 	UIAlertView * errorAlert = [[UIAlertView alloc] initWithTitle:@"Error loading content" message:errorString delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
 	[errorAlert show];
+    
 	isParsing = NO;
 }
 
 - (void)parserDidEndDocument:(NSXMLParser *)parser {
 	[self hideLoaderIcon];
+    
 	isParsing = NO;
 }
 
