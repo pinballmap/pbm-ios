@@ -354,7 +354,7 @@
 				}
 			}
 			
-			[appDelegate newActiveRegion:closestRegion];
+			[appDelegate setActiveRegion:closestRegion];
 			[appDelegate showSplashScreen];
 			
 			self.title = [NSString stringWithFormat:@"%@ Pinball Map",appDelegate.activeRegion.name];

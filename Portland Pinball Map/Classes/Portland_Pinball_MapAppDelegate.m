@@ -3,12 +3,11 @@
 
 @implementation Portland_Pinball_MapAppDelegate
 
-@synthesize window, navigationController, allMachines, allLocations, locationProfileView, splashScreen, locationMap, showUserLocation, rootURL, activeRegion, regions, userLocation;
+@synthesize window, navigationController, locationProfileView, splashScreen, locationMap, showUserLocation, activeRegion, regions, userLocation;
 
 - (void)applicationDidFinishLaunching:(UIApplication *)application {
 	userLocation = [[CLLocation alloc] initWithLatitude:45.52295 longitude:-122.66785];
 	
-	// Override point for customization after app launch 
 	navigationController.navigationBar.barStyle = UIBarStyleBlack;	
 	[window addSubview:[navigationController view]];
 	[window makeKeyAndVisible];
@@ -20,11 +19,11 @@
 	[self hideSplashScreen];
 	
 	splashScreen = [[UIView alloc] init];
-	splashScreen.userInteractionEnabled = NO;
+	[splashScreen setUserInteractionEnabled:NO];
 	
 	UIImageView *pbm = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"pbm2.png"]];
 	UIImageView *base = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"base_blank.png"]];
-	base.frame  = CGRectMake(0,20,320,460);
+	[base setFrame:CGRectMake(0,20,320,460)];
 	
 	if(activeRegion == nil) {
 		[splashScreen addSubview:base];
@@ -36,15 +35,15 @@
 		NSArray *availableRegions = [[NSArray alloc] initWithObjects:@"",@"albuquerque",@"austin",@"bayarea",@"bc",@"boston", @"chicago",@"detroit",@"la", @"lasvegas",@"toronto",@"newyork", @"sandiego",@"seattle",nil];
 		
 		if([availableRegions containsObject:splash_id]) {
-			region.frame = CGRectMake(0,20,320,460);
-			pbm.frame = CGRectMake(0,20,320,460);
+			[region setFrame:CGRectMake(0,20,320,460)];
+			[pbm setFrame:CGRectMake(0,20,320,460)];
 			
 			[splashScreen addSubview:base];
 			[splashScreen addSubview:pbm];
 			[splashScreen addSubview:region];
 			
 		} else {
-			pbm.frame = CGRectMake(0,-10,320,460);
+			[pbm setFrame:CGRectMake(0,-10,320,460)];
 			[splashScreen addSubview:base];
 			[splashScreen addSubview:pbm];
 		}
@@ -72,18 +71,11 @@
 	}	
 }
 
-- (void)newActiveRegion:(RegionObject *)reobj {	
-	activeRegion = reobj;
-	
-	if (rootURL != nil) {
-		rootURL = nil;
-	}
-    
-	rootURL = [[NSString alloc] initWithFormat:@"%@%@/iphone.html?", BASE_URL, activeRegion.subdir];
+- (NSString *)rootURL {
+    return [NSString stringWithFormat:@"%@%@/iphone.html?", BASE_URL, activeRegion.subdir];
 }
 
 - (void)showMap:(NSArray*)array withTitle:(NSString *)newTitle {}
 - (void)applicationWillTerminate:(UIApplication *)application {}
-
 
 @end

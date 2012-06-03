@@ -58,7 +58,7 @@
 		
 		[self.navigationController pushViewController:requestPage animated:YES];
 	} else {
-		[appDelegate newActiveRegion:[appDelegate.regions objectAtIndex:indexPath.row]];
+		[appDelegate setActiveRegion:[appDelegate.regions objectAtIndex:indexPath.row]];
 		[self.navigationController popViewControllerAnimated:YES];
 	}	
 }

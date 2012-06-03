@@ -108,12 +108,12 @@ Portland_Pinball_MapAppDelegate *appDelegate;
 		
 		NSDate *endDate;
 		if(![currentEndDate isEqualToString:@""] && ![currentEndDate isEqualToString:currentStartDate]) {
-			endDate = [self getDateFromString:currentEndDate];
+			endDate = [Utils getDateFromString:currentEndDate];
 			NSString *appendString = [NSString stringWithFormat:@" to %@",[Utils formatDateFromString:currentEndDate]];
             
 			[displayDate appendString:appendString];
 		} else {
-			endDate = [self getDateFromString:currentStartDate];
+			endDate = [Utils getDateFromString:currentStartDate];
 		}
             
 		[eventObject setDisplayDate:displayDate];

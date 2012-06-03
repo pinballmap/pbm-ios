@@ -38,6 +38,5 @@
 @property (nonatomic,strong) EventProfileViewController *eventProfile;
 
 - (int)differenceInDaysFrom:(NSDate *)startDate to:(NSDate *)toDate;
-- (NSDate *)getDateFromString:(NSString *)dateString;
 
 @end
