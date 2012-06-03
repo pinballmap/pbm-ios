@@ -2,7 +2,7 @@
 #import "LocationObject.h"
 
 @interface EventObject : NSObject {
-	NSString *id_number;
+	NSString *idNumber;
 	NSString *name;
 	NSString *longDesc;
 	NSString *link;
@@ -16,7 +16,7 @@
     LocationObject *location;
 }
 
-@property (nonatomic,strong) NSString *id_number;
+@property (nonatomic,strong) NSString *idNumber;
 @property (nonatomic,strong) NSString *name;
 @property (nonatomic,strong) NSString *longDesc;
 @property (nonatomic,strong) NSString *link;
@@ -28,6 +28,5 @@
 @property (nonatomic,strong) NSString *displayName;
 
 @property (nonatomic,strong) LocationObject *location;
-
 
 @end

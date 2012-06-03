@@ -91,7 +91,7 @@ Portland_Pinball_MapAppDelegate *appDelegate;
 	if ([elementName isEqualToString:@"event"]) {
 		Portland_Pinball_MapAppDelegate *appDelegate = (Portland_Pinball_MapAppDelegate *)[[UIApplication sharedApplication] delegate];
 		
-		eventObject.id_number = currentID;
+		eventObject.idNumber = currentID;
 		eventObject.name = currentName;
 		eventObject.longDesc = currentLongDesc;
 		eventObject.link = currentLink;
