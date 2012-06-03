@@ -27,17 +27,17 @@
 	NSString *rootURL;
 }
 
-@property (nonatomic,retain) CLLocation	*userLocation;
-@property (nonatomic,retain) NSArray *regions;
-@property (nonatomic,retain) RegionObject *activeRegion;
-@property (nonatomic,retain) NSString *rootURL;
-@property (nonatomic,retain) IBOutlet UIWindow *window;
-@property (nonatomic,retain) IBOutlet UINavigationController *navigationController;
-@property (nonatomic,retain) NSMutableDictionary *allLocations;
-@property (nonatomic,retain) NSMutableDictionary *allMachines;
-@property (nonatomic,retain) LocationProfileViewController *locationProfileView;
-@property (nonatomic,retain) LocationMap *locationMap;
-@property (nonatomic,retain) UIView	*splashScreen;
+@property (nonatomic,strong) CLLocation	*userLocation;
+@property (nonatomic,strong) NSArray *regions;
+@property (nonatomic,strong) RegionObject *activeRegion;
+@property (nonatomic,strong) NSString *rootURL;
+@property (nonatomic,strong) IBOutlet UIWindow *window;
+@property (nonatomic,strong) IBOutlet UINavigationController *navigationController;
+@property (nonatomic,strong) NSMutableDictionary *allLocations;
+@property (nonatomic,strong) NSMutableDictionary *allMachines;
+@property (nonatomic,strong) LocationProfileViewController *locationProfileView;
+@property (nonatomic,strong) LocationMap *locationMap;
+@property (nonatomic,strong) UIView	*splashScreen;
 @property (nonatomic,assign) BOOL showUserLocation;
 
 - (void)showMap:(NSArray *)array withTitle:(NSString *)newTitle;

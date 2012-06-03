@@ -15,17 +15,10 @@
 	
 	NSString *regionTitle = [NSString stringWithString:appDelegate.activeRegion.name];
 	
-	if(zones != nil)
-        [zones release];
-	if(titles != nil)
-        [titles release];
     
 	zones = [[NSDictionary alloc] initWithObjectsAndKeys:array3,@"Suburbs",array2,regionTitle,array1,@"Filter by",nil];
 	titles = [[NSArray alloc] initWithObjects:@"Filter by",regionTitle,@"Suburbs",nil];
 	
-	[array1 release];
-	[array2 release];
-	[array3 release];
 	
 	self.title = @"Locations";
 	
@@ -69,7 +62,7 @@
 		cell.nameLabel.text = [array objectAtIndex:row];
 	} else {
 		ZoneObject *zone = (ZoneObject*)[array objectAtIndex:row];
-		cell.nameLabel.text = [[[NSString alloc] initWithString:zone.name] autorelease];
+		cell.nameLabel.text = [[NSString alloc] initWithString:zone.name];
 	}
 
     return cell;
@@ -95,18 +88,11 @@
 		ZoneObject *zone = (ZoneObject*)[array objectAtIndex:row];
 		NSString *newString = [[NSString alloc] initWithString:zone.name];
 		locationFilter.zoneID = newString;
-		[newString release];
-		locationFilter.newZone = zone;
+		locationFilter.theNewZone = zone;
 	}
 	
 	[self.navigationController pushViewController:locationFilter  animated:YES];	
 }
 
-- (void)dealloc {
-	[titles release];
-	[zones release];
-	[locationFilter release];
-    [super dealloc];
-}
 
 @end

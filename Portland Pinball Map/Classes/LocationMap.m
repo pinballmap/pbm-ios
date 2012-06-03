@@ -1,4 +1,5 @@
 #import "LocationMap.h"
+#import "BlackTableViewController.h"
 
 @implementation LocationMap
 @synthesize map, locationsToShow, annotationArray, location, showProfileButtons;
@@ -49,9 +50,7 @@
 			for (int i = 0; i < [locationsToShow count]; i++) {
 				LocationObject *newLocation = [locationsToShow objectAtIndex:i];
 				LocationPin *placemark = [[LocationPin alloc] initWithLocation:newLocation];
-				//[map addAnnotation:placemark];
 				[quickArray addObject:placemark];
-				[placemark release];
 				
 				if(i == 0) {
 					southWest.latitude  = newLocation.coords.coordinate.latitude;
@@ -71,12 +70,11 @@
 			region.span.latitudeDelta = northEast.latitude - southWest.latitude;
 			region.span.longitudeDelta = northEast.longitude - southWest.longitude;
 		} else {
-			self.navigationItem.rightBarButtonItem = [[[UIBarButtonItem alloc] initWithTitle:@"Google Map" style:UIBarButtonItemStyleBordered target:self action:@selector(googleMapButtonPressed:)] autorelease];	
+			self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Google Map" style:UIBarButtonItemStyleBordered target:self action:@selector(googleMapButtonPressed:)];	
 			
 			LocationObject *soloLocation = [locationsToShow objectAtIndex:0];
 			LocationPin *soloPlacemark = [[LocationPin alloc] initWithLocation:soloLocation];
 			[quickArray addObject:soloPlacemark];
-			[soloPlacemark release];
 			
 			region.center.latitude = soloLocation.coords.coordinate.latitude;
 			region.center.longitude = soloLocation.coords.coordinate.longitude;
@@ -85,19 +83,11 @@
 		}
 		[map addAnnotations:quickArray];
 		[map setRegion:[map regionThatFits:region] animated:NO];
-		[quickArray release];
 	}
 	
 	[super viewWillAppear:(BOOL)animated];
 }
 
-- (void)dealloc {
-	[map release];
-	[location release];
-	[annotationArray release];
-	[locationsToShow release];
-    [super dealloc];
-}
 
 - (IBAction)googleMapButtonPressed:(id)sender {
 	LocationObject *soloLocation = [locationsToShow objectAtIndex:0];
@@ -109,7 +99,6 @@
 						soloLocation.name];
 	UIApplication *app = [UIApplication sharedApplication];
 	[app openURL:[[NSURL alloc] initWithString: [mapURL stringByReplacingOccurrencesOfString:@" " withString:@"+"]]];
-	[mapURL release];	 
 }
 
 - (void) openGoogleMap {}
@@ -119,13 +108,13 @@
         [mapView selectAnnotation:[[mapView annotations] lastObject] animated:YES];
 }
 
-- (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id <MKAnnotation>) annotation{
+- (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id <MKAnnotation>) annotation {
 	MKPinAnnotationView *pin = nil;
 	
 	if(annotation != mapView.userLocation) {
 		pin = (MKPinAnnotationView *) [mapView dequeueReusableAnnotationViewWithIdentifier: @"asdf"];
 		if (pin == nil) {
-			pin = [[[MKPinAnnotationView alloc] initWithAnnotation: annotation reuseIdentifier: @"asdf"] autorelease];
+			pin = [[MKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier: @"asdf"];
 		}
 		
 		pin.canShowCallout = YES;
@@ -149,9 +138,10 @@
 	return pin;
 }
 
--(void)onPinPress:(id)sender {
-	LocationObject *pinLocation = [(LocationObject *) [[[sender superview] superview] annotation] location];
-	[[[self.navigationController viewControllers] objectAtIndex:0] showLocationProfile:pinLocation  withMapButton:NO];
+- (void)onPinPress:(id)sender {
+	LocationObject *pinLocation = (LocationObject *)[sender location];
+    
+	[(BlackTableViewController *)[[self.navigationController viewControllers] objectAtIndex:0] showLocationProfile:pinLocation withMapButton:NO];
 }
 
 @end

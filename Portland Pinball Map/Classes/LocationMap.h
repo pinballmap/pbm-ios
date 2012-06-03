@@ -13,10 +13,10 @@
 	BOOL showProfileButtons;
 }
 
-@property (nonatomic,retain) NSArray *locationsToShow;
-@property (nonatomic,retain) NSArray *annotationArray;
-@property (nonatomic,retain) MKMapView *map;
-@property (nonatomic,retain) LocationObject *location;
+@property (nonatomic,strong) NSArray *locationsToShow;
+@property (nonatomic,strong) NSArray *annotationArray;
+@property (nonatomic,strong) MKMapView *map;
+@property (nonatomic,strong) LocationObject *location;
 @property (nonatomic,assign) BOOL showProfileButtons;
 
 - (void)openGoogleMap;

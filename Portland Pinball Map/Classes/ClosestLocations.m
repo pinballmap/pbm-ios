@@ -9,7 +9,7 @@ Portland_Pinball_MapAppDelegate *appDelegate;
 	[super viewDidLoad];
     
 	appDelegate = (Portland_Pinball_MapAppDelegate *)[[UIApplication sharedApplication] delegate];
-	self.navigationItem.rightBarButtonItem = [[[UIBarButtonItem alloc] initWithTitle:@"map" style:UIBarButtonItemStyleBordered target:self action:@selector(onMapButtonTapped:)] autorelease];
+	self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"map" style:UIBarButtonItemStyleBordered target:self action:@selector(onMapButtonTapped:)];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -35,9 +35,6 @@ Portland_Pinball_MapAppDelegate *appDelegate;
     allSortedLocations = nil;
     sectionTitles = nil;
     sectionLocations = nil;
-    [allSortedLocations release];
-    [sectionTitles release];
-    [sectionLocations release];
 }
 
 - (void)viewDidAppear:(BOOL)animated {	
@@ -51,7 +48,6 @@ Portland_Pinball_MapAppDelegate *appDelegate;
     for (int i = 0; i < [sectionTitles count]; i++) {
         NSMutableArray *locations = [[NSMutableArray alloc] init];
         [sectionLocations addObject:locations];
-        [locations release];
     }
     
     for (id key in appDelegate.activeRegion.locations) {
@@ -76,7 +72,7 @@ Portland_Pinball_MapAppDelegate *appDelegate;
         [allSortedLocations addObject:location];
     }
             
-    NSSortDescriptor *distanceSortDescriptor = [[[NSSortDescriptor alloc] initWithKey:@"distance" ascending:YES selector:@selector(compare:)] autorelease];
+    NSSortDescriptor *distanceSortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"distance" ascending:YES selector:@selector(compare:)];
     
     [allSortedLocations sortUsingDescriptors:[NSArray arrayWithObjects:distanceSortDescriptor, nil]];
 
@@ -116,7 +112,6 @@ Portland_Pinball_MapAppDelegate *appDelegate;
     
 	[self.navigationController pushViewController:mapView animated:YES];
 	 
-	[mapLocations release];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -155,13 +150,5 @@ Portland_Pinball_MapAppDelegate *appDelegate;
 	[self showLocationProfile:location withMapButton:YES];
 }
 
-- (void)dealloc {
-	[allSortedLocations release];
-	[mapView release];
-	[lastViewedRegion release];
-	[sectionTitles release];
-	[sectionLocations release];
-    [super dealloc];
-}
 
 @end

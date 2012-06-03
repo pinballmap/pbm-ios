@@ -14,7 +14,7 @@
 	NSArray *keys;	
 	NSArray	*emptyArray;
 	
-	ZoneObject *newZone;
+	ZoneObject *theNewZone;
 	ZoneObject *currentZone;
 	
 	NSString *zoneID;
@@ -23,14 +23,14 @@
 	LocationMap *mapView;	
 }
 
-@property (nonatomic,retain) NSString *currentZoneID;
-@property (nonatomic,retain) NSString *zoneID;
-@property (nonatomic,retain) NSMutableDictionary *filteredLocations;
-@property (nonatomic,retain) NSArray *keys;
-@property (nonatomic,retain) LocationMap *mapView;
-@property (nonatomic,retain) NSMutableArray *locationArray;
-@property (nonatomic,retain) ZoneObject *newZone;
-@property (nonatomic,retain) ZoneObject *currentZone;
+@property (nonatomic,strong) NSString *currentZoneID;
+@property (nonatomic,strong) NSString *zoneID;
+@property (nonatomic,strong) NSMutableDictionary *filteredLocations;
+@property (nonatomic,strong) NSArray *keys;
+@property (nonatomic,strong) LocationMap *mapView;
+@property (nonatomic,strong) NSMutableArray *locationArray;
+@property (nonatomic,strong) ZoneObject *theNewZone;
+@property (nonatomic,strong) ZoneObject *currentZone;
 
 - (void)addToFilterDictionary:(LocationObject *)location;
 - (void)onMapPress:(id)sender;

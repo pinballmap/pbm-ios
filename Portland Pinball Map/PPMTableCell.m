@@ -9,9 +9,5 @@
     return self;
 }
 
-- (void)dealloc {
-	[nameLabel release];
-    [super dealloc];
-}
 
 @end

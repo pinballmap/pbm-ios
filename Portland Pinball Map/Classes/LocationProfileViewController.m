@@ -61,7 +61,6 @@
 		NSString *url = [[NSString alloc] initWithFormat:@"%@get_location=%@",appDelegate.rootURL,activeLocationObject.id_number];
 		
 		[self performSelectorInBackground:@selector(parseXMLFileAtURL:) withObject:url];
-		[url release];
 	}
 }
 
@@ -78,7 +77,6 @@
 	
 	if(displayArray != nil) {
 		displayArray = nil;
-        [displayArray release];
 	}
 	
 	displayArray = [[NSMutableArray alloc] initWithCapacity:activeLocationObject.totalMachines];
@@ -88,7 +86,7 @@
 		[displayArray addObject:machineObject];
 	}
 	
-	NSSortDescriptor *nameSortDescriptor = [[[NSSortDescriptor alloc] initWithKey:@"name" ascending:YES selector:@selector(compare:)] autorelease];
+	NSSortDescriptor *nameSortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"name" ascending:YES selector:@selector(compare:)];
 	[displayArray sortUsingDescriptors:[NSArray arrayWithObjects:nameSortDescriptor, nil]];
 	
 	[self.tableView reloadData];
@@ -105,47 +103,6 @@
 	[super viewDidUnload];
 }
 
-- (void)dealloc {
-	[machineProfileView release];
-	
-	[addMachineView release];
-	[addMachineButton release];
-	[lineView release];
-	[mapView release];
-	[activeLocationObject release];
-	
-	[current_street1 release];
-	[current_street2 release];
-	[current_city release];
-	[current_state release];
-	[current_zip release];
-	[current_phone release];	
-	
-	[mapLabel release];
-	[mapButton release];
-	
-	[mapURL release];
-	[masterDictionary release];
-	[info release];
-	[scrollView release];
-	
-	[message release];
-	
-	[label_holder release];
-	
-	//XML Parsing
-	[temp_machine_object release];
-	[temp_machine_dict release];
-	[temp_machine_id release];
-	[temp_machine_name release];
-	[temp_machine_condition release];
-	[temp_machine_condition_date release];
-	[temp_machine_dateAdded release];
-	
-	[displayArray release];
-	
-    [super dealloc];
-}
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
 	return (activeLocationObject.isLoaded == NO) ? 0 : 2;
@@ -191,8 +148,6 @@
 			 cellA.phoneLabel.text = activeLocationObject.phone;
 			 cellA.distanceLabel.text = [NSString stringWithFormat:@"≈ %@",activeLocationObject.distanceString];
 										 
-			 [addressStringA release];
-			 [addressStringB release];
 		} else {
 			cellA.addressLabel1.text = @"";
 			cellA.addressLabel2.text = @"";
@@ -265,7 +220,6 @@
 			
 			NSArray *quickArray = [[NSArray alloc] initWithObjects:activeLocationObject,nil];
 			mapView.locationsToShow = quickArray;
-			[quickArray release];
 			
 			mapView.title = activeLocationObject.name;
 			
@@ -361,32 +315,20 @@
 		
         [temp_machine_dict setObject:temp_machine_object forKey:temp_machine_id];
 		
-		[temp_machine_object release];
-		[temp_machine_id release];
-		[temp_machine_name release];
-		[temp_machine_condition release];
-		[temp_machine_condition_date release];
-		[temp_machine_dateAdded release];
 		
 		building_machine = NO;
 	} else if ([elementName isEqualToString:@"street1"]) {
 		activeLocationObject.street1 = current_street1;
-		[current_street1 release];
 	} else if ([elementName isEqualToString:@"street2"]) {
 		activeLocationObject.street2 = current_street2;
-		[current_street2 release];
 	} else if ([elementName isEqualToString:@"state"]) {
 		activeLocationObject.state = current_state;
-		[current_state release];
 	} else if ([elementName isEqualToString:@"city"]) {
 		activeLocationObject.city = current_city;
-		[current_city release];
 	} else if ([elementName isEqualToString:@"zip"]) {
 		activeLocationObject.zip = current_zip;
-		[current_zip release];
 	} else if ([elementName isEqualToString:@"phone"]) {
 		activeLocationObject.phone = current_phone;
-		[current_phone release];
 	}
 }
 
@@ -396,7 +338,6 @@
 	activeLocationObject.machines = temp_machine_dict;
 	activeLocationObject.totalMachines = [temp_machine_dict count];
 	
-	[temp_machine_dict release];
 	[self refreshPage];
 	
 	[super parserDidEndDocument:parser];
@@ -405,7 +346,6 @@
 - (void)parser:(NSXMLParser *)parser parseErrorOccurred:(NSError *)parseError {
 	if(parsingAttempts < 15) {
 		parsingAttempts++;
-		[temp_machine_dict release];
 		[self loadLocationData];
 	} else {
 		UIApplication* app = [UIApplication sharedApplication];
@@ -418,7 +358,6 @@
 														cancelButtonTitle:@"OK" 
 														otherButtonTitles:nil];
 		[errorAlert show];
-		[errorAlert release];
 		
 		Portland_Pinball_MapAppDelegate *appDelegate = (Portland_Pinball_MapAppDelegate *)[[UIApplication sharedApplication] delegate];
 		NSString* erstr = [NSString stringWithFormat:@"| CODE 0001 | %@ | %@ (%@) did not load",appDelegate.activeRegion.formalName, activeLocationObject.name,activeLocationObject.id_number];
@@ -427,9 +366,9 @@
 }
 
 
-+ (NSString *)urlDecodeValue:(NSString *)str {
-	NSString *result = (NSString *) CFURLCreateStringByReplacingPercentEscapes(kCFAllocatorDefault, (CFStringRef)str, CFSTR(""));
-	return [result autorelease];
++ (NSString *)urlDecodeValue:(NSString *)url {
+    NSString *result = [(NSString *)self stringByReplacingOccurrencesOfString:@"+" withString:@" "];
+    return [result stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];    
 }
 
 

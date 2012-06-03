@@ -63,10 +63,5 @@
 	}	
 }
 
-- (void)dealloc {
-	[requestPage release];
-	[regionArray release];
-    [super dealloc];
-}
 
 @end

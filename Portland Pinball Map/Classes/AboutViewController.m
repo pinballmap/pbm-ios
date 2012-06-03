@@ -7,7 +7,7 @@
     webview = [[WebViewController alloc] initWithNibName:@"WebViewController" bundle:nil];
 	
 	[webview setTitle:title];
-	[webview setNewURL:url];
+	[webview setTheNewURL:url];
     
 	[self.navigationController pushViewController:webview animated:YES];
 }
@@ -32,14 +32,5 @@
 	[self viewURL:@"http://pinballmap.com/" withTitle:@"PinballMap.com"];
 }
 
-- (void)dealloc {
-	[scottButton release];
-	[isaacButton release];
-	[ryanButton release];
-	[ppmButton release];
-	[drewButton release];
-	[webview release];
-    [super dealloc];
-}
 
 @end

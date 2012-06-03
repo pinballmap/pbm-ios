@@ -10,12 +10,12 @@
 	WebViewController *webview;
 }
 
-@property (nonatomic,retain) WebViewController *webview;
-@property (nonatomic,retain) IBOutlet UIButton *ppmButton;
-@property (nonatomic,retain) IBOutlet UIButton *drewButton;
-@property (nonatomic,retain) IBOutlet UIButton *ryanButton;
-@property (nonatomic,retain) IBOutlet UIButton *scottButton;
-@property (nonatomic,retain) IBOutlet UIButton *isaacButton;
+@property (nonatomic,strong) WebViewController *webview;
+@property (nonatomic,strong) IBOutlet UIButton *ppmButton;
+@property (nonatomic,strong) IBOutlet UIButton *drewButton;
+@property (nonatomic,strong) IBOutlet UIButton *ryanButton;
+@property (nonatomic,strong) IBOutlet UIButton *scottButton;
+@property (nonatomic,strong) IBOutlet UIButton *isaacButton;
 
 - (IBAction)ppmButtonPress:(id)sender;
 - (IBAction)drewButtonPress:(id)sender;

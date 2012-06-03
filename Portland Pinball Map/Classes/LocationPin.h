@@ -9,7 +9,7 @@
 }
 
 @property (nonatomic, readonly) CLLocationCoordinate2D coordinate;
-@property (nonatomic, retain) LocationObject *location;
+@property (nonatomic, strong) LocationObject *location;
 
 - (id)initWithCoordinate:(CLLocationCoordinate2D) coordinate;
 - (id)initWithLocation:(LocationObject *)newLocation;

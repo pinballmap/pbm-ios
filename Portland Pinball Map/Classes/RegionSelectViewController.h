@@ -6,7 +6,7 @@
 	RequestPage *requestPage;
 }
 
-@property (nonatomic,retain) RequestPage *requestPage;
-@property (nonatomic,retain) NSArray *regionArray;
+@property (nonatomic,strong) RequestPage *requestPage;
+@property (nonatomic,strong) NSArray *regionArray;
 
 @end

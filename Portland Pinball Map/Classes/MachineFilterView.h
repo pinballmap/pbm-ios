@@ -20,13 +20,13 @@
 }
 @property (nonatomic,assign) BOOL didAbortParsing;
 @property (nonatomic,assign) BOOL resetNavigationStackOnLocationSelect;
-@property (nonatomic,retain) NSMutableArray *tempLocationArray;
-@property (nonatomic,retain) UILabel *noLocationsLabel;
-@property (nonatomic,retain) LocationMap *mapView;
-@property (nonatomic,retain) NSString *temp_location_id;
-@property (nonatomic,retain) NSArray *locationArray;
-@property (nonatomic,retain) NSString *machineID;
-@property (nonatomic,retain) NSString *machineName;
+@property (nonatomic,strong) NSMutableArray *tempLocationArray;
+@property (nonatomic,strong) UILabel *noLocationsLabel;
+@property (nonatomic,strong) LocationMap *mapView;
+@property (nonatomic,strong) NSString *temp_location_id;
+@property (nonatomic,strong) NSArray *locationArray;
+@property (nonatomic,strong) NSString *machineID;
+@property (nonatomic,strong) NSString *machineName;
 
 - (void)onMapPress:(id)sender;
 - (void)reloadLocationData;

@@ -12,11 +12,11 @@
     NSMutableArray *allSortedLocations;
 }
 
-@property (nonatomic,retain) LocationMap *mapView;
-@property (nonatomic,retain) RegionObject *lastViewedRegion;
-@property (nonatomic,retain) NSMutableArray *allSortedLocations;
-@property (nonatomic,retain) NSMutableArray *sectionLocations;
-@property (nonatomic,retain) NSMutableArray *sectionTitles;
+@property (nonatomic,strong) LocationMap *mapView;
+@property (nonatomic,strong) RegionObject *lastViewedRegion;
+@property (nonatomic,strong) NSMutableArray *allSortedLocations;
+@property (nonatomic,strong) NSMutableArray *sectionLocations;
+@property (nonatomic,strong) NSMutableArray *sectionTitles;
 
 - (void)cleanupRegionData;
 - (IBAction)onMapButtonTapped:(id)sender;

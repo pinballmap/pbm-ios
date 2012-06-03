@@ -16,18 +16,18 @@
     LocationObject *location;
 }
 
-@property (nonatomic,retain) NSString *id_number;
-@property (nonatomic,retain) NSString *name;
-@property (nonatomic,retain) NSString *longDesc;
-@property (nonatomic,retain) NSString *link;
-@property (nonatomic,retain) NSString *categoryNo;
-@property (nonatomic,retain) NSString *startDate;
-@property (nonatomic,retain) NSString *endDate;
-@property (nonatomic,retain) NSString *locationNo;
-@property (nonatomic,retain) NSString *displayDate;
-@property (nonatomic,retain) NSString *displayName;
+@property (nonatomic,strong) NSString *id_number;
+@property (nonatomic,strong) NSString *name;
+@property (nonatomic,strong) NSString *longDesc;
+@property (nonatomic,strong) NSString *link;
+@property (nonatomic,strong) NSString *categoryNo;
+@property (nonatomic,strong) NSString *startDate;
+@property (nonatomic,strong) NSString *endDate;
+@property (nonatomic,strong) NSString *locationNo;
+@property (nonatomic,strong) NSString *displayDate;
+@property (nonatomic,strong) NSString *displayName;
 
-@property (nonatomic,retain) LocationObject *location;
+@property (nonatomic,strong) LocationObject *location;
 
 
 @end

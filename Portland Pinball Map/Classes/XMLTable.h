@@ -2,7 +2,7 @@
 
 @interface XMLTable : BlackTableViewController {
 	BOOL isParsing;
-	NSString * currentElement;
+	NSString *currentElement;
 	
 	UIView *loadingPage;
 	UITableView *tableView2;
@@ -11,8 +11,8 @@
 }
 
 @property (nonatomic,assign) BOOL isParsing;
-@property (nonatomic,retain) IBOutlet UIView *loadingPage;
-@property (nonatomic,retain) IBOutlet UIView *tableView2;
+@property (nonatomic,strong) IBOutlet UIView *loadingPage;
+@property (nonatomic,strong) IBOutlet UIView *tableView2;
 
 - (void)parseXMLFileAtURL:(NSString *)URL;
 

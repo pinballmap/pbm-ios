@@ -13,14 +13,5 @@
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {}
 
-- (void)dealloc {	
-	[distanceLabel release];
-	[phoneLabel release];
-	[addressLabel1 release];
-	[addressLabel2 release];
-	[label release];
-	
-    [super dealloc];
-}
 
 @end

@@ -15,7 +15,6 @@
 - (void)textViewDidBeginEditing:(UITextView *)textView {
 	if(savedConditionText != nil) {
 		savedConditionText = nil;
-		[savedConditionText release];
 	}
 	
 	savedConditionText = [[NSString alloc] initWithString:textview.text];
@@ -42,8 +41,6 @@
 											  encoding:NSUTF8StringEncoding
 												 error:&error];
 		
-	[urlstr release];
-	[url release];
 	
 	NSString *addsuccess = [[NSString alloc] initWithString:@"success"];
 	NSRange range = [test rangeOfString:addsuccess];
@@ -53,10 +50,9 @@
 		NSDateFormatter *inputFormatter = [[NSDateFormatter alloc] init];
 		[inputFormatter setDateFormat:@"yyyy-MM-dd"];
 		
-		machine.condition_date = [[[NSString alloc] initWithString:[inputFormatter stringFromDate:today]] autorelease];
-		machine.condition      = [[[NSString alloc] initWithString:textview.text] autorelease];
+		machine.condition_date = [[NSString alloc] initWithString:[inputFormatter stringFromDate:today]];
+		machine.condition      = [[NSString alloc] initWithString:textview.text];
 		
-		[inputFormatter release];
 		
 		app.networkActivityIndicatorVisible = NO;
 		
@@ -70,17 +66,13 @@
 							   cancelButtonTitle:@"OK"
 							   otherButtonTitles:nil];
 		[alert2 show];
-		[alert2 release];
-		[alertString2 release];
 		
 		app.networkActivityIndicatorVisible = NO;
 	}
 	
-	[addsuccess release];
 	
 	if(savedConditionText != nil) {
 		savedConditionText = nil;
-		[savedConditionText release];
 	}	
 }
 	
@@ -100,13 +92,5 @@
 	self.cancelButton = nil;
 }
 
-- (void)dealloc {
-	[location release];
-	[machine release];
-	[submitButton release];
-	[cancelButton release];
-	[textview release];
-    [super dealloc];
-}
 
 @end

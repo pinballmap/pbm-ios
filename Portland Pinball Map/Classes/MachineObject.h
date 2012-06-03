@@ -8,10 +8,10 @@
 	NSString *dateAdded;
 }
 
-@property (nonatomic,retain) NSString *name;
-@property (nonatomic,retain) NSString *id_number;
-@property (nonatomic,retain) NSString *condition;
-@property (nonatomic,retain) NSString *condition_date;
-@property (nonatomic,retain) NSString *dateAdded;
+@property (nonatomic,strong) NSString *name;
+@property (nonatomic,strong) NSString *id_number;
+@property (nonatomic,strong) NSString *condition;
+@property (nonatomic,strong) NSString *condition_date;
+@property (nonatomic,strong) NSString *dateAdded;
 
 @end

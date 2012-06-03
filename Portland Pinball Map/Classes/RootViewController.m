@@ -6,10 +6,9 @@
 @synthesize locationManager, startingPoint, controllers, allLocations, allMachines, aboutView, tableTitles, tempRegionArray;
 
 - (id)initWithFrame:(CGRect)frame {
-	if (self = [super initWithFrame:frame]){
-        parsingAttempts = 0;
-		init2Loaded = NO;
-    }
+    parsingAttempts = 0;
+    init2Loaded = NO;
+    
     return self;
 }
 
@@ -28,7 +27,7 @@
 -(void)showInfoButton {
 	UIButton *infoButton = [UIButton buttonWithType:UIButtonTypeInfoLight];
 	[infoButton addTarget:self action:@selector(pressInfo:) forControlEvents:UIControlEventTouchUpInside];
-	self.navigationItem.rightBarButtonItem = [[[UIBarButtonItem alloc] initWithCustomView:infoButton] autorelease];	
+	self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:infoButton];	
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -58,14 +57,12 @@
 		if(allMachines != nil) {
 			allMachines  = nil;
 			allLocations = nil;
-			[allMachines release];
-			[allLocations release];
 		}
 		[appDelegate showSplashScreen];
 		xmlStarted = NO;
-		NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
-		[self performSelectorInBackground:@selector(loadInitXML:) withObject:nil];
-		[pool release];
+		@autoreleasepool {
+			[self performSelectorInBackground:@selector(loadInitXML:) withObject:nil];
+		}
 	}
 	
 	[super viewDidAppear:animated];
@@ -92,28 +89,6 @@
 	[super viewDidUnload];
 }
 
-- (void)dealloc {
-	[tempRegionArray release];
-	[activeNode release];
-	[aboutView release];
-	[locationManager release];
-	[startingPoint release];
-	[current_id release];
-	[current_name release];
-	[current_neighborhood release];
-	[current_numMachines release];
-	[current_lat release];
-	[current_lon release];
-	[current_numLocations release];
-	[current_numLocations release];
-	[current_isPrimary release];
-	[current_shortName release];
-	[allMachines release];
-	[allLocations release];
-	[controllers release];
-	[tableTitles release];
-	[super dealloc];
-}
 
 - (void)loadInitXML:(int)withID {
 	if(xmlStarted == YES) return;
@@ -135,10 +110,9 @@
 			break;
 	}
     
-	NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
-	[self performSelectorInBackground:@selector(parseXMLFileAtURL:) withObject:path];
-	[pool release];
-	[path release];
+	@autoreleasepool {
+		[self performSelectorInBackground:@selector(parseXMLFileAtURL:) withObject:path];
+	}
 }
 
 - (void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation {
@@ -146,7 +120,7 @@
 	
 	if(appDelegate.userLocation != nil) {
 		appDelegate.userLocation = nil;
-		[appDelegate.userLocation release];
+		appDelegate.userLocation;
 	}
 	appDelegate.userLocation = newLocation;
 	
@@ -160,7 +134,7 @@
     Portland_Pinball_MapAppDelegate *appDelegate = (Portland_Pinball_MapAppDelegate *)[[UIApplication sharedApplication] delegate];
 	
     [self.locationManager stopUpdatingLocation];
-    [self.locationManager release];
+    self.locationManager;
     self.locationManager.delegate = nil;
 		
     NSString *errorType = (error.code == kCLErrorDenied) ? @"Please Allow" : @"Unknown Error";
@@ -173,7 +147,6 @@
     ];
     
     [alert show];
-    [alert release];
 
     appDelegate.userLocation = [[CLLocation alloc] initWithLatitude:45.52295 longitude:-122.66785];
 }
@@ -281,14 +254,7 @@
 					tempRegionArray = [[NSMutableArray alloc] init];
 			
 				[tempRegionArray addObject:regionobject];
-				[regionobject release];
 				
-				[current_id release];
-				[current_name release];
-				[current_formalName release];
-				[current_lat release];
-				[current_lon release];
-				[current_subdir release];
 			}
 			
 			break;
@@ -320,17 +286,9 @@
 				
 					[allLocations setObject:tempLocation forKey:current_id];
 					
-					[coords release];
 					
-					[tempLocation release];
 				}
 				
-				[current_id release];
-				[current_name release];
-				[current_numMachines release];
-				[current_lat release];
-				[current_lon release];
-				[current_neighborhood release];
 			} else if ([elementName isEqualToString:@"machine"]) {
 				if([current_numLocations intValue] != 0) {
 					NSMutableDictionary *tempMachine = [[NSMutableDictionary alloc] init];
@@ -342,12 +300,8 @@
 						allMachines  = [[NSMutableDictionary alloc] init];
 					
 					[allMachines setObject:tempMachine forKey:current_id];
-					[tempMachine release];
 				}
 				
-				[current_id release];
-				[current_name release];
-				[current_numLocations release];
 			} else if ([elementName isEqualToString:@"zone"]) {
 				Portland_Pinball_MapAppDelegate *appDelegate = (Portland_Pinball_MapAppDelegate *)[[UIApplication sharedApplication] delegate];
 				
@@ -366,12 +320,7 @@
 					[appDelegate.activeRegion.secondaryZones addObject:zone];
                 }
 				
-				[zone release];
 				
-				[current_id release];
-				[current_name release];
-				[current_shortName release];
-				[current_isPrimary release];
 			}
 			break;
 	}
@@ -385,6 +334,7 @@
 		
 	switch (initID) {
 		case 2:
+        {
             appDelegate.regions = tempRegionArray;
 			
 			RegionObject       *closestRegion   = [appDelegate.regions objectAtIndex:1];
@@ -402,7 +352,6 @@
 					closestRegion   = reg;
 					closestDistance = distance;
 				}
-				[coords release];
 			}
 			
 			[appDelegate newActiveRegion:closestRegion];
@@ -410,16 +359,15 @@
 			
 			self.title = [NSString stringWithFormat:@"%@ Pinball Map",appDelegate.activeRegion.name];
 
-			[tempRegionArray release];
 						
 			xmlStarted = NO;
-			NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
+			@autoreleasepool {
 			[self performSelectorInBackground:@selector(loadInitXML:) withObject:nil];
-			[pool release];
-			
+			}
+        }
 			break;
-		default:
-		case 1:			
+		case 1:
+        {
 			appDelegate.activeRegion.machines  = self.allMachines;
 			appDelegate.activeRegion.locations = self.allLocations;
 			
@@ -429,43 +377,40 @@
 				ZonesViewController *locView = [[ZonesViewController alloc] initWithStyle:UITableViewStylePlain];
 				locView.title = @"Locations";
 				[array addObject:locView];
-				[locView release];
 				
 				MachineViewController *machView = [[MachineViewController alloc] initWithStyle:UITableViewStylePlain];
 				machView.title = @"Machines";
 				[array addObject:machView];
-				[machView release];
 				
 				ClosestLocations *closest = [[ClosestLocations alloc] initWithStyle:UITableViewStylePlain];
 				closest.title = @"Closest Locations";
 				[array addObject:closest];
-				[closest release];
 				
 				RSSViewController *rssView = [[RSSViewController alloc] initWithStyle:UITableViewStylePlain];
 				rssView.title = @"Recently Added";
 				[array addObject:rssView];
-				[rssView release];
 				
 				EventsViewController *eventView = [[EventsViewController alloc] initWithStyle:UITableViewStylePlain];
 				eventView.title = @"Events";
 				[array addObject:eventView];
-				[eventView release];
 				
 				RegionSelectViewController *regionselect = [[RegionSelectViewController alloc] initWithStyle:UITableViewStylePlain];
 				regionselect.title = @"Change Region";
 				[array addObject:regionselect];
-				[regionselect release]; 
 				
 				self.controllers = array;
-				[array release];
 			}
 			
 			[appDelegate hideSplashScreen];
 			[self.tableView reloadData];
 			[self hideLoaderIcon];
-			
+        }
 			break;
+        default:
+        {}
+            break;
 	}
+    
 	[super parserDidEndDocument:parser];
 }
 
@@ -475,13 +420,10 @@
 		parsingAttempts ++;
 		
 		if(initID == 1) {
-			[allLocations release];
-			[allMachines release];
 			
 			allLocations = [[NSMutableDictionary alloc] init];
 			allMachines  = [[NSMutableDictionary alloc] init];
 		} else if(initID == 2) {
-			[tempRegionArray release];
 			tempRegionArray = nil;
 		}
 
@@ -500,8 +442,6 @@
 							  cancelButtonTitle:@"OK"
 							  otherButtonTitles:nil];
 		[alert show];
-		[alert release];
-		[errorType release];
 	}	
 }
 

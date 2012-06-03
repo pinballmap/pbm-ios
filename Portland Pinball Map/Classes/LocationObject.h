@@ -2,12 +2,12 @@
 #import <CoreLocation/CoreLocation.h>
 
 @interface LocationObject : NSObject {	
+    CLLocation *coords;
 	NSDictionary *machines;
 	
 	NSString *name;
 	NSString *id_number;
 	NSString *neighborhood;
-	CLLocation *coords;
 	NSString *distanceString;
 	NSString *street1;
 	NSString *street2;
@@ -24,19 +24,19 @@
     BOOL isLoaded;
 }
 
-@property (nonatomic,retain) NSString *mapURL;
-@property (nonatomic,retain) NSString *name;
-@property (nonatomic,retain) NSString *id_number;
-@property (nonatomic,retain) NSString *neighborhood;
-@property (nonatomic,retain) NSString *street1;
-@property (nonatomic,retain) NSString *street2;
-@property (nonatomic,retain) NSString *city;
-@property (nonatomic,retain) NSString *state;
-@property (nonatomic,retain) NSString *zip;
-@property (nonatomic,retain) NSString *phone;
-@property (nonatomic,retain) NSDictionary *machines;
-@property (nonatomic,retain) NSString *distanceString;
-@property (nonatomic,retain) CLLocation *coords;
+@property (nonatomic,strong) NSString *mapURL;
+@property (nonatomic,strong) NSString *name;
+@property (nonatomic,strong) NSString *id_number;
+@property (nonatomic,strong) NSString *neighborhood;
+@property (nonatomic,strong) NSString *street1;
+@property (nonatomic,strong) NSString *street2;
+@property (nonatomic,strong) NSString *city;
+@property (nonatomic,strong) NSString *state;
+@property (nonatomic,strong) NSString *zip;
+@property (nonatomic,strong) NSString *phone;
+@property (nonatomic,strong) NSString *distanceString;
+@property (nonatomic,strong) NSDictionary *machines;
+@property (nonatomic,strong) CLLocation *coords;
 @property (nonatomic,assign) BOOL isLoaded;
 @property (nonatomic,assign) double distance;
 @property (nonatomic,assign) double distanceRounded;

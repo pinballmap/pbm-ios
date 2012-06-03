@@ -12,9 +12,5 @@
 	self.contactButton = nil;
 }
 
-- (void)dealloc {
-	[contactButton release];
-    [super dealloc];
-}
 
 @end

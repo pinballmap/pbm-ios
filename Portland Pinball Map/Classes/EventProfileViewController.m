@@ -43,7 +43,7 @@
 		webview = [[WebViewController alloc] initWithNibName:@"WebViewController" bundle:nil];	
 	
 	webview.title = nameLabel.text;
-	webview.newURL = [NSString stringWithString:eventObject.link];
+	webview.theNewURL = [NSString stringWithString:eventObject.link];
 	
 	[self.navigationController pushViewController:webview animated:YES];
 }
@@ -57,16 +57,5 @@
 	self.descText = nil;
 }
 
-- (void)dealloc {	
-	[webview release];
-	[eventObject release];
-	[nameLabel release];
-	[locationButton release];
-	[timeLabel release];
-	[webButton release];
-	[descText release];
-	[locationButton release];
-    [super dealloc];
-}
 
 @end

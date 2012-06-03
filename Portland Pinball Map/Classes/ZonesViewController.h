@@ -8,8 +8,8 @@
 	LocationFilterView *locationFilter;	
 }
 
-@property (nonatomic,retain) NSDictionary *zones;
-@property (nonatomic,retain) NSArray *titles;
-@property (nonatomic,retain) LocationFilterView *locationFilter;
+@property (nonatomic,strong) NSDictionary *zones;
+@property (nonatomic,strong) NSArray *titles;
+@property (nonatomic,strong) LocationFilterView *locationFilter;
 
 @end

@@ -1,7 +1,6 @@
 #import "XMLTable.h"
-#import "PPMTableCell.h"
+#import "PPMDoubleTableCell.h"
 #import "LocationProfileViewController.h"
-#import "Portland_Pinball_MapAppDelegate.h"
 
 @interface RSSViewController : XMLTable {
 	NSMutableDictionary * item;
@@ -22,9 +21,9 @@
 	LocationProfileViewController *childController;
 }
 
-@property (nonatomic,retain) NSDate         *today;
-@property (nonatomic,retain) NSMutableArray *sectionArray;
-@property (nonatomic,retain) NSMutableArray *sectionTitles;
+@property (nonatomic,strong) NSDate *today;
+@property (nonatomic,strong) NSMutableArray *sectionArray;
+@property (nonatomic,strong) NSMutableArray *sectionTitles;
 
 - (int)differenceInDaysFrom:(NSDate *)startDate to:(NSDate *)toDate;
 

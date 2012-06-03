@@ -36,12 +36,12 @@
 	LocationProfileViewController *childController;
 }
 
-@property (nonatomic,retain) UILabel        *noEventsLabel;
-@property (nonatomic,retain) NSArray		*weekdayTitles;
-@property (nonatomic,retain) NSDate         *today;
-@property (nonatomic,retain) NSMutableArray *sectionArray;
-@property (nonatomic,retain) NSMutableArray *sectionTitles;
-@property (nonatomic,retain) EventProfileViewController *eventProfile;
+@property (nonatomic,strong) UILabel        *noEventsLabel;
+@property (nonatomic,strong) NSArray		*weekdayTitles;
+@property (nonatomic,strong) NSDate         *today;
+@property (nonatomic,strong) NSMutableArray *sectionArray;
+@property (nonatomic,strong) NSMutableArray *sectionTitles;
+@property (nonatomic,strong) EventProfileViewController *eventProfile;
 
 - (int)differenceInDaysFrom:(NSDate *)startDate to:(NSDate *)toDate;
 - (NSString *)formatDate:(NSString *)dateString;

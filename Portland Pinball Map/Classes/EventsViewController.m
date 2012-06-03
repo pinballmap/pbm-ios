@@ -76,7 +76,6 @@
 		for(int i = 0; i < [sectionTitles count] ; i++) {
 			NSMutableArray *array = [[NSMutableArray alloc] init];
 			[sectionArray addObject:array];
-			[array release];
 		}
 		NSString * path;
 		
@@ -86,9 +85,9 @@
 			path = [NSString stringWithFormat:@"http://pinballmap.com/%@/iphone.html?init=3",appDelegate.activeRegion.subdir,appDelegate.activeRegion.subdir];
         }
 	
-		NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
-		[self performSelectorInBackground:@selector(parseXMLFileAtURL:) withObject:path];
-		[pool release];
+		@autoreleasepool {
+			[self performSelectorInBackground:@selector(parseXMLFileAtURL:) withObject:path];
+		}
 	}
 }
 
@@ -160,15 +159,6 @@
 		NSMutableArray *quickArray = [sectionArray objectAtIndex:index];
 		[quickArray addObject:eventObject];
 
-		[displayDate release];
-		[eventObject release];
-		[current_name release];
-		[current_id release];
-		[current_link release];
-		[current_categoryNo release];
-		[current_startDate release];
-		[current_endDate release];
-		[current_locationNo release];		
 	}
     
 	currentElement = @"";
@@ -203,16 +193,16 @@
 }
 
 - (void)parserDidEndDocument:(NSXMLParser *)parser {
-	NSSortDescriptor *distanceSortDescriptor = [[[NSSortDescriptor alloc] initWithKey:@"startDate" ascending:YES selector:@selector(compare:)] autorelease];
+	NSSortDescriptor *distanceSortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"startDate" ascending:YES selector:@selector(compare:)];
 	
 	for(int i = [sectionArray count] - 1; i >= 0 ; i--) {
 		NSMutableArray *array = (NSMutableArray*) [sectionArray objectAtIndex:i];
 		
 		if([array count] > 0) {
 			if (i == [sectionArray count] - 1) {
-				distanceSortDescriptor = [[[NSSortDescriptor alloc] initWithKey:@"startDate" ascending:NO selector:@selector(compare:)] autorelease];
+				distanceSortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"startDate" ascending:NO selector:@selector(compare:)];
 			} else { 
-				distanceSortDescriptor = [[[NSSortDescriptor alloc] initWithKey:@"startDate" ascending:YES selector:@selector(compare:)] autorelease];
+				distanceSortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"startDate" ascending:YES selector:@selector(compare:)];
 			}
                 
 			[array sortUsingDescriptors:[NSArray arrayWithObjects:distanceSortDescriptor, nil]];
@@ -226,8 +216,6 @@
 	appDelegate.activeRegion.eventArray = sectionArray;
 	appDelegate.activeRegion.eventTitles = sectionTitles;
 	
-	[sectionArray release];
-	[sectionTitles release];
 	
 	[super parserDidEndDocument:parser];
 	[self refreshPage];
@@ -245,7 +233,6 @@
                                                   toDate:startDate
                                                  options:0];
     NSInteger days = [components day];
-    [gregorian release];
     return days;
 }
 
@@ -258,10 +245,6 @@
 	[inputFormatter setDateFormat:@"yyyy-MM-dd"];
 	NSDate *returnDate = [inputFormatter dateFromString:[NSString stringWithFormat:@"%@-%@-%@",year,month,day]];
 	
-	[day release];
-	[year release];
-	[month release];
-	[inputFormatter release];
 	
 	return returnDate;
 }
@@ -333,13 +316,6 @@
 	
 	NSString *returnString = [[NSString alloc] initWithFormat:@"%@, %@ %@",weekdayString,displayMonth,dayString];
 	
-	[day release];
-	[year release];
-	[month release];
-	[displayMonth release];
-	[gregorian release];
-	[extra release];
-	[lastDigit release];
 	
 	return returnString;
 }
@@ -402,12 +378,6 @@
 
 - (void)dealloc {
 	[noEventsLabel reloadInputViews];
-	[weekdayTitles release];
-	[eventProfile release];
-	[today release];
-	[sectionTitles release];
-	[sectionArray release];
-	[super dealloc];
 }
 
 @end

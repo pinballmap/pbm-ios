@@ -14,31 +14,26 @@
 	self.tableView2 = nil;
 }
 
-- (void)dealloc {
-	[loadingPage release];
-	[tableView2 release];
-    [super dealloc];
-}
 
 - (void)parseXMLFileAtURL:(NSString *)URL {
 	[self showLoaderIcon];
 	isParsing = YES;
 	
-	NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
-	NSURL *xmlURL = [NSURL URLWithString:URL];
-	
-	[[NSURLCache sharedURLCache] setMemoryCapacity:0];
-	[[NSURLCache sharedURLCache] setDiskCapacity:0];
-	
-	NSXMLParser *xmlParser = [[[NSXMLParser alloc] initWithContentsOfURL:xmlURL] autorelease];
-	[xmlParser setDelegate:self];
-	
-	[xmlParser setShouldProcessNamespaces:NO];
-	[xmlParser setShouldReportNamespacePrefixes:NO];
-	[xmlParser setShouldResolveExternalEntities:NO];
-	
-	[xmlParser parse];
-	[pool release];
+	@autoreleasepool {
+		NSURL *xmlURL = [NSURL URLWithString:URL];
+		
+		[[NSURLCache sharedURLCache] setMemoryCapacity:0];
+		[[NSURLCache sharedURLCache] setDiskCapacity:0];
+		
+		NSXMLParser *xmlParser = [[NSXMLParser alloc] initWithContentsOfURL:xmlURL];
+		[xmlParser setDelegate:self];
+		
+		[xmlParser setShouldProcessNamespaces:NO];
+		[xmlParser setShouldReportNamespacePrefixes:NO];
+		[xmlParser setShouldResolveExternalEntities:NO];
+		
+		[xmlParser parse];
+	}
 }
 
 - (void)parserDidStartDocument:(NSXMLParser *)parser {}
@@ -49,7 +44,6 @@
 		
 	UIAlertView * errorAlert = [[UIAlertView alloc] initWithTitle:@"Error loading content" message:errorString delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
 	[errorAlert show];
-	[errorAlert release];
 	isParsing = NO;
 }
 

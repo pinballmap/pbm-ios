@@ -21,9 +21,5 @@
 	return self;
 }
 
--(void)dealloc {
-	[location release];
-	[super dealloc];
-}
 
 @end

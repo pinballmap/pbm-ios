@@ -48,14 +48,14 @@
     BOOL xmlStarted;
 }
 
-@property (nonatomic,retain) CLLocation *startingPoint;
-@property (nonatomic,retain) CLLocationManager *locationManager;
-@property (nonatomic,retain) NSArray  *tableTitles;
-@property (nonatomic,retain) NSArray *controllers;
-@property (nonatomic,retain) NSMutableArray *tempRegionArray;
-@property (nonatomic,retain) NSMutableDictionary *allLocations;
-@property (nonatomic,retain) NSMutableDictionary *allMachines;
-@property (nonatomic,retain) AboutViewController *aboutView;
+@property (nonatomic,strong) CLLocation *startingPoint;
+@property (nonatomic,strong) CLLocationManager *locationManager;
+@property (nonatomic,strong) NSArray  *tableTitles;
+@property (nonatomic,strong) NSArray *controllers;
+@property (nonatomic,strong) NSMutableArray *tempRegionArray;
+@property (nonatomic,strong) NSMutableDictionary *allLocations;
+@property (nonatomic,strong) NSMutableDictionary *allMachines;
+@property (nonatomic,strong) AboutViewController *aboutView;
 
 - (void)loadInitXML:(int)withID;
 - (void)pressInfo:(id)sender;

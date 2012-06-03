@@ -11,9 +11,9 @@
 	NSArray *alphabet;
 }
 
-@property (nonatomic,retain) UIActivityIndicatorView *activityView;
-@property (nonatomic,retain) UILabel *loadingLabel;
-@property (nonatomic,retain) NSArray *alphabet;
+@property (nonatomic,strong) UIActivityIndicatorView *activityView;
+@property (nonatomic,strong) UILabel *loadingLabel;
+@property (nonatomic,strong) NSArray *alphabet;
 @property (nonatomic,assign) NSInteger headerHeight;
 
 NSInteger sortOnDistance(id obj1, id obj2, void *context);
@@ -26,7 +26,7 @@ NSInteger sortOnName(LocationObject *obj1, LocationObject *obj2, void *context);
 - (void)refreshPage;
 - (PPMTableCell *)getTableCell;
 - (PPMDoubleTableCell *)getDoubleCell;
-- (void) showLocationProfile:(LocationObject *)location withMapButton:(BOOL)showMapButton;
+- (void)showLocationProfile:(LocationObject *)location withMapButton:(BOOL)showMapButton;
 - (LocationProfileViewController *) getLocationProfile;
 
 @end

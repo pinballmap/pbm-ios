@@ -8,8 +8,8 @@
 	MachineFilterView *machineFilter;
 }
 
-@property (nonatomic,retain) NSMutableDictionary *sortedMachines;
-@property (nonatomic,retain) NSArray *keys;
-@property (nonatomic,retain) MachineFilterView *machineFilter;
+@property (nonatomic,strong) NSMutableDictionary *sortedMachines;
+@property (nonatomic,strong) NSArray *keys;
+@property (nonatomic,strong) MachineFilterView *machineFilter;
 
 @end

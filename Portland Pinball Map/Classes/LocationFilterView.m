@@ -2,7 +2,7 @@
 
 @implementation LocationFilterView
 
-@synthesize filteredLocations, keys, mapView, locationArray, zoneID, newZone, currentZone, currentZoneID;
+@synthesize filteredLocations, keys, mapView, locationArray, zoneID, theNewZone, currentZone, currentZoneID;
 
 - (void)viewDidLoad {
 	emptyArray = [[NSArray alloc] init];
@@ -35,14 +35,14 @@
 				NSInteger numMachines = location.totalMachines;
 				if(numMachines >= [appDelegate.activeRegion.machineFilter intValue]) [self addToFilterDictionary:location];
 				
-			} else if([neighborhood isEqualToString:newZone.shortName]) {
+			} else if([neighborhood isEqualToString:theNewZone.shortName]) {
                 [self addToFilterDictionary:location];
             }
 		}
 		
 		for(id key in filteredLocations) {
 			NSMutableArray *orig_array = [filteredLocations objectForKey:key];
-			NSSortDescriptor *nameSortDescriptor = [[[NSSortDescriptor alloc] initWithKey:@"name" ascending:YES selector:@selector(compare:)] autorelease];
+			NSSortDescriptor *nameSortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"name" ascending:YES selector:@selector(compare:)];
 			[orig_array sortUsingDescriptors:[NSArray arrayWithObjects:nameSortDescriptor, nil]];
 		}
 		
@@ -54,15 +54,13 @@
 		[self.tableView reloadData];
 	}
 	
-	if(currentZoneID != nil)
-        [currentZoneID release];
     
 	currentZoneID = [[NSString alloc] initWithString:zoneID];
 	        
 	self.title = [NSString stringWithFormat:[NSString stringWithFormat:@"%@", [zoneID isEqualToString:@"All"] ? @"All Locations" : zoneID]];
 	
 	if ([keys count] > 0) {
-		self.navigationItem.rightBarButtonItem = [[[UIBarButtonItem alloc] initWithTitle:@"Map" style:UIBarButtonItemStyleBordered target:self action:@selector(onMapPress:)] autorelease];
+		self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Map" style:UIBarButtonItemStyleBordered target:self action:@selector(onMapPress:)];
     } else { 
 		self.navigationItem.rightBarButtonItem = nil;
 	}
@@ -83,7 +81,6 @@
 	NSString *searchString = [[NSString alloc] initWithString:@"abcdefghijklmnopqrstuvwxyz"];
 	NSRange letterRange = [searchString rangeOfString:firstLetter];
 	if (letterRange.length == 0) {
-		[firstLetter release];
 		firstLetter = [[NSString alloc] initWithString:@"#"];
 	}
 	
@@ -93,14 +90,11 @@
 		NSMutableArray *newLetterArray = [[NSMutableArray alloc] init];
 		[filteredLocations setObject:newLetterArray forKey:firstLetter];
 		letterArray = [filteredLocations objectForKey:firstLetter];
-		[newLetterArray release];
 	}
 	
 	[letterArray addObject:location];
 	[locationArray addObject:location];
 	
-	[firstLetter release];
-	[searchString release];
 }
 
 - (void)onMapPress:(id)sender {
@@ -126,7 +120,6 @@
 
 
 - (void)viewDidUnload {
-	[emptyArray release];
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -181,17 +174,5 @@
 	[self showLocationProfile:location  withMapButton:YES];
 }
 
-- (void)dealloc {
-	[currentZoneID release];
-	[newZone release];
-	[currentZone release];
-	[emptyArray release];
-	[zoneID release];
-	[locationArray release];
-	[mapView release];
-	[keys release];
-	[filteredLocations release];
-    [super dealloc];
-}
 
 @end

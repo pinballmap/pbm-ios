@@ -20,9 +20,6 @@
 	NSString *urlstr = [[NSString alloc] initWithFormat:@"http://portlandpinballmap.com/iphone.html?error=%@",erstr];
 	NSURL *url = [[NSURL alloc] initWithString:urlstr];
 	
-	[newFormat release];
-	[urlstr release];
-	[url release];
 }
 
 + (NSString *)urlencode:(NSString *)url {

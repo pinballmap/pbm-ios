@@ -6,10 +6,10 @@
 	UILabel *distanceLabel;
 }
 
-@property (nonatomic,retain) IBOutlet UILabel *distanceLabel;
-@property (nonatomic,retain) IBOutlet UILabel *label;
-@property (nonatomic,retain) IBOutlet UILabel *addressLabel1;
-@property (nonatomic,retain) IBOutlet UILabel *addressLabel2;
-@property (nonatomic,retain) IBOutlet UILabel *phoneLabel;
+@property (nonatomic,strong) IBOutlet UILabel *distanceLabel;
+@property (nonatomic,strong) IBOutlet UILabel *label;
+@property (nonatomic,strong) IBOutlet UILabel *addressLabel1;
+@property (nonatomic,strong) IBOutlet UILabel *addressLabel2;
+@property (nonatomic,strong) IBOutlet UILabel *phoneLabel;
 
 @end

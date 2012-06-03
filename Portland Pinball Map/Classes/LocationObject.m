@@ -26,32 +26,10 @@
 	distanceRounded = [[numberFormat stringFromNumber:distNum] doubleValue];
 	if(distanceString != nil) {
 		distanceString = nil;
-		[distanceString release];
 	}
 	distanceString = [[NSString alloc] initWithFormat:@"%@ mi", [numberFormat stringFromNumber:distNum]];
 	
-	[distNum release];
-	[numberFormat release];
 }
 
-- (void)dealloc {
-	[distanceString release];
-	
-	[name release];
-	[street1 release];
-	[street2 release];
-	[city release];
-	[state release];
-	[zip release];
-	[phone release];
-	
-	[mapURL release];
-	[name release];
-	[id_number release];
-	[machines release];
-	[coords release];
-	[neighborhood release];
-	[super dealloc];
-}
 
 @end

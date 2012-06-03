@@ -20,7 +20,6 @@
 	Portland_Pinball_MapAppDelegate *appDelegate = (Portland_Pinball_MapAppDelegate *)[[UIApplication sharedApplication] delegate];
 	
 	if(machineArray != nil) {
-		[machineArray release];
 		machineArray = nil;
 	}
 	machineArray = [[NSMutableArray alloc] initWithCapacity:[appDelegate.activeRegion.machines count]];
@@ -30,7 +29,7 @@
 		[machineArray addObject:machine];
 	}
 	
-	NSSortDescriptor *nameSortDescriptor = [[[NSSortDescriptor alloc] initWithKey:@"name" ascending:YES selector:@selector(compare:)] autorelease];
+	NSSortDescriptor *nameSortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"name" ascending:YES selector:@selector(compare:)];
 	[machineArray sortUsingDescriptors:[NSArray arrayWithObjects:nameSortDescriptor, nil]];
 	
 	[super viewWillAppear:animated];
@@ -52,7 +51,6 @@
 									  destructiveButtonTitle:nil 
 									  otherButtonTitles:@"Make It Happen",nil];
 		[actionsheet showInView:self.view];
-		[actionsheet release];
 	} else {
 		NSString *errorString = [[NSString alloc] initWithFormat:@"Please enter the name of the machine or select it from the list below."];
 		UIAlertView *error = [[UIAlertView alloc]
@@ -62,8 +60,6 @@
 							  cancelButtonTitle:@"OK"
 							  otherButtonTitles:nil];
 		[error show];
-		[error release];
-		[errorString release];
 	} 
 }
 
@@ -84,7 +80,7 @@
 	
 	int len = [escapeChars count];
     NSMutableString *temp  = [string mutableCopy];
-	NSMutableString *temp2 = [temp lowercaseString];
+	NSMutableString *temp2 = [[temp lowercaseString] mutableCopy];
 
 	for(int i = 0; i < len; i++) {
         [temp2 replaceOccurrencesOfString: [escapeChars objectAtIndex:i]
@@ -104,23 +100,9 @@
 	self.loaderIcon = nil;
 }
 
-- (void)dealloc {
-	[loaderIcon release];
-	[selected_machine_id release];
-	[location release];
-	[locationName release];
-	[locationId   release];
-	[submitButton release];
-	[returnButton release];
-	[machineArray release];
-	[picker release];
-	[textfield release];
-    [super dealloc];
-}
 
-+ (NSString *)urlEncodeValue:(NSString *)str {
-	NSString *result = (NSString *) CFURLCreateStringByAddingPercentEscapes(kCFAllocatorDefault, (CFStringRef)str, NULL, CFSTR(":/?#[]@!$&’()*+,;="), kCFStringEncodingUTF8);
-	return [result autorelease];
++ (NSString *)urlEncodeValue:(NSString *)url {
+    return [url stringByAddingPercentEscapesUsingEncoding:NSASCIIStringEncoding];
 }
 
 -(void)addMachineFromTextfield {
@@ -157,95 +139,85 @@
 						location.id_number,
 						escapedUrl];
 	
-	NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
-	[self performSelectorInBackground:@selector(addMachineWithURL:) withObject:urlstr];
-	[pool release];
+	@autoreleasepool {
+		[self performSelectorInBackground:@selector(addMachineWithURL:) withObject:urlstr];
+	}
 }
 
 -(void)addMachineWithURL:(NSString*)urlstr {
-	NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
+	@autoreleasepool {
 	
-	UIApplication* app = [UIApplication sharedApplication];
-	Portland_Pinball_MapAppDelegate *appDelegate = (Portland_Pinball_MapAppDelegate *)[[UIApplication sharedApplication] delegate];
-	
-	NSURL *url = [[NSURL alloc] initWithString:urlstr];
-	NSError *error;
-	NSString *test = [NSString stringWithContentsOfURL:url
-											  encoding:NSUTF8StringEncoding
-												 error:&error];
-	[urlstr release];
-	[url release];
-
-	NSString *addsuccess = [[NSString alloc] initWithString:@"add successful"];
-	NSRange range = [test rangeOfString:addsuccess];
-	
-	if(range.length > 0) {
-		NSString *newName = textfield.text;
-		NSString *alertString = [[NSString alloc] initWithFormat:@"%@ has been added to %@.",newName,location.name];
-		UIAlertView *alert = [[UIAlertView alloc]
-							  initWithTitle:@"Thank You!"
-							  message:alertString
-							  delegate:self
-							  cancelButtonTitle:@"Sweet!"
-							  otherButtonTitles:nil];
-		[alert show];
-		[alert release];
-		[alertString release];
-		
-		app.networkActivityIndicatorVisible = NO;
-		[loaderIcon stopAnimating];
-		
-		NSString *id1 = [[NSString alloc] initWithString:@"<id>\n"];
-		NSRange   range1 = [test rangeOfString:id1];
-		NSString *id2 = [[NSString alloc] initWithString:@"\n</id>"];
-		NSRange   range2 = [test rangeOfString:id2];
-		NSRange   range3;
-				  range3.location = range1.location + range1.length;
-				  range3.length   = range2.location - range1.location - range1.length;
-		selected_machine_id = [test substringWithRange:range3];
-		
-		
-		[id1 release];
-		[id2 release];
-		
-		NSMutableDictionary *machine_dict = (NSMutableDictionary *)[appDelegate.activeRegion.machines objectForKey:selected_machine_id];
-		
-		if(machine_dict == nil) {
-			machine_dict = [[NSMutableDictionary alloc] init];
-            [machine_dict setValue:selected_machine_id forKey:@"id"];
-			[machine_dict setValue:newName forKey:@"name"];
-			[machine_dict setValue:@"1" forKey:@"numLocations"];
-			[appDelegate.activeRegion.machines setObject:machine_dict forKey:selected_machine_id];
-			[machine_dict release];
-		}
-				
-		NSMutableArray *locationArray = (NSMutableArray *)[appDelegate.activeRegion.loadedMachines objectForKey:selected_machine_id];
-		if(locationArray != nil) {
-			[locationArray addObject:location];
-		}
-		
+		UIApplication* app = [UIApplication sharedApplication];
 		Portland_Pinball_MapAppDelegate *appDelegate = (Portland_Pinball_MapAppDelegate *)[[UIApplication sharedApplication] delegate];
-		NSString* erstr = [NSString stringWithFormat:@"| CODE 0002 | %@ | %@ was added to %@ (%@)",appDelegate.activeRegion.formalName, newName, location.name, location.id_number];
-		[Utils sendErrorReport:erstr];
-	} else {
-		NSString *alertString2 = [[NSString alloc] initWithString:@"Machine could not be added at this time, please try again later."];
-		UIAlertView *alert2 = [[UIAlertView alloc]
-							   initWithTitle:@"Sorry"
-							   message:alertString2
-							   delegate:nil
-							   cancelButtonTitle:@"OK"
-							   otherButtonTitles:nil];
-		[alert2 show];
-		[alert2 release];
-		[alertString2 release];
 		
-		app.networkActivityIndicatorVisible = NO;
-		submitButton.hidden = NO;
-		[loaderIcon stopAnimating];
+		NSURL *url = [[NSURL alloc] initWithString:urlstr];
+		NSError *error;
+		NSString *test = [NSString stringWithContentsOfURL:url
+												  encoding:NSUTF8StringEncoding
+													 error:&error];
+
+		NSString *addsuccess = [[NSString alloc] initWithString:@"add successful"];
+		NSRange range = [test rangeOfString:addsuccess];
+		
+		if(range.length > 0) {
+			NSString *newName = textfield.text;
+			NSString *alertString = [[NSString alloc] initWithFormat:@"%@ has been added to %@.",newName,location.name];
+			UIAlertView *alert = [[UIAlertView alloc]
+								  initWithTitle:@"Thank You!"
+								  message:alertString
+								  delegate:self
+								  cancelButtonTitle:@"Sweet!"
+								  otherButtonTitles:nil];
+			[alert show];
+			
+			app.networkActivityIndicatorVisible = NO;
+			[loaderIcon stopAnimating];
+			
+			NSString *id1 = [[NSString alloc] initWithString:@"<id>\n"];
+			NSRange   range1 = [test rangeOfString:id1];
+			NSString *id2 = [[NSString alloc] initWithString:@"\n</id>"];
+			NSRange   range2 = [test rangeOfString:id2];
+			NSRange   range3;
+					  range3.location = range1.location + range1.length;
+					  range3.length   = range2.location - range1.location - range1.length;
+			selected_machine_id = [test substringWithRange:range3];
+			
+			
+			
+			NSMutableDictionary *machine_dict = (NSMutableDictionary *)[appDelegate.activeRegion.machines objectForKey:selected_machine_id];
+			
+			if(machine_dict == nil) {
+				machine_dict = [[NSMutableDictionary alloc] init];
+            [machine_dict setValue:selected_machine_id forKey:@"id"];
+				[machine_dict setValue:newName forKey:@"name"];
+				[machine_dict setValue:@"1" forKey:@"numLocations"];
+				[appDelegate.activeRegion.machines setObject:machine_dict forKey:selected_machine_id];
+			}
+					
+			NSMutableArray *locationArray = (NSMutableArray *)[appDelegate.activeRegion.loadedMachines objectForKey:selected_machine_id];
+			if(locationArray != nil) {
+				[locationArray addObject:location];
+			}
+			
+			Portland_Pinball_MapAppDelegate *appDelegate = (Portland_Pinball_MapAppDelegate *)[[UIApplication sharedApplication] delegate];
+			NSString* erstr = [NSString stringWithFormat:@"| CODE 0002 | %@ | %@ was added to %@ (%@)",appDelegate.activeRegion.formalName, newName, location.name, location.id_number];
+			[Utils sendErrorReport:erstr];
+		} else {
+			NSString *alertString2 = [[NSString alloc] initWithString:@"Machine could not be added at this time, please try again later."];
+			UIAlertView *alert2 = [[UIAlertView alloc]
+								   initWithTitle:@"Sorry"
+								   message:alertString2
+								   delegate:nil
+								   cancelButtonTitle:@"OK"
+								   otherButtonTitles:nil];
+			[alert2 show];
+			
+			app.networkActivityIndicatorVisible = NO;
+			submitButton.hidden = NO;
+			[loaderIcon stopAnimating];
+		}
+		
 	}
-	
-	[addsuccess release];
-	[pool release];
 	
 }
 

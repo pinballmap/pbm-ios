@@ -30,22 +30,22 @@
 	MachineObject  *machine;
 }
 
-@property (nonatomic,retain) WebViewController *webview;
-@property (nonatomic,retain) LocationObject *location;
-@property (nonatomic,retain) MachineObject *machine;
+@property (nonatomic,strong) WebViewController *webview;
+@property (nonatomic,strong) LocationObject *location;
+@property (nonatomic,strong) MachineObject *machine;
 
-@property (nonatomic,retain) CommentController *commentController;
-@property (nonatomic,retain) MachineFilterView *machineFilter;
+@property (nonatomic,strong) CommentController *commentController;
+@property (nonatomic,strong) MachineFilterView *machineFilter;
 
-@property (nonatomic,retain) IBOutlet UIButton *updateConditionButton;
-@property (nonatomic,retain) IBOutlet UIButton *otherLocationsButton;
-@property (nonatomic,retain) IBOutlet UILabel *machineLabel;
-@property (nonatomic,retain) IBOutlet UILabel *locationLabel;
-@property (nonatomic,retain) IBOutlet UILabel *conditionLabel;
-@property (nonatomic,retain) IBOutlet UITextView *conditionField;
-@property (nonatomic,retain) IBOutlet UIButton *returnButton;
-@property (nonatomic,retain) IBOutlet UIButton *ipdbButton;
-@property (nonatomic,retain) IBOutlet UIButton *deleteButton;
+@property (nonatomic,strong) IBOutlet UIButton *updateConditionButton;
+@property (nonatomic,strong) IBOutlet UIButton *otherLocationsButton;
+@property (nonatomic,strong) IBOutlet UILabel *machineLabel;
+@property (nonatomic,strong) IBOutlet UILabel *locationLabel;
+@property (nonatomic,strong) IBOutlet UILabel *conditionLabel;
+@property (nonatomic,strong) IBOutlet UITextView *conditionField;
+@property (nonatomic,strong) IBOutlet UIButton *returnButton;
+@property (nonatomic,strong) IBOutlet UIButton *ipdbButton;
+@property (nonatomic,strong) IBOutlet UIButton *deleteButton;
 
 - (IBAction)onUpdateConditionTap:(id)sender;
 - (IBAction)onDeleteTap:(id)sender;
@@ -57,6 +57,6 @@
 - (void)removeMachineWithURL:(NSString *)urlstr;
 - (NSString *)formatDateFromString:(NSString *)string;
 
-+ (NSString *)urlEncodeValue:(NSString *)str;
++ (NSString *)urlEncodeValue:(NSString *)url;
 
 @end

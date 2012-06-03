@@ -22,8 +22,8 @@
 	splashScreen = [[UIView alloc] init];
 	splashScreen.userInteractionEnabled = NO;
 	
-	UIImageView *pbm = [[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"pbm2.png"]] autorelease];
-	UIImageView *base = [[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"base_blank.png"]] autorelease];
+	UIImageView *pbm = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"pbm2.png"]];
+	UIImageView *base = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"base_blank.png"]];
 	base.frame  = CGRectMake(0,20,320,460);
 	
 	if(activeRegion == nil) {
@@ -31,7 +31,7 @@
 	} else {		
 		NSString *splash_id = [NSString stringWithString:activeRegion.subdir];
 		NSString *imageName = [NSString stringWithFormat:@"%@_splash.png",splash_id];
-		UIImageView *region = [[[UIImageView alloc] initWithImage:[UIImage imageNamed:imageName]] autorelease];
+		UIImageView *region = [[UIImageView alloc] initWithImage:[UIImage imageNamed:imageName]];
 		
 		NSArray *availableRegions = [[NSArray alloc] initWithObjects:@"",@"albuquerque",@"austin",@"bayarea",@"bc",@"boston", @"chicago",@"detroit",@"la", @"lasvegas",@"toronto",@"newyork", @"sandiego",@"seattle",nil];
 		
@@ -49,7 +49,6 @@
 			[splashScreen addSubview:pbm];
 		}
 		
-		[availableRegions release];
 	}
 
 	[window addSubview:splashScreen];
@@ -61,7 +60,6 @@
 			[splashScreen removeFromSuperview];
 		
 		splashScreen = nil;
-		[splashScreen release];
 	}
 }
 
@@ -78,7 +76,6 @@
 	activeRegion = reobj;
 	
 	if (rootURL != nil) {
-		[rootURL release];
 		rootURL = nil;
 	}
     
@@ -88,18 +85,5 @@
 - (void)showMap:(NSArray*)array withTitle:(NSString *)newTitle {}
 - (void)applicationWillTerminate:(UIApplication *)application {}
 
-- (void)dealloc {
-	[userLocation release];
-	[regions release];
-	[activeRegion release];
-	[regions release];
-	[rootURL release];
-	[locationMap release];
-	[splashScreen release];
-	[locationProfileView release];
-	[navigationController release];
-	[window release];
-	[super dealloc];
-}
 
 @end

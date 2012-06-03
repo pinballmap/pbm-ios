@@ -71,9 +71,9 @@
 	deleteButton.hidden = doHide;
     
 	if(doHide) {
-		self.navigationItem.rightBarButtonItem = [[[UIBarButtonItem alloc] initWithTitle:@"edit" style:UIBarButtonItemStyleBordered target:self action:@selector(onEditButtonPressed:)] autorelease];	
+		self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"edit" style:UIBarButtonItemStyleBordered target:self action:@selector(onEditButtonPressed:)];	
 	} else { 
-		self.navigationItem.rightBarButtonItem = [[[UIBarButtonItem alloc] initWithTitle:@"done" style:UIBarButtonItemStyleBordered target:self action:@selector(onEditButtonPressed:)] autorelease];	
+		self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"done" style:UIBarButtonItemStyleBordered target:self action:@selector(onEditButtonPressed:)];	
 	}
 }
 
@@ -85,7 +85,6 @@
 								  destructiveButtonTitle:@"Remove" 
 								  otherButtonTitles:nil];
 	[actionsheet showInView:self.view];
-	[actionsheet release];
 }
 
 - (void)actionSheet:(UIActionSheet *)actionSheet didDismissWithButtonIndex:(NSInteger)buttonIndex {
@@ -99,66 +98,59 @@
 								location.id_number,
 								machine.id_number];
 		
-		NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
-		[self performSelectorInBackground:@selector(removeMachineWithURL:) withObject:urlstr];
-		[pool release];
+		@autoreleasepool {
+			[self performSelectorInBackground:@selector(removeMachineWithURL:) withObject:urlstr];
+		}
 	}
 			
 }
 
 - (void)removeMachineWithURL:(NSString *)urlstr {
-	NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
+	@autoreleasepool {
 	
-	Portland_Pinball_MapAppDelegate *appDelegate = (Portland_Pinball_MapAppDelegate *)[[UIApplication sharedApplication] delegate];
-	UIApplication *app = [UIApplication sharedApplication];
-	
-	
-	NSURL    *url = [[NSURL alloc] initWithString:urlstr];
-	NSError  *error;
-	NSString *test = [NSString stringWithContentsOfURL:url
-											  encoding:NSUTF8StringEncoding
-												 error:&error];
-	[urlstr release];
-	[url release];
-	
-	NSString *addsuccess = [[NSString alloc] initWithString:@"remove successful"];
-	NSRange range = [test rangeOfString:addsuccess];
-	
-	if(range.length > 0) {
-		NSString *alertString = [[NSString alloc] initWithString:@"Machine removed."];
-		UIAlertView *alert = [[UIAlertView alloc]
-							  initWithTitle:@"Thank You!"
-							  message:alertString
-							  delegate:self
-							  cancelButtonTitle:@"Good riddance!"
-							  otherButtonTitles:nil];
-		[alert show];
-		[alert release];
-		[alertString release];
+		Portland_Pinball_MapAppDelegate *appDelegate = (Portland_Pinball_MapAppDelegate *)[[UIApplication sharedApplication] delegate];
+		UIApplication *app = [UIApplication sharedApplication];
 		
-		app.networkActivityIndicatorVisible = NO;
 		
-		NSMutableArray *locationArray = (NSMutableArray *)[appDelegate.activeRegion.loadedMachines objectForKey:machine.id_number];
-		if(locationArray != nil) {
-			[locationArray removeObject:location];
+		NSURL    *url = [[NSURL alloc] initWithString:urlstr];
+		NSError  *error;
+		NSString *test = [NSString stringWithContentsOfURL:url
+												  encoding:NSUTF8StringEncoding
+													 error:&error];
+		
+		NSString *addsuccess = [[NSString alloc] initWithString:@"remove successful"];
+		NSRange range = [test rangeOfString:addsuccess];
+		
+		if(range.length > 0) {
+			NSString *alertString = [[NSString alloc] initWithString:@"Machine removed."];
+			UIAlertView *alert = [[UIAlertView alloc]
+								  initWithTitle:@"Thank You!"
+								  message:alertString
+								  delegate:self
+								  cancelButtonTitle:@"Good riddance!"
+								  otherButtonTitles:nil];
+			[alert show];
+			
+			app.networkActivityIndicatorVisible = NO;
+			
+			NSMutableArray *locationArray = (NSMutableArray *)[appDelegate.activeRegion.loadedMachines objectForKey:machine.id_number];
+			if(locationArray != nil) {
+				[locationArray removeObject:location];
+			}
+		} else {
+			NSString *alertString2 = [[NSString alloc] initWithString:@"Machine could not be removed at this time, please try again later."];
+			UIAlertView *alert2 = [[UIAlertView alloc]
+								   initWithTitle:@"Sorry"
+								   message:alertString2
+								   delegate:nil
+								   cancelButtonTitle:@"Fine"
+								   otherButtonTitles:nil];
+			[alert2 show];
+			
+			app.networkActivityIndicatorVisible = NO;
 		}
-	} else {
-		NSString *alertString2 = [[NSString alloc] initWithString:@"Machine could not be removed at this time, please try again later."];
-		UIAlertView *alert2 = [[UIAlertView alloc]
-							   initWithTitle:@"Sorry"
-							   message:alertString2
-							   delegate:nil
-							   cancelButtonTitle:@"Fine"
-							   otherButtonTitles:nil];
-		[alert2 show];
-		[alert2 release];
-		[alertString2 release];
 		
-		app.networkActivityIndicatorVisible = NO;
 	}
-	
-	[addsuccess release];
-	[pool release];
 }
 
 - (IBAction)onUpdateConditionTap:(id)sender {
@@ -182,7 +174,7 @@
 		webview = [[WebViewController alloc] initWithNibName:@"WebViewController" bundle:nil];	
 	
 	webview.title = @"Internet Pinball Database";
-	webview.newURL = [NSString stringWithFormat:@"http://ipdb.org/search.pl?name=%@&qh=checked&searchtype=advanced",[MachineProfileViewController urlEncodeValue:machine.name]];
+	webview.theNewURL = [NSString stringWithFormat:@"http://ipdb.org/search.pl?name=%@&qh=checked&searchtype=advanced",[MachineProfileViewController urlEncodeValue:machine.name]];
 	
 	[self.navigationController pushViewController:webview animated:YES];
 }
@@ -211,9 +203,8 @@
 	}
 }
 
-+ (NSString *)urlEncodeValue:(NSString *)str {
-	NSString *result = (NSString *) CFURLCreateStringByAddingPercentEscapes(kCFAllocatorDefault, (CFStringRef)str, NULL, CFSTR(":/?#[]@!$&’()*+,;="), kCFStringEncodingUTF8);
-	return [result autorelease];
++ (NSString *)urlEncodeValue:(NSString *)url {
+    return [url stringByAddingPercentEscapesUsingEncoding:NSASCIIStringEncoding];
 }
 
 - (void)viewDidUnload {
@@ -227,20 +218,6 @@
 	self.updateConditionButton = nil;
 }
 
-- (void)dealloc {
-	[machineFilter release];
-	[webview release];
-	[otherLocationsButton release];
-	[updateConditionButton release];
-	[locationLabel release];
-	[ipdbButton release];
-	[returnButton release];
-	[location release];
-	[machine release];
-	[deleteButton release];
-	[machineLabel release];
-    [super dealloc];
-}
 
 
 - (NSString *)formatDateFromString:(NSString *)dateString {	
@@ -306,13 +283,6 @@
 	NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
 	NSString *returnString = [[NSString alloc] initWithFormat:@"%@ %@, %@",displayMonth,dayString,year];
 	
-	[day release];
-	[year release];
-	[month release];
-	[displayMonth release];
-	[gregorian release];
-	[extra release];
-	[lastDigit release];
 
 	return returnString;
 }

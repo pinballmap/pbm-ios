@@ -2,7 +2,7 @@
 #import "Portland_Pinball_MapAppDelegate.h"
 
 @implementation WebViewController
-@synthesize webview, newURL;
+@synthesize webview, theNewURL;
 
 - (void)viewDidLoad {	
 	webview.delegate = self;
@@ -18,7 +18,7 @@
 }
 
 - (void)viewWillAppear:(BOOL)animated {
-	NSString *urlAddress = newURL;
+	NSString *urlAddress = theNewURL;
 	
 	NSURL *url = [NSURL URLWithString:urlAddress];	
 	NSURLRequest *requestObj = [NSURLRequest requestWithURL:url];
@@ -60,10 +60,5 @@
 	app.networkActivityIndicatorVisible = YES;
 }
 
-- (void)dealloc {
-	[newURL release];
-	[webview release];
-    [super dealloc];
-}
 
 @end

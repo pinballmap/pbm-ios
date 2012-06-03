@@ -23,24 +23,24 @@
 	NSMutableDictionary *loadedMachines;
 }
 
-@property (nonatomic,retain) NSMutableDictionary *loadedMachines;
+@property (nonatomic,strong) NSMutableDictionary *loadedMachines;
 
-@property (nonatomic,retain) NSMutableArray *rssTitles;
-@property (nonatomic,retain) NSMutableArray *rssArray;
-@property (nonatomic,retain) NSMutableArray *eventTitles;
-@property (nonatomic,retain) NSMutableArray *eventArray;
+@property (nonatomic,strong) NSMutableArray *rssTitles;
+@property (nonatomic,strong) NSMutableArray *rssArray;
+@property (nonatomic,strong) NSMutableArray *eventTitles;
+@property (nonatomic,strong) NSMutableArray *eventArray;
 
-@property (nonatomic,retain) NSString *machineFilterString;
-@property (nonatomic,retain) NSString *machineFilter;
-@property (nonatomic,retain) NSString *formalName;
-@property (nonatomic,retain) NSString *lat;
-@property (nonatomic,retain) NSString *lon;
-@property (nonatomic,retain) NSString *id_number;
-@property (nonatomic,retain) NSString *name;
-@property (nonatomic,retain) NSString *subdir;
-@property (nonatomic,retain) NSMutableDictionary *locations;
-@property (nonatomic,retain) NSMutableDictionary *machines;
-@property (nonatomic,retain) NSMutableArray *primaryZones;
-@property (nonatomic,retain) NSMutableArray *secondaryZones;
+@property (nonatomic,strong) NSString *machineFilterString;
+@property (nonatomic,strong) NSString *machineFilter;
+@property (nonatomic,strong) NSString *formalName;
+@property (nonatomic,strong) NSString *lat;
+@property (nonatomic,strong) NSString *lon;
+@property (nonatomic,strong) NSString *id_number;
+@property (nonatomic,strong) NSString *name;
+@property (nonatomic,strong) NSString *subdir;
+@property (nonatomic,strong) NSMutableDictionary *locations;
+@property (nonatomic,strong) NSMutableDictionary *machines;
+@property (nonatomic,strong) NSMutableArray *primaryZones;
+@property (nonatomic,strong) NSMutableArray *secondaryZones;
 
 @end

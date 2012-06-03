@@ -4,6 +4,6 @@
 	UILabel *subLabel;
 }
 
-@property (nonatomic,retain) IBOutlet UILabel *subLabel;
+@property (nonatomic,strong) IBOutlet UILabel *subLabel;
 
 @end

@@ -40,16 +40,14 @@
 		
 		if(tempLocationArray != nil) {
 			tempLocationArray = nil;
-			[tempLocationArray release];
 		}
 		tempLocationArray = [[NSMutableArray alloc] init];
 		
 		NSString *url = [[NSString alloc] initWithFormat:@"%@get_machine=%@",appDelegate.rootURL,machineID];
 		
-		NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
-		[self performSelectorInBackground:@selector(parseXMLFileAtURL:) withObject:url];
-		[pool release];
-		[url release];
+		@autoreleasepool {
+			[self performSelectorInBackground:@selector(parseXMLFileAtURL:) withObject:url];
+		}
 	}
 	
 	[super viewDidAppear:animated];
@@ -58,7 +56,6 @@
 -(void)viewWillDisappear:(BOOL)animated {
 	if (isParsing == YES) {
 		didAbortParsing = YES;
-		[tempLocationArray release];
 	}
 	
 	[super viewWillDisappear:animated];
@@ -68,15 +65,6 @@
 	noLocationsLabel = nil;
 }
 
-- (void)dealloc {
-	[tempLocationArray release];
-	[noLocationsLabel release];
-	[locationArray release];
-	[machineID release];
-	[machineName release];
-	[temp_location_id release];
-    [super dealloc];
-}
 
 
 - (void)onMapPress:(id)sender {
@@ -125,7 +113,6 @@
 	if(didAbortParsing == NO) {
 		locationArray = tempLocationArray;
 		[appDelegate.activeRegion.loadedMachines setObject:locationArray forKey:machineID];	
-		[tempLocationArray release];
 		[self reloadLocationData];
 	}
 	
@@ -151,9 +138,9 @@
 	} else {
 		self.tableView.separatorColor = [UIColor darkGrayColor];
 		[noLocationsLabel removeFromSuperview];
-		self.navigationItem.rightBarButtonItem = [[[UIBarButtonItem alloc] initWithTitle:@"Map" style:UIBarButtonItemStyleBordered target:self action:@selector(onMapPress:)] autorelease];
+		self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Map" style:UIBarButtonItemStyleBordered target:self action:@selector(onMapPress:)];
 		
-		NSSortDescriptor *nameSortDescriptor = [[[NSSortDescriptor alloc] initWithKey:@"distance" ascending:YES selector:@selector(compare:)] autorelease];
+		NSSortDescriptor *nameSortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"distance" ascending:YES selector:@selector(compare:)];
 		for (int i = 0 ; i < [locationArray count]; i++) {
 			LocationObject *locobj = (LocationObject *)[locationArray objectAtIndex:i];
 			[locobj updateDistance];
@@ -205,7 +192,6 @@
 		
 		NSArray *quickArray = [[NSArray alloc] initWithObjects:rootController,self,locationProfileView,nil];
 		[self.navigationController setViewControllers:quickArray animated:NO];
-		[quickArray release];
 	} else {
 		[self showLocationProfile:location  withMapButton:YES];
 	}

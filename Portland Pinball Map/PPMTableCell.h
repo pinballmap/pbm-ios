@@ -2,6 +2,6 @@
 	UILabel *nameLabel;
 }
 
-@property (nonatomic,retain) IBOutlet UILabel *nameLabel;
+@property (nonatomic,strong) IBOutlet UILabel *nameLabel;
 
 @end

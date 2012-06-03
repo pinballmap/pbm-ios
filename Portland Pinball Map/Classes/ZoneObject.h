@@ -7,9 +7,9 @@
 	NSString *isPrimary;
 }
 
-@property (nonatomic,retain) NSString *name;
-@property (nonatomic,retain) NSString *id_number;
-@property (nonatomic,retain) NSString *shortName;
-@property (nonatomic,retain) NSString *isPrimary;
+@property (nonatomic,strong) NSString *name;
+@property (nonatomic,strong) NSString *id_number;
+@property (nonatomic,strong) NSString *shortName;
+@property (nonatomic,strong) NSString *isPrimary;
 
 @end

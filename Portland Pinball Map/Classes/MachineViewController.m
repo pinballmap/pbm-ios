@@ -17,8 +17,6 @@
 	self.title = @"Machines";
 	Portland_Pinball_MapAppDelegate *appDelegate = (Portland_Pinball_MapAppDelegate *)[[UIApplication sharedApplication] delegate];
 	
-	if(sortedMachines != nil)
-        [sortedMachines release];
 	
 	sortedMachines = [[NSMutableDictionary alloc] init];
 	
@@ -30,13 +28,11 @@
 		
 		NSString *noMorePin = [[NSString alloc] initWithString:@"no more pinball"];
 		NSRange range = [machineName rangeOfString:noMorePin];
-		[noMorePin release];
 		
 		if (range.length == 0) {
 			NSString *searchString = [[NSString alloc] initWithString:@"abcdefghijklmnopqrstuvwxyz"];
 			NSRange letterRange = [searchString rangeOfString:firstLetter];
 			if (letterRange.length == 0) {
-				[firstLetter release];
 				firstLetter = [[NSString alloc] initWithString:@"#"];
 			}		
 			
@@ -45,19 +41,16 @@
 				NSMutableArray *newLetterArray = [[NSMutableArray alloc] init];
 				[sortedMachines setObject:newLetterArray forKey:firstLetter];
 				letterArray = newLetterArray;
-				[newLetterArray release];
 			}
 			
 			[letterArray addObject:machine];
 			
-			[firstLetter release];
-			[searchString release];
 		}
 	}
 	
 	for(id key in sortedMachines) {
 		NSMutableArray *orig_array = [sortedMachines objectForKey:key];
-		NSSortDescriptor *nameSortDescriptor = [[[NSSortDescriptor alloc] initWithKey:@"name" ascending:YES selector:@selector(compare:)] autorelease];
+		NSSortDescriptor *nameSortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"name" ascending:YES selector:@selector(compare:)];
 		[orig_array sortUsingDescriptors:[NSArray arrayWithObjects:nameSortDescriptor, nil]];
 	}
 	
@@ -70,12 +63,6 @@
 
 
 
-- (void)dealloc {
-	[machineFilter release];
-	[sortedMachines release];
-	[keys release];
-    [super dealloc];
-}
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return [keys count];

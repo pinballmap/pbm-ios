@@ -173,10 +173,8 @@ NSInteger sortOnDistance(id obj1, id obj2, void *context) {
 			
 			NSArray *quickArray1234 = [[NSArray alloc] initWithObjects:[self.navigationController.viewControllers objectAtIndex:0],locationProfileView123,nil];
 			[self.navigationController setViewControllers:quickArray1234 animated:NO];
-			[quickArray1234 release];			
 		}
 		
-		[value_array release];
 	}
 }
 
@@ -196,19 +194,17 @@ NSInteger sortOnDistance(id obj1, id obj2, void *context) {
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
 	NSString *sectionTitle = [self tableView:tableView titleForHeaderInSection:section];
 	NSString *extraString = [[NSString alloc] initWithFormat:@"%@",sectionTitle];
-	UILabel *label = [[[UILabel alloc] init] autorelease];
+	UILabel *label = [[UILabel alloc] init];
 	label.frame = CGRectMake(10, 0, 320, headerHeight);
 	label.backgroundColor = [UIColor clearColor];
 	label.textColor = [UIColor blackColor];
 	label.font = [UIFont boldSystemFontOfSize:18];
 	label.text = extraString;
 	
-	[extraString release];
 	
 	UIView *view = [[UIView alloc] initWithFrame:CGRectMake(10, 0, 320, headerHeight)];
 	view.alpha = 0.9;
 	view.backgroundColor = [UIColor whiteColor];
-	[view autorelease];
 	[view addSubview:label];
 	return view;	
 }
@@ -218,7 +214,7 @@ NSInteger sortOnDistance(id obj1, id obj2, void *context) {
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
-        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
 		
 	}
     	
@@ -236,12 +232,5 @@ NSInteger sortOnDistance(id obj1, id obj2, void *context) {
 	return headerHeight ;
 }
 
-- (void)dealloc {
-	[alphabet release];
-	[activityView release];
-	[loadingLabel release];
-
-    [super dealloc];
-}
 
 @end

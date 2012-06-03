@@ -1,8 +1,9 @@
 #import "RSSViewController.h"
-#import "PPMDoubleTableCell.h"
 
 @implementation RSSViewController
 @synthesize sectionTitles, sectionArray, today;
+
+Portland_Pinball_MapAppDelegate *appDelegate;
 
 - (id)initWithStyle:(UITableViewStyle)style {
     if (self = [super initWithStyle:style]) {
@@ -16,58 +17,57 @@
         yearRange.length = 4;
 		 
     }
+
     return self;
+}
+
+- (void)viewDidLoad {
+    appDelegate = (Portland_Pinball_MapAppDelegate *)[[UIApplication sharedApplication] delegate];
+
+    [super viewDidLoad];
 }
  
 - (void)viewWillAppear:(BOOL)animated {
-	self.title = @"Recently Added";
+	[self setTitle:@"Recently Added"];
 	[self refreshPage];
+    
 	[super viewWillAppear:animated];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
-	self.title = @"back";
+	[self setTitle:@"back"];
+    
 	[super viewWillDisappear:animated];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-	
-	Portland_Pinball_MapAppDelegate *appDelegate = (Portland_Pinball_MapAppDelegate *)[[UIApplication sharedApplication] delegate];
-	
+
 	if (appDelegate.activeRegion.rssArray == nil) {
 		today = [[NSDate alloc] init];
 		
 		sectionTitles = [[NSMutableArray alloc] initWithObjects:@"today",@"yesterday",@"this week",@"this month",@"this year",nil];
-		sectionArray = [[NSMutableArray alloc] initWithCapacity:5];
+		sectionArray = [[NSMutableArray alloc] initWithCapacity:[sectionTitles count]];
 		
 		for(int i = 0; i < [sectionTitles count] ; i++) {
 			NSMutableArray *array = [[NSMutableArray alloc] init];
 			[sectionArray addObject:array];
-			[array release];
 		}
         
-		NSString * path;
-		
-		if([appDelegate.activeRegion.subdir isEqualToString:@""]) {
-			path = [NSString stringWithFormat:@"http://pinballmap.com/locations.rss"]; // special case for Portland
-		} else {
-			path = [NSString stringWithFormat:@"http://pinballmap.com/%@/%@.rss",appDelegate.activeRegion.subdir,appDelegate.activeRegion.subdir];
-        }
+		NSString *path = [NSString stringWithFormat:@"%@/%@/%@.rss", BASE_URL, appDelegate.activeRegion.subdir, appDelegate.activeRegion.subdir];
             
 		[self showLoaderIconLarge];
-		NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
-		[self performSelectorInBackground:@selector(parseXMLFileAtURL:) withObject:path];
-		[pool release];
+        
+		@autoreleasepool {
+			[self performSelectorInBackground:@selector(parseXMLFileAtURL:) withObject:path];
+		}
 	}
 	
 	[self.tableView reloadData];
 }
 
-- (void)refreshPage {
-	Portland_Pinball_MapAppDelegate *appDelegate = (Portland_Pinball_MapAppDelegate *)[[UIApplication sharedApplication] delegate];
-    
-	if(appDelegate.activeRegion.rssArray == nil) {
+- (void)refreshPage {    
+	if (appDelegate.activeRegion.rssArray == nil) {
 		[self showLoaderIconLarge];
 	}
 	
@@ -93,62 +93,31 @@
 		
 		NSString *dateID;
 		int difference;
-		if(dateRangeCheck.length > 0) {
+		if (dateRangeCheck.length > 0) {
 			NSString *descText;
 			if([currentDesc length] == 19) {
-				descText = [[NSString alloc] initWithFormat:@"%@0%@",
-							[currentDesc substringToIndex:9],
-							[currentDesc substringFromIndex:9]];
+				descText = [[NSString alloc] initWithFormat:@"%@0%@", [currentDesc substringToIndex:9], [currentDesc substringFromIndex:9]];
 			} else {
 				descText = [currentDesc copy];
 			}
             
 			NSString *day = [[NSString alloc] initWithString:[descText substringWithRange:dayRange]];
 			NSString *year = [[NSString alloc] initWithString:[descText substringWithRange:yearRange]];
-			
 			NSString *monthText = [[NSString alloc] initWithString:[descText substringWithRange:monthRange]];
-			NSString *monthID;
-			
-			if ([monthText isEqualToString:@"Jan"]) {
-                monthID = [[NSString alloc] initWithString:@"01"];
-			} else if ([monthText isEqualToString:@"Feb"]) {
-                monthID = [[NSString alloc] initWithString:@"02"];
-			} else if ([monthText isEqualToString:@"Mar"]) {
-                monthID = [[NSString alloc] initWithString:@"03"];
-			} else if ([monthText isEqualToString:@"Apr"]) {
-                monthID = [[NSString alloc] initWithString:@"04"];
-			} else if ([monthText isEqualToString:@"May"]) {
-                monthID = [[NSString alloc] initWithString:@"05"];
-			} else if ([monthText isEqualToString:@"Jun"]) {
-                monthID = [[NSString alloc] initWithString:@"06"];
-			} else if ([monthText isEqualToString:@"Jul"]) {
-                monthID = [[NSString alloc] initWithString:@"07"];
-			} else if ([monthText isEqualToString:@"Aug"]) {
-                monthID = [[NSString alloc] initWithString:@"08"];
-			} else if ([monthText isEqualToString:@"Sep"]) {
-                monthID = [[NSString alloc] initWithString:@"09"];
-			} else if ([monthText isEqualToString:@"Oct"]) {
-                monthID = [[NSString alloc] initWithString:@"10"];
-			} else if ([monthText isEqualToString:@"Nov"]) {
-                monthID = [[NSString alloc] initWithString:@"11"];
-			} else {
-                monthID = [[NSString alloc] initWithString:@"12"];
-            }
-			
+            
+            NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+            [dateFormatter setDateFormat:@"MMM"];
+            NSDate *date = [dateFormatter dateFromString:monthText];
+            
+            NSString *monthID = [NSString stringWithFormat:@"%01d", [[dateFormatter stringFromDate:date] intValue]];
+						
 			NSDateFormatter *inputFormatter = [[NSDateFormatter alloc] init];
 			[inputFormatter setDateFormat:@"yyyy-MM-dd"];
 			NSDate *addedDate = [inputFormatter dateFromString:[NSString stringWithFormat:@"%@-%@-%@",year,monthID,day]];
 			
 			difference = [self differenceInDaysFrom:today to:addedDate];
 			
-			dateID = [[NSString alloc] initWithFormat:@"%@%@%@",year,monthID,day];
-			
-			[descText release];
-			[day release];
-			[year release];
-			[monthText release];
-			[monthID release];
-			[inputFormatter release];
+			dateID = [[NSString alloc] initWithFormat:@"%@%@%@",year,monthID,day];			
 		} else {
 			difference = 2000;
 			dateID = [[NSString alloc] initWithString:@""];
@@ -181,13 +150,6 @@
 			[quickArray addObject:item];
 		}
 		
-		[machineName release];
-		[locationName release];
-		[dateID release];
-		[string release];
-		[item release];
-		[currentTitle release];
-		[currentDesc release];		
 	}
     
 	currentElement = @"";
@@ -204,7 +166,7 @@
 }
 
 - (void)parserDidEndDocument:(NSXMLParser *)parser {
-	NSSortDescriptor *distanceSortDescriptor = [[[NSSortDescriptor alloc] initWithKey:@"dateID" ascending:NO selector:@selector(compare:)] autorelease];
+	NSSortDescriptor *distanceSortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"dateID" ascending:NO selector:@selector(compare:)];
 	
 	for(int i = [sectionArray count] - 1; i >= 0 ; i--) {
 		NSMutableArray *array = (NSMutableArray*) [sectionArray objectAtIndex:i];
@@ -221,8 +183,6 @@
 	appDelegate.activeRegion.rssArray = sectionArray;
 	appDelegate.activeRegion.rssTitles = sectionTitles;
 	
-	[sectionArray release];
-	[sectionTitles release];
 	
 	[self.tableView reloadData];
 	[self hideLoaderIconLarge];
@@ -238,7 +198,6 @@
                                                   toDate:startDate
                                                  options:0];
     NSInteger days = [components day];
-    [gregorian release];
     return days;
 }
 
@@ -301,11 +260,5 @@
 	} 
 }
 
-- (void)dealloc {
-	[today release];
-	[sectionTitles release];
-	[sectionArray release];
-	[super dealloc];
-}
 
 @end
