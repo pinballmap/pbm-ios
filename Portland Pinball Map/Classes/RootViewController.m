@@ -241,7 +241,7 @@
 		case 2:
 			if ([elementName isEqualToString:@"region"]) {
 				RegionObject *regionobject = [[RegionObject alloc] init];
-				regionobject.id_number  = current_id;
+				regionobject.idNumber  = current_id;
 				regionobject.name       = current_name;
 				regionobject.formalName = current_formalName;
 				regionobject.subdir     = current_subdir;
