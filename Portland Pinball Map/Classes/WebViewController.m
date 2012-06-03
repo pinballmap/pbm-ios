@@ -5,23 +5,17 @@
 @synthesize webview, theNewURL;
 
 - (void)viewDidLoad {	
-	webview.delegate = self;
-	webview.scalesPageToFit = YES;
+	[webview setDelegate:self];
+	[webview setScalesPageToFit:YES];
 	
 	NSURL *url = [NSURL URLWithString:@"http://ipdb.org"];
-	
-	NSURLRequest *requestObj = [NSURLRequest requestWithURL:url];
-	
-	[webview loadRequest:requestObj];
+	[webview loadRequest:[NSURLRequest requestWithURL:url]];
 	
 	[super viewDidLoad];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
-	NSString *urlAddress = theNewURL;
-	
-	NSURL *url = [NSURL URLWithString:urlAddress];	
-	NSURLRequest *requestObj = [NSURLRequest requestWithURL:url];
+	NSURLRequest *requestObj = [NSURLRequest requestWithURL:[NSURL URLWithString:theNewURL]];
 	
 	[webview loadRequest:requestObj];
 	[super viewWillAppear:animated];
@@ -31,12 +25,13 @@
 	[webview stopLoading];
 	
 	UIApplication* app = [UIApplication sharedApplication];
-	app.networkActivityIndicatorVisible = NO;
-	[super viewWillDisappear:animated];
+	[app setNetworkActivityIndicatorVisible:NO];
+	
+    [super viewWillDisappear:animated];
 }
 
 - (void)viewDidUnload {
-	self.webview = nil;
+	[self setWebview:nil];
 }
 
 - (IBAction)onBackTap:(id)sender {
@@ -44,21 +39,19 @@
         [webview goBack];
 }
 
-- (IBAction)onForwardTap:(id)sender
-{
+- (IBAction)onForwardTap:(id)sender {
 	if(webview.canGoForward)
         [webview goForward];
 }
 
 - (void)webViewDidStartLoad:(UIWebView *)webView {
 	UIApplication* app = [UIApplication sharedApplication];
-	app.networkActivityIndicatorVisible = YES;
+	[app setNetworkActivityIndicatorVisible:YES];
 }
 
 - (void)webViewDidFinishLoad:(UIWebView *)webView {
 	UIApplication* app = [UIApplication sharedApplication];
-	app.networkActivityIndicatorVisible = YES;
+	[app setNetworkActivityIndicatorVisible:YES];
 }
-
 
 @end
