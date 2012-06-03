@@ -3,5 +3,4 @@
 @implementation PPMDoubleTableCell
 @synthesize subLabel;
 
-
 @end
