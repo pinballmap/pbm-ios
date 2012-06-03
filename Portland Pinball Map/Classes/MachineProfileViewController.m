@@ -34,8 +34,8 @@
 		conditionField.text = machine.condition;
 	}
 	
-	if(machine.condition_date != nil) {
-		conditionLabel.text = [NSString stringWithFormat:@"Last Updated - %@", [Utils formatDateFromString:machine.condition_date]];
+	if(machine.conditionDate != nil) {
+		conditionLabel.text = [NSString stringWithFormat:@"Last Updated - %@", [Utils formatDateFromString:machine.conditionDate]];
 	} else { 
 		conditionLabel.text = @"";
     }
@@ -82,7 +82,7 @@
 		NSString *urlstr = [[NSString alloc] initWithFormat:@"%@modify_location=%@&action=remove_machine&machine_no=%@",
 								appDelegate.rootURL,
 								location.id_number,
-								machine.id_number];
+								machine.idNumber];
 		
 		@autoreleasepool {
 			[self performSelectorInBackground:@selector(removeMachineWithURL:) withObject:urlstr];
@@ -119,7 +119,7 @@
 			
 			app.networkActivityIndicatorVisible = NO;
 			
-			NSMutableArray *locationArray = (NSMutableArray *)[appDelegate.activeRegion.loadedMachines objectForKey:machine.id_number];
+			NSMutableArray *locationArray = (NSMutableArray *)[appDelegate.activeRegion.loadedMachines objectForKey:machine.idNumber];
 			if(locationArray != nil) {
 				[locationArray removeObject:location];
 			}
@@ -172,7 +172,7 @@
     
 	machineFilter.resetNavigationStackOnLocationSelect = YES;
 	machineFilter.machineName                          = machine.name;
-	machineFilter.machineID                            = machine.id_number;
+	machineFilter.machineID                            = machine.idNumber;
 	[self.navigationController pushViewController:machineFilter  animated:YES];
 }
 

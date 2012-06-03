@@ -14,73 +14,54 @@
 }
 
 - (void)textViewDidBeginEditing:(UITextView *)textView {
-	if(savedConditionText != nil) {
-		savedConditionText = nil;
-	}
-	
-	savedConditionText = [[NSString alloc] initWithString:textview.text];
+    savedConditionText = textview.text;
 }
 
 - (IBAction)onSubmitTap:(id)sender {
 	Portland_Pinball_MapAppDelegate *appDelegate = (Portland_Pinball_MapAppDelegate *)[[UIApplication sharedApplication] delegate];
 	
 	UIApplication* app = [UIApplication sharedApplication];
-	app.networkActivityIndicatorVisible = YES;
+	[app setNetworkActivityIndicatorVisible:YES];
 	
-	NSString *newComment = ([textview.text isEqual:@""]) ? @" " : textview.text;
-	
-	NSString *encodedCondition = [Utils urlEncode:newComment];
+	NSString *encodedCondition = [Utils urlEncode:([textview.text isEqual:@""]) ? @" " : textview.text];
 	
 	NSString *urlstr = [[NSString alloc] initWithFormat:@"%@location_no=%@&machine_no=%@&condition=%@",
 						appDelegate.rootURL,
 						location.id_number,
-						machine.id_number,
+						machine.idNumber,
 						encodedCondition];
 	NSURL *url = [[NSURL alloc] initWithString:urlstr];
 	NSError *error;
-	NSString *test = [NSString stringWithContentsOfURL:url
-											  encoding:NSUTF8StringEncoding
-												 error:&error];
-		
-	
-	NSString *addsuccess = [[NSString alloc] initWithString:@"success"];
-	NSRange range = [test rangeOfString:addsuccess];
-	
+	NSString *test = [NSString stringWithContentsOfURL:url encoding:NSUTF8StringEncoding error:&error];
+    
+	NSRange range = [test rangeOfString:@"success"];
 	if(range.length > 0) {
-		NSDate *today = [NSDate date];
 		NSDateFormatter *inputFormatter = [[NSDateFormatter alloc] init];
 		[inputFormatter setDateFormat:@"yyyy-MM-dd"];
 		
-		machine.condition_date = [[NSString alloc] initWithString:[inputFormatter stringFromDate:today]];
-		machine.condition      = [[NSString alloc] initWithString:textview.text];
-		
-		
-		app.networkActivityIndicatorVisible = NO;
+		[machine setConditionDate:[inputFormatter stringFromDate:[NSDate date]]];
+		[machine setCondition:textview.text];
+        
+		[app setNetworkActivityIndicatorVisible:NO];
 		
 		[self.navigationController popViewControllerAnimated:YES];
 	} else  {
-		NSString *alertString2 = [[NSString alloc] initWithString:@"Machine condition could not be updated at this time, please try again later."];
 		UIAlertView *alert2 = [[UIAlertView alloc]
 							   initWithTitle:@"Sorry"
-							   message:alertString2
+							   message:@"Machine condition could not be updated at this time, please try again later."
 							   delegate:nil
 							   cancelButtonTitle:@"OK"
 							   otherButtonTitles:nil];
 		[alert2 show];
-		
-		app.networkActivityIndicatorVisible = NO;
+		[app setNetworkActivityIndicatorVisible:NO];
 	}
 	
-	
-	if(savedConditionText != nil) {
-		savedConditionText = nil;
-	}	
+    savedConditionText = nil;
 }
 	
 - (IBAction)onCancelTap:(id)sender {
 	[self.navigationController popViewControllerAnimated:YES];
 }
-
 
 - (void)viewDidDisappear:(BOOL)animated {
 	[textview resignFirstResponder];

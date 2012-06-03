@@ -308,10 +308,10 @@
 	
 	if ([elementName isEqualToString:@"machine"]) {
 		temp_machine_object.name = temp_machine_name;
-		temp_machine_object.id_number = temp_machine_id;
+		temp_machine_object.idNumber = temp_machine_id;
 		temp_machine_object.condition = [LocationProfileViewController urlDecodeValue:temp_machine_condition];
 		temp_machine_object.dateAdded = temp_machine_dateAdded;
-		temp_machine_object.condition_date = temp_machine_condition_date;
+		temp_machine_object.conditionDate = temp_machine_condition_date;
 		
         [temp_machine_dict setObject:temp_machine_object forKey:temp_machine_id];
 		
