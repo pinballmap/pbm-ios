@@ -147,7 +147,7 @@ NSInteger sortOnDistance(id obj1, id obj2, void *context) {
 			int value = ceil(pow(locobj.distance + 0.3,-1.9) * 1000);
 			
 			for (int i = 0; i < value; i++) {
-				[value_array addObject:locobj.id_number];
+				[value_array addObject:locobj.idNumber];
 			}
 		}
 		

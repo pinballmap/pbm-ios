@@ -6,7 +6,7 @@
 	NSDictionary *machines;
 	
 	NSString *name;
-	NSString *id_number;
+	NSString *idNumber;
 	NSString *neighborhood;
 	NSString *distanceString;
 	NSString *street1;
@@ -26,7 +26,7 @@
 
 @property (nonatomic,strong) NSString *mapURL;
 @property (nonatomic,strong) NSString *name;
-@property (nonatomic,strong) NSString *id_number;
+@property (nonatomic,strong) NSString *idNumber;
 @property (nonatomic,strong) NSString *neighborhood;
 @property (nonatomic,strong) NSString *street1;
 @property (nonatomic,strong) NSString *street2;

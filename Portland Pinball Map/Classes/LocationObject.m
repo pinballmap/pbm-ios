@@ -2,7 +2,7 @@
 #import "Portland_Pinball_MapAppDelegate.h"
 
 @implementation LocationObject
-@synthesize neighborhood, name, id_number, machines, distanceString, mapURL, street1, street2, city, state, zip, phone, coords, distance, distanceRounded, totalMachines, isLoaded;
+@synthesize neighborhood, name, idNumber, machines, distanceString, mapURL, street1, street2, city, state, zip, phone, coords, distance, distanceRounded, totalMachines, isLoaded;
 
 - init {
     if ((self = [super init])) {

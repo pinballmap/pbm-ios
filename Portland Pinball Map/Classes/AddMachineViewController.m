@@ -101,7 +101,7 @@ Portland_Pinball_MapAppDelegate *appDelegate;
      
 	NSString *urlstr = [[NSString alloc] initWithFormat:@"%@modify_location=%@&action=add_machine&machine_name=%@",
 						appDelegate.rootURL,
-						location.id_number,
+						location.idNumber,
 						[Utils urlEncode:finalString]];
 	
 	@autoreleasepool {

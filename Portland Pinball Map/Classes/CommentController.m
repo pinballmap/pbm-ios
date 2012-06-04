@@ -27,7 +27,7 @@
 	
 	NSString *urlstr = [[NSString alloc] initWithFormat:@"%@location_no=%@&machine_no=%@&condition=%@",
 						appDelegate.rootURL,
-						location.id_number,
+						location.idNumber,
 						machine.idNumber,
 						encodedCondition];
 	NSURL *url = [[NSURL alloc] initWithString:urlstr];

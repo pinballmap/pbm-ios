@@ -15,7 +15,6 @@ Portland_Pinball_MapAppDelegate *appDelegate;
 		 
         yearRange.location = 16;
         yearRange.length = 4;
-		 
     }
 
     return self;

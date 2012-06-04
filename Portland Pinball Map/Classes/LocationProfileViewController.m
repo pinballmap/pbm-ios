@@ -25,7 +25,7 @@
 	}
     
 	[addMachineView setLocationName:activeLocationObject.name];
-	[addMachineView setLocationId:activeLocationObject.id_number];
+	[addMachineView setLocationId:activeLocationObject.idNumber];
 	[addMachineView setLocation:self.activeLocationObject];
     
 	[self.navigationController pushViewController:addMachineView animated:YES];
@@ -57,7 +57,7 @@
 		[app setNetworkActivityIndicatorVisible:YES];
     
 		Portland_Pinball_MapAppDelegate *appDelegate = (Portland_Pinball_MapAppDelegate *)[[UIApplication sharedApplication] delegate];
-		NSString *url = [[NSString alloc] initWithFormat:@"%@get_location=%@", appDelegate.rootURL, activeLocationObject.id_number];
+		NSString *url = [[NSString alloc] initWithFormat:@"%@get_location=%@", appDelegate.rootURL, activeLocationObject.idNumber];
 		
 		[self performSelectorInBackground:@selector(parseXMLFileAtURL:) withObject:url];
 	}
@@ -202,7 +202,7 @@
 			}
             
 			[addMachineView setLocationName:activeLocationObject.name];
-			[addMachineView setLocationId:activeLocationObject.id_number];
+			[addMachineView setLocationId:activeLocationObject.idNumber];
 			[addMachineView setLocation:self.activeLocationObject];
             
 			[self.navigationController pushViewController:addMachineView animated:YES];

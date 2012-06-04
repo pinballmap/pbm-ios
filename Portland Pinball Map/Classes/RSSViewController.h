@@ -3,9 +3,9 @@
 #import "LocationProfileViewController.h"
 
 @interface RSSViewController : XMLTable {
-	NSMutableDictionary * item;
-	NSMutableString * currentTitle;
-	NSMutableString * currentDesc;
+	NSMutableDictionary *item;
+	NSMutableString *currentTitle;
+	NSMutableString *currentDesc;
 		
 	NSRange dayRange;
 	NSRange monthRange;
