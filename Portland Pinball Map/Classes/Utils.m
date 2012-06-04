@@ -15,6 +15,11 @@
     return [url stringByAddingPercentEscapesUsingEncoding:NSASCIIStringEncoding];
 }
 
++ (NSString *)urlDecode:(NSString *)url {
+    NSString *result = [(NSString *)self stringByReplacingOccurrencesOfString:@"+" withString:@" "];
+    return [result stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];    
+}
+
 + (NSString *)formatDateFromString:(NSString *)dateString {	
 	NSString *year = [[NSString alloc] initWithString:[dateString substringWithRange:YEAR_RANGE]];
 	NSString *month = [[NSString alloc] initWithString:[dateString substringWithRange:MONTH_RANGE]];

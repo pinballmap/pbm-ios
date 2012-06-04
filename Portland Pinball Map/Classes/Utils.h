@@ -9,6 +9,7 @@
 
 + (BOOL)stringIsBlank:(NSString *)string;
 + (NSString *)urlEncode:(NSString *)url;
++ (NSString *)urlDecode:(NSString *)url;
 + (NSString *)formatDateFromString:(NSString *)dateString;
 + (NSDate *)getDateFromString:(NSString *)dateString;
 + (NSString *)stripString:(NSString *)string;

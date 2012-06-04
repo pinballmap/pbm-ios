@@ -7,18 +7,18 @@
 #import <Foundation/Foundation.h>
 
 @interface LocationProfileViewController : XMLTable {	  
-	NSString *message;
 	UIScrollView *scrollView;
+
 	NSString *locationID;
+	NSString *message;
+    NSMutableString *mapURL;
 	
 	LocationMap *mapView;
 	
 	NSMutableDictionary *masterDictionary;
 	
 	LocationObject *activeLocationObject;
-	
-	NSMutableString *mapURL;
-	
+
 	NSMutableDictionary *info;
 	
 	UILabel *mapLabel;
@@ -27,23 +27,22 @@
 	
 	UIView *__unsafe_unretained lineView;
 	
-	NSMutableArray *label_holder;
+	NSMutableArray *labelHolder;
 	
-	BOOL building_machine;
-	MachineObject *temp_machine_object;
-	NSMutableDictionary *temp_machine_dict;
-	NSMutableString *temp_machine_name;
-	NSMutableString *temp_machine_id;
-	NSMutableString *temp_machine_condition;
-	NSMutableString *temp_machine_condition_date;
-	NSMutableString *temp_machine_dateAdded;
-	
-	NSMutableString *current_street1;
-	NSMutableString *current_street2;
-	NSMutableString *current_city;
-	NSMutableString *current_state;
-	NSMutableString *current_zip;
-	NSMutableString *current_phone;
+	BOOL isBuildingMachine;
+	MachineObject *tempMachineObject;
+	NSMutableDictionary *tempMachineDict;
+	NSMutableString *tempMachineName;
+	NSMutableString *tempMachineID;
+	NSMutableString *tempMachineCondition;
+	NSMutableString *tempMachineConditionDate;
+	NSMutableString *tempMachineDateAdded;
+	NSMutableString *currentStreet1;
+	NSMutableString *currentStreet2;
+	NSMutableString *currentCity;
+	NSMutableString *currentState;
+	NSMutableString *currentZip;
+	NSMutableString *currentPhone;
 	
 	int parsingAttempts;
 	
@@ -67,23 +66,20 @@
 @property (nonatomic,strong) NSString *message;
 @property (nonatomic,strong) NSString *locationID;
 @property (nonatomic,strong) LocationObject *activeLocationObject;
-@property (nonatomic,assign) BOOL building_machine;
-@property (nonatomic,strong) NSMutableArray *label_holder;
-@property (nonatomic,strong) MachineObject *temp_machine_object;
-@property (nonatomic,strong) NSMutableDictionary *temp_machine_dict;
-@property (nonatomic,strong) NSMutableString *temp_machine_name;
-@property (nonatomic,strong) NSMutableString *temp_machine_id;
-@property (nonatomic,strong) NSMutableString *temp_machine_condition_date;
-@property (nonatomic,strong) NSMutableString *temp_machine_condition;
-@property (nonatomic,strong) NSMutableString *temp_machine_dateAdded;
+@property (nonatomic,assign) BOOL isBuildingMachine;
+@property (nonatomic,strong) NSMutableArray *labelHolder;
+@property (nonatomic,strong) MachineObject *tempMachineObject;
+@property (nonatomic,strong) NSMutableDictionary *tempMachineDict;
+@property (nonatomic,strong) NSMutableString *tempMachineName;
+@property (nonatomic,strong) NSMutableString *tempMachineID;
+@property (nonatomic,strong) NSMutableString *tempMachineConditionDate;
+@property (nonatomic,strong) NSMutableString *tempMachineCondition;
+@property (nonatomic,strong) NSMutableString *tempMachineDateAdded;
 @property (nonatomic,strong) NSMutableArray *displayArray;
 
 - (IBAction)mapButtonPressed:(id)sender;
 - (IBAction)addMachineButtonPressed:(id)sender;
 - (void)refreshAndReload;
 - (void)loadLocationData;
-
-+ (NSString *)urlDecodeValue:(NSString *)url;
-+ (NSString *)urlencode: (NSString *)url;
 
 @end
