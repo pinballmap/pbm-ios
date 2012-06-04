@@ -1,129 +1,57 @@
-//
-//  WebViewController.m
-//  Portland Pinball Map
-//
-//  Created by Isaac Ruiz on 6/5/10.
-//  Copyright 2010 __MyCompanyName__. All rights reserved.
-//
-
 #import "WebViewController.h"
 #import "Portland_Pinball_MapAppDelegate.h"
 
-
 @implementation WebViewController
-@synthesize webview;
-@synthesize newURL;
+@synthesize webview, theNewURL;
 
-/*
- // The designated initializer.  Override if you create the controller programmatically and want to perform customization that is not appropriate for viewDidLoad.
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
-    if (self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil]) {
-        // Custom initialization
-    }
-    return self;
-}
-*/
-
-
-// Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
-- (void)viewDidLoad
-{
+- (void)viewDidLoad {	
+	[webview setDelegate:self];
+	[webview setScalesPageToFit:YES];
 	
-	webview.delegate = self;
-	webview.scalesPageToFit = YES;
-	
-	//preload IPDB
-	
-	//Create a URL object.
 	NSURL *url = [NSURL URLWithString:@"http://ipdb.org"];
-	
-	//URL Requst Object
-	NSURLRequest *requestObj = [NSURLRequest requestWithURL:url];
-	
-	//Load the request in the UIWebView.
-	[webview loadRequest:requestObj];
+	[webview loadRequest:[NSURLRequest requestWithURL:url]];
 	
 	[super viewDidLoad];
 }
 
--(void)viewWillAppear:(BOOL)animated
-{
-	NSString *urlAddress = newURL;
+- (void)viewWillAppear:(BOOL)animated {
+	NSURLRequest *requestObj = [NSURLRequest requestWithURL:[NSURL URLWithString:theNewURL]];
 	
-	//Create a URL object.
-	NSURL *url = [NSURL URLWithString:urlAddress];
-	
-	NSLog(@"webview: %@",newURL);
-	
-	//URL Requst Object
-	NSURLRequest *requestObj = [NSURLRequest requestWithURL:url];
-	
-	//Load the request in the UIWebView.
 	[webview loadRequest:requestObj];
 	[super viewWillAppear:animated];
 }
 
--(void)viewWillDisappear:(BOOL)animated
-{
+- (void)viewWillDisappear:(BOOL)animated {
 	[webview stopLoading];
 	
-	//Portland_Pinball_MapAppDelegate *appDelegate = (Portland_Pinball_MapAppDelegate *)[[UIApplication sharedApplication] delegate];
 	UIApplication* app = [UIApplication sharedApplication];
-	app.networkActivityIndicatorVisible = NO;
-	[super viewWillDisappear:animated];
-}
-
-
-/*
-// Override to allow orientations other than the default portrait orientation.
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
-    // Return YES for supported orientations
-    return (interfaceOrientation == UIInterfaceOrientationPortrait);
-}
-*/
-
-- (void)didReceiveMemoryWarning {
-	// Releases the view if it doesn't have a superview.
-    [super didReceiveMemoryWarning];
+	[app setNetworkActivityIndicatorVisible:NO];
 	
-	// Release any cached data, images, etc that aren't in use.
+    [super viewWillDisappear:animated];
 }
 
 - (void)viewDidUnload {
-	// Release any retained subviews of the main view.
-	// e.g. self.myOutlet = nil;
-	self.webview = nil;
+	[self setWebview:nil];
 }
 
--(IBAction)onBackTap:(id)sender
-{
-	if(webview.canGoBack) [webview goBack];
-}
--(IBAction)onForwardTap:(id)sender
-{
-	if(webview.canGoForward) [webview goForward];
+- (IBAction)onBackTap:(id)sender {
+	if(webview.canGoBack)
+        [webview goBack];
 }
 
-- (void)webViewDidStartLoad:(UIWebView *)webView
-{
-	//Portland_Pinball_MapAppDelegate *appDelegate = (Portland_Pinball_MapAppDelegate *)[[UIApplication sharedApplication] delegate];
+- (IBAction)onForwardTap:(id)sender {
+	if(webview.canGoForward)
+        [webview goForward];
+}
+
+- (void)webViewDidStartLoad:(UIWebView *)webView {
 	UIApplication* app = [UIApplication sharedApplication];
-	app.networkActivityIndicatorVisible = YES;
+	[app setNetworkActivityIndicatorVisible:YES];
 }
 
-- (void)webViewDidFinishLoad:(UIWebView *)webView
-{
-	//Portland_Pinball_MapAppDelegate *appDelegate = (Portland_Pinball_MapAppDelegate *)[[UIApplication sharedApplication] delegate];
+- (void)webViewDidFinishLoad:(UIWebView *)webView {
 	UIApplication* app = [UIApplication sharedApplication];
-	app.networkActivityIndicatorVisible = YES;
+	[app setNetworkActivityIndicatorVisible:YES];
 }
-
-- (void)dealloc
-{
-	[newURL release];
-	[webview release];
-    [super dealloc];
-}
-
 
 @end

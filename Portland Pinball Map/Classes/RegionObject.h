@@ -1,65 +1,45 @@
-//
-//  RegionObject.h
-//  Portland Pinball Map
-//
-//  Created by Isaac Ruiz on 6/6/10.
-//  Copyright 2010 __MyCompanyName__. All rights reserved.
-//
-
 #import <Foundation/Foundation.h>
 
-
 @interface RegionObject : NSObject {
-	NSString *id_number;
+	NSString *idNumber;
 	NSString *name;
 	NSString *formalName;
 	NSString *subdir;
 	NSString *lat;
 	NSString *lon;
-	
 	NSString *machineFilter;
 	NSString *machineFilterString;
 	
 	NSMutableDictionary *locations;
 	NSMutableDictionary *machines;
+	NSMutableDictionary *loadedMachines;
 	
 	NSMutableArray *primaryZones;
 	NSMutableArray *secondaryZones;
-	
-	// RSS Stuff
 	NSMutableArray *rssArray;
 	NSMutableArray *rssTitles;
-	
-	// Event Stuff
 	NSMutableArray *eventArray;
-	NSMutableArray *eventTitles;
-	
-	//Closest Stuff
-	//NSMutableArray *closestArray
-	
-	// Machine Locations
-	NSMutableDictionary *loadedMachines;
-
+	NSMutableArray *eventTitles;	
 }
 
-@property (nonatomic,retain) NSMutableDictionary *loadedMachines;
+@property (nonatomic,strong) NSMutableDictionary *loadedMachines;
+@property (nonatomic,strong) NSMutableDictionary *locations;
+@property (nonatomic,strong) NSMutableDictionary *machines;
 
-@property (nonatomic,retain) NSMutableArray *rssTitles;
-@property (nonatomic,retain) NSMutableArray *rssArray;
-@property (nonatomic,retain) NSMutableArray *eventTitles;
-@property (nonatomic,retain) NSMutableArray *eventArray;
+@property (nonatomic,strong) NSMutableArray *rssTitles;
+@property (nonatomic,strong) NSMutableArray *rssArray;
+@property (nonatomic,strong) NSMutableArray *eventTitles;
+@property (nonatomic,strong) NSMutableArray *eventArray;
+@property (nonatomic,strong) NSMutableArray *primaryZones;
+@property (nonatomic,strong) NSMutableArray *secondaryZones;
 
-@property (nonatomic,retain) NSString *machineFilterString;
-@property (nonatomic,retain) NSString *machineFilter;
-@property (nonatomic,retain) NSString *formalName;
-@property (nonatomic,retain) NSString *lat;
-@property (nonatomic,retain) NSString *lon;
-@property (nonatomic,retain) NSString *id_number;
-@property (nonatomic,retain) NSString *name;
-@property (nonatomic,retain) NSString *subdir;
-@property (nonatomic,retain) NSMutableDictionary *locations;
-@property (nonatomic,retain) NSMutableDictionary *machines;
-@property (nonatomic,retain) NSMutableArray *primaryZones;
-@property (nonatomic,retain) NSMutableArray *secondaryZones;
+@property (nonatomic,strong) NSString *machineFilterString;
+@property (nonatomic,strong) NSString *machineFilter;
+@property (nonatomic,strong) NSString *formalName;
+@property (nonatomic,strong) NSString *lat;
+@property (nonatomic,strong) NSString *lon;
+@property (nonatomic,strong) NSString *idNumber;
+@property (nonatomic,strong) NSString *name;
+@property (nonatomic,strong) NSString *subdir;
 
 @end

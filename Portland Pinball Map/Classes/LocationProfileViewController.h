@@ -1,12 +1,3 @@
-//
-//  LocationProfileViewController.h
-//  Portland Pinball Map
-//
-//  Created by Isaac Ruiz on 11/18/09.
-//  Copyright 2009 __MyCompanyName__. All rights reserved.
-//
-
-
 #import "XMLTable.h"
 #import "MachineProfileViewController.h"
 #import "AddMachineViewController.h"
@@ -15,113 +6,80 @@
 #import "LocationMap.h"
 #import <Foundation/Foundation.h>
 
-//@class AddMachineViewController;
-//@class LocationObject;
-
-@interface LocationProfileViewController : XMLTable
-{
-	  
-	NSString *message;
+@interface LocationProfileViewController : XMLTable {	  
 	UIScrollView *scrollView;
+
 	NSString *locationID;
-	//NSString * currentElement;
+	NSString *message;
+    NSMutableString *mapURL;
 	
 	LocationMap *mapView;
 	
 	NSMutableDictionary *masterDictionary;
-	//LocationObject *currentLocation;
 	
 	LocationObject *activeLocationObject;
-	
-	NSMutableString       *mapURL;
-	
+
 	NSMutableDictionary *info;
 	
-	UILabel   *mapLabel;
-	UIButton  *mapButton;
-	BOOL       showMapButton;
+	UILabel *mapLabel;
+	UIButton *mapButton;
+	BOOL showMapButton;
 	
-		
-	UIView  *lineView;
+	UIView *__unsafe_unretained lineView;
 	
-	//Holder Array for Machine Names
-	NSMutableArray *label_holder;
+	NSMutableArray *labelHolder;
 	
-	//XML Parsing
-	//BOOL isParsing;
-	BOOL building_machine;
-	MachineObject *temp_machine_object;
-	NSMutableDictionary *temp_machine_dict;
-	NSMutableString *temp_machine_name;
-	NSMutableString *temp_machine_id;
-	NSMutableString *temp_machine_condition;
-	NSMutableString *temp_machine_condition_date;
-	NSMutableString *temp_machine_dateAdded;
+	BOOL isBuildingMachine;
+	MachineObject *tempMachineObject;
+	NSMutableDictionary *tempMachineDict;
+	NSMutableString *tempMachineName;
+	NSMutableString *tempMachineID;
+	NSMutableString *tempMachineCondition;
+	NSMutableString *tempMachineConditionDate;
+	NSMutableString *tempMachineDateAdded;
+	NSMutableString *currentStreet1;
+	NSMutableString *currentStreet2;
+	NSMutableString *currentCity;
+	NSMutableString *currentState;
+	NSMutableString *currentZip;
+	NSMutableString *currentPhone;
 	
-	NSMutableString     *current_street1;
-	NSMutableString     *current_street2;
-	NSMutableString     *current_city;
-	NSMutableString     *current_state;
-	NSMutableString     *current_zip;
-	NSMutableString     *current_phone;
-	
-	int					 parsingAttempts;
+	int parsingAttempts;
 	
 	UIButton *addMachineButton;
 	
 	AddMachineViewController *addMachineView;
 	MachineProfileViewController *machineProfileView;
 	
-	//New Table Stuff
 	NSMutableArray *displayArray;
-	//NSMutableArray *infoArray;
-	
-	
-
 }
 
-
-@property (nonatomic,retain) MachineProfileViewController *machineProfileView;
-@property (nonatomic,retain) AddMachineViewController     *addMachineView;
-@property (nonatomic,retain) IBOutlet UIButton *addMachineButton;
-
+@property (nonatomic,strong) MachineProfileViewController *machineProfileView;
+@property (nonatomic,strong) AddMachineViewController *addMachineView;
+@property (nonatomic,strong) IBOutlet UIButton *addMachineButton;
 @property (nonatomic,assign) BOOL showMapButton;
-@property (nonatomic,retain) LocationMap *mapView;
-@property (nonatomic,assign) IBOutlet UIView       *lineView;
-@property (nonatomic,retain) IBOutlet UILabel      *mapLabel;
-@property (nonatomic,retain) IBOutlet UIButton     *mapButton;
-
-
-@property (nonatomic,retain) IBOutlet UIScrollView *scrollView;
-
-@property (nonatomic,retain) NSString *message;
-@property (nonatomic,retain) NSString *locationID;
-@property (nonatomic,retain) LocationObject *activeLocationObject;
-@property (nonatomic,assign) BOOL building_machine;
-
-//Holder Array for Machine Names
-@property (nonatomic,retain) NSMutableArray *label_holder;
-
-//XML Parsing
-@property (nonatomic,retain) MachineObject *temp_machine_object;
-@property (nonatomic,retain) NSMutableDictionary *temp_machine_dict;
-@property (nonatomic,retain) NSMutableString *temp_machine_name;
-@property (nonatomic,retain) NSMutableString *temp_machine_id;
-@property (nonatomic,retain) NSMutableString *temp_machine_condition_date;
-@property (nonatomic,retain) NSMutableString *temp_machine_condition;
-@property (nonatomic,retain) NSMutableString *temp_machine_dateAdded;
-
-
-//Table View Stuff
-@property (nonatomic,retain) NSMutableArray *displayArray;
+@property (nonatomic,strong) LocationMap *mapView;
+@property (nonatomic,unsafe_unretained) IBOutlet UIView *lineView;
+@property (nonatomic,strong) IBOutlet UILabel *mapLabel;
+@property (nonatomic,strong) IBOutlet UIButton *mapButton;
+@property (nonatomic,strong) IBOutlet UIScrollView *scrollView;
+@property (nonatomic,strong) NSString *message;
+@property (nonatomic,strong) NSString *locationID;
+@property (nonatomic,strong) LocationObject *activeLocationObject;
+@property (nonatomic,assign) BOOL isBuildingMachine;
+@property (nonatomic,strong) NSMutableArray *labelHolder;
+@property (nonatomic,strong) MachineObject *tempMachineObject;
+@property (nonatomic,strong) NSMutableDictionary *tempMachineDict;
+@property (nonatomic,strong) NSMutableString *tempMachineName;
+@property (nonatomic,strong) NSMutableString *tempMachineID;
+@property (nonatomic,strong) NSMutableString *tempMachineConditionDate;
+@property (nonatomic,strong) NSMutableString *tempMachineCondition;
+@property (nonatomic,strong) NSMutableString *tempMachineDateAdded;
+@property (nonatomic,strong) NSMutableArray *displayArray;
 
 - (IBAction)mapButtonPressed:(id)sender;
 - (IBAction)addMachineButtonPressed:(id)sender;
-
-
 - (void)refreshAndReload;
-+ (NSString *)urlDecodeValue:(NSString *)str;
 - (void)loadLocationData;
-+ (NSString *) urlencode: (NSString *) url;
 
 @end

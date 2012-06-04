@@ -1,20 +1,9 @@
-//
-//  EventProfileViewController.h
-//  Portland Pinball Map
-//
-//  Created by Isaac Ruiz on 6/26/10.
-//  Copyright 2010 __MyCompanyName__. All rights reserved.
-//
-
-#import <UIKit/UIKit.h>
 #import "EventProfileViewController.h"
 #import "EventObject.h"
 #import "WebViewController.h"
 #import "LocationProfileViewController.h"
 
-
-@interface EventProfileViewController : UIViewController {
-	
+@interface EventProfileViewController : UIViewController {	
 	EventObject *eventObject;
 	WebViewController *webview;
 	
@@ -26,17 +15,16 @@
 	UITextView *descText;
 }
 
-@property (nonatomic,retain) WebViewController *webview;
-@property (nonatomic,retain) EventObject *eventObject;
-@property (nonatomic,retain) IBOutlet UITextView *descText;
-@property (nonatomic,retain) IBOutlet UILabel *nameLabel;
-@property (nonatomic,retain) IBOutlet UILabel *locationLabel;
-@property (nonatomic,retain) IBOutlet UILabel *timeLabel;
-@property (nonatomic,retain) IBOutlet UIButton *webButton;
-@property (nonatomic,retain) IBOutlet UIButton *locationButton;
+@property (nonatomic,strong) WebViewController *webview;
+@property (nonatomic,strong) EventObject *eventObject;
+@property (nonatomic,strong) IBOutlet UITextView *descText;
+@property (nonatomic,strong) IBOutlet UILabel *nameLabel;
+@property (nonatomic,strong) IBOutlet UILabel *locationLabel;
+@property (nonatomic,strong) IBOutlet UILabel *timeLabel;
+@property (nonatomic,strong) IBOutlet UIButton *webButton;
+@property (nonatomic,strong) IBOutlet UIButton *locationButton;
 
--(IBAction)onLocationTap:(id)sender;
--(IBAction)onWebTap:(id)sender;
-
+- (IBAction)onLocationTap:(id)sender;
+- (IBAction)onWebTap:(id)sender;
 
 @end

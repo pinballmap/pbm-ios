@@ -1,330 +1,173 @@
-//
-//  MachineProfileViewController.m
-//  Portland Pinball Map
-//
-//  Created by Isaac Ruiz on 5/2/10.
-//  Copyright 2010 __MyCompanyName__. All rights reserved.
-//
-
-#import "Utils.h"
 #import "MachineProfileViewController.h"
+#import "Utils.h"
 #import "Portland_Pinball_MapAppDelegate.h"
-#import "LocationProfileViewController.h"
 
 @implementation MachineProfileViewController
-@synthesize machineLabel;
-@synthesize deleteButton;
-@synthesize machine;
-@synthesize location;
-@synthesize locationLabel;
-@synthesize conditionLabel;
-@synthesize conditionField;
-@synthesize returnButton;
-@synthesize ipdbButton;
-@synthesize otherLocationsButton;
-@synthesize updateConditionButton;
-@synthesize commentController;
-@synthesize webview;
-@synthesize machineFilter;
+@synthesize machineLabel, deleteButton, machine, location, locationLabel, conditionLabel, conditionField, returnButton, ipdbButton, otherLocationsButton, updateConditionButton, commentController, webview, machineFilter;
 
-//?modify_location=XXX;action=remove_machine;machine_no=YYY
+Portland_Pinball_MapAppDelegate *appDelegate;
 
--(BOOL)canBecomeFirstResponder
-{
+- (BOOL)canBecomeFirstResponder {
 	return YES;
 }
 
 - (void)viewDidAppear:(BOOL)animated {
-	
-    //[super viewDidAppear:animated];
+    appDelegate = (Portland_Pinball_MapAppDelegate *)[[UIApplication sharedApplication] delegate];
+
 	[self becomeFirstResponder];
 }
 
--(void)viewDidLoad
-{
-	dayRange2.location = 8;
-	dayRange2.length = 2;
-	
-	monthRange2.location = 5;
-	monthRange2.length = 2;
-	
-	yearRange2.location = 0;
-	yearRange2.length = 4;
-	
-	
-	[super viewDidLoad];
-}
-
--(void)viewWillAppear:(BOOL)animated
-{
-	self.title = location.name;
+- (void)viewWillAppear:(BOOL)animated {
+	[self setTitle:location.name];
 	
 	[self hideControllButtons:YES];
+		
+	[machineLabel setText:machine.name];
+    [locationLabel setText:[NSString stringWithFormat:@"%@", [Utils stringIsBlank:machine.dateAdded] ?
+        @"" :
+        [NSString stringWithFormat:@"added %@", [Utils formatDateFromString:machine.dateAdded]]
+    ]];
 	
-	//NSLog(@"Machine profile will appear");
-	
-	machineLabel.text   = [NSString stringWithString:machine.name];
-	
-	if([machine.dateAdded isEqualToString:@""])
-	{
-		locationLabel.text  = @"";
-	}
-	else
-	{
-		locationLabel.text  = [NSString stringWithFormat:@"added %@",[self formatDateFromString:machine.dateAdded]];
-	}
-	
-	//temp_machine_object.dateAdded      = [self formatDateFromString:temp_machine_dateAdded];
-	//temp_machine_object.condition_date = [self formatDateFromString:temp_machine_condition_date];
-
-	
-	if([Utils stringIsBlank:machine.condition])
-	{
-		conditionField.font = [UIFont italicSystemFontOfSize:14];
-		conditionField.text = @"Tap below to comment on this machine's condition.";
-	}
-	else
-	{
-		conditionField.font = [UIFont systemFontOfSize:14];
-		conditionField.text = machine.condition;
+	if([Utils stringIsBlank:machine.condition]) {
+		[conditionField setFont:[UIFont italicSystemFontOfSize:14]];
+		[conditionField setText:@"Tap below to comment on this machine's condition."];
+	} else {
+		[conditionField setFont:[UIFont systemFontOfSize:14]];
+		[conditionField setText:machine.condition];
 	}
 	
-	if(machine.condition_date != nil)
-		conditionLabel.text = [NSString stringWithFormat:@"Last Updated - %@", [self formatDateFromString:machine.condition_date]];
-	else 
-		conditionLabel.text = @"";
-
+    [conditionLabel setText:[NSString stringWithFormat:@"%@", (machine.conditionDate != nil) ?
+        [NSString stringWithFormat:@"Last Updated - %@", [Utils formatDateFromString:machine.conditionDate]] :
+        @""
+    ]];
 	
 	[super viewWillAppear:animated];
 }
 
--(void)viewWillDisappear:(BOOL)animated
-{
-	self.title = @"back";
-	//[self resignFirstResponder];
+- (void)viewWillDisappear:(BOOL)animated {
+	[self setTitle:@"back"];
+
 	[super viewWillDisappear:animated];
 }
 
--(IBAction) onEditButtonPressed:(id)sender
-{
+- (IBAction) onEditButtonPressed:(id)sender {
 	[self hideControllButtons:!deleteButton.hidden];
 }
 
--(void)hideControllButtons:(BOOL)doHide
-{
-	deleteButton.hidden          = doHide;
-	//updateConditionButton.hidden = doHide;
-	if(doHide)
-		self.navigationItem.rightBarButtonItem = [[[UIBarButtonItem alloc] initWithTitle:@"edit" style:UIBarButtonItemStyleBordered target:self action:@selector(onEditButtonPressed:)] autorelease];	
-	else 
-		self.navigationItem.rightBarButtonItem = [[[UIBarButtonItem alloc] initWithTitle:@"done" style:UIBarButtonItemStyleBordered target:self action:@selector(onEditButtonPressed:)] autorelease];	
-	
-
+- (void)hideControllButtons:(BOOL)doHide {
+	[deleteButton setHidden:doHide];
+    
+    [self.navigationItem setRightBarButtonItem:[[UIBarButtonItem alloc] initWithTitle:doHide ? @"edit" : @"done" style:UIBarButtonItemStyleBordered target:self action:@selector(onEditButtonPressed:)]];    
 }
 
-#pragma mark Delete Button
--(IBAction)onDeleteTap:(id)sender
-{
-	
-	UIActionSheet *actionsheet = [[UIActionSheet alloc]
+- (IBAction)onDeleteTap:(id)sender {
+ 	UIActionSheet *actionsheet = [[UIActionSheet alloc]
 								  initWithTitle:@"Are you sure?" 
 								  delegate:self 
 								  cancelButtonTitle:@"Cancel" 
 								  destructiveButtonTitle:@"Remove" 
 								  otherButtonTitles:nil];
 	[actionsheet showInView:self.view];
-	[actionsheet release];
 }
 
-- (void)actionSheet:(UIActionSheet *)actionSheet didDismissWithButtonIndex:(NSInteger)buttonIndex
-{
-	if(buttonIndex == 0)
-	{
-		Portland_Pinball_MapAppDelegate *appDelegate = (Portland_Pinball_MapAppDelegate *)[[UIApplication sharedApplication] delegate];
+- (void)actionSheet:(UIActionSheet *)actionSheet didDismissWithButtonIndex:(NSInteger)buttonIndex {
+	if(buttonIndex == 0) {
 		UIApplication *app = [UIApplication sharedApplication];
-					   app.networkActivityIndicatorVisible = YES;
-		//machineLabel.hidden = YES;
+        [app setNetworkActivityIndicatorVisible:YES];
 			
 		NSString *urlstr = [[NSString alloc] initWithFormat:@"%@modify_location=%@&action=remove_machine&machine_no=%@",
 								appDelegate.rootURL,
-								location.id_number,
-								machine.id_number];
+								location.idNumber,
+								machine.idNumber];
 		
-		NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
-		[self performSelectorInBackground:@selector(removeMachineWithURL:) withObject:urlstr];
-		[pool release];
-		//[self removeMachineWithURL:urlstr];
+		@autoreleasepool {
+			[self performSelectorInBackground:@selector(removeMachineWithURL:) withObject:urlstr];
+		}
 	}
 			
 }
 
--(void)removeMachineWithURL:(NSString*)urlstr
-{
-	NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
-	
-	Portland_Pinball_MapAppDelegate *appDelegate = (Portland_Pinball_MapAppDelegate *)[[UIApplication sharedApplication] delegate];
-	UIApplication *app = [UIApplication sharedApplication];
-	
-	
-	NSURL    *url = [[NSURL alloc] initWithString:urlstr];
-	NSError  *error;
-	NSString *test = [NSString stringWithContentsOfURL:url
-											  encoding:NSUTF8StringEncoding
-												 error:&error];
-	[urlstr release];
-	[url release];
-	
-	//If Success, throw thank you
-	NSString *addsuccess = [[NSString alloc] initWithString:@"remove successful"];
-	NSRange range = [test rangeOfString:addsuccess];
-	
-	if(range.length > 0)
-	{
-		NSString *alertString = [[NSString alloc] initWithString:@"Machine removed."];
-		UIAlertView *alert = [[UIAlertView alloc]
-							  initWithTitle:@"Thank You!"
-							  message:alertString
-							  delegate:self
-							  cancelButtonTitle:@"Good riddance!"
-							  otherButtonTitles:nil];
-		[alert show];
-		[alert release];
-		[alertString release];
+- (void)removeMachineWithURL:(NSString *)urlstr {
+	@autoreleasepool {	
+		UIApplication *app = [UIApplication sharedApplication];
 		
-		app.networkActivityIndicatorVisible = NO;
-		//machineLabel.hidden = NO;
+		NSError *error;
+		NSString *test = [NSString stringWithContentsOfURL:[[NSURL alloc] initWithString:urlstr]
+												  encoding:NSUTF8StringEncoding
+													 error:&error];
 		
-		//Remove Location from loaded machines
-		NSMutableArray *locationArray = (NSMutableArray *)[appDelegate.activeRegion.loadedMachines objectForKey:machine.id_number];
-		if(locationArray != nil)
-		{
-			[locationArray removeObject:location];
+		NSRange range = [test rangeOfString:@"remove successful"];
+		
+		if(range.length > 0) {
+			UIAlertView *alert = [[UIAlertView alloc]
+								  initWithTitle:@"Thank You!"
+								  message:@"Machine removed."
+								  delegate:self
+								  cancelButtonTitle:@"Good riddance!"
+								  otherButtonTitles:nil];
+			[alert show];
+						
+			NSMutableArray *locations = (NSMutableArray *)[appDelegate.activeRegion.loadedMachines objectForKey:machine.idNumber];
+			if(locations != nil) {
+				[locations removeObject:location];
+			}
+		} else {
+			UIAlertView *alert2 = [[UIAlertView alloc]
+								   initWithTitle:@"Sorry"
+								   message:@"Machine could not be removed at this time, please try again later."
+								   delegate:nil
+								   cancelButtonTitle:@"Fine"
+								   otherButtonTitles:nil];
+			[alert2 show];			
 		}
-	}
-	else 
-	{
-		NSString *alertString2 = [[NSString alloc] initWithString:@"Machine could not be removed at this time, please try again later."];
-		UIAlertView *alert2 = [[UIAlertView alloc]
-							   initWithTitle:@"Sorry"
-							   message:alertString2
-							   delegate:nil
-							   cancelButtonTitle:@"Fine"
-							   otherButtonTitles:nil];
-		[alert2 show];
-		[alert2 release];
-		[alertString2 release];
 		
-		app.networkActivityIndicatorVisible = NO;
+        [app setNetworkActivityIndicatorVisible:NO];
 	}
-	
-	[addsuccess release];
-	[pool release];
 }
 
-#pragma mark Buttons!
-
--(IBAction)onUpdateConditionTap:(id)sender
-{
-	if(commentController == nil)
-	{
+- (IBAction)onUpdateConditionTap:(id)sender {
+	if(commentController == nil) {
 		commentController = [[CommentController alloc] initWithNibName:@"CommentView" bundle:nil];
 	}
 	
-	commentController.machine = machine;
-	commentController.location = location;
-	commentController.title = machine.name;
+	[commentController setMachine:machine];
+	[commentController setLocation:location];
+	[commentController setTitle:machine.name];
 	
 	[self.navigationController pushViewController:commentController animated:YES];
 }
 
--(IBAction)onReturnTap:(id)sender
-{
+- (IBAction)onReturnTap:(id)sender {
 	[conditionField resignFirstResponder];
 }
 
--(IBAction)onIPDBTap:(id)sender
-{
+- (IBAction)onIPDBTap:(id)sender {
 	if(webview == nil)
 		webview = [[WebViewController alloc] initWithNibName:@"WebViewController" bundle:nil];	
 	
-	webview.title = @"Internet Pinball Database";
-	webview.newURL = [NSString stringWithFormat:@"http://ipdb.org/search.pl?name=%@&qh=checked&searchtype=advanced",[MachineProfileViewController urlEncodeValue:machine.name]];
+	[webview setTitle:@"Internet Pinball Database"];
+	[webview setTheNewURL:[NSString stringWithFormat:@"http://ipdb.org/search.pl?name=%@&qh=checked&searchtype=advanced", [Utils urlEncode:machine.name]]];
 	
 	[self.navigationController pushViewController:webview animated:YES];
-	//http://ipdb.org/search.pl?name=Bad%20Cats&qh=checked&searchtype=advanced
 }
 
--(IBAction)onOtherLocationsTap:(id)sender
-{
-	if(machineFilter == nil)
-	{
+- (IBAction)onOtherLocationsTap:(id)sender {
+	if(machineFilter == nil) {
 		machineFilter = [[MachineFilterView alloc] initWithStyle:UITableViewStylePlain];
-		
 	}
-	machineFilter.resetNavigationStackOnLocationSelect = YES;
-	machineFilter.machineName                          = machine.name;
-	machineFilter.machineID                            = machine.id_number;
-	[self.navigationController pushViewController:machineFilter  animated:YES];
+    
+	[machineFilter setResetNavigationStackOnLocationSelect:YES];
+	[machineFilter setMachineName:machine.name];
+	[machineFilter setMachineID:machine.idNumber];
+    
+	[self.navigationController pushViewController:machineFilter animated:YES];
 }
 
-#pragma mark
-#pragma mark Alert View Delegate 
-
-- (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex
-{
-	
-	if([alertView.title isEqualToString:@"Thank You!"])
-	{
-		Portland_Pinball_MapAppDelegate *appDelegate = (Portland_Pinball_MapAppDelegate *)[[UIApplication sharedApplication] delegate];
-		NSString *erstr = [NSString stringWithFormat:@"| CODE 0003 | %@ | %@ was removed from %@ (%@).",
-						  appDelegate.activeRegion.formalName, machine.name,location.name,location.id_number];
-		[Utils sendErrorReport:erstr];
-		
+- (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex {
+	if([alertView.title isEqualToString:@"Thank You!"]) {
 		location.isLoaded = NO;
 		[self.navigationController popViewControllerAnimated:YES];
 	}
-	else if([alertView.title isEqualToString:@"Remove Machine"])
-	{
-		
-	}
-}
-
-+ (NSString *)urlEncodeValue:(NSString *)str
-{
-	NSString *result = (NSString *) CFURLCreateStringByAddingPercentEscapes(kCFAllocatorDefault, (CFStringRef)str, NULL, CFSTR(":/?#[]@!$&’()*+,;="), kCFStringEncodingUTF8);
-	return [result autorelease];
-}
-
-/*
- // The designated initializer.  Override if you create the controller programmatically and want to perform customization that is not appropriate for viewDidLoad.
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
-    if (self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil]) {
-        // Custom initialization
-    }
-    return self;
-}
-*/
-
-/*
-// Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
-- (void)viewDidLoad {
-    [super viewDidLoad];
-}
-*/
-
-/*
-// Override to allow orientations other than the default portrait orientation.
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
-    // Return YES for supported orientations
-    return (interfaceOrientation == UIInterfaceOrientationPortrait);
-}
-*/
-
--(void)didReceiveMemoryWarning 
-{
-	// Releases the view if it doesn't have a superview.
-    [super didReceiveMemoryWarning];
-	// Release any cached data, images, etc that aren't in use.
 }
 
 - (void)viewDidUnload {
@@ -336,117 +179,6 @@
 	self.conditionLabel = nil;
 	self.locationLabel = nil;
 	self.updateConditionButton = nil;
-}
-
-
-- (void)dealloc
-{
-	[machineFilter release];
-	[webview release];
-	[otherLocationsButton release];
-	[updateConditionButton release];
-	[locationLabel release];
-	[ipdbButton release];
-	[returnButton release];
-	[location release];
-	[machine release];
-	[deleteButton release];
-	[machineLabel release];
-    [super dealloc];
-}
-
-
-/*-(NSDate *)getDateFromString:(NSString *)dateString
-{
-	NSRange dayRange;
-	NSRange monthRange;
-	NSRange yearRange;
-	
-	dayRange.location = 9;
-	dayRange.length = 2;
-	
-	monthRange.location = 6;
-	monthRange.length = 2;
-	
-	yearRange.location = 0;
-	yearRange.length = 4;
-	
-	NSString *day   = [[NSString alloc] initWithString:[dateString substringWithRange:dayRange]];
-	NSString *year  = [[NSString alloc] initWithString:[dateString substringWithRange:yearRange]];
-	NSString *month = [[NSString alloc] initWithString:[dateString substringWithRange:monthRange]];
-	
-	NSDateFormatter *inputFormatter = [[NSDateFormatter alloc] init];
-	[inputFormatter setDateFormat:@"yyyy-MM-dd"];
-	NSDate *returnDate = [inputFormatter dateFromString:[NSString stringWithFormat:@"%@-%@-%@",year,month,day]];
-	
-	[day release];
-	[year release];
-	[month release];
-	[inputFormatter release];
-	
-	return returnDate;
-}*/
-
--(NSString*)formatDateFromString:(NSString*)dateString
-{	
-	
-	NSString *year  = [[NSString alloc] initWithString:[dateString substringWithRange:yearRange2]];
-	
-	//Get Month
-	NSString *month = [[NSString alloc] initWithString:[dateString substringWithRange:monthRange2]];
-	NSString *displayMonth;
-	
-	if      ([month isEqualToString:@"01"]) displayMonth = [[NSString alloc] initWithString:@"Jan"];
-	else if ([month isEqualToString:@"02"]) displayMonth = [[NSString alloc] initWithString:@"Feb"];
-	else if ([month isEqualToString:@"03"]) displayMonth = [[NSString alloc] initWithString:@"March"];
-	else if ([month isEqualToString:@"04"]) displayMonth = [[NSString alloc] initWithString:@"April"];
-	else if ([month isEqualToString:@"05"]) displayMonth = [[NSString alloc] initWithString:@"May"];
-	else if ([month isEqualToString:@"06"]) displayMonth = [[NSString alloc] initWithString:@"June"];
-	else if ([month isEqualToString:@"07"]) displayMonth = [[NSString alloc] initWithString:@"July"];
-	else if ([month isEqualToString:@"08"]) displayMonth = [[NSString alloc] initWithString:@"Aug"];
-	else if ([month isEqualToString:@"09"]) displayMonth = [[NSString alloc] initWithString:@"Sep"];
-	else if ([month isEqualToString:@"10"]) displayMonth = [[NSString alloc] initWithString:@"Oct"];
-	else if ([month isEqualToString:@"11"]) displayMonth = [[NSString alloc] initWithString:@"Nov"];
-	else								    displayMonth = [[NSString alloc] initWithString:@"Dec"];
-	
-	//Get Day String
-	NSRange digit;
-	digit.length   = 1;
-	digit.location = 1;
-	
-	NSString *day       = [[NSString alloc] initWithString:[dateString substringWithRange:dayRange2]];
-	NSString *lastDigit = [[NSString alloc] initWithString:[day substringWithRange:digit]];
-	NSString *extra;
-	if      ([day isEqualToString:@"11"])      extra = [[NSString alloc] initWithString:@"th"];
-	else if ([day isEqualToString:@"12"])      extra = [[NSString alloc] initWithString:@"th"];
-	else if ([day isEqualToString:@"13"])      extra = [[NSString alloc] initWithString:@"th"];
-	else if ([lastDigit isEqualToString:@"1"]) extra = [[NSString alloc] initWithString:@"st"];
-	else if ([lastDigit isEqualToString:@"2"]) extra = [[NSString alloc] initWithString:@"nd"];
-	else if ([lastDigit isEqualToString:@"3"]) extra = [[NSString alloc] initWithString:@"rd"];
-	else                                       extra = [[NSString alloc] initWithString:@"th"];
-	
-	NSString *dayString = [NSString stringWithFormat:@"%i%@",[day intValue],extra];
-	NSDateFormatter *inputFormatter = [[NSDateFormatter alloc] init];
-	[inputFormatter setDateFormat:@"yyyy-MM-dd"];
-	NSDate *date = [inputFormatter dateFromString:dateString];
-
-	//NSDate *date = [self getDateFromString:dateString];
-	NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
-	//NSDateComponents *weekdayComponents = [gregorian components:NSWeekdayCalendarUnit fromDate:date];
-	//int weekday = [weekdayComponents weekday];
-	
-	//Build String
-	NSString *returnString = [[NSString alloc] initWithFormat:@"%@ %@, %@",displayMonth,dayString,year];
-	
-	//release everything
-	[day release];
-	[year release];
-	[month release];
-	[displayMonth release];
-	[gregorian release];
-	[extra release];
-	[lastDigit release];	
-	return returnString;
 }
 
 @end

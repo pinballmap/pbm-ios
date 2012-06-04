@@ -1,35 +1,24 @@
-//
-//  ClosestLocations.h
-//  Portland Pinball Map
-//
-//  Created by Isaac Ruiz on 2/8/10.
-//  Copyright 2010 __MyCompanyName__. All rights reserved.
-//
-
 #import "LocationMap.h"
 #import "RegionObject.h"
-#import "Portland_Pinball_MapAppDelegate.h"
 #import "BlackTableViewController.h"
-#import <UIKit/UIKit.h>
 
-#define kNumberOfLocationsToShowInMap 25
+#define MAX_NUMBER_OF_LOCATIONS_TO_SHOW_IN_MAP 25
 
-
-@interface ClosestLocations : BlackTableViewController
-{
-	NSMutableArray *sectionArray;
+@interface ClosestLocations : BlackTableViewController {
+    LocationMap	*mapView;
+	RegionObject *lastViewedRegion;
+	NSMutableArray *sectionLocations;
 	NSMutableArray *sectionTitles;
-	RegionObject   *lastViewedRegion;
-	LocationMap	   *mapView;
-	NSMutableArray *allSortedLocations;
+    NSMutableArray *allSortedLocations;
 }
 
-@property (nonatomic,retain) NSMutableArray *allSortedLocations;
-@property (nonatomic,retain) LocationMap    *mapView;
-@property (nonatomic,retain) RegionObject   *lastViewedRegion;
-@property (nonatomic,retain) NSMutableArray *sectionArray;
-@property (nonatomic,retain) NSMutableArray *sectionTitles;
+@property (nonatomic,strong) LocationMap *mapView;
+@property (nonatomic,strong) RegionObject *lastViewedRegion;
+@property (nonatomic,strong) NSMutableArray *allSortedLocations;
+@property (nonatomic,strong) NSMutableArray *sectionLocations;
+@property (nonatomic,strong) NSMutableArray *sectionTitles;
 
--(IBAction) onMapButtonTapped:(id)sender;
+- (void)cleanupRegionData;
+- (IBAction)onMapButtonTapped:(id)sender;
 
 @end

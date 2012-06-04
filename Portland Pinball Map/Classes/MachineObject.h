@@ -1,26 +1,17 @@
-//
-//  MachineObject.h
-//  Portland Pinball Map
-//
-//  Created by Isaac Ruiz on 11/30/09.
-//  Copyright 2009 __MyCompanyName__. All rights reserved.
-//
-
 #import <Foundation/Foundation.h>
-
 
 @interface MachineObject : NSObject {
 	NSString *name;
-	NSString *id_number;
+	NSString *idNumber;
 	NSString *condition;
-	NSString *condition_date;
+	NSString *conditionDate;
 	NSString *dateAdded;
 }
 
-@property (nonatomic,retain) NSString *name;
-@property (nonatomic,retain) NSString *id_number;
-@property (nonatomic,retain) NSString *condition;
-@property (nonatomic,retain) NSString *condition_date;
-@property (nonatomic,retain) NSString *dateAdded;
+@property (nonatomic,strong) NSString *name;
+@property (nonatomic,strong) NSString *idNumber;
+@property (nonatomic,strong) NSString *condition;
+@property (nonatomic,strong) NSString *conditionDate;
+@property (nonatomic,strong) NSString *dateAdded;
 
 @end

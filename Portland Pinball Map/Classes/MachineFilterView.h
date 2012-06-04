@@ -1,46 +1,34 @@
-//
-//  MachineFilterView.h
-//  Portland Pinball Map
-//
-//  Created by Isaac Ruiz on 12/6/09.
-//  Copyright 2009 __MyCompanyName__. All rights reserved.
-//
-
-//@class Portland_Pinball_MapAppDelegate;
 #import "XMLTable.h"
 #import "LocationMap.h"
-#import "LocationObject.h"
 #import <Foundation/Foundation.h>
 
-
-@interface MachineFilterView : XMLTable {
-	
-	NSMutableArray *locationArray;
-	NSMutableArray *tempLocationArray;
+@interface MachineFilterView : XMLTable {	
+	NSMutableArray *locations;
+	NSMutableArray *tempLocations;
 	
 	NSString *machineID;
 	NSString *machineName;
-	NSMutableString *temp_location_id;
+	NSMutableString *tempLocationID;
 	
 	UILabel *noLocationsLabel;
 	
 	BOOL resetNavigationStackOnLocationSelect;
 	BOOL didAbortParsing;
 	
-	LocationMap			*mapView;
+	LocationMap *mapView;
 }
-@property (nonatomic,assign) BOOL didAbortParsing;
-@property (nonatomic,retain) NSMutableArray *tempLocationArray;
-@property (nonatomic,retain) UILabel *noLocationsLabel;
-@property (nonatomic,assign) BOOL resetNavigationStackOnLocationSelect;
-@property (nonatomic,retain) LocationMap         *mapView;
-@property (nonatomic,retain) NSString *temp_location_id;
-@property (nonatomic,retain) NSArray *locationArray;
-@property (nonatomic,retain) NSString *machineID;
-@property (nonatomic,retain) NSString *machineName;
 
--(void)onMapPress:(id)sender;
--(void)reloadLocationData;
+@property (nonatomic,assign) BOOL didAbortParsing;
+@property (nonatomic,assign) BOOL resetNavigationStackOnLocationSelect;
+@property (nonatomic,strong) NSMutableArray *tempLocations;
+@property (nonatomic,strong) UILabel *noLocationsLabel;
+@property (nonatomic,strong) LocationMap *mapView;
+@property (nonatomic,strong) NSString *tempLocationID;
+@property (nonatomic,strong) NSArray *locations;
+@property (nonatomic,strong) NSString *machineID;
+@property (nonatomic,strong) NSString *machineName;
+
+- (void)onMapPress:(id)sender;
+- (void)reloadLocationData;
 
 @end
-

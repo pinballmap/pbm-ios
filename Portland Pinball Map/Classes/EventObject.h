@@ -1,17 +1,8 @@
-//
-//  EventObject.h
-//  Portland Pinball Map
-//
-//  Created by Isaac Ruiz on 6/26/10.
-//  Copyright 2010 __MyCompanyName__. All rights reserved.
-//
-
 #import <Foundation/Foundation.h>
 #import "LocationObject.h"
 
-
 @interface EventObject : NSObject {
-	NSString *id_number;
+	NSString *idNumber;
 	NSString *name;
 	NSString *longDesc;
 	NSString *link;
@@ -19,24 +10,23 @@
 	NSString *startDate;
 	NSString *endDate;
 	NSString *locationNo;
-	
-	LocationObject *location;
 	NSString *displayDate;
 	NSString *displayName;
-		
+    
+    LocationObject *location;
 }
 
-@property (nonatomic,retain) NSString *id_number;
-@property (nonatomic,retain) NSString *name;
-@property (nonatomic,retain) NSString *longDesc;
-@property (nonatomic,retain) NSString *link;
-@property (nonatomic,retain) NSString *categoryNo;
-@property (nonatomic,retain) NSString *startDate;
-@property (nonatomic,retain) NSString *endDate;
-@property (nonatomic,retain) NSString *locationNo;
+@property (nonatomic,strong) NSString *idNumber;
+@property (nonatomic,strong) NSString *name;
+@property (nonatomic,strong) NSString *longDesc;
+@property (nonatomic,strong) NSString *link;
+@property (nonatomic,strong) NSString *categoryNo;
+@property (nonatomic,strong) NSString *startDate;
+@property (nonatomic,strong) NSString *endDate;
+@property (nonatomic,strong) NSString *locationNo;
+@property (nonatomic,strong) NSString *displayDate;
+@property (nonatomic,strong) NSString *displayName;
 
-@property (nonatomic,retain) LocationObject *location;
-@property (nonatomic,retain) NSString *displayDate;
-@property (nonatomic,retain) NSString *displayName;
+@property (nonatomic,strong) LocationObject *location;
 
 @end
