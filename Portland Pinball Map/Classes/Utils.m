@@ -16,7 +16,7 @@
 }
 
 + (NSString *)urlDecode:(NSString *)url {
-    NSString *result = [(NSString *)self stringByReplacingOccurrencesOfString:@"+" withString:@" "];
+    NSString *result = [url stringByReplacingOccurrencesOfString:@"+" withString:@" "];
     return [result stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];    
 }
 
