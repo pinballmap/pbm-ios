@@ -10,13 +10,14 @@ Portland_Pinball_MapAppDelegate *appDelegate;
 - (void)viewDidLoad {
     appDelegate = (Portland_Pinball_MapAppDelegate *)[[UIApplication sharedApplication] delegate];
 
-	[self setTitle:@"Add Machine"];
 	[loaderIcon setHidden:YES];
     
     [super viewDidLoad];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
+    [self setTitle:@"Add Machine"];
+
 	[textfield setText:@""];
 	
 	[submitButton setHidden:NO];
@@ -63,14 +64,6 @@ Portland_Pinball_MapAppDelegate *appDelegate;
 - (void)actionSheet:(UIActionSheet *)actionSheet didDismissWithButtonIndex:(NSInteger)buttonIndex {
 	if(buttonIndex == 0)
 		[self addMachineFromTextfield];
-}
-
-- (void)viewDidUnload {
-	self.submitButton = nil;
-	self.returnButton = nil;
-	self.textfield = nil;
-	self.picker = nil;
-	self.loaderIcon = nil;
 }
 
 -(void)addMachineFromTextfield {

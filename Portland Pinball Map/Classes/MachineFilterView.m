@@ -58,10 +58,6 @@ Portland_Pinball_MapAppDelegate *appDelegate;
 	[super viewWillDisappear:animated];
 }
 
-- (void)viewDidUnload {
-	noLocationsLabel = nil;
-}
-
 - (void)onMapPress:(id)sender {
 	if(mapView == nil) {
 		mapView = [[LocationMap alloc] init];

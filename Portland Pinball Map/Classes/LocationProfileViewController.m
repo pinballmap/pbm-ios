@@ -63,11 +63,6 @@
 	}
 }
 
-- (void)viewWillDisappear:(BOOL)animated {
-	self.title = @"back";
-	[super viewWillDisappear:animated];
-}
-
 - (void)refreshPage {
 	[scrollView setContentOffset:CGPointMake(0, 0)];
 	[self setTitle:activeLocationObject.name];
@@ -90,18 +85,6 @@
 	
 	[self.tableView reloadData];
 }
-
-- (void)viewDidUnload {
-	self.mapLabel  = nil;
-	self.mapButton = nil;
-	self.lineView  = nil;
-	self.labelHolder     = nil;
-	self.addMachineButton = nil;
-	self.loadingLabel = nil;
-	self.activityView = nil;
-	[super viewDidUnload];
-}
-
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
 	return (activeLocationObject.isLoaded == NO) ? 0 : 2;
@@ -161,7 +144,7 @@
 			cell = [self getTableCell];
 		
         [cell.nameLabel setText:(section == 0) ?
-            ((showMapButton && row == 1) ? @"map" : @"add machine") :
+            ((showMapButton && row == 1) ? @"Map" : @"Add Machine") :
             [[displayArray objectAtIndex:row] name]
         ];
 		
@@ -179,7 +162,7 @@
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger) section {
-    return section == 0 ? @"location" : @"machines";
+    return section == 0 ? @"Location" : @"Machines";
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {

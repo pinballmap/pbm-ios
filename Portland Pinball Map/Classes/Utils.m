@@ -16,11 +16,14 @@
 }
 
 + (NSString *)urlDecode:(NSString *)url {
-    NSString *result = [(NSString *)self stringByReplacingOccurrencesOfString:@"+" withString:@" "];
+    NSString *result = [url stringByReplacingOccurrencesOfString:@"+" withString:@" "];
     return [result stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];    
 }
 
-+ (NSString *)formatDateFromString:(NSString *)dateString {	
++ (NSString *)formatDateFromString:(NSString *)dateString {
+    if ([dateString isEqualToString:@""])
+        return dateString;
+    
 	NSString *year = [[NSString alloc] initWithString:[dateString substringWithRange:YEAR_RANGE]];
 	NSString *month = [[NSString alloc] initWithString:[dateString substringWithRange:MONTH_RANGE]];
 	NSString *displayMonth;
@@ -83,6 +86,9 @@
 }
 
 + (NSDate *)getDateFromString:(NSString *)dateString {
+    if ([dateString isEqualToString:@""])
+        return @"";
+    
 	NSString *day = [dateString substringWithRange:DAY_RANGE];
 	NSString *year = [dateString substringWithRange:YEAR_RANGE];
 	NSString *month = [dateString substringWithRange:MONTH_RANGE];

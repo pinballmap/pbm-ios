@@ -5,13 +5,14 @@
 @synthesize nameLabel, locationLabel, timeLabel, webButton, locationButton, descText, eventObject, webview;
 
 - (void)viewDidLoad {
-	[self setTitle:@"Events"];
 	[descText setEditable:NO];
 	
 	[super viewDidLoad];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
+    [self setTitle:@"Events"];
+
     [nameLabel setText:[NSString stringWithFormat:@"%@", [eventObject.name isEqualToString:@""] ?
         [NSString stringWithFormat:@"%@ Tournament", eventObject.location.name] :
         eventObject.name
@@ -46,15 +47,6 @@
 	[webview setTheNewURL:eventObject.link];
 	
 	[self.navigationController pushViewController:webview animated:YES];
-}
-
-- (void)viewDidUnload {
-	self.nameLabel = nil;
-	self.locationButton = nil;
-	self.timeLabel = nil;
-	self.webButton = nil;
-	self.locationButton = nil;
-	self.descText = nil;
 }
 
 @end

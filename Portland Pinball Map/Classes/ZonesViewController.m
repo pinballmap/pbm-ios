@@ -26,12 +26,6 @@
 	[super viewWillAppear:animated];
 }
 
-- (void)viewWillDisappear:(BOOL)animated {
-	[self setTitle:@"back"];
-    
-	[super viewWillDisappear:animated];
-}
-
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return [zones count];
 }

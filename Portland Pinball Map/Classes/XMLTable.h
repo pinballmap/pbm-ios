@@ -14,6 +14,6 @@
 @property (nonatomic,strong) IBOutlet UIView *loadingPage;
 @property (nonatomic,strong) IBOutlet UIView *tableView2;
 
-- (void)parseXMLFileAtURL:(NSString *)URL;
+- (void)parseXMLFileAtURL:(NSString *)url;
 
 @end

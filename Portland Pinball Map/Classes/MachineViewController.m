@@ -9,11 +9,6 @@
 	[self.tableView reloadData];
 }
 
-- (void)viewWillDisappear:(BOOL)animated {
-	[self setTitle:@"back"];
-	[super viewWillDisappear:animated];
-}
-
 - (void)viewWillAppear:(BOOL)animated {
 	[self setTitle:@"Machines"];
 	Portland_Pinball_MapAppDelegate *appDelegate = (Portland_Pinball_MapAppDelegate *)[[UIApplication sharedApplication] delegate];

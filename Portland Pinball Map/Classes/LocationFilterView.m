@@ -55,12 +55,6 @@ Portland_Pinball_MapAppDelegate *appDelegate;
 	[super viewWillAppear:animated];
 }
 
-- (void)viewWillDisappear:(BOOL)animated {
-	[self setTitle:@"back"];
-    
-	[super viewWillDisappear:animated];
-}
-
 - (void)addToFilterDictionary:(LocationObject *)location {
 	totalLocations++;
 	NSString *firstLetter = [Utils directoryFirstLetter:location.name];

@@ -19,9 +19,8 @@ Portland_Pinball_MapAppDelegate *appDelegate;
 }
 
 - (void)viewDidLoad {
-    appDelegate = (Portland_Pinball_MapAppDelegate *)[[UIApplication sharedApplication] delegate];
 	tableTitles = [[NSArray alloc] initWithObjects:@"Locations", @"Machines", @"Closest Locations", @"Recently Added", @"Events", @"Change Region", nil];
-	
+    
 	[self showInfoButton];
 	
 	[super viewDidLoad];
@@ -34,8 +33,10 @@ Portland_Pinball_MapAppDelegate *appDelegate;
 }
 
 - (void)viewWillAppear:(BOOL)animated {
-	Portland_Pinball_MapAppDelegate *appDelegate = (Portland_Pinball_MapAppDelegate *)[[UIApplication sharedApplication] delegate];
-	self.title = [NSString stringWithFormat:@"%@ Pinball Map",appDelegate.activeRegion.name];
+    appDelegate = (Portland_Pinball_MapAppDelegate *)[[UIApplication sharedApplication] delegate];
+	
+    [self setTitle:[NSString stringWithFormat:@"%@ Pinball Map", appDelegate.activeRegion.name]];
+    
 	[super viewWillAppear:animated];
 }
 
@@ -46,7 +47,7 @@ Portland_Pinball_MapAppDelegate *appDelegate;
 		[locationManager setDesiredAccuracy:kCLLocationAccuracyBest];
 		[locationManager setDistanceFilter:10.0f];
 		
-		if(locationManager.locationServicesEnabled == YES) {
+		if (locationManager.locationServicesEnabled == YES) {
 			[appDelegate setShowUserLocation:YES];
 			[locationManager startUpdatingLocation];
 		} else {
@@ -71,17 +72,6 @@ Portland_Pinball_MapAppDelegate *appDelegate;
 	[super viewDidAppear:animated];
 }
 
-- (void)viewWillDisappear:(BOOL)animated {
-	[self setTitle:@"back"];
-	
-	[super viewWillDisappear:animated];
-}
-
-- (void)viewDidUnload {
-	self.aboutView = nil;
-	[super viewDidUnload];
-}
-
 - (void)loadInitXML:(int)withID {
 	if(xmlStarted == YES)
         return;
@@ -95,7 +85,7 @@ Portland_Pinball_MapAppDelegate *appDelegate;
         [NSString stringWithFormat:@"%@/%@", BASE_URL, @"iphone.html?init=2"] :
         [NSString stringWithFormat:@"%@init=1", appDelegate.rootURL]
     ];
-    
+        
 	@autoreleasepool {
 		[self performSelectorInBackground:@selector(parseXMLFileAtURL:) withObject:path];
 	}
@@ -104,7 +94,7 @@ Portland_Pinball_MapAppDelegate *appDelegate;
 - (void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation {	
 	[appDelegate setUserLocation:newLocation];
 	
-	if(init2Loaded != YES) {
+	if (init2Loaded != YES) {
 		init2Loaded = YES;
 		[self loadInitXML:2];
 	}
@@ -127,12 +117,26 @@ Portland_Pinball_MapAppDelegate *appDelegate;
 }
 
 - (void)parser:(NSXMLParser *)parser didStartElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qName attributes:(NSDictionary *)attributeDict {
-	
 	currentElement = [elementName copy];
-	activeNode = elementName;    
+        
+    if ([[NSArray arrayWithObjects:@"region", @"location", @"machine", @"zone", nil] containsObject:elementName]) {
+        activeNode = elementName;
+        
+        currentID = [[NSMutableString alloc] init];
+        currentName = [[NSMutableString alloc] init];
+        currentNeighborhood = [[NSMutableString alloc] init];
+        currentNumMachines = [[NSMutableString alloc] init];
+        currentLat = [[NSMutableString alloc] init];
+        currentLon = [[NSMutableString alloc] init];
+        currentNumLocations = [[NSMutableString alloc] init];
+        currentShortName = [[NSMutableString alloc] init];
+        currentIsPrimary = [[NSMutableString alloc] init];
+        currentSubdir = [[NSMutableString alloc] init];
+        currentFormalName = [[NSMutableString alloc] init];
+    }
 }
 
-- (void)parser:(NSXMLParser *)parser foundCharacters:(NSString *)string{
+- (void)parser:(NSXMLParser *)parser foundCharacters:(NSString *)string {
     if (initID == 2) {
         if([activeNode isEqualToString:@"region"] && ![string isEqualToString:@"\n"]) {
             if ([currentElement isEqualToString:@"id"])
@@ -183,7 +187,6 @@ Portland_Pinball_MapAppDelegate *appDelegate;
 }
 
 - (void)parser:(NSXMLParser *)parser didEndElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qName{
-		
     if (initID == 2) {
         if ([elementName isEqualToString:@"region"]) {
             RegionObject *regionobject = [[RegionObject alloc] init];
@@ -196,9 +199,9 @@ Portland_Pinball_MapAppDelegate *appDelegate;
             [regionobject setMachineFilter:@"4"];
             [regionobject setMachineFilterString:[NSString stringWithFormat:@"%@+ Machines", regionobject.machineFilter]];
             
-            if(tempRegionArray == nil)
+            if (tempRegionArray == nil)
                 tempRegionArray = [[NSMutableArray alloc] init];
-			
+            
             [tempRegionArray addObject:regionobject];
         }
     } else {
@@ -267,7 +270,7 @@ Portland_Pinball_MapAppDelegate *appDelegate;
     if (initID == 2) {
         [appDelegate setRegions:tempRegionArray];
         
-        RegionObject *closestRegion = [appDelegate.regions objectAtIndex:1];
+        RegionObject *closestRegion = [appDelegate.regions objectAtIndex:0];
         CLLocationDistance closestDistance = 24901.55;
         for (int i = 0; i < [appDelegate.regions count]; i++) {
             RegionObject *reg = [appDelegate.regions objectAtIndex:i];
@@ -287,7 +290,7 @@ Portland_Pinball_MapAppDelegate *appDelegate;
         [appDelegate setActiveRegion:closestRegion];
         [appDelegate showSplashScreen];
         
-        [self setTitle:[NSString stringWithFormat:@"%@ Pinball Map",appDelegate.activeRegion.name]];
+        [self setTitle:[NSString stringWithFormat:@"%@ Pinball Map", appDelegate.activeRegion.name]];
 
         xmlStarted = NO;
         @autoreleasepool {
@@ -390,7 +393,7 @@ Portland_Pinball_MapAppDelegate *appDelegate;
 		[self loadInitXML:2];
 }
 
--(void)pressInfo:(id)sender {
+- (void)pressInfo:(id)sender {
 	if(aboutView == nil) {
 		aboutView = [[AboutViewController alloc] initWithNibName:@"AboutView" bundle:nil];
 		[aboutView setTitle:@"About"];

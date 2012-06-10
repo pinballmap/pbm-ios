@@ -7,9 +7,7 @@
 
 Portland_Pinball_MapAppDelegate *appDelegate;
 
-- (void)viewDidLoad {
-	[self setTitle:@"Events"];
-    
+- (void)viewDidLoad {    
     appDelegate = (Portland_Pinball_MapAppDelegate *)[[UIApplication sharedApplication] delegate];
 
 	noEventsLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 130, 320, 30)];
@@ -19,11 +17,13 @@ Portland_Pinball_MapAppDelegate *appDelegate;
 	[noEventsLabel setFont:[UIFont boldSystemFontOfSize:20]];
 	[noEventsLabel setTextAlignment:UITextAlignmentCenter];
 	
-	weekdayTitles = [[NSArray alloc] initWithObjects:@"Sunday",@"Monday",@"Tuesday",@"Wednesday",@"Thursday",@"Friday",@"Saturday",nil];
+	weekdayTitles = [[NSArray alloc] initWithObjects:@"Sunday", @"Monday", @"Tuesday", @"Wednesday", @"Thursday", @"Friday", @"Saturday",nil];
 	[super viewDidLoad];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
+    [self setTitle:@"Events"];
+    
 	[self refreshPage];
 	[super viewWillAppear:animated];
 }
@@ -43,27 +43,21 @@ Portland_Pinball_MapAppDelegate *appDelegate;
 	[self.tableView reloadData];
 }
 
-- (void)viewWillDisappear:(BOOL)animated {
-	[self setTitle:@"back"];
-    
-	[super viewWillDisappear:animated];
-}
-
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
 
 	if (appDelegate.activeRegion.eventArray == nil) {
 		today = [[NSDate alloc] init];
 		
-		sectionTitles = [[NSMutableArray alloc] initWithObjects:@"featured",@"tournaments",@"other",@"past events",nil];
+		sectionTitles = [[NSMutableArray alloc] initWithObjects:@"featured", @"tournaments", @"other", @"past events",nil];
 		sectionArray = [[NSMutableArray alloc] initWithCapacity:[sectionTitles count]];
 		
-		for(int i = 0; i < [sectionTitles count] ; i++) {
+		for (int i = 0; i < [sectionTitles count]; i++) {
 			NSMutableArray *array = [[NSMutableArray alloc] init];
 			[sectionArray addObject:array];
 		}
         
-		NSString *path = [NSString stringWithFormat:@"http://pinballmap.com/%@/iphone.html?init=3",appDelegate.activeRegion.subdir,appDelegate.activeRegion.subdir];
+		NSString *path = [NSString stringWithFormat:@"%@init=3",appDelegate.rootURL];
 	
 		@autoreleasepool {
 			[self performSelectorInBackground:@selector(parseXMLFileAtURL:) withObject:path];
@@ -76,29 +70,27 @@ Portland_Pinball_MapAppDelegate *appDelegate;
 	
 	if ([elementName isEqualToString:@"event"]) {
         eventObject = [[EventObject alloc] init];
-		currentID = [[NSMutableString alloc] initWithString:@""];
-		currentName = [[NSMutableString alloc] initWithString:@""];
-		currentLongDesc = [[NSMutableString alloc] initWithString:@""];
-		currentLink = [[NSMutableString alloc] initWithString:@""];
-		currentCategoryNo = [[NSMutableString alloc] initWithString:@""];
-		currentStartDate = [[NSMutableString alloc] initWithString:@""];
-		currentEndDate = [[NSMutableString alloc] initWithString:@""];
-		currentLocationNo = [[NSMutableString alloc] initWithString:@""];
+		currentID = [[NSMutableString alloc] init];
+		currentName = [[NSMutableString alloc] init];
+		currentLongDesc = [[NSMutableString alloc] init];
+		currentLink = [[NSMutableString alloc] init];
+		currentCategoryNo = [[NSMutableString alloc] init];
+		currentStartDate = [[NSMutableString alloc] init];
+		currentEndDate = [[NSMutableString alloc] init];
+		currentLocationNo = [[NSMutableString alloc] init];
 	}
 }
 
 - (void)parser:(NSXMLParser *)parser didEndElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qName {	
-	if ([elementName isEqualToString:@"event"]) {
-		Portland_Pinball_MapAppDelegate *appDelegate = (Portland_Pinball_MapAppDelegate *)[[UIApplication sharedApplication] delegate];
-		
-		eventObject.idNumber = currentID;
-		eventObject.name = currentName;
-		eventObject.longDesc = currentLongDesc;
-		eventObject.link = currentLink;
-		eventObject.categoryNo = currentCategoryNo;
-		eventObject.startDate = currentStartDate;
-		eventObject.endDate = currentEndDate;
-		eventObject.locationNo = currentLocationNo;
+	if ([elementName isEqualToString:@"event"]) {		
+		[eventObject setIdNumber:currentID];
+		[eventObject setName:currentName];
+		[eventObject setLongDesc:currentLongDesc];
+		[eventObject setLink:currentLink];
+		[eventObject setCategoryNo:currentCategoryNo];
+		[eventObject setStartDate:currentStartDate];
+		[eventObject setEndDate:currentEndDate];
+		[eventObject setLocationNo:currentLocationNo];
 		
 		LocationObject *location = (LocationObject *)[appDelegate.activeRegion.locations objectForKey:currentLocationNo];
 		[eventObject setLocation:location];
@@ -118,7 +110,7 @@ Portland_Pinball_MapAppDelegate *appDelegate;
             
 		[eventObject setDisplayDate:displayDate];
 		
-		int difference = [self differenceInDaysFrom:today to:endDate];
+		int difference = [endDate isEqual:@""] ? 3 : [self differenceInDaysFrom:today to:endDate];
 		int index;
 		
 		if(difference <= 0) {
@@ -190,10 +182,6 @@ Portland_Pinball_MapAppDelegate *appDelegate;
 		
 	[super parserDidEndDocument:parser];
 	[self refreshPage];
-}
-
-- (void)viewDidUnload {
-	noEventsLabel = nil;	
 }
 
 - (int)differenceInDaysFrom:(NSDate *)startDate to:(NSDate *)toDate {

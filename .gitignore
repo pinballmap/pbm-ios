@@ -16,3 +16,6 @@ Documentation/Generated
 doxygenWarnings.txt
 *.xcodeproj/xcuserdata/*.xcuserdatad
 *.xcodeproj/project.xcworkspace/xcuserdata/*.xcuserdatad
+
+Portland Pinball Map/Portland Pinball Map.xcodeproj/project.xcworkspace/xcuserdata/
+Portland Pinball Map/Portland Pinball Map.xcodeproj/xcuserdata/
