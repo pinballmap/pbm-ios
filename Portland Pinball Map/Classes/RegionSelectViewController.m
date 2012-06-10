@@ -13,12 +13,6 @@ Portland_Pinball_MapAppDelegate *appDelegate;
     [super viewWillAppear:animated];
 }
 
-- (void)viewWillDisappear:(BOOL)animated {
-	[self setTitle:@"back"];
-    
-	[super viewWillDisappear:animated];
-}
-
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return 1;
 }

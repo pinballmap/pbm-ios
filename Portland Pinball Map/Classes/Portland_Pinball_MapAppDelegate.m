@@ -15,8 +15,9 @@ void uncaughtExceptionHandler(NSException *exception) {
 	
     regions = [[NSArray alloc] init];
     userLocation = [[CLLocation alloc] initWithLatitude:45.52295 longitude:-122.66785];
-	
-	navigationController.navigationBar.barStyle = UIBarStyleBlack;	
+
+	navigationController.navigationBar.barStyle = UIBarStyleBlack;
+    
 	[window addSubview:[navigationController view]];
 	[window makeKeyAndVisible];
 		

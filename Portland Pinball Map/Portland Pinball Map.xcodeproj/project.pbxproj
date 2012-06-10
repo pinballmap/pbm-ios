@@ -215,7 +215,6 @@
 		8E126817157C4B2F00A40329 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2892E40F0DC94CBA00A64D0F /* CoreGraphics.framework */; };
 		8E126818157C4B2F00A40329 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6AC9D6A410BBC6D100EEA3F7 /* CoreLocation.framework */; };
 		8E126819157C4B2F00A40329 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6A47866910E5ED9200F563E4 /* MapKit.framework */; };
-		8E12682D157C4B7200A40329 /* my_first.feature in Resources */ = {isa = PBXBuildFile; fileRef = 8E126825157C4B7200A40329 /* my_first.feature */; };
 		8E12682E157C4B7200A40329 /* launch_steps.rb in Resources */ = {isa = PBXBuildFile; fileRef = 8E126827157C4B7200A40329 /* launch_steps.rb */; };
 		8E12682F157C4B7200A40329 /* env.rb in Resources */ = {isa = PBXBuildFile; fileRef = 8E126829157C4B7200A40329 /* env.rb */; };
 		8E126830157C4B7200A40329 /* frank_static_resources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 8E12682A157C4B7200A40329 /* frank_static_resources.bundle */; };
@@ -365,7 +364,6 @@
 		8D1107310486CEB800E47090 /* Portland_Pinball_Map-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Portland_Pinball_Map-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
 		8E12681F157C4B2F00A40329 /* Portland Pinball Map copy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Portland Pinball Map copy.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8E126821157C4B3000A40329 /* Portland Pinball Map copy-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Portland Pinball Map copy-Info.plist"; path = "/Users/scottwainstock/work/pbm-ios/Portland Pinball Map/Portland Pinball Map copy-Info.plist"; sourceTree = "<absolute>"; };
-		8E126825157C4B7200A40329 /* my_first.feature */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = my_first.feature; sourceTree = "<group>"; };
 		8E126827157C4B7200A40329 /* launch_steps.rb */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.ruby; path = launch_steps.rb; sourceTree = "<group>"; };
 		8E126829157C4B7200A40329 /* env.rb */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.ruby; path = env.rb; sourceTree = "<group>"; };
 		8E12682A157C4B7200A40329 /* frank_static_resources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = frank_static_resources.bundle; sourceTree = "<group>"; };
@@ -688,7 +686,6 @@
 		8E126824157C4B7200A40329 /* features */ = {
 			isa = PBXGroup;
 			children = (
-				8E126825157C4B7200A40329 /* my_first.feature */,
 				8E126826157C4B7200A40329 /* step_definitions */,
 				8E126828157C4B7200A40329 /* support */,
 			);
@@ -920,7 +917,6 @@
 				8E1267F0157C4B2F00A40329 /* bc_splash.png in Resources */,
 				8E1267F1157C4B2F00A40329 /* la_splash.png in Resources */,
 				8E1267F2157C4B2F00A40329 /* albuquerque_splash.png in Resources */,
-				8E12682D157C4B7200A40329 /* my_first.feature in Resources */,
 				8E12682E157C4B7200A40329 /* launch_steps.rb in Resources */,
 				8E12682F157C4B7200A40329 /* env.rb in Resources */,
 				8E126830157C4B7200A40329 /* frank_static_resources.bundle in Resources */,

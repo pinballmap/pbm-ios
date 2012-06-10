@@ -25,12 +25,6 @@ Portland_Pinball_MapAppDelegate *appDelegate;
 	[super viewWillAppear:animated];
 }
 
-- (void)viewWillDisappear:(BOOL)animated {
-	[self setTitle:@"back"];
-	
-	[super viewWillDisappear:animated];
-}
-
 - (void)cleanupRegionData {
     allSortedLocations = nil;
     sectionTitles = nil;

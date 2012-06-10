@@ -68,6 +68,13 @@ NSInteger sortOnDistance(id obj1, id obj2, void *context) {
 }
 
 - (void)viewDidAppear:(BOOL)animated {
+    UIBarButtonItem *backButton = [[UIBarButtonItem alloc] 
+        initWithTitle: @"Back" 
+        style: UIBarButtonItemStyleBordered
+        target: nil action: nil
+    ];
+    [self.navigationItem setBackBarButtonItem: backButton];
+    
     [super viewDidAppear:animated];
 	[self becomeFirstResponder];
 }

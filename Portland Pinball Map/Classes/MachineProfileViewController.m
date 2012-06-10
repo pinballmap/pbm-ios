@@ -44,12 +44,6 @@ Portland_Pinball_MapAppDelegate *appDelegate;
 	[super viewWillAppear:animated];
 }
 
-- (void)viewWillDisappear:(BOOL)animated {
-	[self setTitle:@"back"];
-
-	[super viewWillDisappear:animated];
-}
-
 - (IBAction) onEditButtonPressed:(id)sender {
 	[self hideControllButtons:!deleteButton.hidden];
 }

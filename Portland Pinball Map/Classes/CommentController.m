@@ -68,10 +68,4 @@
 	[super viewDidDisappear:animated];
 }
 
-- (void)viewDidUnload {
-	self.textview = nil;
-	self.submitButton = nil;
-	self.cancelButton = nil;
-}
-
 @end

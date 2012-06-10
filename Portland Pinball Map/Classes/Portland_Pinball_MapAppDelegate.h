@@ -2,7 +2,8 @@
 #import "RegionObject.h"
 #import "LocationMap.h"
 
-#define BASE_URL @"http://glowing-dusk-5085.herokuapp.com"
+//#define BASE_URL @"http://glowing-dusk-5085.herokuapp.com"
+#define BASE_URL @"http://localhost:3000"
 
 @class LocationProfileViewController;
 

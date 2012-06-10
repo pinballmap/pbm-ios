@@ -72,17 +72,6 @@ Portland_Pinball_MapAppDelegate *appDelegate;
 	[super viewDidAppear:animated];
 }
 
-- (void)viewWillDisappear:(BOOL)animated {
-	[self setTitle:@"back"];
-	
-	[super viewWillDisappear:animated];
-}
-
-- (void)viewDidUnload {
-	self.aboutView = nil;
-	[super viewDidUnload];
-}
-
 - (void)loadInitXML:(int)withID {
 	if(xmlStarted == YES)
         return;
@@ -404,7 +393,7 @@ Portland_Pinball_MapAppDelegate *appDelegate;
 		[self loadInitXML:2];
 }
 
--(void)pressInfo:(id)sender {
+- (void)pressInfo:(id)sender {
 	if(aboutView == nil) {
 		aboutView = [[AboutViewController alloc] initWithNibName:@"AboutView" bundle:nil];
 		[aboutView setTitle:@"About"];
