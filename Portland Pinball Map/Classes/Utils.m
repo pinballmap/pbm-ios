@@ -87,7 +87,7 @@
 
 + (NSDate *)getDateFromString:(NSString *)dateString {
     if ([dateString isEqualToString:@""])
-        return @"";
+        return nil;
     
 	NSString *day = [dateString substringWithRange:DAY_RANGE];
 	NSString *year = [dateString substringWithRange:YEAR_RANGE];
