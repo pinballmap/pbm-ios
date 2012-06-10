@@ -6,7 +6,7 @@
 
 - init {
     if ((self = [super init])) {
-       self.isLoaded = NO;
+        [self setIsLoaded:NO];
     }
     
     return self;
@@ -15,7 +15,7 @@
 - (void)updateDistance {
 	Portland_Pinball_MapAppDelegate *appDelegate = (Portland_Pinball_MapAppDelegate *)[[UIApplication sharedApplication] delegate];
 	
-	CLLocationDistance mDistance = [appDelegate.userLocation getDistanceFrom:coords] / 1609.344;
+	CLLocationDistance mDistance = [appDelegate.userLocation distanceFromLocation:coords] / 1609.344;
 	
 	NSNumber *distanceNumber = [[NSNumber alloc] initWithDouble:mDistance]; 
 	NSNumberFormatter *numberFormat = [[NSNumberFormatter alloc] init];

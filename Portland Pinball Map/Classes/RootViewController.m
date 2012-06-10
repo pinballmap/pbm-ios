@@ -47,7 +47,7 @@ Portland_Pinball_MapAppDelegate *appDelegate;
 		[locationManager setDesiredAccuracy:kCLLocationAccuracyBest];
 		[locationManager setDistanceFilter:10.0f];
 		
-		if (locationManager.locationServicesEnabled == YES) {
+		if ([CLLocationManager locationServicesEnabled]) {
 			[appDelegate setShowUserLocation:YES];
 			[locationManager startUpdatingLocation];
 		} else {
@@ -279,7 +279,7 @@ Portland_Pinball_MapAppDelegate *appDelegate;
             double lat = [reg.lat doubleValue];
             
             CLLocation *coords = [[CLLocation alloc] initWithLatitude:lat longitude:lon];
-            CLLocationDistance distance = [appDelegate.userLocation getDistanceFrom:coords] / 1609.344;
+            CLLocationDistance distance = [appDelegate.userLocation distanceFromLocation:coords] / 1609.344;
             
             if(closestDistance > distance) {
                 closestRegion = reg;
