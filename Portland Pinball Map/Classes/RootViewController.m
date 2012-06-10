@@ -290,7 +290,7 @@ Portland_Pinball_MapAppDelegate *appDelegate;
         [appDelegate setActiveRegion:closestRegion];
         [appDelegate showSplashScreen];
         
-        [self setTitle:[NSString stringWithFormat:@"%@ Pinball Map", appDelegate.activeRegion.name]];
+        [self setTitle:[NSString stringWithFormat:@"%@ Pinball Map", appDelegate.activeRegion.formalName]];
 
         xmlStarted = NO;
         @autoreleasepool {
