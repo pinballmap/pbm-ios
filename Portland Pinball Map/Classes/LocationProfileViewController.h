@@ -1,8 +1,8 @@
 #import "XMLTable.h"
 #import "MachineProfileViewController.h"
 #import "AddMachineViewController.h"
-#import "MachineObject.h"
-#import "LocationObject.h"
+#import "Machine.h"
+#import "Location.h"
 #import "LocationMap.h"
 #import <Foundation/Foundation.h>
 
@@ -17,7 +17,7 @@
 	
 	NSMutableDictionary *masterDictionary;
 	
-	LocationObject *activeLocationObject;
+	Location *activeLocationObject;
 
 	NSMutableDictionary *info;
 	
@@ -30,7 +30,7 @@
 	NSMutableArray *labelHolder;
 	
 	BOOL isBuildingMachine;
-	MachineObject *tempMachineObject;
+	Machine *tempMachineObject;
 	NSMutableDictionary *tempMachineDict;
 	NSMutableString *tempMachineName;
 	NSMutableString *tempMachineID;
@@ -65,10 +65,10 @@
 @property (nonatomic,strong) IBOutlet UIScrollView *scrollView;
 @property (nonatomic,strong) NSString *message;
 @property (nonatomic,strong) NSString *locationID;
-@property (nonatomic,strong) LocationObject *activeLocationObject;
+@property (nonatomic,strong) Location *activeLocationObject;
 @property (nonatomic,assign) BOOL isBuildingMachine;
 @property (nonatomic,strong) NSMutableArray *labelHolder;
-@property (nonatomic,strong) MachineObject *tempMachineObject;
+@property (nonatomic,strong) Machine *tempMachineObject;
 @property (nonatomic,strong) NSMutableDictionary *tempMachineDict;
 @property (nonatomic,strong) NSMutableString *tempMachineName;
 @property (nonatomic,strong) NSMutableString *tempMachineID;

@@ -70,8 +70,8 @@ void uncaughtExceptionHandler(NSException *exception) {
 
 - (void)updateLocationDistances {
 	if([activeRegion.locations count] > 0) {
-		for (LocationObject *key in activeRegion.locations) {
-			LocationObject *loc = [activeRegion.locations objectForKey:key];
+		for (Location *key in activeRegion.locations) {
+			Location *loc = [activeRegion.locations objectForKey:key];
 			[loc updateDistance];
 		}
 	}	

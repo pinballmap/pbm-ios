@@ -222,7 +222,7 @@ Portland_Pinball_MapAppDelegate *appDelegate;
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {	
 	static NSString *CellIdentifier = @"DoubleTextCellID";
     
-    PPMDoubleTableCell *cell = (PPMDoubleTableCell*)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    PBMDoubleTableCell *cell = (PBMDoubleTableCell*)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
 		cell = [self getDoubleCell];
     }
@@ -250,7 +250,7 @@ Portland_Pinball_MapAppDelegate *appDelegate;
 	NSString *locationName  = [item2 objectForKey:@"location"];
 	
 	for (id key in appDelegate.activeRegion.locations) {
-		LocationObject *loc = [appDelegate.activeRegion.locations objectForKey:key];
+		Location *loc = [appDelegate.activeRegion.locations objectForKey:key];
 		
 		if([locationName isEqualToString:loc.name]) {
 			[self showLocationProfile:loc  withMapButton:YES];

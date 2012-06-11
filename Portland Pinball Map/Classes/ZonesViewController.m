@@ -1,5 +1,5 @@
 #import "ZonesViewController.h"
-#import "ZoneObject.h"
+#import "Zone.h"
 
 @implementation ZonesViewController
 @synthesize zones, titles, locationFilter;
@@ -39,7 +39,7 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {	
 	static NSString *CellIdentifier = @"SingleTextID";
-    PPMTableCell *cell = (PPMTableCell*)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    PBMTableCell *cell = (PBMTableCell*)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
 		cell = [self getTableCell];
     }
@@ -52,7 +52,7 @@
 	if(section == 0) {
 		[cell.nameLabel setText:[array objectAtIndex:row]];
 	} else {
-		ZoneObject *zone = (ZoneObject*)[array objectAtIndex:row];
+		Zone *zone = (Zone*)[array objectAtIndex:row];
 		[cell.nameLabel setText:zone.name];
 	}
 
@@ -76,7 +76,7 @@
 	if(section == 0) {
 		[locationFilter setZoneID:[array objectAtIndex:row]];
 	} else {
-		ZoneObject *zone = (ZoneObject*)[array objectAtIndex:row];
+		Zone *zone = (Zone*)[array objectAtIndex:row];
         
 		[locationFilter setZoneID:zone.name];
 		[locationFilter setTheNewZone:zone];

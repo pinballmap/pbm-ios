@@ -1,6 +1,6 @@
 #import <Foundation/Foundation.h>
 
-@interface MachineObject : NSObject {
+@interface Machine : NSObject {
 	NSString *name;
 	NSString *idNumber;
 	NSString *condition;

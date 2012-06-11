@@ -1,10 +1,10 @@
 #import "EventProfileViewController.h"
-#import "EventObject.h"
+#import "Event.h"
 #import "WebViewController.h"
 #import "LocationProfileViewController.h"
 
 @interface EventProfileViewController : UIViewController {	
-	EventObject *eventObject;
+	Event *eventObject;
 	WebViewController *webview;
 	
 	UILabel *nameLabel;
@@ -16,7 +16,7 @@
 }
 
 @property (nonatomic,strong) WebViewController *webview;
-@property (nonatomic,strong) EventObject *eventObject;
+@property (nonatomic,strong) Event *eventObject;
 @property (nonatomic,strong) IBOutlet UITextView *descText;
 @property (nonatomic,strong) IBOutlet UILabel *nameLabel;
 @property (nonatomic,strong) IBOutlet UILabel *locationLabel;

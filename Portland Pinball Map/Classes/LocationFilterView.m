@@ -21,7 +21,7 @@ Portland_Pinball_MapAppDelegate *appDelegate;
 		locationArray = [[NSMutableArray alloc] init];
 		
 		for (id key in appDelegate.activeRegion.locations) {
-			LocationObject *location = [appDelegate.activeRegion.locations valueForKey:key];
+			Location *location = [appDelegate.activeRegion.locations valueForKey:key];
 			
 			if ([zoneID isEqualToString:@"All"]) {
                 [self addToFilterDictionary:location];
@@ -55,7 +55,7 @@ Portland_Pinball_MapAppDelegate *appDelegate;
 	[super viewWillAppear:animated];
 }
 
-- (void)addToFilterDictionary:(LocationObject *)location {
+- (void)addToFilterDictionary:(Location *)location {
 	totalLocations++;
 	NSString *firstLetter = [Utils directoryFirstLetter:location.name];
     
@@ -112,14 +112,14 @@ Portland_Pinball_MapAppDelegate *appDelegate;
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     static NSString *CellIdentifier = @"DoubleTextCellID";
     
-    PPMDoubleTableCell *cell = (PPMDoubleTableCell*)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    PBMDoubleTableCell *cell = (PBMDoubleTableCell*)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
 		cell = [self getDoubleCell];
     }
 	
 	NSString *keyAtSection = [keys objectAtIndex:[indexPath section]];
 	NSArray *letterArray = (NSArray*)[filteredLocations objectForKey:keyAtSection];
-	LocationObject *location = [letterArray objectAtIndex:[indexPath row]];
+	Location *location = [letterArray objectAtIndex:[indexPath row]];
     [cell.nameLabel setText:location.name];
 	[cell.subLabel setText:(appDelegate.showUserLocation == YES) ? location.distanceString : @""];
 
@@ -129,7 +129,7 @@ Portland_Pinball_MapAppDelegate *appDelegate;
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
 	NSString *keyAtSection = [keys objectAtIndex:[indexPath section]];
 	NSArray *letterArray = (NSArray*)[filteredLocations objectForKey:keyAtSection];
-	LocationObject *location = [letterArray objectAtIndex:[indexPath row]];
+	Location *location = [letterArray objectAtIndex:[indexPath row]];
 	
 	[self showLocationProfile:location withMapButton:YES];
 }

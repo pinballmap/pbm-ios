@@ -1,6 +1,6 @@
 #import <Foundation/Foundation.h>
 
-@interface RegionObject : NSObject {
+@interface Region : NSObject {
 	NSString *idNumber;
 	NSString *name;
 	NSString *formalName;

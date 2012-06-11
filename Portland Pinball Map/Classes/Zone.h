@@ -1,6 +1,6 @@
 #import <Foundation/Foundation.h>
 
-@interface ZoneObject : NSObject {
+@interface Zone : NSObject {
 	NSString *name;
 	NSString *idNumber;
 	NSString *shortName;

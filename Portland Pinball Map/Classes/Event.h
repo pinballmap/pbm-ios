@@ -1,7 +1,7 @@
 #import <Foundation/Foundation.h>
-#import "LocationObject.h"
+#import "Location.h"
 
-@interface EventObject : NSObject {
+@interface Event : NSObject {
 	NSString *idNumber;
 	NSString *name;
 	NSString *longDesc;
@@ -13,7 +13,7 @@
 	NSString *displayDate;
 	NSString *displayName;
     
-    LocationObject *location;
+    Location *location;
 }
 
 @property (nonatomic,strong) NSString *idNumber;
@@ -27,6 +27,6 @@
 @property (nonatomic,strong) NSString *displayDate;
 @property (nonatomic,strong) NSString *displayName;
 
-@property (nonatomic,strong) LocationObject *location;
+@property (nonatomic,strong) Location *location;
 
 @end

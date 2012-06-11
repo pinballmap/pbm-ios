@@ -1,6 +1,6 @@
-#import "PPMTableCell.h"
+#import "PBMTableCell.h"
 
-@interface PPMDoubleTableCell : PPMTableCell {
+@interface PBMDoubleTableCell : PBMTableCell {
 	UILabel *subLabel;
 }
 

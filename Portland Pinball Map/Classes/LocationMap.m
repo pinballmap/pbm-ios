@@ -48,7 +48,7 @@
 			CLLocationCoordinate2D northEast;
 			
 			for (int i = 0; i < [locationsToShow count]; i++) {
-				LocationObject *newLocation = [locationsToShow objectAtIndex:i];
+				Location *newLocation = [locationsToShow objectAtIndex:i];
 				LocationPin *placemark = [[LocationPin alloc] initWithLocation:newLocation];
 				[quickArray addObject:placemark];
 				
@@ -72,7 +72,7 @@
 		} else {
 			self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Google Map" style:UIBarButtonItemStyleBordered target:self action:@selector(googleMapButtonPressed:)];	
 			
-			LocationObject *soloLocation = [locationsToShow objectAtIndex:0];
+			Location *soloLocation = [locationsToShow objectAtIndex:0];
 			LocationPin *soloPlacemark = [[LocationPin alloc] initWithLocation:soloLocation];
 			[quickArray addObject:soloPlacemark];
 			
@@ -90,7 +90,7 @@
 
 
 - (IBAction)googleMapButtonPressed:(id)sender {
-	LocationObject *soloLocation = [locationsToShow objectAtIndex:0];
+	Location *soloLocation = [locationsToShow objectAtIndex:0];
 	NSString *mapURL = [[NSString alloc] initWithFormat:@"http://maps.google.com/maps?f=q&source=s_q&hl=en&geocode=&q=%@,%@ %@, %@ (%@)",
 						soloLocation.street1,
 						soloLocation.city,
@@ -139,7 +139,7 @@
 }
 
 - (void)onPinPress:(id)sender {
-	LocationObject *pinLocation = (LocationObject *)[sender location];
+	Location *pinLocation = (Location *)[sender location];
     
 	[(BlackTableViewController *)[[self.navigationController viewControllers] objectAtIndex:0] showLocationProfile:pinLocation withMapButton:NO];
 }

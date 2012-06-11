@@ -1,4 +1,4 @@
-@interface PPMTableCell : UITableViewCell {
+@interface PBMTableCell : UITableViewCell {
 	UILabel *nameLabel;
 }
 

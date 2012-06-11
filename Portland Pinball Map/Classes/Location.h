@@ -1,7 +1,7 @@
 #import <Foundation/Foundation.h>
 #import <CoreLocation/CoreLocation.h>
 
-@interface LocationObject : NSObject {	
+@interface Location : NSObject {	
     CLLocation *coords;
 	NSDictionary *machines;
 	

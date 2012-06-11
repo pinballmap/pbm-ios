@@ -1,5 +1,5 @@
 #import "XMLTable.h"
-#import "PPMDoubleTableCell.h"
+#import "PBMDoubleTableCell.h"
 #import "LocationProfileViewController.h"
 
 @interface RSSViewController : XMLTable {

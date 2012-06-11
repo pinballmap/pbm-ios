@@ -1,7 +1,7 @@
-#import "LocationObject.h"
+#import "Location.h"
 #import "Portland_Pinball_MapAppDelegate.h"
-#import "PPMTableCell.h"
-#import "PPMDoubleTableCell.h"
+#import "PBMTableCell.h"
+#import "PBMDoubleTableCell.h"
 #import "LocationProfileCell.h"
 
 @interface BlackTableViewController : UITableViewController <NSXMLParserDelegate> {
@@ -15,16 +15,16 @@
 @property (nonatomic,assign) NSInteger headerHeight;
 
 NSInteger sortOnDistance(id obj1, id obj2, void *context);
-NSInteger sortOnName(LocationObject *obj1, LocationObject *obj2, void *context);
+NSInteger sortOnName(Location *obj1, Location *obj2, void *context);
 
 - (void)showLoaderIcon;
 - (void)hideLoaderIcon;
 - (void)showLoaderIconLarge;
 - (void)hideLoaderIconLarge;
 - (void)refreshPage;
-- (PPMTableCell *)getTableCell;
-- (PPMDoubleTableCell *)getDoubleCell;
-- (void)showLocationProfile:(LocationObject *)location withMapButton:(BOOL)showMapButton;
+- (PBMTableCell *)getTableCell;
+- (PBMDoubleTableCell *)getDoubleCell;
+- (void)showLocationProfile:(Location *)location withMapButton:(BOOL)showMapButton;
 - (LocationProfileViewController *) getLocationProfile;
 
 @end

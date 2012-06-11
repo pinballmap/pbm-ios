@@ -1,6 +1,6 @@
-#import "EventObject.h"
+#import "Event.h"
 
-@implementation EventObject
+@implementation Event
 @synthesize name, idNumber, longDesc, link, categoryNo, startDate, endDate, locationNo, location, displayDate, displayName;
 
 @end

@@ -1,5 +1,5 @@
 #import "RootViewController.h"
-#import "ZoneObject.h"
+#import "Zone.h"
 #import "RegionSelectViewController.h"
 
 @implementation RootViewController
@@ -189,7 +189,7 @@ Portland_Pinball_MapAppDelegate *appDelegate;
 - (void)parser:(NSXMLParser *)parser didEndElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qName{
     if (initID == 2) {
         if ([elementName isEqualToString:@"region"]) {
-            RegionObject *regionobject = [[RegionObject alloc] init];
+            Region *regionobject = [[Region alloc] init];
             [regionobject setIdNumber:currentID];
             [regionobject setName:currentName];
             [regionobject setFormalName:currentFormalName];
@@ -207,7 +207,7 @@ Portland_Pinball_MapAppDelegate *appDelegate;
     } else {
         if ([elementName isEqualToString:@"location"]) {
             if([currentNumMachines intValue] != 0) {
-                LocationObject *tempLocation = [[LocationObject alloc] init];
+                Location *tempLocation = [[Location alloc] init];
                 
                 double lon = [currentLon doubleValue];
                 double lat = [currentLat doubleValue];
@@ -246,7 +246,7 @@ Portland_Pinball_MapAppDelegate *appDelegate;
             }
             
         } else if ([elementName isEqualToString:@"zone"]) {            
-            ZoneObject *zone = [[ZoneObject alloc] init];
+            Zone *zone = [[Zone alloc] init];
             [zone setName:currentName];
             [zone setIdNumber:currentID];
             [zone setShortName:currentShortName];
@@ -270,10 +270,10 @@ Portland_Pinball_MapAppDelegate *appDelegate;
     if (initID == 2) {
         [appDelegate setRegions:tempRegionArray];
         
-        RegionObject *closestRegion = [appDelegate.regions objectAtIndex:0];
+        Region *closestRegion = [appDelegate.regions objectAtIndex:0];
         CLLocationDistance closestDistance = 24901.55;
         for (int i = 0; i < [appDelegate.regions count]; i++) {
-            RegionObject *reg = [appDelegate.regions objectAtIndex:i];
+            Region *reg = [appDelegate.regions objectAtIndex:i];
             
             double lon = [reg.lon doubleValue];
             double lat = [reg.lat doubleValue];
@@ -374,7 +374,7 @@ Portland_Pinball_MapAppDelegate *appDelegate;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {    
-    PPMTableCell *cell = (PPMTableCell*)[tableView dequeueReusableCellWithIdentifier:@"SingleTextID"];
+    PBMTableCell *cell = (PBMTableCell*)[tableView dequeueReusableCellWithIdentifier:@"SingleTextID"];
     if (cell == nil) {
 		cell = [self getTableCell];
 	}

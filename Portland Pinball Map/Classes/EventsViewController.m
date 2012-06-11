@@ -1,5 +1,5 @@
 #import "EventsViewController.h"
-#import "PPMDoubleTableCell.h"
+#import "PBMDoubleTableCell.h"
 #import "Utils.h"
 
 @implementation EventsViewController
@@ -69,7 +69,7 @@ Portland_Pinball_MapAppDelegate *appDelegate;
 	currentElement = [elementName copy];
 	
 	if ([elementName isEqualToString:@"event"]) {
-        eventObject = [[EventObject alloc] init];
+        eventObject = [[Event alloc] init];
 		currentID = [[NSMutableString alloc] init];
 		currentName = [[NSMutableString alloc] init];
 		currentLongDesc = [[NSMutableString alloc] init];
@@ -92,7 +92,7 @@ Portland_Pinball_MapAppDelegate *appDelegate;
 		[eventObject setEndDate:currentEndDate];
 		[eventObject setLocationNo:currentLocationNo];
 		
-		LocationObject *location = (LocationObject *)[appDelegate.activeRegion.locations objectForKey:currentLocationNo];
+		Location *location = (Location *)[appDelegate.activeRegion.locations objectForKey:currentLocationNo];
 		[eventObject setLocation:location];
 		[eventObject setDisplayName:[currentName isEqualToString:@""] ? location.name : currentName];
 				
@@ -208,7 +208,7 @@ Portland_Pinball_MapAppDelegate *appDelegate;
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
 	static NSString *CellIdentifier = @"DoubleTextCellID";
     
-    PPMDoubleTableCell *cell = (PPMDoubleTableCell*)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    PBMDoubleTableCell *cell = (PBMDoubleTableCell*)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
 		cell = [self getDoubleCell];
     }
@@ -216,7 +216,7 @@ Portland_Pinball_MapAppDelegate *appDelegate;
 	NSUInteger section = [indexPath section];
 	NSUInteger row = [indexPath row];
 	NSArray *locationGroup = (NSArray *)[appDelegate.activeRegion.eventArray objectAtIndex:section];
-	EventObject *item2 = (EventObject *)[locationGroup objectAtIndex:row];
+	Event *item2 = (Event *)[locationGroup objectAtIndex:row];
 	
 	[cell.nameLabel setText:item2.displayName];
 	[cell.subLabel setText:item2.displayDate];
@@ -228,7 +228,7 @@ Portland_Pinball_MapAppDelegate *appDelegate;
 	NSUInteger section = [indexPath section];
 	NSUInteger row = [indexPath row];
 	NSArray *locationGroup = (NSArray *)[appDelegate.activeRegion.eventArray objectAtIndex:section];
-	EventObject *eventObj = (EventObject *)[locationGroup objectAtIndex:row];
+	Event *eventObj = (Event *)[locationGroup objectAtIndex:row];
 	
 	if(eventProfile == nil) {
 		eventProfile = [[EventProfileViewController alloc] initWithNibName:@"EventProfileView" bundle:nil];

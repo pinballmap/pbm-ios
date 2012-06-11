@@ -1,5 +1,5 @@
 #import "LocationPin.h"
-#import "LocationObject.h"
+#import "Location.h"
 #import <MapKit/MapKit.h>
 
 @class LocationProfileViewController;
@@ -9,14 +9,14 @@
 	MKMapView *map;
 	NSArray *locationsToShow;
 	NSArray *annotationArray;
-	LocationObject *location;
+	Location *location;
 	BOOL showProfileButtons;
 }
 
 @property (nonatomic,strong) NSArray *locationsToShow;
 @property (nonatomic,strong) NSArray *annotationArray;
 @property (nonatomic,strong) MKMapView *map;
-@property (nonatomic,strong) LocationObject *location;
+@property (nonatomic,strong) Location *location;
 @property (nonatomic,assign) BOOL showProfileButtons;
 
 - (void)openGoogleMap;

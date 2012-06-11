@@ -76,7 +76,7 @@
 	displayArray = [[NSMutableArray alloc] initWithCapacity:activeLocationObject.totalMachines];
 	
 	for(id key in activeLocationObject.machines) {
-		MachineObject *machineObject = (MachineObject *)[activeLocationObject.machines objectForKey:key];
+		Machine *machineObject = (Machine *)[activeLocationObject.machines objectForKey:key];
 		[displayArray addObject:machineObject];
 	}
 	
@@ -139,7 +139,7 @@
 		
 		return cellA;
 	} else {
-		PPMTableCell *cell = (PPMTableCell*)[tableView dequeueReusableCellWithIdentifier:@"SingleTextID"];
+		PBMTableCell *cell = (PBMTableCell*)[tableView dequeueReusableCellWithIdentifier:@"SingleTextID"];
 		if (cell == nil)
 			cell = [self getTableCell];
 		
@@ -212,7 +212,7 @@
 	currentElement = [elementName copy];
 	if ([elementName isEqualToString:@"machine"]) {
 		isBuildingMachine = YES;
-		tempMachineObject = [[MachineObject alloc] init];
+		tempMachineObject = [[Machine alloc] init];
 		tempMachineID = [[NSMutableString alloc] init];
 		tempMachineName = [[NSMutableString alloc] init];
 		tempMachineCondition = [[NSMutableString alloc] init];
