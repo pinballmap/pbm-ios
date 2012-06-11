@@ -1,5 +1,3 @@
-#import <Foundation/Foundation.h>
-
 @interface Zone : NSObject {
 	NSString *name;
 	NSString *idNumber;

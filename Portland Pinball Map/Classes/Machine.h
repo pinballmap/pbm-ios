@@ -1,5 +1,3 @@
-#import <Foundation/Foundation.h>
-
 @interface Machine : NSObject {
 	NSString *name;
 	NSString *idNumber;

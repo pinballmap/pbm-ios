@@ -164,15 +164,4 @@ Portland_Pinball_MapAppDelegate *appDelegate;
 	}
 }
 
-- (void)viewDidUnload {
-	self.deleteButton = nil;
-	self.machineLabel = nil;
-	self.ipdbButton = nil;
-	self.returnButton = nil;
-	self.conditionField = nil;
-	self.conditionLabel = nil;
-	self.locationLabel = nil;
-	self.updateConditionButton = nil;
-}
-
 @end

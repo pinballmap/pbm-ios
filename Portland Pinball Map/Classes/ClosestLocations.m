@@ -144,5 +144,4 @@ Portland_Pinball_MapAppDelegate *appDelegate;
 	[self showLocationProfile:location withMapButton:YES];
 }
 
-
 @end

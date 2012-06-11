@@ -1,5 +1,3 @@
-#import <Foundation/Foundation.h>
-
 @interface Region : NSObject {
 	NSString *idNumber;
 	NSString *name;

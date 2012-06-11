@@ -15,7 +15,7 @@
 		span.longitudeDelta=0.2;
 		region.span = span;
 		
-		CLLocationCoordinate2D newLoc;// = map.userLocation.coordinate;
+		CLLocationCoordinate2D newLoc;
 		newLoc.latitude  = 45.521744;
 		newLoc.longitude = -122.671623;
 		region.center=newLoc;
@@ -91,12 +91,7 @@
 
 - (IBAction)googleMapButtonPressed:(id)sender {
 	Location *soloLocation = [locationsToShow objectAtIndex:0];
-	NSString *mapURL = [[NSString alloc] initWithFormat:@"http://maps.google.com/maps?f=q&source=s_q&hl=en&geocode=&q=%@,%@ %@, %@ (%@)",
-						soloLocation.street1,
-						soloLocation.city,
-						soloLocation.state,
-						soloLocation.zip,
-						soloLocation.name];
+	NSString *mapURL = [[NSString alloc] initWithFormat:@"http://maps.google.com/maps?f=q&source=s_q&hl=en&geocode=&q=%@,%@ %@, %@ (%@)", soloLocation.street1, soloLocation.city, soloLocation.state, soloLocation.zip, soloLocation.name];
 	UIApplication *app = [UIApplication sharedApplication];
 	[app openURL:[[NSURL alloc] initWithString: [mapURL stringByReplacingOccurrencesOfString:@" " withString:@"+"]]];
 }

@@ -33,12 +33,6 @@ Portland_Pinball_MapAppDelegate *appDelegate;
 	[super viewWillAppear:animated];
 }
 
-- (void)viewWillDisappear:(BOOL)animated {
-	[self setTitle:@"back"];
-    
-	[super viewWillDisappear:animated];
-}
-
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
 
@@ -258,6 +252,5 @@ Portland_Pinball_MapAppDelegate *appDelegate;
 		}
 	} 
 }
-
 
 @end
