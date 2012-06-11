@@ -5,7 +5,7 @@ Feature:
 
 Scenario: lands on main menu after loading
 Given I launch the app
-And I wait 3 seconds
+And I wait 5 seconds
 Then I should see a navigation bar titled "Bay Area Pinball Map"
 And I should see the main menu
 
