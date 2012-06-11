@@ -1,6 +1,6 @@
-#import "PPMTableCell.h"
+#import "PBMTableCell.h"
 
-@implementation PPMTableCell
+@implementation PBMTableCell
 @synthesize nameLabel;
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {

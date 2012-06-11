@@ -11,7 +11,7 @@
 		1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
 		1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
 		2892E4100DC94CBA00A64D0F /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2892E40F0DC94CBA00A64D0F /* CoreGraphics.framework */; };
-		466A453710AE668F00AB7A2B /* PPMDoubleTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 466A453610AE668F00AB7A2B /* PPMDoubleTableCell.m */; };
+		466A453710AE668F00AB7A2B /* PBMDoubleTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 466A453610AE668F00AB7A2B /* PBMDoubleTableCell.m */; };
 		46A3834D10AD4FD300414035 /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 46A3834510AD4FD300414035 /* RootViewController.m */; };
 		46A3834E10AD4FD300414035 /* Portland_Pinball_MapAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 46A3834710AD4FD300414035 /* Portland_Pinball_MapAppDelegate.m */; };
 		46A3835010AD4FD300414035 /* MachineViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 46A3834C10AD4FD300414035 /* MachineViewController.m */; };
@@ -47,7 +47,7 @@
 		8E1267F6157C4B2F00A40329 /* Portland_Pinball_MapAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 46A3834710AD4FD300414035 /* Portland_Pinball_MapAppDelegate.m */; };
 		8E1267F7157C4B2F00A40329 /* MachineViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 46A3834C10AD4FD300414035 /* MachineViewController.m */; };
 		8E1267F8157C4B2F00A40329 /* RSSViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 46A3838710AD5F9000414035 /* RSSViewController.m */; };
-		8E1267F9157C4B2F00A40329 /* PPMDoubleTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 466A453610AE668F00AB7A2B /* PPMDoubleTableCell.m */; };
+		8E1267F9157C4B2F00A40329 /* PBMDoubleTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 466A453610AE668F00AB7A2B /* PBMDoubleTableCell.m */; };
 		8E1267FA157C4B2F00A40329 /* BlackTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A26B3F010AFEAA000F07F0A /* BlackTableViewController.m */; };
 		8E1267FC157C4B2F00A40329 /* XMLTable.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A07ABCD10B000510090BDCB /* XMLTable.m */; };
 		8E1267FD157C4B2F00A40329 /* LocationProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A73FFE910B3EB12000C4802 /* LocationProfileViewController.m */; };
@@ -199,18 +199,18 @@
 		8EDA80DF158572FA00F6AD9A /* LocationProfileCellView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8EDA80D4158572FA00F6AD9A /* LocationProfileCellView.xib */; };
 		8EDA80E0158572FA00F6AD9A /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8EDA80D5158572FA00F6AD9A /* MainWindow.xib */; };
 		8EDA80E1158572FA00F6AD9A /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8EDA80D5158572FA00F6AD9A /* MainWindow.xib */; };
-		8EDA80E2158572FA00F6AD9A /* PPMDoubleTextCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8EDA80D6158572FA00F6AD9A /* PPMDoubleTextCell.xib */; };
-		8EDA80E3158572FA00F6AD9A /* PPMDoubleTextCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8EDA80D6158572FA00F6AD9A /* PPMDoubleTextCell.xib */; };
-		8EDA80E4158572FA00F6AD9A /* PPMTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8EDA80D7158572FA00F6AD9A /* PPMTableCell.xib */; };
-		8EDA80E5158572FA00F6AD9A /* PPMTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8EDA80D7158572FA00F6AD9A /* PPMTableCell.xib */; };
+		8EDA80E2158572FA00F6AD9A /* PBMDoubleTextCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8EDA80D6158572FA00F6AD9A /* PBMDoubleTextCell.xib */; };
+		8EDA80E3158572FA00F6AD9A /* PBMDoubleTextCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8EDA80D6158572FA00F6AD9A /* PBMDoubleTextCell.xib */; };
+		8EDA80E4158572FA00F6AD9A /* PBMTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8EDA80D7158572FA00F6AD9A /* PBMTableCell.xib */; };
+		8EDA80E5158572FA00F6AD9A /* PBMTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8EDA80D7158572FA00F6AD9A /* PBMTableCell.xib */; };
 		8EDA80E6158572FA00F6AD9A /* RequestPage.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8EDA80D8158572FA00F6AD9A /* RequestPage.xib */; };
 		8EDA80E7158572FA00F6AD9A /* RequestPage.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8EDA80D8158572FA00F6AD9A /* RequestPage.xib */; };
 		8EDA80E8158572FA00F6AD9A /* RootViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8EDA80D9158572FA00F6AD9A /* RootViewController.xib */; };
 		8EDA80E9158572FA00F6AD9A /* RootViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8EDA80D9158572FA00F6AD9A /* RootViewController.xib */; };
 		8EDA80EC1585740500F6AD9A /* RequestPage.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EDA80EB1585740500F6AD9A /* RequestPage.m */; };
 		8EDA80ED1585740500F6AD9A /* RequestPage.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EDA80EB1585740500F6AD9A /* RequestPage.m */; };
-		8EDA80F01585743C00F6AD9A /* PPMTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EDA80EF1585743C00F6AD9A /* PPMTableCell.m */; };
-		8EDA80F11585743C00F6AD9A /* PPMTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EDA80EF1585743C00F6AD9A /* PPMTableCell.m */; };
+		8EDA80F01585743C00F6AD9A /* PBMTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EDA80EF1585743C00F6AD9A /* PBMTableCell.m */; };
+		8EDA80F11585743C00F6AD9A /* PBMTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EDA80EF1585743C00F6AD9A /* PBMTableCell.m */; };
 		8EDA80F81585748800F6AD9A /* AddMachineView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8EDA80F21585748800F6AD9A /* AddMachineView.xib */; };
 		8EDA80F91585748800F6AD9A /* AddMachineView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8EDA80F21585748800F6AD9A /* AddMachineView.xib */; };
 		8EDA80FA1585748800F6AD9A /* CommentView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8EDA80F31585748800F6AD9A /* CommentView.xib */; };
@@ -232,8 +232,8 @@
 		2892E40F0DC94CBA00A64D0F /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		28A0AAE50D9B0CCF005BE974 /* Portland_Pinball_Map_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Portland_Pinball_Map_Prefix.pch; sourceTree = "<group>"; };
 		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		466A453510AE668F00AB7A2B /* PPMDoubleTableCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PPMDoubleTableCell.h; sourceTree = "<group>"; };
-		466A453610AE668F00AB7A2B /* PPMDoubleTableCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PPMDoubleTableCell.m; sourceTree = "<group>"; };
+		466A453510AE668F00AB7A2B /* PBMDoubleTableCell.h */ = {isa = PBXFileReference; fileEncoding = 4; path = PBMDoubleTableCell.h; sourceTree = "<group>"; };
+		466A453610AE668F00AB7A2B /* PBMDoubleTableCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PBMDoubleTableCell.m; sourceTree = "<group>"; };
 		46A3834510AD4FD300414035 /* RootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RootViewController.m; sourceTree = "<group>"; };
 		46A3834610AD4FD300414035 /* RootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RootViewController.h; sourceTree = "<group>"; };
 		46A3834710AD4FD300414035 /* Portland_Pinball_MapAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Portland_Pinball_MapAppDelegate.m; sourceTree = "<group>"; };
@@ -359,14 +359,14 @@
 		8EDA80D3158572FA00F6AD9A /* LocationProfile.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LocationProfile.xib; sourceTree = "<group>"; };
 		8EDA80D4158572FA00F6AD9A /* LocationProfileCellView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LocationProfileCellView.xib; sourceTree = "<group>"; };
 		8EDA80D5158572FA00F6AD9A /* MainWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainWindow.xib; sourceTree = "<group>"; };
-		8EDA80D6158572FA00F6AD9A /* PPMDoubleTextCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PPMDoubleTextCell.xib; sourceTree = "<group>"; };
-		8EDA80D7158572FA00F6AD9A /* PPMTableCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PPMTableCell.xib; sourceTree = "<group>"; };
+		8EDA80D6158572FA00F6AD9A /* PBMDoubleTextCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PBMDoubleTextCell.xib; sourceTree = "<group>"; };
+		8EDA80D7158572FA00F6AD9A /* PBMTableCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PBMTableCell.xib; sourceTree = "<group>"; };
 		8EDA80D8158572FA00F6AD9A /* RequestPage.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RequestPage.xib; sourceTree = "<group>"; };
 		8EDA80D9158572FA00F6AD9A /* RootViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RootViewController.xib; sourceTree = "<group>"; };
 		8EDA80EA1585740500F6AD9A /* RequestPage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RequestPage.h; sourceTree = "<group>"; };
 		8EDA80EB1585740500F6AD9A /* RequestPage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RequestPage.m; sourceTree = "<group>"; };
-		8EDA80EE1585743C00F6AD9A /* PPMTableCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PPMTableCell.h; sourceTree = "<group>"; };
-		8EDA80EF1585743C00F6AD9A /* PPMTableCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PPMTableCell.m; sourceTree = "<group>"; };
+		8EDA80EE1585743C00F6AD9A /* PBMTableCell.h */ = {isa = PBXFileReference; fileEncoding = 4; path = PBMTableCell.h; sourceTree = "<group>"; };
+		8EDA80EF1585743C00F6AD9A /* PBMTableCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PBMTableCell.m; sourceTree = "<group>"; };
 		8EDA80F21585748800F6AD9A /* AddMachineView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AddMachineView.xib; sourceTree = "<group>"; };
 		8EDA80F31585748800F6AD9A /* CommentView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CommentView.xib; sourceTree = "<group>"; };
 		8EDA80F41585748800F6AD9A /* EventProfileView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EventProfileView.xib; sourceTree = "<group>"; };
@@ -502,10 +502,10 @@
 		6A73453410CCD340005D089C /* cell controllers */ = {
 			isa = PBXGroup;
 			children = (
-				8EDA80EE1585743C00F6AD9A /* PPMTableCell.h */,
-				8EDA80EF1585743C00F6AD9A /* PPMTableCell.m */,
-				466A453510AE668F00AB7A2B /* PPMDoubleTableCell.h */,
-				466A453610AE668F00AB7A2B /* PPMDoubleTableCell.m */,
+				8EDA80EE1585743C00F6AD9A /* PBMTableCell.h */,
+				8EDA80EF1585743C00F6AD9A /* PBMTableCell.m */,
+				466A453510AE668F00AB7A2B /* PBMDoubleTableCell.h */,
+				466A453610AE668F00AB7A2B /* PBMDoubleTableCell.m */,
 				6A89775E11B63FD800C97FBB /* LocationProfileCell.h */,
 				6A89775F11B63FD800C97FBB /* LocationProfileCell.m */,
 			);
@@ -680,8 +680,8 @@
 				8EDA80D3158572FA00F6AD9A /* LocationProfile.xib */,
 				8EDA80D4158572FA00F6AD9A /* LocationProfileCellView.xib */,
 				8EDA80D5158572FA00F6AD9A /* MainWindow.xib */,
-				8EDA80D6158572FA00F6AD9A /* PPMDoubleTextCell.xib */,
-				8EDA80D7158572FA00F6AD9A /* PPMTableCell.xib */,
+				8EDA80D6158572FA00F6AD9A /* PBMDoubleTextCell.xib */,
+				8EDA80D7158572FA00F6AD9A /* PBMTableCell.xib */,
 				8EDA80D8158572FA00F6AD9A /* RequestPage.xib */,
 				8EDA80D9158572FA00F6AD9A /* RootViewController.xib */,
 			);
@@ -817,8 +817,8 @@
 				8EDA80DC158572FA00F6AD9A /* LocationProfile.xib in Resources */,
 				8EDA80DE158572FA00F6AD9A /* LocationProfileCellView.xib in Resources */,
 				8EDA80E0158572FA00F6AD9A /* MainWindow.xib in Resources */,
-				8EDA80E2158572FA00F6AD9A /* PPMDoubleTextCell.xib in Resources */,
-				8EDA80E4158572FA00F6AD9A /* PPMTableCell.xib in Resources */,
+				8EDA80E2158572FA00F6AD9A /* PBMDoubleTextCell.xib in Resources */,
+				8EDA80E4158572FA00F6AD9A /* PBMTableCell.xib in Resources */,
 				8EDA80E6158572FA00F6AD9A /* RequestPage.xib in Resources */,
 				8EDA80E8158572FA00F6AD9A /* RootViewController.xib in Resources */,
 				8EDA80F81585748800F6AD9A /* AddMachineView.xib in Resources */,
@@ -895,8 +895,8 @@
 				8EDA80DD158572FA00F6AD9A /* LocationProfile.xib in Resources */,
 				8EDA80DF158572FA00F6AD9A /* LocationProfileCellView.xib in Resources */,
 				8EDA80E1158572FA00F6AD9A /* MainWindow.xib in Resources */,
-				8EDA80E3158572FA00F6AD9A /* PPMDoubleTextCell.xib in Resources */,
-				8EDA80E5158572FA00F6AD9A /* PPMTableCell.xib in Resources */,
+				8EDA80E3158572FA00F6AD9A /* PBMDoubleTextCell.xib in Resources */,
+				8EDA80E5158572FA00F6AD9A /* PBMTableCell.xib in Resources */,
 				8EDA80E7158572FA00F6AD9A /* RequestPage.xib in Resources */,
 				8EDA80E9158572FA00F6AD9A /* RootViewController.xib in Resources */,
 				8EDA80F91585748800F6AD9A /* AddMachineView.xib in Resources */,
@@ -920,7 +920,7 @@
 				46A3834E10AD4FD300414035 /* Portland_Pinball_MapAppDelegate.m in Sources */,
 				46A3835010AD4FD300414035 /* MachineViewController.m in Sources */,
 				46A3838810AD5F9000414035 /* RSSViewController.m in Sources */,
-				466A453710AE668F00AB7A2B /* PPMDoubleTableCell.m in Sources */,
+				466A453710AE668F00AB7A2B /* PBMDoubleTableCell.m in Sources */,
 				6A26B3F110AFEAA000F07F0A /* BlackTableViewController.m in Sources */,
 				6A07ABCE10B000510090BDCB /* XMLTable.m in Sources */,
 				6A73FFEA10B3EB12000C4802 /* LocationProfileViewController.m in Sources */,
@@ -946,7 +946,7 @@
 				6A23940011D6ECC200924966 /* EventProfileViewController.m in Sources */,
 				6AE45E2C1234A57F00C629DF /* Utils.m in Sources */,
 				8EDA80EC1585740500F6AD9A /* RequestPage.m in Sources */,
-				8EDA80F01585743C00F6AD9A /* PPMTableCell.m in Sources */,
+				8EDA80F01585743C00F6AD9A /* PBMTableCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -959,7 +959,7 @@
 				8E1267F6157C4B2F00A40329 /* Portland_Pinball_MapAppDelegate.m in Sources */,
 				8E1267F7157C4B2F00A40329 /* MachineViewController.m in Sources */,
 				8E1267F8157C4B2F00A40329 /* RSSViewController.m in Sources */,
-				8E1267F9157C4B2F00A40329 /* PPMDoubleTableCell.m in Sources */,
+				8E1267F9157C4B2F00A40329 /* PBMDoubleTableCell.m in Sources */,
 				8E1267FA157C4B2F00A40329 /* BlackTableViewController.m in Sources */,
 				8E1267FC157C4B2F00A40329 /* XMLTable.m in Sources */,
 				8E1267FD157C4B2F00A40329 /* LocationProfileViewController.m in Sources */,
@@ -985,7 +985,7 @@
 				8E126811157C4B2F00A40329 /* EventProfileViewController.m in Sources */,
 				8E126813157C4B2F00A40329 /* Utils.m in Sources */,
 				8EDA80ED1585740500F6AD9A /* RequestPage.m in Sources */,
-				8EDA80F11585743C00F6AD9A /* PPMTableCell.m in Sources */,
+				8EDA80F11585743C00F6AD9A /* PBMTableCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

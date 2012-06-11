@@ -139,7 +139,7 @@
 		
 		return cellA;
 	} else {
-		PPMTableCell *cell = (PPMTableCell*)[tableView dequeueReusableCellWithIdentifier:@"SingleTextID"];
+		PBMTableCell *cell = (PBMTableCell*)[tableView dequeueReusableCellWithIdentifier:@"SingleTextID"];
 		if (cell == nil)
 			cell = [self getTableCell];
 		

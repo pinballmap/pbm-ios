@@ -1,5 +1,5 @@
 #import "EventsViewController.h"
-#import "PPMDoubleTableCell.h"
+#import "PBMDoubleTableCell.h"
 #import "Utils.h"
 
 @implementation EventsViewController
@@ -208,7 +208,7 @@ Portland_Pinball_MapAppDelegate *appDelegate;
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
 	static NSString *CellIdentifier = @"DoubleTextCellID";
     
-    PPMDoubleTableCell *cell = (PPMDoubleTableCell*)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    PBMDoubleTableCell *cell = (PBMDoubleTableCell*)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
 		cell = [self getDoubleCell];
     }

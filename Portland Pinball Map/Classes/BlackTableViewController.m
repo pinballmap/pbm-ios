@@ -27,22 +27,22 @@ Portland_Pinball_MapAppDelegate *appDelegate;
 	[super viewDidLoad];
 }
 
-- (PPMTableCell *)getTableCell {
-	NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"PPMTableCell" owner:self options:nil];
+- (PBMTableCell *)getTableCell {
+	NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"PBMTableCell" owner:self options:nil];
 	
 	for(id obj in nib)
-		if([obj isKindOfClass:[PPMTableCell class]])
-			return (PPMTableCell *)obj;
+		if([obj isKindOfClass:[PBMTableCell class]])
+			return (PBMTableCell *)obj;
 	
 	return nil;	
 }
 
-- (PPMDoubleTableCell *)getDoubleCell {
-	NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"PPMDoubleTextCell" owner:self options:nil];
+- (PBMDoubleTableCell *)getDoubleCell {
+	NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"PBMDoubleTextCell" owner:self options:nil];
 		
 	for(id obj in nib)
-		if([obj isKindOfClass:[PPMDoubleTableCell class]])
-			return (PPMDoubleTableCell *)obj;
+		if([obj isKindOfClass:[PBMDoubleTableCell class]])
+			return (PBMDoubleTableCell *)obj;
 		
 	return nil;	
 }
