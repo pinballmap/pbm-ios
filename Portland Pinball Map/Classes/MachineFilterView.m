@@ -89,7 +89,7 @@ Portland_Pinball_MapAppDelegate *appDelegate;
 	currentElement = @"";
 	
 	if ([elementName isEqualToString:@"id"]) {		
-		LocationObject *location = (LocationObject *)[appDelegate.activeRegion.locations objectForKey:tempLocationID];
+		Location *location = (Location *)[appDelegate.activeRegion.locations objectForKey:tempLocationID];
 		if(location != nil) {
 			[location updateDistance];
 			[tempLocations addObject:location];
@@ -132,7 +132,7 @@ Portland_Pinball_MapAppDelegate *appDelegate;
 		
 		NSSortDescriptor *nameSortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"distance" ascending:YES selector:@selector(compare:)];
 		for (int i = 0 ; i < [locations count]; i++) {
-			LocationObject *locobj = (LocationObject *)[locations objectAtIndex:i];
+			Location *locobj = (Location *)[locations objectAtIndex:i];
 			[locobj updateDistance];
 		}
         
@@ -157,7 +157,7 @@ Portland_Pinball_MapAppDelegate *appDelegate;
     if (cell == nil)
 		cell = [self getDoubleCell];
     
-	LocationObject *location = [locations objectAtIndex:[indexPath row]];
+	Location *location = [locations objectAtIndex:[indexPath row]];
 	[cell.nameLabel setText:location.name];
 	[cell.subLabel setText:(appDelegate.showUserLocation == YES) ? location.distanceString : @""];
 	
@@ -165,7 +165,7 @@ Portland_Pinball_MapAppDelegate *appDelegate;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-	LocationObject *location = [locations objectAtIndex:[indexPath row]];
+	Location *location = [locations objectAtIndex:[indexPath row]];
 	
 	if(NO) {
 		RootViewController *rootController = (RootViewController *)[self.navigationController.viewControllers objectAtIndex:0];

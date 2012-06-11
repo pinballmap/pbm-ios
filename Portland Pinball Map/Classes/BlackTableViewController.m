@@ -47,7 +47,7 @@ Portland_Pinball_MapAppDelegate *appDelegate;
 	return nil;	
 }
 
-NSInteger sortOnName(LocationObject *obj1, LocationObject *obj2, void *context) {		
+NSInteger sortOnName(Location *obj1, Location *obj2, void *context) {		
 	return [obj1.name localizedCompare:obj2.name];
 }
 
@@ -112,7 +112,7 @@ NSInteger sortOnDistance(id obj1, id obj2, void *context) {
 	[loadingLabel removeFromSuperview];
 }
 
-- (void)showLocationProfile:(LocationObject*)location withMapButton:(BOOL)showMapButton {
+- (void)showLocationProfile:(Location*)location withMapButton:(BOOL)showMapButton {
 	LocationProfileViewController *locationProfileView = [self getLocationProfile];
 	
 	[locationProfileView setShowMapButton:showMapButton];
@@ -142,7 +142,7 @@ NSInteger sortOnDistance(id obj1, id obj2, void *context) {
 		double max_dist = 0.0;
 		
 		for(id key in appDelegate.activeRegion.locations) {
-			LocationObject *locobj = (LocationObject *)[appDelegate.activeRegion.locations objectForKey:key];
+			Location *locobj = (Location *)[appDelegate.activeRegion.locations objectForKey:key];
 			[locobj updateDistance];
 			if(min_dist > locobj.distance) min_dist = locobj.distance;
 			if(max_dist < locobj.distance) max_dist = locobj.distance;
@@ -150,7 +150,7 @@ NSInteger sortOnDistance(id obj1, id obj2, void *context) {
 		
 		NSMutableArray *value_array = [[NSMutableArray alloc] init];
 		for(id key in appDelegate.activeRegion.locations) {
-			LocationObject *locobj = (LocationObject *)[appDelegate.activeRegion.locations objectForKey:key];
+			Location *locobj = (Location *)[appDelegate.activeRegion.locations objectForKey:key];
 			int value = ceil(pow(locobj.distance + 0.3,-1.9) * 1000);
 			
 			for (int i = 0; i < value; i++) {
@@ -159,7 +159,7 @@ NSInteger sortOnDistance(id obj1, id obj2, void *context) {
 		}
 		
 		int r = arc4random() % [value_array count];
-		LocationObject *loc = [appDelegate.activeRegion.locations objectForKey:[value_array objectAtIndex:r]];
+		Location *loc = [appDelegate.activeRegion.locations objectForKey:[value_array objectAtIndex:r]];
 		
 		NSArray *viewControllers = self.navigationController.viewControllers;
 		LocationProfileViewController *vc = (LocationProfileViewController *)[viewControllers objectAtIndex:[viewControllers count] - 1];

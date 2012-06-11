@@ -45,7 +45,7 @@ Portland_Pinball_MapAppDelegate *appDelegate;
     }
     
     for (id key in appDelegate.activeRegion.locations) {
-        LocationObject *location = [appDelegate.activeRegion.locations valueForKey:key];
+        Location *location = [appDelegate.activeRegion.locations valueForKey:key];
         [location updateDistance];
         double dist = location.distanceRounded;
         
@@ -127,7 +127,7 @@ Portland_Pinball_MapAppDelegate *appDelegate;
     NSUInteger section = [indexPath section];
 	NSUInteger row = [indexPath row];
 	NSArray *locationGroup = (NSArray *)[sectionLocations objectAtIndex:section];
-	LocationObject *location = [locationGroup objectAtIndex:row];
+	Location *location = [locationGroup objectAtIndex:row];
     
 	[cell.nameLabel setText:location.name];
 	[cell.subLabel setText:(appDelegate.showUserLocation == YES) ? location.distanceString : @""];
@@ -139,7 +139,7 @@ Portland_Pinball_MapAppDelegate *appDelegate;
 	NSUInteger section = [indexPath section];
 	NSUInteger row = [indexPath row];
 	NSArray *locationGroup = (NSArray *)[sectionLocations objectAtIndex:section];
-	LocationObject *location = [locationGroup objectAtIndex:row];	
+	Location *location = [locationGroup objectAtIndex:row];	
     
 	[self showLocationProfile:location withMapButton:YES];
 }

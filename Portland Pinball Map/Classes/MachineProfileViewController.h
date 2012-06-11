@@ -1,5 +1,5 @@
-#import "LocationObject.h"
-#import "MachineObject.h"
+#import "Location.h"
+#import "Machine.h"
 #import "MachineFilterView.h"
 #import "CommentController.h"
 #import "WebViewController.h"
@@ -22,13 +22,13 @@
 	
 	CommentController *commentController;
 	
-	LocationObject *location;
-	MachineObject  *machine;
+	Location *location;
+	Machine  *machine;
 }
 
 @property (nonatomic,strong) WebViewController *webview;
-@property (nonatomic,strong) LocationObject *location;
-@property (nonatomic,strong) MachineObject *machine;
+@property (nonatomic,strong) Location *location;
+@property (nonatomic,strong) Machine *machine;
 
 @property (nonatomic,strong) CommentController *commentController;
 @property (nonatomic,strong) MachineFilterView *machineFilter;

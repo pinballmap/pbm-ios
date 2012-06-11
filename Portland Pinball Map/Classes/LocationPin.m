@@ -11,7 +11,7 @@
 	return location.name;
 }
 
-- (id)initWithLocation:(LocationObject *)newLocation {
+- (id)initWithLocation:(Location *)newLocation {
 	location = newLocation;
 
 	return [self initWithCoordinate:location.coords.coordinate];

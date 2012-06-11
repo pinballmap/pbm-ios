@@ -1,5 +1,5 @@
 #import "RegionSelectViewController.h"
-#import "RegionObject.h"
+#import "Region.h"
 
 @implementation RegionSelectViewController
 @synthesize regionArray, requestPage;
@@ -32,7 +32,7 @@ Portland_Pinball_MapAppDelegate *appDelegate;
 		[cell.nameLabel setFont:[UIFont boldSystemFontOfSize:16]];
 		[cell.nameLabel setText:@"*Request Your Region"];
 	} else {
-		RegionObject *reg = [appDelegate.regions objectAtIndex:indexPath.row];
+		Region *reg = [appDelegate.regions objectAtIndex:indexPath.row];
 		[cell.nameLabel setFont:[UIFont boldSystemFontOfSize:20]];
 		[cell.nameLabel setText:reg.formalName];
 	}

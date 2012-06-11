@@ -1,4 +1,4 @@
-#import "LocationObject.h"
+#import "Location.h"
 
 @interface AddMachineViewController : UIViewController <UIPickerViewDelegate,UIActionSheetDelegate,UIAlertViewDelegate> {
 	UITextField *textfield;
@@ -9,13 +9,13 @@
 	
 	UIActivityIndicatorView *loaderIcon;
 	
-	LocationObject *location;
+	Location *location;
 	NSString *locationName;
 	NSString *locationId;
     NSString *selectedMachineID;
 }
 
-@property (nonatomic,strong) LocationObject *location;
+@property (nonatomic,strong) Location *location;
 @property (nonatomic,strong) NSString *selectedMachineID;
 @property (nonatomic,strong) NSString *locationName;
 @property (nonatomic,strong) NSString *locationId;

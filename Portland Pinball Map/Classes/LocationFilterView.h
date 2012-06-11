@@ -1,7 +1,7 @@
-#import "LocationObject.h"
+#import "Location.h"
 #import "BlackTableViewController.h"
 #import "LocationMap.h"
-#import "ZoneObject.h"
+#import "Zone.h"
 
 @interface LocationFilterView : BlackTableViewController {
 	NSInteger totalLocations;
@@ -10,8 +10,8 @@
 	NSMutableArray *locationArray;
 	NSArray *keys;	
 	
-	ZoneObject *theNewZone;
-	ZoneObject *currentZone;
+	Zone *theNewZone;
+	Zone *currentZone;
 	
 	NSString *zoneID;
 	NSString *currentZoneID;
@@ -25,10 +25,10 @@
 @property (nonatomic,strong) NSArray *keys;
 @property (nonatomic,strong) LocationMap *mapView;
 @property (nonatomic,strong) NSMutableArray *locationArray;
-@property (nonatomic,strong) ZoneObject *theNewZone;
-@property (nonatomic,strong) ZoneObject *currentZone;
+@property (nonatomic,strong) Zone *theNewZone;
+@property (nonatomic,strong) Zone *currentZone;
 
-- (void)addToFilterDictionary:(LocationObject *)location;
+- (void)addToFilterDictionary:(Location *)location;
 - (void)onMapPress:(id)sender;
 
 @end

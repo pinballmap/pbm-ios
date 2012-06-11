@@ -1,10 +1,10 @@
 #import "XMLTable.h"
 #import "LocationProfileViewController.h"
-#import "EventObject.h"
+#import "Event.h"
 #import "EventProfileViewController.h"
 
 @interface EventsViewController : XMLTable {
-	EventObject *eventObject;
+	Event *eventObject;
 	EventProfileViewController *eventProfile;
 	
 	UILabel *noEventsLabel;

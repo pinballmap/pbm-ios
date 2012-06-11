@@ -1,6 +1,6 @@
-#import "MachineObject.h"
+#import "Machine.h"
 
-@implementation MachineObject
+@implementation Machine
 @synthesize name, idNumber, condition, conditionDate, dateAdded;
 
 @end

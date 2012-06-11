@@ -1,5 +1,5 @@
 #import <CoreLocation/CoreLocation.h>
-#import "RegionObject.h"
+#import "Region.h"
 #import "LocationMap.h"
 
 //#define BASE_URL @"http://glowing-dusk-5085.herokuapp.com"
@@ -12,7 +12,7 @@
     UINavigationController *navigationController;
 	
 	NSArray *regions;
-	RegionObject *activeRegion;
+	Region *activeRegion;
 
 	UIView *splashScreen;
 	CLLocation *userLocation;
@@ -25,7 +25,7 @@
 
 @property (nonatomic,strong) CLLocation	*userLocation;
 @property (nonatomic,strong) NSArray *regions;
-@property (nonatomic,strong) RegionObject *activeRegion;
+@property (nonatomic,strong) Region *activeRegion;
 @property (nonatomic,strong) IBOutlet UIWindow *window;
 @property (nonatomic,strong) IBOutlet UINavigationController *navigationController;
 @property (nonatomic,strong) LocationProfileViewController *locationProfileView;

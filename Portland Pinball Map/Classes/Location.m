@@ -1,7 +1,7 @@
-#import "LocationObject.h"
+#import "Location.h"
 #import "Portland_Pinball_MapAppDelegate.h"
 
-@implementation LocationObject
+@implementation Location
 @synthesize neighborhood, name, idNumber, machines, distanceString, mapURL, street1, street2, city, state, zip, phone, coords, distance, distanceRounded, totalMachines, isLoaded;
 
 - init {
