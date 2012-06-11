@@ -1,5 +1,4 @@
 #import "WebViewController.h"
-#import "Portland_Pinball_MapAppDelegate.h"
 
 @implementation WebViewController
 @synthesize webview, theNewURL;
@@ -30,10 +29,6 @@
     [super viewWillDisappear:animated];
 }
 
-- (void)viewDidUnload {
-	[self setWebview:nil];
-}
-
 - (IBAction)onBackTap:(id)sender {
 	if(webview.canGoBack)
         [webview goBack];
@@ -45,12 +40,12 @@
 }
 
 - (void)webViewDidStartLoad:(UIWebView *)webView {
-	UIApplication* app = [UIApplication sharedApplication];
+	UIApplication *app = [UIApplication sharedApplication];
 	[app setNetworkActivityIndicatorVisible:YES];
 }
 
 - (void)webViewDidFinishLoad:(UIWebView *)webView {
-	UIApplication* app = [UIApplication sharedApplication];
+	UIApplication *app = [UIApplication sharedApplication];
 	[app setNetworkActivityIndicatorVisible:YES];
 }
 

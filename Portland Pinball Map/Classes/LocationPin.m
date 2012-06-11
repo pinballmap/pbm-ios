@@ -19,6 +19,7 @@
 
 - (id)initWithCoordinate:(CLLocationCoordinate2D)newCoordinate {
  	coordinate = newCoordinate;
+    
 	return self;
 }
 
