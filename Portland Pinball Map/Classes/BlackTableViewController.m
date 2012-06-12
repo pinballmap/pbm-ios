@@ -1,4 +1,3 @@
-#import "BlackTableViewController.h"
 #import "LocationProfileViewController.h"
 
 @implementation BlackTableViewController
@@ -121,7 +120,7 @@ NSInteger sortOnDistance(id obj1, id obj2, void *context) {
 	[self.navigationController pushViewController:locationProfileView animated:YES];
 }
 
-- (LocationProfileViewController *) getLocationProfile {
+- (LocationProfileViewController *)getLocationProfile {
 	LocationProfileViewController *locationProfileView = appDelegate.locationProfileView;
 	
 	if(locationProfileView == nil) {
@@ -176,7 +175,6 @@ NSInteger sortOnDistance(id obj1, id obj2, void *context) {
 
 			[self.navigationController setViewControllers:quickArray1234 animated:NO];
 		}
-		
 	}
 }
 
@@ -209,7 +207,7 @@ NSInteger sortOnDistance(id obj1, id obj2, void *context) {
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {    
-    static NSString *CellIdentifier = @"Cell";
+    NSString *CellIdentifier = @"Cell";
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
@@ -222,11 +220,10 @@ NSInteger sortOnDistance(id obj1, id obj2, void *context) {
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {}
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-	if([self numberOfSectionsInTableView:tableView] == 1
-	   || [self tableView:tableView numberOfRowsInSection:section] == 0)
+	if([self numberOfSectionsInTableView:tableView] == 1 || [self tableView:tableView numberOfRowsInSection:section] == 0)
 		return 0;
 		
-	return headerHeight ;
+	return headerHeight;
 }
 
 @end

@@ -7,10 +7,6 @@
 
 Portland_Pinball_MapAppDelegate *appDelegate;
 
-- (BOOL)canBecomeFirstResponder {
-	return YES;
-}
-
 - (void)viewDidAppear:(BOOL)animated {
     appDelegate = (Portland_Pinball_MapAppDelegate *)[[UIApplication sharedApplication] delegate];
 
@@ -158,7 +154,7 @@ Portland_Pinball_MapAppDelegate *appDelegate;
 }
 
 - (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex {
-	if([alertView.title isEqualToString:@"Thank You!"]) {
+	if ([alertView.title isEqualToString:@"Thank You!"]) {
 		location.isLoaded = NO;
 		[self.navigationController popViewControllerAnimated:YES];
 	}

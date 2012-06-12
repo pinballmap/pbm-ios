@@ -6,7 +6,8 @@
 #import "ZonesViewController.h"
 #import "MachineViewController.h"
 #import <CoreLocation/CoreLocation.h>
-#import <stdlib.h>
+
+#define METERS_IN_A_MILE 1609.344
 
 @interface RootViewController : XMLTable <CLLocationManagerDelegate,UIAlertViewDelegate,UIAccelerometerDelegate> {
 	NSArray *controllers;
@@ -32,7 +33,7 @@
     NSMutableString *currentFormalName;
 	
     NSArray *tableTitles;
-	NSMutableArray *tempRegionArray;
+	NSMutableArray *regions;
 	
 	int	parsingAttempts;
 	int initID;
@@ -45,7 +46,7 @@
 @property (nonatomic,strong) CLLocationManager *locationManager;
 @property (nonatomic,strong) NSArray  *tableTitles;
 @property (nonatomic,strong) NSArray *controllers;
-@property (nonatomic,strong) NSMutableArray *tempRegionArray;
+@property (nonatomic,strong) NSMutableArray *regions;
 @property (nonatomic,strong) NSMutableDictionary *allLocations;
 @property (nonatomic,strong) NSMutableDictionary *allMachines;
 @property (nonatomic,strong) AboutViewController *aboutView;
