@@ -3,7 +3,7 @@
 #import "RegionSelectViewController.h"
 
 @implementation RootViewController
-@synthesize locationManager, startingPoint, controllers, allLocations, allMachines, aboutView, tableTitles, tempRegionArray;
+@synthesize locationManager, startingPoint, controllers, allLocations, allMachines, aboutView, tableTitles, regions;
 
 Portland_Pinball_MapAppDelegate *appDelegate;
 
@@ -12,10 +12,6 @@ Portland_Pinball_MapAppDelegate *appDelegate;
     init2Loaded = NO;
     
     return self;
-}
-
-- (BOOL)canBecomeFirstResponder {
-	return YES;
 }
 
 - (void)viewDidLoad {
@@ -34,8 +30,7 @@ Portland_Pinball_MapAppDelegate *appDelegate;
 
 - (void)viewWillAppear:(BOOL)animated {
     appDelegate = (Portland_Pinball_MapAppDelegate *)[[UIApplication sharedApplication] delegate];
-	
-    [self setTitle:[NSString stringWithFormat:@"%@ Pinball Map", appDelegate.activeRegion.name]];
+    [self setTitle:[NSString stringWithFormat:@"%@ Pinball Map", appDelegate.activeRegion.formalName]];
     
 	[super viewWillAppear:animated];
 }
@@ -199,10 +194,10 @@ Portland_Pinball_MapAppDelegate *appDelegate;
             [regionobject setMachineFilter:@"4"];
             [regionobject setMachineFilterString:[NSString stringWithFormat:@"%@+ Machines", regionobject.machineFilter]];
             
-            if (tempRegionArray == nil)
-                tempRegionArray = [[NSMutableArray alloc] init];
+            if (regions == nil)
+                regions = [[NSMutableArray alloc] init];
             
-            [tempRegionArray addObject:regionobject];
+            [regions addObject:regionobject];
         }
     } else {
         if ([elementName isEqualToString:@"location"]) {
@@ -268,7 +263,13 @@ Portland_Pinball_MapAppDelegate *appDelegate;
 
 - (void)parserDidEndDocument:(NSXMLParser *)parser {
     if (initID == 2) {
-        [appDelegate setRegions:tempRegionArray];
+        regions = (NSMutableArray *)[regions sortedArrayUsingComparator:^NSComparisonResult(id a, id b) {
+            NSString *first = [(Region *)a formalName];
+            NSString *second = [(Region*)b formalName];
+            return [first compare:second];
+        }];
+        
+        [appDelegate setRegions:regions];
         
         Region *closestRegion = [appDelegate.regions objectAtIndex:0];
         CLLocationDistance closestDistance = 24901.55;
@@ -279,7 +280,7 @@ Portland_Pinball_MapAppDelegate *appDelegate;
             double lat = [reg.lat doubleValue];
             
             CLLocation *coords = [[CLLocation alloc] initWithLatitude:lat longitude:lon];
-            CLLocationDistance distance = [appDelegate.userLocation distanceFromLocation:coords] / 1609.344;
+            CLLocationDistance distance = [appDelegate.userLocation distanceFromLocation:coords] / METERS_IN_A_MILE;
             
             if(closestDistance > distance) {
                 closestRegion = reg;
@@ -323,9 +324,9 @@ Portland_Pinball_MapAppDelegate *appDelegate;
             [eventView setTitle:@"Events"];
             [viewControllers addObject:eventView];
             
-            RegionSelectViewController *regionselect = [[RegionSelectViewController alloc] initWithStyle:UITableViewStylePlain];
-            [regionselect setTitle:@"Change Region"];
-            [viewControllers addObject:regionselect];
+            RegionSelectViewController *regionSelect = [[RegionSelectViewController alloc] initWithStyle:UITableViewStylePlain];
+            [regionSelect setTitle:@"Change Region"];
+            [viewControllers addObject:regionSelect];
             
             [self setControllers:viewControllers];
         }
@@ -346,7 +347,7 @@ Portland_Pinball_MapAppDelegate *appDelegate;
 			allLocations = [[NSMutableDictionary alloc] init];
 			allMachines  = [[NSMutableDictionary alloc] init];
 		} else if(initID == 2) {
-			tempRegionArray = nil;
+			regions = nil;
 		}
 
 		xmlStarted = NO;
@@ -363,10 +364,6 @@ Portland_Pinball_MapAppDelegate *appDelegate;
 							  otherButtonTitles:nil];
 		[alert show];
 	}	
-}
-
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {

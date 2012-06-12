@@ -142,10 +142,6 @@ Portland_Pinball_MapAppDelegate *appDelegate;
 	[self.tableView reloadData];
 }
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 1;
-}
-
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return [locations count];
 }
