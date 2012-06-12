@@ -1,1290 +1,0 @@
-TPortland Pinball Map
-v7
-r0
-t290226841.202563
-cCheck dependencies
-cCpResource "build/Distribution-iphoneos/Portland Pinball Map.app/ResourceRules.plist" /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS3.0.sdk/ResourceRules.plist
-cProcessInfoPlistFile "/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Distribution-iphoneos/Portland Pinball Map.app/Info.plist" Portland_Pinball_Map-Info.plist
-cCompileXIB "/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/MainWindow.xib"
-cCompileXIB "/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/RootViewController.xib"
-cCopyPNGFile "/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Distribution-iphoneos/Portland Pinball Map.app/ppm_icon.png" ppm_icon.png
-cCompileXIB "/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/PPMDoubleTextCell.xib"
-cCompileXIB "/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/PPMTableCell.xib"
-cCompileXIB "/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/Classes/XMLTableView.xib"
-cCopyPNGFile "/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Distribution-iphoneos/Portland Pinball Map.app/arrow.png" arrow.png
-cCompileXIB "/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/LocationProfile.xib"
-cCompileXIB "/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/AboutView.xib"
-cCopyPNGFile "/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Distribution-iphoneos/Portland Pinball Map.app/splash.png" splash.png
-cCopyPNGFile "/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Distribution-iphoneos/Portland Pinball Map.app/Default_old.png" Default_old.png
-cCopyPNGFile "/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Distribution-iphoneos/Portland Pinball Map.app/arrow3.png" arrow3.png
-cCopyPNGFile "/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Distribution-iphoneos/Portland Pinball Map.app/Default.png" Default.png
-cCopyPNGFile "/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Distribution-iphoneos/Portland Pinball Map.app/splash_town.png" splash_town.png
-cCopyPNGFile "/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Distribution-iphoneos/Portland Pinball Map.app/PPM-Icon-03.png" PPM-Icon-03.png
-cCopyPNGFile "/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Distribution-iphoneos/Portland Pinball Map.app/facebook-icon2.png" facebook-icon2.png
-cProcessPCH /var/folders/kl/kl4Acn0tG+4QWNmV7K58pk+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/Portland_Pinball_Map_Prefix-evmejhdgavstfpbvdhlbicemastg/Portland_Pinball_Map_Prefix.pch.gch Portland_Pinball_Map_Prefix.pch normal armv6 objective-c com.apple.compilers.gcc.4_2
-cCompileC "build/Portland Pinball Map.build/Distribution-iphoneos/Portland Pinball Map.build/Objects-normal/armv6/main.o" "/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/main.m" normal armv6 objective-c com.apple.compilers.gcc.4_2
-cCompileC "build/Portland Pinball Map.build/Distribution-iphoneos/Portland Pinball Map.build/Objects-normal/armv6/RootViewController.o" "/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/Classes/RootViewController.m" normal armv6 objective-c com.apple.compilers.gcc.4_2
-cCompileC "build/Portland Pinball Map.build/Distribution-iphoneos/Portland Pinball Map.build/Objects-normal/armv6/Portland_Pinball_MapAppDelegate.o" "/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/Classes/Portland_Pinball_MapAppDelegate.m" normal armv6 objective-c com.apple.compilers.gcc.4_2
-cCompileC "build/Portland Pinball Map.build/Distribution-iphoneos/Portland Pinball Map.build/Objects-normal/armv6/MachineViewController.o" "/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/Classes/MachineViewController.m" normal armv6 objective-c com.apple.compilers.gcc.4_2
-cCompileC "build/Portland Pinball Map.build/Distribution-iphoneos/Portland Pinball Map.build/Objects-normal/armv6/RSSViewController.o" "/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/Classes/RSSViewController.m" normal armv6 objective-c com.apple.compilers.gcc.4_2
-cCompileC "build/Portland Pinball Map.build/Distribution-iphoneos/Portland Pinball Map.build/Objects-normal/armv6/PPMDoubleTableCell.o" "/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/Classes/PPMDoubleTableCell.m" normal armv6 objective-c com.apple.compilers.gcc.4_2
-cCompileC "build/Portland Pinball Map.build/Distribution-iphoneos/Portland Pinball Map.build/Objects-normal/armv6/BlackTableViewController.o" "/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/Classes/BlackTableViewController.m" normal armv6 objective-c com.apple.compilers.gcc.4_2
-cCompileC "build/Portland Pinball Map.build/Distribution-iphoneos/Portland Pinball Map.build/Objects-normal/armv6/PPMTableCell.o" "/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/Classes/../PPMTableCell.m" normal armv6 objective-c com.apple.compilers.gcc.4_2
-cCompileC "build/Portland Pinball Map.build/Distribution-iphoneos/Portland Pinball Map.build/Objects-normal/armv6/XMLTable.o" "/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/Classes/XMLTable.m" normal armv6 objective-c com.apple.compilers.gcc.4_2
-cCompileC "build/Portland Pinball Map.build/Distribution-iphoneos/Portland Pinball Map.build/Objects-normal/armv6/LocationProfileViewController.o" "/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/Classes/LocationProfileViewController.m" normal armv6 objective-c com.apple.compilers.gcc.4_2
-cCompileC "build/Portland Pinball Map.build/Distribution-iphoneos/Portland Pinball Map.build/Objects-normal/armv6/ZonesViewController.o" "/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/Classes/ZonesViewController.m" normal armv6 objective-c com.apple.compilers.gcc.4_2
-cCompileC "build/Portland Pinball Map.build/Distribution-iphoneos/Portland Pinball Map.build/Objects-normal/armv6/LocationFilterView.o" "/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/Classes/LocationFilterView.m" normal armv6 objective-c com.apple.compilers.gcc.4_2
-cCompileC "build/Portland Pinball Map.build/Distribution-iphoneos/Portland Pinball Map.build/Objects-normal/armv6/BlackSectionViewController.o" "/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/Classes/BlackSectionViewController.m" normal armv6 objective-c com.apple.compilers.gcc.4_2
-cCompileC "build/Portland Pinball Map.build/Distribution-iphoneos/Portland Pinball Map.build/Objects-normal/armv6/LocationObject.o" "/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/Classes/LocationObject.m" normal armv6 objective-c com.apple.compilers.gcc.4_2
-cCompileC "build/Portland Pinball Map.build/Distribution-iphoneos/Portland Pinball Map.build/Objects-normal/armv6/MachineObject.o" "/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/Classes/MachineObject.m" normal armv6 objective-c com.apple.compilers.gcc.4_2
-cCompileC "build/Portland Pinball Map.build/Distribution-iphoneos/Portland Pinball Map.build/Objects-normal/armv6/MachineFilterView.o" "/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/Classes/MachineFilterView.m" normal armv6 objective-c com.apple.compilers.gcc.4_2
-cCompileC "build/Portland Pinball Map.build/Distribution-iphoneos/Portland Pinball Map.build/Objects-normal/armv6/AboutViewController.o" "/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/Classes/AboutViewController.m" normal armv6 objective-c com.apple.compilers.gcc.4_2
-cCompileC "build/Portland Pinball Map.build/Distribution-iphoneos/Portland Pinball Map.build/Objects-normal/armv6/LocationMap.o" "/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/Classes/LocationMap.m" normal armv6 objective-c com.apple.compilers.gcc.4_2
-cCompileC "build/Portland Pinball Map.build/Distribution-iphoneos/Portland Pinball Map.build/Objects-normal/armv6/LocationPin.o" "/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/Classes/LocationPin.m" normal armv6 objective-c com.apple.compilers.gcc.4_2
-cCompileC "build/Portland Pinball Map.build/Distribution-iphoneos/Portland Pinball Map.build/Objects-normal/armv6/ClosestLocations.o" "/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/Classes/ClosestLocations.m" normal armv6 objective-c com.apple.compilers.gcc.4_2
-cLd "/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Distribution-iphoneos/Portland Pinball Map.app/Portland Pinball Map" normal armv6
-cGenerateDSYMFile "/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Distribution-iphoneos/Portland Pinball Map.app.dSYM" "/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Distribution-iphoneos/Portland Pinball Map.app/Portland Pinball Map"
-cProcessProductPackaging "/Users/Isaac/Library/MobileDevice/Provisioning Profiles/35EDA825-D876-48BB-9CD2-04CBF9E63986.mobileprovision" "/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Distribution-iphoneos/Portland Pinball Map.app/embedded.mobileprovision"
-cTouch "/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Distribution-iphoneos/Portland Pinball Map.app"
-cProcessProductPackaging /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS3.0.sdk/Entitlements.plist "/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Portland Pinball Map.build/Distribution-iphoneos/Portland Pinball Map.build/Portland Pinball Map.xcent"
-cCodeSign "/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Distribution-iphoneos/Portland Pinball Map.app"
-
-N/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS3.0.sdk
-c000000004B762CB50000000000000110
-t1266035893
-s272
-
-N/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS3.0.sdk/Entitlements.plist
-c000000004A0BA04000000000000000DD
-t1242275904
-s221
-
-N/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS3.0.sdk/ResourceRules.plist
-c000000004A0BA04000000000000001E5
-t1242275904
-s485
-
-N/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS3.0.sdk/System/Library/Frameworks/CoreGraphics.framework/CoreGraphics
-c000000004A121EB900000000003D72A0
-t1242701497
-s4027040
-
-N/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS3.0.sdk/System/Library/Frameworks/CoreLocation.framework/CoreLocation
-c000000004A1222C30000000000080DA0
-t1242702531
-s527776
-
-N/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS3.0.sdk/System/Library/Frameworks/CoreLocation.framework/Headers/CoreLocation.h
-c000000004A0CD38700000000000001AF
-t1242354567
-s431
-
-N/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS3.0.sdk/System/Library/Frameworks/Foundation.framework/Foundation
-c000000004A121FF90000000000396540
-t1242701817
-s3761472
-
-N/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS3.0.sdk/System/Library/Frameworks/Foundation.framework/Headers/Foundation.h
-c000000004A0BAECB0000000000001355
-t1242279627
-s4949
-
-N/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS3.0.sdk/System/Library/Frameworks/MapKit.framework/Headers/MapKit.h
-c000000004A0BC2A5000000000000017D
-t1242284709
-s381
-
-N/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS3.0.sdk/System/Library/Frameworks/MapKit.framework/MapKit
-c000000004A12232A00000000001D2A20
-t1242702634
-s1911328
-
-N/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS3.0.sdk/System/Library/Frameworks/UIKit.framework/Headers/UIKit.h
-c000000004A0CBEBD000000000000075E
-t1242349245
-s1886
-
-N/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS3.0.sdk/System/Library/Frameworks/UIKit.framework/UIKit
-c000000004A1221FD00000000019A6110
-t1242702333
-s26894608
-
-N/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS3.0.sdk/usr/include/Availability.h
-c000000004A0BB10100000000000019D8
-t1242280193
-s6616
-
-N/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS3.0.sdk/usr/include/math.h
-c000000004A0BA2B100000000000004F1
-t1242276529
-s1265
-
-N/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS3.1.3.sdk
-c000000004B2FA6BF0000000000000110
-t1261414079
-s272
-
-N/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS3.1.3.sdk/Entitlements.plist
-c000000004B2B3B9F00000000000000DD
-t1261124511
-s221
-
-N/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS3.1.3.sdk/ResourceRules.plist
-c000000004B2B3B9F00000000000001E5
-t1261124511
-s485
-
-N/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS3.1.3.sdk/System/Library/Frameworks/CoreGraphics.framework/CoreGraphics
-c000000004B2B537900000000005F4900
-t1261130617
-s6244608
-
-N/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS3.1.3.sdk/System/Library/Frameworks/CoreLocation.framework/CoreLocation
-c000000004B2B61E30000000000084510
-t1261134307
-s541968
-
-N/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS3.1.3.sdk/System/Library/Frameworks/CoreLocation.framework/Headers/CoreLocation.h
-c000000004B2B61D300000000000001AF
-t1261134291
-s431
-
-N/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS3.1.3.sdk/System/Library/Frameworks/Foundation.framework/Foundation
-c000000004B2B551F0000000000501370
-t1261131039
-s5247856
-
-N/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS3.1.3.sdk/System/Library/Frameworks/Foundation.framework/Headers/Foundation.h
-c000000004B2B54F40000000000001355
-t1261130996
-s4949
-
-N/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS3.1.3.sdk/System/Library/Frameworks/MapKit.framework/Headers/MapKit.h
-c000000004B2B652A000000000000017D
-t1261135146
-s381
-
-N/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS3.1.3.sdk/System/Library/Frameworks/MapKit.framework/MapKit
-c000000004B2B656100000000001CD6E0
-t1261135201
-s1890016
-
-N/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS3.1.3.sdk/System/Library/Frameworks/UIKit.framework/Headers/UIKit.h
-c000000004B2B61610000000000000788
-t1261134177
-s1928
-
-N/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS3.1.3.sdk/System/Library/Frameworks/UIKit.framework/UIKit
-c000000004B2B63DA0000000001B3F450
-t1261134810
-s28570704
-
-N/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS3.1.3.sdk/usr/include/Availability.h
-c000000004B2B564700000000000019F9
-t1261131335
-s6649
-
-N/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS3.1.3.sdk/usr/include/math.h
-c000000004B2B3EDF00000000000004F1
-t1261125343
-s1265
-
-N/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/AboutView.xib
-c000000004B8BF4B6000000000000AD5A
-t1267463350
-s44378
-
-N/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/Classes/../PPMTableCell.m
-c000000004B64FF4100000000000002BC
-t1264910145
-s700
-i"PPMTableCell.h"
-
-N/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/Classes/AboutViewController.h
-c000000004B8BF074000000000000035D
-t1267462260
-s861
-i<UIKit/UIKit.h>
-
-N/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/Classes/AboutViewController.m
-c000000004B8BF28B00000000000007DF
-t1267462795
-s2015
-i"AboutViewController.h"
-
-N/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/Classes/BlackSectionViewController.h
-c000000004B724493000000000000019D
-t1265779859
-s413
-i"BlackTableViewController.h"
-i<UIKit/UIKit.h>
-
-N/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/Classes/BlackSectionViewController.m
-c000000004B82109400000000000007F5
-t1266815124
-s2037
-i"BlackSectionViewController.h"
-
-N/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/Classes/BlackTableViewController.h
-c000000004B70CCBC00000000000003EF
-t1265683644
-s1007
-i"LocationProfileViewController.h"
-i"LocationObject.h"
-i"Portland_Pinball_MapAppDelegate.h"
-i"PPMTableCell.h"
-i"PPMDoubleTableCell.h"
-i<UIKit/UIKit.h>
-
-N/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/Classes/BlackTableViewController.m
-c000000004B73A8DD0000000000001B73
-t1265871069
-s7027
-i"BlackTableViewController.h"
-
-N/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/Classes/ClosestLocations.h
-c000000004B7242AA0000000000000201
-t1265779370
-s513
-i"Portland_Pinball_MapAppDelegate.h"
-i"BlackSectionViewController.h"
-i<UIKit/UIKit.h>
-
-N/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/Classes/ClosestLocations.m
-c000000004B83483C0000000000000F45
-t1266894908
-s3909
-i"ClosestLocations.h"
-
-N/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/Classes/LocationFilterView.h
-c000000004B724A19000000000000043E
-t1265781273
-s1086
-i"LocationObject.h"
-i"BlackSectionViewController.h"
-i<UIKit/UIKit.h>
-
-N/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/Classes/LocationFilterView.m
-c000000004B8BF8E30000000000002DE2
-t1267464419
-s11746
-i"LocationFilterView.h"
-
-N/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/Classes/LocationMap.h
-c000000004B73B2CD000000000000042D
-t1265873613
-s1069
-i"LocationPin.h"
-i"LocationObject.h"
-i<UIKit/UIKit.h>
-i<MapKit/MapKit.h>
-
-N/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/Classes/LocationMap.m
-c000000004B83485300000000000022EC
-t1266894931
-s8940
-i"LocationMap.h"
-
-N/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/Classes/LocationObject.h
-c000000004B720D850000000000000645
-t1265765765
-s1605
-i<Foundation/Foundation.h>
-i<CoreLocation/CoreLocation.h>
-
-N/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/Classes/LocationObject.m
-c000000004B720D9300000000000003D2
-t1265765779
-s978
-i"LocationObject.h"
-
-N/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/Classes/LocationPin.h
-c000000004B51A45D000000000000029C
-t1263641693
-s668
-i"MachineObject.h"
-i"LocationObject.h"
-i<MapKit/MapKit.h>
-i<Foundation/Foundation.h>
-
-N/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/Classes/LocationPin.m
-c000000004B65360C00000000000003B8
-t1264924172
-s952
-i"LocationPin.h"
-
-N/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/Classes/LocationProfileViewController.h
-c000000004B9C3B170000000000000AE3
-t1268529943
-s2787
-i"MachineObject.h"
-i"LocationObject.h"
-i"LocationMap.h"
-i<Foundation/Foundation.h>
-
-N/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/Classes/LocationProfileViewController.m
-c000000004B9C3E6600000000000036C3
-t1268530790
-s14019
-i"LocationProfileViewController.h"
-
-N/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/Classes/MachineFilterView.h
-c000000004B73A1060000000000000376
-t1265869062
-s886
-i"LocationObject.h"
-i"XMLTable.h"
-i<Foundation/Foundation.h>
-
-N/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/Classes/MachineFilterView.m
-c000000004B8349D100000000000016FA
-t1266895313
-s5882
-i"MachineFilterView.h"
-
-N/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/Classes/MachineObject.h
-c000000004B33C0B50000000000000172
-t1261682869
-s370
-i<Foundation/Foundation.h>
-
-N/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/Classes/MachineObject.m
-c000000004B33C0B50000000000000150
-t1261682869
-s336
-i"MachineObject.h"
-
-N/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/Classes/MachineViewController.h
-c000000004B515DA20000000000000298
-t1263623586
-s664
-i"MachineFilterView.h"
-i"Portland_Pinball_MapAppDelegate.h"
-i<UIKit/UIKit.h>
-i"BlackSectionViewController.h"
-
-N/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/Classes/MachineViewController.m
-c000000004B73A44D0000000000001531
-t1265869901
-s5425
-i"MachineViewController.h"
-
-N/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/Classes/PPMDoubleTableCell.h
-c000000004B33C0B50000000000000150
-t1261682869
-s336
-i<UIKit/UIKit.h>
-i"PPMTableCell.h"
-
-N/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/Classes/PPMDoubleTableCell.m
-c000000004B51A02A0000000000000139
-t1263640618
-s313
-i"PPMDoubleTableCell.h"
-
-N/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/Classes/Portland_Pinball_MapAppDelegate.h
-c000000004B723DE50000000000000540
-t1265778149
-s1344
-i<math.h>
-
-N/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/Classes/Portland_Pinball_MapAppDelegate.m
-c000000004B8A8DAB00000000000007A9
-t1267371435
-s1961
-i"Portland_Pinball_MapAppDelegate.h"
-i"RootViewController.h"
-
-N/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/Classes/RSSViewController.h
-c000000004B820AE000000000000003E6
-t1266813664
-s998
-i<UIKit/UIKit.h>
-i"BlackSectionViewController.h"
-i"PPMTableCell.h"
-i"LocationProfileViewController.h"
-i"Portland_Pinball_MapAppDelegate.h"
-
-N/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/Classes/RSSViewController.m
-c000000004B86E0580000000000003E1D
-t1267130456
-s15901
-i"RSSViewController.h"
-i"PPMDoubleTableCell.h"
-
-N/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/Classes/RootViewController.h
-c000000004B84512E0000000000000712
-t1266962734
-s1810
-i"AboutViewController.h"
-i"LocationObject.h"
-i"XMLTable.h"
-i"ClosestLocations.h"
-i"RSSViewController.h"
-i"ZonesViewController.h"
-i"LocationFilterView.h"
-i"Portland_Pinball_MapAppDelegate.h"
-i"MachineViewController.h"
-i"BlackTableViewController.h"
-i<CoreLocation/CoreLocation.h>
-
-N/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/Classes/RootViewController.m
-c000000004B84512E0000000000003907
-t1266962734
-s14599
-i"RootViewController.h"
-
-N/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/Classes/XMLTable.h
-c000000004B7E22BE000000000000024F
-t1266557630
-s591
-i<UIKit/UIKit.h>
-i"BlackTableViewController.h"
-
-N/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/Classes/XMLTable.m
-c000000004B5BA1120000000000000BDA
-t1264296210
-s3034
-i"XMLTable.h"
-
-N/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/Classes/XMLTableView.xib
-c000000004B33C0B50000000000002E16
-t1261682869
-s11798
-
-N/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/Classes/ZonesViewController.h
-c000000004B33C0B50000000000000242
-t1261682869
-s578
-i"LocationFilterView.h"
-i"BlackSectionViewController.h"
-i<UIKit/UIKit.h>
-
-N/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/Classes/ZonesViewController.m
-c000000004B8BF7DD00000000000014E7
-t1267464157
-s5351
-i"ZonesViewController.h"
-
-N/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/Default.png
-c000000004B7356ED0000000000035F4E
-t1265850093
-s221006
-
-N/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/Default_old.png
-c000000004B735720000000000000542E
-t1265850144
-s21550
-
-N/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/LocationProfile.xib
-c000000004B652F690000000000007D53
-t1264922473
-s32083
-
-N/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/MainWindow.xib
-c000000004B5100400000000000005E74
-t1263599680
-s24180
-
-N/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/PPM-Icon-03.png
-c000000004B74B30100000000000025C5
-t1265939201
-s9669
-
-N/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/PPMDoubleTextCell.xib
-c000000004B6535480000000000004E7D
-t1264923976
-s20093
-
-N/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/PPMTableCell.h
-c000000004B33C0BE0000000000000137
-t1261682878
-s311
-i<UIKit/UIKit.h>
-
-N/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/PPMTableCell.xib
-c000000004B650513000000000000454C
-t1264911635
-s17740
-
-N/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/Portland_Pinball_Map_Prefix.pch
-c000000004B33C0BE000000000000015A
-t1261682878
-s346
-i<Availability.h>
-i<Foundation/Foundation.h>
-i<UIKit/UIKit.h>
-
-N/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/RootViewController.xib
-c000000004B33C0BE0000000000001BB8
-t1261682878
-s7096
-
-N/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/arrow.png
-c000000004B33C0BE0000000000000160
-t1261682878
-s352
-
-N/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/arrow3.png
-c000000004B650A4700000000000002A6
-t1264912967
-s678
-
-N/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Distribution-iphoneos/Portland Pinball Map.app
-t1268534041
-s850
-
-N/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Distribution-iphoneos/Portland Pinball Map.app.dSYM
-t1268534041
-s102
-
-N/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Distribution-iphoneos/Portland Pinball Map.app/AboutView.nib
-t1268534038
-s6537
-
-N/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Distribution-iphoneos/Portland Pinball Map.app/Default.png
-t1268534038
-s232335
-
-N/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Distribution-iphoneos/Portland Pinball Map.app/Default_old.png
-t1268534038
-s29810
-
-N/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Distribution-iphoneos/Portland Pinball Map.app/Info.plist
-t1268534036
-s813
-
-N/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Distribution-iphoneos/Portland Pinball Map.app/LocationProfile.nib
-t1268534037
-s4659
-
-N/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Distribution-iphoneos/Portland Pinball Map.app/MainWindow.nib
-t1268534037
-s2007
-
-N/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Distribution-iphoneos/Portland Pinball Map.app/PPM-Icon-03.png
-t1268534038
-s9968
-
-N/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Distribution-iphoneos/Portland Pinball Map.app/PPMDoubleTextCell.nib
-t1268534037
-s3072
-
-N/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Distribution-iphoneos/Portland Pinball Map.app/PPMTableCell.nib
-t1268534037
-s2314
-
-N/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Distribution-iphoneos/Portland Pinball Map.app/PkgInfo
-t1268534036
-s8
-
-N/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Distribution-iphoneos/Portland Pinball Map.app/Portland Pinball Map
-t1268534041
-s166284
-
-N/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Distribution-iphoneos/Portland Pinball Map.app/ResourceRules.plist
-t1268534036
-s485
-
-N/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Distribution-iphoneos/Portland Pinball Map.app/RootViewController.nib
-t1268534037
-s1386
-
-N/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Distribution-iphoneos/Portland Pinball Map.app/XMLTableView.nib
-t1268534037
-s2271
-
-N/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Distribution-iphoneos/Portland Pinball Map.app/arrow.png
-t1268534037
-s383
-
-N/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Distribution-iphoneos/Portland Pinball Map.app/arrow3.png
-t1268534038
-s690
-
-N/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Distribution-iphoneos/Portland Pinball Map.app/embedded.mobileprovision
-t1268534041
-s7062
-
-N/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Distribution-iphoneos/Portland Pinball Map.app/facebook-icon2.png
-t1268534038
-s3502
-
-N/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Distribution-iphoneos/Portland Pinball Map.app/ppm_icon.png
-t1268534037
-s9336
-
-N/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Distribution-iphoneos/Portland Pinball Map.app/splash.png
-t1268534038
-s27589
-
-N/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Distribution-iphoneos/Portland Pinball Map.app/splash_town.png
-t1268534038
-s231609
-
-N/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Portland Pinball Map.build/Distribution-iphoneos/Portland Pinball Map.build/Objects-normal/armv6/AboutViewController.o
-t1268534040
-s43388
-
-N/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Portland Pinball Map.build/Distribution-iphoneos/Portland Pinball Map.build/Objects-normal/armv6/BlackSectionViewController.o
-t1268534040
-s38908
-
-N/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Portland Pinball Map.build/Distribution-iphoneos/Portland Pinball Map.build/Objects-normal/armv6/BlackTableViewController.o
-t1268534039
-s52664
-
-N/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Portland Pinball Map.build/Distribution-iphoneos/Portland Pinball Map.build/Objects-normal/armv6/ClosestLocations.o
-t1268534040
-s52316
-
-N/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Portland Pinball Map.build/Distribution-iphoneos/Portland Pinball Map.build/Objects-normal/armv6/LocationFilterView.o
-t1268534040
-s69984
-
-N/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Portland Pinball Map.build/Distribution-iphoneos/Portland Pinball Map.build/Objects-normal/armv6/LocationMap.o
-t1268534040
-s61400
-
-N/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Portland Pinball Map.build/Distribution-iphoneos/Portland Pinball Map.build/Objects-normal/armv6/LocationObject.o
-t1268534040
-s25720
-
-N/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Portland Pinball Map.build/Distribution-iphoneos/Portland Pinball Map.build/Objects-normal/armv6/LocationPin.o
-t1268534040
-s14832
-
-N/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Portland Pinball Map.build/Distribution-iphoneos/Portland Pinball Map.build/Objects-normal/armv6/LocationProfileViewController.o
-t1268534040
-s103612
-
-N/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Portland Pinball Map.build/Distribution-iphoneos/Portland Pinball Map.build/Objects-normal/armv6/MachineFilterView.o
-t1268534040
-s62464
-
-N/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Portland Pinball Map.build/Distribution-iphoneos/Portland Pinball Map.build/Objects-normal/armv6/MachineObject.o
-t1268534040
-s9060
-
-N/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Portland Pinball Map.build/Distribution-iphoneos/Portland Pinball Map.build/Objects-normal/armv6/MachineViewController.o
-t1268534039
-s58456
-
-N/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Portland Pinball Map.build/Distribution-iphoneos/Portland Pinball Map.build/Objects-normal/armv6/PPMDoubleTableCell.o
-t1268534039
-s17160
-
-N/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Portland Pinball Map.build/Distribution-iphoneos/Portland Pinball Map.build/Objects-normal/armv6/PPMTableCell.o
-t1268534039
-s18564
-
-N/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Portland Pinball Map.build/Distribution-iphoneos/Portland Pinball Map.build/Objects-normal/armv6/Portland Pinball Map.LinkFileList
-c000000004B9C4B140000000000001032
-t1268534036
-s4146
-
-N/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Portland Pinball Map.build/Distribution-iphoneos/Portland Pinball Map.build/Objects-normal/armv6/Portland_Pinball_MapAppDelegate.o
-t1268534038
-s55868
-
-N/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Portland Pinball Map.build/Distribution-iphoneos/Portland Pinball Map.build/Objects-normal/armv6/RSSViewController.o
-t1268534039
-s78192
-
-N/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Portland Pinball Map.build/Distribution-iphoneos/Portland Pinball Map.build/Objects-normal/armv6/RootViewController.o
-t1268534039
-s93708
-
-N/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Portland Pinball Map.build/Distribution-iphoneos/Portland Pinball Map.build/Objects-normal/armv6/XMLTable.o
-t1268534039
-s44024
-
-N/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Portland Pinball Map.build/Distribution-iphoneos/Portland Pinball Map.build/Objects-normal/armv6/ZonesViewController.o
-t1268534039
-s45484
-
-N/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Portland Pinball Map.build/Distribution-iphoneos/Portland Pinball Map.build/Objects-normal/armv6/main.o
-t1268534038
-s6724
-
-N/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Portland Pinball Map.build/Distribution-iphoneos/Portland Pinball Map.build/Portland Pinball Map.xcent
-t1268534041
-s314
-
-N/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/facebook-icon2.png
-c000000004B8A75660000000000000CD1
-t1267365222
-s3281
-
-N/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/main.m
-c000000004B33C0BE0000000000000170
-t1261682878
-s368
-i<UIKit/UIKit.h>
-
-N/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/ppm_icon.png
-c000000004B33C0BE0000000000001E95
-t1261682878
-s7829
-
-N/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/splash.png
-c000000004B5E5CB6000000000000487A
-t1264475318
-s18554
-
-N/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/splash_town.png
-c000000004B7357F60000000000035D2B
-t1265850358
-s220459
-
-N/Users/Isaac/Library/MobileDevice/Provisioning Profiles/35EDA825-D876-48BB-9CD2-04CBF9E63986.mobileprovision
-c000000004B8C0C140000000000001B96
-t1267469332
-s7062
-
-N/var/folders/kl/kl4Acn0tG+4QWNmV7K58pk+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/Portland_Pinball_Map_Prefix-chxeqokorsmctegndcgqgxjrmitc/Portland_Pinball_Map_Prefix.pch.gch
-t1267470177
-s7700664
-
-N/var/folders/kl/kl4Acn0tG+4QWNmV7K58pk+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/Portland_Pinball_Map_Prefix-evmejhdgavstfpbvdhlbicemastg/Portland_Pinball_Map_Prefix.pch.gch
-t1268533901
-s7651456
-
-NPortland_Pinball_Map-Info.plist
-c000000004B9C4A8A000000000000045E
-t1268533898
-s1118
-
-CCheck dependencies
-r0
-lSLF07#2@18"Check dependencies290226836#290226836#0(0"0(0#1#0"4300885448#0"0#
-
-CCodeSign "/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Distribution-iphoneos/Portland Pinball Map.app"
-s290226841.074545
-e290226841.202521
-r1
-xCodeSign
-x/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Distribution-iphoneos/Portland Pinball Map.app
-lSLF07#2@63"CodeSign "build/Distribution-iphoneos/Portland Pinball Map.app"290226841#290226841#0(0"0(0#0#136"/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Distribution-iphoneos/Portland Pinball Map.app4300885448#908"    cd "/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map"    setenv CODESIGN_ALLOCATE /Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/codesign_allocate    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /usr/bin/codesign -f -s "iPhone Distribution: Isaac Ruiz" "--resource-rules=/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Distribution-iphoneos/Portland Pinball Map.app/ResourceRules.plist" --entitlements "/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Portland Pinball Map.build/Distribution-iphoneos/Portland Pinball Map.build/Portland Pinball Map.xcent" "/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Distribution-iphoneos/Portland Pinball Map.app"0#
-
-CCompileC "build/Portland Pinball Map.build/Distribution-iphoneos/Portland Pinball Map.build/Objects-normal/armv6/AboutViewController.o" "/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/Classes/AboutViewController.m" normal armv6 objective-c com.apple.compilers.gcc.4_2
-s290226840.540958
-e290226840.646905
-r1
-xCompileC
-xbuild/Portland Pinball Map.build/Distribution-iphoneos/Portland Pinball Map.build/Objects-normal/armv6/AboutViewController.o
-x/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/Classes/AboutViewController.m
-xnormal
-xarmv6
-xobjective-c
-xcom.apple.compilers.gcc.4_2
-lSLF07#2@121"Compile /Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/Classes/AboutViewController.m290226840#290226840#0(0"0(0#0#113"/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/Classes/AboutViewController.m4300885448#2619"    cd "/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map"    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch armv6 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -Os -mdynamic-no-pic -Wreturn-type -Wunused-variable -isysroot /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS3.0.sdk -fvisibility=hidden -gdwarf-2 -mthumb -miphoneos-version-min=3.0 -iquote "/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Portland Pinball Map.build/Distribution-iphoneos/Portland Pinball Map.build/Portland Pinball Map-generated-files.hmap" "-I/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Portland Pinball Map.build/Distribution-iphoneos/Portland Pinball Map.build/Portland Pinball Map-own-target-headers.hmap" "-I/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Portland Pinball Map.build/Distribution-iphoneos/Portland Pinball Map.build/Portland Pinball Map-all-target-headers.hmap" -iquote "/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Portland Pinball Map.build/Distribution-iphoneos/Portland Pinball Map.build/Portland Pinball Map-project-headers.hmap" "-F/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Distribution-iphoneos" "-I/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Distribution-iphoneos/include" "-I/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Portland Pinball Map.build/Distribution-iphoneos/Portland Pinball Map.build/DerivedSources/armv6" "-I/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Portland Pinball Map.build/Distribution-iphoneos/Portland Pinball Map.build/DerivedSources" -include /var/folders/kl/kl4Acn0tG+4QWNmV7K58pk+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/Portland_Pinball_Map_Prefix-evmejhdgavstfpbvdhlbicemastg/Portland_Pinball_Map_Prefix.pch -c "/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/Classes/AboutViewController.m" -o "/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Portland Pinball Map.build/Distribution-iphoneos/Portland Pinball Map.build/Objects-normal/armv6/AboutViewController.o"0#
-
-CCompileC "build/Portland Pinball Map.build/Distribution-iphoneos/Portland Pinball Map.build/Objects-normal/armv6/BlackSectionViewController.o" "/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/Classes/BlackSectionViewController.m" normal armv6 objective-c com.apple.compilers.gcc.4_2
-s290226840.230004
-e290226840.339713
-r1
-xCompileC
-xbuild/Portland Pinball Map.build/Distribution-iphoneos/Portland Pinball Map.build/Objects-normal/armv6/BlackSectionViewController.o
-x/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/Classes/BlackSectionViewController.m
-xnormal
-xarmv6
-xobjective-c
-xcom.apple.compilers.gcc.4_2
-lSLF07#2@128"Compile /Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/Classes/BlackSectionViewController.m290226840#290226840#0(0"0(0#0#120"/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/Classes/BlackSectionViewController.m4300885448#2633"    cd "/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map"    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch armv6 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -Os -mdynamic-no-pic -Wreturn-type -Wunused-variable -isysroot /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS3.0.sdk -fvisibility=hidden -gdwarf-2 -mthumb -miphoneos-version-min=3.0 -iquote "/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Portland Pinball Map.build/Distribution-iphoneos/Portland Pinball Map.build/Portland Pinball Map-generated-files.hmap" "-I/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Portland Pinball Map.build/Distribution-iphoneos/Portland Pinball Map.build/Portland Pinball Map-own-target-headers.hmap" "-I/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Portland Pinball Map.build/Distribution-iphoneos/Portland Pinball Map.build/Portland Pinball Map-all-target-headers.hmap" -iquote "/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Portland Pinball Map.build/Distribution-iphoneos/Portland Pinball Map.build/Portland Pinball Map-project-headers.hmap" "-F/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Distribution-iphoneos" "-I/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Distribution-iphoneos/include" "-I/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Portland Pinball Map.build/Distribution-iphoneos/Portland Pinball Map.build/DerivedSources/armv6" "-I/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Portland Pinball Map.build/Distribution-iphoneos/Portland Pinball Map.build/DerivedSources" -include /var/folders/kl/kl4Acn0tG+4QWNmV7K58pk+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/Portland_Pinball_Map_Prefix-evmejhdgavstfpbvdhlbicemastg/Portland_Pinball_Map_Prefix.pch -c "/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/Classes/BlackSectionViewController.m" -o "/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Portland Pinball Map.build/Distribution-iphoneos/Portland Pinball Map.build/Objects-normal/armv6/BlackSectionViewController.o"0#
-
-CCompileC "build/Portland Pinball Map.build/Distribution-iphoneos/Portland Pinball Map.build/Objects-normal/armv6/BlackTableViewController.o" "/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/Classes/BlackTableViewController.m" normal armv6 objective-c com.apple.compilers.gcc.4_2
-s290226839.440830
-e290226839.592604
-r1
-xCompileC
-xbuild/Portland Pinball Map.build/Distribution-iphoneos/Portland Pinball Map.build/Objects-normal/armv6/BlackTableViewController.o
-x/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/Classes/BlackTableViewController.m
-xnormal
-xarmv6
-xobjective-c
-xcom.apple.compilers.gcc.4_2
-lSLF07#2@126"Compile /Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/Classes/BlackTableViewController.m290226839#290226839#0(0"0(0#0#118"/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/Classes/BlackTableViewController.m4300885448#2629"    cd "/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map"    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch armv6 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -Os -mdynamic-no-pic -Wreturn-type -Wunused-variable -isysroot /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS3.0.sdk -fvisibility=hidden -gdwarf-2 -mthumb -miphoneos-version-min=3.0 -iquote "/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Portland Pinball Map.build/Distribution-iphoneos/Portland Pinball Map.build/Portland Pinball Map-generated-files.hmap" "-I/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Portland Pinball Map.build/Distribution-iphoneos/Portland Pinball Map.build/Portland Pinball Map-own-target-headers.hmap" "-I/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Portland Pinball Map.build/Distribution-iphoneos/Portland Pinball Map.build/Portland Pinball Map-all-target-headers.hmap" -iquote "/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Portland Pinball Map.build/Distribution-iphoneos/Portland Pinball Map.build/Portland Pinball Map-project-headers.hmap" "-F/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Distribution-iphoneos" "-I/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Distribution-iphoneos/include" "-I/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Portland Pinball Map.build/Distribution-iphoneos/Portland Pinball Map.build/DerivedSources/armv6" "-I/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Portland Pinball Map.build/Distribution-iphoneos/Portland Pinball Map.build/DerivedSources" -include /var/folders/kl/kl4Acn0tG+4QWNmV7K58pk+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/Portland_Pinball_Map_Prefix-evmejhdgavstfpbvdhlbicemastg/Portland_Pinball_Map_Prefix.pch -c "/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/Classes/BlackTableViewController.m" -o "/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Portland Pinball Map.build/Distribution-iphoneos/Portland Pinball Map.build/Objects-normal/armv6/BlackTableViewController.o"0#
-
-CCompileC "build/Portland Pinball Map.build/Distribution-iphoneos/Portland Pinball Map.build/Objects-normal/armv6/ClosestLocations.o" "/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/Classes/ClosestLocations.m" normal armv6 objective-c com.apple.compilers.gcc.4_2
-s290226840.770946
-e290226840.937167
-r1
-xCompileC
-xbuild/Portland Pinball Map.build/Distribution-iphoneos/Portland Pinball Map.build/Objects-normal/armv6/ClosestLocations.o
-x/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/Classes/ClosestLocations.m
-xnormal
-xarmv6
-xobjective-c
-xcom.apple.compilers.gcc.4_2
-lSLF07#2@118"Compile /Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/Classes/ClosestLocations.m290226840#290226840#0(0"0(0#0#110"/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/Classes/ClosestLocations.m4300885448#2613"    cd "/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map"    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch armv6 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -Os -mdynamic-no-pic -Wreturn-type -Wunused-variable -isysroot /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS3.0.sdk -fvisibility=hidden -gdwarf-2 -mthumb -miphoneos-version-min=3.0 -iquote "/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Portland Pinball Map.build/Distribution-iphoneos/Portland Pinball Map.build/Portland Pinball Map-generated-files.hmap" "-I/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Portland Pinball Map.build/Distribution-iphoneos/Portland Pinball Map.build/Portland Pinball Map-own-target-headers.hmap" "-I/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Portland Pinball Map.build/Distribution-iphoneos/Portland Pinball Map.build/Portland Pinball Map-all-target-headers.hmap" -iquote "/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Portland Pinball Map.build/Distribution-iphoneos/Portland Pinball Map.build/Portland Pinball Map-project-headers.hmap" "-F/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Distribution-iphoneos" "-I/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Distribution-iphoneos/include" "-I/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Portland Pinball Map.build/Distribution-iphoneos/Portland Pinball Map.build/DerivedSources/armv6" "-I/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Portland Pinball Map.build/Distribution-iphoneos/Portland Pinball Map.build/DerivedSources" -include /var/folders/kl/kl4Acn0tG+4QWNmV7K58pk+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/Portland_Pinball_Map_Prefix-evmejhdgavstfpbvdhlbicemastg/Portland_Pinball_Map_Prefix.pch -c "/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/Classes/ClosestLocations.m" -o "/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Portland Pinball Map.build/Distribution-iphoneos/Portland Pinball Map.build/Objects-normal/armv6/ClosestLocations.o"0#
-
-CCompileC "build/Portland Pinball Map.build/Distribution-iphoneos/Portland Pinball Map.build/Objects-normal/armv6/LocationFilterView.o" "/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/Classes/LocationFilterView.m" normal armv6 objective-c com.apple.compilers.gcc.4_2
-s290226839.878177
-e290226840.229894
-r1
-xCompileC
-xbuild/Portland Pinball Map.build/Distribution-iphoneos/Portland Pinball Map.build/Objects-normal/armv6/LocationFilterView.o
-x/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/Classes/LocationFilterView.m
-xnormal
-xarmv6
-xobjective-c
-xcom.apple.compilers.gcc.4_2
-lSLF07#2@120"Compile /Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/Classes/LocationFilterView.m290226839#290226840#0(0"0(0#0#112"/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/Classes/LocationFilterView.m4300885448#2617"    cd "/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map"    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch armv6 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -Os -mdynamic-no-pic -Wreturn-type -Wunused-variable -isysroot /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS3.0.sdk -fvisibility=hidden -gdwarf-2 -mthumb -miphoneos-version-min=3.0 -iquote "/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Portland Pinball Map.build/Distribution-iphoneos/Portland Pinball Map.build/Portland Pinball Map-generated-files.hmap" "-I/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Portland Pinball Map.build/Distribution-iphoneos/Portland Pinball Map.build/Portland Pinball Map-own-target-headers.hmap" "-I/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Portland Pinball Map.build/Distribution-iphoneos/Portland Pinball Map.build/Portland Pinball Map-all-target-headers.hmap" -iquote "/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Portland Pinball Map.build/Distribution-iphoneos/Portland Pinball Map.build/Portland Pinball Map-project-headers.hmap" "-F/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Distribution-iphoneos" "-I/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Distribution-iphoneos/include" "-I/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Portland Pinball Map.build/Distribution-iphoneos/Portland Pinball Map.build/DerivedSources/armv6" "-I/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Portland Pinball Map.build/Distribution-iphoneos/Portland Pinball Map.build/DerivedSources" -include /var/folders/kl/kl4Acn0tG+4QWNmV7K58pk+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/Portland_Pinball_Map_Prefix-evmejhdgavstfpbvdhlbicemastg/Portland_Pinball_Map_Prefix.pch -c "/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/Classes/LocationFilterView.m" -o "/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Portland Pinball Map.build/Distribution-iphoneos/Portland Pinball Map.build/Objects-normal/armv6/LocationFilterView.o"0#
-
-CCompileC "build/Portland Pinball Map.build/Distribution-iphoneos/Portland Pinball Map.build/Objects-normal/armv6/LocationMap.o" "/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/Classes/LocationMap.m" normal armv6 objective-c com.apple.compilers.gcc.4_2
-s290226840.647011
-e290226840.959499
-r1
-xCompileC
-xbuild/Portland Pinball Map.build/Distribution-iphoneos/Portland Pinball Map.build/Objects-normal/armv6/LocationMap.o
-x/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/Classes/LocationMap.m
-xnormal
-xarmv6
-xobjective-c
-xcom.apple.compilers.gcc.4_2
-o/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/Classes/LocationMap.m: In function '-[LocationMap onPinPress:]':
-o/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/Classes/LocationMap.m:267: warning: 'UIView' may not respond to '-annotation'
-o/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/Classes/LocationMap.m:267: warning: (Messages without a matching method signature
-o/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/Classes/LocationMap.m:267: warning: will be assumed to return 'id' and accept
-o/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/Classes/LocationMap.m:267: warning: '...' as arguments.)
-o/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/Classes/LocationMap.m:267: warning: 'LocationObject' may not respond to '-location'
-o/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/Classes/LocationMap.m:268: warning: no '-showLocationProfile:withMapButton:' method found
-lSLF07#2@113"Compile /Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/Classes/LocationMap.m290226840#290226840#0(1122"/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/Classes/LocationMap.m: In function '-[LocationMap onPinPress:]':/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/Classes/LocationMap.m:267: warning: 'UIView' may not respond to '-annotation'/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/Classes/LocationMap.m:267: warning: (Messages without a matching method signature/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/Classes/LocationMap.m:267: warning: will be assumed to return 'id' and accept/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/Classes/LocationMap.m:267: warning: '...' as arguments.)/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/Classes/LocationMap.m:267: warning: 'LocationObject' may not respond to '-location'/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/Classes/LocationMap.m:268: warning: no '-showLocationProfile:withMapButton:' method found4(22@41"'UIView' may not respond to '-annotation'290226840#149#162#0(6@105"/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/Classes/LocationMap.m288587731#267#0#267#0#26"'*' may not respond to '*'0(13@108"(Messages without a matching method signature will be assumed to return 'id' and accept '...' as arguments.)290226840#311#166#0(6@105"/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/Classes/LocationMap.m288587731#267#0#267#0#0"0(22@47"'LocationObject' may not respond to '-location'290226840#780#168#0(6@105"/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/Classes/LocationMap.m288587731#267#0#267#0#26"'*' may not respond to '*'0(22@53"No '-showLocationProfile:withMapButton:' method found290226840#948#174#0(6@105"/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/Classes/LocationMap.m288587731#268#0#268#0#19"no '*' method found0(0#0#105"/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/Classes/LocationMap.m4300885448#2603"    cd "/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map"    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch armv6 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -Os -mdynamic-no-pic -Wreturn-type -Wunused-variable -isysroot /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS3.0.sdk -fvisibility=hidden -gdwarf-2 -mthumb -miphoneos-version-min=3.0 -iquote "/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Portland Pinball Map.build/Distribution-iphoneos/Portland Pinball Map.build/Portland Pinball Map-generated-files.hmap" "-I/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Portland Pinball Map.build/Distribution-iphoneos/Portland Pinball Map.build/Portland Pinball Map-own-target-headers.hmap" "-I/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Portland Pinball Map.build/Distribution-iphoneos/Portland Pinball Map.build/Portland Pinball Map-all-target-headers.hmap" -iquote "/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Portland Pinball Map.build/Distribution-iphoneos/Portland Pinball Map.build/Portland Pinball Map-project-headers.hmap" "-F/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Distribution-iphoneos" "-I/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Distribution-iphoneos/include" "-I/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Portland Pinball Map.build/Distribution-iphoneos/Portland Pinball Map.build/DerivedSources/armv6" "-I/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Portland Pinball Map.build/Distribution-iphoneos/Portland Pinball Map.build/DerivedSources" -include /var/folders/kl/kl4Acn0tG+4QWNmV7K58pk+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/Portland_Pinball_Map_Prefix-evmejhdgavstfpbvdhlbicemastg/Portland_Pinball_Map_Prefix.pch -c "/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/Classes/LocationMap.m" -o "/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Portland Pinball Map.build/Distribution-iphoneos/Portland Pinball Map.build/Objects-normal/armv6/LocationMap.o"0#
-
-CCompileC "build/Portland Pinball Map.build/Distribution-iphoneos/Portland Pinball Map.build/Objects-normal/armv6/LocationObject.o" "/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/Classes/LocationObject.m" normal armv6 objective-c com.apple.compilers.gcc.4_2
-s290226840.339923
-e290226840.540857
-r1
-xCompileC
-xbuild/Portland Pinball Map.build/Distribution-iphoneos/Portland Pinball Map.build/Objects-normal/armv6/LocationObject.o
-x/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/Classes/LocationObject.m
-xnormal
-xarmv6
-xobjective-c
-xcom.apple.compilers.gcc.4_2
-lSLF07#2@116"Compile /Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/Classes/LocationObject.m290226840#290226840#0(0"0(0#0#108"/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/Classes/LocationObject.m4300885448#2609"    cd "/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map"    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch armv6 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -Os -mdynamic-no-pic -Wreturn-type -Wunused-variable -isysroot /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS3.0.sdk -fvisibility=hidden -gdwarf-2 -mthumb -miphoneos-version-min=3.0 -iquote "/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Portland Pinball Map.build/Distribution-iphoneos/Portland Pinball Map.build/Portland Pinball Map-generated-files.hmap" "-I/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Portland Pinball Map.build/Distribution-iphoneos/Portland Pinball Map.build/Portland Pinball Map-own-target-headers.hmap" "-I/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Portland Pinball Map.build/Distribution-iphoneos/Portland Pinball Map.build/Portland Pinball Map-all-target-headers.hmap" -iquote "/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Portland Pinball Map.build/Distribution-iphoneos/Portland Pinball Map.build/Portland Pinball Map-project-headers.hmap" "-F/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Distribution-iphoneos" "-I/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Distribution-iphoneos/include" "-I/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Portland Pinball Map.build/Distribution-iphoneos/Portland Pinball Map.build/DerivedSources/armv6" "-I/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Portland Pinball Map.build/Distribution-iphoneos/Portland Pinball Map.build/DerivedSources" -include /var/folders/kl/kl4Acn0tG+4QWNmV7K58pk+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/Portland_Pinball_Map_Prefix-evmejhdgavstfpbvdhlbicemastg/Portland_Pinball_Map_Prefix.pch -c "/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/Classes/LocationObject.m" -o "/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Portland Pinball Map.build/Distribution-iphoneos/Portland Pinball Map.build/Objects-normal/armv6/LocationObject.o"0#
-
-CCompileC "build/Portland Pinball Map.build/Distribution-iphoneos/Portland Pinball Map.build/Objects-normal/armv6/LocationPin.o" "/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/Classes/LocationPin.m" normal armv6 objective-c com.apple.compilers.gcc.4_2
-s290226840.680041
-e290226840.770842
-r1
-xCompileC
-xbuild/Portland Pinball Map.build/Distribution-iphoneos/Portland Pinball Map.build/Objects-normal/armv6/LocationPin.o
-x/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/Classes/LocationPin.m
-xnormal
-xarmv6
-xobjective-c
-xcom.apple.compilers.gcc.4_2
-lSLF07#2@113"Compile /Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/Classes/LocationPin.m290226840#290226840#0(0"0(0#0#105"/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/Classes/LocationPin.m4300885448#2603"    cd "/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map"    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch armv6 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -Os -mdynamic-no-pic -Wreturn-type -Wunused-variable -isysroot /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS3.0.sdk -fvisibility=hidden -gdwarf-2 -mthumb -miphoneos-version-min=3.0 -iquote "/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Portland Pinball Map.build/Distribution-iphoneos/Portland Pinball Map.build/Portland Pinball Map-generated-files.hmap" "-I/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Portland Pinball Map.build/Distribution-iphoneos/Portland Pinball Map.build/Portland Pinball Map-own-target-headers.hmap" "-I/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Portland Pinball Map.build/Distribution-iphoneos/Portland Pinball Map.build/Portland Pinball Map-all-target-headers.hmap" -iquote "/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Portland Pinball Map.build/Distribution-iphoneos/Portland Pinball Map.build/Portland Pinball Map-project-headers.hmap" "-F/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Distribution-iphoneos" "-I/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Distribution-iphoneos/include" "-I/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Portland Pinball Map.build/Distribution-iphoneos/Portland Pinball Map.build/DerivedSources/armv6" "-I/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Portland Pinball Map.build/Distribution-iphoneos/Portland Pinball Map.build/DerivedSources" -include /var/folders/kl/kl4Acn0tG+4QWNmV7K58pk+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/Portland_Pinball_Map_Prefix-evmejhdgavstfpbvdhlbicemastg/Portland_Pinball_Map_Prefix.pch -c "/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/Classes/LocationPin.m" -o "/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Portland Pinball Map.build/Distribution-iphoneos/Portland Pinball Map.build/Objects-normal/armv6/LocationPin.o"0#
-
-CCompileC "build/Portland Pinball Map.build/Distribution-iphoneos/Portland Pinball Map.build/Objects-normal/armv6/LocationProfileViewController.o" "/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/Classes/LocationProfileViewController.m" normal armv6 objective-c com.apple.compilers.gcc.4_2
-s290226839.640608
-e290226840.356570
-r1
-xCompileC
-xbuild/Portland Pinball Map.build/Distribution-iphoneos/Portland Pinball Map.build/Objects-normal/armv6/LocationProfileViewController.o
-x/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/Classes/LocationProfileViewController.m
-xnormal
-xarmv6
-xobjective-c
-xcom.apple.compilers.gcc.4_2
-lSLF07#2@131"Compile /Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/Classes/LocationProfileViewController.m290226839#290226840#0(0"0(0#0#123"/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/Classes/LocationProfileViewController.m4300885448#2639"    cd "/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map"    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch armv6 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -Os -mdynamic-no-pic -Wreturn-type -Wunused-variable -isysroot /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS3.0.sdk -fvisibility=hidden -gdwarf-2 -mthumb -miphoneos-version-min=3.0 -iquote "/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Portland Pinball Map.build/Distribution-iphoneos/Portland Pinball Map.build/Portland Pinball Map-generated-files.hmap" "-I/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Portland Pinball Map.build/Distribution-iphoneos/Portland Pinball Map.build/Portland Pinball Map-own-target-headers.hmap" "-I/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Portland Pinball Map.build/Distribution-iphoneos/Portland Pinball Map.build/Portland Pinball Map-all-target-headers.hmap" -iquote "/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Portland Pinball Map.build/Distribution-iphoneos/Portland Pinball Map.build/Portland Pinball Map-project-headers.hmap" "-F/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Distribution-iphoneos" "-I/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Distribution-iphoneos/include" "-I/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Portland Pinball Map.build/Distribution-iphoneos/Portland Pinball Map.build/DerivedSources/armv6" "-I/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Portland Pinball Map.build/Distribution-iphoneos/Portland Pinball Map.build/DerivedSources" -include /var/folders/kl/kl4Acn0tG+4QWNmV7K58pk+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/Portland_Pinball_Map_Prefix-evmejhdgavstfpbvdhlbicemastg/Portland_Pinball_Map_Prefix.pch -c "/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/Classes/LocationProfileViewController.m" -o "/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Portland Pinball Map.build/Distribution-iphoneos/Portland Pinball Map.build/Objects-normal/armv6/LocationProfileViewController.o"0#
-
-CCompileC "build/Portland Pinball Map.build/Distribution-iphoneos/Portland Pinball Map.build/Objects-normal/armv6/MachineFilterView.o" "/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/Classes/MachineFilterView.m" normal armv6 objective-c com.apple.compilers.gcc.4_2
-s290226840.425630
-e290226840.679940
-r1
-xCompileC
-xbuild/Portland Pinball Map.build/Distribution-iphoneos/Portland Pinball Map.build/Objects-normal/armv6/MachineFilterView.o
-x/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/Classes/MachineFilterView.m
-xnormal
-xarmv6
-xobjective-c
-xcom.apple.compilers.gcc.4_2
-o/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/Classes/MachineFilterView.m:205: warning: property 'mapView' requires method '-mapView' to be defined - use @synthesize, @dynamic or provide a method implementation
-o/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/Classes/MachineFilterView.m:205: warning: property 'mapView' requires the method 'setMapView:' to be defined - use @synthesize, @dynamic or provide a method implementation
-lSLF07#2@119"Compile /Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/Classes/MachineFilterView.m290226840#290226840#0(505"/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/Classes/MachineFilterView.m:205: warning: property 'mapView' requires method '-mapView' to be defined - use @synthesize, @dynamic or provide a method implementation/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/Classes/MachineFilterView.m:205: warning: property 'mapView' requires the method 'setMapView:' to be defined - use @synthesize, @dynamic or provide a method implementation2(22@122"Property 'mapView' requires method '-mapView' to be defined - use @synthesize, @dynamic or provide a method implementation290226840#0#249#0(6@111"/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/Classes/MachineFilterView.m288588113#205#0#205#0#0"0(22@129"Property 'mapView' requires the method 'setMapView:' to be defined - use @synthesize, @dynamic or provide a method implementation290226840#249#256#0(6@111"/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/Classes/MachineFilterView.m288588113#205#0#205#0#0"0(0#0#111"/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/Classes/MachineFilterView.m4300885448#2615"    cd "/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map"    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch armv6 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -Os -mdynamic-no-pic -Wreturn-type -Wunused-variable -isysroot /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS3.0.sdk -fvisibility=hidden -gdwarf-2 -mthumb -miphoneos-version-min=3.0 -iquote "/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Portland Pinball Map.build/Distribution-iphoneos/Portland Pinball Map.build/Portland Pinball Map-generated-files.hmap" "-I/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Portland Pinball Map.build/Distribution-iphoneos/Portland Pinball Map.build/Portland Pinball Map-own-target-headers.hmap" "-I/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Portland Pinball Map.build/Distribution-iphoneos/Portland Pinball Map.build/Portland Pinball Map-all-target-headers.hmap" -iquote "/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Portland Pinball Map.build/Distribution-iphoneos/Portland Pinball Map.build/Portland Pinball Map-project-headers.hmap" "-F/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Distribution-iphoneos" "-I/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Distribution-iphoneos/include" "-I/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Portland Pinball Map.build/Distribution-iphoneos/Portland Pinball Map.build/DerivedSources/armv6" "-I/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Portland Pinball Map.build/Distribution-iphoneos/Portland Pinball Map.build/DerivedSources" -include /var/folders/kl/kl4Acn0tG+4QWNmV7K58pk+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/Portland_Pinball_Map_Prefix-evmejhdgavstfpbvdhlbicemastg/Portland_Pinball_Map_Prefix.pch -c "/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/Classes/MachineFilterView.m" -o "/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Portland Pinball Map.build/Distribution-iphoneos/Portland Pinball Map.build/Objects-normal/armv6/MachineFilterView.o"0#
-
-CCompileC "build/Portland Pinball Map.build/Distribution-iphoneos/Portland Pinball Map.build/Objects-normal/armv6/MachineObject.o" "/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/Classes/MachineObject.m" normal armv6 objective-c com.apple.compilers.gcc.4_2
-s290226840.356676
-e290226840.425522
-r1
-xCompileC
-xbuild/Portland Pinball Map.build/Distribution-iphoneos/Portland Pinball Map.build/Objects-normal/armv6/MachineObject.o
-x/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/Classes/MachineObject.m
-xnormal
-xarmv6
-xobjective-c
-xcom.apple.compilers.gcc.4_2
-lSLF07#2@115"Compile /Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/Classes/MachineObject.m290226840#290226840#0(0"0(0#0#107"/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/Classes/MachineObject.m4300885448#2607"    cd "/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map"    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch armv6 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -Os -mdynamic-no-pic -Wreturn-type -Wunused-variable -isysroot /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS3.0.sdk -fvisibility=hidden -gdwarf-2 -mthumb -miphoneos-version-min=3.0 -iquote "/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Portland Pinball Map.build/Distribution-iphoneos/Portland Pinball Map.build/Portland Pinball Map-generated-files.hmap" "-I/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Portland Pinball Map.build/Distribution-iphoneos/Portland Pinball Map.build/Portland Pinball Map-own-target-headers.hmap" "-I/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Portland Pinball Map.build/Distribution-iphoneos/Portland Pinball Map.build/Portland Pinball Map-all-target-headers.hmap" -iquote "/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Portland Pinball Map.build/Distribution-iphoneos/Portland Pinball Map.build/Portland Pinball Map-project-headers.hmap" "-F/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Distribution-iphoneos" "-I/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Distribution-iphoneos/include" "-I/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Portland Pinball Map.build/Distribution-iphoneos/Portland Pinball Map.build/DerivedSources/armv6" "-I/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Portland Pinball Map.build/Distribution-iphoneos/Portland Pinball Map.build/DerivedSources" -include /var/folders/kl/kl4Acn0tG+4QWNmV7K58pk+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/Portland_Pinball_Map_Prefix-evmejhdgavstfpbvdhlbicemastg/Portland_Pinball_Map_Prefix.pch -c "/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/Classes/MachineObject.m" -o "/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Portland Pinball Map.build/Distribution-iphoneos/Portland Pinball Map.build/Objects-normal/armv6/MachineObject.o"0#
-
-CCompileC "build/Portland Pinball Map.build/Distribution-iphoneos/Portland Pinball Map.build/Objects-normal/armv6/MachineViewController.o" "/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/Classes/MachineViewController.m" normal armv6 objective-c com.apple.compilers.gcc.4_2
-s290226838.986016
-e290226839.194704
-r1
-xCompileC
-xbuild/Portland Pinball Map.build/Distribution-iphoneos/Portland Pinball Map.build/Objects-normal/armv6/MachineViewController.o
-x/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/Classes/MachineViewController.m
-xnormal
-xarmv6
-xobjective-c
-xcom.apple.compilers.gcc.4_2
-lSLF07#2@123"Compile /Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/Classes/MachineViewController.m290226838#290226839#0(0"0(0#0#115"/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/Classes/MachineViewController.m4300885448#2623"    cd "/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map"    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch armv6 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -Os -mdynamic-no-pic -Wreturn-type -Wunused-variable -isysroot /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS3.0.sdk -fvisibility=hidden -gdwarf-2 -mthumb -miphoneos-version-min=3.0 -iquote "/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Portland Pinball Map.build/Distribution-iphoneos/Portland Pinball Map.build/Portland Pinball Map-generated-files.hmap" "-I/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Portland Pinball Map.build/Distribution-iphoneos/Portland Pinball Map.build/Portland Pinball Map-own-target-headers.hmap" "-I/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Portland Pinball Map.build/Distribution-iphoneos/Portland Pinball Map.build/Portland Pinball Map-all-target-headers.hmap" -iquote "/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Portland Pinball Map.build/Distribution-iphoneos/Portland Pinball Map.build/Portland Pinball Map-project-headers.hmap" "-F/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Distribution-iphoneos" "-I/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Distribution-iphoneos/include" "-I/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Portland Pinball Map.build/Distribution-iphoneos/Portland Pinball Map.build/DerivedSources/armv6" "-I/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Portland Pinball Map.build/Distribution-iphoneos/Portland Pinball Map.build/DerivedSources" -include /var/folders/kl/kl4Acn0tG+4QWNmV7K58pk+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/Portland_Pinball_Map_Prefix-evmejhdgavstfpbvdhlbicemastg/Portland_Pinball_Map_Prefix.pch -c "/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/Classes/MachineViewController.m" -o "/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Portland Pinball Map.build/Distribution-iphoneos/Portland Pinball Map.build/Objects-normal/armv6/MachineViewController.o"0#
-
-CCompileC "build/Portland Pinball Map.build/Distribution-iphoneos/Portland Pinball Map.build/Objects-normal/armv6/PPMDoubleTableCell.o" "/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/Classes/PPMDoubleTableCell.m" normal armv6 objective-c com.apple.compilers.gcc.4_2
-s290226839.388499
-e290226839.440724
-r1
-xCompileC
-xbuild/Portland Pinball Map.build/Distribution-iphoneos/Portland Pinball Map.build/Objects-normal/armv6/PPMDoubleTableCell.o
-x/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/Classes/PPMDoubleTableCell.m
-xnormal
-xarmv6
-xobjective-c
-xcom.apple.compilers.gcc.4_2
-lSLF07#2@120"Compile /Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/Classes/PPMDoubleTableCell.m290226839#290226839#0(0"0(0#0#112"/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/Classes/PPMDoubleTableCell.m4300885448#2617"    cd "/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map"    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch armv6 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -Os -mdynamic-no-pic -Wreturn-type -Wunused-variable -isysroot /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS3.0.sdk -fvisibility=hidden -gdwarf-2 -mthumb -miphoneos-version-min=3.0 -iquote "/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Portland Pinball Map.build/Distribution-iphoneos/Portland Pinball Map.build/Portland Pinball Map-generated-files.hmap" "-I/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Portland Pinball Map.build/Distribution-iphoneos/Portland Pinball Map.build/Portland Pinball Map-own-target-headers.hmap" "-I/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Portland Pinball Map.build/Distribution-iphoneos/Portland Pinball Map.build/Portland Pinball Map-all-target-headers.hmap" -iquote "/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Portland Pinball Map.build/Distribution-iphoneos/Portland Pinball Map.build/Portland Pinball Map-project-headers.hmap" "-F/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Distribution-iphoneos" "-I/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Distribution-iphoneos/include" "-I/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Portland Pinball Map.build/Distribution-iphoneos/Portland Pinball Map.build/DerivedSources/armv6" "-I/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Portland Pinball Map.build/Distribution-iphoneos/Portland Pinball Map.build/DerivedSources" -include /var/folders/kl/kl4Acn0tG+4QWNmV7K58pk+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/Portland_Pinball_Map_Prefix-evmejhdgavstfpbvdhlbicemastg/Portland_Pinball_Map_Prefix.pch -c "/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/Classes/PPMDoubleTableCell.m" -o "/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Portland Pinball Map.build/Distribution-iphoneos/Portland Pinball Map.build/Objects-normal/armv6/PPMDoubleTableCell.o"0#
-
-CCompileC "build/Portland Pinball Map.build/Distribution-iphoneos/Portland Pinball Map.build/Objects-normal/armv6/PPMTableCell.o" "/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/Classes/../PPMTableCell.m" normal armv6 objective-c com.apple.compilers.gcc.4_2
-s290226839.573160
-e290226839.640499
-r1
-xCompileC
-xbuild/Portland Pinball Map.build/Distribution-iphoneos/Portland Pinball Map.build/Objects-normal/armv6/PPMTableCell.o
-x/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/Classes/../PPMTableCell.m
-xnormal
-xarmv6
-xobjective-c
-xcom.apple.compilers.gcc.4_2
-lSLF07#2@117"Compile /Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/Classes/../PPMTableCell.m290226839#290226839#0(0"0(0#0#109"/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/Classes/../PPMTableCell.m4300885448#2608"    cd "/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map"    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch armv6 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -Os -mdynamic-no-pic -Wreturn-type -Wunused-variable -isysroot /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS3.0.sdk -fvisibility=hidden -gdwarf-2 -mthumb -miphoneos-version-min=3.0 -iquote "/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Portland Pinball Map.build/Distribution-iphoneos/Portland Pinball Map.build/Portland Pinball Map-generated-files.hmap" "-I/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Portland Pinball Map.build/Distribution-iphoneos/Portland Pinball Map.build/Portland Pinball Map-own-target-headers.hmap" "-I/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Portland Pinball Map.build/Distribution-iphoneos/Portland Pinball Map.build/Portland Pinball Map-all-target-headers.hmap" -iquote "/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Portland Pinball Map.build/Distribution-iphoneos/Portland Pinball Map.build/Portland Pinball Map-project-headers.hmap" "-F/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Distribution-iphoneos" "-I/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Distribution-iphoneos/include" "-I/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Portland Pinball Map.build/Distribution-iphoneos/Portland Pinball Map.build/DerivedSources/armv6" "-I/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Portland Pinball Map.build/Distribution-iphoneos/Portland Pinball Map.build/DerivedSources" -include /var/folders/kl/kl4Acn0tG+4QWNmV7K58pk+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/Portland_Pinball_Map_Prefix-evmejhdgavstfpbvdhlbicemastg/Portland_Pinball_Map_Prefix.pch -c "/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/Classes/../PPMTableCell.m" -o "/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Portland Pinball Map.build/Distribution-iphoneos/Portland Pinball Map.build/Objects-normal/armv6/PPMTableCell.o"0#
-
-CCompileC "build/Portland Pinball Map.build/Distribution-iphoneos/Portland Pinball Map.build/Objects-normal/armv6/Portland_Pinball_MapAppDelegate.o" "/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/Classes/Portland_Pinball_MapAppDelegate.m" normal armv6 objective-c com.apple.compilers.gcc.4_2
-s290226838.842451
-e290226838.985906
-r1
-xCompileC
-xbuild/Portland Pinball Map.build/Distribution-iphoneos/Portland Pinball Map.build/Objects-normal/armv6/Portland_Pinball_MapAppDelegate.o
-x/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/Classes/Portland_Pinball_MapAppDelegate.m
-xnormal
-xarmv6
-xobjective-c
-xcom.apple.compilers.gcc.4_2
-lSLF07#2@133"Compile /Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/Classes/Portland_Pinball_MapAppDelegate.m290226838#290226838#0(0"0(0#0#125"/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/Classes/Portland_Pinball_MapAppDelegate.m4300885448#2643"    cd "/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map"    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch armv6 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -Os -mdynamic-no-pic -Wreturn-type -Wunused-variable -isysroot /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS3.0.sdk -fvisibility=hidden -gdwarf-2 -mthumb -miphoneos-version-min=3.0 -iquote "/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Portland Pinball Map.build/Distribution-iphoneos/Portland Pinball Map.build/Portland Pinball Map-generated-files.hmap" "-I/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Portland Pinball Map.build/Distribution-iphoneos/Portland Pinball Map.build/Portland Pinball Map-own-target-headers.hmap" "-I/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Portland Pinball Map.build/Distribution-iphoneos/Portland Pinball Map.build/Portland Pinball Map-all-target-headers.hmap" -iquote "/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Portland Pinball Map.build/Distribution-iphoneos/Portland Pinball Map.build/Portland Pinball Map-project-headers.hmap" "-F/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Distribution-iphoneos" "-I/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Distribution-iphoneos/include" "-I/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Portland Pinball Map.build/Distribution-iphoneos/Portland Pinball Map.build/DerivedSources/armv6" "-I/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Portland Pinball Map.build/Distribution-iphoneos/Portland Pinball Map.build/DerivedSources" -include /var/folders/kl/kl4Acn0tG+4QWNmV7K58pk+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/Portland_Pinball_Map_Prefix-evmejhdgavstfpbvdhlbicemastg/Portland_Pinball_Map_Prefix.pch -c "/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/Classes/Portland_Pinball_MapAppDelegate.m" -o "/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Portland Pinball Map.build/Distribution-iphoneos/Portland Pinball Map.build/Objects-normal/armv6/Portland_Pinball_MapAppDelegate.o"0#
-
-CCompileC "build/Portland Pinball Map.build/Distribution-iphoneos/Portland Pinball Map.build/Objects-normal/armv6/RSSViewController.o" "/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/Classes/RSSViewController.m" normal armv6 objective-c com.apple.compilers.gcc.4_2
-s290226839.194811
-e290226839.573049
-r1
-xCompileC
-xbuild/Portland Pinball Map.build/Distribution-iphoneos/Portland Pinball Map.build/Objects-normal/armv6/RSSViewController.o
-x/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/Classes/RSSViewController.m
-xnormal
-xarmv6
-xobjective-c
-xcom.apple.compilers.gcc.4_2
-lSLF07#2@119"Compile /Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/Classes/RSSViewController.m290226839#290226839#0(0"0(0#0#111"/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/Classes/RSSViewController.m4300885448#2615"    cd "/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map"    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch armv6 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -Os -mdynamic-no-pic -Wreturn-type -Wunused-variable -isysroot /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS3.0.sdk -fvisibility=hidden -gdwarf-2 -mthumb -miphoneos-version-min=3.0 -iquote "/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Portland Pinball Map.build/Distribution-iphoneos/Portland Pinball Map.build/Portland Pinball Map-generated-files.hmap" "-I/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Portland Pinball Map.build/Distribution-iphoneos/Portland Pinball Map.build/Portland Pinball Map-own-target-headers.hmap" "-I/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Portland Pinball Map.build/Distribution-iphoneos/Portland Pinball Map.build/Portland Pinball Map-all-target-headers.hmap" -iquote "/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Portland Pinball Map.build/Distribution-iphoneos/Portland Pinball Map.build/Portland Pinball Map-project-headers.hmap" "-F/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Distribution-iphoneos" "-I/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Distribution-iphoneos/include" "-I/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Portland Pinball Map.build/Distribution-iphoneos/Portland Pinball Map.build/DerivedSources/armv6" "-I/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Portland Pinball Map.build/Distribution-iphoneos/Portland Pinball Map.build/DerivedSources" -include /var/folders/kl/kl4Acn0tG+4QWNmV7K58pk+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/Portland_Pinball_Map_Prefix-evmejhdgavstfpbvdhlbicemastg/Portland_Pinball_Map_Prefix.pch -c "/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/Classes/RSSViewController.m" -o "/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Portland Pinball Map.build/Distribution-iphoneos/Portland Pinball Map.build/Objects-normal/armv6/RSSViewController.o"0#
-
-CCompileC "build/Portland Pinball Map.build/Distribution-iphoneos/Portland Pinball Map.build/Objects-normal/armv6/RootViewController.o" "/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/Classes/RootViewController.m" normal armv6 objective-c com.apple.compilers.gcc.4_2
-s290226838.798447
-e290226839.388393
-r1
-xCompileC
-xbuild/Portland Pinball Map.build/Distribution-iphoneos/Portland Pinball Map.build/Objects-normal/armv6/RootViewController.o
-x/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/Classes/RootViewController.m
-xnormal
-xarmv6
-xobjective-c
-xcom.apple.compilers.gcc.4_2
-o/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/Classes/RootViewController.m: In function '-[RootViewController initWithFrame:]':
-o/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/Classes/RootViewController.m:23: warning: 'XMLTable' may not respond to '-initWithFrame:'
-o/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/Classes/RootViewController.m:23: warning: (Messages without a matching method signature
-o/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/Classes/RootViewController.m:23: warning: will be assumed to return 'id' and accept
-o/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/Classes/RootViewController.m:23: warning: '...' as arguments.)
-o/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/Classes/RootViewController.m: At top level:
-o/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/Classes/RootViewController.m:503: warning: incomplete implementation of class 'RootViewController'
-o/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/Classes/RootViewController.m:503: warning: method definition for '-skipLocation' not found
-lSLF07#2@120"Compile /Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/Classes/RootViewController.m290226838#290226839#0(1313"/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/Classes/RootViewController.m: In function '-[RootViewController initWithFrame:]':/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/Classes/RootViewController.m:23: warning: 'XMLTable' may not respond to '-initWithFrame:'/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/Classes/RootViewController.m:23: warning: (Messages without a matching method signature/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/Classes/RootViewController.m:23: warning: will be assumed to return 'id' and accept/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/Classes/RootViewController.m:23: warning: '...' as arguments.)/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/Classes/RootViewController.m: At top level:/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/Classes/RootViewController.m:503: warning: incomplete implementation of class 'RootViewController'/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/Classes/RootViewController.m:503: warning: method definition for '-skipLocation' not found5(22@47"'XMLTable' may not respond to '-initWithFrame:'290226838#166#174#0(6@112"/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/Classes/RootViewController.m288655534#23#0#23#0#26"'*' may not respond to '*'0(13@108"(Messages without a matching method signature will be assumed to return 'id' and accept '...' as arguments.)290226838#340#172#0(6@112"/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/Classes/RootViewController.m288655534#23#0#23#0#0"0(23@13"At top level:290226838#827#128#0(6@112"/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/Classes/RootViewController.m288655534#0#0#0#0#0"0(22@55"Incomplete implementation of class 'RootViewController'290226838#955#183#0(6@112"/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/Classes/RootViewController.m288655534#503#0#503#0#38"incomplete implementation of class '*'0(22@47"Method definition for '-skipLocation' not found290226838#1138#175#0(6@112"/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/Classes/RootViewController.m288655534#503#0#503#0#35"method definition for '*' not found0(0#0#112"/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/Classes/RootViewController.m4300885448#2617"    cd "/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map"    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch armv6 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -Os -mdynamic-no-pic -Wreturn-type -Wunused-variable -isysroot /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS3.0.sdk -fvisibility=hidden -gdwarf-2 -mthumb -miphoneos-version-min=3.0 -iquote "/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Portland Pinball Map.build/Distribution-iphoneos/Portland Pinball Map.build/Portland Pinball Map-generated-files.hmap" "-I/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Portland Pinball Map.build/Distribution-iphoneos/Portland Pinball Map.build/Portland Pinball Map-own-target-headers.hmap" "-I/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Portland Pinball Map.build/Distribution-iphoneos/Portland Pinball Map.build/Portland Pinball Map-all-target-headers.hmap" -iquote "/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Portland Pinball Map.build/Distribution-iphoneos/Portland Pinball Map.build/Portland Pinball Map-project-headers.hmap" "-F/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Distribution-iphoneos" "-I/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Distribution-iphoneos/include" "-I/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Portland Pinball Map.build/Distribution-iphoneos/Portland Pinball Map.build/DerivedSources/armv6" "-I/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Portland Pinball Map.build/Distribution-iphoneos/Portland Pinball Map.build/DerivedSources" -include /var/folders/kl/kl4Acn0tG+4QWNmV7K58pk+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/Portland_Pinball_Map_Prefix-evmejhdgavstfpbvdhlbicemastg/Portland_Pinball_Map_Prefix.pch -c "/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/Classes/RootViewController.m" -o "/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Portland Pinball Map.build/Distribution-iphoneos/Portland Pinball Map.build/Objects-normal/armv6/RootViewController.o"0#
-
-CCompileC "build/Portland Pinball Map.build/Distribution-iphoneos/Portland Pinball Map.build/Objects-normal/armv6/XMLTable.o" "/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/Classes/XMLTable.m" normal armv6 objective-c com.apple.compilers.gcc.4_2
-s290226839.592709
-e290226839.710111
-r1
-xCompileC
-xbuild/Portland Pinball Map.build/Distribution-iphoneos/Portland Pinball Map.build/Objects-normal/armv6/XMLTable.o
-x/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/Classes/XMLTable.m
-xnormal
-xarmv6
-xobjective-c
-xcom.apple.compilers.gcc.4_2
-lSLF07#2@110"Compile /Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/Classes/XMLTable.m290226839#290226839#0(0"0(0#0#102"/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/Classes/XMLTable.m4300885448#2597"    cd "/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map"    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch armv6 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -Os -mdynamic-no-pic -Wreturn-type -Wunused-variable -isysroot /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS3.0.sdk -fvisibility=hidden -gdwarf-2 -mthumb -miphoneos-version-min=3.0 -iquote "/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Portland Pinball Map.build/Distribution-iphoneos/Portland Pinball Map.build/Portland Pinball Map-generated-files.hmap" "-I/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Portland Pinball Map.build/Distribution-iphoneos/Portland Pinball Map.build/Portland Pinball Map-own-target-headers.hmap" "-I/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Portland Pinball Map.build/Distribution-iphoneos/Portland Pinball Map.build/Portland Pinball Map-all-target-headers.hmap" -iquote "/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Portland Pinball Map.build/Distribution-iphoneos/Portland Pinball Map.build/Portland Pinball Map-project-headers.hmap" "-F/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Distribution-iphoneos" "-I/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Distribution-iphoneos/include" "-I/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Portland Pinball Map.build/Distribution-iphoneos/Portland Pinball Map.build/DerivedSources/armv6" "-I/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Portland Pinball Map.build/Distribution-iphoneos/Portland Pinball Map.build/DerivedSources" -include /var/folders/kl/kl4Acn0tG+4QWNmV7K58pk+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/Portland_Pinball_Map_Prefix-evmejhdgavstfpbvdhlbicemastg/Portland_Pinball_Map_Prefix.pch -c "/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/Classes/XMLTable.m" -o "/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Portland Pinball Map.build/Distribution-iphoneos/Portland Pinball Map.build/Objects-normal/armv6/XMLTable.o"0#
-
-CCompileC "build/Portland Pinball Map.build/Distribution-iphoneos/Portland Pinball Map.build/Objects-normal/armv6/ZonesViewController.o" "/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/Classes/ZonesViewController.m" normal armv6 objective-c com.apple.compilers.gcc.4_2
-s290226839.710214
-e290226839.878081
-r1
-xCompileC
-xbuild/Portland Pinball Map.build/Distribution-iphoneos/Portland Pinball Map.build/Objects-normal/armv6/ZonesViewController.o
-x/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/Classes/ZonesViewController.m
-xnormal
-xarmv6
-xobjective-c
-xcom.apple.compilers.gcc.4_2
-lSLF07#2@121"Compile /Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/Classes/ZonesViewController.m290226839#290226839#0(0"0(0#0#113"/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/Classes/ZonesViewController.m4300885448#2619"    cd "/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map"    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch armv6 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -Os -mdynamic-no-pic -Wreturn-type -Wunused-variable -isysroot /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS3.0.sdk -fvisibility=hidden -gdwarf-2 -mthumb -miphoneos-version-min=3.0 -iquote "/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Portland Pinball Map.build/Distribution-iphoneos/Portland Pinball Map.build/Portland Pinball Map-generated-files.hmap" "-I/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Portland Pinball Map.build/Distribution-iphoneos/Portland Pinball Map.build/Portland Pinball Map-own-target-headers.hmap" "-I/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Portland Pinball Map.build/Distribution-iphoneos/Portland Pinball Map.build/Portland Pinball Map-all-target-headers.hmap" -iquote "/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Portland Pinball Map.build/Distribution-iphoneos/Portland Pinball Map.build/Portland Pinball Map-project-headers.hmap" "-F/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Distribution-iphoneos" "-I/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Distribution-iphoneos/include" "-I/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Portland Pinball Map.build/Distribution-iphoneos/Portland Pinball Map.build/DerivedSources/armv6" "-I/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Portland Pinball Map.build/Distribution-iphoneos/Portland Pinball Map.build/DerivedSources" -include /var/folders/kl/kl4Acn0tG+4QWNmV7K58pk+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/Portland_Pinball_Map_Prefix-evmejhdgavstfpbvdhlbicemastg/Portland_Pinball_Map_Prefix.pch -c "/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/Classes/ZonesViewController.m" -o "/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Portland Pinball Map.build/Distribution-iphoneos/Portland Pinball Map.build/Objects-normal/armv6/ZonesViewController.o"0#
-
-CCompileC "build/Portland Pinball Map.build/Distribution-iphoneos/Portland Pinball Map.build/Objects-normal/armv6/main.o" "/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/main.m" normal armv6 objective-c com.apple.compilers.gcc.4_2
-s290226838.797438
-e290226838.842349
-r1
-xCompileC
-xbuild/Portland Pinball Map.build/Distribution-iphoneos/Portland Pinball Map.build/Objects-normal/armv6/main.o
-x/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/main.m
-xnormal
-xarmv6
-xobjective-c
-xcom.apple.compilers.gcc.4_2
-lSLF07#2@98"Compile /Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/main.m290226838#290226838#0(0"0(0#0#90"/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/main.m4300885448#2581"    cd "/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map"    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch armv6 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -Os -mdynamic-no-pic -Wreturn-type -Wunused-variable -isysroot /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS3.0.sdk -fvisibility=hidden -gdwarf-2 -mthumb -miphoneos-version-min=3.0 -iquote "/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Portland Pinball Map.build/Distribution-iphoneos/Portland Pinball Map.build/Portland Pinball Map-generated-files.hmap" "-I/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Portland Pinball Map.build/Distribution-iphoneos/Portland Pinball Map.build/Portland Pinball Map-own-target-headers.hmap" "-I/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Portland Pinball Map.build/Distribution-iphoneos/Portland Pinball Map.build/Portland Pinball Map-all-target-headers.hmap" -iquote "/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Portland Pinball Map.build/Distribution-iphoneos/Portland Pinball Map.build/Portland Pinball Map-project-headers.hmap" "-F/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Distribution-iphoneos" "-I/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Distribution-iphoneos/include" "-I/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Portland Pinball Map.build/Distribution-iphoneos/Portland Pinball Map.build/DerivedSources/armv6" "-I/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Portland Pinball Map.build/Distribution-iphoneos/Portland Pinball Map.build/DerivedSources" -include /var/folders/kl/kl4Acn0tG+4QWNmV7K58pk+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/Portland_Pinball_Map_Prefix-evmejhdgavstfpbvdhlbicemastg/Portland_Pinball_Map_Prefix.pch -c "/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/main.m" -o "/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Portland Pinball Map.build/Distribution-iphoneos/Portland Pinball Map.build/Objects-normal/armv6/main.o"0#
-
-CCompileXIB "/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/AboutView.xib"
-s290226837.829298
-e290226838.296644
-r1
-xCompileXIB
-x/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/AboutView.xib
-lSLF07#2@24"CompileXIB AboutView.xib290226837#290226838#0(0"0(0#0#97"/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/AboutView.xib4300885448#625"    cd "/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map"    setenv IBC_MINIMUM_COMPATIBILITY_VERSION 3.0    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/usr/bin/ibtool --errors --warnings --notices --output-format human-readable-text --compile "/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Distribution-iphoneos/Portland Pinball Map.app/AboutView.nib" "/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/AboutView.xib"0#
-
-CCompileXIB "/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/Classes/XMLTableView.xib"
-s290226837.487789
-e290226837.829200
-r1
-xCompileXIB
-x/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/Classes/XMLTableView.xib
-lSLF07#2@35"CompileXIB Classes/XMLTableView.xib290226837#290226837#0(0"0(0#0#108"/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/Classes/XMLTableView.xib4300885448#639"    cd "/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map"    setenv IBC_MINIMUM_COMPATIBILITY_VERSION 3.0    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/usr/bin/ibtool --errors --warnings --notices --output-format human-readable-text --compile "/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Distribution-iphoneos/Portland Pinball Map.app/XMLTableView.nib" "/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/Classes/XMLTableView.xib"0#
-
-CCompileXIB "/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/LocationProfile.xib"
-s290226837.571854
-e290226837.952111
-r1
-xCompileXIB
-x/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/LocationProfile.xib
-lSLF07#2@30"CompileXIB LocationProfile.xib290226837#290226837#0(0"0(0#0#103"/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/LocationProfile.xib4300885448#637"    cd "/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map"    setenv IBC_MINIMUM_COMPATIBILITY_VERSION 3.0    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/usr/bin/ibtool --errors --warnings --notices --output-format human-readable-text --compile "/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Distribution-iphoneos/Portland Pinball Map.app/LocationProfile.nib" "/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/LocationProfile.xib"0#
-
-CCompileXIB "/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/MainWindow.xib"
-s290226836.889335
-e290226837.218394
-r1
-xCompileXIB
-x/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/MainWindow.xib
-lSLF07#2@25"CompileXIB MainWindow.xib290226836#290226837#0(0"0(0#0#98"/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/MainWindow.xib4300885448#627"    cd "/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map"    setenv IBC_MINIMUM_COMPATIBILITY_VERSION 3.0    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/usr/bin/ibtool --errors --warnings --notices --output-format human-readable-text --compile "/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Distribution-iphoneos/Portland Pinball Map.app/MainWindow.nib" "/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/MainWindow.xib"0#
-
-CCompileXIB "/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/PPMDoubleTextCell.xib"
-s290226837.183879
-e290226837.487686
-r1
-xCompileXIB
-x/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/PPMDoubleTextCell.xib
-lSLF07#2@32"CompileXIB PPMDoubleTextCell.xib290226837#290226837#0(0"0(0#0#105"/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/PPMDoubleTextCell.xib4300885448#641"    cd "/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map"    setenv IBC_MINIMUM_COMPATIBILITY_VERSION 3.0    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/usr/bin/ibtool --errors --warnings --notices --output-format human-readable-text --compile "/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Distribution-iphoneos/Portland Pinball Map.app/PPMDoubleTextCell.nib" "/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/PPMDoubleTextCell.xib"0#
-
-CCompileXIB "/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/PPMTableCell.xib"
-s290226837.218487
-e290226837.549711
-r1
-xCompileXIB
-x/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/PPMTableCell.xib
-lSLF07#2@27"CompileXIB PPMTableCell.xib290226837#290226837#0(0"0(0#0#100"/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/PPMTableCell.xib4300885448#631"    cd "/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map"    setenv IBC_MINIMUM_COMPATIBILITY_VERSION 3.0    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/usr/bin/ibtool --errors --warnings --notices --output-format human-readable-text --compile "/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Distribution-iphoneos/Portland Pinball Map.app/PPMTableCell.nib" "/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/PPMTableCell.xib"0#
-
-CCompileXIB "/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/RootViewController.xib"
-s290226836.889984
-e290226837.159382
-r1
-xCompileXIB
-x/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/RootViewController.xib
-lSLF07#2@33"CompileXIB RootViewController.xib290226836#290226837#0(0"0(0#0#106"/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/RootViewController.xib4300885448#643"    cd "/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map"    setenv IBC_MINIMUM_COMPATIBILITY_VERSION 3.0    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/usr/bin/ibtool --errors --warnings --notices --output-format human-readable-text --compile "/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Distribution-iphoneos/Portland Pinball Map.app/RootViewController.nib" "/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/RootViewController.xib"0#
-
-CCopyPNGFile "/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Distribution-iphoneos/Portland Pinball Map.app/Default.png" Default.png
-s290226838.265933
-e290226838.744677
-r1
-xCopyPNGFile
-x/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Distribution-iphoneos/Portland Pinball Map.app/Default.png
-xDefault.png
-lSLF07#2@90"CopyPNGFile "build/Distribution-iphoneos/Portland Pinball Map.app/Default.png" Default.png290226838#290226838#0(0"0(0#0#95"/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/Default.png4300885448#723"    cd "/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map"    setenv COPY_COMMAND /Developer/Library/PrivateFrameworks/DevToolsCore.framework/Resources/pbxcp    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    "/Developer/Platforms/iPhoneOS.platform/Developer/Library/Xcode/Plug-ins/iPhoneOS Build System Support.xcplugin/Contents/Resources/copypng" -compress "" "/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/Default.png" "/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Distribution-iphoneos/Portland Pinball Map.app/Default.png"0#
-
-CCopyPNGFile "/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Distribution-iphoneos/Portland Pinball Map.app/Default_old.png" Default_old.png
-s290226838.080855
-e290226838.243597
-r1
-xCopyPNGFile
-x/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Distribution-iphoneos/Portland Pinball Map.app/Default_old.png
-xDefault_old.png
-lSLF07#2@98"CopyPNGFile "build/Distribution-iphoneos/Portland Pinball Map.app/Default_old.png" Default_old.png290226838#290226838#0(0"0(0#0#99"/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/Default_old.png4300885448#731"    cd "/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map"    setenv COPY_COMMAND /Developer/Library/PrivateFrameworks/DevToolsCore.framework/Resources/pbxcp    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    "/Developer/Platforms/iPhoneOS.platform/Developer/Library/Xcode/Plug-ins/iPhoneOS Build System Support.xcplugin/Contents/Resources/copypng" -compress "" "/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/Default_old.png" "/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Distribution-iphoneos/Portland Pinball Map.app/Default_old.png"0#
-
-CCopyPNGFile "/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Distribution-iphoneos/Portland Pinball Map.app/PPM-Icon-03.png" PPM-Icon-03.png
-s290226838.744818
-e290226838.772816
-r1
-xCopyPNGFile
-x/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Distribution-iphoneos/Portland Pinball Map.app/PPM-Icon-03.png
-xPPM-Icon-03.png
-lSLF07#2@98"CopyPNGFile "build/Distribution-iphoneos/Portland Pinball Map.app/PPM-Icon-03.png" PPM-Icon-03.png290226838#290226838#0(0"0(0#0#99"/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/PPM-Icon-03.png4300885448#731"    cd "/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map"    setenv COPY_COMMAND /Developer/Library/PrivateFrameworks/DevToolsCore.framework/Resources/pbxcp    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    "/Developer/Platforms/iPhoneOS.platform/Developer/Library/Xcode/Plug-ins/iPhoneOS Build System Support.xcplugin/Contents/Resources/copypng" -compress "" "/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/PPM-Icon-03.png" "/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Distribution-iphoneos/Portland Pinball Map.app/PPM-Icon-03.png"0#
-
-CCopyPNGFile "/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Distribution-iphoneos/Portland Pinball Map.app/arrow.png" arrow.png
-s290226837.549809
-e290226837.571740
-r1
-xCopyPNGFile
-x/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Distribution-iphoneos/Portland Pinball Map.app/arrow.png
-xarrow.png
-lSLF07#2@86"CopyPNGFile "build/Distribution-iphoneos/Portland Pinball Map.app/arrow.png" arrow.png290226837#290226837#0(0"0(0#0#93"/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/arrow.png4300885448#719"    cd "/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map"    setenv COPY_COMMAND /Developer/Library/PrivateFrameworks/DevToolsCore.framework/Resources/pbxcp    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    "/Developer/Platforms/iPhoneOS.platform/Developer/Library/Xcode/Plug-ins/iPhoneOS Build System Support.xcplugin/Contents/Resources/copypng" -compress "" "/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/arrow.png" "/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Distribution-iphoneos/Portland Pinball Map.app/arrow.png"0#
-
-CCopyPNGFile "/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Distribution-iphoneos/Portland Pinball Map.app/arrow3.png" arrow3.png
-s290226838.243691
-e290226838.265837
-r1
-xCopyPNGFile
-x/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Distribution-iphoneos/Portland Pinball Map.app/arrow3.png
-xarrow3.png
-lSLF07#2@88"CopyPNGFile "build/Distribution-iphoneos/Portland Pinball Map.app/arrow3.png" arrow3.png290226838#290226838#0(0"0(0#0#94"/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/arrow3.png4300885448#721"    cd "/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map"    setenv COPY_COMMAND /Developer/Library/PrivateFrameworks/DevToolsCore.framework/Resources/pbxcp    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    "/Developer/Platforms/iPhoneOS.platform/Developer/Library/Xcode/Plug-ins/iPhoneOS Build System Support.xcplugin/Contents/Resources/copypng" -compress "" "/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/arrow3.png" "/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Distribution-iphoneos/Portland Pinball Map.app/arrow3.png"0#
-
-CCopyPNGFile "/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Distribution-iphoneos/Portland Pinball Map.app/facebook-icon2.png" facebook-icon2.png
-s290226838.773051
-e290226838.797192
-r1
-xCopyPNGFile
-x/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Distribution-iphoneos/Portland Pinball Map.app/facebook-icon2.png
-xfacebook-icon2.png
-lSLF07#2@104"CopyPNGFile "build/Distribution-iphoneos/Portland Pinball Map.app/facebook-icon2.png" facebook-icon2.png290226838#290226838#0(0"0(0#0#102"/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/facebook-icon2.png4300885448#737"    cd "/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map"    setenv COPY_COMMAND /Developer/Library/PrivateFrameworks/DevToolsCore.framework/Resources/pbxcp    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    "/Developer/Platforms/iPhoneOS.platform/Developer/Library/Xcode/Plug-ins/iPhoneOS Build System Support.xcplugin/Contents/Resources/copypng" -compress "" "/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/facebook-icon2.png" "/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Distribution-iphoneos/Portland Pinball Map.app/facebook-icon2.png"0#
-
-CCopyPNGFile "/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Distribution-iphoneos/Portland Pinball Map.app/ppm_icon.png" ppm_icon.png
-s290226837.159485
-e290226837.183783
-r1
-xCopyPNGFile
-x/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Distribution-iphoneos/Portland Pinball Map.app/ppm_icon.png
-xppm_icon.png
-lSLF07#2@92"CopyPNGFile "build/Distribution-iphoneos/Portland Pinball Map.app/ppm_icon.png" ppm_icon.png290226837#290226837#0(0"0(0#0#96"/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/ppm_icon.png4300885448#725"    cd "/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map"    setenv COPY_COMMAND /Developer/Library/PrivateFrameworks/DevToolsCore.framework/Resources/pbxcp    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    "/Developer/Platforms/iPhoneOS.platform/Developer/Library/Xcode/Plug-ins/iPhoneOS Build System Support.xcplugin/Contents/Resources/copypng" -compress "" "/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/ppm_icon.png" "/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Distribution-iphoneos/Portland Pinball Map.app/ppm_icon.png"0#
-
-CCopyPNGFile "/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Distribution-iphoneos/Portland Pinball Map.app/splash.png" splash.png
-s290226837.952208
-e290226838.080755
-r1
-xCopyPNGFile
-x/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Distribution-iphoneos/Portland Pinball Map.app/splash.png
-xsplash.png
-lSLF07#2@88"CopyPNGFile "build/Distribution-iphoneos/Portland Pinball Map.app/splash.png" splash.png290226837#290226838#0(0"0(0#0#94"/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/splash.png4300885448#721"    cd "/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map"    setenv COPY_COMMAND /Developer/Library/PrivateFrameworks/DevToolsCore.framework/Resources/pbxcp    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    "/Developer/Platforms/iPhoneOS.platform/Developer/Library/Xcode/Plug-ins/iPhoneOS Build System Support.xcplugin/Contents/Resources/copypng" -compress "" "/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/splash.png" "/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Distribution-iphoneos/Portland Pinball Map.app/splash.png"0#
-
-CCopyPNGFile "/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Distribution-iphoneos/Portland Pinball Map.app/splash_town.png" splash_town.png
-s290226838.296738
-e290226838.772975
-r1
-xCopyPNGFile
-x/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Distribution-iphoneos/Portland Pinball Map.app/splash_town.png
-xsplash_town.png
-lSLF07#2@98"CopyPNGFile "build/Distribution-iphoneos/Portland Pinball Map.app/splash_town.png" splash_town.png290226838#290226838#0(0"0(0#0#99"/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/splash_town.png4300885448#731"    cd "/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map"    setenv COPY_COMMAND /Developer/Library/PrivateFrameworks/DevToolsCore.framework/Resources/pbxcp    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    "/Developer/Platforms/iPhoneOS.platform/Developer/Library/Xcode/Plug-ins/iPhoneOS Build System Support.xcplugin/Contents/Resources/copypng" -compress "" "/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/splash_town.png" "/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Distribution-iphoneos/Portland Pinball Map.app/splash_town.png"0#
-
-CCpResource "build/Distribution-iphoneos/Portland Pinball Map.app/ResourceRules.plist" /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS3.0.sdk/ResourceRules.plist
-s290226836.879698
-e290226836.889247
-r1
-xCpResource
-xbuild/Distribution-iphoneos/Portland Pinball Map.app/ResourceRules.plist
-x/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS3.0.sdk/ResourceRules.plist
-lSLF07#2@94"Copy /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS3.0.sdk/ResourceRules.plist290226836#290226836#0(0"0(0#0#89"/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS3.0.sdk/ResourceRules.plist4300885448#615"    cd "/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map"    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Library/PrivateFrameworks/DevToolsCore.framework/Resources/pbxcp -exclude .DS_Store -exclude CVS -exclude .svn -strip-debug-symbols -resolve-src-symlinks /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS3.0.sdk/ResourceRules.plist "/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Distribution-iphoneos/Portland Pinball Map.app"0#
-
-CCpResource "build/Distribution-iphoneos/Portland Pinball Map.app/ResourceRules.plist" /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS3.1.3.sdk/ResourceRules.plist
-s290225698.489659
-e290225698.501301
-r1
-xCpResource
-xbuild/Distribution-iphoneos/Portland Pinball Map.app/ResourceRules.plist
-x/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS3.1.3.sdk/ResourceRules.plist
-lSLF07#2@96"Copy /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS3.1.3.sdk/ResourceRules.plist290225698#290225698#0(0"0(0#0#91"/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS3.1.3.sdk/ResourceRules.plist7297009443364890624#617"    cd "/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map"    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Library/PrivateFrameworks/DevToolsCore.framework/Resources/pbxcp -exclude .DS_Store -exclude CVS -exclude .svn -strip-debug-symbols -resolve-src-symlinks /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS3.1.3.sdk/ResourceRules.plist "/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Distribution-iphoneos/Portland Pinball Map.app"0#
-
-CGenerateDSYMFile "/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Distribution-iphoneos/Portland Pinball Map.app.dSYM" "/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Distribution-iphoneos/Portland Pinball Map.app/Portland Pinball Map"
-s290226841.007301
-e290226841.052737
-r1
-xGenerateDSYMFile
-x/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Distribution-iphoneos/Portland Pinball Map.app.dSYM
-x/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Distribution-iphoneos/Portland Pinball Map.app/Portland Pinball Map
-lSLF07#2@152"GenerateDSYMFile "build/Distribution-iphoneos/Portland Pinball Map.app.dSYM" "build/Distribution-iphoneos/Portland Pinball Map.app/Portland Pinball Map"290226841#290226841#0(0"0(0#0#157"/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Distribution-iphoneos/Portland Pinball Map.app/Portland Pinball Map4300885448#556"    cd "/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map"    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/usr/bin/dsymutil "/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Distribution-iphoneos/Portland Pinball Map.app/Portland Pinball Map" -o "/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Distribution-iphoneos/Portland Pinball Map.app.dSYM"0#
-
-CLd "/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Distribution-iphoneos/Portland Pinball Map.app/Portland Pinball Map" normal armv6
-s290226840.959598
-e290226841.007198
-r1
-xLd
-x/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Distribution-iphoneos/Portland Pinball Map.app/Portland Pinball Map
-xnormal
-xarmv6
-lSLF07#2@162"Link /Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Distribution-iphoneos/Portland Pinball Map.app/Portland Pinball Map290226840#290226841#0(0"0(0#0#0"4300885448#1259"    cd "/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map"    setenv IPHONEOS_DEPLOYMENT_TARGET 3.0    setenv MACOSX_DEPLOYMENT_TARGET 10.5    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/gcc-4.2 -arch armv6 -isysroot /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS3.0.sdk "-L/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Distribution-iphoneos" "-F/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Distribution-iphoneos" -filelist "/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Portland Pinball Map.build/Distribution-iphoneos/Portland Pinball Map.build/Objects-normal/armv6/Portland Pinball Map.LinkFileList" -mmacosx-version-min=10.5 -dead_strip -miphoneos-version-min=3.0 -framework Foundation -framework UIKit -framework CoreGraphics -framework CoreLocation -framework MapKit -o "/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Distribution-iphoneos/Portland Pinball Map.app/Portland Pinball Map"0#
-
-CProcessInfoPlistFile "/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Distribution-iphoneos/Portland Pinball Map.app/Info.plist" Portland_Pinball_Map-Info.plist
-s290226836.881549
-e290226836.885884
-r1
-xProcessInfoPlistFile
-x/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Distribution-iphoneos/Portland Pinball Map.app/Info.plist
-xPortland_Pinball_Map-Info.plist
-lSLF07#2@39"Process Portland_Pinball_Map-Info.plist290226836#290226836#0(0"0(0#0#115"/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/Portland_Pinball_Map-Info.plist4300885448#823"    cd "/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map"    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    builtin-infoPlistUtility Portland_Pinball_Map-Info.plist -genpkginfo "/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Distribution-iphoneos/Portland Pinball Map.app/PkgInfo" -expandbuildsettings -format binary -platform iphoneos -resourcerulesfile "/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Distribution-iphoneos/Portland Pinball Map.app/ResourceRules.plist" -o "/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Distribution-iphoneos/Portland Pinball Map.app/Info.plist"0#
-
-CProcessPCH /var/folders/kl/kl4Acn0tG+4QWNmV7K58pk+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/Portland_Pinball_Map_Prefix-chxeqokorsmctegndcgqgxjrmitc/Portland_Pinball_Map_Prefix.pch.gch Portland_Pinball_Map_Prefix.pch normal armv6 objective-c com.apple.compilers.gcc.4_2
-s289162977.001702
-e289162977.715351
-r1
-xProcessPCH
-x/var/folders/kl/kl4Acn0tG+4QWNmV7K58pk+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/Portland_Pinball_Map_Prefix-chxeqokorsmctegndcgqgxjrmitc/Portland_Pinball_Map_Prefix.pch.gch
-xPortland_Pinball_Map_Prefix.pch
-xnormal
-xarmv6
-xobjective-c
-xcom.apple.compilers.gcc.4_2
-lSLF07#2@42"Precompile Portland_Pinball_Map_Prefix.pch289162977#289162977#0(0"0(0#0#115"/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/Portland_Pinball_Map_Prefix.pch4300885448#2416"    cd "/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map"    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/gcc-4.2 -x objective-c-header -arch armv6 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -Os -mdynamic-no-pic -Wreturn-type -Wunused-variable -isysroot /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS3.1.3.sdk -fvisibility=hidden -gdwarf-2 -mthumb -miphoneos-version-min=3.1.3 -iquote "/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Portland Pinball Map.build/Distribution-iphoneos/Portland Pinball Map.build/Portland Pinball Map-generated-files.hmap" "-I/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Portland Pinball Map.build/Distribution-iphoneos/Portland Pinball Map.build/Portland Pinball Map-own-target-headers.hmap" "-I/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Portland Pinball Map.build/Distribution-iphoneos/Portland Pinball Map.build/Portland Pinball Map-all-target-headers.hmap" -iquote "/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Portland Pinball Map.build/Distribution-iphoneos/Portland Pinball Map.build/Portland Pinball Map-project-headers.hmap" "-F/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Distribution-iphoneos" "-I/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Distribution-iphoneos/include" "-I/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Portland Pinball Map.build/Distribution-iphoneos/Portland Pinball Map.build/DerivedSources/armv6" "-I/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Portland Pinball Map.build/Distribution-iphoneos/Portland Pinball Map.build/DerivedSources" -c "/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/Portland_Pinball_Map_Prefix.pch" -o /var/folders/kl/kl4Acn0tG+4QWNmV7K58pk+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/Portland_Pinball_Map_Prefix-chxeqokorsmctegndcgqgxjrmitc/Portland_Pinball_Map_Prefix.pch.gch0#
-
-CProcessPCH /var/folders/kl/kl4Acn0tG+4QWNmV7K58pk+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/Portland_Pinball_Map_Prefix-evmejhdgavstfpbvdhlbicemastg/Portland_Pinball_Map_Prefix.pch.gch Portland_Pinball_Map_Prefix.pch normal armv6 objective-c com.apple.compilers.gcc.4_2
-s290226700.768484
-e290226701.266345
-r1
-xProcessPCH
-x/var/folders/kl/kl4Acn0tG+4QWNmV7K58pk+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/Portland_Pinball_Map_Prefix-evmejhdgavstfpbvdhlbicemastg/Portland_Pinball_Map_Prefix.pch.gch
-xPortland_Pinball_Map_Prefix.pch
-xnormal
-xarmv6
-xobjective-c
-xcom.apple.compilers.gcc.4_2
-lSLF07#2@42"Precompile Portland_Pinball_Map_Prefix.pch290226700#290226701#0(0"0(0#0#115"/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/Portland_Pinball_Map_Prefix.pch4300885448#2412"    cd "/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map"    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/gcc-4.2 -x objective-c-header -arch armv6 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -Os -mdynamic-no-pic -Wreturn-type -Wunused-variable -isysroot /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS3.0.sdk -fvisibility=hidden -gdwarf-2 -mthumb -miphoneos-version-min=3.0 -iquote "/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Portland Pinball Map.build/Distribution-iphoneos/Portland Pinball Map.build/Portland Pinball Map-generated-files.hmap" "-I/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Portland Pinball Map.build/Distribution-iphoneos/Portland Pinball Map.build/Portland Pinball Map-own-target-headers.hmap" "-I/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Portland Pinball Map.build/Distribution-iphoneos/Portland Pinball Map.build/Portland Pinball Map-all-target-headers.hmap" -iquote "/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Portland Pinball Map.build/Distribution-iphoneos/Portland Pinball Map.build/Portland Pinball Map-project-headers.hmap" "-F/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Distribution-iphoneos" "-I/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Distribution-iphoneos/include" "-I/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Portland Pinball Map.build/Distribution-iphoneos/Portland Pinball Map.build/DerivedSources/armv6" "-I/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Portland Pinball Map.build/Distribution-iphoneos/Portland Pinball Map.build/DerivedSources" -c "/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/Portland_Pinball_Map_Prefix.pch" -o /var/folders/kl/kl4Acn0tG+4QWNmV7K58pk+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/Portland_Pinball_Map_Prefix-evmejhdgavstfpbvdhlbicemastg/Portland_Pinball_Map_Prefix.pch.gch0#
-
-CProcessProductPackaging "/Users/Isaac/Library/MobileDevice/Provisioning Profiles/35EDA825-D876-48BB-9CD2-04CBF9E63986.mobileprovision" "/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Distribution-iphoneos/Portland Pinball Map.app/embedded.mobileprovision"
-s290226841.052846
-e290226841.054054
-r1
-xProcessProductPackaging
-x/Users/Isaac/Library/MobileDevice/Provisioning Profiles/35EDA825-D876-48BB-9CD2-04CBF9E63986.mobileprovision
-x/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Distribution-iphoneos/Portland Pinball Map.app/embedded.mobileprovision
-lSLF07#2@214"ProcessProductPackaging "/Users/Isaac/Library/MobileDevice/Provisioning Profiles/35EDA825-D876-48BB-9CD2-04CBF9E63986.mobileprovision" "build/Distribution-iphoneos/Portland Pinball Map.app/embedded.mobileprovision"290226841#290226841#0(0"0(0#0#161"/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Distribution-iphoneos/Portland Pinball Map.app/embedded.mobileprovision4300885448#537"    cd "/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map"    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    <com.apple.tools.product-pkg-utility> "/Users/Isaac/Library/MobileDevice/Provisioning Profiles/35EDA825-D876-48BB-9CD2-04CBF9E63986.mobileprovision" -o "/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Distribution-iphoneos/Portland Pinball Map.app/embedded.mobileprovision"0#
-
-CProcessProductPackaging /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS3.0.sdk/Entitlements.plist "/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Portland Pinball Map.build/Distribution-iphoneos/Portland Pinball Map.build/Portland Pinball Map.xcent"
-s290226841.058269
-e290226841.074467
-r1
-xProcessProductPackaging
-x/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS3.0.sdk/Entitlements.plist
-x/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Portland Pinball Map.build/Distribution-iphoneos/Portland Pinball Map.build/Portland Pinball Map.xcent
-lSLF07#2@223"ProcessProductPackaging /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS3.0.sdk/Entitlements.plist "build/Portland Pinball Map.build/Distribution-iphoneos/Portland Pinball Map.build/Portland Pinball Map.xcent"290226841#290226841#0(0"0(0#0#192"/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Portland Pinball Map.build/Distribution-iphoneos/Portland Pinball Map.build/Portland Pinball Map.xcent4300885448#572"    cd "/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map"    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    <com.apple.tools.product-pkg-utility> /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS3.0.sdk/Entitlements.plist -entitlements -format xml -o "/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Portland Pinball Map.build/Distribution-iphoneos/Portland Pinball Map.build/Portland Pinball Map.xcent"0#
-
-CProcessProductPackaging /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS3.1.3.sdk/Entitlements.plist "/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Portland Pinball Map.build/Distribution-iphoneos/Portland Pinball Map.build/Portland Pinball Map.xcent"
-s290225700.519448
-e290225700.540834
-r1
-xProcessProductPackaging
-x/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS3.1.3.sdk/Entitlements.plist
-x/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Portland Pinball Map.build/Distribution-iphoneos/Portland Pinball Map.build/Portland Pinball Map.xcent
-lSLF07#2@225"ProcessProductPackaging /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS3.1.3.sdk/Entitlements.plist "build/Portland Pinball Map.build/Distribution-iphoneos/Portland Pinball Map.build/Portland Pinball Map.xcent"290225700#290225700#0(0"0(0#0#192"/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Portland Pinball Map.build/Distribution-iphoneos/Portland Pinball Map.build/Portland Pinball Map.xcent4300885448#574"    cd "/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map"    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    <com.apple.tools.product-pkg-utility> /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS3.1.3.sdk/Entitlements.plist -entitlements -format xml -o "/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Portland Pinball Map.build/Distribution-iphoneos/Portland Pinball Map.build/Portland Pinball Map.xcent"0#
-
-CTouch "/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Distribution-iphoneos/Portland Pinball Map.app"
-s290226841.054122
-e290226841.058171
-r1
-xTouch
-x/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Distribution-iphoneos/Portland Pinball Map.app
-lSLF07#2@142"Touch /Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Distribution-iphoneos/Portland Pinball Map.app290226841#290226841#0(0"0(0#0#0"4300885448#378"    cd "/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map"    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /usr/bin/touch -c "/Users/Isaac/Desktop/Projects/PPM/Portland Pinball Map SVN/PPM/Portland Pinball Map/build/Distribution-iphoneos/Portland Pinball Map.app"0#
-
