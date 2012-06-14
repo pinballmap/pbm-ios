@@ -4,10 +4,9 @@
 #import "Zone.h"
 
 @interface LocationFilterView : BlackTableViewController {
-	NSInteger totalLocations;
 	NSMutableDictionary *filteredLocations;
     
-	NSMutableArray *locationArray;
+	NSMutableArray *locations;
 	NSArray *keys;	
 	
 	Zone *theNewZone;
@@ -24,7 +23,7 @@
 @property (nonatomic,strong) NSMutableDictionary *filteredLocations;
 @property (nonatomic,strong) NSArray *keys;
 @property (nonatomic,strong) LocationMap *mapView;
-@property (nonatomic,strong) NSMutableArray *locationArray;
+@property (nonatomic,strong) NSMutableArray *locations;
 @property (nonatomic,strong) Zone *theNewZone;
 @property (nonatomic,strong) Zone *currentZone;
 

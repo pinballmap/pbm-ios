@@ -1,8 +1,8 @@
-#import "LocationFilterView.h"
 #import "Utils.h"
+#import "LocationFilterView.h"
 
 @implementation LocationFilterView
-@synthesize filteredLocations, keys, mapView, locationArray, zoneID, theNewZone, currentZone, currentZoneID;
+@synthesize filteredLocations, keys, mapView, locations, zoneID, theNewZone, currentZone, currentZoneID;
 
 Portland_Pinball_MapAppDelegate *appDelegate;
 
@@ -13,12 +13,11 @@ Portland_Pinball_MapAppDelegate *appDelegate;
 }
 
 - (void)viewWillAppear:(BOOL)animated {
-	if(![zoneID isEqualToString:currentZoneID]) {		
+	if (![zoneID isEqualToString:currentZoneID]) {		
 		[self.tableView setContentOffset:CGPointZero];
 		
-		totalLocations = 0;
+        locations = [[NSMutableArray alloc] init];
 		filteredLocations = [[NSMutableDictionary alloc] init];
-		locationArray = [[NSMutableArray alloc] init];
 		
 		for (id key in appDelegate.activeRegion.locations) {
 			Location *location = [appDelegate.activeRegion.locations valueForKey:key];
@@ -36,9 +35,19 @@ Portland_Pinball_MapAppDelegate *appDelegate;
                 [self addToFilterDictionary:location];
             }
 		}
-		
-		headerHeight = (totalLocations > 25) ? 20 : 0;		
-		self.keys = [[filteredLocations allKeys] sortedArrayUsingSelector:@selector(compare:)];
+        
+        for (NSString *key in filteredLocations.allKeys) {            
+            NSArray *sortedLocations = [filteredLocations objectForKey:key];
+            sortedLocations = (NSMutableArray *)[sortedLocations sortedArrayUsingComparator:^NSComparisonResult(id a, id b) {
+                NSString *first = [(Location *)a name];
+                NSString *second = [(Location *)b name];
+                return [first compare:second];
+            }];
+            
+            [filteredLocations setObject:sortedLocations forKey:key];
+        }
+
+		[self setKeys:[[filteredLocations allKeys] sortedArrayUsingSelector:@selector(compare:)]];
 		
 		[self.tableView reloadData];
 	}
@@ -56,7 +65,6 @@ Portland_Pinball_MapAppDelegate *appDelegate;
 }
 
 - (void)addToFilterDictionary:(Location *)location {
-	totalLocations++;
 	NSString *firstLetter = [Utils directoryFirstLetter:location.name];
     
 	NSMutableArray *letterArray = [filteredLocations objectForKey:firstLetter];
@@ -67,7 +75,7 @@ Portland_Pinball_MapAppDelegate *appDelegate;
 	}
 	
 	[letterArray addObject:location];
-	[locationArray addObject:location];
+	[locations addObject:location];
 }
 
 - (void)onMapPress:(id)sender {
@@ -76,20 +84,11 @@ Portland_Pinball_MapAppDelegate *appDelegate;
 		[mapView setShowProfileButtons:YES];
 	}
 	
-	[mapView setLocationsToShow:locationArray];
+	[mapView setLocationsToShow:locations];
 	[mapView setTitle:self.title];
 	
-	if (NO) {
-		[UIView beginAnimations:nil context:NULL];
-		[UIView setAnimationDuration: 1];
-		[UIView setAnimationTransition:UIViewAnimationTransitionFlipFromRight forView:self.navigationController.view cache:NO];
-        [UIView commitAnimations];
-	}
-    
     [self.navigationController pushViewController:mapView animated:YES];
 }
-
-- (void)viewDidUnload {}
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return [keys count];
@@ -106,13 +105,11 @@ Portland_Pinball_MapAppDelegate *appDelegate;
 }
 
 - (NSArray *)sectionIndexTitlesForTableView:(UITableView *)tableView {
-    return (headerHeight > 0) ? keys : [[NSArray alloc] init];
+    return ([locations count] > 25) ? keys : [[NSArray alloc] init];
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    static NSString *CellIdentifier = @"DoubleTextCellID";
-    
-    PBMDoubleTableCell *cell = (PBMDoubleTableCell*)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {    
+    PBMDoubleTableCell *cell = (PBMDoubleTableCell*)[tableView dequeueReusableCellWithIdentifier:@"DoubleTextCellID"];
     if (cell == nil) {
 		cell = [self getDoubleCell];
     }

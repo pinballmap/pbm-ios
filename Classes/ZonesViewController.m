@@ -76,7 +76,7 @@
 	if(section == 0) {
 		[locationFilter setZoneID:[array objectAtIndex:row]];
 	} else {
-		Zone *zone = (Zone*)[array objectAtIndex:row];
+		Zone *zone = (Zone *)[array objectAtIndex:row];
         
 		[locationFilter setZoneID:zone.name];
 		[locationFilter setTheNewZone:zone];
