@@ -10,10 +10,9 @@
 	NSArray *allZones = [[NSArray alloc] initWithObjects:@"All", appDelegate.activeRegion.machineFilterString, @"< 1 mile", nil];
 	NSArray *primaryZones = [[NSArray alloc] initWithArray:appDelegate.activeRegion.primaryZones];
 	NSArray *secondaryZones = [[NSArray alloc] initWithArray:appDelegate.activeRegion.secondaryZones];
+	NSString *regionTitle = appDelegate.activeRegion.formalName;
 	
-	NSString *regionTitle = appDelegate.activeRegion.name;
-	
-	zones = [[NSDictionary alloc] initWithObjectsAndKeys:secondaryZones,@"Suburbs", primaryZones, regionTitle, allZones, @"Filter by", nil];
+	zones = [[NSDictionary alloc] initWithObjectsAndKeys:secondaryZones, @"Suburbs", primaryZones, regionTitle, allZones, @"Filter by", nil];
 	titles = [[NSArray alloc] initWithObjects:@"Filter by", regionTitle, @"Suburbs", nil];
 	
 	[self setTitle:@"Locations"];
@@ -32,14 +31,13 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     NSString *keyAtSection = [titles objectAtIndex:section];
-	NSArray *array = (NSArray*)[zones objectForKey:keyAtSection];
+	NSArray *zonesForSection = (NSArray *)[zones objectForKey:keyAtSection];
     
-	return [array count];
+	return [zonesForSection count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {	
-	static NSString *CellIdentifier = @"SingleTextID";
-    PBMTableCell *cell = (PBMTableCell*)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    PBMTableCell *cell = (PBMTableCell *)[tableView dequeueReusableCellWithIdentifier:@"SingleTextID"];
     if (cell == nil) {
 		cell = [self getTableCell];
     }
@@ -47,12 +45,12 @@
 	NSUInteger row = [indexPath row];
 	NSUInteger section = [indexPath section];
 	NSString *keyAtSection = [titles objectAtIndex:section];
-	NSArray *array = (NSArray*)[zones objectForKey:keyAtSection];
+	NSArray *zonesForSection = (NSArray *)[zones objectForKey:keyAtSection];
 	
 	if(section == 0) {
-		[cell.nameLabel setText:[array objectAtIndex:row]];
+		[cell.nameLabel setText:[zonesForSection objectAtIndex:row]];
 	} else {
-		Zone *zone = (Zone*)[array objectAtIndex:row];
+		Zone *zone = (Zone *)[zonesForSection objectAtIndex:row];
 		[cell.nameLabel setText:zone.name];
 	}
 
@@ -71,12 +69,12 @@
 	NSUInteger row = [indexPath row];
 	NSUInteger section = [indexPath section];
 	NSString *keyAtSection = [titles objectAtIndex:section];
-	NSArray *array = (NSArray*)[zones objectForKey:keyAtSection];
+	NSArray *zonesForSection = (NSArray *)[zones objectForKey:keyAtSection];
 	
 	if(section == 0) {
-		[locationFilter setZoneID:[array objectAtIndex:row]];
+		[locationFilter setZoneID:[zonesForSection objectAtIndex:row]];
 	} else {
-		Zone *zone = (Zone *)[array objectAtIndex:row];
+		Zone *zone = (Zone *)[zonesForSection objectAtIndex:row];
         
 		[locationFilter setZoneID:zone.name];
 		[locationFilter setTheNewZone:zone];

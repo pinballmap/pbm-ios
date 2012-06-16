@@ -336,6 +336,22 @@ Portland_Pinball_MapAppDelegate *appDelegate;
         [self hideLoaderIcon];
 	}
     
+    [appDelegate.activeRegion setPrimaryZones:
+     (NSMutableArray *)[appDelegate.activeRegion.primaryZones sortedArrayUsingComparator:^NSComparisonResult(id a, id b) {
+        NSString *first = [(Zone *)a name];
+        NSString *second = [(Zone *)b name];
+        return [first compare:second];
+     }]
+    ];
+    
+    [appDelegate.activeRegion setSecondaryZones:
+     (NSMutableArray *)[appDelegate.activeRegion.secondaryZones sortedArrayUsingComparator:^NSComparisonResult(id a, id b) {
+        NSString *first = [(Zone *)a name];
+        NSString *second = [(Zone *)b name];
+        return [first compare:second];
+     }]
+    ];
+    
 	[super parserDidEndDocument:parser];
 }
 
