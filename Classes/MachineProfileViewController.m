@@ -47,7 +47,7 @@ Portland_Pinball_MapAppDelegate *appDelegate;
 - (void)hideControllButtons:(BOOL)doHide {
 	[deleteButton setHidden:doHide];
     
-    [self.navigationItem setRightBarButtonItem:[[UIBarButtonItem alloc] initWithTitle:doHide ? @"edit" : @"done" style:UIBarButtonItemStyleBordered target:self action:@selector(onEditButtonPressed:)]];    
+    [self.navigationItem setRightBarButtonItem:[[UIBarButtonItem alloc] initWithTitle:doHide ? @"Edit" : @"Done" style:UIBarButtonItemStyleBordered target:self action:@selector(onEditButtonPressed:)]];    
 }
 
 - (IBAction)onDeleteTap:(id)sender {

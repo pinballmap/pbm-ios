@@ -228,7 +228,7 @@ Portland_Pinball_MapAppDelegate *appDelegate;
 		eventProfile = [[EventProfileViewController alloc] initWithNibName:@"EventProfileView" bundle:nil];
 	}
     
-	[eventProfile setEventObject:eventObj];
+	[eventProfile setEvent:eventObj];
 	
     [self.navigationController pushViewController:eventProfile animated:YES];
 }

@@ -411,33 +411,11 @@
 			children = (
 				6ACA3CFB11BC583D00F64051 /* models */,
 				6AF208AA11839D2B002FBE1F /* maps */,
-				6AF208A911839D12002FBE1F /* single pages */,
+				6AF208A911839D12002FBE1F /* controllers */,
 				6A73456610CCE038005D089C /* table base classes */,
 				6A73453410CCD340005D089C /* cell controllers */,
-				8EDA80EA1585740500F6AD9A /* RequestPage.h */,
-				8EDA80EB1585740500F6AD9A /* RequestPage.m */,
 				46A3834810AD4FD300414035 /* Portland_Pinball_MapAppDelegate.h */,
 				46A3834710AD4FD300414035 /* Portland_Pinball_MapAppDelegate.m */,
-				46A3834610AD4FD300414035 /* RootViewController.h */,
-				46A3834510AD4FD300414035 /* RootViewController.m */,
-				6A61E2A110B7C64E00DFD9BE /* LocationFilterView.h */,
-				6A61E2A210B7C64E00DFD9BE /* LocationFilterView.m */,
-				46A3834910AD4FD300414035 /* MachineViewController.h */,
-				46A3834C10AD4FD300414035 /* MachineViewController.m */,
-				6A73455B10CCD657005D089C /* MachineFilterView.h */,
-				6A73455C10CCD657005D089C /* MachineFilterView.m */,
-				6AF208B511839D63002FBE1F /* AddMachineViewController.h */,
-				6AF208B611839D63002FBE1F /* AddMachineViewController.m */,
-				6A73FFE810B3EB12000C4802 /* LocationProfileViewController.h */,
-				6A73FFE910B3EB12000C4802 /* LocationProfileViewController.m */,
-				6A95F6C3118E4FA00054928C /* MachineProfileViewController.h */,
-				6A95F6C4118E4FA00054928C /* MachineProfileViewController.m */,
-				6AC7E81A11B568B400A7E748 /* CommentController.h */,
-				6AC7E81B11B568B400A7E748 /* CommentController.m */,
-				6A9F909B11BB03F900BBF21A /* WebViewController.h */,
-				6A9F909C11BB03F900BBF21A /* WebViewController.m */,
-				6A64252D11BE4CDF00E3BC11 /* RegionSelectViewController.h */,
-				6A64252E11BE4CDF00E3BC11 /* RegionSelectViewController.m */,
 				6AE45E2A1234A57F00C629DF /* Utils.h */,
 				6AE45E2B1234A57F00C629DF /* Utils.m */,
 			);
@@ -540,9 +518,11 @@
 			name = models;
 			sourceTree = "<group>";
 		};
-		6AF208A911839D12002FBE1F /* single pages */ = {
+		6AF208A911839D12002FBE1F /* controllers */ = {
 			isa = PBXGroup;
 			children = (
+				6A9F909B11BB03F900BBF21A /* WebViewController.h */,
+				6A9F909C11BB03F900BBF21A /* WebViewController.m */,
 				6A6A7BBE10E41766002C9909 /* AboutViewController.h */,
 				6A6A7BBF10E41766002C9909 /* AboutViewController.m */,
 				6A10D0961120EF9A00A81A8B /* ClosestLocations.h */,
@@ -555,8 +535,28 @@
 				6A23925F11D66B9B00924966 /* EventsViewController.m */,
 				6A2393FD11D6ECC200924966 /* EventProfileViewController.h */,
 				6A2393FE11D6ECC200924966 /* EventProfileViewController.m */,
+				46A3834610AD4FD300414035 /* RootViewController.h */,
+				46A3834510AD4FD300414035 /* RootViewController.m */,
+				6A61E2A110B7C64E00DFD9BE /* LocationFilterView.h */,
+				6A61E2A210B7C64E00DFD9BE /* LocationFilterView.m */,
+				46A3834910AD4FD300414035 /* MachineViewController.h */,
+				46A3834C10AD4FD300414035 /* MachineViewController.m */,
+				6A73455B10CCD657005D089C /* MachineFilterView.h */,
+				6A73455C10CCD657005D089C /* MachineFilterView.m */,
+				6AF208B511839D63002FBE1F /* AddMachineViewController.h */,
+				6AF208B611839D63002FBE1F /* AddMachineViewController.m */,
+				6A73FFE810B3EB12000C4802 /* LocationProfileViewController.h */,
+				6A73FFE910B3EB12000C4802 /* LocationProfileViewController.m */,
+				6A95F6C3118E4FA00054928C /* MachineProfileViewController.h */,
+				6A95F6C4118E4FA00054928C /* MachineProfileViewController.m */,
+				6AC7E81A11B568B400A7E748 /* CommentController.h */,
+				6AC7E81B11B568B400A7E748 /* CommentController.m */,
+				6A64252D11BE4CDF00E3BC11 /* RegionSelectViewController.h */,
+				6A64252E11BE4CDF00E3BC11 /* RegionSelectViewController.m */,
+				8EDA80EA1585740500F6AD9A /* RequestPage.h */,
+				8EDA80EB1585740500F6AD9A /* RequestPage.m */,
 			);
-			name = "single pages";
+			name = controllers;
 			sourceTree = "<group>";
 		};
 		6AF208AA11839D2B002FBE1F /* maps */ = {

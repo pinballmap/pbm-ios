@@ -1,6 +1,6 @@
-#import "CommentController.h"
-#import "Portland_Pinball_MapAppDelegate.h"
 #import "Utils.h"
+#import "Portland_Pinball_MapAppDelegate.h"
+#import "CommentController.h"
 
 @implementation CommentController
 @synthesize submitButton, cancelButton, textview, machine, location;
