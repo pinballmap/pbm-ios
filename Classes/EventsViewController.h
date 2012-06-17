@@ -22,9 +22,7 @@
 	
 	NSMutableArray *sectionArray;
 	NSMutableArray *sectionTitles;
-	
-	NSDate *today;
-	
+		
 	BOOL parsingItemNode;
 	
 	LocationProfileViewController *childController;
@@ -32,7 +30,6 @@
 
 @property (nonatomic,strong) UILabel *noEventsLabel;
 @property (nonatomic,strong) NSArray *weekdayTitles;
-@property (nonatomic,strong) NSDate *today;
 @property (nonatomic,strong) NSMutableArray *sectionArray;
 @property (nonatomic,strong) NSMutableArray *sectionTitles;
 @property (nonatomic,strong) EventProfileViewController *eventProfile;

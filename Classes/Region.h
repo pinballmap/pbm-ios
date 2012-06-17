@@ -16,7 +16,6 @@
 	NSMutableArray *secondaryZones;
 	NSMutableArray *recentlyAdded;
 	NSMutableArray *events;
-	NSMutableArray *eventTitles;	
 }
 
 @property (nonatomic,strong) NSMutableDictionary *loadedMachines;
@@ -24,7 +23,6 @@
 @property (nonatomic,strong) NSMutableDictionary *machines;
 
 @property (nonatomic,strong) NSMutableArray *recentlyAdded;
-@property (nonatomic,strong) NSMutableArray *eventTitles;
 @property (nonatomic,strong) NSMutableArray *events;
 @property (nonatomic,strong) NSMutableArray *primaryZones;
 @property (nonatomic,strong) NSMutableArray *secondaryZones;
