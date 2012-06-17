@@ -15,7 +15,7 @@
 		46A3834D10AD4FD300414035 /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 46A3834510AD4FD300414035 /* RootViewController.m */; };
 		46A3834E10AD4FD300414035 /* Portland_Pinball_MapAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 46A3834710AD4FD300414035 /* Portland_Pinball_MapAppDelegate.m */; };
 		46A3835010AD4FD300414035 /* MachineViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 46A3834C10AD4FD300414035 /* MachineViewController.m */; };
-		46A3838810AD5F9000414035 /* RSSViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 46A3838710AD5F9000414035 /* RSSViewController.m */; };
+		46A3838810AD5F9000414035 /* RecentlyAddedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 46A3838710AD5F9000414035 /* RecentlyAddedViewController.m */; };
 		6A0782AF10C4F857006EA7E3 /* Machine.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A0782AE10C4F857006EA7E3 /* Machine.m */; };
 		6A07ABCE10B000510090BDCB /* XMLTable.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A07ABCD10B000510090BDCB /* XMLTable.m */; };
 		6A10D0981120EF9A00A81A8B /* ClosestLocations.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A10D0971120EF9A00A81A8B /* ClosestLocations.m */; };
@@ -46,7 +46,7 @@
 		8E1267F5157C4B2F00A40329 /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 46A3834510AD4FD300414035 /* RootViewController.m */; };
 		8E1267F6157C4B2F00A40329 /* Portland_Pinball_MapAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 46A3834710AD4FD300414035 /* Portland_Pinball_MapAppDelegate.m */; };
 		8E1267F7157C4B2F00A40329 /* MachineViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 46A3834C10AD4FD300414035 /* MachineViewController.m */; };
-		8E1267F8157C4B2F00A40329 /* RSSViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 46A3838710AD5F9000414035 /* RSSViewController.m */; };
+		8E1267F8157C4B2F00A40329 /* RecentlyAddedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 46A3838710AD5F9000414035 /* RecentlyAddedViewController.m */; };
 		8E1267F9157C4B2F00A40329 /* PBMDoubleTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 466A453610AE668F00AB7A2B /* PBMDoubleTableCell.m */; };
 		8E1267FA157C4B2F00A40329 /* BlackTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A26B3F010AFEAA000F07F0A /* BlackTableViewController.m */; };
 		8E1267FC157C4B2F00A40329 /* XMLTable.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A07ABCD10B000510090BDCB /* XMLTable.m */; };
@@ -232,7 +232,7 @@
 		2892E40F0DC94CBA00A64D0F /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		28A0AAE50D9B0CCF005BE974 /* Portland_Pinball_Map_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Portland_Pinball_Map_Prefix.pch; sourceTree = "<group>"; };
 		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		466A453510AE668F00AB7A2B /* PBMDoubleTableCell.h */ = {isa = PBXFileReference; fileEncoding = 4; path = PBMDoubleTableCell.h; sourceTree = "<group>"; };
+		466A453510AE668F00AB7A2B /* PBMDoubleTableCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PBMDoubleTableCell.h; sourceTree = "<group>"; };
 		466A453610AE668F00AB7A2B /* PBMDoubleTableCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PBMDoubleTableCell.m; sourceTree = "<group>"; };
 		46A3834510AD4FD300414035 /* RootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RootViewController.m; sourceTree = "<group>"; };
 		46A3834610AD4FD300414035 /* RootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RootViewController.h; sourceTree = "<group>"; };
@@ -240,15 +240,15 @@
 		46A3834810AD4FD300414035 /* Portland_Pinball_MapAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Portland_Pinball_MapAppDelegate.h; sourceTree = "<group>"; };
 		46A3834910AD4FD300414035 /* MachineViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MachineViewController.h; sourceTree = "<group>"; };
 		46A3834C10AD4FD300414035 /* MachineViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MachineViewController.m; sourceTree = "<group>"; };
-		46A3838610AD5F9000414035 /* RSSViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RSSViewController.h; sourceTree = "<group>"; };
-		46A3838710AD5F9000414035 /* RSSViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RSSViewController.m; sourceTree = "<group>"; };
-		6A0782AD10C4F857006EA7E3 /* Machine.h */ = {isa = PBXFileReference; fileEncoding = 4; path = Machine.h; sourceTree = "<group>"; };
+		46A3838610AD5F9000414035 /* RecentlyAddedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecentlyAddedViewController.h; sourceTree = "<group>"; };
+		46A3838710AD5F9000414035 /* RecentlyAddedViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecentlyAddedViewController.m; sourceTree = "<group>"; };
+		6A0782AD10C4F857006EA7E3 /* Machine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Machine.h; sourceTree = "<group>"; };
 		6A0782AE10C4F857006EA7E3 /* Machine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Machine.m; sourceTree = "<group>"; };
 		6A07ABCC10B000510090BDCB /* XMLTable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMLTable.h; sourceTree = "<group>"; };
 		6A07ABCD10B000510090BDCB /* XMLTable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMLTable.m; sourceTree = "<group>"; };
 		6A10D0961120EF9A00A81A8B /* ClosestLocations.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClosestLocations.h; sourceTree = "<group>"; };
 		6A10D0971120EF9A00A81A8B /* ClosestLocations.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClosestLocations.m; sourceTree = "<group>"; };
-		6A23925A11D667F400924966 /* Event.h */ = {isa = PBXFileReference; fileEncoding = 4; path = Event.h; sourceTree = "<group>"; };
+		6A23925A11D667F400924966 /* Event.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Event.h; sourceTree = "<group>"; };
 		6A23925B11D667F400924966 /* Event.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Event.m; sourceTree = "<group>"; };
 		6A23925E11D66B9B00924966 /* EventsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EventsViewController.h; sourceTree = "<group>"; };
 		6A23925F11D66B9B00924966 /* EventsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EventsViewController.m; sourceTree = "<group>"; };
@@ -263,7 +263,7 @@
 		6A61E21D10B7BD4100DFD9BE /* ZonesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZonesViewController.m; sourceTree = "<group>"; };
 		6A61E2A110B7C64E00DFD9BE /* LocationFilterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationFilterView.h; sourceTree = "<group>"; };
 		6A61E2A210B7C64E00DFD9BE /* LocationFilterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocationFilterView.m; sourceTree = "<group>"; };
-		6A64239B11BE282300E3BC11 /* Zone.h */ = {isa = PBXFileReference; fileEncoding = 4; path = Zone.h; sourceTree = "<group>"; };
+		6A64239B11BE282300E3BC11 /* Zone.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Zone.h; sourceTree = "<group>"; };
 		6A64239C11BE282300E3BC11 /* Zone.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Zone.m; sourceTree = "<group>"; };
 		6A64252D11BE4CDF00E3BC11 /* RegionSelectViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegionSelectViewController.h; sourceTree = "<group>"; };
 		6A64252E11BE4CDF00E3BC11 /* RegionSelectViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegionSelectViewController.m; sourceTree = "<group>"; };
@@ -279,14 +279,14 @@
 		6A95F6C4118E4FA00054928C /* MachineProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MachineProfileViewController.m; sourceTree = "<group>"; };
 		6A9F909B11BB03F900BBF21A /* WebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebViewController.h; sourceTree = "<group>"; };
 		6A9F909C11BB03F900BBF21A /* WebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebViewController.m; sourceTree = "<group>"; };
-		6A9FC52110BE430F00927165 /* Location.h */ = {isa = PBXFileReference; fileEncoding = 4; path = Location.h; sourceTree = "<group>"; };
+		6A9FC52110BE430F00927165 /* Location.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Location.h; sourceTree = "<group>"; };
 		6A9FC52210BE430F00927165 /* Location.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Location.m; sourceTree = "<group>"; };
 		6AB12FAD10E71E3D002CB85F /* LocationPin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationPin.h; sourceTree = "<group>"; };
 		6AB12FAE10E71E3D002CB85F /* LocationPin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocationPin.m; sourceTree = "<group>"; };
 		6AC7E81A11B568B400A7E748 /* CommentController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommentController.h; sourceTree = "<group>"; };
 		6AC7E81B11B568B400A7E748 /* CommentController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommentController.m; sourceTree = "<group>"; };
 		6AC9D6A410BBC6D100EEA3F7 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
-		6ACA3CEE11BC582D00F64051 /* Region.h */ = {isa = PBXFileReference; fileEncoding = 4; path = Region.h; sourceTree = "<group>"; };
+		6ACA3CEE11BC582D00F64051 /* Region.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Region.h; sourceTree = "<group>"; };
 		6ACA3CEF11BC582D00F64051 /* Region.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Region.m; sourceTree = "<group>"; };
 		6AE45E2A1234A57F00C629DF /* Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Utils.h; sourceTree = "<group>"; };
 		6AE45E2B1234A57F00C629DF /* Utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Utils.m; sourceTree = "<group>"; };
@@ -365,7 +365,7 @@
 		8EDA80D9158572FA00F6AD9A /* RootViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RootViewController.xib; sourceTree = "<group>"; };
 		8EDA80EA1585740500F6AD9A /* RequestPage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RequestPage.h; sourceTree = "<group>"; };
 		8EDA80EB1585740500F6AD9A /* RequestPage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RequestPage.m; sourceTree = "<group>"; };
-		8EDA80EE1585743C00F6AD9A /* PBMTableCell.h */ = {isa = PBXFileReference; fileEncoding = 4; path = PBMTableCell.h; sourceTree = "<group>"; };
+		8EDA80EE1585743C00F6AD9A /* PBMTableCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PBMTableCell.h; sourceTree = "<group>"; };
 		8EDA80EF1585743C00F6AD9A /* PBMTableCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PBMTableCell.m; sourceTree = "<group>"; };
 		8EDA80F21585748800F6AD9A /* AddMachineView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AddMachineView.xib; sourceTree = "<group>"; };
 		8EDA80F31585748800F6AD9A /* CommentView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CommentView.xib; sourceTree = "<group>"; };
@@ -547,8 +547,8 @@
 				6A6A7BBF10E41766002C9909 /* AboutViewController.m */,
 				6A10D0961120EF9A00A81A8B /* ClosestLocations.h */,
 				6A10D0971120EF9A00A81A8B /* ClosestLocations.m */,
-				46A3838610AD5F9000414035 /* RSSViewController.h */,
-				46A3838710AD5F9000414035 /* RSSViewController.m */,
+				46A3838610AD5F9000414035 /* RecentlyAddedViewController.h */,
+				46A3838710AD5F9000414035 /* RecentlyAddedViewController.m */,
 				6A61E21C10B7BD4100DFD9BE /* ZonesViewController.h */,
 				6A61E21D10B7BD4100DFD9BE /* ZonesViewController.m */,
 				6A23925E11D66B9B00924966 /* EventsViewController.h */,
@@ -731,7 +731,7 @@
 		29B97313FDCFA39411CA2CEA /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0420;
+				LastUpgradeCheck = 0430;
 			};
 			buildConfigurationList = C01FCF4E08A954540054247B /* Build configuration list for PBXProject "Portland Pinball Map" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -919,7 +919,7 @@
 				46A3834D10AD4FD300414035 /* RootViewController.m in Sources */,
 				46A3834E10AD4FD300414035 /* Portland_Pinball_MapAppDelegate.m in Sources */,
 				46A3835010AD4FD300414035 /* MachineViewController.m in Sources */,
-				46A3838810AD5F9000414035 /* RSSViewController.m in Sources */,
+				46A3838810AD5F9000414035 /* RecentlyAddedViewController.m in Sources */,
 				466A453710AE668F00AB7A2B /* PBMDoubleTableCell.m in Sources */,
 				6A26B3F110AFEAA000F07F0A /* BlackTableViewController.m in Sources */,
 				6A07ABCE10B000510090BDCB /* XMLTable.m in Sources */,
@@ -958,7 +958,7 @@
 				8E1267F5157C4B2F00A40329 /* RootViewController.m in Sources */,
 				8E1267F6157C4B2F00A40329 /* Portland_Pinball_MapAppDelegate.m in Sources */,
 				8E1267F7157C4B2F00A40329 /* MachineViewController.m in Sources */,
-				8E1267F8157C4B2F00A40329 /* RSSViewController.m in Sources */,
+				8E1267F8157C4B2F00A40329 /* RecentlyAddedViewController.m in Sources */,
 				8E1267F9157C4B2F00A40329 /* PBMDoubleTableCell.m in Sources */,
 				8E1267FA157C4B2F00A40329 /* BlackTableViewController.m in Sources */,
 				8E1267FC157C4B2F00A40329 /* XMLTable.m in Sources */,

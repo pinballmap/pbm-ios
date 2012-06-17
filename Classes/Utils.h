@@ -14,5 +14,6 @@
 + (NSDate *)getDateFromString:(NSString *)dateString;
 + (NSString *)stripString:(NSString *)string;
 + (NSString *)directoryFirstLetter:(NSString *)string;
++ (int)differenceInDaysFrom:(NSDate *)startDate to:(NSDate *)toDate;
 
 @end

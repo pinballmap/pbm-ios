@@ -14,9 +14,8 @@
 	
 	NSMutableArray *primaryZones;
 	NSMutableArray *secondaryZones;
-	NSMutableArray *rssArray;
-	NSMutableArray *rssTitles;
-	NSMutableArray *eventArray;
+	NSMutableArray *recentlyAdded;
+	NSMutableArray *events;
 	NSMutableArray *eventTitles;	
 }
 
@@ -24,10 +23,9 @@
 @property (nonatomic,strong) NSMutableDictionary *locations;
 @property (nonatomic,strong) NSMutableDictionary *machines;
 
-@property (nonatomic,strong) NSMutableArray *rssTitles;
-@property (nonatomic,strong) NSMutableArray *rssArray;
+@property (nonatomic,strong) NSMutableArray *recentlyAdded;
 @property (nonatomic,strong) NSMutableArray *eventTitles;
-@property (nonatomic,strong) NSMutableArray *eventArray;
+@property (nonatomic,strong) NSMutableArray *events;
 @property (nonatomic,strong) NSMutableArray *primaryZones;
 @property (nonatomic,strong) NSMutableArray *secondaryZones;
 
