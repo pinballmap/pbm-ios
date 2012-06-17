@@ -1,5 +1,4 @@
 #import "Portland_Pinball_MapAppDelegate.h"
-#import "RootViewController.h"
 
 @implementation Portland_Pinball_MapAppDelegate
 

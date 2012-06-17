@@ -7,18 +7,18 @@
 - (void)viewDidLoad {
 	if(map == nil) {
 		map = [[MKMapView alloc] initWithFrame:self.view.bounds];
-		map.delegate = self;
+		[map setDelegate:self];
 		
 		MKCoordinateRegion region;
 		MKCoordinateSpan span;
-		span.latitudeDelta=0.2;
-		span.longitudeDelta=0.2;
+		span.latitudeDelta = 0.2;
+		span.longitudeDelta = 0.2;
 		region.span = span;
 		
 		CLLocationCoordinate2D newLoc;
 		newLoc.latitude  = 45.521744;
 		newLoc.longitude = -122.671623;
-		region.center=newLoc;
+		region.center = newLoc;
 		
 		[map setRegion:region animated:NO];
 		
@@ -30,9 +30,9 @@
 
 - (void)viewWillAppear:(BOOL)animated {
 	if (locationsToShow != annotationArray) {
-		map.showsUserLocation = NO;
+		[map setShowsUserLocation:NO];
 		[map removeAnnotations:map.annotations];
-		map.showsUserLocation = YES;
+		[map setShowsUserLocation:YES];
 	}
 	
 	if (locationsToShow != annotationArray) {
@@ -96,7 +96,7 @@
 	[app openURL:[[NSURL alloc] initWithString: [mapURL stringByReplacingOccurrencesOfString:@" " withString:@"+"]]];
 }
 
-- (void) openGoogleMap {}
+- (void)openGoogleMap {}
 
 - (void)mapView:(MKMapView *)mapView didAddAnnotationViews:(NSArray *)views {
     if(showProfileButtons == NO && [[mapView annotations] lastObject] != mapView.userLocation)

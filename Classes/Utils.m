@@ -134,4 +134,12 @@
     return firstLetter;
 }
 
++ (int)differenceInDaysFrom:(NSDate *)startDate to:(NSDate *)toDate {
+    NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+    NSDateComponents *components = [gregorian components:NSDayCalendarUnit fromDate:toDate toDate:startDate options:0];
+    NSInteger days = [components day];
+    
+    return days;
+}
+
 @end

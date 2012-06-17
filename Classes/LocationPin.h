@@ -1,6 +1,5 @@
 #import "Location.h"
 #import <MapKit/MapKit.h>
-#import <Foundation/Foundation.h>
 
 @interface LocationPin : NSObject <MKAnnotation> {
     Location *location;	

@@ -3,7 +3,7 @@
 #import "Utils.h"
 
 @implementation EventsViewController
-@synthesize sectionTitles, sectionArray, today, eventProfile, weekdayTitles, noEventsLabel;
+@synthesize sectionTitles, sectionArray, eventProfile, weekdayTitles, noEventsLabel;
 
 Portland_Pinball_MapAppDelegate *appDelegate;
 
@@ -17,7 +17,7 @@ Portland_Pinball_MapAppDelegate *appDelegate;
 	[noEventsLabel setFont:[UIFont boldSystemFontOfSize:20]];
 	[noEventsLabel setTextAlignment:UITextAlignmentCenter];
 	
-	weekdayTitles = [[NSArray alloc] initWithObjects:@"Sunday", @"Monday", @"Tuesday", @"Wednesday", @"Thursday", @"Friday", @"Saturday",nil];
+	weekdayTitles = [[NSArray alloc] initWithObjects:@"Sunday", @"Monday", @"Tuesday", @"Wednesday", @"Thursday", @"Friday", @"Saturday", nil];
 	[super viewDidLoad];
 }
 
@@ -29,10 +29,10 @@ Portland_Pinball_MapAppDelegate *appDelegate;
 }
 
 - (void)refreshPage {    
-	if(appDelegate.activeRegion.eventArray == nil) {
+	if(appDelegate.activeRegion.events == nil) {
 		[noEventsLabel removeFromSuperview];
 		[self showLoaderIconLarge];
-	} else if([appDelegate.activeRegion.eventArray count] == 0) {
+	} else if([appDelegate.activeRegion.events count] == 0) {
 		[self.tableView setSeparatorColor:[UIColor blackColor]];
 		[self.view addSubview:noEventsLabel];
 	} else {
@@ -46,15 +46,12 @@ Portland_Pinball_MapAppDelegate *appDelegate;
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
 
-	if (appDelegate.activeRegion.eventArray == nil) {
-		today = [[NSDate alloc] init];
-		
+	if (appDelegate.activeRegion.events == nil) {		
 		sectionTitles = [[NSMutableArray alloc] initWithObjects:@"featured", @"tournaments", @"other", @"past events",nil];
 		sectionArray = [[NSMutableArray alloc] initWithCapacity:[sectionTitles count]];
 		
 		for (int i = 0; i < [sectionTitles count]; i++) {
-			NSMutableArray *array = [[NSMutableArray alloc] init];
-			[sectionArray addObject:array];
+			[sectionArray addObject:[[NSMutableArray alloc] init]];
 		}
         
 		NSString *path = [NSString stringWithFormat:@"%@init=3",appDelegate.rootURL];
@@ -110,7 +107,7 @@ Portland_Pinball_MapAppDelegate *appDelegate;
             
 		[eventObject setDisplayDate:displayDate];
 		
-		int difference = [endDate isEqual:@""] ? 3 : [self differenceInDaysFrom:today to:endDate];
+		int difference = [endDate isEqual:@""] ? 3 : [self differenceInDaysFrom:[NSDate date] to:endDate];
 		int index;
 		
 		if(difference <= 0) {
@@ -177,8 +174,7 @@ Portland_Pinball_MapAppDelegate *appDelegate;
 		}
 	}
 	
-	[appDelegate.activeRegion setEventArray:sectionArray];
-	[appDelegate.activeRegion setEventTitles:sectionTitles];
+	[appDelegate.activeRegion setEvents:sectionArray];
 		
 	[super parserDidEndDocument:parser];
 	[self refreshPage];
@@ -192,30 +188,28 @@ Portland_Pinball_MapAppDelegate *appDelegate;
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return [appDelegate.activeRegion.eventArray count];
+    return [appDelegate.activeRegion.events count];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {	
-	NSArray *locationGroup = (NSArray *)[appDelegate.activeRegion.eventArray objectAtIndex:section];
+	NSArray *locationGroup = (NSArray *)[appDelegate.activeRegion.events objectAtIndex:section];
     
     return [locationGroup count];
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger) section {	
-	return [appDelegate.activeRegion.eventTitles objectAtIndex:section];
+	return [sectionTitles objectAtIndex:section];
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-	static NSString *CellIdentifier = @"DoubleTextCellID";
-    
-    PBMDoubleTableCell *cell = (PBMDoubleTableCell*)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {    
+    PBMDoubleTableCell *cell = (PBMDoubleTableCell*)[tableView dequeueReusableCellWithIdentifier:@"DoubleTextCellID"];
     if (cell == nil) {
 		cell = [self getDoubleCell];
     }
 
 	NSUInteger section = [indexPath section];
 	NSUInteger row = [indexPath row];
-	NSArray *locationGroup = (NSArray *)[appDelegate.activeRegion.eventArray objectAtIndex:section];
+	NSArray *locationGroup = (NSArray *)[appDelegate.activeRegion.events objectAtIndex:section];
 	Event *item2 = (Event *)[locationGroup objectAtIndex:row];
 	
 	[cell.nameLabel setText:item2.displayName];
@@ -227,14 +221,14 @@ Portland_Pinball_MapAppDelegate *appDelegate;
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
 	NSUInteger section = [indexPath section];
 	NSUInteger row = [indexPath row];
-	NSArray *locationGroup = (NSArray *)[appDelegate.activeRegion.eventArray objectAtIndex:section];
+	NSArray *locationGroup = (NSArray *)[appDelegate.activeRegion.events objectAtIndex:section];
 	Event *eventObj = (Event *)[locationGroup objectAtIndex:row];
 	
 	if(eventProfile == nil) {
 		eventProfile = [[EventProfileViewController alloc] initWithNibName:@"EventProfileView" bundle:nil];
 	}
     
-	[eventProfile setEventObject:eventObj];
+	[eventProfile setEvent:eventObj];
 	
     [self.navigationController pushViewController:eventProfile animated:YES];
 }

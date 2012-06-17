@@ -316,7 +316,7 @@ Portland_Pinball_MapAppDelegate *appDelegate;
             [closest setTitle:@"Closest Locations"];
             [viewControllers addObject:closest];
             
-            RSSViewController *rssView = [[RSSViewController alloc] initWithStyle:UITableViewStylePlain];
+            RecentlyAddedViewController *rssView = [[RecentlyAddedViewController alloc] initWithStyle:UITableViewStylePlain];
             [rssView setTitle:@"Recently Added"];
             [viewControllers addObject:rssView];
             

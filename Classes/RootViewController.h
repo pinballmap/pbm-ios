@@ -1,7 +1,7 @@
 #import "AboutViewController.h"
 #import "XMLTable.h"
 #import "ClosestLocations.h"
-#import "RSSViewController.h"
+#import "RecentlyAddedViewController.h"
 #import "EventsViewController.h"
 #import "ZonesViewController.h"
 #import "MachineViewController.h"

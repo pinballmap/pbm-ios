@@ -32,5 +32,4 @@
 	[self viewURL:@"http://pinballmap.com/" withTitle:@"PinballMap.com"];
 }
 
-
 @end

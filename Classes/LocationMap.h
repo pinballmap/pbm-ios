@@ -1,9 +1,6 @@
-#import "LocationPin.h"
 #import "Location.h"
+#import "LocationPin.h"
 #import <MapKit/MapKit.h>
-
-@class LocationProfileViewController;
-@class Portland_Pinball_MapAppDelegate;
 
 @interface LocationMap : UIViewController <MKMapViewDelegate> {
 	MKMapView *map;
