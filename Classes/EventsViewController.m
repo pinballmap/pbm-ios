@@ -3,7 +3,7 @@
 #import "Utils.h"
 
 @implementation EventsViewController
-@synthesize sectionTitles, sectionArray, eventProfile, weekdayTitles, noEventsLabel;
+@synthesize sectionTitles, sectionArray, eventProfileViewController, weekdayTitles, noEventsLabel;
 
 Portland_Pinball_MapAppDelegate *appDelegate;
 
@@ -47,17 +47,15 @@ Portland_Pinball_MapAppDelegate *appDelegate;
     [super viewDidAppear:animated];
 
 	if (appDelegate.activeRegion.events == nil) {		
-		sectionTitles = [[NSMutableArray alloc] initWithObjects:@"featured", @"tournaments", @"other", @"past events",nil];
+		sectionTitles = [[NSMutableArray alloc] initWithObjects:@"featured", @"tournaments", @"other", @"past events", nil];
 		sectionArray = [[NSMutableArray alloc] initWithCapacity:[sectionTitles count]];
 		
 		for (int i = 0; i < [sectionTitles count]; i++) {
 			[sectionArray addObject:[[NSMutableArray alloc] init]];
 		}
-        
-		NSString *path = [NSString stringWithFormat:@"%@init=3",appDelegate.rootURL];
-	
+        	
 		@autoreleasepool {
-			[self performSelectorInBackground:@selector(parseXMLFileAtURL:) withObject:path];
+			[self performSelectorInBackground:@selector(parseXMLFileAtURL:) withObject:[NSString stringWithFormat:@"%@init=3",appDelegate.rootURL]];
 		}
 	}
 }
@@ -66,61 +64,42 @@ Portland_Pinball_MapAppDelegate *appDelegate;
 	currentElement = [elementName copy];
 	
 	if ([elementName isEqualToString:@"event"]) {
-        eventObject = [[Event alloc] init];
-		currentID = [[NSMutableString alloc] init];
+		currentID = [[NSNumber alloc] init];
 		currentName = [[NSMutableString alloc] init];
 		currentLongDesc = [[NSMutableString alloc] init];
 		currentLink = [[NSMutableString alloc] init];
-		currentCategoryNo = [[NSMutableString alloc] init];
-		currentStartDate = [[NSMutableString alloc] init];
-		currentEndDate = [[NSMutableString alloc] init];
-		currentLocationNo = [[NSMutableString alloc] init];
+		currentCategoryNo = [[NSNumber alloc] init];
+		currentStartDate = [[NSDate alloc] init];
+		currentEndDate = [[NSDate alloc] init];
+		currentLocationID = [[NSNumber alloc] init];
 	}
 }
 
 - (void)parser:(NSXMLParser *)parser didEndElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qName {	
-	if ([elementName isEqualToString:@"event"]) {		
-		[eventObject setIdNumber:currentID];
-		[eventObject setName:currentName];
-		[eventObject setLongDesc:currentLongDesc];
-		[eventObject setLink:currentLink];
-		[eventObject setCategoryNo:currentCategoryNo];
-		[eventObject setStartDate:currentStartDate];
-		[eventObject setEndDate:currentEndDate];
-		[eventObject setLocationNo:currentLocationNo];
+	if ([elementName isEqualToString:@"event"]) {
+        Location *location = (Location *)[appDelegate fetchObject:@"Location" where:@"idNumber" equals:[NSString stringWithFormat:@"%d", [currentLocationID intValue]]];
+        Event *event = [NSEntityDescription insertNewObjectForEntityForName:@"Event" inManagedObjectContext:appDelegate.managedObjectContext];
+		[event setName:currentName];
+		[event setLongDesc:currentLongDesc];
+		[event setExternalLink:currentLink];
+		[event setCategoryNo:currentCategoryNo];
+		[event setStartDate:currentStartDate];
+		[event setEndDate:currentEndDate];
+		[event setLocation:location];
+        [appDelegate saveContext];
 		
-		Location *location = (Location *)[appDelegate.activeRegion.locations objectForKey:currentLocationNo];
-		[eventObject setLocation:location];
-		[eventObject setDisplayName:[currentName isEqualToString:@""] ? location.name : currentName];
-				
-		NSMutableString *displayDate = [[NSMutableString alloc] initWithString:[Utils formatDateFromString:currentStartDate]];
-		
-		NSDate *endDate;
-		if(![currentEndDate isEqualToString:@""] && ![currentEndDate isEqualToString:currentStartDate]) {
-			endDate = [Utils getDateFromString:currentEndDate];
-			NSString *appendString = [NSString stringWithFormat:@" to %@",[Utils formatDateFromString:currentEndDate]];
-            
-			[displayDate appendString:appendString];
-		} else {
-			endDate = [Utils getDateFromString:currentStartDate];
-		}
-            
-		[eventObject setDisplayDate:displayDate];
-		
-		int difference = [endDate isEqual:@""] ? 3 : [self differenceInDaysFrom:[NSDate date] to:endDate];
+		int difference = [event.endDate isEqual:@""] ? 3 : [self differenceInDaysFrom:[NSDate date] to:event.endDate];
 		int index;
 		
 		if(difference <= 0) {
-			if([eventObject.categoryNo isEqualToString:@"2"]) index = 0;
-			if([eventObject.categoryNo isEqualToString:@"1"]) index = 1;
-			if([eventObject.categoryNo isEqualToString:@"3"]) index = 2;
+			if([event.categoryNo intValue] == 2) index = 0;
+			if([event.categoryNo intValue] == 1) index = 1;
+			if([event.categoryNo intValue] == 3) index = 2;
 		} else {
 			index = 3;
 		}
             
-		NSMutableArray *quickArray = [sectionArray objectAtIndex:index];
-		[quickArray addObject:eventObject];
-
+		[[sectionArray objectAtIndex:index] addObject:event];
 	}
     
 	currentElement = @"";
@@ -128,9 +107,6 @@ Portland_Pinball_MapAppDelegate *appDelegate;
 
 - (void)parser:(NSXMLParser *)parser foundCharacters:(NSString *)string {
 	if (![string isEqualToString:@"\n"]) {
-		if ([currentElement isEqualToString:@"id"])         
-            [currentID appendString:string];
-		
         if ([currentElement isEqualToString:@"name"])       
             [currentName appendString:string];
 		
@@ -138,20 +114,23 @@ Portland_Pinball_MapAppDelegate *appDelegate;
             [currentLink appendString:string];
 		
         if ([currentElement isEqualToString:@"categoryNo"]) 
-            [currentCategoryNo appendString:string];
-		
-        if ([currentElement isEqualToString:@"startDate"])  
-            [currentStartDate appendString:string];
-		
-        if ([currentElement isEqualToString:@"endDate"])    
-            [currentEndDate appendString:string];
+            currentCategoryNo = [NSNumber numberWithInt:[string intValue]];
         
-		if ([currentElement isEqualToString:@"locationNo"]) 
-            [currentLocationNo appendString:string];
+        if ([currentElement isEqualToString:@"locationNo"]) 
+            currentLocationID = [NSNumber numberWithInt:[string intValue]];
+
+        if ([currentElement isEqualToString:@"longDesc"])   
+            [currentLongDesc appendString:string];
+        
+        NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+        [formatter setDateFormat:@"yyyy-MM-dd"];
+        if ([currentElement isEqualToString:@"startDate"]) {  
+            currentStartDate = [formatter dateFromString:string];
+        }
+        if ([currentElement isEqualToString:@"endDate"]) {  
+            currentEndDate = [formatter dateFromString:string];
+        }
 	}
-    
-	if ([currentElement isEqualToString:@"longDesc"])   
-        [currentLongDesc appendString:string];
 }
 
 - (void)parserDidEndDocument:(NSXMLParser *)parser {
@@ -174,7 +153,7 @@ Portland_Pinball_MapAppDelegate *appDelegate;
 		}
 	}
 	
-	[appDelegate.activeRegion setEvents:sectionArray];
+	[appDelegate.activeRegion setEvents:[NSSet setWithArray:sectionArray]];
 		
 	[super parserDidEndDocument:parser];
 	[self refreshPage];
@@ -191,10 +170,8 @@ Portland_Pinball_MapAppDelegate *appDelegate;
     return [appDelegate.activeRegion.events count];
 }
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {	
-	NSArray *locationGroup = (NSArray *)[appDelegate.activeRegion.events objectAtIndex:section];
-    
-    return [locationGroup count];
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {	    
+    return [appDelegate.activeRegion.events count];
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger) section {	
@@ -207,30 +184,37 @@ Portland_Pinball_MapAppDelegate *appDelegate;
 		cell = [self getDoubleCell];
     }
 
-	NSUInteger section = [indexPath section];
 	NSUInteger row = [indexPath row];
-	NSArray *locationGroup = (NSArray *)[appDelegate.activeRegion.events objectAtIndex:section];
-	Event *item2 = (Event *)[locationGroup objectAtIndex:row];
-	
-	[cell.nameLabel setText:item2.displayName];
-	[cell.subLabel setText:item2.displayDate];
+	Event *event = [appDelegate.activeRegion.events.allObjects objectAtIndex:row];
+
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateFormat:@"yyyy-mm-dd"];
+    
+    NSMutableString *displayDate = [[NSMutableString alloc] initWithString:[Utils formatDateFromString:[formatter stringFromDate:event.startDate]]];
+    
+    if(!(event.endDate == nil) && !([event.endDate compare:event.startDate] == NSOrderedSame)) {
+        NSString *appendString = [NSString stringWithFormat:@" to %@", [Utils formatDateFromString:[formatter stringFromDate:event.endDate]]];
+        
+        [displayDate appendString:appendString];
+    }
+        
+	[cell.nameLabel setText:[event.name isEqualToString:@""] ? event.location.name : event.name];
+	[cell.subLabel setText:displayDate];
 	
     return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-	NSUInteger section = [indexPath section];
 	NSUInteger row = [indexPath row];
-	NSArray *locationGroup = (NSArray *)[appDelegate.activeRegion.events objectAtIndex:section];
-	Event *eventObj = (Event *)[locationGroup objectAtIndex:row];
+	Event *event = (Event *)[appDelegate.activeRegion.events.allObjects objectAtIndex:row];
 	
-	if(eventProfile == nil) {
-		eventProfile = [[EventProfileViewController alloc] initWithNibName:@"EventProfileView" bundle:nil];
+	if(eventProfileViewController == nil) {
+		eventProfileViewController = [[EventProfileViewController alloc] initWithNibName:@"EventProfileView" bundle:nil];
 	}
     
-	[eventProfile setEvent:eventObj];
+	[eventProfileViewController setEvent:event];
 	
-    [self.navigationController pushViewController:eventProfile animated:YES];
+    [self.navigationController pushViewController:eventProfileViewController animated:YES];
 }
 
 - (void)dealloc {

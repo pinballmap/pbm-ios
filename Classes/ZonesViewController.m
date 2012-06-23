@@ -1,5 +1,5 @@
-#import "ZonesViewController.h"
 #import "Zone.h"
+#import "ZonesViewController.h"
 
 @implementation ZonesViewController
 @synthesize zones, titles, locationFilter;
@@ -7,7 +7,7 @@
 - (void)viewWillAppear:(BOOL)animated {
 	Portland_Pinball_MapAppDelegate *appDelegate = (Portland_Pinball_MapAppDelegate *)[[UIApplication sharedApplication] delegate];
 	
-	NSArray *allZones = [[NSArray alloc] initWithObjects:@"All", appDelegate.activeRegion.machineFilterString, @"< 1 mile", nil];
+	NSArray *allZones = [[NSArray alloc] initWithObjects:@"All", appDelegate.activeRegion.formattedNMachines, @"< 1 mile", nil];
 	NSArray *primaryZones = [[NSArray alloc] initWithArray:appDelegate.activeRegion.primaryZones];
 	NSArray *secondaryZones = [[NSArray alloc] initWithArray:appDelegate.activeRegion.secondaryZones];
 	NSString *regionTitle = appDelegate.activeRegion.formalName;

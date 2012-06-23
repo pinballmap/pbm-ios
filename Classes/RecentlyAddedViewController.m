@@ -1,17 +1,11 @@
 #import "Utils.h"
+#import "RecentAddition.h"
 #import "RecentlyAddedViewController.h"
 
 @implementation RecentlyAddedViewController
 @synthesize sectionTitles, sectionData;
 
 Portland_Pinball_MapAppDelegate *appDelegate;
-
-- (id)initWithStyle:(UITableViewStyle)style {
-    if (self = [super initWithStyle:style]) {
-    }
-
-    return self;
-}
 
 - (void)viewDidLoad {
     appDelegate = (Portland_Pinball_MapAppDelegate *)[[UIApplication sharedApplication] delegate];
@@ -29,7 +23,7 @@ Portland_Pinball_MapAppDelegate *appDelegate;
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
 
-	if (appDelegate.activeRegion.recentlyAdded == nil) {	
+	if (appDelegate.activeRegion.recentAdditions == nil) {	
 		sectionTitles = [[NSMutableArray alloc] initWithObjects:@"today", @"yesterday", @"this week", @"this month", @"this year", nil];
 		sectionData = [[NSMutableArray alloc] initWithCapacity:[sectionTitles count]];
 		
@@ -50,7 +44,7 @@ Portland_Pinball_MapAppDelegate *appDelegate;
 }
 
 - (void)refreshPage {    
-	if (appDelegate.activeRegion.recentlyAdded == nil) {
+	if (appDelegate.activeRegion.recentAdditions == nil) {
 		[self showLoaderIconLarge];
 	}
 	
@@ -97,14 +91,10 @@ Portland_Pinball_MapAppDelegate *appDelegate;
         NSArray *matches = [regex matchesInString:currentDesc options:0 range:NSMakeRange(0, [currentDesc length])];
         
         int difference;
-		NSString *dateID = @"";
+		NSDate *dateAdded = nil;
 		if ([matches count] > 0) {
-            NSDate *addedDate = [self getDateFromRegexMatches:matches];
-			difference = [Utils differenceInDaysFrom:[NSDate date] to:addedDate];
-    
-            NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-            [dateFormatter setDateFormat:@"yyyy-MM-dd"];            
-			dateID = [dateFormatter stringFromDate:addedDate];	
+            dateAdded = [self getDateFromRegexMatches:matches];
+			difference = [Utils differenceInDaysFrom:[NSDate date] to:dateAdded];    
         } else {
 			difference = DISTANT_FUTURE;
 		}
@@ -113,9 +103,13 @@ Portland_Pinball_MapAppDelegate *appDelegate;
 		NSString *machineName = [currentTitle substringToIndex:range.location];
 		NSString *locationName = [currentTitle substringFromIndex:range.length + range.location];
 		
-		[newMachineAtLocation setObject:dateID forKey:@"dateID"];
-		[newMachineAtLocation setObject:machineName forKey:@"machine"];
-		[newMachineAtLocation setObject:locationName forKey:@"location"];
+        Machine *machine = (Machine *)[appDelegate fetchObject:@"Machine" where:@"name" equals:machineName];
+        Location *location = (Location *)[appDelegate fetchObject:@"Location" where:@"name" equals:locationName];
+        LocationMachineXref *lmx = [LocationMachineXref findForMachine:machine andLocation:location];
+        
+        RecentAddition *recentAddition = [NSEntityDescription insertNewObjectForEntityForName:@"RecentAddition" inManagedObjectContext:appDelegate.managedObjectContext];
+        [recentAddition setLocationMachineXref:lmx];
+        [recentAddition setDateAdded:dateAdded];
 		
 		if(difference <= ONE_YEAR) {
             int index;
@@ -131,7 +125,7 @@ Portland_Pinball_MapAppDelegate *appDelegate;
                 index = 4;
             }
 			
-            [[sectionData objectAtIndex:index] addObject:newMachineAtLocation];
+            [[sectionData objectAtIndex:index] addObject:recentAddition];
 		}		
 	}
     
@@ -161,8 +155,6 @@ Portland_Pinball_MapAppDelegate *appDelegate;
 			[sectionData removeObjectAtIndex:i];
 		}
 	}
-
-	[appDelegate.activeRegion setRecentlyAdded:sectionData];
 		
 	[self.tableView reloadData];
 	[self hideLoaderIconLarge];
@@ -171,13 +163,11 @@ Portland_Pinball_MapAppDelegate *appDelegate;
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return [appDelegate.activeRegion.recentlyAdded count];
+    return [appDelegate.activeRegion.recentAdditions count];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {   
-	NSArray *locationGroup = (NSArray *)[appDelegate.activeRegion.recentlyAdded objectAtIndex:section];
-    
-    return [locationGroup count];
+	return [[sectionData objectAtIndex:section] count];    
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger) section {	
@@ -192,11 +182,11 @@ Portland_Pinball_MapAppDelegate *appDelegate;
 	
     NSUInteger section = [indexPath section];
 	NSUInteger row = [indexPath row];
-	NSArray *locationGroup = (NSArray *)[appDelegate.activeRegion.recentlyAdded objectAtIndex:section];
+	NSArray *locationGroup = [sectionData objectAtIndex:section];
 	
-	NSDictionary *item2 = (NSDictionary *)[locationGroup objectAtIndex:row];
-	[cell.nameLabel setText:[item2 objectForKey:@"machine"]];
-	[cell.subLabel setText:[item2 objectForKey:@"location"]];
+    LocationMachineXref *lmx = [locationGroup objectAtIndex:row];
+	[cell.nameLabel setText:lmx.machine.name];
+	[cell.subLabel setText:lmx.location.name];
     
 	return cell;
 }
@@ -204,18 +194,9 @@ Portland_Pinball_MapAppDelegate *appDelegate;
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {		
 	NSUInteger section = [indexPath section];
 	NSUInteger row = [indexPath row];
-	NSArray *locationGroup = (NSArray *)[appDelegate.activeRegion.recentlyAdded objectAtIndex:section];
-	NSDictionary *item2 = (NSDictionary *)[locationGroup objectAtIndex:row];
-	NSString *locationName  = [item2 objectForKey:@"location"];
-	
-	for (id key in appDelegate.activeRegion.locations) {
-		Location *loc = [appDelegate.activeRegion.locations objectForKey:key];
-		
-		if([locationName isEqualToString:loc.name]) {
-			[self showLocationProfile:loc  withMapButton:YES];
-			break;
-		}
-	} 
+	NSArray *locationGroup = (NSArray *)[sectionData objectAtIndex:section];
+    
+    [self showLocationProfile:[locationGroup objectAtIndex:row]  withMapButton:YES];
 }
 
 @end

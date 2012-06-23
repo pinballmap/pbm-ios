@@ -1,4 +1,5 @@
 #import "Utils.h"
+#import "Zone.h"
 #import "LocationFilterView.h"
 
 @implementation LocationFilterView
@@ -26,22 +27,20 @@ Portland_Pinball_MapAppDelegate *appDelegate;
                 [self addToFilterDictionary:location];
 			} else if([zoneID isEqualToString:@"< 1 mile"] && appDelegate.showUserLocation == YES) {
 				[location updateDistance];
-				if(location.distanceRounded <= 1.0)
+				if(location.distance <= 1.0)
                     [self addToFilterDictionary:location];
-			} else if([zoneID isEqualToString:appDelegate.activeRegion.machineFilterString]) {
-				if(location.totalMachines >= [appDelegate.activeRegion.machineFilter intValue])
+			} else if([zoneID isEqualToString:appDelegate.activeRegion.formattedNMachines]) {
+				if(location.totalMachines >= appDelegate.activeRegion.nMachines)
                     [self addToFilterDictionary:location];
-			} else if([location.neighborhood isEqualToString:theNewZone.shortName]) {
+			} else if([location.locationZone.idNumber isEqualToNumber:theNewZone.idNumber]){
                 [self addToFilterDictionary:location];
             }
 		}
         
         for (NSString *key in filteredLocations.allKeys) {            
             NSArray *sortedLocations = [filteredLocations objectForKey:key];
-            sortedLocations = (NSMutableArray *)[sortedLocations sortedArrayUsingComparator:^NSComparisonResult(id a, id b) {
-                NSString *first = [(Location *)a name];
-                NSString *second = [(Location *)b name];
-                return [first compare:second];
+            sortedLocations = (NSMutableArray *)[sortedLocations sortedArrayUsingComparator:^NSComparisonResult(Location *a, Location *b) {
+                return [a.name compare:b.name];
             }];
             
             [filteredLocations setObject:sortedLocations forKey:key];
@@ -118,7 +117,7 @@ Portland_Pinball_MapAppDelegate *appDelegate;
 	NSArray *letterArray = (NSArray*)[filteredLocations objectForKey:keyAtSection];
 	Location *location = [letterArray objectAtIndex:[indexPath row]];
     [cell.nameLabel setText:location.name];
-	[cell.subLabel setText:(appDelegate.showUserLocation == YES) ? location.distanceString : @""];
+	[cell.subLabel setText:(appDelegate.showUserLocation == YES) ? location.formattedDistance : @""];
 
     return cell;
 }

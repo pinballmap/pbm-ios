@@ -17,18 +17,14 @@
 	UIButton *updateConditionButton;
 	
 	MachineFilterView *machineFilter;
-	
 	WebViewController *webview;
-	
 	CommentController *commentController;
 	
-	Location *location;
-	Machine  *machine;
+	LocationMachineXref *locationMachineXref;
 }
 
 @property (nonatomic,strong) WebViewController *webview;
-@property (nonatomic,strong) Location *location;
-@property (nonatomic,strong) Machine *machine;
+@property (nonatomic,strong) LocationMachineXref *locationMachineXref;
 
 @property (nonatomic,strong) CommentController *commentController;
 @property (nonatomic,strong) MachineFilterView *machineFilter;

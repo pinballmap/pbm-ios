@@ -140,40 +140,34 @@ NSInteger sortOnDistance(id obj1, id obj2, void *context) {
 		double min_dist = 1000000.0;
 		double max_dist = 0.0;
 		
-		for(id key in appDelegate.activeRegion.locations) {
-			Location *locobj = (Location *)[appDelegate.activeRegion.locations objectForKey:key];
-			[locobj updateDistance];
-			if(min_dist > locobj.distance) min_dist = locobj.distance;
-			if(max_dist < locobj.distance) max_dist = locobj.distance;
-		}
-		
-		NSMutableArray *value_array = [[NSMutableArray alloc] init];
-		for(id key in appDelegate.activeRegion.locations) {
-			Location *locobj = (Location *)[appDelegate.activeRegion.locations objectForKey:key];
-			int value = ceil(pow(locobj.distance + 0.3,-1.9) * 1000);
+        NSMutableArray *randSeed = [[NSMutableArray alloc] init];
+		for(Location *location in appDelegate.activeRegion.locations) {
+			[location updateDistance];
+			if(min_dist > location.distance) min_dist = location.distance;
+			if(max_dist < location.distance) max_dist = location.distance;
+            
+            int maxDistance = ceil(pow(location.distance + 0.3, -1.9) * 1000);
 			
-			for (int i = 0; i < value; i++) {
-				[value_array addObject:locobj.idNumber];
+			for (int i = 0; i < maxDistance; i++) {
+				[randSeed addObject:location];
 			}
 		}
 		
-		int r = arc4random() % [value_array count];
-		Location *loc = [appDelegate.activeRegion.locations objectForKey:[value_array objectAtIndex:r]];
+		int random = arc4random() % [randSeed count];
+		Location *location = [randSeed objectAtIndex:random];
 		
 		NSArray *viewControllers = self.navigationController.viewControllers;
 		LocationProfileViewController *vc = (LocationProfileViewController *)[viewControllers objectAtIndex:[viewControllers count] - 1];
 		if([vc isKindOfClass:[LocationProfileViewController class]]) {
-			vc.activeLocationObject = loc;
+			vc.activeLocationObject = location;
 			[vc refreshAndReload];
 		} else {
-			LocationProfileViewController *locationProfileView123 = [self getLocationProfile];
-			[locationProfileView123 setTitle:@"Mystery"];
-            [locationProfileView123 setShowMapButton:YES];
-			[locationProfileView123 setActiveLocationObject:loc];
+			LocationProfileViewController *locationProfileView = [self getLocationProfile];
+			[locationProfileView setTitle:@"Mystery"];
+            [locationProfileView setShowMapButton:YES];
+			[locationProfileView setActiveLocationObject:location];
 			
-			NSArray *quickArray1234 = [[NSArray alloc] initWithObjects:[self.navigationController.viewControllers objectAtIndex:0],locationProfileView123,nil];
-
-			[self.navigationController setViewControllers:quickArray1234 animated:NO];
+			[self.navigationController setViewControllers:[[NSArray alloc] initWithObjects:[self.navigationController.viewControllers objectAtIndex:0], locationProfileView, nil] animated:NO];
 		}
 	}
 }

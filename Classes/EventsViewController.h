@@ -4,21 +4,20 @@
 #import "EventProfileViewController.h"
 
 @interface EventsViewController : XMLTable {
-	Event *eventObject;
-	EventProfileViewController *eventProfile;
+	EventProfileViewController *eventProfileViewController;
 	
 	UILabel *noEventsLabel;
 	
 	NSArray *weekdayTitles;
 	
-	NSMutableString *currentID;
-	NSMutableString *currentName;
+    NSNumber *currentID;
+    NSNumber *currentCategoryNo;
+    NSNumber *currentLocationID;
+    NSMutableString *currentName;
 	NSMutableString *currentLongDesc;
 	NSMutableString *currentLink;
-	NSMutableString *currentCategoryNo;
-	NSMutableString *currentStartDate;
-	NSMutableString *currentEndDate;
-	NSMutableString *currentLocationNo;
+	NSDate *currentStartDate;
+	NSDate *currentEndDate;
 	
 	NSMutableArray *sectionArray;
 	NSMutableArray *sectionTitles;
@@ -32,7 +31,7 @@
 @property (nonatomic,strong) NSArray *weekdayTitles;
 @property (nonatomic,strong) NSMutableArray *sectionArray;
 @property (nonatomic,strong) NSMutableArray *sectionTitles;
-@property (nonatomic,strong) EventProfileViewController *eventProfile;
+@property (nonatomic,strong) EventProfileViewController *eventProfileViewController;
 
 - (int)differenceInDaysFrom:(NSDate *)startDate to:(NSDate *)toDate;
 

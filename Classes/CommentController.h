@@ -1,5 +1,4 @@
-#import "Machine.h"
-#import "Location.h"
+#import "LocationMachineXref.h"
 
 @interface CommentController : UIViewController <UITextViewDelegate,UIAlertViewDelegate> {
 	UIButton *submitButton;
@@ -8,12 +7,10 @@
 	
 	NSString *savedConditionText;
 	
-	Machine *machine;
-	Location *location;
+	LocationMachineXref *locationMachineXref;
 }
 
-@property (nonatomic,strong) Location *location;
-@property (nonatomic,strong) Machine *machine;
+@property (nonatomic,strong) LocationMachineXref *locationMachineXref;
 @property (nonatomic,strong) IBOutlet UIButton *submitButton;
 @property (nonatomic,strong) IBOutlet UIButton *cancelButton;
 @property (nonatomic,strong) IBOutlet UITextView *textview;

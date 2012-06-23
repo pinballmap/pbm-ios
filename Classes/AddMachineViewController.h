@@ -5,20 +5,15 @@
 	UIPickerView *picker;
 	UIButton *submitButton;
 	UIButton *returnButton;
-	NSMutableArray *machines;
 	
 	UIActivityIndicatorView *loaderIcon;
 	
 	Location *location;
-	NSString *locationName;
-	NSString *locationId;
     NSString *selectedMachineID;
 }
 
 @property (nonatomic,strong) Location *location;
 @property (nonatomic,strong) NSString *selectedMachineID;
-@property (nonatomic,strong) NSString *locationName;
-@property (nonatomic,strong) NSString *locationId;
 
 @property (nonatomic,strong) IBOutlet UIActivityIndicatorView *loaderIcon;
 @property (nonatomic,strong) IBOutlet UIButton *submitButton;

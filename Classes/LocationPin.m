@@ -14,7 +14,7 @@
 - (id)initWithLocation:(Location *)newLocation {
 	location = newLocation;
 
-	return [self initWithCoordinate:location.coords.coordinate];
+	return [self initWithCoordinate:location.coordinates.coordinate];
 }
 
 - (id)initWithCoordinate:(CLLocationCoordinate2D)newCoordinate {

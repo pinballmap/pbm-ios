@@ -18,8 +18,11 @@
         event.name
     ]];
      
-	[locationLabel setText:event.location.name ? [NSString stringWithFormat:@"@ %@",event.location.name] : @""];
-	[timeLabel setText:event.displayDate];
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateFormat:@"mmm-dd-yyyy"];
+    
+	[locationLabel setText:event.location.name ? [NSString stringWithFormat:@"@ %@", event.location.name] : @""];
+	[timeLabel setText:[formatter stringFromDate:event.startDate]];
 	[descText setText:event.longDesc];
     
 	[super viewWillAppear:animated];
@@ -44,7 +47,7 @@
 		webview = [[WebViewController alloc] initWithNibName:@"WebViewController" bundle:nil];	
 	
 	[webview setTitle:nameLabel.text];
-	[webview setTheNewURL:event.link];
+	[webview setTheNewURL:event.externalLink];
 	
 	[self.navigationController pushViewController:webview animated:YES];
 }
