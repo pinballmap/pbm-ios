@@ -3,7 +3,7 @@
 #import "RootViewController.h"
 
 @implementation MachineFilterView
-@synthesize locations, machineID, machineName, tempLocationID, mapView, resetNavigationStackOnLocationSelect, noLocationsLabel, tempLocations, didAbortParsing;
+@synthesize locations, machine, tempLocationID, mapView, resetNavigationStackOnLocationSelect, noLocationsLabel, tempLocations, didAbortParsing;
 
 Portland_Pinball_MapAppDelegate *appDelegate;
 
@@ -21,12 +21,9 @@ Portland_Pinball_MapAppDelegate *appDelegate;
 }
 
 - (void)viewWillAppear:(BOOL)animated {
-	[self setTitle:machineName];
-	
-	if(appDelegate.activeRegion.loadedMachines == nil)
-		appDelegate.activeRegion.loadedMachines = [[NSMutableDictionary alloc] init];
-	
-	locations = (NSMutableArray *)[appDelegate.activeRegion.loadedMachines objectForKey:machineID];
+	[self setTitle:machine.name];
+
+	locations = [LocationMachineXref locationsForMachine:machine];
 		
 	[self.tableView setContentOffset:CGPointZero];
 	
@@ -39,8 +36,7 @@ Portland_Pinball_MapAppDelegate *appDelegate;
 		didAbortParsing = NO;
 		
 		tempLocations = [[NSMutableArray alloc] init];
-		
-		NSString *url = [[NSString alloc] initWithFormat:@"%@get_machine=%@", appDelegate.rootURL, machineID];
+		NSString *url = [[NSString alloc] initWithFormat:@"%@get_machine=%@", appDelegate.rootURL, machine.idNumber];
 		
 		@autoreleasepool {
 			[self performSelectorInBackground:@selector(parseXMLFileAtURL:) withObject:url];
@@ -88,21 +84,17 @@ Portland_Pinball_MapAppDelegate *appDelegate;
 	
 	currentElement = @"";
 	
-	if ([elementName isEqualToString:@"id"]) {		
-		Location *location = (Location *)[appDelegate.activeRegion.locations objectForKey:tempLocationID];
+	if ([elementName isEqualToString:@"id"]) {
+        
+        Location *location = (Location *)[appDelegate fetchObject:@"Location" where:@"idNumber" equals:tempLocationID];
 		if(location != nil) {
 			[location updateDistance];
-			[tempLocations addObject:location];
 		}
 	}
 }
 
-- (void)parserDidEndDocument:(NSXMLParser *)parser {
-	Portland_Pinball_MapAppDelegate *appDelegate = (Portland_Pinball_MapAppDelegate *)[[UIApplication sharedApplication] delegate];
-	
+- (void)parserDidEndDocument:(NSXMLParser *)parser {	
 	if(didAbortParsing == NO) {
-		locations = tempLocations;
-		[appDelegate.activeRegion.loadedMachines setObject:locations forKey:machineID];	
 		[self reloadLocationData];
 	}
 	
@@ -114,7 +106,7 @@ Portland_Pinball_MapAppDelegate *appDelegate;
 	[self reloadLocationData];
 }
 
--(void)reloadLocationData {
+- (void)reloadLocationData {
 	if (locations == nil) {
 		[noLocationsLabel removeFromSuperview];
 		[self showLoaderIconLarge];
@@ -146,16 +138,14 @@ Portland_Pinball_MapAppDelegate *appDelegate;
     return [locations count];
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {    
-	static NSString *CellIdentifier = @"DoubleTextCellID";
-    
-    PBMDoubleTableCell *cell = (PBMDoubleTableCell*)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {        
+    PBMDoubleTableCell *cell = (PBMDoubleTableCell*)[tableView dequeueReusableCellWithIdentifier:@"DoubleTextCellID"];
     if (cell == nil)
 		cell = [self getDoubleCell];
     
 	Location *location = [locations objectAtIndex:[indexPath row]];
 	[cell.nameLabel setText:location.name];
-	[cell.subLabel setText:(appDelegate.showUserLocation == YES) ? location.distanceString : @""];
+	[cell.subLabel setText:(appDelegate.showUserLocation == YES) ? location.formattedDistance : @""];
 	
     return cell;
 }
@@ -163,17 +153,7 @@ Portland_Pinball_MapAppDelegate *appDelegate;
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
 	Location *location = [locations objectAtIndex:[indexPath row]];
 	
-	if(NO) {
-		RootViewController *rootController = (RootViewController *)[self.navigationController.viewControllers objectAtIndex:0];
-		LocationProfileViewController *locationProfileView = [self getLocationProfile];
-		
-		[locationProfileView setShowMapButton:YES];
-		[locationProfileView setActiveLocationObject:location];
-		
-		[self.navigationController setViewControllers:[NSArray arrayWithObjects:rootController, self, locationProfileView, nil] animated:NO];
-	} else {
-		[self showLocationProfile:location withMapButton:YES];
-	}
+    return [self showLocationProfile:location withMapButton:YES];
 }
 
 @end

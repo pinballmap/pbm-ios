@@ -1,9 +1,9 @@
-#import "MachineProfileViewController.h"
 #import "Utils.h"
 #import "Portland_Pinball_MapAppDelegate.h"
+#import "MachineProfileViewController.h"
 
 @implementation MachineProfileViewController
-@synthesize machineLabel, deleteButton, machine, location, locationLabel, conditionLabel, conditionField, returnButton, ipdbButton, otherLocationsButton, updateConditionButton, commentController, webview, machineFilter;
+@synthesize machineLabel, deleteButton, locationMachineXref, locationLabel, conditionLabel, conditionField, returnButton, ipdbButton, otherLocationsButton, updateConditionButton, commentController, webview, machineFilter;
 
 Portland_Pinball_MapAppDelegate *appDelegate;
 
@@ -14,26 +14,32 @@ Portland_Pinball_MapAppDelegate *appDelegate;
 }
 
 - (void)viewWillAppear:(BOOL)animated {
-	[self setTitle:location.name];
+	[self setTitle:locationMachineXref.location.name];
 	
 	[self hideControllButtons:YES];
 		
-	[machineLabel setText:machine.name];
-    [locationLabel setText:[NSString stringWithFormat:@"%@", [Utils stringIsBlank:machine.dateAdded] ?
+	[machineLabel setText:locationMachineXref.machine.name];
+
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateFormat:@"yyyy-MM-dd"];
+    NSString *dateAdded = [formatter stringFromDate:locationMachineXref.dateAdded];
+    
+    [locationLabel setText:[NSString stringWithFormat:@"%@", [Utils stringIsBlank:dateAdded] ?
         @"" :
-        [NSString stringWithFormat:@"added %@", [Utils formatDateFromString:machine.dateAdded]]
+        [NSString stringWithFormat:@"added %@", [Utils formatDateFromString:dateAdded]]
     ]];
 	
-	if([Utils stringIsBlank:machine.condition]) {
+	if ([Utils stringIsBlank:locationMachineXref.condition]) {
 		[conditionField setFont:[UIFont italicSystemFontOfSize:14]];
 		[conditionField setText:@"Tap below to comment on this machine's condition."];
 	} else {
 		[conditionField setFont:[UIFont systemFontOfSize:14]];
-		[conditionField setText:machine.condition];
+		[conditionField setText:locationMachineXref.condition];
 	}
 	
-    [conditionLabel setText:[NSString stringWithFormat:@"%@", (machine.conditionDate != nil) ?
-        [NSString stringWithFormat:@"Last Updated - %@", [Utils formatDateFromString:machine.conditionDate]] :
+    NSString *conditionDate = [formatter stringFromDate:locationMachineXref.conditionDate];
+    [conditionLabel setText:[NSString stringWithFormat:@"%@", (conditionDate != nil) ?
+        [NSString stringWithFormat:@"Last Updated - %@", [Utils formatDateFromString:conditionDate]] :
         @""
     ]];
 	
@@ -67,8 +73,8 @@ Portland_Pinball_MapAppDelegate *appDelegate;
 			
 		NSString *urlstr = [[NSString alloc] initWithFormat:@"%@modify_location=%@&action=remove_machine&machine_no=%@",
 								appDelegate.rootURL,
-								location.idNumber,
-								machine.idNumber];
+								locationMachineXref.location.idNumber,
+								locationMachineXref.machine.idNumber];
 		
 		@autoreleasepool {
 			[self performSelectorInBackground:@selector(removeMachineWithURL:) withObject:urlstr];
@@ -96,11 +102,9 @@ Portland_Pinball_MapAppDelegate *appDelegate;
 								  cancelButtonTitle:@"Good riddance!"
 								  otherButtonTitles:nil];
 			[alert show];
-						
-			NSMutableArray *locations = (NSMutableArray *)[appDelegate.activeRegion.loadedMachines objectForKey:machine.idNumber];
-			if(locations != nil) {
-				[locations removeObject:location];
-			}
+            
+            [appDelegate.managedObjectContext deleteObject:locationMachineXref];
+            [appDelegate saveContext];
 		} else {
 			UIAlertView *alert2 = [[UIAlertView alloc]
 								   initWithTitle:@"Sorry"
@@ -120,9 +124,8 @@ Portland_Pinball_MapAppDelegate *appDelegate;
 		commentController = [[CommentController alloc] initWithNibName:@"CommentView" bundle:nil];
 	}
 	
-	[commentController setMachine:machine];
-	[commentController setLocation:location];
-	[commentController setTitle:machine.name];
+	[commentController setLocationMachineXref:locationMachineXref];
+	[commentController setTitle:locationMachineXref.machine.name];
 	
 	[self.navigationController pushViewController:commentController animated:YES];
 }
@@ -136,7 +139,7 @@ Portland_Pinball_MapAppDelegate *appDelegate;
 		webview = [[WebViewController alloc] initWithNibName:@"WebViewController" bundle:nil];	
 	
 	[webview setTitle:@"Internet Pinball Database"];
-	[webview setTheNewURL:[NSString stringWithFormat:@"http://ipdb.org/search.pl?name=%@&qh=checked&searchtype=advanced", [Utils urlEncode:machine.name]]];
+	[webview setTheNewURL:[NSString stringWithFormat:@"http://ipdb.org/search.pl?name=%@&qh=checked&searchtype=advanced", [Utils urlEncode:locationMachineXref.machine.name]]];
 	
 	[self.navigationController pushViewController:webview animated:YES];
 }
@@ -147,15 +150,13 @@ Portland_Pinball_MapAppDelegate *appDelegate;
 	}
     
 	[machineFilter setResetNavigationStackOnLocationSelect:YES];
-	[machineFilter setMachineName:machine.name];
-	[machineFilter setMachineID:machine.idNumber];
+	[machineFilter setMachine:locationMachineXref.machine];
     
 	[self.navigationController pushViewController:machineFilter animated:YES];
 }
 
 - (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex {
 	if ([alertView.title isEqualToString:@"Thank You!"]) {
-		location.isLoaded = NO;
 		[self.navigationController popViewControllerAnimated:YES];
 	}
 }

@@ -2,10 +2,14 @@
 #import "LocationProfileViewController.h"
 
 @implementation LocationProfileViewController
-@synthesize message, scrollView, mapLabel, mapButton, showMapButton, locationID, activeLocationObject, isBuildingMachine, labelHolder, tempMachineObject, tempMachineDict, tempMachineName, tempMachineID, tempMachineCondition, tempMachineConditionDate, tempMachineDateAdded, lineView, mapView, addMachineButton, addMachineView, displayArray, machineProfileView;
+@synthesize scrollView, mapLabel, mapButton, showMapButton, activeLocationObject, isBuildingMachine, tempMachineID, tempMachineCondition, tempMachineConditionDate, tempMachineDateAdded, mapView, addMachineButton, addMachineView, machineProfileView;
+
+Portland_Pinball_MapAppDelegate *appDelegate;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+
+    appDelegate = (Portland_Pinball_MapAppDelegate *)[[UIApplication sharedApplication] delegate];
 
 	self.isBuildingMachine = NO;
 	[scrollView setContentSize:CGSizeMake(320,460)];
@@ -24,8 +28,6 @@
 		[addMachineView setTitle:@"Add a New Machine"];
 	}
     
-	[addMachineView setLocationName:activeLocationObject.name];
-	[addMachineView setLocationId:activeLocationObject.idNumber];
 	[addMachineView setLocation:self.activeLocationObject];
     
 	[self.navigationController pushViewController:addMachineView animated:YES];
@@ -52,11 +54,10 @@
 }
 
 - (void)loadLocationData {
-	if (isParsing == NO && activeLocationObject.isLoaded == NO) {
+	if (isParsing == NO && !activeLocationObject.isLoaded) {
 		UIApplication* app = [UIApplication sharedApplication];
 		[app setNetworkActivityIndicatorVisible:YES];
     
-		Portland_Pinball_MapAppDelegate *appDelegate = (Portland_Pinball_MapAppDelegate *)[[UIApplication sharedApplication] delegate];
 		NSString *url = [[NSString alloc] initWithFormat:@"%@get_location=%@", appDelegate.rootURL, activeLocationObject.idNumber];
 		
 		[self performSelectorInBackground:@selector(parseXMLFileAtURL:) withObject:url];
@@ -68,20 +69,6 @@
 	[self setTitle:activeLocationObject.name];
 	
 	(activeLocationObject.isLoaded) ? [self hideLoaderIconLarge] : [self showLoaderIconLarge];
-	
-	if(displayArray != nil) {
-		displayArray = nil;
-	}
-	
-	displayArray = [[NSMutableArray alloc] initWithCapacity:activeLocationObject.totalMachines];
-	
-	for(id key in activeLocationObject.machines) {
-		Machine *machineObject = (Machine *)[activeLocationObject.machines objectForKey:key];
-		[displayArray addObject:machineObject];
-	}
-	
-	NSSortDescriptor *nameSortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"name" ascending:YES selector:@selector(compare:)];
-	[displayArray sortUsingDescriptors:[NSArray arrayWithObjects:nameSortDescriptor, nil]];
 	
 	[self.tableView reloadData];
 }
@@ -100,7 +87,7 @@
 			break;
 		case 1:
 		default:
-			return [displayArray count];
+			return [activeLocationObject.locationMachineXrefs count];
 			break;
 	}
 }
@@ -121,12 +108,12 @@
 		}
 		
 		if(activeLocationObject.isLoaded) {
-			 NSString *addressStringA = [NSString stringWithFormat:@"%@ %@",activeLocationObject.street1,activeLocationObject.street2];
-			 NSString *addressStringB = [NSString stringWithFormat:@"%@, %@ %@",activeLocationObject.city,activeLocationObject.state,activeLocationObject.zip];
+			 NSString *addressStringA = [NSString stringWithFormat:@"%@ %@", activeLocationObject.street1, activeLocationObject.street2];
+			 NSString *addressStringB = [NSString stringWithFormat:@"%@, %@ %@",activeLocationObject.city, activeLocationObject.state, activeLocationObject.zip];
             [cellA.addressLabel1 setText:addressStringA];
             [cellA.addressLabel2 setText:addressStringB];
             [cellA.phoneLabel setText:activeLocationObject.phone];
-            [cellA.distanceLabel setText:[NSString stringWithFormat:@"≈ %@", activeLocationObject.distanceString]];
+            [cellA.distanceLabel setText:[NSString stringWithFormat:@"≈ %@", activeLocationObject.formattedDistance]];
 										 
 		} else {
 			[cellA.addressLabel1 setText:@""];
@@ -145,7 +132,7 @@
 		
         [cell.nameLabel setText:(section == 0) ?
             ((showMapButton && row == 1) ? @"Map" : @"Add Machine") :
-            [[displayArray objectAtIndex:row] name]
+            [[[activeLocationObject.locationMachineXrefs.allObjects objectAtIndex:row] machine] name]
         ];
 		
 		return cell;
@@ -184,8 +171,6 @@
 				addMachineView = [[AddMachineViewController alloc] initWithNibName:@"AddMachineView" bundle:nil];
 			}
             
-			[addMachineView setLocationName:activeLocationObject.name];
-			[addMachineView setLocationId:activeLocationObject.idNumber];
 			[addMachineView setLocation:self.activeLocationObject];
             
 			[self.navigationController pushViewController:addMachineView animated:YES];
@@ -196,25 +181,20 @@
 		}
 		
 		[machineProfileView setTitle:activeLocationObject.name];
-		[machineProfileView setMachine:[displayArray objectAtIndex:indexPath.row]];
-		[machineProfileView setLocation:activeLocationObject];
+        [machineProfileView setLocationMachineXref:[activeLocationObject.locationMachineXrefs.allObjects objectAtIndex:indexPath.row]];
         
 		[self.navigationController pushViewController:machineProfileView animated:YES];
 	}	
 }
 
-- (void)parserDidStartDocument:(NSXMLParser *)parser {
-	tempMachineDict = [[NSMutableDictionary alloc] initWithCapacity:activeLocationObject.totalMachines];
-}
+- (void)parserDidStartDocument:(NSXMLParser *)parser {}
 
 - (void)parser:(NSXMLParser *)parser didStartElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qName attributes:(NSDictionary *)attributeDict {
 	
 	currentElement = [elementName copy];
 	if ([elementName isEqualToString:@"machine"]) {
 		isBuildingMachine = YES;
-		tempMachineObject = [[Machine alloc] init];
 		tempMachineID = [[NSMutableString alloc] init];
-		tempMachineName = [[NSMutableString alloc] init];
 		tempMachineCondition = [[NSMutableString alloc] init];
 		tempMachineDateAdded = [[NSMutableString alloc] init];
 	} else if ([elementName isEqualToString:@"condition"]) {
@@ -238,8 +218,6 @@
 	if(isBuildingMachine == YES) {
 		if ([currentElement isEqualToString:@"id"])
             [tempMachineID appendString:string];
-		if ([currentElement isEqualToString:@"name"])
-            [tempMachineName appendString:string];
 		if ([currentElement isEqualToString:@"condition"])
             [tempMachineCondition appendString:string];
 		if ([currentElement isEqualToString:@"dateAdded"])
@@ -265,13 +243,16 @@
 	currentElement = @"";
 	
 	if ([elementName isEqualToString:@"machine"]) {
-		[tempMachineObject setName:tempMachineName];
-		[tempMachineObject setIdNumber:tempMachineID];
-		[tempMachineObject setCondition:[Utils urlDecode:tempMachineCondition]];
-		[tempMachineObject setDateAdded:tempMachineDateAdded];
-		[tempMachineObject setConditionDate:tempMachineConditionDate];
-		
-        [tempMachineDict setObject:tempMachineObject forKey:tempMachineID];
+        NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+        [formatter setDateFormat:@"yyyy-MM-dd"];
+        
+        LocationMachineXref *xref = [NSEntityDescription insertNewObjectForEntityForName:@"LocationMachineXref" inManagedObjectContext:appDelegate.managedObjectContext];
+        [xref setMachine:(Machine *)[appDelegate fetchObject:@"Machine" where:@"idNumber" equals:tempMachineID]];
+        [xref setCondition:[Utils urlDecode:tempMachineCondition]];
+		[xref setDateAdded:[formatter dateFromString:tempMachineDateAdded]];
+		[xref setConditionDate:[formatter dateFromString:tempMachineConditionDate]];
+        [xref setLocation:activeLocationObject];
+        [activeLocationObject addLocationMachineXrefsObject:xref];		
 		
 		isBuildingMachine = NO;
 	} else if ([elementName isEqualToString:@"street1"]) {
@@ -289,11 +270,7 @@
 	}
 }
 
-- (void)parserDidEndDocument:(NSXMLParser *)parser {
-	[activeLocationObject setIsLoaded:YES];
-	[activeLocationObject setMachines:tempMachineDict];
-	[activeLocationObject setTotalMachines:[tempMachineDict count]];
-	
+- (void)parserDidEndDocument:(NSXMLParser *)parser {	
 	[self refreshPage];
 	
 	[super parserDidEndDocument:parser];
@@ -304,7 +281,7 @@
 		parsingAttempts++;
 		[self loadLocationData];
 	} else {
-		UIApplication* app = [UIApplication sharedApplication];
+		UIApplication *app = [UIApplication sharedApplication];
 		[app setNetworkActivityIndicatorVisible:NO];
 
 		UIAlertView * errorAlert = [[UIAlertView alloc] initWithTitle:@"Whoops." 

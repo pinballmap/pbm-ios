@@ -1,9 +1,10 @@
 #import "Utils.h"
+#import "Machine.h"
 #import "AddMachineViewController.h"
 #import "Portland_Pinball_MapAppDelegate.h"
 
 @implementation AddMachineViewController
-@synthesize picker, textfield, returnButton, submitButton, location, locationName, locationId, selectedMachineID, loaderIcon;
+@synthesize picker, textfield, returnButton, submitButton, location, selectedMachineID, loaderIcon;
 
 Portland_Pinball_MapAppDelegate *appDelegate;
 
@@ -17,21 +18,10 @@ Portland_Pinball_MapAppDelegate *appDelegate;
 
 - (void)viewWillAppear:(BOOL)animated {
     [self setTitle:@"Add Machine"];
-
-	[textfield setText:@""];
-	
-	[submitButton setHidden:NO];
+    [textfield setText:@""];
     
-    machines = [[NSMutableArray alloc] initWithCapacity:[appDelegate.activeRegion.machines count]];
-	
-	for(id key in appDelegate.activeRegion.machines) {
-		NSDictionary *machine = [appDelegate.activeRegion.machines valueForKey:key];
-		[machines addObject:machine];
-	}
-	
-	NSSortDescriptor *nameSortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"name" ascending:YES selector:@selector(compare:)];
-	[machines sortUsingDescriptors:[NSArray arrayWithObjects:nameSortDescriptor, nil]];
-	
+    [submitButton setHidden:NO];
+    	
 	[super viewWillAppear:animated];
 }
 
@@ -66,55 +56,45 @@ Portland_Pinball_MapAppDelegate *appDelegate;
 		[self addMachineFromTextfield];
 }
 
--(void)addMachineFromTextfield {
-	UIApplication* app = [UIApplication sharedApplication];
+- (void)addMachineFromTextfield {
+	UIApplication *app = [UIApplication sharedApplication];
 	[app setNetworkActivityIndicatorVisible:YES];
 	
 	[submitButton setHidden:YES];
 	[loaderIcon startAnimating];
 		
-	NSString *newMachineStripped = [Utils stripString:[NSString stringWithString:textfield.text]];
-	NSString *finalString;
-	
-	for (int i = 0; i < [machines count]; i++) {
-		NSString *machineName = [NSString stringWithString:[[machines objectAtIndex:i] objectForKey:@"name"]];
-		NSString *stripped = [Utils stripString:machineName];
-				
-		if([newMachineStripped isEqualToString:stripped]) {
-			finalString = machineName;
-			break;
+	NSString *name;
+	for (Machine *machine in appDelegate.activeRegion.machines) {				
+		if ([[Utils stripString:textfield.text] isEqualToString:[Utils stripString:machine.name]]) {
+			name = machine.name;
 		}
 	}
 	
-	if(finalString == nil) {
-		finalString = textfield.text;
-	} else { 
-		[textfield setText:finalString];
+	if (name == nil) {
+		name = textfield.text;
 	}
-     
+    
 	NSString *urlstr = [[NSString alloc] initWithFormat:@"%@modify_location=%@&action=add_machine&machine_name=%@",
 						appDelegate.rootURL,
 						location.idNumber,
-						[Utils urlEncode:finalString]];
+						[Utils urlEncode:name]];
 	
 	@autoreleasepool {
 		[self performSelectorInBackground:@selector(addMachineWithURL:) withObject:urlstr];
 	}
 }
 
--(void)addMachineWithURL:(NSString*)urlstr {
+- (void)addMachineWithURL:(NSString*)urlstr {
 	@autoreleasepool {
 		UIApplication *app = [UIApplication sharedApplication];
 		
 		NSError *error;
-		NSString *test = [NSString stringWithContentsOfURL:[[NSURL alloc] initWithString:urlstr]
+		NSString *response = [NSString stringWithContentsOfURL:[[NSURL alloc] initWithString:urlstr]
 												  encoding:NSUTF8StringEncoding
 													 error:&error];
-		NSRange range = [test rangeOfString:@"add successful"];
-		
+		NSRange range = [response rangeOfString:@"add successful"];
 		if(range.length > 0) {
-			NSString *newName = textfield.text;
-			NSString *alertString = [[NSString alloc] initWithFormat:@"%@ has been added to %@.", newName, location.name];
+			NSString *alertString = [[NSString alloc] initWithFormat:@"%@ has been added to %@.", textfield.text, location.name];
 			UIAlertView *alert = [[UIAlertView alloc]
 								  initWithTitle:@"Thank You!"
 								  message:alertString
@@ -125,29 +105,14 @@ Portland_Pinball_MapAppDelegate *appDelegate;
 			
 			[loaderIcon stopAnimating];
 			
-			NSString *id1 = [[NSString alloc] initWithString:@"<id>\n"];
-			NSRange range1 = [test rangeOfString:id1];
-			NSString *id2 = [[NSString alloc] initWithString:@"\n</id>"];
-			NSRange range2 = [test rangeOfString:id2];
-			NSRange range3;
-            range3.location = range1.location + range1.length;
-            range3.length = range2.location - range1.location - range1.length;
-			selectedMachineID = [test substringWithRange:range3];
-			
-			NSMutableDictionary *machine_dict = (NSMutableDictionary *)[appDelegate.activeRegion.machines objectForKey:selectedMachineID];
-			
-			if(machine_dict == nil) {
-				machine_dict = [[NSMutableDictionary alloc] init];
-                [machine_dict setValue:selectedMachineID forKey:@"id"];
-				[machine_dict setValue:newName forKey:@"name"];
-				[machine_dict setValue:@"1" forKey:@"numLocations"];
-				[appDelegate.activeRegion.machines setObject:machine_dict forKey:selectedMachineID];
-			}
-					
-			NSMutableArray *locationArray = (NSMutableArray *)[appDelegate.activeRegion.loadedMachines objectForKey:selectedMachineID];
-			if(locationArray != nil) {
-				[locationArray addObject:location];
-			}
+            NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:@"<id>\n(.*)\n</id>" options:NSRegularExpressionCaseInsensitive error:nil];
+            NSRange range = [regex rangeOfFirstMatchInString:response options:0 range:NSMakeRange(0, [response length])];
+            NSNumber *idNumber = [NSNumber numberWithInt:[[response substringWithRange:range] intValue]];
+                        
+            NSManagedObject *machine = [NSEntityDescription insertNewObjectForEntityForName:@"Machine" inManagedObjectContext:appDelegate.managedObjectContext];
+            [machine setValue:textfield.text forKey:@"name"];
+            [machine setValue:idNumber forKey:@"locationID"];
+			[appDelegate saveContext];
         } else {
 			UIAlertView *alert2 = [[UIAlertView alloc]
 								   initWithTitle:@"Sorry"
@@ -166,10 +131,9 @@ Portland_Pinball_MapAppDelegate *appDelegate;
 }
 
 - (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex {
-	if(buttonIndex == 1) {
+	if (buttonIndex == 1) {
 		[self addMachineFromTextfield];
 	} else if([alertView.title isEqualToString:@"Thank You!"]) {
-		[location setIsLoaded:NO];
 		[self.navigationController popViewControllerAnimated:YES];
 	}
 }
@@ -177,7 +141,7 @@ Portland_Pinball_MapAppDelegate *appDelegate;
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {}
 
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component {
-	[textfield setText:[[machines objectAtIndex:row] objectForKey:@"name"]];
+	[textfield setText:[[appDelegate.activeRegion.machines objectAtIndex:row] objectForKey:@"name"]];
 }
 
 - (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView {
@@ -185,11 +149,11 @@ Portland_Pinball_MapAppDelegate *appDelegate;
 }
 
 - (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component {
-	return [machines count];
+	return [appDelegate.activeRegion.machines count];
 }
 
 - (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component {
-	return [[machines objectAtIndex:row] objectForKey:@"name"];
+	return [[appDelegate.activeRegion.machines objectAtIndex:row] objectForKey:@"name"];
 }
 
 @end

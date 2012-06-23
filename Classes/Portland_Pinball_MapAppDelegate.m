@@ -2,7 +2,7 @@
 
 @implementation Portland_Pinball_MapAppDelegate
 
-@synthesize window, navigationController, locationProfileView, splashScreen, locationMap, showUserLocation, activeRegion, regions, userLocation;
+@synthesize window, navigationController, locationProfileView, splashScreen, locationMap, showUserLocation, activeRegion,userLocation;
 
 void uncaughtExceptionHandler(NSException *exception) {
     NSLog(@"CRASH: %@", exception);
@@ -12,7 +12,6 @@ void uncaughtExceptionHandler(NSException *exception) {
 - (void)applicationDidFinishLaunching:(UIApplication *)application {
     NSSetUncaughtExceptionHandler(&uncaughtExceptionHandler);
 	
-    regions = [[NSArray alloc] init];
     userLocation = [[CLLocation alloc] initWithLatitude:45.52295 longitude:-122.66785];
 
 	navigationController.navigationBar.barStyle = UIBarStyleBlack;
@@ -69,11 +68,36 @@ void uncaughtExceptionHandler(NSException *exception) {
 
 - (void)updateLocationDistances {
 	if([activeRegion.locations count] > 0) {
-		for (Location *key in activeRegion.locations) {
-			Location *loc = [activeRegion.locations objectForKey:key];
-			[loc updateDistance];
+		for (Location *location in activeRegion.locations) {
+			[location updateDistance];
 		}
 	}	
+}
+
+- (NSArray *)regions {
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    [fetchRequest setEntity:[NSEntityDescription entityForName:@"Region" inManagedObjectContext:self.managedObjectContext]];
+    
+    NSArray *regions = [self.managedObjectContext executeFetchRequest:fetchRequest error:nil];
+    
+    return [regions sortedArrayUsingComparator:^NSComparisonResult(Region *a, Region *b) {
+        return [a.name compare:b.name];
+    }];
+}
+
+- (NSArray *)fetchObjects:(NSString *)type where:(NSString *)field equals:(NSString *)value {
+    NSFetchRequest *request = [[NSFetchRequest alloc] init];
+    
+    [request setEntity:[NSEntityDescription entityForName:type inManagedObjectContext:self.managedObjectContext]];
+    [request setPredicate:[NSPredicate predicateWithFormat:[NSString stringWithFormat:@"%@ = %@", field, value]]];
+    
+    return [self.managedObjectContext executeFetchRequest:request error:nil];
+}
+
+- (id)fetchObject:(NSString *)type where:(NSString *)field equals:(NSString *)value {
+    NSArray *objects = [self fetchObjects:type where:field equals:value];
+    
+    return [objects count] > 0 ? [objects objectAtIndex:0] : nil;
 }
 
 - (NSString *)rootURL {
@@ -82,5 +106,60 @@ void uncaughtExceptionHandler(NSException *exception) {
 
 - (void)showMap:(NSArray*)array withTitle:(NSString *)newTitle {}
 - (void)applicationWillTerminate:(UIApplication *)application {}
+
+- (NSURL *)applicationDocumentsDirectory {
+    return [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject];
+}
+
+- (void)saveContext {
+    NSError *error = nil;
+    NSManagedObjectContext *objectContext = self.managedObjectContext;
+    if (objectContext != nil) {
+        if ([objectContext hasChanges] && ![objectContext save:&error]) {
+            NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
+            abort();
+        }
+    }
+}
+
+- (NSManagedObjectContext *)managedObjectContext {
+    if (managedObjectContext != nil) {
+        return managedObjectContext;
+    }
+    
+    NSPersistentStoreCoordinator *coordinator = [self persistentStoreCoordinator];
+    if (coordinator != nil) {
+        managedObjectContext = [[NSManagedObjectContext alloc] init];
+        [managedObjectContext setPersistentStoreCoordinator:coordinator];
+    }
+    
+    return managedObjectContext;
+}
+
+- (NSManagedObjectModel *)managedObjectModel {
+    if (managedObjectModel != nil) {
+        return managedObjectModel;
+    }
+    managedObjectModel = [NSManagedObjectModel mergedModelFromBundles:nil];
+    
+    return managedObjectModel;
+}
+
+- (NSPersistentStoreCoordinator *)persistentStoreCoordinator {
+    if (persistentStoreCoordinator != nil) {
+        return persistentStoreCoordinator;
+    }
+    
+    NSURL *storeURL = [[self applicationDocumentsDirectory] URLByAppendingPathComponent:@"pbm.sqlite"];
+    
+    NSError *error = nil;
+    persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:[self managedObjectModel]];
+    if (![persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:storeURL options:nil error:&error]) {
+        NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
+        abort();
+    }  
+    
+    return persistentStoreCoordinator;
+}
 
 @end

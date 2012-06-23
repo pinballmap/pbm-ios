@@ -53,16 +53,16 @@
 				[quickArray addObject:placemark];
 				
 				if(i == 0) {
-					southWest.latitude  = newLocation.coords.coordinate.latitude;
-					southWest.longitude = newLocation.coords.coordinate.longitude;
+					southWest.latitude  = newLocation.coordinates.coordinate.latitude;
+					southWest.longitude = newLocation.coordinates.coordinate.longitude;
 					northEast = southWest;
 				}
 				
-				southWest.latitude  = MIN(southWest.latitude,  newLocation.coords.coordinate.latitude - 0.01);
-				southWest.longitude = MIN(southWest.longitude, newLocation.coords.coordinate.longitude + 0.01);
+				southWest.latitude  = MIN(southWest.latitude,  newLocation.coordinates.coordinate.latitude - 0.01);
+				southWest.longitude = MIN(southWest.longitude, newLocation.coordinates.coordinate.longitude + 0.01);
 				
-				northEast.latitude  = MAX(northEast.latitude,  newLocation.coords.coordinate.latitude + 0.01);
-				northEast.longitude = MAX(northEast.longitude, newLocation.coords.coordinate.longitude - 0.01);
+				northEast.latitude  = MAX(northEast.latitude,  newLocation.coordinates.coordinate.latitude + 0.01);
+				northEast.longitude = MAX(northEast.longitude, newLocation.coordinates.coordinate.longitude - 0.01);
 			}
 			
 			region.center.latitude = (southWest.latitude + northEast.latitude) / 2.0;
@@ -76,8 +76,8 @@
 			LocationPin *soloPlacemark = [[LocationPin alloc] initWithLocation:soloLocation];
 			[quickArray addObject:soloPlacemark];
 			
-			region.center.latitude = soloLocation.coords.coordinate.latitude;
-			region.center.longitude = soloLocation.coords.coordinate.longitude;
+			region.center.latitude = soloLocation.coordinates.coordinate.latitude;
+			region.center.longitude = soloLocation.coordinates.coordinate.longitude;
 			region.span.latitudeDelta = 0.02;
 			region.span.longitudeDelta = 0.02;			
 		}

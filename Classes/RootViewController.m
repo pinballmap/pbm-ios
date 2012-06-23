@@ -3,7 +3,7 @@
 #import "RegionSelectViewController.h"
 
 @implementation RootViewController
-@synthesize locationManager, startingPoint, controllers, allLocations, allMachines, aboutView, tableTitles, regions;
+@synthesize locationManager, startingPoint, controllers, aboutView, tableTitles;
 
 Portland_Pinball_MapAppDelegate *appDelegate;
 
@@ -50,11 +50,6 @@ Portland_Pinball_MapAppDelegate *appDelegate;
 			[self loadInitXML:2];
 		}
 	} else if (appDelegate.activeRegion.locations == nil) {
-		if(allMachines != nil) {
-			allMachines  = nil;
-			allLocations = nil;
-		}
-		
         [appDelegate showSplashScreen];
 		
         xmlStarted = NO;
@@ -117,66 +112,72 @@ Portland_Pinball_MapAppDelegate *appDelegate;
     if ([[NSArray arrayWithObjects:@"region", @"location", @"machine", @"zone", nil] containsObject:elementName]) {
         activeNode = elementName;
         
-        currentID = [[NSMutableString alloc] init];
+        currentID = [[NSNumber alloc] init];
         currentName = [[NSMutableString alloc] init];
-        currentNeighborhood = [[NSMutableString alloc] init];
-        currentNumMachines = [[NSMutableString alloc] init];
-        currentLat = [[NSMutableString alloc] init];
-        currentLon = [[NSMutableString alloc] init];
-        currentNumLocations = [[NSMutableString alloc] init];
+        currentNumMachines = [[NSNumber alloc] init];
+        currentLat = [[NSNumber alloc] init];
+        currentLon = [[NSNumber alloc] init];
+        currentNumLocations = [[NSNumber alloc] init];
         currentShortName = [[NSMutableString alloc] init];
-        currentIsPrimary = [[NSMutableString alloc] init];
+        currentIsPrimary = false;
         currentSubdir = [[NSMutableString alloc] init];
         currentFormalName = [[NSMutableString alloc] init];
     }
 }
 
 - (void)parser:(NSXMLParser *)parser foundCharacters:(NSString *)string {
+    NSNumberFormatter *formatter = [[NSNumberFormatter alloc] init];
+
     if (initID == 2) {
         if([activeNode isEqualToString:@"region"] && ![string isEqualToString:@"\n"]) {
+            [formatter setNumberStyle:NSNumberFormatterBehaviorDefault];
             if ([currentElement isEqualToString:@"id"])
-                [currentID appendString:string];
+                currentID = [formatter numberFromString:string];
+            
+            [formatter setNumberStyle:NSNumberFormatterDecimalStyle];
+            if ([currentElement isEqualToString:@"lat"])
+                currentLat = [formatter numberFromString:string];
+            if ([currentElement isEqualToString:@"lon"])
+                currentLon = [formatter numberFromString:string];
             if ([currentElement isEqualToString:@"name"])
                 [currentName appendString:string];
             if ([currentElement isEqualToString:@"formalName"])
                 [currentFormalName appendString:string];
-            if ([currentElement isEqualToString:@"lat"])
-                [currentLat appendString:string];
-            if ([currentElement isEqualToString:@"lon"])
-                [currentLon appendString:string];
             if ([currentElement isEqualToString:@"subdir"])
                 [currentSubdir appendString:string];
         }         
     } else {
         if([activeNode isEqualToString:@"location"]) {
-            if ([currentElement isEqualToString:@"id"])           
-                [currentID appendString:string];
+            [formatter setNumberStyle:NSNumberFormatterBehaviorDefault];
+            if ([currentElement isEqualToString:@"id"])
+                currentID = [formatter numberFromString:string];
+            if ([currentElement isEqualToString:@"numMachines"])
+                currentNumMachines = [formatter numberFromString:string];
+            
+            [formatter setNumberStyle:NSNumberFormatterDecimalStyle];
+            if ([currentElement isEqualToString:@"lat"])
+                currentLat = [formatter numberFromString:string];
+            if ([currentElement isEqualToString:@"lon"])
+                currentLon = [formatter numberFromString:string];
             if ([currentElement isEqualToString:@"name"])         
                 [currentName appendString:string];
-            if ([currentElement isEqualToString:@"neighborhood"]) 
-                [currentNeighborhood appendString:string];
-            if ([currentElement isEqualToString:@"numMachines"])  
-                [currentNumMachines appendString:string];
-            if ([currentElement isEqualToString:@"lat"])          
-                [currentLat appendString:string];
-            if ([currentElement isEqualToString:@"lon"])          
-                [currentLon appendString:string];
         } else if([activeNode isEqualToString:@"machine"]) {
-            if ([currentElement isEqualToString:@"id"])           
-                [currentID appendString:string];
+            if ([currentElement isEqualToString:@"id"])     
+                currentID = [formatter numberFromString:string];
+            if ([currentElement isEqualToString:@"numLocations"])
+                currentNumLocations = [formatter numberFromString:string];
             if ([currentElement isEqualToString:@"name"])         
                 [currentName appendString:string];
-            if ([currentElement isEqualToString:@"numLocations"]) 
-                [currentNumLocations appendString:string];
         } else if([activeNode isEqualToString:@"zone"]) {
-            if ([currentElement isEqualToString:@"id"])           
-                [currentID appendString:string];
+            [formatter setNumberStyle:NSNumberFormatterBehaviorDefault];
+            if ([currentElement isEqualToString:@"id"])
+                currentID = [formatter numberFromString:string];
+            if ([currentElement isEqualToString:@"isPrimary"])   
+                currentIsPrimary = [string boolValue];
             if ([currentElement isEqualToString:@"name"])         
                 [currentName appendString:string];
             if ([currentElement isEqualToString:@"shortName"])    
                 [currentShortName appendString:string];
-            if ([currentElement isEqualToString:@"isPrimary"])    
-                [currentIsPrimary appendString:string];
         }
     }
 }
@@ -184,77 +185,53 @@ Portland_Pinball_MapAppDelegate *appDelegate;
 - (void)parser:(NSXMLParser *)parser didEndElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qName{
     if (initID == 2) {
         if ([elementName isEqualToString:@"region"]) {
-            Region *regionobject = [[Region alloc] init];
-            [regionobject setIdNumber:currentID];
-            [regionobject setName:currentName];
-            [regionobject setFormalName:currentFormalName];
-            [regionobject setSubdir:currentSubdir];
-            [regionobject setLat:currentLat];
-            [regionobject setLon:currentLon];
-            [regionobject setMachineFilter:@"4"];
-            [regionobject setMachineFilterString:[NSString stringWithFormat:@"%@+ Machines", regionobject.machineFilter]];
+            Region *region = [NSEntityDescription insertNewObjectForEntityForName:@"Region" inManagedObjectContext:appDelegate.managedObjectContext];
             
-            if (regions == nil)
-                regions = [[NSMutableArray alloc] init];
+            [region setIdNumber:currentID];
+            [region setName:currentName];
+            [region setFormalName:currentFormalName];
+            [region setSubdir:currentSubdir];
+            [region setLat:currentLat];
+            [region setLon:currentLon];
+            [region setNMachines:[NSNumber numberWithInt:4]];
             
-            [regions addObject:regionobject];
+            [appDelegate saveContext];
         }
     } else {
         if ([elementName isEqualToString:@"location"]) {
             if([currentNumMachines intValue] != 0) {
-                Location *tempLocation = [[Location alloc] init];
+                Location *location = [NSEntityDescription insertNewObjectForEntityForName:@"Location" inManagedObjectContext:appDelegate.managedObjectContext];
                 
                 double lon = [currentLon doubleValue];
                 double lat = [currentLat doubleValue];
                 
-                if(lat == 0.0 || lon == 0.0) {
+                if (lat == 0.0 || lon == 0.0) {
                     lat = 45.52295;
                     lon = -122.66785;
                 }
+                                
+                [location setIdNumber:currentID];
+                [location setTotalMachines:currentNumMachines];
+                [location setName:currentName];
+                [location setLat:[NSNumber numberWithDouble:lat]];
+                [location setLon:[NSNumber numberWithDouble:lon]];
+                [location updateDistance];
                 
-                CLLocation *coords = [[CLLocation alloc] initWithLatitude:lat longitude:lon];
-                
-                [tempLocation setIdNumber:currentID];
-                [tempLocation setTotalMachines:[currentNumMachines intValue]];
-                [tempLocation setName:currentName];
-                [tempLocation setNeighborhood:currentNeighborhood];
-                [tempLocation setCoords:coords];
-                [tempLocation updateDistance];
-                
-                if(allLocations == nil)
-                    allLocations = [[NSMutableDictionary alloc] init];
-				
-                [allLocations setObject:tempLocation forKey:currentID];
+                [appDelegate saveContext];
             }
-            
         } else if ([elementName isEqualToString:@"machine"]) {
             if([currentNumLocations intValue] != 0) {
-                NSMutableDictionary *tempMachine = [[NSMutableDictionary alloc] init];
-                [tempMachine setValue:currentID forKey:@"id"];
-                [tempMachine setValue:currentName forKey:@"name"];
-                [tempMachine setValue:currentNumLocations forKey:@"numLocations"];
-				
-                if(allMachines == nil)
-                    allMachines  = [[NSMutableDictionary alloc] init];
+                Machine *machine = [NSEntityDescription insertNewObjectForEntityForName:@"Machine" inManagedObjectContext:appDelegate.managedObjectContext];
+                [machine setValue:currentID forKey:@"id"];
+                [machine setValue:currentName forKey:@"name"];
                 
-                [allMachines setObject:tempMachine forKey:currentID];
+                [appDelegate saveContext];
             }
-            
         } else if ([elementName isEqualToString:@"zone"]) {            
-            Zone *zone = [[Zone alloc] init];
+            Zone *zone = [NSEntityDescription insertNewObjectForEntityForName:@"Zone" inManagedObjectContext:appDelegate.managedObjectContext];
             [zone setName:currentName];
             [zone setIdNumber:currentID];
-            [zone setShortName:currentShortName];
-            [zone setIsPrimary:currentIsPrimary];
-            
-            if(appDelegate.activeRegion.primaryZones == nil)
-                appDelegate.activeRegion.primaryZones = [[NSMutableArray alloc] init];
-            if(appDelegate.activeRegion.secondaryZones == nil)
-                appDelegate.activeRegion.secondaryZones = [[NSMutableArray alloc] init];
-            
-            ([zone.isPrimary isEqualToString:@"1"]) ?
-                [appDelegate.activeRegion.primaryZones addObject:zone] :
-                [appDelegate.activeRegion.secondaryZones addObject:zone];
+            [zone setIsPrimary:[NSNumber numberWithBool:currentIsPrimary]];
         }        
     }
 
@@ -263,27 +240,22 @@ Portland_Pinball_MapAppDelegate *appDelegate;
 
 - (void)parserDidEndDocument:(NSXMLParser *)parser {
     if (initID == 2) {
-        regions = (NSMutableArray *)[regions sortedArrayUsingComparator:^NSComparisonResult(id a, id b) {
-            NSString *first = [(Region *)a formalName];
-            NSString *second = [(Region*)b formalName];
-            return [first compare:second];
-        }];
         
-        [appDelegate setRegions:regions];
+        NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+        NSEntityDescription *entity = [NSEntityDescription entityForName:@"Region"
+                                                  inManagedObjectContext:appDelegate.managedObjectContext];
+        [fetchRequest setEntity:entity];
+        NSArray *fetchedRegions = [appDelegate.managedObjectContext executeFetchRequest:fetchRequest error:nil];
         
-        Region *closestRegion = [appDelegate.regions objectAtIndex:0];
+        Region *closestRegion = [fetchedRegions objectAtIndex:0];
         CLLocationDistance closestDistance = 24901.55;
-        for (int i = 0; i < [appDelegate.regions count]; i++) {
-            Region *reg = [appDelegate.regions objectAtIndex:i];
+        for (int i = 0; i < [fetchedRegions count]; i++) {
+            Region *region = [fetchedRegions objectAtIndex:i];
             
-            double lon = [reg.lon doubleValue];
-            double lat = [reg.lat doubleValue];
-            
-            CLLocation *coords = [[CLLocation alloc] initWithLatitude:lat longitude:lon];
-            CLLocationDistance distance = [appDelegate.userLocation distanceFromLocation:coords] / METERS_IN_A_MILE;
+            CLLocationDistance distance = [appDelegate.userLocation distanceFromLocation:[region coordinates]] / METERS_IN_A_MILE;
             
             if(closestDistance > distance) {
-                closestRegion = reg;
+                closestRegion = region;
                 closestDistance = distance;
             }
         }
@@ -298,9 +270,6 @@ Portland_Pinball_MapAppDelegate *appDelegate;
 			[self performSelectorInBackground:@selector(loadInitXML:) withObject:nil];
         }
     } else {
-        [appDelegate.activeRegion setMachines:self.allMachines];
-        [appDelegate.activeRegion setLocations:self.allLocations];
-
         if(self.controllers == nil) {
             NSMutableArray *viewControllers = [[NSMutableArray alloc] init];
             
@@ -336,22 +305,6 @@ Portland_Pinball_MapAppDelegate *appDelegate;
         [self hideLoaderIcon];
 	}
     
-    [appDelegate.activeRegion setPrimaryZones:
-     (NSMutableArray *)[appDelegate.activeRegion.primaryZones sortedArrayUsingComparator:^NSComparisonResult(id a, id b) {
-        NSString *first = [(Zone *)a name];
-        NSString *second = [(Zone *)b name];
-        return [first compare:second];
-     }]
-    ];
-    
-    [appDelegate.activeRegion setSecondaryZones:
-     (NSMutableArray *)[appDelegate.activeRegion.secondaryZones sortedArrayUsingComparator:^NSComparisonResult(id a, id b) {
-        NSString *first = [(Zone *)a name];
-        NSString *second = [(Zone *)b name];
-        return [first compare:second];
-     }]
-    ];
-    
 	[super parserDidEndDocument:parser];
 }
 
@@ -359,13 +312,6 @@ Portland_Pinball_MapAppDelegate *appDelegate;
 	if (parsingAttempts < 15) {
 		parsingAttempts ++;
 		
-		if (initID == 1) {
-			allLocations = [[NSMutableDictionary alloc] init];
-			allMachines  = [[NSMutableDictionary alloc] init];
-		} else if(initID == 2) {
-			regions = nil;
-		}
-
 		xmlStarted = NO;
 		
 		[self loadInitXML:initID];

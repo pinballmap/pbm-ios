@@ -47,14 +47,13 @@ Portland_Pinball_MapAppDelegate *appDelegate;
     for (id key in appDelegate.activeRegion.locations) {
         Location *location = [appDelegate.activeRegion.locations valueForKey:key];
         [location updateDistance];
-        double dist = location.distanceRounded;
         
         int index;
-        if (dist < 1.0) {
+        if (location.distance < 1.0) {
             index = 0;
-        } else if (dist < 2.0) {
+        } else if (location.distance < 2.0) {
             index = 1;
-        } else if (dist < 3.0) {
+        } else if (location.distance < 3.0) {
             index = 2;
         } else {
             index = 3;
@@ -130,7 +129,7 @@ Portland_Pinball_MapAppDelegate *appDelegate;
 	Location *location = [locationGroup objectAtIndex:row];
     
 	[cell.nameLabel setText:location.name];
-	[cell.subLabel setText:(appDelegate.showUserLocation == YES) ? location.distanceString : @""];
+	[cell.subLabel setText:(appDelegate.showUserLocation == YES) ? location.formattedDistance : @""];
 	
     return cell;
 }

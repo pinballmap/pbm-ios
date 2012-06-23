@@ -1,13 +1,14 @@
 #import "Utils.h"
+#import "Machine.h"
 #import "Portland_Pinball_MapAppDelegate.h"
 #import "CommentController.h"
 
 @implementation CommentController
-@synthesize submitButton, cancelButton, textview, machine, location;
+@synthesize submitButton, cancelButton, textview, locationMachineXref;
 
 - (void)viewWillAppear:(BOOL)animated {
-	[self setTitle:machine.name];
-	[textview setText:machine.condition];
+	[self setTitle:locationMachineXref.machine.name];
+	[textview setText:locationMachineXref.condition];
 	[textview becomeFirstResponder];
     
 	[super viewWillAppear:animated];
@@ -27,8 +28,8 @@
 	
 	NSString *urlstr = [[NSString alloc] initWithFormat:@"%@location_no=%@&machine_no=%@&condition=%@",
 						appDelegate.rootURL,
-						location.idNumber,
-						machine.idNumber,
+						locationMachineXref.location.idNumber,
+                        locationMachineXref.machine.idNumber,
 						encodedCondition];
 	NSURL *url = [[NSURL alloc] initWithString:urlstr];
 	NSError *error;
@@ -39,8 +40,8 @@
 		NSDateFormatter *inputFormatter = [[NSDateFormatter alloc] init];
 		[inputFormatter setDateFormat:@"yyyy-MM-dd"];
 		
-		[machine setConditionDate:[inputFormatter stringFromDate:[NSDate date]]];
-		[machine setCondition:textview.text];
+		[locationMachineXref setConditionDate:[NSDate date]];
+		[locationMachineXref setCondition:textview.text];
         
 		[app setNetworkActivityIndicatorVisible:NO];
 		

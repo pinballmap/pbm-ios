@@ -1,4 +1,5 @@
 #import "XMLTable.h"
+#import "Machine.h"
 #import "LocationMap.h"
 #import <Foundation/Foundation.h>
 
@@ -6,8 +7,7 @@
 	NSMutableArray *locations;
 	NSMutableArray *tempLocations;
 	
-	NSString *machineID;
-	NSString *machineName;
+	Machine *machine;
 	NSMutableString *tempLocationID;
 	
 	UILabel *noLocationsLabel;
@@ -25,8 +25,7 @@
 @property (nonatomic,strong) LocationMap *mapView;
 @property (nonatomic,strong) NSString *tempLocationID;
 @property (nonatomic,strong) NSArray *locations;
-@property (nonatomic,strong) NSString *machineID;
-@property (nonatomic,strong) NSString *machineName;
+@property (nonatomic,strong) Machine *machine;
 
 - (void)onMapPress:(id)sender;
 - (void)reloadLocationData;

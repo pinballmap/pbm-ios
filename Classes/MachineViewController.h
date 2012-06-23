@@ -2,14 +2,14 @@
 #import "BlackTableViewController.h"
 
 @interface MachineViewController : BlackTableViewController {
-    NSMutableDictionary *sortedMachines;
+    NSMutableDictionary *machinesByFirstLetter;
 	NSArray *keys;
 	
-	MachineFilterView *machineFilter;
+	MachineFilterView *machineFilterView;
 }
 
-@property (nonatomic,strong) NSMutableDictionary *sortedMachines;
+@property (nonatomic,strong) NSMutableDictionary *machinesByFirstLetter;
 @property (nonatomic,strong) NSArray *keys;
-@property (nonatomic,strong) MachineFilterView *machineFilter;
+@property (nonatomic,strong) MachineFilterView *machineFilterView;
 
 @end
