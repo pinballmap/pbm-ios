@@ -48,6 +48,7 @@
 - (NSString *)rootURL;
 - (NSURL *)applicationDocumentsDirectory;
 - (void)saveContext;
+- (void)resetDatabase;
 - (NSArray *)regions;
 - (NSArray *)fetchObject:(NSString *)type where:(NSString *)field equals:(NSString *)value;
 - (NSArray *)fetchObjects:(NSString *)type where:(NSString *)field equals:(NSString *)value;

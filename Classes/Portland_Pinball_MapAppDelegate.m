@@ -19,6 +19,7 @@ void uncaughtExceptionHandler(NSException *exception) {
 	[window addSubview:[navigationController view]];
 	[window makeKeyAndVisible];
 		
+    [self resetDatabase];
 	[self showSplashScreen];
 }
 
@@ -111,6 +112,13 @@ void uncaughtExceptionHandler(NSException *exception) {
     return [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject];
 }
 
+- (void)resetDatabase {
+    [self.persistentStoreCoordinator removePersistentStore:[self.persistentStoreCoordinator persistentStoreForURL:[self storeURL]] error:nil];
+    [[NSFileManager defaultManager] removeItemAtURL:[self storeURL] error:nil];
+    
+    [persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:[self storeURL] options:nil error:nil];
+}
+
 - (void)saveContext {
     NSError *error = nil;
     NSManagedObjectContext *objectContext = self.managedObjectContext;
@@ -145,16 +153,18 @@ void uncaughtExceptionHandler(NSException *exception) {
     return managedObjectModel;
 }
 
+- (NSURL *)storeURL {
+    return [[self applicationDocumentsDirectory] URLByAppendingPathComponent:@"pbm.sqlite"];
+}
+
 - (NSPersistentStoreCoordinator *)persistentStoreCoordinator {
     if (persistentStoreCoordinator != nil) {
         return persistentStoreCoordinator;
     }
-    
-    NSURL *storeURL = [[self applicationDocumentsDirectory] URLByAppendingPathComponent:@"pbm.sqlite"];
-    
+        
     NSError *error = nil;
     persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:[self managedObjectModel]];
-    if (![persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:storeURL options:nil error:&error]) {
+    if (![persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:[self storeURL] options:nil error:&error]) {
         NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
         abort();
     }  
