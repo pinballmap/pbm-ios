@@ -6,7 +6,7 @@
 
 - (void)viewWillAppear:(BOOL)animated {
 	Portland_Pinball_MapAppDelegate *appDelegate = (Portland_Pinball_MapAppDelegate *)[[UIApplication sharedApplication] delegate];
-	
+
 	NSArray *allZones = [[NSArray alloc] initWithObjects:@"All", appDelegate.activeRegion.formattedNMachines, @"< 1 mile", nil];
 	NSArray *primaryZones = [[NSArray alloc] initWithArray:appDelegate.activeRegion.primaryZones];
 	NSArray *secondaryZones = [[NSArray alloc] initWithArray:appDelegate.activeRegion.secondaryZones];

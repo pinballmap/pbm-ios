@@ -16,6 +16,7 @@
 	
     NSString *activeNode;
     NSNumber *currentID;
+    NSNumber *currentZoneID;
 	NSMutableString *currentName;
     NSMutableString *currentFormalName;
 	NSNumber *currentNumMachines;
@@ -33,6 +34,8 @@
 	
 	BOOL init2Loaded;
     BOOL xmlStarted;
+    
+    NSMutableDictionary *zonesForLocations;
 }
 
 @property (nonatomic,strong) CLLocation *startingPoint;

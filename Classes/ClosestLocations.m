@@ -35,7 +35,7 @@ Portland_Pinball_MapAppDelegate *appDelegate;
     if (sectionLocations != nil)
         [self cleanupRegionData];
     
-    sectionTitles = [[NSMutableArray alloc] initWithObjects:@"< 1 mile",@"< 2 miles",@"< 3 miles",@"3+ miles", nil];
+    sectionTitles = [[NSMutableArray alloc] initWithObjects:@"< 1 mile", @"< 2 miles", @"< 3 miles", @"3+ miles", nil];
     sectionLocations = [[NSMutableArray alloc] initWithCapacity:[sectionTitles count]];
     allSortedLocations = [[NSMutableArray alloc] initWithCapacity:MAX_NUMBER_OF_LOCATIONS_TO_SHOW_IN_MAP];
     

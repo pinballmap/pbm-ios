@@ -20,9 +20,7 @@ Portland_Pinball_MapAppDelegate *appDelegate;
         locations = [[NSMutableArray alloc] init];
 		filteredLocations = [[NSMutableDictionary alloc] init];
 		
-		for (id key in appDelegate.activeRegion.locations) {
-			Location *location = [appDelegate.activeRegion.locations valueForKey:key];
-			
+		for (Location *location in appDelegate.activeRegion.locations) {			
 			if ([zoneID isEqualToString:@"All"]) {
                 [self addToFilterDictionary:location];
 			} else if([zoneID isEqualToString:@"< 1 mile"] && appDelegate.showUserLocation == YES) {

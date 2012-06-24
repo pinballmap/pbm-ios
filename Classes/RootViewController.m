@@ -16,6 +16,7 @@ Portland_Pinball_MapAppDelegate *appDelegate;
 
 - (void)viewDidLoad {
 	tableTitles = [[NSArray alloc] initWithObjects:@"Locations", @"Machines", @"Closest Locations", @"Recently Added", @"Events", @"Change Region", nil];
+    zonesForLocations = [[NSMutableDictionary alloc] init];
     
 	[self showInfoButton];
 	
@@ -70,7 +71,7 @@ Portland_Pinball_MapAppDelegate *appDelegate;
 
 	initID = withID;
 	[self showLoaderIcon];
-	
+    
 	NSString *path = [NSString stringWithFormat:@"%@", withID == 2 ?
         [NSString stringWithFormat:@"%@/%@", BASE_URL, @"iphone.html?init=2"] :
         [NSString stringWithFormat:@"%@init=1", appDelegate.rootURL]
@@ -153,6 +154,8 @@ Portland_Pinball_MapAppDelegate *appDelegate;
                 currentID = [formatter numberFromString:string];
             if ([currentElement isEqualToString:@"numMachines"])
                 currentNumMachines = [formatter numberFromString:string];
+            if ([currentElement isEqualToString:@"zoneNo"])
+                currentZoneID = [formatter numberFromString:string];
             
             [formatter setNumberStyle:NSNumberFormatterDecimalStyle];
             if ([currentElement isEqualToString:@"lat"])
@@ -200,8 +203,13 @@ Portland_Pinball_MapAppDelegate *appDelegate;
     } else {
         if ([elementName isEqualToString:@"location"]) {
             if([currentNumMachines intValue] != 0) {
+                NSNumberFormatter *formatter = [[NSNumberFormatter alloc] init];                
+                [formatter setNumberStyle:NSNumberFormatterBehaviorDefault];
+
                 Location *location = [NSEntityDescription insertNewObjectForEntityForName:@"Location" inManagedObjectContext:appDelegate.managedObjectContext];
                 
+                [zonesForLocations setValue:currentZoneID forKey:[formatter stringFromNumber:currentID]];
+                                
                 double lon = [currentLon doubleValue];
                 double lat = [currentLat doubleValue];
                 
@@ -217,7 +225,7 @@ Portland_Pinball_MapAppDelegate *appDelegate;
                 [location setLon:[NSNumber numberWithDouble:lon]];
                 [location setRegion:appDelegate.activeRegion];
                 [location updateDistance];
-                
+
                 [appDelegate saveContext];
             }
         } else if ([elementName isEqualToString:@"machine"]) {
@@ -233,18 +241,56 @@ Portland_Pinball_MapAppDelegate *appDelegate;
             [zone setName:currentName];
             [zone setIdNumber:currentID];
             [zone setIsPrimary:[NSNumber numberWithBool:currentIsPrimary]];
+            [zone setRegion:appDelegate.activeRegion];
+            [appDelegate.activeRegion addZonesObject:zone];
+            
+            [appDelegate saveContext];
         }        
     }
 
 	currentElement = @"";
 }
 
+- (void)showMenu {
+    if(self.controllers == nil) {
+        NSMutableArray *viewControllers = [[NSMutableArray alloc] init];
+        
+        ZonesViewController *locView = [[ZonesViewController alloc] initWithStyle:UITableViewStylePlain];
+        [locView setTitle:@"Locations"];
+        [viewControllers addObject:locView];
+        
+        MachineViewController *machView = [[MachineViewController alloc] initWithStyle:UITableViewStylePlain];
+        [machView setTitle:@"Machines"];
+        [viewControllers addObject:machView];
+        
+        ClosestLocations *closest = [[ClosestLocations alloc] initWithStyle:UITableViewStylePlain];
+        [closest setTitle:@"Closest Locations"];
+        [viewControllers addObject:closest];
+        
+        RecentlyAddedViewController *rssView = [[RecentlyAddedViewController alloc] initWithStyle:UITableViewStylePlain];
+        [rssView setTitle:@"Recently Added"];
+        [viewControllers addObject:rssView];
+        
+        EventsViewController *eventView = [[EventsViewController alloc] initWithStyle:UITableViewStylePlain];
+        [eventView setTitle:@"Events"];
+        [viewControllers addObject:eventView];
+        
+        RegionSelectViewController *regionSelect = [[RegionSelectViewController alloc] initWithStyle:UITableViewStylePlain];
+        [regionSelect setTitle:@"Change Region"];
+        [viewControllers addObject:regionSelect];
+        
+        [self setControllers:viewControllers];
+    }
+    
+    [appDelegate hideSplashScreen];
+    [self.tableView reloadData];
+    [self hideLoaderIcon];
+}
+
 - (void)parserDidEndDocument:(NSXMLParser *)parser {
     if (initID == 2) {
-        
         NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
-        NSEntityDescription *entity = [NSEntityDescription entityForName:@"Region"
-                                                  inManagedObjectContext:appDelegate.managedObjectContext];
+        NSEntityDescription *entity = [NSEntityDescription entityForName:@"Region" inManagedObjectContext:appDelegate.managedObjectContext];
         [fetchRequest setEntity:entity];
         NSArray *fetchedRegions = [appDelegate.managedObjectContext executeFetchRequest:fetchRequest error:nil];
         
@@ -270,40 +316,18 @@ Portland_Pinball_MapAppDelegate *appDelegate;
         @autoreleasepool {
 			[self performSelectorInBackground:@selector(loadInitXML:) withObject:nil];
         }
-    } else {
-        if(self.controllers == nil) {
-            NSMutableArray *viewControllers = [[NSMutableArray alloc] init];
-            
-            ZonesViewController *locView = [[ZonesViewController alloc] initWithStyle:UITableViewStylePlain];
-            [locView setTitle:@"Locations"];
-            [viewControllers addObject:locView];
-            
-            MachineViewController *machView = [[MachineViewController alloc] initWithStyle:UITableViewStylePlain];
-            [machView setTitle:@"Machines"];
-            [viewControllers addObject:machView];
-            
-            ClosestLocations *closest = [[ClosestLocations alloc] initWithStyle:UITableViewStylePlain];
-            [closest setTitle:@"Closest Locations"];
-            [viewControllers addObject:closest];
-            
-            RecentlyAddedViewController *rssView = [[RecentlyAddedViewController alloc] initWithStyle:UITableViewStylePlain];
-            [rssView setTitle:@"Recently Added"];
-            [viewControllers addObject:rssView];
-            
-            EventsViewController *eventView = [[EventsViewController alloc] initWithStyle:UITableViewStylePlain];
-            [eventView setTitle:@"Events"];
-            [viewControllers addObject:eventView];
-            
-            RegionSelectViewController *regionSelect = [[RegionSelectViewController alloc] initWithStyle:UITableViewStylePlain];
-            [regionSelect setTitle:@"Change Region"];
-            [viewControllers addObject:regionSelect];
-            
-            [self setControllers:viewControllers];
+    } else if (initID == 0) {
+        for (NSString *locationID in zonesForLocations.allKeys) {
+            Zone *zone = (Zone *)[appDelegate fetchObject:@"Zone" where:@"idNumber" equals:[zonesForLocations objectForKey:locationID]];
+            Location *location = (Location *)[appDelegate fetchObject:@"Location" where:@"idNumber" equals:locationID];
+
+            [zone addLocationObject:location];
+            [location setLocationZone:zone];
         }
 
-        [appDelegate hideSplashScreen];
-        [self.tableView reloadData];
-        [self hideLoaderIcon];
+        [self showMenu];
+    } else {
+        [self showMenu];
 	}
     
 	[super parserDidEndDocument:parser];
