@@ -15,7 +15,7 @@
 }
 
 - (NSString *)formattedNMachines {
-    return [NSString stringWithFormat:@"%d+ Machines", self.nMachines];
+    return [NSString stringWithFormat:@"%d+ Machines", [self.nMachines intValue]];
 }
 
 - (NSMutableArray *)primaryZones {

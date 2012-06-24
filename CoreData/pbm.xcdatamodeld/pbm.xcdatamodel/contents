@@ -11,20 +11,20 @@
         <relationship name="region" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Region" inverseName="events" inverseEntity="Region" syncable="YES"/>
     </entity>
     <entity name="Location" representedClassName="Location" syncable="YES">
-        <attribute name="city" attributeType="String" syncable="YES"/>
+        <attribute name="city" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="idNumber" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="lat" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
         <attribute name="lon" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
         <attribute name="name" attributeType="String" syncable="YES"/>
         <attribute name="phone" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="state" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="street1" attributeType="String" syncable="YES"/>
+        <attribute name="street1" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="street2" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="totalMachines" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
-        <attribute name="zip" attributeType="String" syncable="YES"/>
+        <attribute name="zip" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="events" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Event" inverseName="location" inverseEntity="Event" syncable="YES"/>
         <relationship name="locationMachineXrefs" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="LocationMachineXref" inverseName="location" inverseEntity="LocationMachineXref" syncable="YES"/>
-        <relationship name="locationZone" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Zone" inverseName="location" inverseEntity="Zone" syncable="YES"/>
+        <relationship name="locationZone" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Zone" inverseName="location" inverseEntity="Zone" syncable="YES"/>
         <relationship name="region" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Region" inverseName="locations" inverseEntity="Region" syncable="YES"/>
     </entity>
     <entity name="LocationMachineXref" representedClassName="LocationMachineXref" syncable="YES">
