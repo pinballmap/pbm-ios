@@ -27,7 +27,7 @@
     [numberFormat setMaximumFractionDigits:1];
     [numberFormat setMinimumFractionDigits:1];
     
-    return [NSString stringWithFormat:@"%f mi", [numberFormat stringFromNumber:[[NSNumber alloc] initWithDouble:distance]]];
+    return [NSString stringWithFormat:@"%@ mi", [numberFormat stringFromNumber:[[NSNumber alloc] initWithDouble:distance]]];
 }
 
 - (bool)isLoaded {

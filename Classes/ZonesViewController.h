@@ -5,11 +5,11 @@
 	NSDictionary *zones;
 	NSArray *titles;
 	
-	LocationFilterView *locationFilter;	
+	LocationFilterView *locationFilterView;	
 }
 
 @property (nonatomic,strong) NSDictionary *zones;
 @property (nonatomic,strong) NSArray *titles;
-@property (nonatomic,strong) LocationFilterView *locationFilter;
+@property (nonatomic,strong) LocationFilterView *locationFilterView;
 
 @end
