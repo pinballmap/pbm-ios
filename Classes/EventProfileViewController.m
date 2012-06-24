@@ -1,5 +1,4 @@
 #import "EventProfileViewController.h"
-#import "Portland_Pinball_MapAppDelegate.h"
 
 @implementation EventProfileViewController
 @synthesize nameLabel, locationLabel, timeLabel, webButton, locationButton, descText, event, webview;
@@ -29,15 +28,10 @@
 }
 
 - (IBAction)onLocationTap:(id)sender {
-	Portland_Pinball_MapAppDelegate *appDelegate = (Portland_Pinball_MapAppDelegate *)[[UIApplication sharedApplication] delegate];
-	LocationProfileViewController *locationProfileView = appDelegate.locationProfileView;
-	
-	if (locationProfileView == nil) {
-		locationProfileView = [[LocationProfileViewController alloc] initWithStyle:UITableViewStylePlain];
-	}
+	LocationProfileViewController *locationProfileView = [[LocationProfileViewController alloc] initWithStyle:UITableViewStylePlain];
 	
 	[locationProfileView setShowMapButton:YES];
-	[locationProfileView setActiveLocationObject:event.location];
+	[locationProfileView setActiveLocation:event.location];
 	
 	[self.navigationController pushViewController:locationProfileView animated:YES];
 }

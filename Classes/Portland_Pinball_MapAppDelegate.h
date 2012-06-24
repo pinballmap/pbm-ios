@@ -16,9 +16,7 @@
 	Region *activeRegion;
 
 	UIView *splashScreen;
-	CLLocation *userLocation;
-	
-	LocationProfileViewController *locationProfileView;
+	CLLocation *userLocation;	
 	LocationMap *locationMap;
 	
 	BOOL showUserLocation;
@@ -33,7 +31,6 @@
 @property (nonatomic,strong) Region *activeRegion;
 @property (nonatomic,strong) IBOutlet UIWindow *window;
 @property (nonatomic,strong) IBOutlet UINavigationController *navigationController;
-@property (nonatomic,strong) LocationProfileViewController *locationProfileView;
 @property (nonatomic,strong) LocationMap *locationMap;
 @property (nonatomic,strong) UIView	*splashScreen;
 @property (nonatomic,assign) BOOL showUserLocation;

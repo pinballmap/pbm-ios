@@ -2,7 +2,7 @@
 
 @implementation Portland_Pinball_MapAppDelegate
 
-@synthesize window, navigationController, locationProfileView, splashScreen, locationMap, showUserLocation, activeRegion,userLocation;
+@synthesize window, navigationController, splashScreen, locationMap, showUserLocation, activeRegion, userLocation;
 
 void uncaughtExceptionHandler(NSException *exception) {
     NSLog(@"CRASH: %@", exception);
