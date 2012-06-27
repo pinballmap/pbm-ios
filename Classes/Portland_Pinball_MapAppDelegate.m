@@ -1,12 +1,24 @@
+#import "MainMenuViewController.h"
+#import "RequestPage.h"
 #import "Portland_Pinball_MapAppDelegate.h"
 
 @implementation Portland_Pinball_MapAppDelegate
 
-@synthesize window, navigationController, splashScreen, locationMap, showUserLocation, activeRegion, userLocation;
+@synthesize window, navigationController, splitViewController, splashScreen, locationMap, showUserLocation, activeRegion, userLocation;
 
 void uncaughtExceptionHandler(NSException *exception) {
     NSLog(@"CRASH: %@", exception);
     NSLog(@"Stack Trace: %@", [exception callStackSymbols]);
+}
+
+- (bool)isPad {
+    return UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad;
+}
+
+- (void) awakeFromNib{
+    [super awakeFromNib];
+    
+    splitViewController.delegate = self;
 }
 
 - (void)applicationDidFinishLaunching:(UIApplication *)application {
@@ -14,13 +26,27 @@ void uncaughtExceptionHandler(NSException *exception) {
 	
     userLocation = [[CLLocation alloc] initWithLatitude:45.52295 longitude:-122.66785];
 
-	navigationController.navigationBar.barStyle = UIBarStyleBlack;
+    if (self.isPad) { 
+        navigationController = [[UINavigationController alloc] initWithRootViewController:[[RequestPage alloc] init]];
+        navigationController.navigationBar.barStyle = UIBarStyleBlack;
+        
+        window.rootViewController = splitViewController;
+        [window.rootViewController.view setHidden:YES];
+    } else {
+        locationMap = [[LocationMap alloc] init];
+        navigationController.navigationBar.barStyle = UIBarStyleBlack;
+        
+        [window addSubview:navigationController.view];
+	}
     
-	[window addSubview:[navigationController view]];
-	[window makeKeyAndVisible];
+    [window makeKeyAndVisible];
 		
     [self resetDatabase];
 	[self showSplashScreen];
+}
+
+- (void)rotateImageViewForIpad:(UIImageView *)imageView {
+    imageView.transform = CGAffineTransformMakeRotation(3.14159265 * (-0.5));
 }
 
 - (void)showSplashScreen {	
@@ -31,7 +57,17 @@ void uncaughtExceptionHandler(NSException *exception) {
 	
 	UIImageView *pbm = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"pbm2.png"]];
 	UIImageView *base = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"base_blank.png"]];
-	[base setFrame:CGRectMake(0,20,320,460)];
+    [pbm setContentMode:UIViewContentModeScaleAspectFit];
+    [base setContentMode:UIViewContentModeScaleAspectFit];
+    
+    if (self.isPad) {
+        [self rotateImageViewForIpad:pbm];
+        [self rotateImageViewForIpad:base];
+    }
+    
+    CGRect screenBounds = [[UIScreen mainScreen] bounds];
+    screenBounds.origin.y += 20;
+	[base setFrame:screenBounds];
 	
     if ((activeRegion != nil) && (activeRegion.subdir != nil)) {
         UIImage *regionImage;
@@ -39,16 +75,20 @@ void uncaughtExceptionHandler(NSException *exception) {
 
         [splashScreen addSubview:base];
         
-		if((regionImage = [UIImage imageNamed:[NSString stringWithFormat:@"%@_splash.png", splashID]])) {
+		if ((regionImage = [UIImage imageNamed:[NSString stringWithFormat:@"%@_splash.png", splashID]])) {
             UIImageView *region = [[UIImageView alloc] initWithImage:regionImage];
-			[region setFrame:CGRectMake(0,20,320,460)];
-			[pbm setFrame:CGRectMake(0,20,320,460)];
+			[region setFrame:screenBounds];
+			[pbm setFrame:screenBounds];
 			
+            if (self.isPad) {
+                [self rotateImageViewForIpad:region];
+            }
+            
 			[splashScreen addSubview:pbm];
 			[splashScreen addSubview:region];
-			
 		} else {
-			[pbm setFrame:CGRectMake(0,-10,320,460)];
+            screenBounds.origin.y -= 30;
+			[pbm setFrame:screenBounds];
 			[splashScreen addSubview:pbm];
 		}		
 	} else {
@@ -59,12 +99,7 @@ void uncaughtExceptionHandler(NSException *exception) {
 }
 
 - (void)hideSplashScreen {
-	if(splashScreen != nil) {
-		if(splashScreen.superview != nil)
-			[splashScreen removeFromSuperview];
-		
-		splashScreen = nil;
-	}
+    [splashScreen removeFromSuperview];
 }
 
 - (void)updateLocationDistances {

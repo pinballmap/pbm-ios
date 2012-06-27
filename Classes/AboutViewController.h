@@ -1,6 +1,7 @@
+#import "PBMViewController.h"
 #import "WebViewController.h"
 
-@interface AboutViewController : UIViewController {
+@interface AboutViewController : PBMViewController {
 	UIButton *drewButton;
 	UIButton *ryanButton;
 	UIButton *scottButton;

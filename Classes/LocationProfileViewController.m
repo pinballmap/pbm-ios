@@ -54,9 +54,7 @@ Portland_Pinball_MapAppDelegate *appDelegate;
 }
 
 - (void)loadLocationData {
-    NSLog(@"LOADING");
 	if (!activeLocation.isLoaded) {
-        NSLog(@"GREAT");
 		UIApplication *app = [UIApplication sharedApplication];
 		[app setNetworkActivityIndicatorVisible:YES];
     
@@ -73,6 +71,11 @@ Portland_Pinball_MapAppDelegate *appDelegate;
 	(activeLocation.isLoaded) ? [self hideLoaderIconLarge] : [self showLoaderIconLarge];
 	
 	[self.tableView reloadData];
+    
+    if (appDelegate.isPad) {
+        [appDelegate.locationMap setLocationsToShow:[NSArray arrayWithObject:activeLocation]];
+        [appDelegate.locationMap loadPins];
+    }
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -159,15 +162,15 @@ Portland_Pinball_MapAppDelegate *appDelegate;
 	
 	if(indexPath.section == 0) {
 		if(showMapButton && row == 1) {
-			if(mapView == nil) {
-				mapView = [[LocationMap alloc] init];
-				[mapView setShowProfileButtons:NO];
-			}
-			
-			[mapView setLocationsToShow:[NSArray arrayWithObject:activeLocation]];
-			[mapView setTitle:activeLocation.name];
-			
-			[self.navigationController pushViewController:mapView animated:YES];
+            if(mapView == nil) {
+                mapView = [[LocationMap alloc] init];
+                [mapView setShowProfileButtons:NO];
+            }
+        
+            [mapView setLocationsToShow:[NSArray arrayWithObject:activeLocation]];
+            [mapView setTitle:activeLocation.name];
+        
+            [self.navigationController pushViewController:mapView animated:YES];
 		} else {
 			if(addMachineView == nil) {
 				addMachineView = [[AddMachineViewController alloc] initWithNibName:@"AddMachineView" bundle:nil];
@@ -279,7 +282,7 @@ Portland_Pinball_MapAppDelegate *appDelegate;
 }
 
 - (void)parser:(NSXMLParser *)parser parseErrorOccurred:(NSError *)parseError {
-	if(parsingAttempts < 15) {
+	if(parsingAttempts < MAX_PARSING_ATTEMPTS) {
 		parsingAttempts++;
 		[self loadLocationData];
 	} else {

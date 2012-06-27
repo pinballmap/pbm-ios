@@ -3,7 +3,7 @@
 #import "LocationFilterView.h"
 
 @implementation LocationFilterView
-@synthesize filteredLocations, keys, mapView, locations, zoneID, theNewZone, currentZone, currentZoneID;
+@synthesize filteredLocations, keys, locations, zoneID, theNewZone, currentZone, currentZoneID;
 
 Portland_Pinball_MapAppDelegate *appDelegate;
 
@@ -53,11 +53,16 @@ Portland_Pinball_MapAppDelegate *appDelegate;
     
 	[self setTitle:[NSString stringWithFormat:[NSString stringWithFormat:@"%@", [zoneID isEqualToString:@"All"] ? @"All Locations" : zoneID]]];
 	
-    [self.navigationItem setRightBarButtonItem:([keys count] > 0) ?
+    [self.navigationItem setRightBarButtonItem:([keys count] > 0 && !appDelegate.isPad) ?
         [[UIBarButtonItem alloc] initWithTitle:@"Map" style:UIBarButtonItemStyleBordered target:self action:@selector(onMapPress:)] :
         nil
     ];
-        
+    
+    if (appDelegate.isPad) {
+        [appDelegate.locationMap setLocationsToShow:locations];
+        [appDelegate.locationMap loadPins];
+    }
+    
 	[super viewWillAppear:animated];
 }
 
@@ -76,15 +81,11 @@ Portland_Pinball_MapAppDelegate *appDelegate;
 }
 
 - (void)onMapPress:(id)sender {
-	if (mapView == nil) {
-		mapView = [[LocationMap alloc] init];
-		[mapView setShowProfileButtons:YES];
-	}
+    [appDelegate.locationMap setShowProfileButtons:YES];
+	[appDelegate.locationMap setLocationsToShow:locations];
+	[appDelegate.locationMap setTitle:self.title];
 	
-	[mapView setLocationsToShow:locations];
-	[mapView setTitle:self.title];
-	
-    [self.navigationController pushViewController:mapView animated:YES];
+    [self.navigationController pushViewController:appDelegate.locationMap animated:YES];
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {

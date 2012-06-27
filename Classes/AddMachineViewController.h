@@ -1,6 +1,7 @@
+#import "PBMViewController.h"
 #import "Location.h"
 
-@interface AddMachineViewController : UIViewController <UIPickerViewDelegate,UIActionSheetDelegate,UIAlertViewDelegate> {
+@interface AddMachineViewController : PBMViewController <UIPickerViewDelegate,UIActionSheetDelegate,UIAlertViewDelegate> {
 	UITextField *textfield;
 	UIPickerView *picker;
 	UIButton *submitButton;

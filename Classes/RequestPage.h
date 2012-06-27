@@ -1,4 +1,6 @@
-@interface RequestPage : UIViewController {
+#import "PBMViewController.h"
+
+@interface RequestPage : PBMViewController {
 	UIButton *contactButton;
 }
 

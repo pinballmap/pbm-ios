@@ -7,7 +7,7 @@
 #import "MachineViewController.h"
 #import <CoreLocation/CoreLocation.h>
 
-@interface RootViewController : XMLTable <CLLocationManagerDelegate,UIAlertViewDelegate,UIAccelerometerDelegate> {
+@interface MainMenuViewController : XMLTable <CLLocationManagerDelegate, UIAlertViewDelegate, UIAccelerometerDelegate> {
 	NSArray *controllers;
 	AboutViewController *aboutView;
 	

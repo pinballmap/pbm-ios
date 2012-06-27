@@ -22,9 +22,14 @@
 	
 	[self.tableView reloadData];
 	
+    if (appDelegate.isPad) {
+        [appDelegate.locationMap setLocationsToShow:appDelegate.activeRegion.locations.allObjects];
+        [appDelegate.locationMap loadPins];
+    }
+    
 	[super viewWillAppear:animated];
 }
-
+    
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return [zones count];
 }

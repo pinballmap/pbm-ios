@@ -112,6 +112,10 @@ NSInteger sortOnDistance(id obj1, id obj2, void *context) {
 }
 
 - (void)showLocationProfile:(Location*)location withMapButton:(BOOL)showMapButton {
+    if (appDelegate.isPad) {
+        showMapButton = NO;
+    }
+    
 	LocationProfileViewController *locationProfileView = [[LocationProfileViewController alloc] initWithStyle:UITableViewStylePlain];
 	
 	[locationProfileView setShowMapButton:showMapButton];

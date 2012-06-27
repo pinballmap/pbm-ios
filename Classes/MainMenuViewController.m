@@ -1,8 +1,8 @@
-#import "RootViewController.h"
+#import "MainMenuViewController.h"
 #import "Zone.h"
 #import "RegionSelectViewController.h"
 
-@implementation RootViewController
+@implementation MainMenuViewController
 @synthesize locationManager, startingPoint, controllers, aboutView, tableTitles;
 
 Portland_Pinball_MapAppDelegate *appDelegate;
@@ -285,6 +285,12 @@ Portland_Pinball_MapAppDelegate *appDelegate;
     [appDelegate hideSplashScreen];
     [self.tableView reloadData];
     [self hideLoaderIcon];
+
+    if (appDelegate.isPad) {
+        [appDelegate.splitViewController.view setHidden:NO];
+        [appDelegate.locationMap setLocationsToShow:appDelegate.activeRegion.locations.allObjects];
+        [appDelegate.locationMap loadPins];
+    }
 }
 
 - (void)parserDidEndDocument:(NSXMLParser *)parser {
@@ -324,7 +330,6 @@ Portland_Pinball_MapAppDelegate *appDelegate;
             [zone addLocationObject:location];
             [location setLocationZone:zone];
         }
-
         [self showMenu];
     } else {
         [self showMenu];
@@ -334,7 +339,7 @@ Portland_Pinball_MapAppDelegate *appDelegate;
 }
 
 - (void)parser:(NSXMLParser *)parser parseErrorOccurred:(NSError *)parseError {	
-	if (parsingAttempts < 15) {
+	if (parsingAttempts < MAX_PARSING_ATTEMPTS) {
 		parsingAttempts ++;
 		
 		xmlStarted = NO;

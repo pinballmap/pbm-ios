@@ -1,6 +1,5 @@
 #import "MachineFilterView.h"
 #import "LocationProfileViewController.h"
-#import "RootViewController.h"
 
 @implementation MachineFilterView
 @synthesize locations, machine, tempLocationID, mapView, resetNavigationStackOnLocationSelect, noLocationsLabel, tempLocations, didAbortParsing;
