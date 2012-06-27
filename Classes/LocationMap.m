@@ -2,7 +2,7 @@
 #import "BlackTableViewController.h"
 
 @implementation LocationMap
-@synthesize map, locationsToShow, annotationArray, location, showProfileButtons;
+@synthesize map, locationsToShow, location, showProfileButtons;
 
 - (void)viewDidLoad {
 	if(map == nil) {
@@ -28,66 +28,63 @@
 	[super viewDidLoad];
 }
 
-- (void)viewWillAppear:(BOOL)animated {
-	if (locationsToShow != annotationArray) {
-		[map setShowsUserLocation:NO];
-		[map removeAnnotations:map.annotations];
-		[map setShowsUserLocation:YES];
-	}
-	
-	if (locationsToShow != annotationArray) {
-		annotationArray = locationsToShow;
-		MKCoordinateRegion region;
-		
-		NSMutableArray *quickArray = [[NSMutableArray alloc] initWithCapacity:[annotationArray count]];
-		
-		if([locationsToShow count] > 1) {
-			self.navigationItem.rightBarButtonItem = nil;	
-			
-			CLLocationCoordinate2D southWest;
-			CLLocationCoordinate2D northEast;
-			
-			for (int i = 0; i < [locationsToShow count]; i++) {
-				Location *newLocation = [locationsToShow objectAtIndex:i];
-				LocationPin *placemark = [[LocationPin alloc] initWithLocation:newLocation];
-				[quickArray addObject:placemark];
-				
-				if(i == 0) {
-					southWest.latitude  = newLocation.coordinates.coordinate.latitude;
-					southWest.longitude = newLocation.coordinates.coordinate.longitude;
-					northEast = southWest;
-				}
-				
-				southWest.latitude  = MIN(southWest.latitude,  newLocation.coordinates.coordinate.latitude - 0.01);
-				southWest.longitude = MIN(southWest.longitude, newLocation.coordinates.coordinate.longitude + 0.01);
-				
-				northEast.latitude  = MAX(northEast.latitude,  newLocation.coordinates.coordinate.latitude + 0.01);
-				northEast.longitude = MAX(northEast.longitude, newLocation.coordinates.coordinate.longitude - 0.01);
-			}
-			
-			region.center.latitude = (southWest.latitude + northEast.latitude) / 2.0;
-			region.center.longitude = (southWest.longitude + northEast.longitude) / 2.0;
-			region.span.latitudeDelta = northEast.latitude - southWest.latitude;
-			region.span.longitudeDelta = northEast.longitude - southWest.longitude;
-		} else {
-			self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Google Map" style:UIBarButtonItemStyleBordered target:self action:@selector(googleMapButtonPressed:)];	
-			
-			Location *soloLocation = [locationsToShow objectAtIndex:0];
-			LocationPin *soloPlacemark = [[LocationPin alloc] initWithLocation:soloLocation];
-			[quickArray addObject:soloPlacemark];
-			
-			region.center.latitude = soloLocation.coordinates.coordinate.latitude;
-			region.center.longitude = soloLocation.coordinates.coordinate.longitude;
-			region.span.latitudeDelta = 0.02;
-			region.span.longitudeDelta = 0.02;			
-		}
-		[map addAnnotations:quickArray];
-		[map setRegion:[map regionThatFits:region] animated:NO];
-	}
-	
+- (void)viewWillAppear:(BOOL)animated {	
 	[super viewWillAppear:(BOOL)animated];
+    [self loadPins];
 }
 
+- (void)loadPins {
+    [map setShowsUserLocation:NO];
+    [map removeAnnotations:map.annotations];
+    [map setShowsUserLocation:YES];
+
+    MKCoordinateRegion region;
+    NSMutableArray *annotations = [[NSMutableArray alloc] init];
+    
+    if ([locationsToShow count] > 1) {
+        self.navigationItem.rightBarButtonItem = nil;
+        
+        CLLocationCoordinate2D southWest;
+        CLLocationCoordinate2D northEast;
+        
+        for (int i = 0; i < [locationsToShow count]; i++) {
+            Location *newLocation = [locationsToShow objectAtIndex:i];
+            LocationPin *placemark = [[LocationPin alloc] initWithLocation:newLocation];
+            [annotations addObject:placemark];
+            
+            if(i == 0) {
+                southWest.latitude  = newLocation.coordinates.coordinate.latitude;
+                southWest.longitude = newLocation.coordinates.coordinate.longitude;
+                northEast = southWest;
+            }
+            
+            southWest.latitude  = MIN(southWest.latitude,  newLocation.coordinates.coordinate.latitude - 0.01);
+            southWest.longitude = MIN(southWest.longitude, newLocation.coordinates.coordinate.longitude + 0.01);
+            
+            northEast.latitude  = MAX(northEast.latitude,  newLocation.coordinates.coordinate.latitude + 0.01);
+            northEast.longitude = MAX(northEast.longitude, newLocation.coordinates.coordinate.longitude - 0.01);
+        }
+        
+        region.center.latitude = (southWest.latitude + northEast.latitude) / 2.0;
+        region.center.longitude = (southWest.longitude + northEast.longitude) / 2.0;
+        region.span.latitudeDelta = northEast.latitude - southWest.latitude;
+        region.span.longitudeDelta = northEast.longitude - southWest.longitude;
+    } else {
+        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Google Map" style:UIBarButtonItemStyleBordered target:self action:@selector(googleMapButtonPressed:)];
+        
+        Location *soloLocation = [locationsToShow objectAtIndex:0];
+        LocationPin *soloPlacemark = [[LocationPin alloc] initWithLocation:soloLocation];
+        [annotations addObject:soloPlacemark];
+        
+        region.center.latitude = soloLocation.coordinates.coordinate.latitude;
+        region.center.longitude = soloLocation.coordinates.coordinate.longitude;
+        region.span.latitudeDelta = 0.02;
+        region.span.longitudeDelta = 0.02;        
+    }
+    
+    [map addAnnotations:annotations];
+    [map setRegion:[map regionThatFits:region] animated:NO];
+}
 
 - (IBAction)googleMapButtonPressed:(id)sender {
 	Location *soloLocation = [locationsToShow objectAtIndex:0];

@@ -2,7 +2,7 @@
 #import "LocationProfileViewController.h"
 
 @implementation LocationProfileViewController
-@synthesize scrollView, mapLabel, mapButton, showMapButton, activeLocationObject, isBuildingMachine, tempMachineID, tempMachineCondition, tempMachineConditionDate, tempMachineDateAdded, mapView, addMachineButton, addMachineView, machineProfileView;
+@synthesize scrollView, mapLabel, mapButton, showMapButton, activeLocation, isBuildingMachine, tempMachineID, tempMachineCondition, tempMachineConditionDate, tempMachineDateAdded, mapView, addMachineButton, addMachineView, machineProfileView;
 
 Portland_Pinball_MapAppDelegate *appDelegate;
 
@@ -28,7 +28,7 @@ Portland_Pinball_MapAppDelegate *appDelegate;
 		[addMachineView setTitle:@"Add a New Machine"];
 	}
     
-	[addMachineView setLocation:self.activeLocationObject];
+	[addMachineView setLocation:self.activeLocation];
     
 	[self.navigationController pushViewController:addMachineView animated:YES];
 }
@@ -54,11 +54,11 @@ Portland_Pinball_MapAppDelegate *appDelegate;
 }
 
 - (void)loadLocationData {
-	if (isParsing == NO && !activeLocationObject.isLoaded) {
-		UIApplication* app = [UIApplication sharedApplication];
+	if (!activeLocation.isLoaded) {
+		UIApplication *app = [UIApplication sharedApplication];
 		[app setNetworkActivityIndicatorVisible:YES];
     
-		NSString *url = [[NSString alloc] initWithFormat:@"%@get_location=%@", appDelegate.rootURL, activeLocationObject.idNumber];
+		NSString *url = [[NSString alloc] initWithFormat:@"%@get_location=%@", appDelegate.rootURL, activeLocation.idNumber];
 		
 		[self performSelectorInBackground:@selector(parseXMLFileAtURL:) withObject:url];
 	}
@@ -66,19 +66,24 @@ Portland_Pinball_MapAppDelegate *appDelegate;
 
 - (void)refreshPage {
 	[scrollView setContentOffset:CGPointMake(0, 0)];
-	[self setTitle:activeLocationObject.name];
+	[self setTitle:activeLocation.name];
 	
-	(activeLocationObject.isLoaded) ? [self hideLoaderIconLarge] : [self showLoaderIconLarge];
+	(activeLocation.isLoaded) ? [self hideLoaderIconLarge] : [self showLoaderIconLarge];
 	
 	[self.tableView reloadData];
+    
+    if (appDelegate.isPad) {
+        [appDelegate.locationMap setLocationsToShow:[NSArray arrayWithObject:activeLocation]];
+        [appDelegate.locationMap loadPins];
+    }
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-	return (activeLocationObject.isLoaded == NO) ? 0 : 2;
+	return (activeLocation.isLoaded == NO) ? 0 : 2;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-	if(activeLocationObject.isLoaded == NO)
+	if(activeLocation.isLoaded == NO)
         return 0;
     
 	switch (section) {
@@ -87,7 +92,7 @@ Portland_Pinball_MapAppDelegate *appDelegate;
 			break;
 		case 1:
 		default:
-			return [activeLocationObject.locationMachineXrefs count];
+			return [activeLocation.locationMachineXrefs count];
 			break;
 	}
 }
@@ -107,13 +112,13 @@ Portland_Pinball_MapAppDelegate *appDelegate;
 			}
 		}
 		
-		if(activeLocationObject.isLoaded) {
-			 NSString *addressStringA = [NSString stringWithFormat:@"%@ %@", activeLocationObject.street1, activeLocationObject.street2];
-			 NSString *addressStringB = [NSString stringWithFormat:@"%@, %@ %@",activeLocationObject.city, activeLocationObject.state, activeLocationObject.zip];
+		if(activeLocation.isLoaded) {
+			 NSString *addressStringA = [NSString stringWithFormat:@"%@ %@", activeLocation.street1, activeLocation.street2];
+			 NSString *addressStringB = [NSString stringWithFormat:@"%@, %@ %@",activeLocation.city, activeLocation.state, activeLocation.zip];
             [cellA.addressLabel1 setText:addressStringA];
             [cellA.addressLabel2 setText:addressStringB];
-            [cellA.phoneLabel setText:activeLocationObject.phone];
-            [cellA.distanceLabel setText:[NSString stringWithFormat:@"≈ %@", activeLocationObject.formattedDistance]];
+            [cellA.phoneLabel setText:activeLocation.phone];
+            [cellA.distanceLabel setText:[NSString stringWithFormat:@"≈ %@", activeLocation.formattedDistance]];
 										 
 		} else {
 			[cellA.addressLabel1 setText:@""];
@@ -122,7 +127,7 @@ Portland_Pinball_MapAppDelegate *appDelegate;
 			[cellA.distanceLabel setText:@""];
 		}
 
-		[cellA.label setText:activeLocationObject.name];
+		[cellA.label setText:activeLocation.name];
 		
 		return cellA;
 	} else {
@@ -132,7 +137,7 @@ Portland_Pinball_MapAppDelegate *appDelegate;
 		
         [cell.nameLabel setText:(section == 0) ?
             ((showMapButton && row == 1) ? @"Map" : @"Add Machine") :
-            [[[activeLocationObject.locationMachineXrefs.allObjects objectAtIndex:row] machine] name]
+            [[[activeLocation.locationMachineXrefs.allObjects objectAtIndex:row] machine] name]
         ];
 		
 		return cell;
@@ -157,21 +162,21 @@ Portland_Pinball_MapAppDelegate *appDelegate;
 	
 	if(indexPath.section == 0) {
 		if(showMapButton && row == 1) {
-			if(mapView == nil) {
-				mapView = [[LocationMap alloc] init];
-				[mapView setShowProfileButtons:NO];
-			}
-			
-			[mapView setLocationsToShow:[NSArray arrayWithObject:activeLocationObject]];
-			[mapView setTitle:activeLocationObject.name];
-			
-			[self.navigationController pushViewController:mapView animated:YES];
+            if(mapView == nil) {
+                mapView = [[LocationMap alloc] init];
+                [mapView setShowProfileButtons:NO];
+            }
+        
+            [mapView setLocationsToShow:[NSArray arrayWithObject:activeLocation]];
+            [mapView setTitle:activeLocation.name];
+        
+            [self.navigationController pushViewController:mapView animated:YES];
 		} else {
 			if(addMachineView == nil) {
 				addMachineView = [[AddMachineViewController alloc] initWithNibName:@"AddMachineView" bundle:nil];
 			}
             
-			[addMachineView setLocation:self.activeLocationObject];
+			[addMachineView setLocation:self.activeLocation];
             
 			[self.navigationController pushViewController:addMachineView animated:YES];
 		}
@@ -180,8 +185,8 @@ Portland_Pinball_MapAppDelegate *appDelegate;
 			machineProfileView = [[MachineProfileViewController alloc] initWithNibName:@"MachineProfileView" bundle:nil];
 		}
 		
-		[machineProfileView setTitle:activeLocationObject.name];
-        [machineProfileView setLocationMachineXref:[activeLocationObject.locationMachineXrefs.allObjects objectAtIndex:indexPath.row]];
+		[machineProfileView setTitle:activeLocation.name];
+        [machineProfileView setLocationMachineXref:[activeLocation.locationMachineXrefs.allObjects objectAtIndex:indexPath.row]];
         
 		[self.navigationController pushViewController:machineProfileView animated:YES];
 	}	
@@ -251,22 +256,22 @@ Portland_Pinball_MapAppDelegate *appDelegate;
         [xref setCondition:[Utils urlDecode:tempMachineCondition]];
 		[xref setDateAdded:[formatter dateFromString:tempMachineDateAdded]];
 		[xref setConditionDate:[formatter dateFromString:tempMachineConditionDate]];
-        [xref setLocation:activeLocationObject];
-        [activeLocationObject addLocationMachineXrefsObject:xref];		
+        [xref setLocation:activeLocation];
+        [activeLocation addLocationMachineXrefsObject:xref];		
 		
 		isBuildingMachine = NO;
 	} else if ([elementName isEqualToString:@"street1"]) {
-		[activeLocationObject setStreet1:currentStreet1];
+		[activeLocation setStreet1:currentStreet1];
 	} else if ([elementName isEqualToString:@"street2"]) {
-		[activeLocationObject setStreet2:currentStreet2];
+		[activeLocation setStreet2:currentStreet2];
 	} else if ([elementName isEqualToString:@"state"]) {
-		[activeLocationObject setState:currentState];
+		[activeLocation setState:currentState];
 	} else if ([elementName isEqualToString:@"city"]) {
-		[activeLocationObject setCity:currentCity];
+		[activeLocation setCity:currentCity];
 	} else if ([elementName isEqualToString:@"zip"]) {
-		[activeLocationObject setZip:currentZip];
+		[activeLocation setZip:currentZip];
 	} else if ([elementName isEqualToString:@"phone"]) {
-		[activeLocationObject setPhone:currentPhone];
+		[activeLocation setPhone:currentPhone];
 	}
 }
 
@@ -277,7 +282,7 @@ Portland_Pinball_MapAppDelegate *appDelegate;
 }
 
 - (void)parser:(NSXMLParser *)parser parseErrorOccurred:(NSError *)parseError {
-	if(parsingAttempts < 15) {
+	if(parsingAttempts < MAX_PARSING_ATTEMPTS) {
 		parsingAttempts++;
 		[self loadLocationData];
 	} else {

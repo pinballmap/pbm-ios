@@ -1,9 +1,10 @@
 #import "EventProfileViewController.h"
 #import "Event.h"
 #import "WebViewController.h"
+#import "PBMViewController.h"
 #import "LocationProfileViewController.h"
 
-@interface EventProfileViewController : UIViewController {	
+@interface EventProfileViewController : PBMViewController {	
 	Event *event;
 	WebViewController *webview;
 	

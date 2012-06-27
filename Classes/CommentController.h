@@ -1,6 +1,7 @@
 #import "LocationMachineXref.h"
+#import "PBMViewController.h"
 
-@interface CommentController : UIViewController <UITextViewDelegate,UIAlertViewDelegate> {
+@interface CommentController : PBMViewController <UITextViewDelegate,UIAlertViewDelegate> {
 	UIButton *submitButton;
 	UIButton *cancelButton;
 	UITextView *textview;

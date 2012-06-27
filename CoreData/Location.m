@@ -27,12 +27,12 @@
     [numberFormat setMaximumFractionDigits:1];
     [numberFormat setMinimumFractionDigits:1];
     
-    return [NSString stringWithFormat:@"%f mi", [numberFormat stringFromNumber:[[NSNumber alloc] initWithDouble:distance]]];
+    return [NSString stringWithFormat:@"%@ mi", [numberFormat stringFromNumber:[[NSNumber alloc] initWithDouble:distance]]];
 }
 
 - (bool)isLoaded {
     // street1 is only filled out when the app hits the location detail screen, it is considered "loaded" at this point
-    return (self.street1 == (id)[NSNull null] || self.street1.length == 0);
+    return (self.street1 != (id)[NSNull null] && self.street1.length != 0 && ![self.street1 isEqualToString:@"(null)"]);
 }
 
 @end

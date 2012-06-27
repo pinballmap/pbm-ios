@@ -1,4 +1,5 @@
 #import "Location.h"
+#import "PBMTableViewController.h"
 #import "Portland_Pinball_MapAppDelegate.h"
 #import "PBMTableCell.h"
 #import "PBMDoubleTableCell.h"
@@ -25,6 +26,5 @@ NSInteger sortOnName(Location *obj1, Location *obj2, void *context);
 - (PBMTableCell *)getTableCell;
 - (PBMDoubleTableCell *)getDoubleCell;
 - (void)showLocationProfile:(Location *)location withMapButton:(BOOL)showMapButton;
-- (LocationProfileViewController *) getLocationProfile;
 
 @end

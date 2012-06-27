@@ -3,8 +3,9 @@
 #import "MachineFilterView.h"
 #import "CommentController.h"
 #import "WebViewController.h"
+#import "PBMViewController.h"
 
-@interface MachineProfileViewController : UIViewController <UIActionSheetDelegate,UIAlertViewDelegate> {
+@interface MachineProfileViewController : PBMViewController <UIActionSheetDelegate,UIAlertViewDelegate> {
 	UILabel *machineLabel;
 	UILabel *locationLabel;
 	UILabel *conditionLabel;

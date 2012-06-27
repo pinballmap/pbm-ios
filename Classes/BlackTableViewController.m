@@ -112,22 +112,16 @@ NSInteger sortOnDistance(id obj1, id obj2, void *context) {
 }
 
 - (void)showLocationProfile:(Location*)location withMapButton:(BOOL)showMapButton {
-	LocationProfileViewController *locationProfileView = [self getLocationProfile];
+    if (appDelegate.isPad) {
+        showMapButton = NO;
+    }
+    
+	LocationProfileViewController *locationProfileView = [[LocationProfileViewController alloc] initWithStyle:UITableViewStylePlain];
 	
 	[locationProfileView setShowMapButton:showMapButton];
-	[locationProfileView setActiveLocationObject:location];
+	[locationProfileView setActiveLocation:location];
 	
 	[self.navigationController pushViewController:locationProfileView animated:YES];
-}
-
-- (LocationProfileViewController *)getLocationProfile {
-	LocationProfileViewController *locationProfileView = appDelegate.locationProfileView;
-	
-	if(locationProfileView == nil) {
-		locationProfileView = [[LocationProfileViewController alloc] initWithStyle:UITableViewStylePlain];
-	}
-	
-	return locationProfileView;
 }
 
 - (void)motionEnded:(UIEventSubtype)motion withEvent:(UIEvent *)event {	
@@ -159,13 +153,13 @@ NSInteger sortOnDistance(id obj1, id obj2, void *context) {
 		NSArray *viewControllers = self.navigationController.viewControllers;
 		LocationProfileViewController *vc = (LocationProfileViewController *)[viewControllers objectAtIndex:[viewControllers count] - 1];
 		if([vc isKindOfClass:[LocationProfileViewController class]]) {
-			vc.activeLocationObject = location;
+			vc.activeLocation = location;
 			[vc refreshAndReload];
 		} else {
-			LocationProfileViewController *locationProfileView = [self getLocationProfile];
+			LocationProfileViewController *locationProfileView = [[LocationProfileViewController alloc] initWithStyle:UITableViewStylePlain];
 			[locationProfileView setTitle:@"Mystery"];
             [locationProfileView setShowMapButton:YES];
-			[locationProfileView setActiveLocationObject:location];
+			[locationProfileView setActiveLocation:location];
 			
 			[self.navigationController setViewControllers:[[NSArray alloc] initWithObjects:[self.navigationController.viewControllers objectAtIndex:0], locationProfileView, nil] animated:NO];
 		}

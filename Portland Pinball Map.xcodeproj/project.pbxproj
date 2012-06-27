@@ -12,7 +12,6 @@
 		1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
 		2892E4100DC94CBA00A64D0F /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2892E40F0DC94CBA00A64D0F /* CoreGraphics.framework */; };
 		466A453710AE668F00AB7A2B /* PBMDoubleTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 466A453610AE668F00AB7A2B /* PBMDoubleTableCell.m */; };
-		46A3834D10AD4FD300414035 /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 46A3834510AD4FD300414035 /* RootViewController.m */; };
 		46A3834E10AD4FD300414035 /* Portland_Pinball_MapAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 46A3834710AD4FD300414035 /* Portland_Pinball_MapAppDelegate.m */; };
 		46A3835010AD4FD300414035 /* MachineViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 46A3834C10AD4FD300414035 /* MachineViewController.m */; };
 		46A3838810AD5F9000414035 /* RecentlyAddedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 46A3838710AD5F9000414035 /* RecentlyAddedViewController.m */; };
@@ -40,7 +39,6 @@
 		8E07D691159693260028E65C /* Location.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E07D690159693260028E65C /* Location.m */; };
 		8E07D692159693260028E65C /* Location.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E07D690159693260028E65C /* Location.m */; };
 		8E1267F4157C4B2F00A40329 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; };
-		8E1267F5157C4B2F00A40329 /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 46A3834510AD4FD300414035 /* RootViewController.m */; };
 		8E1267F6157C4B2F00A40329 /* Portland_Pinball_MapAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 46A3834710AD4FD300414035 /* Portland_Pinball_MapAppDelegate.m */; };
 		8E1267F7157C4B2F00A40329 /* MachineViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 46A3834C10AD4FD300414035 /* MachineViewController.m */; };
 		8E1267F8157C4B2F00A40329 /* RecentlyAddedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 46A3838710AD5F9000414035 /* RecentlyAddedViewController.m */; };
@@ -79,6 +77,10 @@
 		8E276C7E1590209A00EEE1D8 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E276C7B1590208700EEE1D8 /* CoreData.framework */; };
 		8E276C821590210D00EEE1D8 /* pbm.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 8E276C801590210D00EEE1D8 /* pbm.xcdatamodeld */; };
 		8E276C831590210D00EEE1D8 /* pbm.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 8E276C801590210D00EEE1D8 /* pbm.xcdatamodeld */; };
+		8E6D0DB615996580000FAA4E /* PBMViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E6D0DB515996580000FAA4E /* PBMViewController.m */; };
+		8E6D0DB715996580000FAA4E /* PBMViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E6D0DB515996580000FAA4E /* PBMViewController.m */; };
+		8E6D0DBB15996827000FAA4E /* PBMTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E6D0DBA15996827000FAA4E /* PBMTableViewController.m */; };
+		8E6D0DBC15996827000FAA4E /* PBMTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E6D0DBA15996827000FAA4E /* PBMTableViewController.m */; };
 		8E700B1E1592D37D0016FBA2 /* LocationMachineXref.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E700B1D1592D37D0016FBA2 /* LocationMachineXref.m */; };
 		8E700B1F1592D37D0016FBA2 /* LocationMachineXref.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E700B1D1592D37D0016FBA2 /* LocationMachineXref.m */; };
 		8E700B321592D5890016FBA2 /* Event.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E700B311592D5890016FBA2 /* Event.m */; };
@@ -91,6 +93,8 @@
 		8E700B47159427740016FBA2 /* Machine.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E700B45159427740016FBA2 /* Machine.m */; };
 		8E700B4A15943A9A0016FBA2 /* RecentAddition.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E700B4915943A9A0016FBA2 /* RecentAddition.m */; };
 		8E700B4B15943A9A0016FBA2 /* RecentAddition.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E700B4915943A9A0016FBA2 /* RecentAddition.m */; };
+		8EBE6A32159A0C9C00C0374F /* PBMSplitViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EBE6A31159A0C9C00C0374F /* PBMSplitViewController.m */; };
+		8EBE6A33159A0C9C00C0374F /* PBMSplitViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EBE6A31159A0C9C00C0374F /* PBMSplitViewController.m */; };
 		8EDA8065158572EC00F6AD9A /* _splash.png in Resources */ = {isa = PBXBuildFile; fileRef = 8EDA802F158572EC00F6AD9A /* _splash.png */; };
 		8EDA8066158572EC00F6AD9A /* _splash.png in Resources */ = {isa = PBXBuildFile; fileRef = 8EDA802F158572EC00F6AD9A /* _splash.png */; };
 		8EDA8067158572EC00F6AD9A /* add-ro.png in Resources */ = {isa = PBXBuildFile; fileRef = 8EDA8030158572EC00F6AD9A /* add-ro.png */; };
@@ -125,7 +129,6 @@
 		8EDA8084158572EC00F6AD9A /* contact-ro.png in Resources */ = {isa = PBXBuildFile; fileRef = 8EDA803E158572EC00F6AD9A /* contact-ro.png */; };
 		8EDA8085158572EC00F6AD9A /* contact.png in Resources */ = {isa = PBXBuildFile; fileRef = 8EDA803F158572EC00F6AD9A /* contact.png */; };
 		8EDA8086158572EC00F6AD9A /* contact.png in Resources */ = {isa = PBXBuildFile; fileRef = 8EDA803F158572EC00F6AD9A /* contact.png */; };
-		8EDA8087158572EC00F6AD9A /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 8EDA8040158572EC00F6AD9A /* Default.png */; };
 		8EDA8088158572EC00F6AD9A /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 8EDA8040158572EC00F6AD9A /* Default.png */; };
 		8EDA8089158572EC00F6AD9A /* Default_old.png in Resources */ = {isa = PBXBuildFile; fileRef = 8EDA8041158572EC00F6AD9A /* Default_old.png */; };
 		8EDA808A158572EC00F6AD9A /* Default_old.png in Resources */ = {isa = PBXBuildFile; fileRef = 8EDA8041158572EC00F6AD9A /* Default_old.png */; };
@@ -205,8 +208,8 @@
 		8EDA80DD158572FA00F6AD9A /* LocationProfile.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8EDA80D3158572FA00F6AD9A /* LocationProfile.xib */; };
 		8EDA80DE158572FA00F6AD9A /* LocationProfileCellView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8EDA80D4158572FA00F6AD9A /* LocationProfileCellView.xib */; };
 		8EDA80DF158572FA00F6AD9A /* LocationProfileCellView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8EDA80D4158572FA00F6AD9A /* LocationProfileCellView.xib */; };
-		8EDA80E0158572FA00F6AD9A /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8EDA80D5158572FA00F6AD9A /* MainWindow.xib */; };
-		8EDA80E1158572FA00F6AD9A /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8EDA80D5158572FA00F6AD9A /* MainWindow.xib */; };
+		8EDA80E0158572FA00F6AD9A /* MainWindow_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8EDA80D5158572FA00F6AD9A /* MainWindow_iPhone.xib */; };
+		8EDA80E1158572FA00F6AD9A /* MainWindow_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8EDA80D5158572FA00F6AD9A /* MainWindow_iPhone.xib */; };
 		8EDA80E2158572FA00F6AD9A /* PBMDoubleTextCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8EDA80D6158572FA00F6AD9A /* PBMDoubleTextCell.xib */; };
 		8EDA80E3158572FA00F6AD9A /* PBMDoubleTextCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8EDA80D6158572FA00F6AD9A /* PBMDoubleTextCell.xib */; };
 		8EDA80E4158572FA00F6AD9A /* PBMTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8EDA80D7158572FA00F6AD9A /* PBMTableCell.xib */; };
@@ -231,6 +234,12 @@
 		8EDA81011585748800F6AD9A /* WebViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8EDA80F61585748800F6AD9A /* WebViewController.xib */; };
 		8EDA81021585748800F6AD9A /* XMLTableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8EDA80F71585748800F6AD9A /* XMLTableView.xib */; };
 		8EDA81031585748800F6AD9A /* XMLTableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8EDA80F71585748800F6AD9A /* XMLTableView.xib */; };
+		8EDD3E3F1597D23E00D34DF2 /* MainWindow_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8EDD3E3E1597D23E00D34DF2 /* MainWindow_iPad.xib */; };
+		8EDD3E401597D23E00D34DF2 /* MainWindow_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8EDD3E3E1597D23E00D34DF2 /* MainWindow_iPad.xib */; };
+		8EDD3E4F1597DEED00D34DF2 /* MainMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EDD3E4E1597DEED00D34DF2 /* MainMenuViewController.m */; };
+		8EDD3E501597DEED00D34DF2 /* MainMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EDD3E4E1597DEED00D34DF2 /* MainMenuViewController.m */; };
+		8EDD3E521597DF1F00D34DF2 /* MainMenuViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8EDD3E511597DF1F00D34DF2 /* MainMenuViewController.xib */; };
+		8EDD3E531597DF1F00D34DF2 /* MainMenuViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8EDD3E511597DF1F00D34DF2 /* MainMenuViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -242,8 +251,6 @@
 		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		466A453510AE668F00AB7A2B /* PBMDoubleTableCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PBMDoubleTableCell.h; sourceTree = "<group>"; };
 		466A453610AE668F00AB7A2B /* PBMDoubleTableCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PBMDoubleTableCell.m; sourceTree = "<group>"; };
-		46A3834510AD4FD300414035 /* RootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RootViewController.m; sourceTree = "<group>"; };
-		46A3834610AD4FD300414035 /* RootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RootViewController.h; sourceTree = "<group>"; };
 		46A3834710AD4FD300414035 /* Portland_Pinball_MapAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Portland_Pinball_MapAppDelegate.m; sourceTree = "<group>"; };
 		46A3834810AD4FD300414035 /* Portland_Pinball_MapAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Portland_Pinball_MapAppDelegate.h; sourceTree = "<group>"; };
 		46A3834910AD4FD300414035 /* MachineViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MachineViewController.h; sourceTree = "<group>"; };
@@ -294,7 +301,6 @@
 		8E07D68F159693260028E65C /* Location.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Location.h; sourceTree = "<group>"; };
 		8E07D690159693260028E65C /* Location.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Location.m; sourceTree = "<group>"; };
 		8E12681F157C4B2F00A40329 /* Portland Pinball Map copy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Portland Pinball Map copy.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		8E126821157C4B3000A40329 /* Portland Pinball Map copy-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Portland Pinball Map copy-Info.plist"; path = "/Users/scottwainstock/work/pbm-ios/Portland Pinball Map/Portland Pinball Map copy-Info.plist"; sourceTree = "<absolute>"; };
 		8E126827157C4B7200A40329 /* launch_steps.rb */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.ruby; path = launch_steps.rb; sourceTree = "<group>"; };
 		8E126829157C4B7200A40329 /* env.rb */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.ruby; path = env.rb; sourceTree = "<group>"; };
 		8E12682A157C4B7200A40329 /* frank_static_resources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = frank_static_resources.bundle; sourceTree = "<group>"; };
@@ -303,6 +309,10 @@
 		8E126833157C4BA100A40329 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		8E276C7B1590208700EEE1D8 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		8E276C811590210D00EEE1D8 /* pbm.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = pbm.xcdatamodel; sourceTree = "<group>"; };
+		8E6D0DB415996580000FAA4E /* PBMViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PBMViewController.h; sourceTree = "<group>"; };
+		8E6D0DB515996580000FAA4E /* PBMViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PBMViewController.m; sourceTree = "<group>"; };
+		8E6D0DB915996826000FAA4E /* PBMTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PBMTableViewController.h; sourceTree = "<group>"; };
+		8E6D0DBA15996827000FAA4E /* PBMTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PBMTableViewController.m; sourceTree = "<group>"; };
 		8E700B1C1592D37D0016FBA2 /* LocationMachineXref.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationMachineXref.h; sourceTree = "<group>"; };
 		8E700B1D1592D37D0016FBA2 /* LocationMachineXref.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocationMachineXref.m; sourceTree = "<group>"; };
 		8E700B301592D5890016FBA2 /* Event.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Event.h; sourceTree = "<group>"; };
@@ -315,6 +325,8 @@
 		8E700B45159427740016FBA2 /* Machine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Machine.m; sourceTree = "<group>"; };
 		8E700B4815943A9A0016FBA2 /* RecentAddition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecentAddition.h; sourceTree = "<group>"; };
 		8E700B4915943A9A0016FBA2 /* RecentAddition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecentAddition.m; sourceTree = "<group>"; };
+		8EBE6A30159A0C9C00C0374F /* PBMSplitViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PBMSplitViewController.h; sourceTree = "<group>"; };
+		8EBE6A31159A0C9C00C0374F /* PBMSplitViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PBMSplitViewController.m; sourceTree = "<group>"; };
 		8EDA802F158572EC00F6AD9A /* _splash.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = _splash.png; sourceTree = "<group>"; };
 		8EDA8030158572EC00F6AD9A /* add-ro.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "add-ro.png"; sourceTree = "<group>"; };
 		8EDA8031158572EC00F6AD9A /* add.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = add.png; sourceTree = "<group>"; };
@@ -372,7 +384,7 @@
 		8EDA80D2158572FA00F6AD9A /* AboutView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AboutView.xib; sourceTree = "<group>"; };
 		8EDA80D3158572FA00F6AD9A /* LocationProfile.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LocationProfile.xib; sourceTree = "<group>"; };
 		8EDA80D4158572FA00F6AD9A /* LocationProfileCellView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LocationProfileCellView.xib; sourceTree = "<group>"; };
-		8EDA80D5158572FA00F6AD9A /* MainWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainWindow.xib; sourceTree = "<group>"; };
+		8EDA80D5158572FA00F6AD9A /* MainWindow_iPhone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainWindow_iPhone.xib; sourceTree = "<group>"; };
 		8EDA80D6158572FA00F6AD9A /* PBMDoubleTextCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PBMDoubleTextCell.xib; sourceTree = "<group>"; };
 		8EDA80D7158572FA00F6AD9A /* PBMTableCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PBMTableCell.xib; sourceTree = "<group>"; };
 		8EDA80D8158572FA00F6AD9A /* RequestPage.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RequestPage.xib; sourceTree = "<group>"; };
@@ -387,6 +399,10 @@
 		8EDA80F51585748800F6AD9A /* MachineProfileView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MachineProfileView.xib; sourceTree = "<group>"; };
 		8EDA80F61585748800F6AD9A /* WebViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WebViewController.xib; sourceTree = "<group>"; };
 		8EDA80F71585748800F6AD9A /* XMLTableView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = XMLTableView.xib; sourceTree = "<group>"; };
+		8EDD3E3E1597D23E00D34DF2 /* MainWindow_iPad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainWindow_iPad.xib; sourceTree = "<group>"; };
+		8EDD3E4D1597DEE300D34DF2 /* MainMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainMenuViewController.h; sourceTree = "<group>"; };
+		8EDD3E4E1597DEED00D34DF2 /* MainMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainMenuViewController.m; sourceTree = "<group>"; };
+		8EDD3E511597DF1F00D34DF2 /* MainMenuViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainMenuViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -475,7 +491,6 @@
 				8EDA80D1158572FA00F6AD9A /* Nibs */,
 				8EDA802E158572EC00F6AD9A /* Images */,
 				8D1107310486CEB800E47090 /* Portland_Pinball_Map-Info.plist */,
-				8E126821157C4B3000A40329 /* Portland Pinball Map copy-Info.plist */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -535,8 +550,8 @@
 				6A23925F11D66B9B00924966 /* EventsViewController.m */,
 				6A2393FD11D6ECC200924966 /* EventProfileViewController.h */,
 				6A2393FE11D6ECC200924966 /* EventProfileViewController.m */,
-				46A3834610AD4FD300414035 /* RootViewController.h */,
-				46A3834510AD4FD300414035 /* RootViewController.m */,
+				8EDD3E4D1597DEE300D34DF2 /* MainMenuViewController.h */,
+				8EDD3E4E1597DEED00D34DF2 /* MainMenuViewController.m */,
 				6A61E2A110B7C64E00DFD9BE /* LocationFilterView.h */,
 				6A61E2A210B7C64E00DFD9BE /* LocationFilterView.m */,
 				46A3834910AD4FD300414035 /* MachineViewController.h */,
@@ -555,6 +570,12 @@
 				6A64252E11BE4CDF00E3BC11 /* RegionSelectViewController.m */,
 				8EDA80EA1585740500F6AD9A /* RequestPage.h */,
 				8EDA80EB1585740500F6AD9A /* RequestPage.m */,
+				8E6D0DB915996826000FAA4E /* PBMTableViewController.h */,
+				8E6D0DBA15996827000FAA4E /* PBMTableViewController.m */,
+				8E6D0DB415996580000FAA4E /* PBMViewController.h */,
+				8E6D0DB515996580000FAA4E /* PBMViewController.m */,
+				8EBE6A30159A0C9C00C0374F /* PBMSplitViewController.h */,
+				8EBE6A31159A0C9C00C0374F /* PBMSplitViewController.m */,
 			);
 			name = controllers;
 			sourceTree = "<group>";
@@ -702,11 +723,13 @@
 				8EDA80D2158572FA00F6AD9A /* AboutView.xib */,
 				8EDA80D3158572FA00F6AD9A /* LocationProfile.xib */,
 				8EDA80D4158572FA00F6AD9A /* LocationProfileCellView.xib */,
-				8EDA80D5158572FA00F6AD9A /* MainWindow.xib */,
+				8EDA80D5158572FA00F6AD9A /* MainWindow_iPhone.xib */,
+				8EDD3E3E1597D23E00D34DF2 /* MainWindow_iPad.xib */,
 				8EDA80D6158572FA00F6AD9A /* PBMDoubleTextCell.xib */,
 				8EDA80D7158572FA00F6AD9A /* PBMTableCell.xib */,
 				8EDA80D8158572FA00F6AD9A /* RequestPage.xib */,
 				8EDA80D9158572FA00F6AD9A /* RootViewController.xib */,
+				8EDD3E511597DF1F00D34DF2 /* MainMenuViewController.xib */,
 			);
 			path = Nibs;
 			sourceTree = "<group>";
@@ -799,7 +822,6 @@
 				8EDA8081158572EC00F6AD9A /* chicago_splash.png in Resources */,
 				8EDA8083158572EC00F6AD9A /* contact-ro.png in Resources */,
 				8EDA8085158572EC00F6AD9A /* contact.png in Resources */,
-				8EDA8087158572EC00F6AD9A /* Default.png in Resources */,
 				8EDA8089158572EC00F6AD9A /* Default_old.png in Resources */,
 				8EDA808B158572EC00F6AD9A /* Default_old1.png in Resources */,
 				8EDA808D158572EC00F6AD9A /* Default_old2.png in Resources */,
@@ -839,7 +861,7 @@
 				8EDA80DA158572FA00F6AD9A /* AboutView.xib in Resources */,
 				8EDA80DC158572FA00F6AD9A /* LocationProfile.xib in Resources */,
 				8EDA80DE158572FA00F6AD9A /* LocationProfileCellView.xib in Resources */,
-				8EDA80E0158572FA00F6AD9A /* MainWindow.xib in Resources */,
+				8EDA80E0158572FA00F6AD9A /* MainWindow_iPhone.xib in Resources */,
 				8EDA80E2158572FA00F6AD9A /* PBMDoubleTextCell.xib in Resources */,
 				8EDA80E4158572FA00F6AD9A /* PBMTableCell.xib in Resources */,
 				8EDA80E6158572FA00F6AD9A /* RequestPage.xib in Resources */,
@@ -850,6 +872,8 @@
 				8EDA80FE1585748800F6AD9A /* MachineProfileView.xib in Resources */,
 				8EDA81001585748800F6AD9A /* WebViewController.xib in Resources */,
 				8EDA81021585748800F6AD9A /* XMLTableView.xib in Resources */,
+				8EDD3E3F1597D23E00D34DF2 /* MainWindow_iPad.xib in Resources */,
+				8EDD3E521597DF1F00D34DF2 /* MainMenuViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -917,7 +941,7 @@
 				8EDA80DB158572FA00F6AD9A /* AboutView.xib in Resources */,
 				8EDA80DD158572FA00F6AD9A /* LocationProfile.xib in Resources */,
 				8EDA80DF158572FA00F6AD9A /* LocationProfileCellView.xib in Resources */,
-				8EDA80E1158572FA00F6AD9A /* MainWindow.xib in Resources */,
+				8EDA80E1158572FA00F6AD9A /* MainWindow_iPhone.xib in Resources */,
 				8EDA80E3158572FA00F6AD9A /* PBMDoubleTextCell.xib in Resources */,
 				8EDA80E5158572FA00F6AD9A /* PBMTableCell.xib in Resources */,
 				8EDA80E7158572FA00F6AD9A /* RequestPage.xib in Resources */,
@@ -928,6 +952,8 @@
 				8EDA80FF1585748800F6AD9A /* MachineProfileView.xib in Resources */,
 				8EDA81011585748800F6AD9A /* WebViewController.xib in Resources */,
 				8EDA81031585748800F6AD9A /* XMLTableView.xib in Resources */,
+				8EDD3E401597D23E00D34DF2 /* MainWindow_iPad.xib in Resources */,
+				8EDD3E531597DF1F00D34DF2 /* MainMenuViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -939,7 +965,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				1D60589B0D05DD56006BFB54 /* main.m in Sources */,
-				46A3834D10AD4FD300414035 /* RootViewController.m in Sources */,
 				46A3834E10AD4FD300414035 /* Portland_Pinball_MapAppDelegate.m in Sources */,
 				46A3835010AD4FD300414035 /* MachineViewController.m in Sources */,
 				46A3838810AD5F9000414035 /* RecentlyAddedViewController.m in Sources */,
@@ -973,6 +998,10 @@
 				8E700B46159427740016FBA2 /* Machine.m in Sources */,
 				8E700B4A15943A9A0016FBA2 /* RecentAddition.m in Sources */,
 				8E07D691159693260028E65C /* Location.m in Sources */,
+				8EDD3E4F1597DEED00D34DF2 /* MainMenuViewController.m in Sources */,
+				8E6D0DB615996580000FAA4E /* PBMViewController.m in Sources */,
+				8E6D0DBB15996827000FAA4E /* PBMTableViewController.m in Sources */,
+				8EBE6A32159A0C9C00C0374F /* PBMSplitViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -981,7 +1010,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				8E1267F4157C4B2F00A40329 /* main.m in Sources */,
-				8E1267F5157C4B2F00A40329 /* RootViewController.m in Sources */,
 				8E1267F6157C4B2F00A40329 /* Portland_Pinball_MapAppDelegate.m in Sources */,
 				8E1267F7157C4B2F00A40329 /* MachineViewController.m in Sources */,
 				8E1267F8157C4B2F00A40329 /* RecentlyAddedViewController.m in Sources */,
@@ -1015,6 +1043,10 @@
 				8E700B47159427740016FBA2 /* Machine.m in Sources */,
 				8E700B4B15943A9A0016FBA2 /* RecentAddition.m in Sources */,
 				8E07D692159693260028E65C /* Location.m in Sources */,
+				8EDD3E501597DEED00D34DF2 /* MainMenuViewController.m in Sources */,
+				8E6D0DB715996580000FAA4E /* PBMViewController.m in Sources */,
+				8E6D0DBC15996827000FAA4E /* PBMTableViewController.m in Sources */,
+				8EBE6A33159A0C9C00C0374F /* PBMSplitViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1069,7 +1101,7 @@
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 3.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				SDKROOT = iphoneos;
 			};
@@ -1107,6 +1139,7 @@
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "35EDA825-D876-48BB-9CD2-04CBF9E63986";
 				SDKROOT = iphoneos;
 			};
@@ -1248,7 +1281,7 @@
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 3.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				SDKROOT = iphoneos;
 			};
@@ -1262,6 +1295,7 @@
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				SDKROOT = iphoneos;
 			};
 			name = Release;

@@ -2,7 +2,7 @@
 #import "ZonesViewController.h"
 
 @implementation ZonesViewController
-@synthesize zones, titles, locationFilter;
+@synthesize zones, titles, locationFilterView;
 
 - (void)viewWillAppear:(BOOL)animated {
 	Portland_Pinball_MapAppDelegate *appDelegate = (Portland_Pinball_MapAppDelegate *)[[UIApplication sharedApplication] delegate];
@@ -17,14 +17,19 @@
 	
 	[self setTitle:@"Locations"];
 	
-	if(locationFilter != nil)
-		[locationFilter setCurrentZoneID:@" "];
+	if(locationFilterView != nil)
+		[locationFilterView setCurrentZoneID:@" "];
 	
 	[self.tableView reloadData];
 	
+    if (appDelegate.isPad) {
+        [appDelegate.locationMap setLocationsToShow:appDelegate.activeRegion.locations.allObjects];
+        [appDelegate.locationMap loadPins];
+    }
+    
 	[super viewWillAppear:animated];
 }
-
+    
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return [zones count];
 }
@@ -62,8 +67,8 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-	if(locationFilter == nil) {
-		locationFilter = [[LocationFilterView alloc] initWithStyle:UITableViewStylePlain];
+	if(locationFilterView == nil) {
+		locationFilterView = [[LocationFilterView alloc] initWithStyle:UITableViewStylePlain];
 	}
 	
 	NSUInteger row = [indexPath row];
@@ -72,15 +77,15 @@
 	NSArray *zonesForSection = (NSArray *)[zones objectForKey:keyAtSection];
 	
 	if(section == 0) {
-		[locationFilter setZoneID:[zonesForSection objectAtIndex:row]];
+		[locationFilterView setZoneID:[zonesForSection objectAtIndex:row]];
 	} else {
 		Zone *zone = (Zone *)[zonesForSection objectAtIndex:row];
         
-		[locationFilter setZoneID:zone.name];
-		[locationFilter setTheNewZone:zone];
+		[locationFilterView setZoneID:zone.name];
+		[locationFilterView setTheNewZone:zone];
 	}
 	
-	[self.navigationController pushViewController:locationFilter animated:YES];	
+	[self.navigationController pushViewController:locationFilterView animated:YES];	
 }
 
 @end

@@ -2,14 +2,14 @@
 #import "BlackTableViewController.h"
 
 @interface ZonesViewController : BlackTableViewController {
+    NSArray *titles;
 	NSDictionary *zones;
-	NSArray *titles;
 	
-	LocationFilterView *locationFilter;	
+	LocationFilterView *locationFilterView;	
 }
 
-@property (nonatomic,strong) NSDictionary *zones;
 @property (nonatomic,strong) NSArray *titles;
-@property (nonatomic,strong) LocationFilterView *locationFilter;
+@property (nonatomic,strong) NSDictionary *zones;
+@property (nonatomic,strong) LocationFilterView *locationFilterView;
 
 @end

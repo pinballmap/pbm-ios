@@ -11,8 +11,7 @@
     NSMutableString *mapURL;
 	
 	LocationMap *mapView;
-		
-	Location *activeLocationObject;
+	Location *activeLocation;
 	
 	UILabel *mapLabel;
 	UIButton *mapButton;
@@ -46,7 +45,7 @@
 @property (nonatomic,strong) IBOutlet UILabel *mapLabel;
 @property (nonatomic,strong) IBOutlet UIButton *mapButton;
 @property (nonatomic,strong) IBOutlet UIScrollView *scrollView;
-@property (nonatomic,strong) Location *activeLocationObject;
+@property (nonatomic,strong) Location *activeLocation;
 @property (nonatomic,assign) BOOL isBuildingMachine;
 @property (nonatomic,strong) NSMutableString *tempMachineID;
 @property (nonatomic,strong) NSMutableString *tempMachineConditionDate;
