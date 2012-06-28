@@ -1,7 +1,7 @@
 #import "ClosestLocations.h"
 
 @implementation ClosestLocations
-@synthesize sectionLocations, sectionTitles, lastViewedRegion, mapView, allSortedLocations;
+@synthesize sectionLocations, sectionTitles, lastViewedRegion, allSortedLocations;
 
 Portland_Pinball_MapAppDelegate *appDelegate;
 
@@ -44,8 +44,7 @@ Portland_Pinball_MapAppDelegate *appDelegate;
         [sectionLocations addObject:locations];
     }
     
-    for (id key in appDelegate.activeRegion.locations) {
-        Location *location = [appDelegate.activeRegion.locations valueForKey:key];
+    for (Location *location in appDelegate.activeRegion.locations) {
         [location updateDistance];
         
         int index;
@@ -97,14 +96,12 @@ Portland_Pinball_MapAppDelegate *appDelegate;
 		[mapLocations addObject:[allSortedLocations objectAtIndex:i]];
 	}
 
-    mapView = [[LocationMap alloc] init];
-    [mapView setShowProfileButtons:YES];
+    [appDelegate.locationMap setShowProfileButtons:YES];
     
-	[mapView setLocationsToShow:mapLocations];
-	[mapView setTitle:[NSString stringWithFormat:@"Closest %i", MAX_NUMBER_OF_LOCATIONS_TO_SHOW_IN_MAP]];
+	[appDelegate.locationMap setLocationsToShow:mapLocations];
+	[appDelegate.locationMap setTitle:[NSString stringWithFormat:@"Closest %i", MAX_NUMBER_OF_LOCATIONS_TO_SHOW_IN_MAP]];
     
-	[self.navigationController pushViewController:mapView animated:YES];
-	 
+	[self.navigationController pushViewController:appDelegate.locationMap animated:YES];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -115,10 +112,8 @@ Portland_Pinball_MapAppDelegate *appDelegate;
 	return [sectionTitles objectAtIndex:section];
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-	static NSString *CellIdentifier = @"DoubleTextCellID";
-    
-    PBMDoubleTableCell *cell = (PBMDoubleTableCell*)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {    
+    PBMDoubleTableCell *cell = (PBMDoubleTableCell*)[tableView dequeueReusableCellWithIdentifier:@"DoubleTextCellID"];
     if (cell == nil) {
 		cell = [self getDoubleCell];
     }

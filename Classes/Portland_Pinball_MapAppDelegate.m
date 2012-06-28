@@ -66,7 +66,7 @@ void uncaughtExceptionHandler(NSException *exception) {
     }
     
     CGRect screenBounds = [[UIScreen mainScreen] bounds];
-    screenBounds.origin.y += 20;
+    screenBounds.origin.y += 10;
 	[base setFrame:screenBounds];
 	
     if ((activeRegion != nil) && (activeRegion.subdir != nil)) {
