@@ -1,8 +1,9 @@
 #import "Machine.h"
 #import "LocationMachineXref.h"
+#import "Region.h"
 
 @implementation Machine
 
-@dynamic name, idNumber, locationMachineXref;
+@dynamic idNumber, name, locationMachineXref, region;
 
 @end

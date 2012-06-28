@@ -233,6 +233,8 @@ Portland_Pinball_MapAppDelegate *appDelegate;
                 Machine *machine = [NSEntityDescription insertNewObjectForEntityForName:@"Machine" inManagedObjectContext:appDelegate.managedObjectContext];
                 [machine setValue:currentID forKey:@"idNumber"];
                 [machine setValue:currentName forKey:@"name"];
+                [machine addRegionObject:appDelegate.activeRegion];
+                [appDelegate.activeRegion addMachinesObject:machine];
                 
                 [appDelegate saveContext];
             }

@@ -3,12 +3,11 @@
 #import "Location.h"
 #import "Zone.h"
 #import "RecentAddition.h"
-#import "Machine.h"
 #import "LocationMachineXref.h"
 
 @implementation Region
 
-@dynamic formalName, idNumber, lat, lon, name, subdir, nMachines, events, locations, recentAdditions, zones;
+@dynamic formalName, idNumber, lat, lon, name, subdir, nMachines, events, locations, machines, recentAdditions, zones;
 
 - (CLLocation *)coordinates {
     return [[CLLocation alloc] initWithLatitude:[self.lat floatValue] longitude:[self.lon floatValue]];
@@ -42,19 +41,6 @@
     return (NSMutableArray *)[secondaryZones sortedArrayUsingComparator:^NSComparisonResult(Zone *a, Zone *b) {
         return [a.name compare:b.name];
     }];
-}
-
-- (NSArray *)machines {
-    NSMutableDictionary *machines = [[NSMutableDictionary alloc] init];
-    for (Location *location in self.locations) {
-        for (LocationMachineXref *xref in location.locationMachineXrefs) {
-            [machines setObject:xref.machine forKey:xref.machine.name];
-        }
-    }
-    
-    return [machines.allValues sortedArrayUsingComparator:^NSComparisonResult(Machine *a, Machine *b) {
-        return [a.name compare:b.name];
-    }];    
 }
 
 @end

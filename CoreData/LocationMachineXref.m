@@ -32,7 +32,7 @@
         [locations addObject:lmx.location];
     }
     
-    return [locations count] > 0 ? [locations objectAtIndex:0] : nil;        
+    return locations;        
 }
 
 @end

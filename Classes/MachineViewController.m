@@ -22,9 +22,8 @@
         
         NSMutableArray *letterArray = [machinesByFirstLetter objectForKey:firstLetter];
         if (letterArray == nil) {
-            NSMutableArray *newLetterArray = [[NSMutableArray alloc] init];
-            [machinesByFirstLetter setObject:newLetterArray forKey:firstLetter];
-            letterArray = newLetterArray;
+            letterArray = [[NSMutableArray alloc] init];
+            [machinesByFirstLetter setObject:letterArray forKey:firstLetter];
         }
 			
         [letterArray addObject:machine];
@@ -32,10 +31,8 @@
     
     for (NSString *key in machinesByFirstLetter.allKeys) {    
         NSMutableArray *machines = [machinesByFirstLetter objectForKey:key];
-        machines = (NSMutableArray *)[machines sortedArrayUsingComparator:^NSComparisonResult(id a, id b) {
-            NSString *first = [a objectForKey:@"name"];
-            NSString *second = [b objectForKey:@"name"];
-            return [first compare:second];
+        machines = (NSMutableArray *)[machines sortedArrayUsingComparator:^NSComparisonResult(Machine *a, Machine *b) {
+            return [a.name compare:b.name];
         }];
         
         [machinesByFirstLetter setObject:machines forKey:key];
@@ -74,8 +71,8 @@
     
 	NSString *keyAtSection = [keys objectAtIndex:[indexPath section]];
 	NSArray *letterArray = (NSArray *)[machinesByFirstLetter objectForKey:keyAtSection];
-	NSDictionary *machine = [letterArray objectAtIndex:[indexPath row]];
-	[cell.nameLabel setText:[machine objectForKey:@"name"]];
+	Machine *machine = [letterArray objectAtIndex:[indexPath row]];
+	[cell.nameLabel setText:machine.name];
 	
     return cell;
 }
