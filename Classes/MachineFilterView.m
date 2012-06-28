@@ -1,20 +1,16 @@
 #import "MachineFilterView.h"
+#import "LocationMachineXref.h"
 #import "LocationProfileViewController.h"
 
 @implementation MachineFilterView
-@synthesize locations, machine, tempLocationID, mapView, resetNavigationStackOnLocationSelect, noLocationsLabel, tempLocations, didAbortParsing;
+@synthesize locations, machine, foundLocation, resetNavigationStackOnLocationSelect, didAbortParsing;
 
 Portland_Pinball_MapAppDelegate *appDelegate;
 
 - (void)viewDidLoad {
     appDelegate = (Portland_Pinball_MapAppDelegate *)[[UIApplication sharedApplication] delegate];
 
-	noLocationsLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 130, 320, 30)];
-	[noLocationsLabel setText:@"(no locations)"];
-	[noLocationsLabel setBackgroundColor:[UIColor blackColor]];
-	[noLocationsLabel setTextColor:[UIColor whiteColor]];
-	[noLocationsLabel setFont:[UIFont boldSystemFontOfSize:20]];
-	[noLocationsLabel setTextAlignment:UITextAlignmentCenter];
+    foundLocation = [[NSMutableDictionary alloc] init];
 	
 	[super viewDidLoad];
 }
@@ -23,20 +19,18 @@ Portland_Pinball_MapAppDelegate *appDelegate;
 	[self setTitle:machine.name];
 
 	locations = [LocationMachineXref locationsForMachine:machine];
-		
-	[self.tableView setContentOffset:CGPointZero];
-	
+
 	[self reloadLocationData];
+    
 	[super viewWillAppear:animated];
 }	
 
 - (void)viewDidAppear:(BOOL)animated {
-	if (locations == nil) {
+	if (locations == nil || [locations count] == 0) {
 		didAbortParsing = NO;
 		
-		tempLocations = [[NSMutableArray alloc] init];
 		NSString *url = [[NSString alloc] initWithFormat:@"%@get_machine=%@", appDelegate.rootURL, machine.idNumber];
-		
+
 		@autoreleasepool {
 			[self performSelectorInBackground:@selector(parseXMLFileAtURL:) withObject:url];
 		}
@@ -54,48 +48,61 @@ Portland_Pinball_MapAppDelegate *appDelegate;
 }
 
 - (void)onMapPress:(id)sender {
-	if(mapView == nil) {
-		mapView = [[LocationMap alloc] init];
-		[mapView setShowProfileButtons:YES];
-	}
+    [appDelegate.locationMap setShowProfileButtons:YES];
+	[appDelegate.locationMap setLocationsToShow:locations];
+	[appDelegate.locationMap setTitle:self.title];
 	
-	[mapView setLocationsToShow:locations];
-	[mapView setTitle:self.title];
-	
-	[self.navigationController pushViewController:mapView animated:YES];
+	[self.navigationController pushViewController:appDelegate.locationMap animated:YES];
 }
 
 - (void)parser:(NSXMLParser *)parser didStartElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qName attributes:(NSDictionary *)attributeDict {
-	currentElement = [elementName copy];
-	
-	if ([elementName isEqualToString:@"id"])
-        tempLocationID = [[NSMutableString alloc] init];
+    currentElement = [elementName copy];
 }
 
 - (void)parser:(NSXMLParser *)parser foundCharacters:(NSString *)string {
-	if ([currentElement isEqualToString:@"id"])
-        [tempLocationID appendString:string];
+    for (NSString *property in [[NSArray alloc] initWithObjects:@"id", @"street1", @"street2", @"city", @"state", @"zip", @"phone", nil]) {
+        if ([property isEqualToString:currentElement]) {
+            [foundLocation setObject:string forKey:property];
+        }
+    }
 }
 
 - (void)parser:(NSXMLParser *)parser didEndElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qName {	
-	if(didAbortParsing == YES)
+	if(didAbortParsing == YES) {
         return;
+    }
 	
 	currentElement = @"";
 	
-	if ([elementName isEqualToString:@"id"]) {
+	if ([elementName isEqualToString:@"phone"]) {
+        Location *location = (Location *)[appDelegate fetchObject:@"Location" where:@"idNumber" equals:[foundLocation objectForKey:@"id"]];
+
+        if (![LocationMachineXref findForMachine:machine andLocation:location]) {
+            LocationMachineXref *lmx = [NSEntityDescription insertNewObjectForEntityForName:@"LocationMachineXref" inManagedObjectContext:appDelegate.managedObjectContext];
+            [lmx setLocation:location];
+            [lmx setMachine:machine];
+            
+            [appDelegate saveContext];
+        }
         
-        Location *location = (Location *)[appDelegate fetchObject:@"Location" where:@"idNumber" equals:tempLocationID];
-		if(location != nil) {
-			[location updateDistance];
-		}
-	}
+        [locations addObject:location];
+    }
 }
 
 - (void)parserDidEndDocument:(NSXMLParser *)parser {	
-	if(didAbortParsing == NO) {
-		[self reloadLocationData];
-	}
+	if (didAbortParsing == NO) {
+        for (Location *location in locations) {
+            [location setStreet1:[foundLocation objectForKey:@"street1"]];
+            [location setStreet2:[foundLocation objectForKey:@"street2"]];
+            [location setCity:[foundLocation objectForKey:@"city"]];
+            [location setState:[foundLocation objectForKey:@"state"]];
+            [location setZip:[foundLocation objectForKey:@"zip"]];
+            [location setPhone:[foundLocation objectForKey:@"phone"]];
+            [location updateDistance]; 
+        }
+    }
+    
+    [self reloadLocationData];
 	
 	[super parserDidEndDocument:parser];
 }
@@ -106,25 +113,20 @@ Portland_Pinball_MapAppDelegate *appDelegate;
 }
 
 - (void)reloadLocationData {
-	if (locations == nil) {
-		[noLocationsLabel removeFromSuperview];
-		[self showLoaderIconLarge];
-		
-		[self.navigationItem setRightBarButtonItem:nil];
-	} else if ([locations count] == 0) {
-		[self.tableView setSeparatorColor:[UIColor blackColor]];
-		[self.view addSubview:noLocationsLabel];
-        
+	if (locations == nil || [locations count] == 0) {
+		[self.tableView setSeparatorColor:[UIColor blackColor]];        
 		[self.navigationItem setRightBarButtonItem:nil];
 	} else {
 		[self.tableView setSeparatorColor:[UIColor darkGrayColor]];
-		[noLocationsLabel removeFromSuperview];
-		[self.navigationItem setRightBarButtonItem:[[UIBarButtonItem alloc] initWithTitle:@"Map" style:UIBarButtonItemStyleBordered target:self action:@selector(onMapPress:)]];
-		
+        
+        if (!appDelegate.isPad) {
+            [self.navigationItem setRightBarButtonItem:[[UIBarButtonItem alloc] initWithTitle:@"Map" style:UIBarButtonItemStyleBordered target:self action:@selector(onMapPress:)]];
+		}
+            
 		NSSortDescriptor *nameSortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"distance" ascending:YES selector:@selector(compare:)];
 		for (int i = 0 ; i < [locations count]; i++) {
-			Location *locobj = (Location *)[locations objectAtIndex:i];
-			[locobj updateDistance];
+			Location *location = (Location *)[locations objectAtIndex:i];
+			[location updateDistance];
 		}
         
 		[locations sortUsingDescriptors:[NSArray arrayWithObjects:nameSortDescriptor, nil]];

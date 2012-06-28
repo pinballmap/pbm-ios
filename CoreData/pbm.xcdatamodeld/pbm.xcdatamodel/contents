@@ -40,6 +40,7 @@
         <attribute name="idNumber" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="name" attributeType="String" syncable="YES"/>
         <relationship name="locationMachineXref" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="LocationMachineXref" inverseName="machine" inverseEntity="LocationMachineXref" syncable="YES"/>
+        <relationship name="region" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Region" inverseName="machines" inverseEntity="Region" syncable="YES"/>
     </entity>
     <entity name="RecentAddition" representedClassName="RecentAddition" syncable="YES">
         <attribute name="dateAdded" attributeType="Date" syncable="YES"/>
@@ -56,6 +57,7 @@
         <attribute name="subdir" attributeType="String" syncable="YES"/>
         <relationship name="events" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Event" inverseName="region" inverseEntity="Event" syncable="YES"/>
         <relationship name="locations" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Location" inverseName="region" inverseEntity="Location" syncable="YES"/>
+        <relationship name="machines" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Machine" inverseName="region" inverseEntity="Machine" syncable="YES"/>
         <relationship name="recentAdditions" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="RecentAddition" inverseName="region" inverseEntity="RecentAddition" syncable="YES"/>
         <relationship name="zones" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Zone" inverseName="region" inverseEntity="Zone" syncable="YES"/>
     </entity>
@@ -70,9 +72,9 @@
         <element name="Event" positionX="-2412" positionY="-873" width="128" height="165"/>
         <element name="Location" positionX="-2243" positionY="-783" width="128" height="270"/>
         <element name="LocationMachineXref" positionX="-2016" positionY="-783" width="128" height="150"/>
-        <element name="Machine" positionX="-1973" positionY="-351" width="128" height="75"/>
+        <element name="Machine" positionX="-1973" positionY="-351" width="128" height="105"/>
         <element name="RecentAddition" positionX="-2241" positionY="-873" width="128" height="90"/>
-        <element name="Region" positionX="-2432" positionY="-495" width="128" height="165"/>
+        <element name="Region" positionX="-2432" positionY="-495" width="128" height="225"/>
         <element name="Zone" positionX="-2241" positionY="-369" width="128" height="105"/>
     </elements>
 </model>
