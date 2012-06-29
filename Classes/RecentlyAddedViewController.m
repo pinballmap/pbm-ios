@@ -1,9 +1,11 @@
 #import "Utils.h"
+#import "Machine.h"
 #import "RecentAddition.h"
+#import "LocationMachineXref.h"
 #import "RecentlyAddedViewController.h"
 
 @implementation RecentlyAddedViewController
-@synthesize sectionTitles, sectionData;
+@synthesize sectionData;
 
 Portland_Pinball_MapAppDelegate *appDelegate;
 
@@ -23,22 +25,15 @@ Portland_Pinball_MapAppDelegate *appDelegate;
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
 
-	if (appDelegate.activeRegion.recentAdditions == nil) {	
-		sectionTitles = [[NSMutableArray alloc] initWithObjects:@"today", @"yesterday", @"this week", @"this month", @"this year", nil];
-		sectionData = [[NSMutableArray alloc] initWithCapacity:[sectionTitles count]];
-		
-		for (NSString *sectionTitle in sectionTitles) {
-			[sectionData addObject:[[NSMutableArray alloc] init]];
-		}
+    sectionData = [[NSMutableDictionary alloc] initWithObjectsAndKeys:[[NSMutableArray alloc] init], TODAY, [[NSMutableArray alloc] init], YESTERDAY,[[NSMutableArray alloc] init], THIS_WEEK, [[NSMutableArray alloc] init], THIS_MONTH, [[NSMutableArray alloc] init], THIS_YEAR, nil];
+    
+    NSString *path = [NSString stringWithFormat:@"%@/%@/location_machine_xrefs.rss", BASE_URL, appDelegate.activeRegion.subdir];
         
-		NSString *path = [NSString stringWithFormat:@"%@/%@/%@.rss", BASE_URL, appDelegate.activeRegion.subdir, @"location_machine_xrefs"];
-            
-		[self showLoaderIconLarge];
-        
-		@autoreleasepool {
-			[self performSelectorInBackground:@selector(parseXMLFileAtURL:) withObject:path];
-		}
-	}
+    [self showLoaderIconLarge];
+    
+    @autoreleasepool {
+        [self performSelectorInBackground:@selector(parseXMLFileAtURL:) withObject:path];
+    }
 	
 	[self.tableView reloadData];
 }
@@ -53,9 +48,8 @@ Portland_Pinball_MapAppDelegate *appDelegate;
 
 - (void)parser:(NSXMLParser *)parser didStartElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qName attributes:(NSDictionary *)attributeDict {
 	currentElement = [elementName copy];
-	
+
 	if ([elementName isEqualToString:@"item"]) {
-		newMachineAtLocation = [[NSMutableDictionary alloc] init];
 		currentTitle = [[NSMutableString alloc] init];
 		currentDesc  = [[NSMutableString alloc] init];
 		parsingItemNode = YES;
@@ -100,33 +94,43 @@ Portland_Pinball_MapAppDelegate *appDelegate;
 		}
         
 		NSRange range = [currentTitle rangeOfString:@"was added to "];
-		NSString *machineName = [currentTitle substringToIndex:range.location];
-		NSString *locationName = [currentTitle substringFromIndex:range.length + range.location];
-		
-        Machine *machine = (Machine *)[appDelegate fetchObject:@"Machine" where:@"name" equals:machineName];
-        Location *location = (Location *)[appDelegate fetchObject:@"Location" where:@"name" equals:locationName];
-        LocationMachineXref *lmx = [LocationMachineXref findForMachine:machine andLocation:location];
+		NSString *machineName = [[currentTitle substringToIndex:range.location] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+		NSString *locationName = [[currentTitle substringFromIndex:range.length + range.location] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+                
+        Machine *machine = (Machine *)[appDelegate fetchObject:@"Machine" where:@"name" equals:[NSString stringWithFormat:@"\"%@\"", machineName]];
+        Location *location = (Location *)[appDelegate fetchObject:@"Location" where:@"name" equals:[NSString stringWithFormat:@"\"%@\"", locationName]];
         
-        RecentAddition *recentAddition = [NSEntityDescription insertNewObjectForEntityForName:@"RecentAddition" inManagedObjectContext:appDelegate.managedObjectContext];
-        [recentAddition setLocationMachineXref:lmx];
-        [recentAddition setDateAdded:dateAdded];
-		
-		if(difference <= ONE_YEAR) {
-            int index;
-			if (difference == 0) {
-                index = 0;
-			} else if (difference == ONE_DAY) {
-                index = 1;
-			} else if (difference <=  ONE_WEEK) {
-                index = 2;
-			} else if (difference <=  ONE_MONTH) {
-                index = 3;
-			} else if (difference <=  ONE_YEAR) {
-                index = 4;
+        if (location && machine) {
+            RecentAddition *recentAddition = [RecentAddition findForLocation:location andMachine:machine];
+
+            if (recentAddition == nil) {
+                recentAddition = [NSEntityDescription insertNewObjectForEntityForName:@"RecentAddition" inManagedObjectContext:appDelegate.managedObjectContext];
+                [recentAddition setRegion:appDelegate.activeRegion];
+                [recentAddition setLocation:location];
+                [recentAddition setMachine:machine];
+                [recentAddition setDateAdded:dateAdded];
+                [location addRecentAdditionsObject:recentAddition];
+                [machine addRecentAdditionsObject:recentAddition];
+                [appDelegate saveContext];
             }
-			
-            [[sectionData objectAtIndex:index] addObject:recentAddition];
-		}		
+        
+            if(difference <= ONE_YEAR) {
+                NSString *index;
+                if (difference == 0) {
+                    index = TODAY;
+                } else if (difference == ONE_DAY) {
+                    index = YESTERDAY;
+                } else if (difference <=  ONE_WEEK) {
+                    index = THIS_WEEK;
+                } else if (difference <=  ONE_MONTH) {
+                    index = THIS_MONTH;
+                } else if (difference <=  ONE_YEAR) {
+                    index = THIS_YEAR;
+                }
+                
+                [[sectionData valueForKey:index] addObject:recentAddition];
+            }
+        }
 	}
     
 	currentElement = @"";
@@ -142,36 +146,36 @@ Portland_Pinball_MapAppDelegate *appDelegate;
 	}
 }
 
-- (void)parserDidEndDocument:(NSXMLParser *)parser {
-	NSSortDescriptor *distanceSortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"dateID" ascending:NO selector:@selector(compare:)];
-	
-	for(int i = [sectionData count] - 1; i >= 0 ; i--) {
-		NSMutableArray *array = (NSMutableArray *)[sectionData objectAtIndex:i];
-		
-		if ([array count] > 0) {
-            [array sortUsingDescriptors:[NSArray arrayWithObjects:distanceSortDescriptor, nil]];
-		} else {            
-			[sectionTitles removeObjectAtIndex:i];
-			[sectionData removeObjectAtIndex:i];
-		}
+- (void)parserDidEndDocument:(NSXMLParser *)parser {	
+	for (NSString *section in sectionData.allKeys) {
+        NSMutableArray *data = [sectionData objectForKey:section];
+        
+        if ([data count] <= 0 || data == nil) {
+            [sectionData removeObjectForKey:section];
+        } else {
+            [sectionData setValue:(NSMutableArray *)[data sortedArrayUsingComparator:^NSComparisonResult(RecentAddition *a, RecentAddition *b) {
+                return [b.dateAdded compare:a.dateAdded];
+            }]  forKey:section];
+        }
 	}
 		
 	[self.tableView reloadData];
 	[self hideLoaderIconLarge];
 	[super parserDidEndDocument:parser];
-	
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return [appDelegate.activeRegion.recentAdditions count];
+    return [sectionData.allKeys count];
 }
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {   
-	return [[sectionData objectAtIndex:section] count];    
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    NSString *index = [sectionData.allKeys objectAtIndex:section];
+    
+	return [[sectionData valueForKey:index] count];    
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger) section {	
-	return [sectionTitles objectAtIndex:section];
+	return [sectionData.allKeys objectAtIndex:section];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {	    
@@ -182,21 +186,27 @@ Portland_Pinball_MapAppDelegate *appDelegate;
 	
     NSUInteger section = [indexPath section];
 	NSUInteger row = [indexPath row];
-	NSArray *locationGroup = [sectionData objectAtIndex:section];
+    NSString *index = [sectionData.allKeys objectAtIndex:section];
+	NSArray *locationGroup = [sectionData valueForKey:index];
 	
-    LocationMachineXref *lmx = [locationGroup objectAtIndex:row];
-	[cell.nameLabel setText:lmx.machine.name];
-	[cell.subLabel setText:lmx.location.name];
-    
-	return cell;
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateFormat:@"yyyy-MM-dd"];
+
+    RecentAddition *recentAddition = [locationGroup objectAtIndex:row];
+	[cell.nameLabel setText:recentAddition.machine.name];
+	[cell.subLabel setText:[NSString stringWithFormat:@"@%@ on %@", recentAddition.location.name, [formatter stringFromDate:recentAddition.dateAdded]]];
+
+     return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {		
 	NSUInteger section = [indexPath section];
 	NSUInteger row = [indexPath row];
-	NSArray *locationGroup = (NSArray *)[sectionData objectAtIndex:section];
+    NSString *index = [sectionData.allKeys objectAtIndex:section];
+	NSArray *locationGroup = (NSArray *)[sectionData valueForKey:index];
+    RecentAddition *recentAddition = [locationGroup objectAtIndex:row];
     
-    [self showLocationProfile:[locationGroup objectAtIndex:row]  withMapButton:YES];
+    [self showLocationProfile:recentAddition.location withMapButton:YES];
 }
 
 @end

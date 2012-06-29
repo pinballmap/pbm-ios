@@ -1,28 +1,25 @@
 #import "LocationMachineXref.h"
 #import "Location.h"
 #import "Machine.h"
-#import "RecentAddition.h"
 #import "Portland_Pinball_MapAppDelegate.h"
 
 @implementation LocationMachineXref
 
-@dynamic condition, conditionDate, dateAdded, idNumber, location, machine, recentAddition;
+@dynamic condition, conditionDate, dateAdded, idNumber, location, machine;
 
 + (LocationMachineXref *)findForMachine:(Machine *)machine andLocation:(Location *)location {
-    Portland_Pinball_MapAppDelegate *appDelegate = (Portland_Pinball_MapAppDelegate *)[[UIApplication sharedApplication] delegate];
-
-    NSFetchRequest *request = [[NSFetchRequest alloc] init];
-    [request setEntity:[NSEntityDescription entityForName:@"LocationMachineXref" inManagedObjectContext:appDelegate.managedObjectContext]];
-    [request setPredicate:[NSPredicate predicateWithFormat:@"machine == %@ and location == %@", machine, location]];
+    for (LocationMachineXref *lmx in location.locationMachineXrefs) {
+        if ([lmx.machine.idNumber isEqualToNumber:machine.idNumber]) {
+            return lmx;
+        }
+    }
     
-    NSArray *lmxes = [appDelegate.managedObjectContext executeFetchRequest:request error:nil];
-    
-    return [lmxes count] > 0 ? [lmxes objectAtIndex:0] : nil;    
+    return nil;
 }
 
 + (NSMutableArray *)locationsForMachine:(Machine *)machine {
     Portland_Pinball_MapAppDelegate *appDelegate = (Portland_Pinball_MapAppDelegate *)[[UIApplication sharedApplication] delegate];
-
+    
     NSFetchRequest *request = [[NSFetchRequest alloc] init];
     [request setEntity:[NSEntityDescription entityForName:@"LocationMachineXref" inManagedObjectContext:appDelegate.managedObjectContext]];
     [request setPredicate:[NSPredicate predicateWithFormat:@"machine == %@", machine]];
