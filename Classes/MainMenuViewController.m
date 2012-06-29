@@ -220,7 +220,7 @@ Portland_Pinball_MapAppDelegate *appDelegate;
                                 
                 [location setIdNumber:currentID];
                 [location setTotalMachines:currentNumMachines];
-                [location setName:currentName];
+                [location setName:[currentName stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]]];
                 [location setLat:[NSNumber numberWithDouble:lat]];
                 [location setLon:[NSNumber numberWithDouble:lon]];
                 [location setRegion:appDelegate.activeRegion];
@@ -232,7 +232,7 @@ Portland_Pinball_MapAppDelegate *appDelegate;
             if([currentNumLocations intValue] != 0) {
                 Machine *machine = [NSEntityDescription insertNewObjectForEntityForName:@"Machine" inManagedObjectContext:appDelegate.managedObjectContext];
                 [machine setValue:currentID forKey:@"idNumber"];
-                [machine setValue:currentName forKey:@"name"];
+                [machine setValue:[currentName stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]] forKey:@"name"];
                 [machine addRegionObject:appDelegate.activeRegion];
                 [appDelegate.activeRegion addMachinesObject:machine];
                 

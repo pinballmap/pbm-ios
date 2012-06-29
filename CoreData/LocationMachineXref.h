@@ -10,7 +10,6 @@
 @property (nonatomic, strong) NSNumber *idNumber;
 @property (nonatomic, strong) Location *location;
 @property (nonatomic, strong) Machine *machine;
-@property (nonatomic, strong) RecentAddition *recentAddition;
 
 + (LocationMachineXref *)findForMachine:(Machine *)machine andLocation:(Location *)location;
 + (NSMutableArray *)locationsForMachine:(Machine *)machine;

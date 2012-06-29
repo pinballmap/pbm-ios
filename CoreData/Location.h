@@ -1,27 +1,27 @@
-#import <Foundation/Foundation.h>
 #import <CoreLocation/CoreLocation.h>
 
-@class Event, LocationMachineXref, Region, Zone;
+@class Event, LocationMachineXref, RecentAddition, Region, Zone;
 
 @interface Location : NSManagedObject {
     double distance;
 }
 
-@property (nonatomic, strong) NSString *city;
-@property (nonatomic, strong) NSNumber *idNumber;
-@property (nonatomic, strong) NSNumber *lat;
-@property (nonatomic, strong) NSNumber *lon;
-@property (nonatomic, strong) NSString *name;
-@property (nonatomic, strong) NSString *phone;
-@property (nonatomic, strong) NSString *state;
-@property (nonatomic, strong) NSString *street1;
-@property (nonatomic, strong) NSString *street2;
-@property (nonatomic, strong) NSNumber *totalMachines;
-@property (nonatomic, strong) NSString *zip;
-@property (nonatomic, strong) NSSet *events;
-@property (nonatomic, strong) NSSet *locationMachineXrefs;
-@property (nonatomic, strong) Zone *locationZone;
-@property (nonatomic, strong) Region *region;
+@property (nonatomic, retain) NSString * city;
+@property (nonatomic, retain) NSNumber * idNumber;
+@property (nonatomic, retain) NSNumber * lat;
+@property (nonatomic, retain) NSNumber * lon;
+@property (nonatomic, retain) NSString * name;
+@property (nonatomic, retain) NSString * phone;
+@property (nonatomic, retain) NSString * state;
+@property (nonatomic, retain) NSString * street1;
+@property (nonatomic, retain) NSString * street2;
+@property (nonatomic, retain) NSNumber * totalMachines;
+@property (nonatomic, retain) NSString * zip;
+@property (nonatomic, retain) NSSet *events;
+@property (nonatomic, retain) NSSet *locationMachineXrefs;
+@property (nonatomic, retain) Zone *locationZone;
+@property (nonatomic, retain) Region *region;
+@property (nonatomic, retain) NSSet *recentAdditions;
 @property (nonatomic) double distance;
 
 - (void)updateDistance;
@@ -41,6 +41,11 @@
 - (void)removeLocationMachineXrefsObject:(LocationMachineXref *)value;
 - (void)addLocationMachineXrefs:(NSSet *)values;
 - (void)removeLocationMachineXrefs:(NSSet *)values;
+
+- (void)addRecentAdditionsObject:(RecentAddition *)value;
+- (void)removeRecentAdditionsObject:(RecentAddition *)value;
+- (void)addRecentAdditions:(NSSet *)values;
+- (void)removeRecentAdditions:(NSSet *)values;
 - (bool)isLoaded;
 
 @end

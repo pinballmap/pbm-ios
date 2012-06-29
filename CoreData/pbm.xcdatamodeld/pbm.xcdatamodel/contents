@@ -25,6 +25,7 @@
         <relationship name="events" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Event" inverseName="location" inverseEntity="Event" syncable="YES"/>
         <relationship name="locationMachineXrefs" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="LocationMachineXref" inverseName="location" inverseEntity="LocationMachineXref" syncable="YES"/>
         <relationship name="locationZone" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Zone" inverseName="location" inverseEntity="Zone" syncable="YES"/>
+        <relationship name="recentAdditions" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="RecentAddition" inverseName="location" inverseEntity="RecentAddition" syncable="YES"/>
         <relationship name="region" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Region" inverseName="locations" inverseEntity="Region" syncable="YES"/>
     </entity>
     <entity name="LocationMachineXref" representedClassName="LocationMachineXref" syncable="YES">
@@ -34,17 +35,18 @@
         <attribute name="idNumber" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <relationship name="location" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Location" inverseName="locationMachineXrefs" inverseEntity="Location" syncable="YES"/>
         <relationship name="machine" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Machine" inverseName="locationMachineXref" inverseEntity="Machine" syncable="YES"/>
-        <relationship name="recentAddition" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="RecentAddition" inverseName="locationMachineXref" inverseEntity="RecentAddition" syncable="YES"/>
     </entity>
     <entity name="Machine" representedClassName="Machine" syncable="YES">
         <attribute name="idNumber" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="name" attributeType="String" syncable="YES"/>
         <relationship name="locationMachineXref" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="LocationMachineXref" inverseName="machine" inverseEntity="LocationMachineXref" syncable="YES"/>
+        <relationship name="recentAdditions" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="RecentAddition" inverseName="machine" inverseEntity="RecentAddition" syncable="YES"/>
         <relationship name="region" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Region" inverseName="machines" inverseEntity="Region" syncable="YES"/>
     </entity>
     <entity name="RecentAddition" representedClassName="RecentAddition" syncable="YES">
         <attribute name="dateAdded" attributeType="Date" syncable="YES"/>
-        <relationship name="locationMachineXref" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="LocationMachineXref" inverseName="recentAddition" inverseEntity="LocationMachineXref" syncable="YES"/>
+        <relationship name="location" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Location" inverseName="recentAdditions" inverseEntity="Location" syncable="YES"/>
+        <relationship name="machine" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Machine" inverseName="recentAdditions" inverseEntity="Machine" syncable="YES"/>
         <relationship name="region" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Region" inverseName="recentAdditions" inverseEntity="Region" syncable="YES"/>
     </entity>
     <entity name="Region" representedClassName="Region" syncable="YES">

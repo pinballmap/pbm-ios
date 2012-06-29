@@ -1,26 +1,25 @@
 #import "XMLTable.h"
-#import "LocationProfileViewController.h"
 
 #define ONE_YEAR 365
 #define ONE_MONTH 31
 #define ONE_WEEK 7
 #define ONE_DAY 1
 #define DISTANT_FUTURE 2000
+#define TODAY @"today"
+#define YESTERDAY @"yesterday"
+#define THIS_WEEK @"this week"
+#define THIS_MONTH @"this month"
+#define THIS_YEAR @"this year"
 
 @interface RecentlyAddedViewController : XMLTable {
-	NSMutableDictionary *newMachineAtLocation;
 	NSMutableString *currentTitle;
 	NSMutableString *currentDesc;
 		
-	NSMutableArray *sectionData;
-	NSMutableArray *sectionTitles;
+    NSMutableDictionary *sectionData;
     
-	BOOL parsingItemNode;
-	
-	LocationProfileViewController *childController;
+	BOOL parsingItemNode;	
 }
 
-@property (nonatomic,strong) NSMutableArray *sectionData;
-@property (nonatomic,strong) NSMutableArray *sectionTitles;
+@property (nonatomic,strong) NSMutableDictionary *sectionData;
 
 @end

@@ -8,7 +8,7 @@
 
 @synthesize distance;
 
-@dynamic city, idNumber, lat, lon, name, phone, state, street1, street2, totalMachines, zip, events, locationMachineXrefs, locationZone, region;
+@dynamic city, idNumber, lat, lon, name, phone, state, street1, street2, totalMachines, zip, events, locationMachineXrefs, locationZone, region, recentAdditions;
 
 - (void)updateDistance {
     Portland_Pinball_MapAppDelegate *appDelegate = (Portland_Pinball_MapAppDelegate *)[[UIApplication sharedApplication] delegate];
