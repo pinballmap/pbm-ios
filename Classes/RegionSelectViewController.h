@@ -1,6 +1,4 @@
 #import "BlackTableViewController.h"
 
-@interface RegionSelectViewController : BlackTableViewController {
-}
-
+@interface RegionSelectViewController : BlackTableViewController
 @end

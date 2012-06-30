@@ -28,9 +28,9 @@ Portland_Pinball_MapAppDelegate *appDelegate;
 		[cell.nameLabel setFont:[UIFont boldSystemFontOfSize:16]];
 		[cell.nameLabel setText:@"*Request Your Region"];
 	} else {
-		Region *reg = [appDelegate.regions objectAtIndex:indexPath.row];
+		Region *region = [appDelegate.regions objectAtIndex:indexPath.row];
 		[cell.nameLabel setFont:[UIFont boldSystemFontOfSize:20]];
-		[cell.nameLabel setText:reg.formalName];        
+		[cell.nameLabel setText:region.formalName];        
 	}
     
 	return cell;

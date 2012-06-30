@@ -37,7 +37,7 @@ Portland_Pinball_MapAppDelegate *appDelegate;
 }
 
 - (void)viewDidAppear:(BOOL)animated {	
-	if(self.locationManager == nil) {
+	if (self.locationManager == nil) {
 		self.locationManager = [[CLLocationManager alloc] init];
 		[locationManager setDelegate:self];
 		[locationManager setDesiredAccuracy:kCLLocationAccuracyBest];
@@ -50,7 +50,8 @@ Portland_Pinball_MapAppDelegate *appDelegate;
 			[appDelegate setShowUserLocation:NO];
 			[self loadInitXML:2];
 		}
-	} else if (appDelegate.activeRegion.locations == nil) {
+	} else if (appDelegate.activeRegion.locations == nil || [appDelegate.activeRegion.locations count] == 0) {
+        motd = nil;
         [appDelegate showSplashScreen];
 		
         xmlStarted = NO;
@@ -335,7 +336,7 @@ Portland_Pinball_MapAppDelegate *appDelegate;
             [location setLocationZone:zone];
         }
         
-        if (motd != nil || ![motd isKindOfClass:[NSNull class]]) {
+        if (motd != nil && ![motd isKindOfClass:[NSNull class]]) {
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Message Of The Day" message:motd delegate:self cancelButtonTitle:@"Thanks" otherButtonTitles:nil];
             [alert show];
         }
