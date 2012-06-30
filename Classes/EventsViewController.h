@@ -1,15 +1,13 @@
 #import "XMLTable.h"
 #import "LocationProfileViewController.h"
 #import "Event.h"
-#import "EventProfileViewController.h"
 
-@interface EventsViewController : XMLTable {
-	EventProfileViewController *eventProfileViewController;
-	
-	UILabel *noEventsLabel;
-	
-	NSArray *weekdayTitles;
-	
+#define FEATURED @"featured"
+#define TOURNAMENTS @"tournaments"
+#define OTHER @"other"
+#define PAST_EVENTS @"past events"
+
+@interface EventsViewController : XMLTable {	
     NSNumber *currentID;
     NSNumber *currentCategoryNo;
     NSNumber *currentLocationID;
@@ -19,19 +17,12 @@
 	NSDate *currentStartDate;
 	NSDate *currentEndDate;
 	
-	NSMutableArray *sectionArray;
-	NSMutableArray *sectionTitles;
+    NSMutableDictionary *sectionData;
 		
-	BOOL parsingItemNode;
-	
-	LocationProfileViewController *childController;
+	BOOL parsingItemNode;	
 }
 
-@property (nonatomic,strong) UILabel *noEventsLabel;
-@property (nonatomic,strong) NSArray *weekdayTitles;
-@property (nonatomic,strong) NSMutableArray *sectionArray;
-@property (nonatomic,strong) NSMutableArray *sectionTitles;
-@property (nonatomic,strong) EventProfileViewController *eventProfileViewController;
+@property (nonatomic,strong) NSMutableDictionary *sectionData;
 
 - (int)differenceInDaysFrom:(NSDate *)startDate to:(NSDate *)toDate;
 

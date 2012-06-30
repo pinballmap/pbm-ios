@@ -24,6 +24,10 @@
 	[timeLabel setText:[formatter stringFromDate:event.startDate]];
 	[descText setText:event.longDesc];
     
+    if (event.location == nil) {
+        [locationButton setHidden:YES];
+    }
+    
 	[super viewWillAppear:animated];
 }
 
