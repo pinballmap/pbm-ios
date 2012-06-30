@@ -146,6 +146,8 @@ Portland_Pinball_MapAppDelegate *appDelegate;
                 [currentFormalName appendString:string];
             if ([currentElement isEqualToString:@"subdir"])
                 [currentSubdir appendString:string];
+            if ([currentElement isEqualToString:@"motd"])
+                motd = string;
         }         
     } else {
         if([activeNode isEqualToString:@"location"]) {
@@ -332,6 +334,12 @@ Portland_Pinball_MapAppDelegate *appDelegate;
             [zone addLocationObject:location];
             [location setLocationZone:zone];
         }
+        
+        if (motd != nil || ![motd isKindOfClass:[NSNull class]]) {
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Message Of The Day" message:motd delegate:self cancelButtonTitle:@"Thanks" otherButtonTitles:nil];
+            [alert show];
+        }
+        
         [self showMenu];
     } else {
         [self showMenu];

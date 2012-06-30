@@ -13,7 +13,8 @@
 	
 	CLLocationManager *locationManager;
 	CLLocation *startingPoint;
-	
+
+    NSString *motd;
     NSString *activeNode;
     NSNumber *currentID;
     NSNumber *currentZoneID;
