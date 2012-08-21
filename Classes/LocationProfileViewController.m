@@ -1,8 +1,10 @@
 #import "Utils.h"
+#import "AddMachineViewController.h"
+#import "MachineProfileViewController.h"
 #import "LocationProfileViewController.h"
 
 @implementation LocationProfileViewController
-@synthesize scrollView, mapLabel, mapButton, showMapButton, activeLocation, isBuildingMachine, tempMachineID, tempMachineCondition, tempMachineConditionDate, tempMachineDateAdded, mapView, addMachineButton, addMachineView, machineProfileView;
+@synthesize scrollView, mapLabel, mapButton, showMapButton, activeLocation, isBuildingMachine, tempMachineID, tempMachineCondition, tempMachineConditionDate, tempMachineDateAdded, addMachineButton;
 
 Portland_Pinball_MapAppDelegate *appDelegate;
 
@@ -23,10 +25,8 @@ Portland_Pinball_MapAppDelegate *appDelegate;
 }
 
 - (IBAction)addMachineButtonPressed:(id)sender {
-	if(addMachineView == nil) {
-		addMachineView = [[AddMachineViewController alloc] initWithNibName:@"AddMachineView" bundle:nil];
-		[addMachineView setTitle:@"Add a New Machine"];
-	}
+    AddMachineViewController *addMachineView = [[AddMachineViewController alloc] initWithNibName:@"AddMachineView" bundle:nil];
+    [addMachineView setTitle:@"Add a New Machine"];
     
 	[addMachineView setLocation:self.activeLocation];
     
@@ -162,29 +162,19 @@ Portland_Pinball_MapAppDelegate *appDelegate;
 	
 	if(indexPath.section == 0) {
 		if(showMapButton && row == 1) {
-            if(mapView == nil) {
-                mapView = [[LocationMap alloc] init];
-                [mapView setShowProfileButtons:NO];
-            }
+            [appDelegate.locationMap setShowProfileButtons:NO];
+            [appDelegate.locationMap setLocationsToShow:[NSArray arrayWithObject:activeLocation]];
+            [appDelegate.locationMap setTitle:activeLocation.name];
         
-            [mapView setLocationsToShow:[NSArray arrayWithObject:activeLocation]];
-            [mapView setTitle:activeLocation.name];
-        
-            [self.navigationController pushViewController:mapView animated:YES];
+            [self.navigationController pushViewController:appDelegate.locationMap animated:YES];
 		} else {
-			if(addMachineView == nil) {
-				addMachineView = [[AddMachineViewController alloc] initWithNibName:@"AddMachineView" bundle:nil];
-			}
-            
+            AddMachineViewController *addMachineView = [[AddMachineViewController alloc] initWithNibName:@"AddMachineView" bundle:nil];            
 			[addMachineView setLocation:self.activeLocation];
             
 			[self.navigationController pushViewController:addMachineView animated:YES];
 		}
 	} else if(indexPath.section == 1) {
-		if(machineProfileView == nil) {
-			machineProfileView = [[MachineProfileViewController alloc] initWithNibName:@"MachineProfileView" bundle:nil];
-		}
-		
+        MachineProfileViewController *machineProfileView = [[MachineProfileViewController alloc] initWithNibName:@"MachineProfileView" bundle:nil];		
 		[machineProfileView setTitle:activeLocation.name];
         [machineProfileView setLocationMachineXref:[activeLocation.locationMachineXrefs.allObjects objectAtIndex:indexPath.row]];
         

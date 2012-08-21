@@ -1,10 +1,10 @@
-
 #import "Utils.h"
 #import "Machine.h"
+#import "MachineFilterView.h"
 #import "MachineViewController.h"
 
 @implementation MachineViewController
-@synthesize machinesByFirstLetter, keys, machineFilterView;
+@synthesize machinesByFirstLetter, keys;
 
 - (void)viewDidLoad {
 	[super viewDidLoad];
@@ -78,9 +78,7 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-	if(machineFilterView == nil) {
-		machineFilterView = [[MachineFilterView alloc] initWithStyle:UITableViewStylePlain];
-	}
+	MachineFilterView *machineFilterView = [[MachineFilterView alloc] initWithStyle:UITableViewStylePlain];
 	
 	NSString *keyAtSection = [keys objectAtIndex:[indexPath section]];
 	NSArray *letterArray = (NSArray *)[machinesByFirstLetter objectForKey:keyAtSection];

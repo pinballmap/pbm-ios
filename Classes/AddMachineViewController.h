@@ -11,8 +11,11 @@
 	
 	Location *location;
     NSString *selectedMachineID;
+    
+    bool newMachine;
 }
 
+@property (nonatomic) bool newMachine;
 @property (nonatomic,strong) Location *location;
 @property (nonatomic,strong) NSString *selectedMachineID;
 
@@ -23,7 +26,7 @@
 @property (nonatomic,strong) IBOutlet UIPickerView *picker;
 
 - (IBAction)onReturnTap:(id)sender;
-- (IBAction)onSumbitTap:(id)sender;
+- (IBAction)onSubmitTap:(id)sender;
 - (void)addMachineFromTextfield;
 - (void)addMachineWithURL:(NSString *)urlstr;
 

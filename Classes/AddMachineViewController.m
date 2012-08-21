@@ -1,16 +1,18 @@
 #import "Utils.h"
 #import "Machine.h"
+#import "LocationMachineXref.h"
 #import "AddMachineViewController.h"
 #import "Portland_Pinball_MapAppDelegate.h"
 
 @implementation AddMachineViewController
-@synthesize picker, textfield, returnButton, submitButton, location, selectedMachineID, loaderIcon;
+@synthesize picker, textfield, returnButton, submitButton, location, selectedMachineID, loaderIcon, newMachine;
 
 Portland_Pinball_MapAppDelegate *appDelegate;
 
 - (void)viewDidLoad {
     appDelegate = (Portland_Pinball_MapAppDelegate *)[[UIApplication sharedApplication] delegate];
-
+    newMachine = NO;
+    
 	[loaderIcon setHidden:YES];
     
     [super viewDidLoad];
@@ -29,7 +31,7 @@ Portland_Pinball_MapAppDelegate *appDelegate;
 	[textfield resignFirstResponder];
 }
 
-- (IBAction)onSumbitTap:(id)sender {
+- (IBAction)onSubmitTap:(id)sender {
 	[textfield resignFirstResponder];
 	
 	if(![Utils stringIsBlank:textfield.text]) {
@@ -71,13 +73,11 @@ Portland_Pinball_MapAppDelegate *appDelegate;
 	}
 	
 	if (name == nil) {
+        newMachine = YES;
 		name = textfield.text;
 	}
     
-	NSString *urlstr = [[NSString alloc] initWithFormat:@"%@modify_location=%@&action=add_machine&machine_name=%@",
-						appDelegate.rootURL,
-						location.idNumber,
-						[Utils urlEncode:name]];
+	NSString *urlstr = [[NSString alloc] initWithFormat:@"%@modify_location=%@&action=add_machine&machine_name=%@", appDelegate.rootURL, location.idNumber, [Utils urlEncode:name]];
 	
 	@autoreleasepool {
 		[self performSelectorInBackground:@selector(addMachineWithURL:) withObject:urlstr];
@@ -94,10 +94,9 @@ Portland_Pinball_MapAppDelegate *appDelegate;
 													 error:&error];
 		NSRange range = [response rangeOfString:@"add successful"];
 		if(range.length > 0) {
-			NSString *alertString = [[NSString alloc] initWithFormat:@"%@ has been added to %@.", textfield.text, location.name];
 			UIAlertView *alert = [[UIAlertView alloc]
 								  initWithTitle:@"Thank You!"
-								  message:alertString
+								  message:[[NSString alloc] initWithFormat:@"%@ has been added to %@.", textfield.text, location.name]
 								  delegate:self
 								  cancelButtonTitle:@"Sweet!"
 								  otherButtonTitles:nil];
@@ -105,22 +104,42 @@ Portland_Pinball_MapAppDelegate *appDelegate;
 			
 			[loaderIcon stopAnimating];
 			
-            NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:@"<id>\n(.*)\n</id>" options:NSRegularExpressionCaseInsensitive error:nil];
-            NSRange range = [regex rangeOfFirstMatchInString:response options:0 range:NSMakeRange(0, [response length])];
-            NSNumber *idNumber = [NSNumber numberWithInt:[[response substringWithRange:range] intValue]];
-                        
-            NSManagedObject *machine = [NSEntityDescription insertNewObjectForEntityForName:@"Machine" inManagedObjectContext:appDelegate.managedObjectContext];
-            [machine setValue:textfield.text forKey:@"name"];
-            [machine setValue:idNumber forKey:@"locationID"];
-			[appDelegate saveContext];
+            for (int i = 0; i < [response length]; i++) {
+                if (isdigit([response characterAtIndex:i])) {
+                    NSLog(@"%c",[response characterAtIndex:i]);
+                }
+            }
+            
+            NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:@"<id>\\s?(\\d+)\\s?<\\/id>" options:NSRegularExpressionAllowCommentsAndWhitespace error:nil];
+            NSTextCheckingResult *textCheckingResult = [regex firstMatchInString:response options:0 range:NSMakeRange(0, response.length)];
+            
+            NSRange matchRange = [textCheckingResult rangeAtIndex:1];
+            NSString *idNumber = [response substringWithRange:matchRange];
+                                    
+            Machine *machine;
+            if (newMachine) {
+                machine = [NSEntityDescription insertNewObjectForEntityForName:@"Machine" inManagedObjectContext:appDelegate.managedObjectContext];
+                [machine setValue:textfield.text forKey:@"name"];
+                [machine setValue:[NSNumber numberWithInt:[idNumber intValue]] forKey:@"idNumber"];
+            } else {
+                machine = (Machine *)[appDelegate fetchObject:@"Machine" where:@"idNumber" equals:idNumber];
+            }
+                
+            [appDelegate.activeRegion addMachinesObject:machine];
+
+            LocationMachineXref *lmx = [NSEntityDescription insertNewObjectForEntityForName:@"LocationMachineXref" inManagedObjectContext:appDelegate.managedObjectContext];
+            [lmx setLocation:location];
+            [lmx setMachine:machine];
+            
+            [appDelegate saveContext];
         } else {
-			UIAlertView *alert2 = [[UIAlertView alloc]
+			UIAlertView *alert = [[UIAlertView alloc]
 								   initWithTitle:@"Sorry"
 								   message:@"Machine could not be added at this time, please try again later."
 								   delegate:nil
 								   cancelButtonTitle:@"OK"
 								   otherButtonTitles:nil];
-			[alert2 show];
+			[alert show];
 			
 			[submitButton setHidden:NO];
 			[loaderIcon stopAnimating];
@@ -141,7 +160,7 @@ Portland_Pinball_MapAppDelegate *appDelegate;
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {}
 
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component {
-	[textfield setText:[[appDelegate.activeRegion.machines.allObjects objectAtIndex:row] objectForKey:@"name"]];
+	[textfield setText:[[appDelegate.activeRegion.machines.allObjects objectAtIndex:row] name]];
 }
 
 - (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView {
@@ -153,7 +172,7 @@ Portland_Pinball_MapAppDelegate *appDelegate;
 }
 
 - (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component {
-	return [[appDelegate.activeRegion.machines.allObjects objectAtIndex:row] objectForKey:@"name"];
+	return [(Machine *)[appDelegate.activeRegion.machines.allObjects objectAtIndex:row] name];
 }
 
 @end
