@@ -109,9 +109,9 @@ Portland_Pinball_MapAppDelegate *appDelegate;
             [currentLongDesc appendString:string];
 		
         if ([currentElement isEqualToString:@"categoryNo"]) 
-            currentCategoryNo = [NSNumber numberWithInt:[string intValue]];
+            currentCategoryNo = @([string intValue]);
         if ([currentElement isEqualToString:@"locationNo"]) 
-            currentLocationID = [NSNumber numberWithInt:[string intValue]];
+            currentLocationID = @([string intValue]);
         
         NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
         [formatter setDateFormat:@"yyyy-MM-dd"];

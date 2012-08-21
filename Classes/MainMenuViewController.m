@@ -16,7 +16,7 @@ Portland_Pinball_MapAppDelegate *appDelegate;
 }
 
 - (void)viewDidLoad {
-	tableTitles = [[NSArray alloc] initWithObjects:@"Locations", @"Machines", @"Closest Locations", @"Recently Added", @"Events", @"Change Region", nil];
+	tableTitles = @[@"Locations", @"Machines", @"Closest Locations", @"Recently Added", @"Events", @"Change Region"];
     zonesForLocations = [[NSMutableDictionary alloc] init];
     
 	[self showInfoButton];
@@ -112,7 +112,7 @@ Portland_Pinball_MapAppDelegate *appDelegate;
 - (void)parser:(NSXMLParser *)parser didStartElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qName attributes:(NSDictionary *)attributeDict {
 	currentElement = [elementName copy];
         
-    if ([[NSArray arrayWithObjects:@"region", @"location", @"machine", @"zone", nil] containsObject:elementName]) {
+    if ([@[@"region", @"location", @"machine", @"zone"] containsObject:elementName]) {
         activeNode = elementName;
         
         currentID = [[NSNumber alloc] init];
@@ -200,7 +200,7 @@ Portland_Pinball_MapAppDelegate *appDelegate;
             [region setSubdir:currentSubdir];
             [region setLat:currentLat];
             [region setLon:currentLon];
-            [region setNMachines:[NSNumber numberWithInt:4]];
+            [region setNMachines:@4];
             
             [appDelegate saveContext];
         }
@@ -225,8 +225,8 @@ Portland_Pinball_MapAppDelegate *appDelegate;
                 [location setIdNumber:currentID];
                 [location setTotalMachines:currentNumMachines];
                 [location setName:[currentName stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]]];
-                [location setLat:[NSNumber numberWithDouble:lat]];
-                [location setLon:[NSNumber numberWithDouble:lon]];
+                [location setLat:@(lat)];
+                [location setLon:@(lon)];
                 [location setRegion:appDelegate.activeRegion];
                 [location updateDistance];
 
@@ -246,7 +246,7 @@ Portland_Pinball_MapAppDelegate *appDelegate;
             Zone *zone = [NSEntityDescription insertNewObjectForEntityForName:@"Zone" inManagedObjectContext:appDelegate.managedObjectContext];
             [zone setName:currentName];
             [zone setIdNumber:currentID];
-            [zone setIsPrimary:[NSNumber numberWithBool:currentIsPrimary]];
+            [zone setIsPrimary:@(currentIsPrimary)];
             [zone setRegion:appDelegate.activeRegion];
             [appDelegate.activeRegion addZonesObject:zone];
             

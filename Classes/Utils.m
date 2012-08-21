@@ -100,13 +100,12 @@
 }
 
 + (NSString *)stripString:(NSString *)string {
-	NSArray *escapeChars = [NSArray arrayWithObjects:
-							@";", @"/", @"?", @":",
+	NSArray *escapeChars = @[@";", @"/", @"?", @":",
 							@"@", @"&", @"=", @"+",
 							@"$", @",", @"[", @"]",
 							@"#", @"!", @"|", @"(", 
 							@"-",
-							@")", @"*", @"'", @" ", nil];
+							@")", @"*", @"'", @" "];
 	
 	int len = [escapeChars count];
     NSMutableString *temp  = [string mutableCopy];

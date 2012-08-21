@@ -161,7 +161,7 @@ NSInteger sortOnDistance(id obj1, id obj2, void *context) {
             [locationProfileView setShowMapButton:YES];
 			[locationProfileView setActiveLocation:location];
 			
-			[self.navigationController setViewControllers:[[NSArray alloc] initWithObjects:[self.navigationController.viewControllers objectAtIndex:0], locationProfileView, nil] animated:NO];
+			[self.navigationController setViewControllers:@[[self.navigationController.viewControllers objectAtIndex:0], locationProfileView] animated:NO];
 		}
 	}
 }
