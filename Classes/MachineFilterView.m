@@ -60,7 +60,7 @@ Portland_Pinball_MapAppDelegate *appDelegate;
 }
 
 - (void)parser:(NSXMLParser *)parser foundCharacters:(NSString *)string {
-    for (NSString *property in [[NSArray alloc] initWithObjects:@"id", @"street1", @"street2", @"city", @"state", @"zip", @"phone", nil]) {
+    for (NSString *property in @[@"id", @"street1", @"street2", @"city", @"state", @"zip", @"phone"]) {
         if ([property isEqualToString:currentElement]) {
             [foundLocation setObject:string forKey:property];
         }
@@ -129,7 +129,7 @@ Portland_Pinball_MapAppDelegate *appDelegate;
 			[location updateDistance];
 		}
         
-		[locations sortUsingDescriptors:[NSArray arrayWithObjects:nameSortDescriptor, nil]];
+		[locations sortUsingDescriptors:@[nameSortDescriptor]];
 	}
 	
 	[self.tableView reloadData];

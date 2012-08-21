@@ -66,13 +66,13 @@ Portland_Pinball_MapAppDelegate *appDelegate;
             
     NSSortDescriptor *distanceSortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"distance" ascending:YES selector:@selector(compare:)];
     
-    [allSortedLocations sortUsingDescriptors:[NSArray arrayWithObjects:distanceSortDescriptor, nil]];
+    [allSortedLocations sortUsingDescriptors:@[distanceSortDescriptor]];
 
     for(int i = 3; i >= 0 ; i--) {
         NSMutableArray *array = (NSMutableArray*) [sectionLocations objectAtIndex:i];
         
         if([array count] > 0) {
-            [array sortUsingDescriptors:[NSArray arrayWithObjects:distanceSortDescriptor, nil]];   
+            [array sortUsingDescriptors:@[distanceSortDescriptor]];   
         } else {
             [sectionTitles removeObjectAtIndex:i];
             [sectionLocations removeObjectAtIndex:i];

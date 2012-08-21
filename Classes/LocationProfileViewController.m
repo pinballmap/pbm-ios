@@ -73,7 +73,7 @@ Portland_Pinball_MapAppDelegate *appDelegate;
 	[self.tableView reloadData];
     
     if (appDelegate.isPad) {
-        [appDelegate.locationMap setLocationsToShow:[NSArray arrayWithObject:activeLocation]];
+        [appDelegate.locationMap setLocationsToShow:@[activeLocation]];
         [appDelegate.locationMap loadPins];
     }
 }
@@ -163,7 +163,7 @@ Portland_Pinball_MapAppDelegate *appDelegate;
 	if(indexPath.section == 0) {
 		if(showMapButton && row == 1) {
             [appDelegate.locationMap setShowProfileButtons:NO];
-            [appDelegate.locationMap setLocationsToShow:[NSArray arrayWithObject:activeLocation]];
+            [appDelegate.locationMap setLocationsToShow:@[activeLocation]];
             [appDelegate.locationMap setTitle:activeLocation.name];
         
             [self.navigationController pushViewController:appDelegate.locationMap animated:YES];

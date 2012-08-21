@@ -120,7 +120,7 @@ Portland_Pinball_MapAppDelegate *appDelegate;
             if (newMachine) {
                 machine = [NSEntityDescription insertNewObjectForEntityForName:@"Machine" inManagedObjectContext:appDelegate.managedObjectContext];
                 [machine setValue:textfield.text forKey:@"name"];
-                [machine setValue:[NSNumber numberWithInt:[idNumber intValue]] forKey:@"idNumber"];
+                [machine setValue:@([idNumber intValue]) forKey:@"idNumber"];
             } else {
                 machine = (Machine *)[appDelegate fetchObject:@"Machine" where:@"idNumber" equals:idNumber];
             }
