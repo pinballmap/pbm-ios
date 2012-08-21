@@ -1,5 +1,6 @@
 #import "MainMenuViewController.h"
 #import "Zone.h"
+#import "Machine.h"
 #import "RegionSelectViewController.h"
 
 @implementation MainMenuViewController

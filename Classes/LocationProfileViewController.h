@@ -1,16 +1,11 @@
 #import "XMLTable.h"
-#import "MachineProfileViewController.h"
-#import "AddMachineViewController.h"
 #import "Location.h"
-#import "LocationMap.h"
-#import <Foundation/Foundation.h>
 
 @interface LocationProfileViewController : XMLTable {	  
 	UIScrollView *scrollView;
 
     NSMutableString *mapURL;
 	
-	LocationMap *mapView;
 	Location *activeLocation;
 	
 	UILabel *mapLabel;
@@ -32,16 +27,10 @@
 	int parsingAttempts;
 	
 	UIButton *addMachineButton;
-	
-	AddMachineViewController *addMachineView;
-	MachineProfileViewController *machineProfileView;	
 }
 
-@property (nonatomic,strong) MachineProfileViewController *machineProfileView;
-@property (nonatomic,strong) AddMachineViewController *addMachineView;
 @property (nonatomic,strong) IBOutlet UIButton *addMachineButton;
 @property (nonatomic,assign) BOOL showMapButton;
-@property (nonatomic,strong) LocationMap *mapView;
 @property (nonatomic,strong) IBOutlet UILabel *mapLabel;
 @property (nonatomic,strong) IBOutlet UIButton *mapButton;
 @property (nonatomic,strong) IBOutlet UIScrollView *scrollView;

@@ -29,29 +29,29 @@
 	NSString *displayMonth;
 	
 	if ([month isEqualToString:@"01"]) {
-        displayMonth = [[NSString alloc] initWithString:@"Jan"];
+        displayMonth = @"Jan";
 	} else if ([month isEqualToString:@"02"]) {
-        displayMonth = [[NSString alloc] initWithString:@"Feb"];
+        displayMonth = @"Feb";
 	} else if ([month isEqualToString:@"03"]) {
-        displayMonth = [[NSString alloc] initWithString:@"March"];
+        displayMonth = @"March";
 	} else if ([month isEqualToString:@"04"]) {
-        displayMonth = [[NSString alloc] initWithString:@"April"];
+        displayMonth = @"April";
 	} else if ([month isEqualToString:@"05"]) {
-        displayMonth = [[NSString alloc] initWithString:@"May"];
+        displayMonth = @"May";
     } else if ([month isEqualToString:@"06"]) {
-        displayMonth = [[NSString alloc] initWithString:@"June"];
+        displayMonth = @"June";
 	} else if ([month isEqualToString:@"07"]) {
-        displayMonth = [[NSString alloc] initWithString:@"July"];
+        displayMonth = @"July";
 	} else if ([month isEqualToString:@"08"]) {
-        displayMonth = [[NSString alloc] initWithString:@"Aug"];
+        displayMonth = @"Aug";
 	} else if ([month isEqualToString:@"09"]) {
-        displayMonth = [[NSString alloc] initWithString:@"Sep"];
+        displayMonth = @"Sep";
 	} else if ([month isEqualToString:@"10"]) {
-        displayMonth = [[NSString alloc] initWithString:@"Oct"];
+        displayMonth = @"Oct";
 	} else if ([month isEqualToString:@"11"]) {
-        displayMonth = [[NSString alloc] initWithString:@"Nov"];
+        displayMonth = @"Nov";
 	} else {
-        displayMonth = [[NSString alloc] initWithString:@"Dec"];
+        displayMonth = @"Dec";
     }
 	
 	NSRange digit;
@@ -63,19 +63,19 @@
 	NSString *extra;
     
 	if ([day isEqualToString:@"11"]) {
-        extra = [[NSString alloc] initWithString:@"th"];
+        extra = @"th";
 	} else if ([day isEqualToString:@"12"]) {
-        extra = [[NSString alloc] initWithString:@"th"];
+        extra = @"th";
 	} else if ([day isEqualToString:@"13"]) {
-        extra = [[NSString alloc] initWithString:@"th"];
+        extra = @"th";
 	} else if ([lastDigit isEqualToString:@"1"]) {
-        extra = [[NSString alloc] initWithString:@"st"];
+        extra = @"st";
 	} else if ([lastDigit isEqualToString:@"2"]) {
-        extra = [[NSString alloc] initWithString:@"nd"];
+        extra = @"nd";
 	} else if ([lastDigit isEqualToString:@"3"]) {
-        extra = [[NSString alloc] initWithString:@"rd"];
+        extra = @"rd";
 	} else {
-        extra = [[NSString alloc] initWithString:@"th"];
+        extra = @"th";
     }
 	
 	NSString *dayString = [NSString stringWithFormat:@"%i%@",[day intValue],extra];
@@ -124,7 +124,7 @@
 
 + (NSString *)directoryFirstLetter:(NSString *)string {
     NSString *firstLetter = [[string substringToIndex:1] lowercaseString];
-	NSString *searchString = [[NSString alloc] initWithString:@"abcdefghijklmnopqrstuvwxyz"];
+	NSString *searchString = @"abcdefghijklmnopqrstuvwxyz";
     
 	NSRange letterRange = [searchString rangeOfString:firstLetter];
 	if (letterRange.length == 0) {
