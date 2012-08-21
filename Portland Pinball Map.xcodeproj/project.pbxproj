@@ -87,8 +87,6 @@
 		8E63C833159CC68500624174 /* Region.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E63C831159CC68500624174 /* Region.m */; };
 		8E6D0DB615996580000FAA4E /* PBMViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E6D0DB515996580000FAA4E /* PBMViewController.m */; };
 		8E6D0DB715996580000FAA4E /* PBMViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E6D0DB515996580000FAA4E /* PBMViewController.m */; };
-		8E6D0DBB15996827000FAA4E /* PBMTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E6D0DBA15996827000FAA4E /* PBMTableViewController.m */; };
-		8E6D0DBC15996827000FAA4E /* PBMTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E6D0DBA15996827000FAA4E /* PBMTableViewController.m */; };
 		8E700B321592D5890016FBA2 /* Event.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E700B311592D5890016FBA2 /* Event.m */; };
 		8E700B331592D5890016FBA2 /* Event.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E700B311592D5890016FBA2 /* Event.m */; };
 		8E700B3E1593F76E0016FBA2 /* Zone.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E700B3D1593F76E0016FBA2 /* Zone.m */; };
@@ -319,8 +317,6 @@
 		8E63C831159CC68500624174 /* Region.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Region.m; sourceTree = "<group>"; };
 		8E6D0DB415996580000FAA4E /* PBMViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PBMViewController.h; sourceTree = "<group>"; };
 		8E6D0DB515996580000FAA4E /* PBMViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PBMViewController.m; sourceTree = "<group>"; };
-		8E6D0DB915996826000FAA4E /* PBMTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PBMTableViewController.h; sourceTree = "<group>"; };
-		8E6D0DBA15996827000FAA4E /* PBMTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PBMTableViewController.m; sourceTree = "<group>"; };
 		8E700B301592D5890016FBA2 /* Event.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Event.h; sourceTree = "<group>"; };
 		8E700B311592D5890016FBA2 /* Event.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Event.m; sourceTree = "<group>"; };
 		8E700B3C1593F76E0016FBA2 /* Zone.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Zone.h; sourceTree = "<group>"; };
@@ -570,8 +566,6 @@
 				6A64252E11BE4CDF00E3BC11 /* RegionSelectViewController.m */,
 				8EDA80EA1585740500F6AD9A /* RequestPage.h */,
 				8EDA80EB1585740500F6AD9A /* RequestPage.m */,
-				8E6D0DB915996826000FAA4E /* PBMTableViewController.h */,
-				8E6D0DBA15996827000FAA4E /* PBMTableViewController.m */,
 				8E6D0DB415996580000FAA4E /* PBMViewController.h */,
 				8E6D0DB515996580000FAA4E /* PBMViewController.m */,
 				8EBE6A30159A0C9C00C0374F /* PBMSplitViewController.h */,
@@ -995,7 +989,6 @@
 				8E700B3E1593F76E0016FBA2 /* Zone.m in Sources */,
 				8EDD3E4F1597DEED00D34DF2 /* MainMenuViewController.m in Sources */,
 				8E6D0DB615996580000FAA4E /* PBMViewController.m in Sources */,
-				8E6D0DBB15996827000FAA4E /* PBMTableViewController.m in Sources */,
 				8EBE6A32159A0C9C00C0374F /* PBMSplitViewController.m in Sources */,
 				8E63C832159CC68500624174 /* Region.m in Sources */,
 				8E57FEB7159E2EA700A57AF3 /* Location.m in Sources */,
@@ -1040,7 +1033,6 @@
 				8E700B3F1593F76E0016FBA2 /* Zone.m in Sources */,
 				8EDD3E501597DEED00D34DF2 /* MainMenuViewController.m in Sources */,
 				8E6D0DB715996580000FAA4E /* PBMViewController.m in Sources */,
-				8E6D0DBC15996827000FAA4E /* PBMTableViewController.m in Sources */,
 				8EBE6A33159A0C9C00C0374F /* PBMSplitViewController.m in Sources */,
 				8E63C833159CC68500624174 /* Region.m in Sources */,
 				8E57FEB8159E2EA700A57AF3 /* Location.m in Sources */,

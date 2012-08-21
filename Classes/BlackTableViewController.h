@@ -1,5 +1,4 @@
 #import "Location.h"
-#import "PBMTableViewController.h"
 #import "Portland_Pinball_MapAppDelegate.h"
 #import "PBMTableCell.h"
 #import "PBMDoubleTableCell.h"
