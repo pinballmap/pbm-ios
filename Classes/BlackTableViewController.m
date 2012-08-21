@@ -5,6 +5,18 @@
 
 Portland_Pinball_MapAppDelegate *appDelegate;
 
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
+    Portland_Pinball_MapAppDelegate *appDelegate = (Portland_Pinball_MapAppDelegate *)[[UIApplication sharedApplication] delegate];
+    
+    if (appDelegate.isPad) {
+        return [[UIDevice currentDevice] orientation] == UIInterfaceOrientationLandscapeLeft ||
+        [[UIDevice currentDevice] orientation] == UIInterfaceOrientationLandscapeRight;
+    } else {
+        return [[UIDevice currentDevice] orientation] == UIInterfaceOrientationPortraitUpsideDown ||
+            [[UIDevice currentDevice] orientation] == UIInterfaceOrientationPortrait;
+    }
+}
+
 - (void)viewDidLoad {
     appDelegate = (Portland_Pinball_MapAppDelegate *)[[UIApplication sharedApplication] delegate];
 

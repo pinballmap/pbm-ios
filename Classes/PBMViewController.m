@@ -9,7 +9,8 @@
     if (appDelegate.isPad) {
         return YES;
     } else {
-        return [[UIDevice currentDevice] orientation] == UIInterfaceOrientationPortraitUpsideDown;
+        return [[UIDevice currentDevice] orientation] == UIInterfaceOrientationPortraitUpsideDown ||
+            [[UIDevice currentDevice] orientation] == UIInterfaceOrientationPortrait;
     }    
 }
 
