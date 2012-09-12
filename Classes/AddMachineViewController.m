@@ -104,12 +104,6 @@ Portland_Pinball_MapAppDelegate *appDelegate;
 			
 			[loaderIcon stopAnimating];
 			
-            for (int i = 0; i < [response length]; i++) {
-                if (isdigit([response characterAtIndex:i])) {
-                    NSLog(@"%c",[response characterAtIndex:i]);
-                }
-            }
-            
             NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:@"<id>\\s?(\\d+)\\s?<\\/id>" options:NSRegularExpressionAllowCommentsAndWhitespace error:nil];
             NSTextCheckingResult *textCheckingResult = [regex firstMatchInString:response options:0 range:NSMakeRange(0, response.length)];
             
