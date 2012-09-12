@@ -48,4 +48,6 @@
 - (void)removeRecentAdditions:(NSSet *)values;
 - (bool)isLoaded;
 
+- (NSArray *)sortedLocationMachineXrefs;
+
 @end
