@@ -51,7 +51,7 @@ Portland_Pinball_MapAppDelegate *appDelegate;
 
 	currentZoneID = zoneID;
     
-	[self setTitle:[NSString stringWithFormat:[NSString stringWithFormat:@"%@", [zoneID isEqualToString:@"All"] ? @"All Locations" : zoneID]]];
+	[self setTitle:[NSString stringWithFormat:@"%@", [zoneID isEqualToString:@"All"] ? @"All Locations" : zoneID]];
 	
     [self.navigationItem setRightBarButtonItem:([keys count] > 0 && !appDelegate.isPad) ?
         [[UIBarButtonItem alloc] initWithTitle:@"Map" style:UIBarButtonItemStyleBordered target:self action:@selector(onMapPress:)] :
