@@ -17,6 +17,11 @@
     return [NSString stringWithFormat:@"%d+ Machines", [self.nMachines intValue]];
 }
 
+- (NSArray *)sortedMachines {
+    NSSortDescriptor *byName = [[NSSortDescriptor alloc] initWithKey:@"name" ascending:YES];
+    return [self.machines sortedArrayUsingDescriptors:@[byName]];
+}
+
 - (NSMutableArray *)primaryZones {
     NSMutableArray *primaryZones = [[NSMutableArray alloc] init];
     for (Zone *zone in self.zones) {

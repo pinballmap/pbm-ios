@@ -160,7 +160,7 @@ Portland_Pinball_MapAppDelegate *appDelegate;
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {}
 
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component {
-	[textfield setText:[[appDelegate.activeRegion.machines.allObjects objectAtIndex:row] name]];
+	[textfield setText:[[appDelegate.activeRegion.sortedMachines objectAtIndex:row] name]];
 }
 
 - (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView {
@@ -172,7 +172,7 @@ Portland_Pinball_MapAppDelegate *appDelegate;
 }
 
 - (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component {
-	return [(Machine *)[appDelegate.activeRegion.machines.allObjects objectAtIndex:row] name];
+	return [(Machine *)[appDelegate.activeRegion.sortedMachines objectAtIndex:row] name];
 }
 
 @end

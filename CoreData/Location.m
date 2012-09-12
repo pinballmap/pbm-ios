@@ -35,4 +35,9 @@
     return (self.street1 != (id)[NSNull null] && self.street1.length != 0 && ![self.street1 isEqualToString:@"(null)"]);
 }
 
+- (NSArray *)sortedLocationMachineXrefs {
+    NSSortDescriptor *byName = [[NSSortDescriptor alloc] initWithKey:@"machine.name" ascending:YES];
+    return [self.locationMachineXrefs sortedArrayUsingDescriptors:@[byName]];
+}
+
 @end

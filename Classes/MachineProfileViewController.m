@@ -46,7 +46,7 @@ Portland_Pinball_MapAppDelegate *appDelegate;
 	[super viewWillAppear:animated];
 }
 
-- (IBAction) onEditButtonPressed:(id)sender {
+- (IBAction)onEditButtonPressed:(id)sender {
 	[self hideControllButtons:!deleteButton.hidden];
 }
 

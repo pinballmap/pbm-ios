@@ -137,7 +137,7 @@ Portland_Pinball_MapAppDelegate *appDelegate;
 		
         [cell.nameLabel setText:(section == 0) ?
             ((showMapButton && row == 1) ? @"Map" : @"Add Machine") :
-            [[[activeLocation.locationMachineXrefs.allObjects objectAtIndex:row] machine] name]
+            [[[activeLocation.sortedLocationMachineXrefs objectAtIndex:row] machine] name]
         ];
 		
 		return cell;
@@ -176,7 +176,7 @@ Portland_Pinball_MapAppDelegate *appDelegate;
 	} else if(indexPath.section == 1) {
         MachineProfileViewController *machineProfileView = [[MachineProfileViewController alloc] initWithNibName:@"MachineProfileView" bundle:nil];		
 		[machineProfileView setTitle:activeLocation.name];
-        [machineProfileView setLocationMachineXref:[activeLocation.locationMachineXrefs.allObjects objectAtIndex:indexPath.row]];
+        [machineProfileView setLocationMachineXref:[activeLocation.sortedLocationMachineXrefs objectAtIndex:indexPath.row]];
         
 		[self.navigationController pushViewController:machineProfileView animated:YES];
 	}	

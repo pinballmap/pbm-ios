@@ -51,4 +51,6 @@
 - (void)addMachines:(NSSet *)values;
 - (void)removeMachines:(NSSet *)values;
 
+- (NSArray *)sortedMachines;
+
 @end
