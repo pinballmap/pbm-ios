@@ -37,8 +37,28 @@ Portland_Pinball_MapAppDelegate *appDelegate;
 	[super viewWillAppear:animated];
 }
 
-- (void)viewDidAppear:(BOOL)animated {	
-	if (self.locationManager == nil) {
+- (void)viewDidAppear:(BOOL)animated {
+    if (appDelegate.noConnectionOrSavedData) {
+        NSLog(@"MAIN MENU NO CONNECTION OR SAVED DATA");
+        
+        UIAlertView *alert = [[UIAlertView alloc]
+							  initWithTitle:@"No connection or cached data available"
+							  message:@"You have no saved location data, and no Internet connection. Please try again after you get a connection."
+							  delegate:nil
+							  cancelButtonTitle:@"OK"
+							  otherButtonTitles:nil];
+		[alert show];
+    } else if (appDelegate.noConnectionSavedDataAvailable) {
+        NSLog(@"MAIN MENU NO CONNECTION BUT THERE IS SAVED DATA");
+
+        UIAlertView *alert = [[UIAlertView alloc]
+							  initWithTitle:@"Using cached data"
+							  message:@"You have no Internet connection. But, you do have some saved location data from earlier. I'm going to use this."
+							  delegate:nil
+							  cancelButtonTitle:@"OK"
+							  otherButtonTitles:nil];
+		[alert show];
+    } else if (self.locationManager == nil) {
 		self.locationManager = [[CLLocationManager alloc] init];
 		[locationManager setDelegate:self];
 		[locationManager setDesiredAccuracy:kCLLocationAccuracyBest];
@@ -141,7 +161,7 @@ Portland_Pinball_MapAppDelegate *appDelegate;
             if ([currentElement isEqualToString:@"lat"])
                 currentLat = [formatter numberFromString:string];
             if ([currentElement isEqualToString:@"lon"])
-                currentLon = [formatter numberFromString:string];
+                currentLon = [formatter numberFromString:string];     
             if ([currentElement isEqualToString:@"name"])
                 [currentName appendString:string];
             if ([currentElement isEqualToString:@"formalName"])
@@ -193,6 +213,14 @@ Portland_Pinball_MapAppDelegate *appDelegate;
     if (initID == 2) {
         if ([elementName isEqualToString:@"region"]) {
             Region *region = [NSEntityDescription insertNewObjectForEntityForName:@"Region" inManagedObjectContext:appDelegate.managedObjectContext];
+            
+            if (currentLat == nil) {
+                currentLat = [NSNumber numberWithInt:1];
+            }
+            
+            if (currentLon == nil) {
+                currentLon = [NSNumber numberWithInt:1];
+            }
             
             [region setIdNumber:currentID];
             [region setName:currentName];
@@ -357,7 +385,7 @@ Portland_Pinball_MapAppDelegate *appDelegate;
 		xmlStarted = NO;
 		
 		[self loadInitXML:initID];
-	} else {
+    } else {
 		[self hideLoaderIcon];
 
 		UIAlertView *alert = [[UIAlertView alloc]
