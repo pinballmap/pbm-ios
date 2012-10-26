@@ -3,7 +3,7 @@
 #import "MachineProfileViewController.h"
 
 @implementation MachineProfileViewController
-@synthesize machineLabel, deleteButton, locationMachineXref, locationLabel, conditionLabel, conditionField, returnButton, ipdbButton, otherLocationsButton, updateConditionButton, commentController, webview, machineFilter;
+@synthesize machineLabel, deleteButton, editButton, locationMachineXref, locationLabel, conditionLabel, conditionField, returnButton, ipdbButton, otherLocationsButton, updateConditionButton, commentController, webview, machineFilter;
 
 Portland_Pinball_MapAppDelegate *appDelegate;
 
@@ -14,10 +14,16 @@ Portland_Pinball_MapAppDelegate *appDelegate;
 }
 
 - (void)viewWillAppear:(BOOL)animated {
-	[self setTitle:locationMachineXref.location.name];
-	
-	[self hideControllButtons:YES];
-		
+    [self setTitle:locationMachineXref.location.name];
+
+    if (!appDelegate.internetActive) {
+        [editButton setHidden:YES];
+        [deleteButton setHidden:YES];
+        [self.navigationItem setRightBarButtonItem:nil];
+    } else {
+        [self hideControlButtons:YES];
+    }
+    
 	[machineLabel setText:locationMachineXref.machine.name];
 
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
@@ -47,13 +53,13 @@ Portland_Pinball_MapAppDelegate *appDelegate;
 }
 
 - (IBAction)onEditButtonPressed:(id)sender {
-	[self hideControllButtons:!deleteButton.hidden];
+	[self hideControlButtons:!deleteButton.hidden];
 }
 
-- (void)hideControllButtons:(BOOL)doHide {
+- (void)hideControlButtons:(BOOL)doHide {
 	[deleteButton setHidden:doHide];
     
-    [self.navigationItem setRightBarButtonItem:[[UIBarButtonItem alloc] initWithTitle:doHide ? @"Edit" : @"Done" style:UIBarButtonItemStyleBordered target:self action:@selector(onEditButtonPressed:)]];    
+    [self.navigationItem setRightBarButtonItem:[[UIBarButtonItem alloc] initWithTitle:doHide ? @"Edit" : @"Done" style:UIBarButtonItemStyleBordered target:self action:@selector(onEditButtonPressed:)]];
 }
 
 - (IBAction)onDeleteTap:(id)sender {

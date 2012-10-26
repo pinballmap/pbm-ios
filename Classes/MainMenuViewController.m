@@ -16,7 +16,6 @@ Portland_Pinball_MapAppDelegate *appDelegate;
 }
 
 - (void)viewDidLoad {
-	tableTitles = @[@"Locations", @"Machines", @"Closest Locations", @"Recently Added", @"Events", @"Change Region"];
     zonesForLocations = [[NSMutableDictionary alloc] init];
     
 	[self showInfoButton];
@@ -38,6 +37,14 @@ Portland_Pinball_MapAppDelegate *appDelegate;
 }
 
 - (void)viewDidAppear:(BOOL)animated {
+    if (appDelegate.internetActive) {
+        tableTitles = @[@"Locations", @"Machines", @"Closest Locations", @"Recently Added", @"Events", @"Change Region"];
+    } else {
+        NSLog(@"INTERNET NOT ACTIVE");
+        
+        tableTitles = @[@"Locations", @"Machines", @"Events"];
+    }
+        
     if (appDelegate.noConnectionOrSavedData) {
         NSLog(@"MAIN MENU NO CONNECTION OR SAVED DATA");
         
@@ -58,6 +65,8 @@ Portland_Pinball_MapAppDelegate *appDelegate;
 							  cancelButtonTitle:@"OK"
 							  otherButtonTitles:nil];
 		[alert show];
+        
+        [self showMenu];
     } else if (self.locationManager == nil) {
 		self.locationManager = [[CLLocationManager alloc] init];
 		[locationManager setDelegate:self];
@@ -72,6 +81,7 @@ Portland_Pinball_MapAppDelegate *appDelegate;
 			[self loadInitXML:2];
 		}
 	} else if (appDelegate.activeRegion.locations == nil || [appDelegate.activeRegion.locations count] == 0) {
+        NSLog(@"NO ACTIVE REHION READY TO GO");
         motd = nil;
         [appDelegate showSplashScreen];
 		
@@ -297,22 +307,28 @@ Portland_Pinball_MapAppDelegate *appDelegate;
         [machView setTitle:@"Machines"];
         [viewControllers addObject:machView];
         
-        ClosestLocations *closest = [[ClosestLocations alloc] initWithStyle:UITableViewStylePlain];
-        [closest setTitle:@"Closest Locations"];
-        [viewControllers addObject:closest];
+        if (appDelegate.internetActive) {
+            ClosestLocations *closest = [[ClosestLocations alloc] initWithStyle:UITableViewStylePlain];
+            [closest setTitle:@"Closest Locations"];
+            [viewControllers addObject:closest];
+            
+            RecentlyAddedViewController *rssView = [[RecentlyAddedViewController alloc] initWithStyle:UITableViewStylePlain];
+            [rssView setTitle:@"Recently Added"];
+            [viewControllers addObject:rssView];
+        }
         
-        RecentlyAddedViewController *rssView = [[RecentlyAddedViewController alloc] initWithStyle:UITableViewStylePlain];
-        [rssView setTitle:@"Recently Added"];
-        [viewControllers addObject:rssView];
+        if ([appDelegate.activeRegion.events count] != 0) {
+            EventsViewController *eventView = [[EventsViewController alloc] initWithStyle:UITableViewStylePlain];
+            [eventView setTitle:@"Events"];
+            [viewControllers addObject:eventView];
+        }
         
-        EventsViewController *eventView = [[EventsViewController alloc] initWithStyle:UITableViewStylePlain];
-        [eventView setTitle:@"Events"];
-        [viewControllers addObject:eventView];
-        
-        RegionSelectViewController *regionSelect = [[RegionSelectViewController alloc] initWithStyle:UITableViewStylePlain];
-        [regionSelect setTitle:@"Change Region"];
-        [viewControllers addObject:regionSelect];
-        
+        if (appDelegate.internetActive) {
+            RegionSelectViewController *regionSelect = [[RegionSelectViewController alloc] initWithStyle:UITableViewStylePlain];
+            [regionSelect setTitle:@"Change Region"];
+            [viewControllers addObject:regionSelect];
+        }
+            
         [self setControllers:viewControllers];
     }
     
@@ -366,8 +382,7 @@ Portland_Pinball_MapAppDelegate *appDelegate;
         }
         
         if (motd != nil && ![motd isKindOfClass:[NSNull class]]) {
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Message Of The Day" message:motd delegate:self cancelButtonTitle:@"Thanks" otherButtonTitles:nil];
-            [alert show];
+            [self performSelectorOnMainThread:@selector(showMOTDAlert:) withObject:motd waitUntilDone:NO];
         }
         
         [self showMenu];
@@ -378,7 +393,14 @@ Portland_Pinball_MapAppDelegate *appDelegate;
 	[super parserDidEndDocument:parser];
 }
 
-- (void)parser:(NSXMLParser *)parser parseErrorOccurred:(NSError *)parseError {	
+- (void)showMOTDAlert:(NSString *)alertMOTD {
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Message Of The Day" message:alertMOTD delegate:self cancelButtonTitle:@"Thanks" otherButtonTitles:nil];
+    [alert show];
+}
+
+- (void)parser:(NSXMLParser *)parser parseErrorOccurred:(NSError *)parseError {
+    NSLog(@"PARSE ERROR: %@", [NSString stringWithFormat:@"Error %i, Description: %@, Line: %i, Column: %i", [parseError code], [[parser parserError] localizedDescription], [parser lineNumber], [parser columnNumber]]);
+    
 	if (parsingAttempts < MAX_PARSING_ATTEMPTS) {
 		parsingAttempts ++;
 		
@@ -387,15 +409,19 @@ Portland_Pinball_MapAppDelegate *appDelegate;
 		[self loadInitXML:initID];
     } else {
 		[self hideLoaderIcon];
+        [self performSelectorOnMainThread:@selector(alertNoConnectionFound) withObject:nil waitUntilDone:NO];
+	}
+}
 
-		UIAlertView *alert = [[UIAlertView alloc]
-							  initWithTitle:@"No Internet Connection Found"
-							  message:@"Please close the app and try again."
-							  delegate:nil
-							  cancelButtonTitle:@"OK"
-							  otherButtonTitles:nil];
-		[alert show];
-	}	
+- (void)alertNoConnectionFound {
+    UIAlertView *alert = [[UIAlertView alloc]
+                          initWithTitle:@"No Internet Connection Found"
+                          message:@"Please close the app and try again."
+                          delegate:nil
+                          cancelButtonTitle:@"OK"
+                          otherButtonTitles:nil];
+    
+    [alert show];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -407,6 +433,8 @@ Portland_Pinball_MapAppDelegate *appDelegate;
     if (cell == nil) {
 		cell = [self getTableCell];
 	}
+    
+    NSLog(@"TABLE TITLES: %@", tableTitles);
     
 	[cell.nameLabel setText:[tableTitles objectAtIndex:[indexPath row]]];
 

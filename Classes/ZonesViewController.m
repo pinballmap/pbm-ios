@@ -17,9 +17,10 @@
 	
 	[self setTitle:@"Locations"];
 	
-	if(locationFilterView != nil)
+	if(locationFilterView != nil) {
 		[locationFilterView setCurrentZoneID:@" "];
-	
+	}
+        
 	[self.tableView reloadData];
 	
     if (appDelegate.isPad) {

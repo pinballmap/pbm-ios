@@ -4,7 +4,7 @@
 
 @implementation Portland_Pinball_MapAppDelegate
 
-@synthesize window, navigationController, splitViewController, splashScreen, locationMap, showUserLocation, activeRegion, userLocation;
+@synthesize window, navigationController, splitViewController, splashScreen, locationMap, showUserLocation, activeRegion, userLocation, internetActive;
 
 void uncaughtExceptionHandler(NSException *exception) {
     NSLog(@"CRASH: %@", exception);
@@ -15,7 +15,7 @@ void uncaughtExceptionHandler(NSException *exception) {
     return UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad;
 }
 
-- (void) awakeFromNib{
+- (void)awakeFromNib{
     [super awakeFromNib];
     
     splitViewController.delegate = self;
@@ -26,7 +26,14 @@ void uncaughtExceptionHandler(NSException *exception) {
 	
     userLocation = [[CLLocation alloc] initWithLatitude:45.52295 longitude:-122.66785];
 
-    if (self.isPad) { 
+    NSLog(@"BASE URL: %@", BASE_URL);
+
+    internetReachable_ = [Reachability reachabilityForInternetConnection];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(checkNetworkStatus:) name:kReachabilityChangedNotification object:nil];
+    [internetReachable_ startNotifier];
+    [self checkNetworkStatus:nil];
+    
+    if (self.isPad) {
         navigationController = [[UINavigationController alloc] initWithRootViewController:[[RequestPage alloc] init]];
         navigationController.navigationBar.barStyle = UIBarStyleBlack;
         
@@ -40,8 +47,17 @@ void uncaughtExceptionHandler(NSException *exception) {
 	}
     
     [window makeKeyAndVisible];
-		
-    [self resetDatabase];
+    
+    NSLog(@"TRYING TO FETCH: %@", (NSString *)[[NSUserDefaults standardUserDefaults] valueForKey:@"activeRegionID"]);
+    
+    activeRegion = (Region *)[self fetchObject:@"Region" where:@"idNumber" equals:(NSString *)[[NSUserDefaults standardUserDefaults] valueForKey:@"activeRegionID"]];
+
+    NSLog(@"NAME %@", activeRegion.name);
+	
+	if (internetActive) {
+        [self resetDatabase];
+    }
+    
 	[self showSplashScreen];
 }
 
@@ -205,6 +221,45 @@ void uncaughtExceptionHandler(NSException *exception) {
     }  
     
     return persistentStoreCoordinator;
+}
+
+- (void)checkNetworkStatus:(NSNotification *)notice {
+    NetworkStatus internetStatus = [internetReachable_ currentReachabilityStatus];
+    switch (internetStatus) {
+        case NotReachable: {
+            internetActive = NO;
+            
+            break;
+        }
+        case ReachableViaWiFi: {
+            internetActive = YES;
+            
+            break;
+        }
+        case ReachableViaWWAN: {
+            internetActive = YES;
+            
+            break;
+        }
+    }
+}
+
+- (bool)noConnectionOrSavedData {
+    NSLog(@"ACTIVE: %@", self.activeRegion.name);
+    NSLog(@"COUNT: %d", [self.activeRegion.locations count]);
+    
+    return !internetActive && (!self.activeRegion.locations || [self.activeRegion.locations count] == 0);
+}
+
+- (bool)noConnectionSavedDataAvailable {
+    return !internetActive && ([self.activeRegion.locations count] > 0);
+}
+
+- (void)setActiveRegion:(Region *)region {
+    [[NSUserDefaults standardUserDefaults] setObject:[region.idNumber stringValue] forKey:@"activeRegionID"];
+    
+    activeRegion = region;
+    NSLog(@"SETTING ACTIVE REGION: %@", activeRegion.name);
 }
 
 @end
