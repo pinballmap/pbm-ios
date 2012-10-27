@@ -43,7 +43,7 @@ Portland_Pinball_MapAppDelegate *appDelegate;
 		
 		[self.navigationController pushViewController:requestPage animated:YES];
 	} else {
-		[appDelegate setActiveRegion:[appDelegate.regions objectAtIndex:indexPath.row]];
+		[appDelegate setActiveRegion:appDelegate.regions[indexPath.row]];
 		[self.navigationController popViewControllerAnimated:YES];
 	}	
 }
