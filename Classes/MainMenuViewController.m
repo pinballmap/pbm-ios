@@ -100,13 +100,13 @@ Portland_Pinball_MapAppDelegate *appDelegate;
             [viewControllers addObject:rssView];
         }
         
-        if ([appDelegate.activeRegion.events count] != 0) {
+        if ([appDelegate.activeRegion.events count] != 0 || appDelegate.internetActive) {
             EventsViewController *eventView = [[EventsViewController alloc] initWithStyle:UITableViewStylePlain];
             [eventView setTitle:@"Events"];
             [viewControllers addObject:eventView];
         }
         
-        if (appDelegate.internetActive) {
+        if (appDelegate.internetActive) {            
             RegionSelectViewController *regionSelect = [[RegionSelectViewController alloc] initWithStyle:UITableViewStylePlain];
             [regionSelect setTitle:@"Change Region"];
             [viewControllers addObject:regionSelect];
@@ -146,25 +146,24 @@ Portland_Pinball_MapAppDelegate *appDelegate;
     if (cell == nil) {
 		cell = [self getTableCell];
 	}
-    
-    NSLog(@"TABLE TITLES: %@", tableTitles);
-    
-	[cell.nameLabel setText:[tableTitles objectAtIndex:[indexPath row]]];
+
+	[cell.nameLabel setText:tableTitles[[indexPath row]]];
 
 	return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-	[self.navigationController pushViewController:[self.controllers objectAtIndex:[indexPath row]] animated:YES];
+	[self.navigationController pushViewController:self.controllers[[indexPath row]] animated:YES];
 }
 
 - (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex {	
-	if(buttonIndex == 0)
+	if(buttonIndex == 0) {
         [appDelegate fetchRegionData];
+    }
 }
 
 - (void)pressInfo:(id)sender {
-	if(aboutView == nil) {
+	if (aboutView == nil) {
 		aboutView = [[AboutViewController alloc] initWithNibName:@"AboutView" bundle:nil];
 		[aboutView setTitle:@"About"];
 	}

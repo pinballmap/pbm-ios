@@ -101,10 +101,10 @@ void uncaughtExceptionHandler(NSException *exception) {
     [fetchRequest setEntity:entity];
     NSArray *fetchedRegions = [self.managedObjectContext executeFetchRequest:fetchRequest error:nil];
     
-    Region *closestRegion = [fetchedRegions objectAtIndex:0];
+    Region *closestRegion = fetchedRegions[0];
     CLLocationDistance closestDistance = 24901.55;
     for (int i = 0; i < [fetchedRegions count]; i++) {
-        Region *region = [fetchedRegions objectAtIndex:i];
+        Region *region = fetchedRegions[i];
         
         CLLocationDistance distance = [self.userLocation distanceFromLocation:[region coordinates]] / METERS_IN_A_MILE;
         
@@ -347,7 +347,7 @@ void uncaughtExceptionHandler(NSException *exception) {
 - (id)fetchObject:(NSString *)type where:(NSString *)field equals:(NSString *)value {
     NSArray *objects = [self fetchObjects:type where:field equals:value];
     
-    return [objects count] > 0 ? [objects objectAtIndex:0] : nil;
+    return [objects count] > 0 ? objects[0] : nil;
 }
 
 - (NSString *)rootURL {
