@@ -39,6 +39,7 @@
 @property (nonatomic,strong) IBOutlet UIButton *returnButton;
 @property (nonatomic,strong) IBOutlet UIButton *ipdbButton;
 @property (nonatomic,strong) IBOutlet UIButton *deleteButton;
+@property (nonatomic,strong) IBOutlet UIButton *editButton;
 
 - (IBAction)onUpdateConditionTap:(id)sender;
 - (IBAction)onDeleteTap:(id)sender;
@@ -46,7 +47,7 @@
 - (IBAction)onIPDBTap:(id)sender;
 - (IBAction)onOtherLocationsTap:(id)sender;
 - (IBAction)onEditButtonPressed:(id)sender;
-- (void)hideControllButtons:(BOOL)doHide;
+- (void)hideControlButtons:(BOOL)doHide;
 - (void)removeMachineWithURL:(NSString *)urlstr;
 
 @end

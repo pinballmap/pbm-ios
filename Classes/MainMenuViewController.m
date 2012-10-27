@@ -4,21 +4,11 @@
 #import "RegionSelectViewController.h"
 
 @implementation MainMenuViewController
-@synthesize locationManager, startingPoint, controllers, aboutView, tableTitles;
+@synthesize startingPoint, controllers, aboutView, tableTitles;
 
 Portland_Pinball_MapAppDelegate *appDelegate;
 
-- (id)initWithFrame:(CGRect)frame {
-    parsingAttempts = 0;
-    init2Loaded = NO;
-    
-    return self;
-}
-
-- (void)viewDidLoad {
-	tableTitles = @[@"Locations", @"Machines", @"Closest Locations", @"Recently Added", @"Events", @"Change Region"];
-    zonesForLocations = [[NSMutableDictionary alloc] init];
-    
+- (void)viewDidLoad {    
 	[self showInfoButton];
 	
 	[super viewDidLoad];
@@ -37,228 +27,59 @@ Portland_Pinball_MapAppDelegate *appDelegate;
 	[super viewWillAppear:animated];
 }
 
-- (void)viewDidAppear:(BOOL)animated {	
-	if (self.locationManager == nil) {
-		self.locationManager = [[CLLocationManager alloc] init];
-		[locationManager setDelegate:self];
-		[locationManager setDesiredAccuracy:kCLLocationAccuracyBest];
-		[locationManager setDistanceFilter:10.0f];
-		
-		if ([CLLocationManager locationServicesEnabled]) {
-			[appDelegate setShowUserLocation:YES];
-			[locationManager startUpdatingLocation];
-		} else {
-			[appDelegate setShowUserLocation:NO];
-			[self loadInitXML:2];
-		}
+- (void)viewDidAppear:(BOOL)animated {
+    [self setTitle:[NSString stringWithFormat:@"%@ Pinball Map", appDelegate.activeRegion.formalName]];
+
+    if (appDelegate.internetActive) {
+        tableTitles = @[@"Locations", @"Machines", @"Closest Locations", @"Recently Added", @"Events", @"Change Region"];
+    } else {
+        NSLog(@"INTERNET NOT ACTIVE");
+        
+        tableTitles = @[@"Locations", @"Machines", @"Events"];
+    }
+        
+    if (appDelegate.noConnectionOrSavedData) {
+        NSLog(@"MAIN MENU NO CONNECTION OR SAVED DATA");
+        
+        UIAlertView *alert = [[UIAlertView alloc]
+							  initWithTitle:@"No connection or cached data available"
+							  message:@"You have no saved location data, and no Internet connection. Please try again after you get a connection."
+							  delegate:nil
+							  cancelButtonTitle:@"OK"
+							  otherButtonTitles:nil];
+		[alert show];
+    } else if (appDelegate.noConnectionSavedDataAvailable) {
+        NSLog(@"MAIN MENU NO CONNECTION BUT THERE IS SAVED DATA");
+
+        UIAlertView *alert = [[UIAlertView alloc]
+							  initWithTitle:@"Using cached data"
+							  message:@"You have no Internet connection. But, you do have some saved location data from earlier. I'm going to use this."
+							  delegate:nil
+							  cancelButtonTitle:@"OK"
+							  otherButtonTitles:nil];
+		[alert show];
+        
+        [self showMenu];
 	} else if (appDelegate.activeRegion.locations == nil || [appDelegate.activeRegion.locations count] == 0) {
+        NSLog(@"NO ACTIVE REGION READY TO GO");
         motd = nil;
+        
         [appDelegate showSplashScreen];
-		
-        xmlStarted = NO;
-		
-        @autoreleasepool {
-			[self performSelectorInBackground:@selector(loadInitXML:) withObject:nil];
-		}
+        [appDelegate fetchLocationData];
+        
+        if (motd != nil && ![motd isKindOfClass:[NSNull class]]) {
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Message Of The Day" message:motd delegate:self cancelButtonTitle:@"Thanks" otherButtonTitles:nil];
+            [alert show];
+        }
+        
+        [self showMenu];
 	}
 	
 	[super viewDidAppear:animated];
 }
 
-- (void)loadInitXML:(int)withID {
-	if(xmlStarted == YES)
-        return;
-    
-	xmlStarted = YES;
-
-	initID = withID;
-	[self showLoaderIcon];
-    
-	NSString *path = [NSString stringWithFormat:@"%@", withID == 2 ?
-        [NSString stringWithFormat:@"%@/%@", BASE_URL, @"iphone.html?init=2"] :
-        [NSString stringWithFormat:@"%@init=1", appDelegate.rootURL]
-    ];
-        
-	@autoreleasepool {
-		[self performSelectorInBackground:@selector(parseXMLFileAtURL:) withObject:path];
-	}
-}
-
-- (void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation {	
-	[appDelegate setUserLocation:newLocation];
-	
-	if (init2Loaded != YES) {
-		init2Loaded = YES;
-		[self loadInitXML:2];
-	}
-}
-
-- (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error {	
-    [self.locationManager stopUpdatingLocation];
-    [self.locationManager setDelegate:nil];
-		
-    UIAlertView *alert = [[UIAlertView alloc]
-        initWithTitle:(error.code == kCLErrorDenied) ? @"Please Allow" : @"Unknown Error"
-        message:@"User Location denied, defaulting to static location."
-        delegate:self
-        cancelButtonTitle:@"Okay"
-        otherButtonTitles:nil
-    ];
-    [alert show];
-
-    [appDelegate setUserLocation:[[CLLocation alloc] initWithLatitude:45.52295 longitude:-122.66785]];
-}
-
-- (void)parser:(NSXMLParser *)parser didStartElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qName attributes:(NSDictionary *)attributeDict {
-	currentElement = [elementName copy];
-        
-    if ([@[@"region", @"location", @"machine", @"zone"] containsObject:elementName]) {
-        activeNode = elementName;
-        
-        currentID = [[NSNumber alloc] init];
-        currentName = [[NSMutableString alloc] init];
-        currentNumMachines = [[NSNumber alloc] init];
-        currentLat = [[NSNumber alloc] init];
-        currentLon = [[NSNumber alloc] init];
-        currentNumLocations = [[NSNumber alloc] init];
-        currentShortName = [[NSMutableString alloc] init];
-        currentIsPrimary = false;
-        currentSubdir = [[NSMutableString alloc] init];
-        currentFormalName = [[NSMutableString alloc] init];
-    }
-}
-
-- (void)parser:(NSXMLParser *)parser foundCharacters:(NSString *)string {
-    NSNumberFormatter *formatter = [[NSNumberFormatter alloc] init];
-
-    if (initID == 2) {
-        if([activeNode isEqualToString:@"region"] && ![string isEqualToString:@"\n"]) {
-            [formatter setNumberStyle:NSNumberFormatterBehaviorDefault];
-            if ([currentElement isEqualToString:@"id"])
-                currentID = [formatter numberFromString:string];
-            
-            [formatter setNumberStyle:NSNumberFormatterDecimalStyle];
-            if ([currentElement isEqualToString:@"lat"])
-                currentLat = [formatter numberFromString:string];
-            if ([currentElement isEqualToString:@"lon"])
-                currentLon = [formatter numberFromString:string];
-            if ([currentElement isEqualToString:@"name"])
-                [currentName appendString:string];
-            if ([currentElement isEqualToString:@"formalName"])
-                [currentFormalName appendString:string];
-            if ([currentElement isEqualToString:@"subdir"])
-                [currentSubdir appendString:string];
-            if ([currentElement isEqualToString:@"motd"])
-                motd = string;
-        }         
-    } else {
-        if([activeNode isEqualToString:@"location"]) {
-            [formatter setNumberStyle:NSNumberFormatterBehaviorDefault];
-            if ([currentElement isEqualToString:@"id"])
-                currentID = [formatter numberFromString:string];
-            if ([currentElement isEqualToString:@"numMachines"])
-                currentNumMachines = [formatter numberFromString:string];
-            if ([currentElement isEqualToString:@"zoneNo"])
-                currentZoneID = [formatter numberFromString:string];
-            
-            [formatter setNumberStyle:NSNumberFormatterDecimalStyle];
-            if ([currentElement isEqualToString:@"lat"])
-                currentLat = [formatter numberFromString:string];
-            if ([currentElement isEqualToString:@"lon"])
-                currentLon = [formatter numberFromString:string];
-            if ([currentElement isEqualToString:@"name"])         
-                [currentName appendString:string];
-        } else if([activeNode isEqualToString:@"machine"]) {
-            if ([currentElement isEqualToString:@"id"])     
-                currentID = [formatter numberFromString:string];
-            if ([currentElement isEqualToString:@"numLocations"])
-                currentNumLocations = [formatter numberFromString:string];
-            if ([currentElement isEqualToString:@"name"])         
-                [currentName appendString:string];
-        } else if([activeNode isEqualToString:@"zone"]) {
-            [formatter setNumberStyle:NSNumberFormatterBehaviorDefault];
-            if ([currentElement isEqualToString:@"id"])
-                currentID = [formatter numberFromString:string];
-            if ([currentElement isEqualToString:@"isPrimary"])   
-                currentIsPrimary = [string boolValue];
-            if ([currentElement isEqualToString:@"name"])         
-                [currentName appendString:string];
-            if ([currentElement isEqualToString:@"shortName"])    
-                [currentShortName appendString:string];
-        }
-    }
-}
-
-- (void)parser:(NSXMLParser *)parser didEndElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qName{
-    if (initID == 2) {
-        if ([elementName isEqualToString:@"region"]) {
-            Region *region = [NSEntityDescription insertNewObjectForEntityForName:@"Region" inManagedObjectContext:appDelegate.managedObjectContext];
-            
-            [region setIdNumber:currentID];
-            [region setName:currentName];
-            [region setFormalName:currentFormalName];
-            [region setSubdir:currentSubdir];
-            [region setLat:currentLat];
-            [region setLon:currentLon];
-            [region setNMachines:@4];
-            
-            [appDelegate saveContext];
-        }
-    } else {
-        if ([elementName isEqualToString:@"location"]) {
-            if([currentNumMachines intValue] != 0) {
-                NSNumberFormatter *formatter = [[NSNumberFormatter alloc] init];                
-                [formatter setNumberStyle:NSNumberFormatterBehaviorDefault];
-
-                Location *location = [NSEntityDescription insertNewObjectForEntityForName:@"Location" inManagedObjectContext:appDelegate.managedObjectContext];
-                
-                [zonesForLocations setValue:currentZoneID forKey:[formatter stringFromNumber:currentID]];
-                                
-                double lon = [currentLon doubleValue];
-                double lat = [currentLat doubleValue];
-                
-                if (lat == 0.0 || lon == 0.0) {
-                    lat = 45.52295;
-                    lon = -122.66785;
-                }
-                                
-                [location setIdNumber:currentID];
-                [location setTotalMachines:currentNumMachines];
-                [location setName:[currentName stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]]];
-                [location setLat:@(lat)];
-                [location setLon:@(lon)];
-                [location setRegion:appDelegate.activeRegion];
-                [location updateDistance];
-
-                [appDelegate saveContext];
-            }
-        } else if ([elementName isEqualToString:@"machine"]) {
-            if([currentNumLocations intValue] != 0) {
-                Machine *machine = [NSEntityDescription insertNewObjectForEntityForName:@"Machine" inManagedObjectContext:appDelegate.managedObjectContext];
-                [machine setValue:currentID forKey:@"idNumber"];
-                [machine setValue:[currentName stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]] forKey:@"name"];
-                [machine addRegionObject:appDelegate.activeRegion];
-                [appDelegate.activeRegion addMachinesObject:machine];
-                
-                [appDelegate saveContext];
-            }
-        } else if ([elementName isEqualToString:@"zone"]) {            
-            Zone *zone = [NSEntityDescription insertNewObjectForEntityForName:@"Zone" inManagedObjectContext:appDelegate.managedObjectContext];
-            [zone setName:currentName];
-            [zone setIdNumber:currentID];
-            [zone setIsPrimary:@(currentIsPrimary)];
-            [zone setRegion:appDelegate.activeRegion];
-            [appDelegate.activeRegion addZonesObject:zone];
-            
-            [appDelegate saveContext];
-        }        
-    }
-
-	currentElement = @"";
-}
-
 - (void)showMenu {
-    if(self.controllers == nil) {
+    if (self.controllers == nil) {
         NSMutableArray *viewControllers = [[NSMutableArray alloc] init];
         
         ZonesViewController *locView = [[ZonesViewController alloc] initWithStyle:UITableViewStylePlain];
@@ -269,22 +90,28 @@ Portland_Pinball_MapAppDelegate *appDelegate;
         [machView setTitle:@"Machines"];
         [viewControllers addObject:machView];
         
-        ClosestLocations *closest = [[ClosestLocations alloc] initWithStyle:UITableViewStylePlain];
-        [closest setTitle:@"Closest Locations"];
-        [viewControllers addObject:closest];
+        if (appDelegate.internetActive) {
+            ClosestLocations *closest = [[ClosestLocations alloc] initWithStyle:UITableViewStylePlain];
+            [closest setTitle:@"Closest Locations"];
+            [viewControllers addObject:closest];
+            
+            RecentlyAddedViewController *rssView = [[RecentlyAddedViewController alloc] initWithStyle:UITableViewStylePlain];
+            [rssView setTitle:@"Recently Added"];
+            [viewControllers addObject:rssView];
+        }
         
-        RecentlyAddedViewController *rssView = [[RecentlyAddedViewController alloc] initWithStyle:UITableViewStylePlain];
-        [rssView setTitle:@"Recently Added"];
-        [viewControllers addObject:rssView];
+        if ([appDelegate.activeRegion.events count] != 0) {
+            EventsViewController *eventView = [[EventsViewController alloc] initWithStyle:UITableViewStylePlain];
+            [eventView setTitle:@"Events"];
+            [viewControllers addObject:eventView];
+        }
         
-        EventsViewController *eventView = [[EventsViewController alloc] initWithStyle:UITableViewStylePlain];
-        [eventView setTitle:@"Events"];
-        [viewControllers addObject:eventView];
-        
-        RegionSelectViewController *regionSelect = [[RegionSelectViewController alloc] initWithStyle:UITableViewStylePlain];
-        [regionSelect setTitle:@"Change Region"];
-        [viewControllers addObject:regionSelect];
-        
+        if (appDelegate.internetActive) {
+            RegionSelectViewController *regionSelect = [[RegionSelectViewController alloc] initWithStyle:UITableViewStylePlain];
+            [regionSelect setTitle:@"Change Region"];
+            [viewControllers addObject:regionSelect];
+        }
+            
         [self setControllers:viewControllers];
     }
     
@@ -299,75 +126,15 @@ Portland_Pinball_MapAppDelegate *appDelegate;
     }
 }
 
-- (void)parserDidEndDocument:(NSXMLParser *)parser {
-    if (initID == 2) {
-        NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
-        NSEntityDescription *entity = [NSEntityDescription entityForName:@"Region" inManagedObjectContext:appDelegate.managedObjectContext];
-        [fetchRequest setEntity:entity];
-        NSArray *fetchedRegions = [appDelegate.managedObjectContext executeFetchRequest:fetchRequest error:nil];
-        
-        Region *closestRegion = [fetchedRegions objectAtIndex:0];
-        CLLocationDistance closestDistance = 24901.55;
-        for (int i = 0; i < [fetchedRegions count]; i++) {
-            Region *region = [fetchedRegions objectAtIndex:i];
-            
-            CLLocationDistance distance = [appDelegate.userLocation distanceFromLocation:[region coordinates]] / METERS_IN_A_MILE;
-            
-            if(closestDistance > distance) {
-                closestRegion = region;
-                closestDistance = distance;
-            }
-        }
-        
-        [appDelegate setActiveRegion:closestRegion];
-        [appDelegate showSplashScreen];
-        
-        [self setTitle:[NSString stringWithFormat:@"%@ Pinball Map", appDelegate.activeRegion.formalName]];
-
-        xmlStarted = NO;
-        @autoreleasepool {
-			[self performSelectorInBackground:@selector(loadInitXML:) withObject:nil];
-        }
-    } else if (initID == 0) {
-        for (NSString *locationID in zonesForLocations.allKeys) {
-            Zone *zone = (Zone *)[appDelegate fetchObject:@"Zone" where:@"idNumber" equals:[zonesForLocations objectForKey:locationID]];
-            Location *location = (Location *)[appDelegate fetchObject:@"Location" where:@"idNumber" equals:locationID];
-
-            [zone addLocationObject:location];
-            [location setLocationZone:zone];
-        }
-        
-        if (motd != nil && ![motd isKindOfClass:[NSNull class]]) {
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Message Of The Day" message:motd delegate:self cancelButtonTitle:@"Thanks" otherButtonTitles:nil];
-            [alert show];
-        }
-        
-        [self showMenu];
-    } else {
-        [self showMenu];
-	}
+- (void)alertNoConnectionFound {
+    UIAlertView *alert = [[UIAlertView alloc]
+                          initWithTitle:@"No Internet Connection Found"
+                          message:@"Please close the app and try again."
+                          delegate:nil
+                          cancelButtonTitle:@"OK"
+                          otherButtonTitles:nil];
     
-	[super parserDidEndDocument:parser];
-}
-
-- (void)parser:(NSXMLParser *)parser parseErrorOccurred:(NSError *)parseError {	
-	if (parsingAttempts < MAX_PARSING_ATTEMPTS) {
-		parsingAttempts ++;
-		
-		xmlStarted = NO;
-		
-		[self loadInitXML:initID];
-	} else {
-		[self hideLoaderIcon];
-
-		UIAlertView *alert = [[UIAlertView alloc]
-							  initWithTitle:@"No Internet Connection Found"
-							  message:@"Please close the app and try again."
-							  delegate:nil
-							  cancelButtonTitle:@"OK"
-							  otherButtonTitles:nil];
-		[alert show];
-	}	
+    [alert show];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -380,6 +147,8 @@ Portland_Pinball_MapAppDelegate *appDelegate;
 		cell = [self getTableCell];
 	}
     
+    NSLog(@"TABLE TITLES: %@", tableTitles);
+    
 	[cell.nameLabel setText:[tableTitles objectAtIndex:[indexPath row]]];
 
 	return cell;
@@ -391,7 +160,7 @@ Portland_Pinball_MapAppDelegate *appDelegate;
 
 - (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex {	
 	if(buttonIndex == 0)
-		[self loadInitXML:2];
+        [appDelegate fetchRegionData];
 }
 
 - (void)pressInfo:(id)sender {

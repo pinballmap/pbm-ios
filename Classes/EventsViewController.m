@@ -37,6 +37,8 @@ Portland_Pinball_MapAppDelegate *appDelegate;
     [super viewDidAppear:animated];
 
 	if (appDelegate.activeRegion.events == nil || [appDelegate.activeRegion.events count] == 0) {
+        NSLog(@"THERE ARE NO EVENTS, SO I'M GOING TO GO FIND SOME");
+        
 		sectionData = [[NSMutableDictionary alloc] initWithObjectsAndKeys:[[NSMutableArray alloc] init], FEATURED, [[NSMutableArray alloc] init], TOURNAMENTS, [[NSMutableArray alloc] init], OTHER, [[NSMutableArray alloc] init], PAST_EVENTS, nil];
         	
 		@autoreleasepool {

@@ -91,6 +91,9 @@
 		8E700B331592D5890016FBA2 /* Event.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E700B311592D5890016FBA2 /* Event.m */; };
 		8E700B3E1593F76E0016FBA2 /* Zone.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E700B3D1593F76E0016FBA2 /* Zone.m */; };
 		8E700B3F1593F76E0016FBA2 /* Zone.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E700B3D1593F76E0016FBA2 /* Zone.m */; };
+		8E7A2E6E1606B206009D9B87 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E7A2E6D1606B206009D9B87 /* SystemConfiguration.framework */; };
+		8E7A2E761606B2AF009D9B87 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E7A2E751606B2AF009D9B87 /* Reachability.m */; };
+		8E7A2E771606B2AF009D9B87 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E7A2E751606B2AF009D9B87 /* Reachability.m */; };
 		8EBE6A32159A0C9C00C0374F /* PBMSplitViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EBE6A31159A0C9C00C0374F /* PBMSplitViewController.m */; };
 		8EBE6A33159A0C9C00C0374F /* PBMSplitViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EBE6A31159A0C9C00C0374F /* PBMSplitViewController.m */; };
 		8EDA8065158572EC00F6AD9A /* _splash.png in Resources */ = {isa = PBXBuildFile; fileRef = 8EDA802F158572EC00F6AD9A /* _splash.png */; };
@@ -321,6 +324,9 @@
 		8E700B311592D5890016FBA2 /* Event.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Event.m; sourceTree = "<group>"; };
 		8E700B3C1593F76E0016FBA2 /* Zone.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Zone.h; sourceTree = "<group>"; };
 		8E700B3D1593F76E0016FBA2 /* Zone.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Zone.m; sourceTree = "<group>"; };
+		8E7A2E6D1606B206009D9B87 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		8E7A2E741606B2AF009D9B87 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Reachability.h; path = Reachability/Reachability.h; sourceTree = "<group>"; };
+		8E7A2E751606B2AF009D9B87 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Reachability.m; path = Reachability/Reachability.m; sourceTree = "<group>"; };
 		8EBE6A30159A0C9C00C0374F /* PBMSplitViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PBMSplitViewController.h; sourceTree = "<group>"; };
 		8EBE6A31159A0C9C00C0374F /* PBMSplitViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PBMSplitViewController.m; sourceTree = "<group>"; };
 		8EDA802F158572EC00F6AD9A /* _splash.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = _splash.png; sourceTree = "<group>"; };
@@ -406,6 +412,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8E7A2E6E1606B206009D9B87 /* SystemConfiguration.framework in Frameworks */,
 				8E276C7C1590208700EEE1D8 /* CoreData.framework in Frameworks */,
 				1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */,
 				1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */,
@@ -474,6 +481,7 @@
 		29B97315FDCFA39411CA2CEA /* Other Sources */ = {
 			isa = PBXGroup;
 			children = (
+				8EC76C7E1606A99900B394FF /* Reachability */,
 				8E126823157C4B7200A40329 /* Frank */,
 				28A0AAE50D9B0CCF005BE974 /* Portland_Pinball_Map_Prefix.pch */,
 				29B97316FDCFA39411CA2CEA /* main.m */,
@@ -494,6 +502,7 @@
 		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				8E7A2E6D1606B206009D9B87 /* SystemConfiguration.framework */,
 				8E276C7B1590208700EEE1D8 /* CoreData.framework */,
 				8E126833157C4BA100A40329 /* CFNetwork.framework */,
 				6AC9D6A410BBC6D100EEA3F7 /* CoreLocation.framework */,
@@ -644,6 +653,15 @@
 			path = CoreData;
 			sourceTree = SOURCE_ROOT;
 		};
+		8EC76C7E1606A99900B394FF /* Reachability */ = {
+			isa = PBXGroup;
+			children = (
+				8E7A2E741606B2AF009D9B87 /* Reachability.h */,
+				8E7A2E751606B2AF009D9B87 /* Reachability.m */,
+			);
+			name = Reachability;
+			sourceTree = "<group>";
+		};
 		8EDA802E158572EC00F6AD9A /* Images */ = {
 			isa = PBXGroup;
 			children = (
@@ -771,7 +789,7 @@
 		29B97313FDCFA39411CA2CEA /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0440;
+				LastUpgradeCheck = 0450;
 			};
 			buildConfigurationList = C01FCF4E08A954540054247B /* Build configuration list for PBXProject "Portland Pinball Map" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -995,6 +1013,7 @@
 				8E57FEBF159E2FDE00A57AF3 /* LocationMachineXref.m in Sources */,
 				8E57FEC3159E32D100A57AF3 /* Machine.m in Sources */,
 				8E57FEC7159E331D00A57AF3 /* RecentAddition.m in Sources */,
+				8E7A2E761606B2AF009D9B87 /* Reachability.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1039,6 +1058,7 @@
 				8E57FEC0159E2FDE00A57AF3 /* LocationMachineXref.m in Sources */,
 				8E57FEC4159E32D100A57AF3 /* Machine.m in Sources */,
 				8E57FEC8159E331D00A57AF3 /* RecentAddition.m in Sources */,
+				8E7A2E771606B2AF009D9B87 /* Reachability.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1050,8 +1070,8 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ENABLE_OBJC_ARC = YES;
-				CODE_SIGN_IDENTITY = "Don't Code Sign";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -1074,6 +1094,8 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = Portland_Pinball_Map_Prefix.pch;
@@ -1081,6 +1103,8 @@
 				INFOPLIST_FILE = "Portland_Pinball_Map-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				PRODUCT_NAME = "Portland Pinball Map";
+				PROVISIONING_PROFILE = "";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				SDKROOT = iphoneos;
 			};
 			name = Release;
@@ -1089,12 +1113,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Scott Wainstock (DP435AHE8B)";
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
+				PROVISIONING_PROFILE = "";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "9DBDA858-CC87-431A-BE45-CD38E2E9E15D";
 				SDKROOT = iphoneos;
 			};
 			name = Distribution2;
@@ -1104,8 +1130,8 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ENABLE_OBJC_ARC = YES;
-				CODE_SIGN_IDENTITY = "Don't Code Sign";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -1127,12 +1153,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Isaac Ruiz";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Scott Wainstock (DP435AHE8B)";
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "35EDA825-D876-48BB-9CD2-04CBF9E63986";
+				PROVISIONING_PROFILE = "";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "D8EEA014-847E-45BF-9E76-30AB65E496F0";
 				SDKROOT = iphoneos;
 			};
 			name = Distribution;
@@ -1142,6 +1170,8 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = Portland_Pinball_Map_Prefix.pch;
@@ -1149,6 +1179,8 @@
 				INFOPLIST_FILE = "Portland_Pinball_Map-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				PRODUCT_NAME = "Portland Pinball Map";
+				PROVISIONING_PROFILE = "";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				SDKROOT = iphoneos;
 			};
 			name = Distribution;
@@ -1158,7 +1190,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ENABLE_OBJC_ARC = YES;
-				CODE_SIGN_IDENTITY = "Don't Code Sign";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Scott Wainstock (DP435AHE8B)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				COPY_PHASE_STRIP = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -1190,7 +1222,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ENABLE_OBJC_ARC = YES;
-				CODE_SIGN_IDENTITY = "Don't Code Sign";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Scott Wainstock (DP435AHE8B)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				COPY_PHASE_STRIP = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -1222,6 +1254,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer: Scott Wainstock (DP435AHE8B)";
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = Portland_Pinball_Map_Prefix.pch;
@@ -1237,6 +1270,7 @@
 					"-ObjC",
 				);
 				PRODUCT_NAME = "Portland Pinball Map copy";
+				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 			};
 			name = Release;
@@ -1246,6 +1280,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer: Scott Wainstock (DP435AHE8B)";
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = Portland_Pinball_Map_Prefix.pch;
@@ -1261,6 +1296,7 @@
 					"-ObjC",
 				);
 				PRODUCT_NAME = "Portland Pinball Map copy";
+				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 			};
 			name = Distribution;
@@ -1269,12 +1305,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Scott Wainstock (DP435AHE8B)";
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
+				PROVISIONING_PROFILE = "";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "9DBDA858-CC87-431A-BE45-CD38E2E9E15D";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -1283,11 +1321,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Scott Wainstock (DP435AHE8B)";
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				PROVISIONING_PROFILE = "";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "D8EEA014-847E-45BF-9E76-30AB65E496F0";
 				SDKROOT = iphoneos;
 			};
 			name = Release;
