@@ -1,10 +1,13 @@
 #import <CoreLocation/CoreLocation.h>
 #import "Region.h"
 #import "LocationMap.h"
+#import "Machine.h"
 #import "Reachability.h"
 
-#define BASE_URL @"http://pinballmap.com"
-//#define BASE_URL @"http://localhost:3000"
+#define kBgQueue dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)
+
+//#define BASE_URL @"http://pinballmap.com"
+#define BASE_URL @"http://localhost:3000"
 
 #define METERS_IN_A_MILE 1609.344
 #define MAX_PARSING_ATTEMPTS 15
@@ -12,7 +15,7 @@
 @class LocationProfileViewController;
 @class Reachability;
 
-@interface Portland_Pinball_MapAppDelegate : NSObject <UIApplicationDelegate, UISplitViewControllerDelegate> {
+@interface Portland_Pinball_MapAppDelegate : NSObject <UIApplicationDelegate, CLLocationManagerDelegate, UISplitViewControllerDelegate> {
     UIWindow *window;
     UINavigationController *navigationController;
 	UISplitViewController *splitViewController;
@@ -22,11 +25,16 @@
 	UIView *splashScreen;
 	CLLocation *userLocation;	
 	LocationMap *locationMap;
-	
+    
+    CLLocationManager *locationManager;
+	CLLocation *startingPoint;
+    BOOL initLoaded;
 	BOOL showUserLocation;
     BOOL internetActive;
     
     Reachability *internetReachable_;
+    
+    NSMutableDictionary *zonesForLocations;
     
 @private
     NSManagedObjectContext *managedObjectContext;
@@ -46,7 +54,10 @@
 @property (nonatomic,strong,readonly) NSManagedObjectContext *managedObjectContext;
 @property (nonatomic,strong,readonly) NSManagedObjectModel *managedObjectModel;
 @property (nonatomic,strong,readonly) NSPersistentStoreCoordinator *persistentStoreCoordinator;
+@property (nonatomic,strong) CLLocationManager *locationManager;
 
+- (void)fetchRegionData;
+- (void)fetchLocationData;
 - (void)showMap:(NSArray *)array withTitle:(NSString *)newTitle;
 - (void)updateLocationDistances;
 - (void)hideSplashScreen;
