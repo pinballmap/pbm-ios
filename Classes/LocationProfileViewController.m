@@ -4,7 +4,7 @@
 #import "LocationProfileViewController.h"
 
 @implementation LocationProfileViewController
-@synthesize scrollView, mapLabel, mapButton, showMapButton, activeLocation, isBuildingMachine, tempMachineID, tempMachineCondition, tempMachineConditionDate, tempMachineDateAdded, addMachineButton;
+@synthesize scrollView, mapLabel, mapButton, showMapButton, activeLocation, addMachineButton;
 
 Portland_Pinball_MapAppDelegate *appDelegate;
 
@@ -13,7 +13,6 @@ Portland_Pinball_MapAppDelegate *appDelegate;
 
     appDelegate = (Portland_Pinball_MapAppDelegate *)[[UIApplication sharedApplication] delegate];
 
-	self.isBuildingMachine = NO;
 	[scrollView setContentSize:CGSizeMake(320,460)];
 	[scrollView setMaximumZoomScale:1];
 	[scrollView setMinimumZoomScale:1];
@@ -37,11 +36,11 @@ Portland_Pinball_MapAppDelegate *appDelegate;
 
 - (void)viewWillAppear:(BOOL)animated {
 	[self refreshPage];
+    
 	[super viewWillAppear:(BOOL)animated];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
-	parsingAttempts = 0;
 	[self loadLocationData];
 	
 	[super viewDidAppear:animated];
@@ -49,7 +48,6 @@ Portland_Pinball_MapAppDelegate *appDelegate;
 
 - (void)refreshAndReload {
 	[self refreshPage];
-	parsingAttempts = 0;
 	[self loadLocationData];
 }
 
@@ -58,9 +56,11 @@ Portland_Pinball_MapAppDelegate *appDelegate;
 		UIApplication *app = [UIApplication sharedApplication];
 		[app setNetworkActivityIndicatorVisible:YES];
     
-		NSString *url = [[NSString alloc] initWithFormat:@"%@get_location=%@", appDelegate.rootURL, activeLocation.idNumber];
-		
-		[self performSelectorInBackground:@selector(parseXMLFileAtURL:) withObject:url];
+		        
+        dispatch_async(kBgQueue, ^{
+            NSData *data = [NSData dataWithContentsOfURL:[NSURL URLWithString:[[NSString alloc] initWithFormat:@"%@locations/%@.json", appDelegate.rootURL, activeLocation.idNumber]]];
+            [self performSelectorOnMainThread:@selector(fetchedData:) withObject:data waitUntilDone:YES];
+        });
 	}
 }
 
@@ -83,8 +83,9 @@ Portland_Pinball_MapAppDelegate *appDelegate;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-	if(activeLocation.isLoaded == NO)
+	if(activeLocation.isLoaded == NO) {
         return 0;
+    }
     
 	switch (section) {
 		case 0:
@@ -101,7 +102,7 @@ Portland_Pinball_MapAppDelegate *appDelegate;
 	NSUInteger row = [indexPath row];
 	NSUInteger section = [indexPath section];
 	
-	if(section == 0 && row == 0) {
+	if (section == 0 && row == 0) {
 		LocationProfileCell *cellA = (LocationProfileCell*)[tableView dequeueReusableCellWithIdentifier:@"LocationCellID"];
 		if (cellA == nil) {
 			NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"LocationProfileCellView" owner:self options:nil];
@@ -112,11 +113,9 @@ Portland_Pinball_MapAppDelegate *appDelegate;
 			}
 		}
 		
-		if(activeLocation.isLoaded) {
-			 NSString *addressStringA = [NSString stringWithFormat:@"%@ %@", activeLocation.street1, activeLocation.street2];
-			 NSString *addressStringB = [NSString stringWithFormat:@"%@, %@ %@",activeLocation.city, activeLocation.state, activeLocation.zip];
-            [cellA.addressLabel1 setText:addressStringA];
-            [cellA.addressLabel2 setText:addressStringB];
+		if (activeLocation.isLoaded) {
+            [cellA.addressLabel1 setText:activeLocation.street1];
+            [cellA.addressLabel2 setText:[NSString stringWithFormat:@"%@, %@ %@",activeLocation.city, activeLocation.state, activeLocation.zip]];
             [cellA.phoneLabel setText:activeLocation.phone];
             [cellA.distanceLabel setText:[NSString stringWithFormat:@"≈ %@", activeLocation.formattedDistance]];
 										 
@@ -132,9 +131,10 @@ Portland_Pinball_MapAppDelegate *appDelegate;
 		return cellA;
 	} else {
 		PBMTableCell *cell = (PBMTableCell*)[tableView dequeueReusableCellWithIdentifier:@"SingleTextID"];
-		if (cell == nil)
+		if (cell == nil) {
 			cell = [self getTableCell];
-		
+		}
+        
         [cell.nameLabel setText:(section == 0) ?
             ((showMapButton && row == 1) ? @"Map" : @"Add Machine") :
             [[[activeLocation.sortedLocationMachineXrefs objectAtIndex:row] machine] name]
@@ -182,110 +182,42 @@ Portland_Pinball_MapAppDelegate *appDelegate;
 	}	
 }
 
-- (void)parserDidStartDocument:(NSXMLParser *)parser {}
-
-- (void)parser:(NSXMLParser *)parser didStartElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qName attributes:(NSDictionary *)attributeDict {
-	
-	currentElement = [elementName copy];
-	if ([elementName isEqualToString:@"machine"]) {
-		isBuildingMachine = YES;
-		tempMachineID = [[NSMutableString alloc] init];
-		tempMachineCondition = [[NSMutableString alloc] init];
-		tempMachineDateAdded = [[NSMutableString alloc] init];
-	} else if ([elementName isEqualToString:@"condition"]) {
-		tempMachineConditionDate = [[[NSString alloc] initWithString:[attributeDict objectForKey:@"date"]] mutableCopy];
-	} else if ([elementName isEqualToString:@"street1"]) {
-        currentStreet1 = [[NSMutableString alloc] init];
-    } else if ([elementName isEqualToString:@"street2"]) {
-        currentStreet2	= [[NSMutableString alloc] init];
-	} else if ([elementName isEqualToString:@"state"]) {
-        currentState = [[NSMutableString alloc] init];
-    } else if ([elementName isEqualToString:@"city"]) {
-        currentCity = [[NSMutableString alloc] init];
-    } else if ([elementName isEqualToString:@"zip"]) {
-        currentZip = [[NSMutableString alloc] init];
-    } else if ([elementName isEqualToString:@"phone"]) {
-        currentPhone = [[NSMutableString alloc] init];
-    }
-}
-
-- (void)parser:(NSXMLParser *)parser foundCharacters:(NSString *)string {
-	if(isBuildingMachine == YES) {
-		if ([currentElement isEqualToString:@"id"])
-            [tempMachineID appendString:string];
-		if ([currentElement isEqualToString:@"condition"])
-            [tempMachineCondition appendString:string];
-		if ([currentElement isEqualToString:@"dateAdded"])
-            [tempMachineDateAdded appendString:string];
-	} else {
-		if ([currentElement isEqualToString:@"street1"])
-            [currentStreet1 appendString:string];
-		if ([currentElement isEqualToString:@"street2"])
-            [currentStreet2 appendString:string];
-		if ([currentElement isEqualToString:@"city"])
-            [currentCity appendString:string];
-		if ([currentElement isEqualToString:@"state"])
-            [currentState appendString:string];
-		if ([currentElement isEqualToString:@"zip"])
-            [currentZip appendString:string];
-		if ([currentElement isEqualToString:@"phone"])
-            [currentPhone appendString:string];
-	}
-
-}
-
-- (void)parser:(NSXMLParser *)parser didEndElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qName {
-	currentElement = @"";
-	
-	if ([elementName isEqualToString:@"machine"]) {
-        NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-        [formatter setDateFormat:@"yyyy-MM-dd"];
-        
+- (void)fetchedData:(NSData *)data {
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateFormat:@"yyyy-MM-dd"];
+    
+    NSError *error;
+    NSDictionary *json = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&error];
+    NSDictionary *locationContainer = json[@"location"];
+    NSDictionary *locationData = locationContainer[@"location"];
+    NSArray *machines = json[@"machines"];
+    
+    Location *location = (Location *)[appDelegate fetchObject:@"Location" where:@"idNumber" equals:locationData[@"id"]];    
+    [location setStreet1:locationData[@"street"]];
+    [location setCity:locationData[@"city"]];
+    [location setState:locationData[@"state"]];
+    [location setZip:locationData[@"zip"]];
+    [location setPhone:locationData[@"phone"]];
+    
+    for (NSDictionary *machineContainer in machines) {
+        NSDictionary *machineData = machineContainer[@"machine"];
         LocationMachineXref *xref = [NSEntityDescription insertNewObjectForEntityForName:@"LocationMachineXref" inManagedObjectContext:appDelegate.managedObjectContext];
-        [xref setMachine:(Machine *)[appDelegate fetchObject:@"Machine" where:@"idNumber" equals:tempMachineID]];
-        [xref setCondition:[Utils urlDecode:tempMachineCondition]];
-		[xref setDateAdded:[formatter dateFromString:tempMachineDateAdded]];
-		[xref setConditionDate:[formatter dateFromString:tempMachineConditionDate]];
-        [xref setLocation:activeLocation];
-        [activeLocation addLocationMachineXrefsObject:xref];		
-		
-		isBuildingMachine = NO;
-	} else if ([elementName isEqualToString:@"street1"]) {
-		[activeLocation setStreet1:currentStreet1];
-	} else if ([elementName isEqualToString:@"street2"]) {
-		[activeLocation setStreet2:currentStreet2];
-	} else if ([elementName isEqualToString:@"state"]) {
-		[activeLocation setState:currentState];
-	} else if ([elementName isEqualToString:@"city"]) {
-		[activeLocation setCity:currentCity];
-	} else if ([elementName isEqualToString:@"zip"]) {
-		[activeLocation setZip:currentZip];
-	} else if ([elementName isEqualToString:@"phone"]) {
-		[activeLocation setPhone:currentPhone];
-	}
-}
-
-- (void)parserDidEndDocument:(NSXMLParser *)parser {	
-	[self refreshPage];
-	
-	[super parserDidEndDocument:parser];
-}
-
-- (void)parser:(NSXMLParser *)parser parseErrorOccurred:(NSError *)parseError {
-	if(parsingAttempts < MAX_PARSING_ATTEMPTS) {
-		parsingAttempts++;
-		[self loadLocationData];
-	} else {
-		UIApplication *app = [UIApplication sharedApplication];
-		[app setNetworkActivityIndicatorVisible:NO];
-
-		UIAlertView * errorAlert = [[UIAlertView alloc] initWithTitle:@"Whoops." 
-														message:@"There was a problem loading this location. The developers have been notified. Please try again later."
-														delegate:self 
-														cancelButtonTitle:@"OK" 
-														otherButtonTitles:nil];
-		[errorAlert show];
-	}
+        [xref setMachine:(Machine *)[appDelegate fetchObject:@"Machine" where:@"idNumber" equals:machineData[@"id"]]];
+        
+        if (machineData[@"condition"] != ((NSString *)[NSNull null])) {
+            [xref setCondition:[Utils urlDecode:machineData[@"condition"]]];
+            [xref setConditionDate:[formatter dateFromString:machineData[@"condition_date"]]];
+        }
+        
+        [xref setLocation:location];
+        [location addLocationMachineXrefsObject:xref];
+    }
+    
+    [appDelegate saveContext];
+    
+    activeLocation = (Location *)[appDelegate fetchObject:@"Location" where:@"idNumber" equals:locationData[@"id"]];
+    
+    [self refreshPage];
 }
 
 @end
