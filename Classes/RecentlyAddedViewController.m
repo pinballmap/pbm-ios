@@ -27,82 +27,50 @@ Portland_Pinball_MapAppDelegate *appDelegate;
 
     sectionData = [[NSMutableDictionary alloc] initWithObjectsAndKeys:[[NSMutableArray alloc] init], TODAY, [[NSMutableArray alloc] init], YESTERDAY,[[NSMutableArray alloc] init], THIS_WEEK, [[NSMutableArray alloc] init], THIS_MONTH, [[NSMutableArray alloc] init], THIS_YEAR, nil];
     
-    NSString *path = [NSString stringWithFormat:@"%@/%@/location_machine_xrefs.rss", BASE_URL, appDelegate.activeRegion.subdir];
+    NSString *path = [NSString stringWithFormat:@"%@/%@/location_machine_xrefs.json", BASE_URL, appDelegate.activeRegion.subdir];
         
     [self showLoaderIconLarge];
     
-    @autoreleasepool {
-        [self performSelectorInBackground:@selector(parseXMLFileAtURL:) withObject:path];
-    }
+    dispatch_async(kBgQueue, ^{
+        NSData *data = [NSData dataWithContentsOfURL:[NSURL URLWithString:path]];
+        [self performSelectorOnMainThread:@selector(fetchedData:) withObject:data waitUntilDone:YES];
+    });
 	
 	[self.tableView reloadData];
 }
 
-- (void)refreshPage {    
-	if (appDelegate.activeRegion.recentAdditions == nil) {
-		[self showLoaderIconLarge];
-	}
-	
-	[self.tableView reloadData];
-}
-
-- (void)parser:(NSXMLParser *)parser didStartElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qName attributes:(NSDictionary *)attributeDict {
-	currentElement = [elementName copy];
-
-	if ([elementName isEqualToString:@"item"]) {
-		currentTitle = [[NSMutableString alloc] init];
-		currentDesc  = [[NSMutableString alloc] init];
-		parsingItemNode = YES;
-	}
-}
-
-- (NSDate *)getDateFromRegexMatches:(NSArray *)matches {
-    NSString *day;
-    NSString *year;
-    NSString *monthText;
-    
-    for (NSTextCheckingResult *match in matches) {
-        day = [currentDesc substringWithRange:[match rangeAtIndex:1]];
-        monthText = [currentDesc substringWithRange:[match rangeAtIndex:2]];
-        year = [currentDesc substringWithRange:[match rangeAtIndex:3]];
-    }
-    
-    NSDateFormatter *monthFormatter = [[NSDateFormatter alloc] init];
-    [monthFormatter setDateFormat:@"LL"];
-    NSDate *formattedMonth = [monthFormatter dateFromString:monthText];
+- (void)fetchedData:(NSData *)data {
+    NSError *error;
+    NSDictionary *json = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&error];
+    NSArray *items = json[@"items"];
+    for (NSDictionary *itemContainer in items) {
+        NSDictionary *itemData = itemContainer[@"item"];
         
-    NSDateFormatter *inputFormatter = [[NSDateFormatter alloc] init];
-    [inputFormatter setDateFormat:@"yyyy-MM-dd"];
-    
-    return [inputFormatter dateFromString:[NSString stringWithFormat:@"%@-%@-%@", year, [monthFormatter stringFromDate:formattedMonth], day]];
-}
-
-- (void)parser:(NSXMLParser *)parser didEndElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qName{
-	if ([elementName isEqualToString:@"item"]) {
-		parsingItemNode = NO;
-
-        NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:@"(\\d\\d) (\\w\\w\\w) (\\d\\d\\d\\d)" options:NSRegularExpressionCaseInsensitive error:nil];
-        NSArray *matches = [regex matchesInString:currentDesc options:0 range:NSMakeRange(0, [currentDesc length])];
+        NSString *title = itemData[@"title"];
+        NSString *description = itemData[@"description"];
+        
+        NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:@"(\\d\\d)-(\\w\\w\\w)-(\\d\\d\\d\\d)" options:NSRegularExpressionCaseInsensitive error:nil];
+        NSArray *matches = [regex matchesInString:description options:0 range:NSMakeRange(0, [description length])];
         
         int difference;
 		NSDate *dateAdded = nil;
 		if ([matches count] > 0) {
-            dateAdded = [self getDateFromRegexMatches:matches];
-			difference = [Utils differenceInDaysFrom:[NSDate date] to:dateAdded];    
+            dateAdded = [self getDateFromRegexMatches:matches description:description];
+			difference = [Utils differenceInDaysFrom:[NSDate date] to:dateAdded];
         } else {
 			difference = DISTANT_FUTURE;
 		}
         
-		NSRange range = [currentTitle rangeOfString:@"was added to "];
-		NSString *machineName = [[currentTitle substringToIndex:range.location] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
-		NSString *locationName = [[currentTitle substringFromIndex:range.length + range.location] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
-                
+		NSRange range = [title rangeOfString:@"was added to "];
+		NSString *machineName = [[title substringToIndex:range.location] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+		NSString *locationName = [[title substringFromIndex:range.length + range.location] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+        
         Machine *machine = (Machine *)[appDelegate fetchObject:@"Machine" where:@"name" equals:[NSString stringWithFormat:@"\"%@\"", machineName]];
         Location *location = (Location *)[appDelegate fetchObject:@"Location" where:@"name" equals:[NSString stringWithFormat:@"\"%@\"", locationName]];
         
         if (location && machine) {
             RecentAddition *recentAddition = [RecentAddition findForLocation:location andMachine:machine];
-
+            
             if (recentAddition == nil) {
                 recentAddition = [NSEntityDescription insertNewObjectForEntityForName:@"RecentAddition" inManagedObjectContext:appDelegate.managedObjectContext];
                 [recentAddition setRegion:appDelegate.activeRegion];
@@ -113,7 +81,7 @@ Portland_Pinball_MapAppDelegate *appDelegate;
                 [machine addRecentAdditionsObject:recentAddition];
                 [appDelegate saveContext];
             }
-        
+            
             if(difference <= ONE_YEAR) {
                 NSString *index;
                 if (difference == 0) {
@@ -131,23 +99,9 @@ Portland_Pinball_MapAppDelegate *appDelegate;
                 [[sectionData valueForKey:index] addObject:recentAddition];
             }
         }
-	}
+    }
     
-	currentElement = @"";
-}
-
-- (void)parser:(NSXMLParser *)parser foundCharacters:(NSString *)string {
-	if(parsingItemNode == YES) {
-		if ([currentElement isEqualToString:@"title"] && ![string isEqualToString:@"\n"]) {
-			[currentTitle appendString:string];
-		} else if ([currentElement isEqualToString:@"description"] && ![string isEqualToString:@"\n"]) {
-			[currentDesc appendString:string];
-        }
-	}
-}
-
-- (void)parserDidEndDocument:(NSXMLParser *)parser {	
-	for (NSString *section in sectionData.allKeys) {
+    for (NSString *section in sectionData.allKeys) {
         NSMutableArray *data = [sectionData objectForKey:section];
         
         if ([data count] <= 0 || data == nil) {
@@ -158,10 +112,38 @@ Portland_Pinball_MapAppDelegate *appDelegate;
             }]  forKey:section];
         }
 	}
-		
+    
 	[self.tableView reloadData];
 	[self hideLoaderIconLarge];
-	[super parserDidEndDocument:parser];
+}
+
+- (void)refreshPage {
+	if (appDelegate.activeRegion.recentAdditions == nil) {
+		[self showLoaderIconLarge];
+	}
+	
+	[self.tableView reloadData];
+}
+
+- (NSDate *)getDateFromRegexMatches:(NSArray *)matches description:(NSString *)description {
+    NSString *day;
+    NSString *year;
+    NSString *monthText;
+        
+    for (NSTextCheckingResult *match in matches) {
+        day = [description substringWithRange:[match rangeAtIndex:1]];
+        monthText = [description substringWithRange:[match rangeAtIndex:2]];
+        year = [description substringWithRange:[match rangeAtIndex:3]];
+    }
+        
+    NSDateFormatter *monthFormatter = [[NSDateFormatter alloc] init];
+    [monthFormatter setDateFormat:@"LL"];
+    NSDate *formattedMonth = [monthFormatter dateFromString:monthText];
+        
+    NSDateFormatter *inputFormatter = [[NSDateFormatter alloc] init];
+    [inputFormatter setDateFormat:@"yyyy-MM-dd"];
+    
+    return [inputFormatter dateFromString:[NSString stringWithFormat:@"%@-%@-%@", year, [monthFormatter stringFromDate:formattedMonth], day]];
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
