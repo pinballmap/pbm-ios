@@ -12,12 +12,7 @@
 #define THIS_YEAR @"this year"
 
 @interface RecentlyAddedViewController : XMLTable {
-	NSMutableString *currentTitle;
-	NSMutableString *currentDesc;
-		
     NSMutableDictionary *sectionData;
-    
-	BOOL parsingItemNode;	
 }
 
 @property (nonatomic,strong) NSMutableDictionary *sectionData;
