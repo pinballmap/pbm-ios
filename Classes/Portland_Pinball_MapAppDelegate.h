@@ -6,8 +6,8 @@
 
 #define kBgQueue dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)
 
-//#define BASE_URL @"http://pinballmap.com"
-#define BASE_URL @"http://localhost:3000"
+#define BASE_URL @"http://pinballmap.com"
+//#define BASE_URL @"http://localhost:3000"
 
 #define METERS_IN_A_MILE 1609.344
 #define MAX_PARSING_ATTEMPTS 15

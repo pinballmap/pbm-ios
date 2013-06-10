@@ -183,6 +183,7 @@ Portland_Pinball_MapAppDelegate *appDelegate;
 }
 
 - (void)fetchedData:(NSData *)data {
+    
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
     [formatter setDateFormat:@"yyyy-MM-dd"];
     

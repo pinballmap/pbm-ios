@@ -22,6 +22,8 @@
 		6A26B3F110AFEAA000F07F0A /* BlackTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A26B3F010AFEAA000F07F0A /* BlackTableViewController.m */; };
 		6A47866A10E5ED9200F563E4 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6A47866910E5ED9200F563E4 /* MapKit.framework */; };
 		6A47868E10E5F03400F563E4 /* LocationMap.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A47868D10E5F03400F563E4 /* LocationMap.m */; };
+		6A47BC3117651E880028F2B8 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6A47BC3017651E880028F2B8 /* Default-568h@2x.png */; };
+		6A47BC3217651E880028F2B8 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6A47BC3017651E880028F2B8 /* Default-568h@2x.png */; };
 		6A61E21E10B7BD4100DFD9BE /* ZonesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A61E21D10B7BD4100DFD9BE /* ZonesViewController.m */; };
 		6A61E2A310B7C64E00DFD9BE /* LocationFilterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A61E2A210B7C64E00DFD9BE /* LocationFilterView.m */; };
 		6A64253011BE4CDF00E3BC11 /* RegionSelectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A64252E11BE4CDF00E3BC11 /* RegionSelectViewController.m */; };
@@ -271,6 +273,7 @@
 		6A47866910E5ED9200F563E4 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		6A47868C10E5F03400F563E4 /* LocationMap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationMap.h; sourceTree = "<group>"; };
 		6A47868D10E5F03400F563E4 /* LocationMap.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocationMap.m; sourceTree = "<group>"; };
+		6A47BC3017651E880028F2B8 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		6A61E21C10B7BD4100DFD9BE /* ZonesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZonesViewController.h; sourceTree = "<group>"; };
 		6A61E21D10B7BD4100DFD9BE /* ZonesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZonesViewController.m; sourceTree = "<group>"; };
 		6A61E2A110B7C64E00DFD9BE /* LocationFilterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationFilterView.h; sourceTree = "<group>"; };
@@ -492,6 +495,7 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				6A47BC3017651E880028F2B8 /* Default-568h@2x.png */,
 				8EDA80D1158572FA00F6AD9A /* Nibs */,
 				8EDA802E158572EC00F6AD9A /* Images */,
 				8D1107310486CEB800E47090 /* Portland_Pinball_Map-Info.plist */,
@@ -886,6 +890,7 @@
 				8EDA81021585748800F6AD9A /* XMLTableView.xib in Resources */,
 				8EDD3E3F1597D23E00D34DF2 /* MainWindow_iPad.xib in Resources */,
 				8EDD3E521597DF1F00D34DF2 /* MainMenuViewController.xib in Resources */,
+				6A47BC3117651E880028F2B8 /* Default-568h@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -966,6 +971,7 @@
 				8EDA81031585748800F6AD9A /* XMLTableView.xib in Resources */,
 				8EDD3E401597D23E00D34DF2 /* MainWindow_iPad.xib in Resources */,
 				8EDD3E531597DF1F00D34DF2 /* MainMenuViewController.xib in Resources */,
+				6A47BC3217651E880028F2B8 /* Default-568h@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1079,7 +1085,7 @@
 				GCC_PREFIX_HEADER = Portland_Pinball_Map_Prefix.pch;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				INFOPLIST_FILE = "Portland_Pinball_Map-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				PRODUCT_NAME = "Portland Pinball Map";
 				PROVISIONING_PROFILE = "";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
@@ -1101,7 +1107,7 @@
 				GCC_PREFIX_HEADER = Portland_Pinball_Map_Prefix.pch;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				INFOPLIST_FILE = "Portland_Pinball_Map-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				PRODUCT_NAME = "Portland Pinball Map";
 				PROVISIONING_PROFILE = "";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
@@ -1139,7 +1145,7 @@
 				GCC_PREFIX_HEADER = Portland_Pinball_Map_Prefix.pch;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				INFOPLIST_FILE = "Portland_Pinball_Map-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				PRODUCT_NAME = Pinballmap.com;
 				PROVISIONING_PROFILE = "";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
@@ -1177,7 +1183,7 @@
 				GCC_PREFIX_HEADER = Portland_Pinball_Map_Prefix.pch;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				INFOPLIST_FILE = "Portland_Pinball_Map-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				PRODUCT_NAME = "Portland Pinball Map";
 				PROVISIONING_PROFILE = "";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";

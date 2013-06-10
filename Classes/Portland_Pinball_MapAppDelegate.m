@@ -1,6 +1,8 @@
 #import "MainMenuViewController.h"
 #import "RequestPage.h"
 #import "Portland_Pinball_MapAppDelegate.h"
+#import "LocationMachineXref.h"
+#import "Utils.h"
 
 @implementation Portland_Pinball_MapAppDelegate
 
@@ -10,6 +12,8 @@ void uncaughtExceptionHandler(NSException *exception) {
     NSLog(@"CRASH: %@", exception);
     NSLog(@"Stack Trace: %@", [exception callStackSymbols]);
 }
+
+#define SAVE_MOC { NSError *_error;if (![moc save:&_error]) { NSLog(@"Sub MOC Error %@",[_error localizedDescription]); } [mainMOC performBlock:^{ NSError *e = nil;  if (![mainMOC save:&e]) {  NSLog(@"Main MOC Error");}}]; }
 
 - (bool)isPad {
     return UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad;
@@ -68,6 +72,7 @@ void uncaughtExceptionHandler(NSException *exception) {
             [locationManager setDistanceFilter:10.0f];
         }
         
+        #pragma mark TODO: Breaks if locationServises is enabled
         if ([CLLocationManager locationServicesEnabled]) {
             [self setShowUserLocation:YES];
             [locationManager startUpdatingLocation];
@@ -83,11 +88,16 @@ void uncaughtExceptionHandler(NSException *exception) {
 }
 
 - (NSDictionary *)fetchedData:(NSData *)data {
+    
+    //NSString *string = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+    //NSLog(@"string %@",string);
     NSError *error;
     NSDictionary *json = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&error];
     
     return json;
 }
+
+#pragma mark - Fetch Data
 
 - (void)fetchRegionData {
     UIApplication *app = [UIApplication sharedApplication];
@@ -97,7 +107,7 @@ void uncaughtExceptionHandler(NSException *exception) {
     [self fetchedRegionData:data];
     
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
-    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Region" inManagedObjectContext:self.managedObjectContext];
+    NSEntityDescription *entity  = [NSEntityDescription entityForName:@"Region" inManagedObjectContext:self.managedObjectContext];
     [fetchRequest setEntity:entity];
     NSArray *fetchedRegions = [self.managedObjectContext executeFetchRequest:fetchRequest error:nil];
     
@@ -121,8 +131,8 @@ void uncaughtExceptionHandler(NSException *exception) {
     UIApplication *app = [UIApplication sharedApplication];
     [app setNetworkActivityIndicatorVisible:YES];
     
-    NSData *data = [NSData dataWithContentsOfURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@locations.json", self.rootURL]]];
-    [self fetchedLocationData:data];
+    NSData *data = [NSData dataWithContentsOfURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@all_region_data.json", self.rootURL]]];
+    [self fetchedLocationData:data forRegion:self.activeRegion];
 }
 
 - (void)fetchedRegionData:(NSData *)data {
@@ -157,85 +167,142 @@ void uncaughtExceptionHandler(NSException *exception) {
     }
 }
 
-- (void)fetchedLocationData:(NSData *)data {
-    NSDictionary *json = [self fetchedData:data];
+- (void)fetchedLocationData:(NSData *)data forRegion:(Region*)region{
     
-    NSArray *locations = json[@"locations"];
-    for (NSDictionary *locationContainer in locations) {
-        NSDictionary *locationData = locationContainer[@"location"];
-        
-        if ([locationData[@"numMachines"] intValue] != 0) {
-            NSNumberFormatter *formatter = [[NSNumberFormatter alloc] init];
-            [formatter setNumberStyle:NSNumberFormatterBehaviorDefault];
-            
-            NSString *locationID = locationData[@"id"];
-            
-            Location *location = [NSEntityDescription insertNewObjectForEntityForName:@"Location" inManagedObjectContext:self.managedObjectContext];
-            
-            if (locationData[@"zoneNo"] != (NSString *)[NSNull null]) {
-                [zonesForLocations setValue:locationData[@"zoneNo"] forKey:locationID];
-            }
-            
-            double lon = [locationData[@"lon"] doubleValue];
-            double lat = [locationData[@"lat"] doubleValue];
-            
-            if (lat == 0.0 || lon == 0.0) {
-                lat = 45.52295;
-                lon = -122.66785;
-            }
-                        
-            [location setIdNumber:[NSNumber numberWithInt:[locationID intValue]]];
-            [location setTotalMachines:locationData[@"numMachines"]];
-            [location setName:[locationData[@"name"] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]]];
-            [location setLat:@(lat)];
-            [location setLon:@(lon)];
-            [location setRegion:self.activeRegion];
-            [location updateDistance];
-            
-            [self saveContext];
-        }
-    }
+    NSDateFormatter *dateformatter = [[NSDateFormatter alloc] init];
+    [dateformatter setDateFormat:@"yyyy-MM-dd"];
     
-    NSArray *machines = json[@"machines"];
-    for (NSDictionary *machineContainer in machines) {
-        NSDictionary *machineData = machineContainer[@"machine"];
-        
-        if ([machineData[@"numLocations"] intValue] != 0) {
-            Machine *machine = [NSEntityDescription insertNewObjectForEntityForName:@"Machine" inManagedObjectContext:self.managedObjectContext];
-                        
-            [machine setIdNumber:machineData[@"id"]];
-            [machine setName:[machineData[@"name"] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]]];
-            [machine addRegionObject:self.activeRegion];
-            [self.activeRegion addMachinesObject:machine];
-            
-            [self saveContext];
-        }
-    }
+    NSNumberFormatter *formatter = [[NSNumberFormatter alloc] init];
+    [formatter setNumberStyle:NSNumberFormatterBehaviorDefault];
     
-    NSArray *zones = json[@"zones"];
-    for (NSDictionary *zoneContainer in zones) {
-        NSDictionary *zoneData = zoneContainer[@"zone"];
+    dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+    dispatch_async(queue, ^{
         
-        Zone *zone = [NSEntityDescription insertNewObjectForEntityForName:@"Zone" inManagedObjectContext:self.managedObjectContext];
+        
+        
+        NSManagedObjectContext *mainMOC = region.managedObjectContext;
+        NSManagedObjectContext *moc     = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSConfinementConcurrencyType];
+        [moc setParentContext:mainMOC];
+        [moc setUndoManager:nil];
+        
+        
+        Region *subregion = (Region*)[moc objectWithID:region.objectID]; //get region from submoc
+        
+        NSDictionary *json = [self fetchedData:data][@"data"][@"region"];
+        
+        //Parse Machines First
+        NSMutableSet *machineSet = [NSMutableSet set];
+        NSArray *machines = json[@"machines"];
+        for (NSDictionary *machineContainer in machines) {
+            NSDictionary *machineData = machineContainer[@"machine"];
+            
+            if ([machineData[@"numLocations"] intValue] != 0) {
+                Machine *machine = [NSEntityDescription insertNewObjectForEntityForName:@"Machine" inManagedObjectContext:moc];
                 
-        [zone setName:zoneData[@"name"]];
-        [zone setIdNumber:zoneData[@"id"]];
-        [zone setIsPrimary:@([zoneData[@"isPrimary"] intValue])];
-        [zone setRegion:self.activeRegion];
-        [self.activeRegion addZonesObject:zone];
+                [machine setIdNumber:machineData[@"id"]];
+                [machine setName:[machineData[@"name"] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]]];
+                [machine addRegionObject:subregion];
+                //[subregion addMachinesObject:machine]; //redundant
+                
+                [machineSet addObject:machine]; //save them for use with locations later
+            }
+        }
         
-        [self saveContext];
-    }
+        SAVE_MOC;
         
-    for (NSString *locationID in zonesForLocations.allKeys) {
-        Zone *zone = (Zone *)[self fetchObject:@"Zone" where:@"idNumber" equals:[zonesForLocations objectForKey:locationID]];
-        Location *location = (Location *)[self fetchObject:@"Location" where:@"idNumber" equals:locationID];
+        NSArray *locations = json[@"locations"];
+        for (NSDictionary *locationContainer in locations) {
+            NSDictionary *locationData = locationContainer[@"location"];
+            
+            if ([locationData[@"numMachines"] intValue] != 0) {
+                
+                NSString *locationID = locationData[@"id"];
+                
+                Location *location = [NSEntityDescription insertNewObjectForEntityForName:@"Location" inManagedObjectContext:moc];
+                [location setStreet1:locationData[@"street"]];
+                [location setCity:locationData[@"city"]];
+                [location setState:locationData[@"state"]];
+                [location setZip:locationData[@"zip"]];
+                //[location setPhone:locationData[@"phone"]];
+                
+                #warning TODO: Add zoneNo to allregiondata
+                if (locationData[@"zoneNo"] && locationData[@"zoneNo"] != (NSString *)[NSNull null]) {
+                    [zonesForLocations setValue:locationData[@"zoneNo"] forKey:locationID];
+                }
+                
+                double lon = [locationData[@"lon"] doubleValue];
+                double lat = [locationData[@"lat"] doubleValue];
+                
+                if (lat == 0.0 || lon == 0.0) {
+                    lat = 45.52295;
+                    lon = -122.66785;
+                }
+                            
+                [location setIdNumber:[NSNumber numberWithInt:[locationID intValue]]];
+                [location setTotalMachines:locationData[@"numMachines"]];
+                [location setName:[locationData[@"name"] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]]];
+                [location setLat:@(lat)];
+                [location setLon:@(lon)];
+                [location setRegion:subregion];
+                [location updateDistance];
+                
+                NSArray *machines = locationData[@"machines"];
+                for (NSDictionary *machineContainer in machines) {
+                    NSDictionary *machineData = machineContainer[@"machine"];
+                    
+                    NSString *machineName = machineData[@"name"];
+                    NSSet *quickset = [machineSet filteredSetUsingPredicate:[NSPredicate predicateWithFormat:@"name == %@",machineName]];
+                    if(quickset.count > 0) {
+                        LocationMachineXref *xref = [NSEntityDescription insertNewObjectForEntityForName:@"LocationMachineXref" inManagedObjectContext:moc];
+                        
+                        if (machineData[@"condition"] && machineData[@"condition"] != ((NSString *)[NSNull null])) {
+                            [xref setCondition:[Utils urlDecode:machineData[@"condition"]]];
+                            [xref setConditionDate:[dateformatter dateFromString:machineData[@"condition_date"]]];
+                        }
+                    
+                        [xref setMachine:[quickset anyObject]];
+                        [location addLocationMachineXrefsObject:xref];
+                    } else {
+                        NSLog(@"Machine not found %@",machineName);
+                    }
+                    
+                    SAVE_MOC;
+                }
+            }
+        }
         
-        [zone addLocationObject:location];
-        [location setLocationZone:zone];
+        SAVE_MOC;
         
-        [self saveContext];
-    }
+        NSArray *zones = json[@"zones"];
+        for (NSDictionary *zoneContainer in zones) {
+            NSDictionary *zoneData = zoneContainer[@"zone"];
+            
+            Zone *zone = [NSEntityDescription insertNewObjectForEntityForName:@"Zone" inManagedObjectContext:moc];
+                    
+            [zone setName:zoneData[@"name"]];
+            [zone setIdNumber:zoneData[@"id"]];
+            [zone setIsPrimary:@([zoneData[@"isPrimary"] intValue])];
+            [zone setRegion:subregion];
+            //[subregion addZonesObject:zone]; //redundant
+        }
+        
+        SAVE_MOC;
+            
+        for (NSString *locationID in zonesForLocations.allKeys) {
+            Zone *zone = (Zone *)[self fetchObject:@"Zone" where:@"idNumber" equals:[zonesForLocations objectForKey:locationID]];
+            Location *location = (Location *)[self fetchObject:@"Location" where:@"idNumber" equals:locationID];
+            
+            [zone addLocationObject:location];
+            [location setLocationZone:zone];
+        }
+        
+        SAVE_MOC;
+        
+        dispatch_async(dispatch_get_main_queue(),
+           ^{
+               NSLog(@"Parse Compelte");
+           });
+    });
 }
 
 - (void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation {
@@ -370,6 +437,7 @@ void uncaughtExceptionHandler(NSException *exception) {
 }
 
 - (void)saveContext {
+    NSLog(@"Save Context");
     NSError *error = nil;
     NSManagedObjectContext *objectContext = self.managedObjectContext;
     if (objectContext != nil) {
@@ -387,7 +455,7 @@ void uncaughtExceptionHandler(NSException *exception) {
     
     NSPersistentStoreCoordinator *coordinator = [self persistentStoreCoordinator];
     if (coordinator != nil) {
-        managedObjectContext = [[NSManagedObjectContext alloc] init];
+        managedObjectContext = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSMainQueueConcurrencyType]; //For multithreading
         [managedObjectContext setPersistentStoreCoordinator:coordinator];
     }
     

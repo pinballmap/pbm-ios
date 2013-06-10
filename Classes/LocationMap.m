@@ -69,21 +69,21 @@
         region.center.longitude = (southWest.longitude + northEast.longitude) / 2.0;
         region.span.latitudeDelta = northEast.latitude - southWest.latitude;
         region.span.longitudeDelta = northEast.longitude - southWest.longitude;
-    } else {
+    } else if ([locationsToShow count] == 1) {
         self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Google Map" style:UIBarButtonItemStyleBordered target:self action:@selector(googleMapButtonPressed:)];
         
         Location *soloLocation = [locationsToShow objectAtIndex:0];
         LocationPin *soloPlacemark = [[LocationPin alloc] initWithLocation:soloLocation];
         [annotations addObject:soloPlacemark];
         
-        region.center.latitude = soloLocation.coordinates.coordinate.latitude;
+        region.center.latitude  = soloLocation.coordinates.coordinate.latitude;
         region.center.longitude = soloLocation.coordinates.coordinate.longitude;
         region.span.latitudeDelta = 0.02;
         region.span.longitudeDelta = 0.02;        
     }
     
     [map addAnnotations:annotations];
-    [map setRegion:[map regionThatFits:region] animated:NO];
+    [map setRegion:[map regionThatFits:region] animated:YES];
 }
 
 - (IBAction)googleMapButtonPressed:(id)sender {
@@ -110,7 +110,7 @@
 		}
 		
 		pin.canShowCallout = YES;
-		pin.animatesDrop = NO;
+		pin.animatesDrop   = YES;
 		
 		if(showProfileButtons == YES) {
 			UIButton *myDetailButton = [UIButton buttonWithType:UIButtonTypeCustom];

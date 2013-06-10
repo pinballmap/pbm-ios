@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model name="" userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="1171" systemVersion="11E2620" minimumToolsVersion="Xcode 4.1" macOSVersion="Automatic" iOSVersion="Automatic">
+<model name="" userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="2057" systemVersion="11G56" minimumToolsVersion="Xcode 4.1" macOSVersion="Automatic" iOSVersion="Automatic">
     <entity name="Event" representedClassName="Event" syncable="YES">
         <attribute name="categoryNo" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="endDate" optional="YES" attributeType="Date" syncable="YES"/>
@@ -71,12 +71,12 @@
         <relationship name="region" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Region" inverseName="zones" inverseEntity="Region" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Event" positionX="-2412" positionY="-873" width="128" height="165"/>
-        <element name="Location" positionX="-2243" positionY="-783" width="128" height="270"/>
-        <element name="LocationMachineXref" positionX="-2016" positionY="-783" width="128" height="150"/>
-        <element name="Machine" positionX="-1973" positionY="-351" width="128" height="105"/>
-        <element name="RecentAddition" positionX="-2241" positionY="-873" width="128" height="90"/>
-        <element name="Region" positionX="-2432" positionY="-495" width="128" height="225"/>
-        <element name="Zone" positionX="-2241" positionY="-369" width="128" height="105"/>
+        <element name="Event" positionX="-3015" positionY="-693" width="128" height="165"/>
+        <element name="Location" positionX="-2502" positionY="-648" width="128" height="270"/>
+        <element name="LocationMachineXref" positionX="-2862" positionY="-447" width="128" height="150"/>
+        <element name="Machine" positionX="-3033" positionY="-339" width="128" height="105"/>
+        <element name="RecentAddition" positionX="-2457" positionY="-855" width="128" height="90"/>
+        <element name="Region" positionX="-2844" positionY="-846" width="128" height="225"/>
+        <element name="Zone" positionX="-2288" positionY="-387" width="128" height="105"/>
     </elements>
 </model>

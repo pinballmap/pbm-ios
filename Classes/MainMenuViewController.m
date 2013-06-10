@@ -28,6 +28,7 @@ Portland_Pinball_MapAppDelegate *appDelegate;
 }
 
 - (void)viewDidAppear:(BOOL)animated {
+    
     [self setTitle:[NSString stringWithFormat:@"%@ Pinball Map", appDelegate.activeRegion.formalName]];
 
     if (appDelegate.internetActive) {
@@ -65,13 +66,14 @@ Portland_Pinball_MapAppDelegate *appDelegate;
         motd = nil;
         
         [appDelegate showSplashScreen];
+        //[appDelegate fetchRegionData]; //couldn't get this to work without it
         [appDelegate fetchLocationData];
         
         if (motd != nil && ![motd isKindOfClass:[NSNull class]]) {
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Message Of The Day" message:motd delegate:self cancelButtonTitle:@"Thanks" otherButtonTitles:nil];
             [alert show];
         }
-        
+         
         [self showMenu];
 	}
 	
