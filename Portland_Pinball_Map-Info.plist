@@ -34,12 +34,12 @@
 	<string>MainWindow_iPad</string>
 	<key>NSMainNibFile~iphone</key>
 	<string>MainWindow_iPhone</string>
+	<key>UIInterfaceOrientation (iPad)</key>
+	<string>UIInterfaceOrientationLandscapeRight</string>
 	<key>UIPrerenderedIcon</key>
 	<true/>
 	<key>UIStatusBarStyle</key>
 	<string>UIStatusBarStyleBlackOpaque</string>
-	<key>UIInterfaceOrientation (iPad)</key>
-	<string>UIInterfaceOrientationLandscapeRight</string>
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>

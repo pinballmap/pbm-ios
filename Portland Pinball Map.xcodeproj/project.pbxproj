@@ -36,6 +36,12 @@
 		6AB12FAF10E71E3D002CB85F /* LocationPin.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AB12FAE10E71E3D002CB85F /* LocationPin.m */; };
 		6AC7E81D11B568B400A7E748 /* CommentController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AC7E81B11B568B400A7E748 /* CommentController.m */; };
 		6AC9D6A510BBC6D100EEA3F7 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6AC9D6A410BBC6D100EEA3F7 /* CoreLocation.framework */; };
+		6AD1C1D41766797E00EA27BB /* libTestFlight.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6AD1C1D01766797E00EA27BB /* libTestFlight.a */; };
+		6AD1C1D51766797E00EA27BB /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 6AD1C1D11766797E00EA27BB /* README.md */; };
+		6AD1C1D61766797E00EA27BB /* release_notes.md in Resources */ = {isa = PBXBuildFile; fileRef = 6AD1C1D21766797E00EA27BB /* release_notes.md */; };
+		6AD1C1D817667B2A00EA27BB /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6AD1C1D717667B2A00EA27BB /* libz.dylib */; };
+		6AD1C1DE17667ED300EA27BB /* SplashViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AD1C1DD17667ED300EA27BB /* SplashViewController.m */; };
+		6AD1C1E017667EFB00EA27BB /* SplashView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6AD1C1DF17667EFB00EA27BB /* SplashView.xib */; };
 		6AE45E2C1234A57F00C629DF /* Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AE45E2B1234A57F00C629DF /* Utils.m */; };
 		6AF208B811839D63002FBE1F /* AddMachineViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AF208B611839D63002FBE1F /* AddMachineViewController.m */; };
 		8E1267F4157C4B2F00A40329 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; };
@@ -297,6 +303,14 @@
 		6AC7E81A11B568B400A7E748 /* CommentController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommentController.h; sourceTree = "<group>"; };
 		6AC7E81B11B568B400A7E748 /* CommentController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommentController.m; sourceTree = "<group>"; };
 		6AC9D6A410BBC6D100EEA3F7 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		6AD1C1D01766797E00EA27BB /* libTestFlight.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libTestFlight.a; sourceTree = "<group>"; };
+		6AD1C1D11766797E00EA27BB /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
+		6AD1C1D21766797E00EA27BB /* release_notes.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = release_notes.md; sourceTree = "<group>"; };
+		6AD1C1D31766797E00EA27BB /* TestFlight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestFlight.h; sourceTree = "<group>"; };
+		6AD1C1D717667B2A00EA27BB /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
+		6AD1C1DC17667ED300EA27BB /* SplashViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SplashViewController.h; sourceTree = "<group>"; };
+		6AD1C1DD17667ED300EA27BB /* SplashViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SplashViewController.m; sourceTree = "<group>"; };
+		6AD1C1DF17667EFB00EA27BB /* SplashView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SplashView.xib; sourceTree = "<group>"; };
 		6AE45E2A1234A57F00C629DF /* Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Utils.h; sourceTree = "<group>"; };
 		6AE45E2B1234A57F00C629DF /* Utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Utils.m; sourceTree = "<group>"; };
 		6AF208B511839D63002FBE1F /* AddMachineViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddMachineViewController.h; sourceTree = "<group>"; };
@@ -415,6 +429,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6AD1C1D817667B2A00EA27BB /* libz.dylib in Frameworks */,
 				8E7A2E6E1606B206009D9B87 /* SystemConfiguration.framework in Frameworks */,
 				8E276C7C1590208700EEE1D8 /* CoreData.framework in Frameworks */,
 				1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */,
@@ -422,6 +437,7 @@
 				2892E4100DC94CBA00A64D0F /* CoreGraphics.framework in Frameworks */,
 				6AC9D6A510BBC6D100EEA3F7 /* CoreLocation.framework in Frameworks */,
 				6A47866A10E5ED9200F563E4 /* MapKit.framework in Frameworks */,
+				6AD1C1D41766797E00EA27BB /* libTestFlight.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -472,6 +488,7 @@
 		29B97314FDCFA39411CA2CEA /* CustomTemplate */ = {
 			isa = PBXGroup;
 			children = (
+				6AD1C1D717667B2A00EA27BB /* libz.dylib */,
 				080E96DDFE201D6D7F000001 /* Classes */,
 				29B97315FDCFA39411CA2CEA /* Other Sources */,
 				29B97317FDCFA39411CA2CEA /* Resources */,
@@ -484,6 +501,7 @@
 		29B97315FDCFA39411CA2CEA /* Other Sources */ = {
 			isa = PBXGroup;
 			children = (
+				6AD1C1CF1766797E00EA27BB /* TestFlightSDK1.2.5 */,
 				8EC76C7E1606A99900B394FF /* Reachability */,
 				8E126823157C4B7200A40329 /* Frank */,
 				28A0AAE50D9B0CCF005BE974 /* Portland_Pinball_Map_Prefix.pch */,
@@ -542,6 +560,17 @@
 			name = "table base classes";
 			sourceTree = "<group>";
 		};
+		6AD1C1CF1766797E00EA27BB /* TestFlightSDK1.2.5 */ = {
+			isa = PBXGroup;
+			children = (
+				6AD1C1D01766797E00EA27BB /* libTestFlight.a */,
+				6AD1C1D11766797E00EA27BB /* README.md */,
+				6AD1C1D21766797E00EA27BB /* release_notes.md */,
+				6AD1C1D31766797E00EA27BB /* TestFlight.h */,
+			);
+			path = TestFlightSDK1.2.5;
+			sourceTree = "<group>";
+		};
 		6AF208A911839D12002FBE1F /* controllers */ = {
 			isa = PBXGroup;
 			children = (
@@ -583,6 +612,8 @@
 				8E6D0DB515996580000FAA4E /* PBMViewController.m */,
 				8EBE6A30159A0C9C00C0374F /* PBMSplitViewController.h */,
 				8EBE6A31159A0C9C00C0374F /* PBMSplitViewController.m */,
+				6AD1C1DC17667ED300EA27BB /* SplashViewController.h */,
+				6AD1C1DD17667ED300EA27BB /* SplashViewController.m */,
 			);
 			name = controllers;
 			sourceTree = "<group>";
@@ -746,6 +777,7 @@
 				8EDA80D8158572FA00F6AD9A /* RequestPage.xib */,
 				8EDA80D9158572FA00F6AD9A /* RootViewController.xib */,
 				8EDD3E511597DF1F00D34DF2 /* MainMenuViewController.xib */,
+				6AD1C1DF17667EFB00EA27BB /* SplashView.xib */,
 			);
 			path = Nibs;
 			sourceTree = "<group>";
@@ -891,6 +923,9 @@
 				8EDD3E3F1597D23E00D34DF2 /* MainWindow_iPad.xib in Resources */,
 				8EDD3E521597DF1F00D34DF2 /* MainMenuViewController.xib in Resources */,
 				6A47BC3117651E880028F2B8 /* Default-568h@2x.png in Resources */,
+				6AD1C1D51766797E00EA27BB /* README.md in Resources */,
+				6AD1C1D61766797E00EA27BB /* release_notes.md in Resources */,
+				6AD1C1E017667EFB00EA27BB /* SplashView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1020,6 +1055,7 @@
 				8E57FEC3159E32D100A57AF3 /* Machine.m in Sources */,
 				8E57FEC7159E331D00A57AF3 /* RecentAddition.m in Sources */,
 				8E7A2E761606B2AF009D9B87 /* Reachability.m in Sources */,
+				6AD1C1DE17667ED300EA27BB /* SplashViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1085,7 +1121,11 @@
 				GCC_PREFIX_HEADER = Portland_Pinball_Map_Prefix.pch;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				INFOPLIST_FILE = "Portland_Pinball_Map-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/TestFlightSDK1.2.5\"",
+				);
 				PRODUCT_NAME = "Portland Pinball Map";
 				PROVISIONING_PROFILE = "";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
@@ -1107,7 +1147,11 @@
 				GCC_PREFIX_HEADER = Portland_Pinball_Map_Prefix.pch;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				INFOPLIST_FILE = "Portland_Pinball_Map-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/TestFlightSDK1.2.5\"",
+				);
 				PRODUCT_NAME = "Portland Pinball Map";
 				PROVISIONING_PROFILE = "";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
@@ -1124,7 +1168,7 @@
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				PROVISIONING_PROFILE = "";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "9DBDA858-CC87-431A-BE45-CD38E2E9E15D";
 				SDKROOT = iphoneos;
@@ -1145,7 +1189,11 @@
 				GCC_PREFIX_HEADER = Portland_Pinball_Map_Prefix.pch;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				INFOPLIST_FILE = "Portland_Pinball_Map-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/TestFlightSDK1.2.5\"",
+				);
 				PRODUCT_NAME = Pinballmap.com;
 				PROVISIONING_PROFILE = "";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
@@ -1164,7 +1212,7 @@
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				PROVISIONING_PROFILE = "";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "D8EEA014-847E-45BF-9E76-30AB65E496F0";
 				SDKROOT = iphoneos;
@@ -1183,7 +1231,11 @@
 				GCC_PREFIX_HEADER = Portland_Pinball_Map_Prefix.pch;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				INFOPLIST_FILE = "Portland_Pinball_Map-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/TestFlightSDK1.2.5\"",
+				);
 				PRODUCT_NAME = "Portland Pinball Map";
 				PROVISIONING_PROFILE = "";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
@@ -1316,7 +1368,7 @@
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				PROVISIONING_PROFILE = "";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "9DBDA858-CC87-431A-BE45-CD38E2E9E15D";
 				SDKROOT = iphoneos;
@@ -1332,7 +1384,7 @@
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				PROVISIONING_PROFILE = "";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "D8EEA014-847E-45BF-9E76-30AB65E496F0";
 				SDKROOT = iphoneos;

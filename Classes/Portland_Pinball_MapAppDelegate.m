@@ -1,4 +1,5 @@
-#import "MainMenuViewController.h"
+#import "SplashViewController.h"
+#import "ZonesViewController.h"
 #import "RequestPage.h"
 #import "Portland_Pinball_MapAppDelegate.h"
 #import "LocationMachineXref.h"
@@ -26,6 +27,9 @@ void uncaughtExceptionHandler(NSException *exception) {
 }
 
 - (void)applicationDidFinishLaunching:(UIApplication *)application {
+    
+    [TestFlight takeOff:@"b0b7ff36-b459-483b-8c44-57b51e53cfae"];
+    
     NSSetUncaughtExceptionHandler(&uncaughtExceptionHandler);
 	
     userLocation = [[CLLocation alloc] initWithLatitude:45.52295 longitude:-122.66785];
@@ -54,12 +58,14 @@ void uncaughtExceptionHandler(NSException *exception) {
 	}
     
     [window makeKeyAndVisible];
+    
+    return;
         
     activeRegion = (Region *)[self fetchObject:@"Region" where:@"idNumber" equals:(NSString *)[[NSUserDefaults standardUserDefaults] valueForKey:@"activeRegionID"]];
 
     NSLog(@"SAVED REGION NAME %@", activeRegion.name);
 	
-    [self showSplashScreen];
+   
     
 	if (internetActive) {
         NSLog(@"INTERNET ACTIVE, RESETTING DATABASE");
@@ -79,7 +85,10 @@ void uncaughtExceptionHandler(NSException *exception) {
         } else {
             [self setShowUserLocation:NO];
             [self fetchRegionData];
+            [self showSplashScreen];
         }
+    } else {
+         [self showSplashScreen];
     }
 }
 
@@ -311,6 +320,7 @@ void uncaughtExceptionHandler(NSException *exception) {
 	if (initLoaded != YES) {
 		initLoaded = YES;
         [self fetchRegionData];
+        [self showSplashScreen];
 	}
 }
 
