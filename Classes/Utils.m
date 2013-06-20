@@ -141,4 +141,19 @@
     return days;
 }
 
++ (NSArray *)fetchObjects:(NSString *)type where:(NSString *)field equals:(NSString *)value inMOC:(NSManagedObjectContext*)moc {
+    NSFetchRequest *request = [[NSFetchRequest alloc] init];
+    
+    [request setEntity:[NSEntityDescription entityForName:type inManagedObjectContext:moc]];
+    [request setPredicate:[NSPredicate predicateWithFormat:[NSString stringWithFormat:@"%@ = %@", field, value]]];
+    
+    return [moc executeFetchRequest:request error:nil];
+}
+
++ (id)fetchObject:(NSString *)type where:(NSString *)field equals:(NSString *)value inMOC:(NSManagedObjectContext*)moc{
+    NSArray *objects = [Utils fetchObjects:type where:field equals:value inMOC:moc];
+    
+    return [objects count] > 0 ? objects[0] : nil;
+}
+
 @end

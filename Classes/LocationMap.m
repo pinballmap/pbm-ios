@@ -1,5 +1,6 @@
 #import "LocationMap.h"
 #import "BlackTableViewController.h"
+#import "Utils.h"
 
 @implementation LocationMap
 @synthesize map, locationsToShow, location, showProfileButtons;
@@ -16,8 +17,8 @@
 		region.span = span;
 		
 		CLLocationCoordinate2D newLoc;
-		newLoc.latitude  = 45.521744;
-		newLoc.longitude = -122.671623;
+		newLoc.latitude  = PDX_LAT;
+		newLoc.longitude = PDX_LON;
 		region.center = newLoc;
 		
 		[map setRegion:region animated:NO];

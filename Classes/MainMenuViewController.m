@@ -67,7 +67,7 @@ Portland_Pinball_MapAppDelegate *appDelegate;
         
         [appDelegate showSplashScreen];
         //[appDelegate fetchRegionData]; //couldn't get this to work without it
-        [appDelegate fetchLocationData];
+        //[appDelegate fetchLocationData];
         
         if (motd != nil && ![motd isKindOfClass:[NSNull class]]) {
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Message Of The Day" message:motd delegate:self cancelButtonTitle:@"Thanks" otherButtonTitles:nil];
@@ -160,7 +160,7 @@ Portland_Pinball_MapAppDelegate *appDelegate;
 
 - (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex {	
 	if(buttonIndex == 0) {
-        [appDelegate fetchRegionData];
+        //[appDelegate fetchRegionData];
     }
 }
 

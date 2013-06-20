@@ -34,20 +34,21 @@
     
     Reachability *internetReachable_;
     
-    NSMutableDictionary *zonesForLocations;
-    
 @private
     NSManagedObjectContext *managedObjectContext;
     NSManagedObjectModel *managedObjectModel;
     NSPersistentStoreCoordinator *persistentStoreCoordinator;
 }
 
+@property (nonatomic,strong) UIWindow *window;
+
 @property (nonatomic,strong) CLLocation	*userLocation;
 @property (nonatomic,strong) Region *activeRegion;
-@property (nonatomic,strong) IBOutlet UIWindow *window;
-@property (nonatomic,strong) IBOutlet UINavigationController *navigationController;
-@property (nonatomic,strong) IBOutlet UISplitViewController *splitViewController;
-@property (nonatomic,strong) IBOutlet LocationMap *locationMap;
+
+@property (nonatomic,strong) UINavigationController *navigationController;
+@property (nonatomic,strong) UISplitViewController *splitViewController;
+@property (nonatomic,strong) LocationMap *locationMap;
+
 @property (nonatomic,strong) UIView	*splashScreen;
 @property (nonatomic,assign) BOOL showUserLocation;
 @property (nonatomic,assign) BOOL internetActive;
@@ -56,8 +57,7 @@
 @property (nonatomic,strong,readonly) NSPersistentStoreCoordinator *persistentStoreCoordinator;
 @property (nonatomic,strong) CLLocationManager *locationManager;
 
-- (void)fetchRegionData;
-- (void)fetchLocationData;
+
 - (void)showMap:(NSArray *)array withTitle:(NSString *)newTitle;
 - (void)updateLocationDistances;
 - (void)hideSplashScreen;

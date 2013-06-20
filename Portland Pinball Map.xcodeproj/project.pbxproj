@@ -30,6 +30,7 @@
 		6A6A7BC010E41766002C9909 /* AboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A6A7BBF10E41766002C9909 /* AboutViewController.m */; };
 		6A73455D10CCD657005D089C /* MachineFilterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A73455C10CCD657005D089C /* MachineFilterView.m */; };
 		6A73FFEA10B3EB12000C4802 /* LocationProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A73FFE910B3EB12000C4802 /* LocationProfileViewController.m */; };
+		6A87CF491767D3EF006CC3A7 /* APIManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A87CF481767D3EE006CC3A7 /* APIManager.m */; };
 		6A89776011B63FD800C97FBB /* LocationProfileCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A89775F11B63FD800C97FBB /* LocationProfileCell.m */; };
 		6A95F6C6118E4FA00054928C /* MachineProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A95F6C4118E4FA00054928C /* MachineProfileViewController.m */; };
 		6A9F909E11BB03F900BBF21A /* WebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A9F909C11BB03F900BBF21A /* WebViewController.m */; };
@@ -217,16 +218,12 @@
 		8EDA80DD158572FA00F6AD9A /* LocationProfile.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8EDA80D3158572FA00F6AD9A /* LocationProfile.xib */; };
 		8EDA80DE158572FA00F6AD9A /* LocationProfileCellView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8EDA80D4158572FA00F6AD9A /* LocationProfileCellView.xib */; };
 		8EDA80DF158572FA00F6AD9A /* LocationProfileCellView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8EDA80D4158572FA00F6AD9A /* LocationProfileCellView.xib */; };
-		8EDA80E0158572FA00F6AD9A /* MainWindow_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8EDA80D5158572FA00F6AD9A /* MainWindow_iPhone.xib */; };
-		8EDA80E1158572FA00F6AD9A /* MainWindow_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8EDA80D5158572FA00F6AD9A /* MainWindow_iPhone.xib */; };
 		8EDA80E2158572FA00F6AD9A /* PBMDoubleTextCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8EDA80D6158572FA00F6AD9A /* PBMDoubleTextCell.xib */; };
 		8EDA80E3158572FA00F6AD9A /* PBMDoubleTextCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8EDA80D6158572FA00F6AD9A /* PBMDoubleTextCell.xib */; };
 		8EDA80E4158572FA00F6AD9A /* PBMTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8EDA80D7158572FA00F6AD9A /* PBMTableCell.xib */; };
 		8EDA80E5158572FA00F6AD9A /* PBMTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8EDA80D7158572FA00F6AD9A /* PBMTableCell.xib */; };
 		8EDA80E6158572FA00F6AD9A /* RequestPage.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8EDA80D8158572FA00F6AD9A /* RequestPage.xib */; };
 		8EDA80E7158572FA00F6AD9A /* RequestPage.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8EDA80D8158572FA00F6AD9A /* RequestPage.xib */; };
-		8EDA80E8158572FA00F6AD9A /* RootViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8EDA80D9158572FA00F6AD9A /* RootViewController.xib */; };
-		8EDA80E9158572FA00F6AD9A /* RootViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8EDA80D9158572FA00F6AD9A /* RootViewController.xib */; };
 		8EDA80EC1585740500F6AD9A /* RequestPage.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EDA80EB1585740500F6AD9A /* RequestPage.m */; };
 		8EDA80ED1585740500F6AD9A /* RequestPage.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EDA80EB1585740500F6AD9A /* RequestPage.m */; };
 		8EDA80F01585743C00F6AD9A /* PBMTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EDA80EF1585743C00F6AD9A /* PBMTableCell.m */; };
@@ -243,8 +240,6 @@
 		8EDA81011585748800F6AD9A /* WebViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8EDA80F61585748800F6AD9A /* WebViewController.xib */; };
 		8EDA81021585748800F6AD9A /* XMLTableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8EDA80F71585748800F6AD9A /* XMLTableView.xib */; };
 		8EDA81031585748800F6AD9A /* XMLTableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8EDA80F71585748800F6AD9A /* XMLTableView.xib */; };
-		8EDD3E3F1597D23E00D34DF2 /* MainWindow_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8EDD3E3E1597D23E00D34DF2 /* MainWindow_iPad.xib */; };
-		8EDD3E401597D23E00D34DF2 /* MainWindow_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8EDD3E3E1597D23E00D34DF2 /* MainWindow_iPad.xib */; };
 		8EDD3E4F1597DEED00D34DF2 /* MainMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EDD3E4E1597DEED00D34DF2 /* MainMenuViewController.m */; };
 		8EDD3E501597DEED00D34DF2 /* MainMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EDD3E4E1597DEED00D34DF2 /* MainMenuViewController.m */; };
 		8EDD3E521597DF1F00D34DF2 /* MainMenuViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8EDD3E511597DF1F00D34DF2 /* MainMenuViewController.xib */; };
@@ -292,6 +287,8 @@
 		6A73455C10CCD657005D089C /* MachineFilterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MachineFilterView.m; sourceTree = "<group>"; };
 		6A73FFE810B3EB12000C4802 /* LocationProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationProfileViewController.h; sourceTree = "<group>"; };
 		6A73FFE910B3EB12000C4802 /* LocationProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocationProfileViewController.m; sourceTree = "<group>"; };
+		6A87CF471767D3EE006CC3A7 /* APIManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APIManager.h; sourceTree = "<group>"; };
+		6A87CF481767D3EE006CC3A7 /* APIManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APIManager.m; sourceTree = "<group>"; };
 		6A89775E11B63FD800C97FBB /* LocationProfileCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationProfileCell.h; sourceTree = "<group>"; };
 		6A89775F11B63FD800C97FBB /* LocationProfileCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocationProfileCell.m; sourceTree = "<group>"; };
 		6A95F6C3118E4FA00054928C /* MachineProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MachineProfileViewController.h; sourceTree = "<group>"; };
@@ -403,11 +400,9 @@
 		8EDA80D2158572FA00F6AD9A /* AboutView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AboutView.xib; sourceTree = "<group>"; };
 		8EDA80D3158572FA00F6AD9A /* LocationProfile.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LocationProfile.xib; sourceTree = "<group>"; };
 		8EDA80D4158572FA00F6AD9A /* LocationProfileCellView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LocationProfileCellView.xib; sourceTree = "<group>"; };
-		8EDA80D5158572FA00F6AD9A /* MainWindow_iPhone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainWindow_iPhone.xib; sourceTree = "<group>"; };
 		8EDA80D6158572FA00F6AD9A /* PBMDoubleTextCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PBMDoubleTextCell.xib; sourceTree = "<group>"; };
 		8EDA80D7158572FA00F6AD9A /* PBMTableCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PBMTableCell.xib; sourceTree = "<group>"; };
 		8EDA80D8158572FA00F6AD9A /* RequestPage.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RequestPage.xib; sourceTree = "<group>"; };
-		8EDA80D9158572FA00F6AD9A /* RootViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RootViewController.xib; sourceTree = "<group>"; };
 		8EDA80EA1585740500F6AD9A /* RequestPage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RequestPage.h; sourceTree = "<group>"; };
 		8EDA80EB1585740500F6AD9A /* RequestPage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RequestPage.m; sourceTree = "<group>"; };
 		8EDA80EE1585743C00F6AD9A /* PBMTableCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PBMTableCell.h; sourceTree = "<group>"; };
@@ -418,7 +413,6 @@
 		8EDA80F51585748800F6AD9A /* MachineProfileView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MachineProfileView.xib; sourceTree = "<group>"; };
 		8EDA80F61585748800F6AD9A /* WebViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WebViewController.xib; sourceTree = "<group>"; };
 		8EDA80F71585748800F6AD9A /* XMLTableView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = XMLTableView.xib; sourceTree = "<group>"; };
-		8EDD3E3E1597D23E00D34DF2 /* MainWindow_iPad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainWindow_iPad.xib; sourceTree = "<group>"; };
 		8EDD3E4D1597DEE300D34DF2 /* MainMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainMenuViewController.h; sourceTree = "<group>"; };
 		8EDD3E4E1597DEED00D34DF2 /* MainMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainMenuViewController.m; sourceTree = "<group>"; };
 		8EDD3E511597DF1F00D34DF2 /* MainMenuViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainMenuViewController.xib; sourceTree = "<group>"; };
@@ -472,6 +466,8 @@
 				46A3834710AD4FD300414035 /* Portland_Pinball_MapAppDelegate.m */,
 				6AE45E2A1234A57F00C629DF /* Utils.h */,
 				6AE45E2B1234A57F00C629DF /* Utils.m */,
+				6A87CF471767D3EE006CC3A7 /* APIManager.h */,
+				6A87CF481767D3EE006CC3A7 /* APIManager.m */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -770,12 +766,9 @@
 				8EDA80D2158572FA00F6AD9A /* AboutView.xib */,
 				8EDA80D3158572FA00F6AD9A /* LocationProfile.xib */,
 				8EDA80D4158572FA00F6AD9A /* LocationProfileCellView.xib */,
-				8EDA80D5158572FA00F6AD9A /* MainWindow_iPhone.xib */,
-				8EDD3E3E1597D23E00D34DF2 /* MainWindow_iPad.xib */,
 				8EDA80D6158572FA00F6AD9A /* PBMDoubleTextCell.xib */,
 				8EDA80D7158572FA00F6AD9A /* PBMTableCell.xib */,
 				8EDA80D8158572FA00F6AD9A /* RequestPage.xib */,
-				8EDA80D9158572FA00F6AD9A /* RootViewController.xib */,
 				8EDD3E511597DF1F00D34DF2 /* MainMenuViewController.xib */,
 				6AD1C1DF17667EFB00EA27BB /* SplashView.xib */,
 			);
@@ -909,18 +902,15 @@
 				8EDA80DA158572FA00F6AD9A /* AboutView.xib in Resources */,
 				8EDA80DC158572FA00F6AD9A /* LocationProfile.xib in Resources */,
 				8EDA80DE158572FA00F6AD9A /* LocationProfileCellView.xib in Resources */,
-				8EDA80E0158572FA00F6AD9A /* MainWindow_iPhone.xib in Resources */,
 				8EDA80E2158572FA00F6AD9A /* PBMDoubleTextCell.xib in Resources */,
 				8EDA80E4158572FA00F6AD9A /* PBMTableCell.xib in Resources */,
 				8EDA80E6158572FA00F6AD9A /* RequestPage.xib in Resources */,
-				8EDA80E8158572FA00F6AD9A /* RootViewController.xib in Resources */,
 				8EDA80F81585748800F6AD9A /* AddMachineView.xib in Resources */,
 				8EDA80FA1585748800F6AD9A /* CommentView.xib in Resources */,
 				8EDA80FC1585748800F6AD9A /* EventProfileView.xib in Resources */,
 				8EDA80FE1585748800F6AD9A /* MachineProfileView.xib in Resources */,
 				8EDA81001585748800F6AD9A /* WebViewController.xib in Resources */,
 				8EDA81021585748800F6AD9A /* XMLTableView.xib in Resources */,
-				8EDD3E3F1597D23E00D34DF2 /* MainWindow_iPad.xib in Resources */,
 				8EDD3E521597DF1F00D34DF2 /* MainMenuViewController.xib in Resources */,
 				6A47BC3117651E880028F2B8 /* Default-568h@2x.png in Resources */,
 				6AD1C1D51766797E00EA27BB /* README.md in Resources */,
@@ -993,18 +983,15 @@
 				8EDA80DB158572FA00F6AD9A /* AboutView.xib in Resources */,
 				8EDA80DD158572FA00F6AD9A /* LocationProfile.xib in Resources */,
 				8EDA80DF158572FA00F6AD9A /* LocationProfileCellView.xib in Resources */,
-				8EDA80E1158572FA00F6AD9A /* MainWindow_iPhone.xib in Resources */,
 				8EDA80E3158572FA00F6AD9A /* PBMDoubleTextCell.xib in Resources */,
 				8EDA80E5158572FA00F6AD9A /* PBMTableCell.xib in Resources */,
 				8EDA80E7158572FA00F6AD9A /* RequestPage.xib in Resources */,
-				8EDA80E9158572FA00F6AD9A /* RootViewController.xib in Resources */,
 				8EDA80F91585748800F6AD9A /* AddMachineView.xib in Resources */,
 				8EDA80FB1585748800F6AD9A /* CommentView.xib in Resources */,
 				8EDA80FD1585748800F6AD9A /* EventProfileView.xib in Resources */,
 				8EDA80FF1585748800F6AD9A /* MachineProfileView.xib in Resources */,
 				8EDA81011585748800F6AD9A /* WebViewController.xib in Resources */,
 				8EDA81031585748800F6AD9A /* XMLTableView.xib in Resources */,
-				8EDD3E401597D23E00D34DF2 /* MainWindow_iPad.xib in Resources */,
 				8EDD3E531597DF1F00D34DF2 /* MainMenuViewController.xib in Resources */,
 				6A47BC3217651E880028F2B8 /* Default-568h@2x.png in Resources */,
 			);
@@ -1056,6 +1043,7 @@
 				8E57FEC7159E331D00A57AF3 /* RecentAddition.m in Sources */,
 				8E7A2E761606B2AF009D9B87 /* Reachability.m in Sources */,
 				6AD1C1DE17667ED300EA27BB /* SplashViewController.m in Sources */,
+				6A87CF491767D3EF006CC3A7 /* APIManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

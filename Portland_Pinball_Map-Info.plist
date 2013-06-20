@@ -28,12 +28,6 @@
 	<string>2.1.0</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
-	<key>NSMainNibFile</key>
-	<string>MainMenuViewController</string>
-	<key>NSMainNibFile~ipad</key>
-	<string>MainWindow_iPad</string>
-	<key>NSMainNibFile~iphone</key>
-	<string>MainWindow_iPhone</string>
 	<key>UIInterfaceOrientation (iPad)</key>
 	<string>UIInterfaceOrientationLandscapeRight</string>
 	<key>UIPrerenderedIcon</key>
