@@ -6,7 +6,12 @@
 //
 //
 
+#import <CoreLocation/CoreLocation.h>
 #import "SplashViewController.h"
+#import "Portland_Pinball_MapAppDelegate.h"
+#import "APIManager.h"
+#import "MainMenuViewController.h"
+
 
 @implementation SplashViewController
 
@@ -14,6 +19,24 @@
 {
     NSLog(@"view did load");
     [super viewDidLoad];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onLocationReady:) name:kNotificationLocationReady object:nil];
+}
+
+-(void)onLocationReady:(NSNotification*)notification
+{
+    CLLocation *loc = (CLLocation*)notification.object;
+    NSLog(@"Loc found! %@ %@",loc,self.managedObjectContext);
+    
+    APIManager *dm = [[APIManager alloc] init];
+    dm.delegate = self;
+    [dm fetchRegionDataForLocation:loc inMOC:self.managedObjectContext];
+}
+
+-(void)apiManager:(APIManager *)apiManager didCompleteWithClosestRegion:(Region *)region
+{
+    MainMenuViewController *main = [[MainMenuViewController alloc] initWithRegion:region];
+    [self.navigationController pushViewController:main animated:YES];
 }
 
 @end

@@ -4,6 +4,8 @@
 #import "Machine.h"
 #import "Reachability.h"
 
+#define kNotificationLocationReady @"Location_Ready"
+
 #define kBgQueue dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)
 
 #define BASE_URL @"http://pinballmap.com"

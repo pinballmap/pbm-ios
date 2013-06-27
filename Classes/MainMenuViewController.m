@@ -8,7 +8,8 @@
 
 Portland_Pinball_MapAppDelegate *appDelegate;
 
-- (void)viewDidLoad {    
+- (void)viewDidLoad {
+    [self.navigationItem setHidesBackButton:YES];
 	[self showInfoButton];
 	
 	[super viewDidLoad];
@@ -21,15 +22,14 @@ Portland_Pinball_MapAppDelegate *appDelegate;
 }
 
 - (void)viewWillAppear:(BOOL)animated {
-    appDelegate = (Portland_Pinball_MapAppDelegate *)[[UIApplication sharedApplication] delegate];
-    [self setTitle:[NSString stringWithFormat:@"%@ Pinball Map", appDelegate.activeRegion.formalName]];
+    [self setTitle:[NSString stringWithFormat:@"%@ Pinball Map", self.region.formalName]];
     
 	[super viewWillAppear:animated];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
     
-    [self setTitle:[NSString stringWithFormat:@"%@ Pinball Map", appDelegate.activeRegion.formalName]];
+    [self setTitle:[NSString stringWithFormat:@"%@ Pinball Map", self.region.formalName]];
 
     if (appDelegate.internetActive) {
         tableTitles = @[@"Locations", @"Machines", @"Closest Locations", @"Recently Added", @"Events", @"Change Region"];
@@ -61,11 +61,11 @@ Portland_Pinball_MapAppDelegate *appDelegate;
 		[alert show];
         
         [self showMenu];
-	} else if (appDelegate.activeRegion.locations == nil || [appDelegate.activeRegion.locations count] == 0) {
+	} else if (self.region.locations == nil || [self.region.locations count] == 0) {
         NSLog(@"NO ACTIVE REGION READY TO GO");
         motd = nil;
         
-        [appDelegate showSplashScreen];
+        //[appDelegate showSplashScreen];
         //[appDelegate fetchRegionData]; //couldn't get this to work without it
         //[appDelegate fetchLocationData];
         

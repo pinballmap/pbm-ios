@@ -7,8 +7,17 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "Region.h"
+
+@class APIManager;
+@protocol APIManagerDelegate <NSObject>
+-(void)apiManager:(APIManager*)apiManager didCompleteWithClosestRegion:(Region*)region;
+
+
+@end
 
 @interface APIManager : NSObject
+@property (nonatomic,weak) id <APIManagerDelegate> delegate;
 
 - (void)fetchRegionDataForLocation:(CLLocation*)location inMOC:(NSManagedObjectContext*)moc;
 

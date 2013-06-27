@@ -8,6 +8,8 @@
 #import "Utils.h"
 #import "APIManager.h"
 
+
+
 @implementation Portland_Pinball_MapAppDelegate
 
 @synthesize window, navigationController, splitViewController, splashScreen, locationMap, showUserLocation, activeRegion, userLocation, internetActive, locationManager;
@@ -47,9 +49,11 @@ void uncaughtExceptionHandler(NSException *exception) {
         SplashViewController *masterViewController = [[SplashViewController alloc] initWithNibName:@"SplashView" bundle:nil];
         self.navigationController = [[UINavigationController alloc] initWithRootViewController:masterViewController];
         self.window.rootViewController = self.navigationController;
-        //masterViewController.managedObjectContext = self.managedObjectContext;
+        masterViewController.managedObjectContext = self.managedObjectContext;
     } else {
         SplashViewController *masterViewController = [[SplashViewController alloc] initWithNibName:@"SplashView" bundle:nil];
+        masterViewController.managedObjectContext = self.managedObjectContext;
+
         UINavigationController *masterNavigationController = [[UINavigationController alloc] initWithRootViewController:masterViewController];
         
         LocationMap *detailViewController = [[LocationMap alloc] init];
@@ -88,10 +92,7 @@ void uncaughtExceptionHandler(NSException *exception) {
             [locationManager startUpdatingLocation];
         } else {
             [self setShowUserLocation:NO];
-            
-            APIManager *dm = [[APIManager alloc] init];
-            [dm fetchRegionDataForLocation:self.userLocation inMOC:self.managedObjectContext];
-            //[self showSplashScreen];
+            [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationLocationReady object:self.userLocation];
         }
     } else {
         [self showSplashScreen];
@@ -102,7 +103,7 @@ void uncaughtExceptionHandler(NSException *exception) {
 
 
 - (void)rotateImageViewForIpad:(UIImageView *)imageView {
-    imageView.transform = CGAffineTransformMakeRotation(3.14159265 * (-0.5));
+    imageView.transform = CGAffineTransformMakeRotation(M_PI * (-0.5));
 }
 
 #pragma mark - Location Manager
@@ -113,9 +114,7 @@ void uncaughtExceptionHandler(NSException *exception) {
 	 
 	if (initLoaded != YES) {
 		initLoaded = YES;
-        APIManager *dm = [[APIManager alloc] init];
-        [dm fetchRegionDataForLocation:newLocation inMOC:self.managedObjectContext];
-        //[self showSplashScreen];
+        [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationLocationReady object:self.userLocation];
 	}
 }
 
@@ -133,6 +132,7 @@ void uncaughtExceptionHandler(NSException *exception) {
     [alert show];
     
     [self setUserLocation:[[CLLocation alloc] initWithLatitude:PDX_LAT longitude:PDX_LON]];
+    [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationLocationReady object:self.userLocation];
 }
 
 - (void)showSplashScreen {	

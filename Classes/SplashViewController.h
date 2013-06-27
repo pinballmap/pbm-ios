@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "APIManager.h"
 
-@interface SplashViewController : UIViewController
-
+@interface SplashViewController : UIViewController <APIManagerDelegate>
+@property (nonatomic,strong) NSManagedObjectContext *managedObjectContext;
 @end

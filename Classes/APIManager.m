@@ -87,6 +87,11 @@
     } 
     
     //[self setActiveRegion:closestRegion];
+    
+    if([_delegate respondsToSelector:@selector(apiManager:didCompleteWithClosestRegion:)])
+    {
+        [_delegate apiManager:self didCompleteWithClosestRegion:closestRegion];
+    }
 }
 
 #pragma mark Location Data
@@ -236,9 +241,10 @@
         SAVE_MOC;
         
         dispatch_async(dispatch_get_main_queue(),
-                       ^{
-                           NSLog(@"Parse Compelte");
-                       });
+           ^{
+               NSLog(@"Parse Compelte");
+               
+           });
     });
 }
 
