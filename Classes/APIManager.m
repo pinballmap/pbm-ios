@@ -12,8 +12,9 @@
 #import "LocationMachineXref.h"
 #import "Zone.h"
 #import "Utils.h"
+#import "ASIHTTPRequest.h"
 
-
+#define kCIRCUMFERENCE_OF_EARTH 24901
 
 #define SAVE_MOC { NSError *_error;if (![moc save:&_error]) { NSLog(@"Sub MOC Error %@",[_error localizedDescription]); } [mainMOC performBlock:^{ NSError *e = nil;  if (![mainMOC save:&e]) {  NSLog(@"Main MOC Error");}}]; }
 
@@ -34,7 +35,7 @@
     NSDictionary *json = [self fetchedData:data];
     NSArray *regions = json[@"regions"];
     
-    NSMutableSet *regionSet;
+    NSMutableSet *regionSet = [NSMutableSet set];
     for (NSDictionary *regionContainer in regions) {
         NSDictionary *regionData = regionContainer[@"region"];
         
@@ -76,7 +77,7 @@
     NSSet *regions = [self updateRegionData:data inMOC:moc];
     
     Region *closestRegion = nil;
-    CLLocationDistance closestDistance = 24901.55;
+    CLLocationDistance closestDistance = kCIRCUMFERENCE_OF_EARTH;
     for (Region *region in regions) {
         CLLocationDistance distance = [location distanceFromLocation:[region coordinates]] / METERS_IN_A_MILE;
         
@@ -86,6 +87,8 @@
         }
     } 
     
+    Portland_Pinball_MapAppDelegate *appDelegate = (Portland_Pinball_MapAppDelegate *)[[UIApplication sharedApplication] delegate];
+    appDelegate.activeRegion = closestRegion;
     //[self setActiveRegion:closestRegion];
     
     if([_delegate respondsToSelector:@selector(apiManager:didCompleteWithClosestRegion:)])
@@ -103,13 +106,29 @@
     UIApplication *app = [UIApplication sharedApplication];
     [app setNetworkActivityIndicatorVisible:YES];
     
-    NSData *data = [NSData dataWithContentsOfURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@all_region_data.json", appDelegate.rootURL]]];
-    [self fetchedLocationData:data forRegion:appDelegate.activeRegion];
+
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@all_region_data.json", appDelegate.rootURL]];
+    __weak __block ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:url];
+    [request setCompletionBlock:^{
+         [app setNetworkActivityIndicatorVisible:NO];
+        // Use when fetching text data
+        //NSString *responseString = [request responseString];
+        
+        // Use when fetching binary data
+        NSData *responseData = [request responseData];
+        [self fetchedLocationData:responseData forRegion:appDelegate.activeRegion];
+    }];
+    [request setFailedBlock:^{
+        NSError *error = [request error];
+        NSLog(@"log %@",[error localizedDescription]);
+    }];
+    [request startAsynchronous];
 
 }
 
 - (void)fetchedLocationData:(NSData *)data forRegion:(Region*)region{
     
+     NSLog(@"data start!");
     NSDateFormatter *dateformatter = [[NSDateFormatter alloc] init];
     [dateformatter setDateFormat:@"yyyy-MM-dd"];
     

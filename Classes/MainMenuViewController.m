@@ -2,6 +2,7 @@
 #import "Zone.h"
 #import "Machine.h"
 #import "RegionSelectViewController.h"
+#import "APIManager.h"
 
 @implementation MainMenuViewController
 @synthesize startingPoint, controllers, aboutView, tableTitles;
@@ -22,6 +23,7 @@ Portland_Pinball_MapAppDelegate *appDelegate;
 }
 
 - (void)viewWillAppear:(BOOL)animated {
+    
     [self setTitle:[NSString stringWithFormat:@"%@ Pinball Map", self.region.formalName]];
     
 	[super viewWillAppear:animated];
@@ -60,7 +62,7 @@ Portland_Pinball_MapAppDelegate *appDelegate;
 							  otherButtonTitles:nil];
 		[alert show];
         
-        [self showMenu];
+        //[self showMenu];
 	} else if (self.region.locations == nil || [self.region.locations count] == 0) {
         NSLog(@"NO ACTIVE REGION READY TO GO");
         motd = nil;
@@ -74,8 +76,11 @@ Portland_Pinball_MapAppDelegate *appDelegate;
             [alert show];
         }
          
-        [self showMenu];
+        //[self showMenu];
 	}
+    
+    [self showMenu];
+
 	
 	[super viewDidAppear:animated];
 }

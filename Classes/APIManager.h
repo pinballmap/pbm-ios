@@ -20,5 +20,6 @@
 @property (nonatomic,weak) id <APIManagerDelegate> delegate;
 
 - (void)fetchRegionDataForLocation:(CLLocation*)location inMOC:(NSManagedObjectContext*)moc;
+- (void)fetchLocationData;
 
 @end

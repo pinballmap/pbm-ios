@@ -35,6 +35,10 @@
 
 -(void)apiManager:(APIManager *)apiManager didCompleteWithClosestRegion:(Region *)region
 {
+    
+    APIManager *dm = [[APIManager alloc] init];
+    [dm fetchLocationData];
+    
     MainMenuViewController *main = [[MainMenuViewController alloc] initWithRegion:region];
     [self.navigationController pushViewController:main animated:YES];
 }
