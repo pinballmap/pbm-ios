@@ -326,6 +326,9 @@ void uncaughtExceptionHandler(NSException *exception) {
     
     activeRegion = region;
     NSLog(@"SETTING ACTIVE REGION: %@", activeRegion.name);
+    
+    APIManager *dm = [[APIManager alloc] init];
+    [dm fetchLocationData];
 }
 
 @end

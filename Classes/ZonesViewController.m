@@ -77,7 +77,6 @@
 		[locationFilterView setZoneID:[zonesForSection objectAtIndex:row]];
 	} else {
 		Zone *zone = (Zone *)[zonesForSection objectAtIndex:row];
-        
 		[locationFilterView setZoneID:zone.name];
 		[locationFilterView setTheNewZone:zone];
 	}

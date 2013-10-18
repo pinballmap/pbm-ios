@@ -132,9 +132,12 @@
 }
 
 - (void)onPinPress:(id)sender {
-	Location *pinLocation = (Location *)[sender location];
+    
+    /*
+	Location *pinLocation = (Location *)sender;
     
 	[(BlackTableViewController *)[[self.navigationController viewControllers] objectAtIndex:0] showLocationProfile:pinLocation withMapButton:NO];
+    */
 }
 
 @end
