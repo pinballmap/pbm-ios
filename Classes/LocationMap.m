@@ -1,5 +1,6 @@
 #import "LocationMap.h"
 #import "BlackTableViewController.h"
+#import "Utils.h"
 
 @implementation LocationMap
 @synthesize map, locationsToShow, location, showProfileButtons;
@@ -16,8 +17,8 @@
 		region.span = span;
 		
 		CLLocationCoordinate2D newLoc;
-		newLoc.latitude  = 45.521744;
-		newLoc.longitude = -122.671623;
+		newLoc.latitude  = PDX_LAT;
+		newLoc.longitude = PDX_LON;
 		region.center = newLoc;
 		
 		[map setRegion:region animated:NO];
@@ -69,21 +70,21 @@
         region.center.longitude = (southWest.longitude + northEast.longitude) / 2.0;
         region.span.latitudeDelta = northEast.latitude - southWest.latitude;
         region.span.longitudeDelta = northEast.longitude - southWest.longitude;
-    } else {
+    } else if ([locationsToShow count] == 1) {
         self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Google Map" style:UIBarButtonItemStyleBordered target:self action:@selector(googleMapButtonPressed:)];
         
         Location *soloLocation = [locationsToShow objectAtIndex:0];
         LocationPin *soloPlacemark = [[LocationPin alloc] initWithLocation:soloLocation];
         [annotations addObject:soloPlacemark];
         
-        region.center.latitude = soloLocation.coordinates.coordinate.latitude;
+        region.center.latitude  = soloLocation.coordinates.coordinate.latitude;
         region.center.longitude = soloLocation.coordinates.coordinate.longitude;
         region.span.latitudeDelta = 0.02;
         region.span.longitudeDelta = 0.02;        
     }
     
     [map addAnnotations:annotations];
-    [map setRegion:[map regionThatFits:region] animated:NO];
+    [map setRegion:[map regionThatFits:region] animated:YES];
 }
 
 - (IBAction)googleMapButtonPressed:(id)sender {
@@ -110,7 +111,7 @@
 		}
 		
 		pin.canShowCallout = YES;
-		pin.animatesDrop = NO;
+		pin.animatesDrop   = YES;
 		
 		if(showProfileButtons == YES) {
 			UIButton *myDetailButton = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -131,9 +132,12 @@
 }
 
 - (void)onPinPress:(id)sender {
-	Location *pinLocation = (Location *)[sender location];
+    
+    /*
+	Location *pinLocation = (Location *)sender;
     
 	[(BlackTableViewController *)[[self.navigationController viewControllers] objectAtIndex:0] showLocationProfile:pinLocation withMapButton:NO];
+    */
 }
 
 @end

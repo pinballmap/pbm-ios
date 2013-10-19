@@ -2,13 +2,15 @@
 #import "Zone.h"
 #import "Machine.h"
 #import "RegionSelectViewController.h"
+#import "APIManager.h"
 
 @implementation MainMenuViewController
 @synthesize startingPoint, controllers, aboutView, tableTitles;
 
 Portland_Pinball_MapAppDelegate *appDelegate;
 
-- (void)viewDidLoad {    
+- (void)viewDidLoad {
+    [self.navigationItem setHidesBackButton:YES];
 	[self showInfoButton];
 	
 	[super viewDidLoad];
@@ -21,14 +23,15 @@ Portland_Pinball_MapAppDelegate *appDelegate;
 }
 
 - (void)viewWillAppear:(BOOL)animated {
-    appDelegate = (Portland_Pinball_MapAppDelegate *)[[UIApplication sharedApplication] delegate];
-    [self setTitle:[NSString stringWithFormat:@"%@ Pinball Map", appDelegate.activeRegion.formalName]];
+    
+    [self setTitle:[NSString stringWithFormat:@"%@ Pinball Map", self.region.formalName]];
     
 	[super viewWillAppear:animated];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
-    [self setTitle:[NSString stringWithFormat:@"%@ Pinball Map", appDelegate.activeRegion.formalName]];
+    
+    [self setTitle:[NSString stringWithFormat:@"%@ Pinball Map", self.region.formalName]];
 
     if (appDelegate.internetActive) {
         tableTitles = @[@"Locations", @"Machines", @"Closest Locations", @"Recently Added", @"Events", @"Change Region"];
@@ -59,21 +62,25 @@ Portland_Pinball_MapAppDelegate *appDelegate;
 							  otherButtonTitles:nil];
 		[alert show];
         
-        [self showMenu];
-	} else if (appDelegate.activeRegion.locations == nil || [appDelegate.activeRegion.locations count] == 0) {
+        //[self showMenu];
+	} else if (self.region.locations == nil || [self.region.locations count] == 0) {
         NSLog(@"NO ACTIVE REGION READY TO GO");
         motd = nil;
         
-        [appDelegate showSplashScreen];
-        [appDelegate fetchLocationData];
+        //[appDelegate showSplashScreen];
+        //[appDelegate fetchRegionData]; //couldn't get this to work without it
+        //[appDelegate fetchLocationData];
         
         if (motd != nil && ![motd isKindOfClass:[NSNull class]]) {
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Message Of The Day" message:motd delegate:self cancelButtonTitle:@"Thanks" otherButtonTitles:nil];
             [alert show];
         }
-        
-        [self showMenu];
+         
+        //[self showMenu];
 	}
+    
+    [self showMenu];
+
 	
 	[super viewDidAppear:animated];
 }
@@ -158,7 +165,7 @@ Portland_Pinball_MapAppDelegate *appDelegate;
 
 - (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex {	
 	if(buttonIndex == 0) {
-        [appDelegate fetchRegionData];
+        //[appDelegate fetchRegionData];
     }
 }
 

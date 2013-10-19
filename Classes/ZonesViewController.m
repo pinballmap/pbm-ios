@@ -1,8 +1,9 @@
 #import "Zone.h"
 #import "ZonesViewController.h"
+#import "LocationFilterView.h"
 
 @implementation ZonesViewController
-@synthesize zones, titles, locationFilterView;
+@synthesize zones, titles;
 
 - (void)viewWillAppear:(BOOL)animated {
 	Portland_Pinball_MapAppDelegate *appDelegate = (Portland_Pinball_MapAppDelegate *)[[UIApplication sharedApplication] delegate];
@@ -17,10 +18,6 @@
 	
 	[self setTitle:@"Locations"];
 	
-	if(locationFilterView != nil) {
-		[locationFilterView setCurrentZoneID:@" "];
-	}
-        
 	[self.tableView reloadData];
 	
     if (appDelegate.isPad) {
@@ -68,9 +65,8 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-	if(locationFilterView == nil) {
-		locationFilterView = [[LocationFilterView alloc] initWithStyle:UITableViewStylePlain];
-	}
+    
+	LocationFilterView *locationFilterView = [[LocationFilterView alloc] initWithStyle:UITableViewStylePlain];
 	
 	NSUInteger row = [indexPath row];
 	NSUInteger section = [indexPath section];
@@ -81,7 +77,6 @@
 		[locationFilterView setZoneID:[zonesForSection objectAtIndex:row]];
 	} else {
 		Zone *zone = (Zone *)[zonesForSection objectAtIndex:row];
-        
 		[locationFilterView setZoneID:zone.name];
 		[locationFilterView setTheNewZone:zone];
 	}

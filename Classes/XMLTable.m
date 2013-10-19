@@ -3,6 +3,15 @@
 @implementation XMLTable
 @synthesize loadingPage, tableView2, isParsing;
 
+-(id)initWithRegion:(Region *)activeRegion
+{
+    if(self = [super init])
+    {
+        _region = activeRegion;
+    }
+    return self;
+}
+
 - (void)viewDidLoad {
 	isParsing = NO;
 
