@@ -10,8 +10,12 @@
 #import "InformationCell.h"
 #import "NSDate+DateFormatting.h"
 #import "LocationProfileView.h"
-
-@interface EventProfileView ()
+#import <EventKit/EventKit.h>
+#import <EventKitUI/EventKitUI.h>
+#import "UIAlertView+Application.h"
+@interface EventProfileView () <EKEventViewDelegate>{
+    
+}
 
 @end
 
@@ -65,12 +69,41 @@
             [[UIApplication sharedApplication] openURL:[NSURL URLWithString:_currentEvent.link]];
         }
     }else if (indexPath.row == 2){
-        
+        EKEventStore *store = [[EKEventStore alloc] init];
+        [store requestAccessToEntityType:EKEntityTypeEvent completion:^(BOOL granted, NSError *error) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                if (granted){
+                    EKEvent *newEvent = [EKEvent eventWithEventStore:store];
+                    newEvent.startDate = _currentEvent.startDate;
+                    newEvent.endDate = _currentEvent.startDate;
+                    newEvent.location = _currentEvent.location.name;
+                    newEvent.title = _currentEvent.name;
+                    newEvent.allDay = YES;
+                    newEvent.URL = [NSURL URLWithString:_currentEvent.link];
+                    
+                    EKEventViewController *eventView = [[EKEventViewController alloc] init];
+                    eventView.event = newEvent;
+                    eventView.allowsEditing = YES;
+                    eventView.delegate = self;
+                    UINavigationController *eventNav = [[UINavigationController alloc] initWithRootViewController:eventView];
+                    [self.navigationController presentViewController:eventNav animated:YES completion:nil];
+                }else{
+                    [UIAlertView simpleApplicationAlertWithMessage:@"You must grant access to your calender to save this event." cancelButton:@"Ok"];
+                }
+            });
+        }];
     }else if (indexPath.row == 3){
         LocationProfileView *locationProfile = [self.storyboard instantiateViewControllerWithIdentifier:@"LocationProfileView"];
         locationProfile.currentLocation = _currentEvent.location;
         [self.navigationController pushViewController:locationProfile animated:YES];
     }
+}
+#pragma mark - EventView Delegate
+- (void)eventViewController:(EKEventViewController *)controller didCompleteWithAction:(EKEventViewAction)action{
+    if (action == EKEventViewActionDone || action == EKEventViewActionResponded){
+        [UIAlertView simpleApplicationAlertWithMessage:@"Added Event!" cancelButton:@"Ok"];
+    }
+    [controller dismissViewControllerAnimated:YES completion:nil];
 }
 /*
 // Override to support conditional editing of the table view.

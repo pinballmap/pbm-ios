@@ -19,6 +19,9 @@
 		DB52D2F718FB087400BB56D8 /* Machine.m in Sources */ = {isa = PBXBuildFile; fileRef = DB52D2F618FB087400BB56D8 /* Machine.m */; };
 		DB52D2FA18FB09AF00BB56D8 /* NSDate+DateFormatting.m in Sources */ = {isa = PBXBuildFile; fileRef = DB52D2F918FB09AF00BB56D8 /* NSDate+DateFormatting.m */; };
 		DB52D2FD18FB0AD300BB56D8 /* EventProfileView.m in Sources */ = {isa = PBXBuildFile; fileRef = DB52D2FC18FB0AD300BB56D8 /* EventProfileView.m */; };
+		DB52D30018FB0D7400BB56D8 /* EventKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DB52D2FE18FB0D7400BB56D8 /* EventKit.framework */; };
+		DB52D30118FB0D7400BB56D8 /* EventKitUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DB52D2FF18FB0D7400BB56D8 /* EventKitUI.framework */; };
+		DB52D30418FB0DCF00BB56D8 /* UIAlertView+Application.m in Sources */ = {isa = PBXBuildFile; fileRef = DB52D30318FB0DCF00BB56D8 /* UIAlertView+Application.m */; };
 		DBB59CCA18FAD9AC00F35BFD /* LocationProfileView.m in Sources */ = {isa = PBXBuildFile; fileRef = DBB59CC918FAD9AC00F35BFD /* LocationProfileView.m */; };
 		DBB59CD218FADF6D00F35BFD /* InformationCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DBB59CD118FADF6D00F35BFD /* InformationCell.m */; };
 		DBB59CD518FADF7A00F35BFD /* LocationMapCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DBB59CD418FADF7A00F35BFD /* LocationMapCell.m */; };
@@ -95,6 +98,10 @@
 		DB52D2F918FB09AF00BB56D8 /* NSDate+DateFormatting.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+DateFormatting.m"; sourceTree = "<group>"; };
 		DB52D2FB18FB0AD300BB56D8 /* EventProfileView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EventProfileView.h; sourceTree = "<group>"; };
 		DB52D2FC18FB0AD300BB56D8 /* EventProfileView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EventProfileView.m; sourceTree = "<group>"; };
+		DB52D2FE18FB0D7400BB56D8 /* EventKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = EventKit.framework; path = System/Library/Frameworks/EventKit.framework; sourceTree = SDKROOT; };
+		DB52D2FF18FB0D7400BB56D8 /* EventKitUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = EventKitUI.framework; path = System/Library/Frameworks/EventKitUI.framework; sourceTree = SDKROOT; };
+		DB52D30218FB0DCF00BB56D8 /* UIAlertView+Application.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIAlertView+Application.h"; sourceTree = "<group>"; };
+		DB52D30318FB0DCF00BB56D8 /* UIAlertView+Application.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIAlertView+Application.m"; sourceTree = "<group>"; };
 		DBB59CC818FAD9AC00F35BFD /* LocationProfileView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationProfileView.h; sourceTree = "<group>"; };
 		DBB59CC918FAD9AC00F35BFD /* LocationProfileView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocationProfileView.m; sourceTree = "<group>"; };
 		DBB59CD018FADF6D00F35BFD /* InformationCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InformationCell.h; sourceTree = "<group>"; };
@@ -157,6 +164,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DB52D30018FB0D7400BB56D8 /* EventKit.framework in Frameworks */,
+				DB52D30118FB0D7400BB56D8 /* EventKitUI.framework in Frameworks */,
 				DBB59CD918FAE0E100F35BFD /* MapKit.framework in Frameworks */,
 				DBB59CD718FAE0A800F35BFD /* CoreLocation.framework in Frameworks */,
 				DBF06C0318F9704F00F92912 /* CoreData.framework in Frameworks */,
@@ -253,6 +262,8 @@
 		DBF06BCD18F96FF500F92912 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				DB52D2FE18FB0D7400BB56D8 /* EventKit.framework */,
+				DB52D2FF18FB0D7400BB56D8 /* EventKitUI.framework */,
 				DBB59CD818FAE0E100F35BFD /* MapKit.framework */,
 				DBB59CD618FAE0A800F35BFD /* CoreLocation.framework */,
 				DBF06C0218F9704F00F92912 /* CoreData.framework */,
@@ -283,6 +294,8 @@
 		DBF06BD518F96FF500F92912 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				DB52D30218FB0DCF00BB56D8 /* UIAlertView+Application.h */,
+				DB52D30318FB0DCF00BB56D8 /* UIAlertView+Application.m */,
 				DB52D2F818FB09AF00BB56D8 /* NSDate+DateFormatting.h */,
 				DB52D2F918FB09AF00BB56D8 /* NSDate+DateFormatting.m */,
 				DBF06C8118F9840B00F92912 /* pinball.png */,
@@ -514,6 +527,7 @@
 				DBF06C8718F984AF00F92912 /* MachinesView.m in Sources */,
 				DBB59CD218FADF6D00F35BFD /* InformationCell.m in Sources */,
 				DBF06C4018F9775600F92912 /* Machine+Create.m in Sources */,
+				DB52D30418FB0DCF00BB56D8 /* UIAlertView+Application.m in Sources */,
 				DB52D2E818FB06EC00BB56D8 /* Event+Create.m in Sources */,
 				DBF06C3C18F975C500F92912 /* Region+Create.m in Sources */,
 				DBB59CD518FADF7A00F35BFD /* LocationMapCell.m in Sources */,

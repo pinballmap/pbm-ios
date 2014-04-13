@@ -37,7 +37,6 @@
     [cdManager saveContext];
     // Add machines to region object.
     [_currentRegion addMachines:machines];
-    machines = nil;
     // Create all locations
     NSMutableSet *locations = [NSMutableSet new];
     [pinballData[@"locations"] enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
@@ -56,6 +55,7 @@
         [locations addObject:newLocation];
         [_currentRegion addLocationsObject:newLocation];
     }];
+    machines = nil;
     [cdManager saveContext];
     // Craete all events
     [pinballData[@"events"] enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
