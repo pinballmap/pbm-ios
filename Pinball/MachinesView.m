@@ -7,7 +7,8 @@
 //
 
 #import "MachinesView.h"
-
+#import "MachineLocation.h"
+#import "MachineProfileView.h"
 @interface MachinesView () <NSFetchedResultsControllerDelegate,UISearchBarDelegate>{
     NSFetchedResultsController *fetchedResults;
     NSManagedObjectContext *managedContext;
@@ -45,6 +46,13 @@
 - (void)didReceiveMemoryWarning{
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
+    if ([segue.identifier isEqualToString:@"ProfileView"]){
+        Machine *currentMachine = [fetchedResults objectAtIndexPath:[self.tableView indexPathForCell:sender]];
+        MachineProfileView *profileView = segue.destinationViewController;
+        profileView.currentMachine = currentMachine;
+    }
 }
 #pragma mark - Table view data source
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{

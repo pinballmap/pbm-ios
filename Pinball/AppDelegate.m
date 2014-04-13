@@ -13,7 +13,10 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    [[UITabBar appearance] setTintColor:[UIColor colorWithRed:1.0f green:0.0f blue:146.0f/255.0f alpha:1.0]];
+    UIColor *pinkColor = [UIColor colorWithRed:1.0f green:0.0f blue:146.0f/255.0f alpha:1.0];
+    [[UITabBar appearance] setTintColor:pinkColor];
+    [[UISearchBar appearance] setTintColor:pinkColor];
+    [[UINavigationBar appearance] setTintColor:pinkColor];
     [[PinballManager sharedInstance] importFromJSON];
     return YES;
 }

@@ -7,12 +7,12 @@
 //
 
 #import "LocationProfileView.h"
-#import "LocationInfoCell.h"
+#import "InformationCell.h"
 #import "LocationMapCell.h"
 #import <CoreLocation/CoreLocation.h>
 #import <MapKit/MapKit.h>
 #import "Machine.h"
-#import "LocationMapView.h"
+#import "MapView.h"
 @interface LocationProfileView () {
     NSArray *machines;
 }
@@ -81,7 +81,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.section == 0){
         if (indexPath.row == 0 || indexPath.row == 1){
-            LocationInfoCell *cell = (LocationInfoCell *)[tableView dequeueReusableCellWithIdentifier:@"InfoCell" forIndexPath:indexPath];
+            InformationCell *cell = (InformationCell *)[tableView dequeueReusableCellWithIdentifier:@"InfoCell" forIndexPath:indexPath];
             if (indexPath.row == 0){
                 cell.infoLabel.text = @"Phone";
                 cell.dataLabel.text = _currentLocation.phone;
@@ -142,7 +142,7 @@
 }
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
     if ([segue.identifier isEqualToString:@"MapView"]){
-        LocationMapView *mapView = segue.destinationViewController;
+        MapView *mapView = segue.destinationViewController;
         mapView.currentLocation = _currentLocation;
     }
 }
