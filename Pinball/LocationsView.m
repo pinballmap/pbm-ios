@@ -135,6 +135,24 @@
     }
     return rows;
 }
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    Location *currentLocation;
+    if (!isSearching){
+        currentLocation = [fetchedResults objectAtIndexPath:indexPath];
+    }else{
+        currentLocation = [searchResults objectAtIndex:indexPath.row];
+    }
+    NSString *cellTitle = currentLocation.name;
+    
+    CGRect stringSize = [cellTitle boundingRectWithSize:CGSizeMake(270, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName: [UIFont systemFontOfSize:18]} context:nil];
+    
+    stringSize.size.height = stringSize.size.height+10;   // Take into account the 10 points of padding within a cell.
+    if (stringSize.size.height+10 < 44){
+        return 44;
+    }else{
+        return stringSize.size.height+10;
+    }
+}
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"LocationCell" forIndexPath:indexPath];
     
