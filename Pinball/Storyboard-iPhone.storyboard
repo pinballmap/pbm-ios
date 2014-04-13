@@ -239,10 +239,16 @@
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="121"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                         </imageView>
+                                        <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="VRj-Sm-duw">
+                                            <rect key="frame" x="150" y="51" width="20" height="20"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        </activityIndicatorView>
                                     </subviews>
                                 </tableViewCellContentView>
                                 <connections>
+                                    <outlet property="loadingView" destination="VRj-Sm-duw" id="7wi-MT-s2J"/>
                                     <outlet property="mapImage" destination="cEW-Pq-hPF" id="Qz6-lI-daQ"/>
+                                    <segue destination="vmD-ty-UrL" kind="push" identifier="MapView" id="3T4-DN-wdq"/>
                                 </connections>
                             </tableViewCell>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="MachineCell" textLabel="c1j-X6-vfs" detailTextLabel="WkL-aF-X67" rowHeight="44" style="IBUITableViewCellStyleSubtitle" id="xZd-4s-kMa">
@@ -252,7 +258,7 @@
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="c1j-X6-vfs">
+                                        <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="34" id="c1j-X6-vfs">
                                             <rect key="frame" x="15" y="3" width="34" height="22"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="18"/>
@@ -280,6 +286,36 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ebf-cG-edK" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1778" y="-85"/>
+        </scene>
+        <!--Location Map View-->
+        <scene sceneID="5JO-g6-gzS">
+            <objects>
+                <viewController id="vmD-ty-UrL" customClass="LocationMapView" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="bQX-xc-Yhn"/>
+                        <viewControllerLayoutGuide type="bottom" id="NEZ-iA-9TC"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="D4C-XQ-Xe5">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="EfV-l3-7Iz">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            </mapView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="UxV-ya-2X9">
+                        <barButtonItem key="rightBarButtonItem" systemItem="action" id="nVv-h4-ezY"/>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="mapView" destination="EfV-l3-7Iz" id="mgg-jZ-uTg"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="LJj-ce-AK9" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2183" y="-85"/>
         </scene>
         <!--Navigation Controller - Events-->
         <scene sceneID="caA-Ft-Sam">

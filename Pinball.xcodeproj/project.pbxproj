@@ -12,6 +12,7 @@
 		DB1A44E518FAE3E600F78589 /* Machine.m in Sources */ = {isa = PBXBuildFile; fileRef = DB1A44E418FAE3E600F78589 /* Machine.m */; };
 		DB1A44E818FAE3E600F78589 /* Region.m in Sources */ = {isa = PBXBuildFile; fileRef = DB1A44E718FAE3E600F78589 /* Region.m */; };
 		DB1A44EB18FAE3E600F78589 /* MachineLocation.m in Sources */ = {isa = PBXBuildFile; fileRef = DB1A44EA18FAE3E600F78589 /* MachineLocation.m */; };
+		DB52D2DA18FAE96C00BB56D8 /* LocationMapView.m in Sources */ = {isa = PBXBuildFile; fileRef = DB52D2D918FAE96C00BB56D8 /* LocationMapView.m */; };
 		DBB59CCA18FAD9AC00F35BFD /* LocationProfileView.m in Sources */ = {isa = PBXBuildFile; fileRef = DBB59CC918FAD9AC00F35BFD /* LocationProfileView.m */; };
 		DBB59CD218FADF6D00F35BFD /* LocationInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DBB59CD118FADF6D00F35BFD /* LocationInfoCell.m */; };
 		DBB59CD518FADF7A00F35BFD /* LocationMapCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DBB59CD418FADF7A00F35BFD /* LocationMapCell.m */; };
@@ -74,6 +75,8 @@
 		DB1A44E718FAE3E600F78589 /* Region.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Region.m; sourceTree = "<group>"; };
 		DB1A44E918FAE3E600F78589 /* MachineLocation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MachineLocation.h; sourceTree = "<group>"; };
 		DB1A44EA18FAE3E600F78589 /* MachineLocation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MachineLocation.m; sourceTree = "<group>"; };
+		DB52D2D818FAE96C00BB56D8 /* LocationMapView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationMapView.h; sourceTree = "<group>"; };
+		DB52D2D918FAE96C00BB56D8 /* LocationMapView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocationMapView.m; sourceTree = "<group>"; };
 		DBB59CC818FAD9AC00F35BFD /* LocationProfileView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationProfileView.h; sourceTree = "<group>"; };
 		DBB59CC918FAD9AC00F35BFD /* LocationProfileView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocationProfileView.m; sourceTree = "<group>"; };
 		DBB59CD018FADF6D00F35BFD /* LocationInfoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationInfoCell.h; sourceTree = "<group>"; };
@@ -158,6 +161,19 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		DB52D2D718FAE95E00BB56D8 /* Location */ = {
+			isa = PBXGroup;
+			children = (
+				DBF06C6B18F97E6300F92912 /* LocationsView.h */,
+				DBF06C6C18F97E6300F92912 /* LocationsView.m */,
+				DBB59CC818FAD9AC00F35BFD /* LocationProfileView.h */,
+				DBB59CC918FAD9AC00F35BFD /* LocationProfileView.m */,
+				DB52D2D818FAE96C00BB56D8 /* LocationMapView.h */,
+				DB52D2D918FAE96C00BB56D8 /* LocationMapView.m */,
+			);
+			name = Location;
+			sourceTree = "<group>";
+		};
 		DBB59CCB18FADC3B00F35BFD /* Views */ = {
 			isa = PBXGroup;
 			children = (
@@ -281,10 +297,7 @@
 		DBF06C0818F972DD00F92912 /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				DBF06C6B18F97E6300F92912 /* LocationsView.h */,
-				DBF06C6C18F97E6300F92912 /* LocationsView.m */,
-				DBB59CC818FAD9AC00F35BFD /* LocationProfileView.h */,
-				DBB59CC918FAD9AC00F35BFD /* LocationProfileView.m */,
+				DB52D2D718FAE95E00BB56D8 /* Location */,
 				DBF06C8518F984AF00F92912 /* MachinesView.h */,
 				DBF06C8618F984AF00F92912 /* MachinesView.m */,
 			);
@@ -434,6 +447,7 @@
 			files = (
 				DBF06C6D18F97E6300F92912 /* LocationsView.m in Sources */,
 				DB1A44EB18FAE3E600F78589 /* MachineLocation.m in Sources */,
+				DB52D2DA18FAE96C00BB56D8 /* LocationMapView.m in Sources */,
 				DBF06C6418F97C5F00F92912 /* MachineLocation+Create.m in Sources */,
 				DBB59CCA18FAD9AC00F35BFD /* LocationProfileView.m in Sources */,
 				DBF06C1918F9749F00F92912 /* PinballManager.m in Sources */,

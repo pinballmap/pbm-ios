@@ -12,7 +12,7 @@
 #import <CoreLocation/CoreLocation.h>
 #import <MapKit/MapKit.h>
 #import "Machine.h"
-
+#import "LocationMapView.h"
 @interface LocationProfileView () {
     NSArray *machines;
 }
@@ -56,7 +56,17 @@
             return 122;
         }
     }else if (indexPath.section == 1){
-        return 44;
+        MachineLocation *currentMachine = machines[indexPath.row];
+        NSString *cellTitle = currentMachine.machine.name;
+        
+        CGRect stringSize = [cellTitle boundingRectWithSize:CGSizeMake(290, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName: [UIFont systemFontOfSize:18]} context:nil];
+        
+        stringSize.size.height = stringSize.size.height+10;   // Take into account the 10 points of padding within a cell.
+        if (stringSize.size.height+10 < 44){
+            return 44;
+        }else{
+            return stringSize.size.height+10;
+        }
     }
     return 44;
 }
@@ -68,8 +78,7 @@
     }
     return nil;
 }
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.section == 0){
         if (indexPath.row == 0 || indexPath.row == 1){
             LocationInfoCell *cell = (LocationInfoCell *)[tableView dequeueReusableCellWithIdentifier:@"InfoCell" forIndexPath:indexPath];
@@ -83,18 +92,21 @@
             return cell;
         }else if (indexPath.row == 2){
             LocationMapCell *cell = (LocationMapCell *)[tableView dequeueReusableCellWithIdentifier:@"MapCell" forIndexPath:indexPath];
+            [cell.loadingView startAnimating];
             CLLocationCoordinate2D coord = CLLocationCoordinate2DMake([_currentLocation.latitude doubleValue],[_currentLocation.longitude doubleValue]);
             
             MKMapSnapshotOptions *options = [[MKMapSnapshotOptions alloc] init];
             options.size = cell.mapImage.frame.size;
             options.region = MKCoordinateRegionMake(coord, MKCoordinateSpanMake(.002, .002));
             options.mapType = MKMapTypeHybrid;
+            options.showsPointsOfInterest = NO;
             MKMapSnapshotter *snapShooter2 = [[MKMapSnapshotter alloc] initWithOptions:options];
             [snapShooter2 startWithCompletionHandler:^(MKMapSnapshot *snapshot, NSError *error) {
                 NSLog(@"Loaded Snap");
                 if (error){
                     NSLog(@"%@",error);
                 }else{
+                    [cell.loadingView stopAnimating];
                     cell.mapImage.image = snapshot.image;
                 }
             }];
@@ -105,18 +117,35 @@
         MachineLocation *currentMachine = machines[indexPath.row];
         UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MachineCell" forIndexPath:indexPath];
         cell.textLabel.text = currentMachine.machine.name;
-        cell.detailTextLabel.text = currentMachine.condition;
+        // If no condition is available, just don't set the detail text label.
+        if (![currentMachine.condition isEqualToString:@"N/A"]){
+            cell.detailTextLabel.text = currentMachine.condition;
+        }else{
+            cell.detailTextLabel.text = nil;
+        }
         return cell;
     }
-    
-    
-    
-    
-    // Configure the cell...
-    
     return nil;
 }
-
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    if (indexPath.section == 0){
+        if (indexPath.row == 0){
+            if (_currentLocation.phone.length > 0 && ![_currentLocation.phone isEqualToString:@"N/A"]){
+                NSString *contactsPhoneNumber = [@"tel:+" stringByAppendingString:_currentLocation.phone];
+                [[UIApplication sharedApplication] openURL:[NSURL URLWithString:contactsPhoneNumber]];
+            }
+        }else if (indexPath.row == 1){
+            [self performSegueWithIdentifier:@"MapView" sender:[tableView cellForRowAtIndexPath:indexPath]];
+        }
+    }
+}
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
+    if ([segue.identifier isEqualToString:@"MapView"]){
+        LocationMapView *mapView = segue.destinationViewController;
+        mapView.currentLocation = _currentLocation;
+    }
+}
 /*
 // Override to support conditional editing of the table view.
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath

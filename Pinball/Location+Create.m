@@ -18,13 +18,17 @@
     stringNumber.numberStyle = NSNumberFormatterDecimalStyle;
     
     newLocation.latitude = [stringNumber numberFromString:data[@"lat"]];
-    newLocation.longitude = [stringNumber numberFromString:data[@"long"]];
+    newLocation.longitude = [stringNumber numberFromString:data[@"lon"]];
     newLocation.street = data[@"street"];
     newLocation.city = data[@"city"];
     newLocation.state = data[@"state"];
     newLocation.zip = data[@"zip"];
     if (![data[@"phone"] isKindOfClass:[NSNull class]]){
-        newLocation.phone = data[@"phone"];
+        if ([data[@"phone"] length] == 0){
+            newLocation.phone = @"N/A";
+        }else{
+            newLocation.phone = data[@"phone"];
+        }
     }else{
         newLocation.phone = @"N/A";
     }
