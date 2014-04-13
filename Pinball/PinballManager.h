@@ -1,0 +1,19 @@
+//
+//  PinballManager.h
+//  Pinball
+//
+//  Created by Frank Michael on 4/12/14.
+//  Copyright (c) 2014 Frank Michael Sanchez. All rights reserved.
+//
+
+#import <Foundation/Foundation.h>
+#import "PinballModels.h"
+
+@interface PinballManager : NSObject
+
+@property (nonatomic) Region *currentRegion;
+
++ (id)sharedInstance;
+- (void)importFromJSON;
+
+@end
