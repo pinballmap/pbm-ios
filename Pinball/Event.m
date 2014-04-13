@@ -20,6 +20,6 @@
 @dynamic name;
 @dynamic startDate;
 @dynamic location;
-@dynamic newRelationship;
+@dynamic region;
 
 @end

@@ -27,8 +27,8 @@
 @property (nonatomic, retain) NSString * zip;
 @property (nonatomic, retain) NSNumber * zoneNo;
 @property (nonatomic, retain) NSOrderedSet *events;
-@property (nonatomic, retain) Region *region;
 @property (nonatomic, retain) NSSet *machines;
+@property (nonatomic, retain) Region *region;
 @end
 
 @interface Location (CoreDataGeneratedAccessors)

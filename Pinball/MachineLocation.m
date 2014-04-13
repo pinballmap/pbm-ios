@@ -15,7 +15,7 @@
 
 @dynamic condition;
 @dynamic conditionUpdate;
-@dynamic machine;
 @dynamic location;
+@dynamic machine;
 
 @end

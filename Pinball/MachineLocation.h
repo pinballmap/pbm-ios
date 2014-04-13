@@ -15,7 +15,7 @@
 
 @property (nonatomic, retain) NSString * condition;
 @property (nonatomic, retain) NSDate * conditionUpdate;
-@property (nonatomic, retain) Machine *machine;
 @property (nonatomic, retain) Location *location;
+@property (nonatomic, retain) Machine *machine;
 
 @end

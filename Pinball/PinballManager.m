@@ -37,7 +37,9 @@
     [cdManager saveContext];
     // Add machines to region object.
     [_currentRegion addMachines:machines];
+    machines = nil;
     // Create all locations
+    NSMutableSet *locations = [NSMutableSet new];
     [pinballData[@"locations"] enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
         NSDictionary *location = obj[@"location"];
         Location *newLocation = [Location createLocationWithData:location];
@@ -51,7 +53,20 @@
             locMachine.location = newLocation;
             [newLocation addMachinesObject:locMachine];
         }];
+        [locations addObject:newLocation];
         [_currentRegion addLocationsObject:newLocation];
+    }];
+    [cdManager saveContext];
+    // Craete all events
+    [pinballData[@"events"] enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+        NSDictionary *event = obj[@"event"];
+        Event *newEvent = [Event createEventWithData:event];
+        if (![event[@"locationNo"] isKindOfClass:[NSNull class]]){
+            NSPredicate *pred = [NSPredicate predicateWithFormat:@"locationId = %@" argumentArray:@[event[@"locationNo"]]];
+            NSSet *found = [locations filteredSetUsingPredicate:pred];
+            newEvent.location = [found anyObject];
+            newEvent.region = newEvent.location.region;
+        }
     }];
     [cdManager saveContext];
 }

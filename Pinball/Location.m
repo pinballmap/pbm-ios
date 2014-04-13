@@ -28,7 +28,7 @@
 @dynamic zip;
 @dynamic zoneNo;
 @dynamic events;
-@dynamic region;
 @dynamic machines;
+@dynamic region;
 
 @end

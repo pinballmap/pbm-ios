@@ -20,6 +20,6 @@
 @property (nonatomic, retain) NSString * name;
 @property (nonatomic, retain) NSDate * startDate;
 @property (nonatomic, retain) Location *location;
-@property (nonatomic, retain) Region *newRelationship;
+@property (nonatomic, retain) Region *region;
 
 @end

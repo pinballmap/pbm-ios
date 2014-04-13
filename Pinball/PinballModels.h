@@ -13,5 +13,6 @@
 #import "Location.h"
 #import "Location+Create.h"
 #import "Event.h"
+#import "Event+Create.h"
 #import "MachineLocation.h"
 #import "MachineLocation+Create.h"
