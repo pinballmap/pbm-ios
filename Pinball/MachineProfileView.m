@@ -10,6 +10,7 @@
 #import "MachineLocation.h"
 #import "InformationCell.h"
 #import "MapView.h"
+#import "LocationProfileView.h"
 
 @interface MachineProfileView ()
 
@@ -100,9 +101,18 @@
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    MapView *map = [self.storyboard instantiateViewControllerWithIdentifier:@"MapView"];
-    map.currentMachine = _currentMachine;
-    [self.navigationController pushViewController:map animated:YES];
+    if (indexPath.section == 1){
+        if (indexPath.row == 0){
+            MapView *map = [self.storyboard instantiateViewControllerWithIdentifier:@"MapView"];
+            map.currentMachine = _currentMachine;
+            [self.navigationController pushViewController:map animated:YES];
+        }else{
+            MachineLocation *machine = _currentMachine.machineLocations[indexPath.row-1];
+            LocationProfileView *locationProfile = [self.storyboard instantiateViewControllerWithIdentifier:@"LocationProfileView"];
+            locationProfile.currentLocation = machine.location;
+            [self.navigationController pushViewController:locationProfile animated:YES];
+        }
+    }
 }
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
 
