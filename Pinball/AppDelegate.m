@@ -17,7 +17,7 @@
     [[UITabBar appearance] setTintColor:pinkColor];
     [[UISearchBar appearance] setTintColor:pinkColor];
     [[UINavigationBar appearance] setTintColor:pinkColor];
-    [[PinballManager sharedInstance] importFromJSON];
+//    [[CoreDataManager sharedInstance] resetStore];
     return YES;
 }
 

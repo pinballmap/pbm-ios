@@ -12,11 +12,6 @@
 		DB52D2E118FAF94500BB56D8 /* MachineLocationPin.m in Sources */ = {isa = PBXBuildFile; fileRef = DB52D2E018FAF94500BB56D8 /* MachineLocationPin.m */; };
 		DB52D2E518FB054200BB56D8 /* EventsView.m in Sources */ = {isa = PBXBuildFile; fileRef = DB52D2E418FB054200BB56D8 /* EventsView.m */; };
 		DB52D2E818FB06EC00BB56D8 /* Event+Create.m in Sources */ = {isa = PBXBuildFile; fileRef = DB52D2E718FB06EC00BB56D8 /* Event+Create.m */; };
-		DB52D2EB18FB087300BB56D8 /* Event.m in Sources */ = {isa = PBXBuildFile; fileRef = DB52D2EA18FB087300BB56D8 /* Event.m */; };
-		DB52D2EE18FB087300BB56D8 /* Location.m in Sources */ = {isa = PBXBuildFile; fileRef = DB52D2ED18FB087300BB56D8 /* Location.m */; };
-		DB52D2F118FB087300BB56D8 /* Region.m in Sources */ = {isa = PBXBuildFile; fileRef = DB52D2F018FB087300BB56D8 /* Region.m */; };
-		DB52D2F418FB087400BB56D8 /* MachineLocation.m in Sources */ = {isa = PBXBuildFile; fileRef = DB52D2F318FB087400BB56D8 /* MachineLocation.m */; };
-		DB52D2F718FB087400BB56D8 /* Machine.m in Sources */ = {isa = PBXBuildFile; fileRef = DB52D2F618FB087400BB56D8 /* Machine.m */; };
 		DB52D2FA18FB09AF00BB56D8 /* NSDate+DateFormatting.m in Sources */ = {isa = PBXBuildFile; fileRef = DB52D2F918FB09AF00BB56D8 /* NSDate+DateFormatting.m */; };
 		DB52D2FD18FB0AD300BB56D8 /* EventProfileView.m in Sources */ = {isa = PBXBuildFile; fileRef = DB52D2FC18FB0AD300BB56D8 /* EventProfileView.m */; };
 		DB52D30018FB0D7400BB56D8 /* EventKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DB52D2FE18FB0D7400BB56D8 /* EventKit.framework */; };
@@ -27,6 +22,14 @@
 		DBB59CD518FADF7A00F35BFD /* LocationMapCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DBB59CD418FADF7A00F35BFD /* LocationMapCell.m */; };
 		DBB59CD718FAE0A800F35BFD /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DBB59CD618FAE0A800F35BFD /* CoreLocation.framework */; };
 		DBB59CD918FAE0E100F35BFD /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DBB59CD818FAE0E100F35BFD /* MapKit.framework */; };
+		DBB71B9C18FC4838007907DE /* SettingsView.m in Sources */ = {isa = PBXBuildFile; fileRef = DBB71B9B18FC4838007907DE /* SettingsView.m */; };
+		DBB71B9F18FC4846007907DE /* RegionsView.m in Sources */ = {isa = PBXBuildFile; fileRef = DBB71B9E18FC4846007907DE /* RegionsView.m */; };
+		DBB71BA218FC48EC007907DE /* MachineLocation.m in Sources */ = {isa = PBXBuildFile; fileRef = DBB71BA118FC48EC007907DE /* MachineLocation.m */; };
+		DBB71BA518FC48EC007907DE /* Region.m in Sources */ = {isa = PBXBuildFile; fileRef = DBB71BA418FC48EC007907DE /* Region.m */; };
+		DBB71BA818FC48EC007907DE /* Event.m in Sources */ = {isa = PBXBuildFile; fileRef = DBB71BA718FC48EC007907DE /* Event.m */; };
+		DBB71BAB18FC48EC007907DE /* Machine.m in Sources */ = {isa = PBXBuildFile; fileRef = DBB71BAA18FC48EC007907DE /* Machine.m */; };
+		DBB71BAE18FC48EC007907DE /* Location.m in Sources */ = {isa = PBXBuildFile; fileRef = DBB71BAD18FC48EC007907DE /* Location.m */; };
+		DBB71BB118FC5E77007907DE /* NSFileManager+DocumentsDirectory.m in Sources */ = {isa = PBXBuildFile; fileRef = DBB71BB018FC5E77007907DE /* NSFileManager+DocumentsDirectory.m */; };
 		DBF06BCF18F96FF500F92912 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DBF06BCE18F96FF500F92912 /* Foundation.framework */; };
 		DBF06BD118F96FF500F92912 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DBF06BD018F96FF500F92912 /* CoreGraphics.framework */; };
 		DBF06BD318F96FF500F92912 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DBF06BD218F96FF500F92912 /* UIKit.framework */; };
@@ -84,16 +87,6 @@
 		DB52D2E418FB054200BB56D8 /* EventsView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EventsView.m; sourceTree = "<group>"; };
 		DB52D2E618FB06EC00BB56D8 /* Event+Create.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Event+Create.h"; sourceTree = "<group>"; };
 		DB52D2E718FB06EC00BB56D8 /* Event+Create.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Event+Create.m"; sourceTree = "<group>"; };
-		DB52D2E918FB087300BB56D8 /* Event.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Event.h; sourceTree = "<group>"; };
-		DB52D2EA18FB087300BB56D8 /* Event.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Event.m; sourceTree = "<group>"; };
-		DB52D2EC18FB087300BB56D8 /* Location.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Location.h; sourceTree = "<group>"; };
-		DB52D2ED18FB087300BB56D8 /* Location.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Location.m; sourceTree = "<group>"; };
-		DB52D2EF18FB087300BB56D8 /* Region.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Region.h; sourceTree = "<group>"; };
-		DB52D2F018FB087300BB56D8 /* Region.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Region.m; sourceTree = "<group>"; };
-		DB52D2F218FB087400BB56D8 /* MachineLocation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MachineLocation.h; sourceTree = "<group>"; };
-		DB52D2F318FB087400BB56D8 /* MachineLocation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MachineLocation.m; sourceTree = "<group>"; };
-		DB52D2F518FB087400BB56D8 /* Machine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Machine.h; sourceTree = "<group>"; };
-		DB52D2F618FB087400BB56D8 /* Machine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Machine.m; sourceTree = "<group>"; };
 		DB52D2F818FB09AF00BB56D8 /* NSDate+DateFormatting.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+DateFormatting.h"; sourceTree = "<group>"; };
 		DB52D2F918FB09AF00BB56D8 /* NSDate+DateFormatting.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+DateFormatting.m"; sourceTree = "<group>"; };
 		DB52D2FB18FB0AD300BB56D8 /* EventProfileView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EventProfileView.h; sourceTree = "<group>"; };
@@ -110,6 +103,22 @@
 		DBB59CD418FADF7A00F35BFD /* LocationMapCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocationMapCell.m; sourceTree = "<group>"; };
 		DBB59CD618FAE0A800F35BFD /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		DBB59CD818FAE0E100F35BFD /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		DBB71B9A18FC4838007907DE /* SettingsView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsView.h; sourceTree = "<group>"; };
+		DBB71B9B18FC4838007907DE /* SettingsView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsView.m; sourceTree = "<group>"; };
+		DBB71B9D18FC4846007907DE /* RegionsView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegionsView.h; sourceTree = "<group>"; };
+		DBB71B9E18FC4846007907DE /* RegionsView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegionsView.m; sourceTree = "<group>"; };
+		DBB71BA018FC48EC007907DE /* MachineLocation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MachineLocation.h; path = ../MachineLocation.h; sourceTree = "<group>"; };
+		DBB71BA118FC48EC007907DE /* MachineLocation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MachineLocation.m; path = ../MachineLocation.m; sourceTree = "<group>"; };
+		DBB71BA318FC48EC007907DE /* Region.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Region.h; path = ../Region.h; sourceTree = "<group>"; };
+		DBB71BA418FC48EC007907DE /* Region.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Region.m; path = ../Region.m; sourceTree = "<group>"; };
+		DBB71BA618FC48EC007907DE /* Event.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Event.h; path = ../Event.h; sourceTree = "<group>"; };
+		DBB71BA718FC48EC007907DE /* Event.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Event.m; path = ../Event.m; sourceTree = "<group>"; };
+		DBB71BA918FC48EC007907DE /* Machine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Machine.h; path = ../Machine.h; sourceTree = "<group>"; };
+		DBB71BAA18FC48EC007907DE /* Machine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Machine.m; path = ../Machine.m; sourceTree = "<group>"; };
+		DBB71BAC18FC48EC007907DE /* Location.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Location.h; path = ../Location.h; sourceTree = "<group>"; };
+		DBB71BAD18FC48EC007907DE /* Location.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Location.m; path = ../Location.m; sourceTree = "<group>"; };
+		DBB71BAF18FC5E77007907DE /* NSFileManager+DocumentsDirectory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSFileManager+DocumentsDirectory.h"; sourceTree = "<group>"; };
+		DBB71BB018FC5E77007907DE /* NSFileManager+DocumentsDirectory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSFileManager+DocumentsDirectory.m"; sourceTree = "<group>"; };
 		DBF06BCB18F96FF500F92912 /* Pinball.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Pinball.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DBF06BCE18F96FF500F92912 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		DBF06BD018F96FF500F92912 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -240,6 +249,17 @@
 			name = Cells;
 			sourceTree = "<group>";
 		};
+		DBB71B9918FC482B007907DE /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				DBB71B9A18FC4838007907DE /* SettingsView.h */,
+				DBB71B9B18FC4838007907DE /* SettingsView.m */,
+				DBB71B9D18FC4846007907DE /* RegionsView.h */,
+				DBB71B9E18FC4846007907DE /* RegionsView.m */,
+			);
+			name = Settings;
+			sourceTree = "<group>";
+		};
 		DBF06BC218F96FF500F92912 = {
 			isa = PBXGroup;
 			children = (
@@ -294,6 +314,8 @@
 		DBF06BD518F96FF500F92912 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				DBB71BAF18FC5E77007907DE /* NSFileManager+DocumentsDirectory.h */,
+				DBB71BB018FC5E77007907DE /* NSFileManager+DocumentsDirectory.m */,
 				DB52D30218FB0DCF00BB56D8 /* UIAlertView+Application.h */,
 				DB52D30318FB0DCF00BB56D8 /* UIAlertView+Application.m */,
 				DB52D2F818FB09AF00BB56D8 /* NSDate+DateFormatting.h */,
@@ -353,6 +375,7 @@
 				DB52D2D918FAE96C00BB56D8 /* MapView.m */,
 				DB52D2DF18FAF94500BB56D8 /* MachineLocationPin.h */,
 				DB52D2E018FAF94500BB56D8 /* MachineLocationPin.m */,
+				DBB71B9918FC482B007907DE /* Settings */,
 				DB52D2E218FB009400BB56D8 /* Events */,
 				DB52D2D718FAE95E00BB56D8 /* Locations */,
 				DB52D2DB18FAEFB100BB56D8 /* Machines */,
@@ -365,17 +388,17 @@
 			children = (
 				DBF06C3D18F9767400F92912 /* PinballModels.h */,
 				DBF06C3918F975B600F92912 /* Model Helpers */,
-				DB52D2F518FB087400BB56D8 /* Machine.h */,
-				DB52D2F618FB087400BB56D8 /* Machine.m */,
-				DB52D2F218FB087400BB56D8 /* MachineLocation.h */,
-				DB52D2F318FB087400BB56D8 /* MachineLocation.m */,
-				DB52D2EF18FB087300BB56D8 /* Region.h */,
-				DB52D2F018FB087300BB56D8 /* Region.m */,
-				DB52D2EC18FB087300BB56D8 /* Location.h */,
-				DB52D2ED18FB087300BB56D8 /* Location.m */,
-				DB52D2E918FB087300BB56D8 /* Event.h */,
-				DB52D2EA18FB087300BB56D8 /* Event.m */,
 				DBF06C0418F9707400F92912 /* Pinball.xcdatamodeld */,
+				DBB71BAC18FC48EC007907DE /* Location.h */,
+				DBB71BAD18FC48EC007907DE /* Location.m */,
+				DBB71BA918FC48EC007907DE /* Machine.h */,
+				DBB71BAA18FC48EC007907DE /* Machine.m */,
+				DBB71BA618FC48EC007907DE /* Event.h */,
+				DBB71BA718FC48EC007907DE /* Event.m */,
+				DBB71BA318FC48EC007907DE /* Region.h */,
+				DBB71BA418FC48EC007907DE /* Region.m */,
+				DBB71BA018FC48EC007907DE /* MachineLocation.h */,
+				DBB71BA118FC48EC007907DE /* MachineLocation.m */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -505,32 +528,35 @@
 			buildActionMask = 2147483647;
 			files = (
 				DB52D2E518FB054200BB56D8 /* EventsView.m in Sources */,
-				DB52D2F718FB087400BB56D8 /* Machine.m in Sources */,
-				DB52D2EE18FB087300BB56D8 /* Location.m in Sources */,
 				DBF06C6D18F97E6300F92912 /* LocationsView.m in Sources */,
-				DB52D2F118FB087300BB56D8 /* Region.m in Sources */,
 				DB52D2DA18FAE96C00BB56D8 /* MapView.m in Sources */,
+				DBB71BA818FC48EC007907DE /* Event.m in Sources */,
 				DBF06C6418F97C5F00F92912 /* MachineLocation+Create.m in Sources */,
+				DBB71BAB18FC48EC007907DE /* Machine.m in Sources */,
+				DBB71BA218FC48EC007907DE /* MachineLocation.m in Sources */,
 				DBB59CCA18FAD9AC00F35BFD /* LocationProfileView.m in Sources */,
 				DB52D2E118FAF94500BB56D8 /* MachineLocationPin.m in Sources */,
+				DBB71B9F18FC4846007907DE /* RegionsView.m in Sources */,
 				DBF06C1918F9749F00F92912 /* PinballManager.m in Sources */,
 				DBF06C0118F9703E00F92912 /* CoreDataManager.m in Sources */,
 				DB52D2FD18FB0AD300BB56D8 /* EventProfileView.m in Sources */,
-				DB52D2F418FB087400BB56D8 /* MachineLocation.m in Sources */,
+				DBB71B9C18FC4838007907DE /* SettingsView.m in Sources */,
 				DB52D2FA18FB09AF00BB56D8 /* NSDate+DateFormatting.m in Sources */,
 				DBF06C4318F9788900F92912 /* Location+Create.m in Sources */,
 				DBF06BDF18F96FF500F92912 /* AppDelegate.m in Sources */,
 				DBF06C0618F9707400F92912 /* Pinball.xcdatamodeld in Sources */,
 				DB52D2DE18FAEFC500BB56D8 /* MachineProfileView.m in Sources */,
-				DB52D2EB18FB087300BB56D8 /* Event.m in Sources */,
 				DBF06BDB18F96FF500F92912 /* main.m in Sources */,
 				DBF06C8718F984AF00F92912 /* MachinesView.m in Sources */,
 				DBB59CD218FADF6D00F35BFD /* InformationCell.m in Sources */,
 				DBF06C4018F9775600F92912 /* Machine+Create.m in Sources */,
 				DB52D30418FB0DCF00BB56D8 /* UIAlertView+Application.m in Sources */,
 				DB52D2E818FB06EC00BB56D8 /* Event+Create.m in Sources */,
+				DBB71BA518FC48EC007907DE /* Region.m in Sources */,
+				DBB71BAE18FC48EC007907DE /* Location.m in Sources */,
 				DBF06C3C18F975C500F92912 /* Region+Create.m in Sources */,
 				DBB59CD518FADF7A00F35BFD /* LocationMapCell.m in Sources */,
+				DBB71BB118FC5E77007907DE /* NSFileManager+DocumentsDirectory.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

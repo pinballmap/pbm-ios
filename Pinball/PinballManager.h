@@ -14,6 +14,6 @@
 @property (nonatomic) Region *currentRegion;
 
 + (id)sharedInstance;
-- (void)importFromJSON;
-
+- (void)allRegions:(void (^)(NSArray *regions))regionBlock;
+- (void)changeToRegion:(NSDictionary *)region;
 @end

@@ -7,6 +7,16 @@
 //
 
 #import "PinballManager.h"
+#import "NSFileManager+DocumentsDirectory.h"
+
+#define rootURL @"http://pinballmap.com/"
+
+@interface PinballManager () {
+    NSURLSession *session;
+}
+
+@end
+
 
 @implementation PinballManager
 
@@ -18,14 +28,36 @@
     });
     return _sharedObject;
 }
-
-- (void)importFromJSON{
-    NSData *jsonFile = [NSData dataWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"pinball_data" ofType:@"json"]];
-    NSDictionary *pinballData = [NSJSONSerialization JSONObjectWithData:jsonFile options:NSJSONReadingAllowFragments error:nil][@"data"][@"region"];
+- (id)init{
+    self = [super init];
+    if (self){
+        session = [NSURLSession sharedSession];
+        NSDictionary *region = [[NSUserDefaults standardUserDefaults] objectForKey:@"CurrentRegion"];
+        if (region){
+            NSFetchRequest *regionRequest = [NSFetchRequest fetchRequestWithEntityName:@"Region"];
+            regionRequest.predicate = [NSPredicate predicateWithFormat:@"fullName = %@",region[@"fullName"]];
+            regionRequest.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"fullName" ascending:YES]];
+            NSManagedObjectContext *context = [[CoreDataManager sharedInstance] managedObjectContext];
+            NSArray *results = [context executeFetchRequest:regionRequest error:nil];
+            if (results.count == 1){
+                _currentRegion = results[0];
+            }else{
+                [self changeToRegion:@{@"name": @"seattle"}];
+            }
+        }else{
+            [self changeToRegion:@{@"name": @"seattle"}];
+        }
+    }
+    return self;
+}
+- (void)importToCoreData:(NSDictionary *)pinballData{
     CoreDataManager *cdManager = [CoreDataManager sharedInstance];
     [cdManager resetStore];
     
     _currentRegion = [Region createRegionWithData:pinballData];
+    NSDictionary *regionDic = @{@"fullName": _currentRegion.fullName};
+    [[NSUserDefaults standardUserDefaults] setObject:regionDic forKey:@"CurrentRegion"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
     // Create all machines.
     // Save the machines to a array to be used when creating the MachineLocation objects to ref.
     NSMutableSet *machines = [NSMutableSet new];
@@ -69,6 +101,59 @@
         }
     }];
     [cdManager saveContext];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"RegionUpdate" object:nil];
 }
-
+- (void)allRegions:(void (^)(NSArray *regions))regionBlock{
+    NSData *cacheData = [self regionCacheData];
+    
+    if (cacheData){
+        regionBlock([self parseRegions:cacheData]);
+    }else{
+        NSURL *regionURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@portland/regions.json",rootURL]];
+        NSURLSessionDataTask *regionData = [session dataTaskWithURL:regionURL completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+            if (data && !error){
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [self saveRegionCache:data];
+                    regionBlock([self parseRegions:cacheData]);
+                });
+            }
+        }];
+        [regionData resume];
+    }
+}
+- (NSArray *)parseRegions:(NSData *)apiData{
+    NSDictionary *jsonData = [NSJSONSerialization JSONObjectWithData:apiData options:NSJSONReadingAllowFragments error:nil];
+    if (jsonData){
+        NSMutableArray *regions = [NSMutableArray new];
+        [jsonData[@"regions"] enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+            NSDictionary *region = obj[@"region"];
+            [regions addObject:@{@"formalName": region[@"formalName"],@"name": region[@"name"]}];
+        }];
+        NSSortDescriptor *sorter = [NSSortDescriptor sortDescriptorWithKey:@"formalName" ascending:YES];
+        return [regions sortedArrayUsingDescriptors:@[sorter]];
+    }
+    return nil;
+}
+- (NSData *)regionCacheData{
+    if ([[NSFileManager defaultManager] fileExistsAtPath:[NSString stringWithFormat:@"%@/regions.json",[NSFileManager documentsDirectory]]]){
+        return [NSData dataWithContentsOfFile:[NSString stringWithFormat:@"%@/regions.json",[NSFileManager documentsDirectory]]];
+    }
+    return nil;
+}
+- (void)saveRegionCache:(NSData *)data{
+    [data writeToFile:[NSString stringWithFormat:@"%@/regions.json",[NSFileManager documentsDirectory]] atomically:YES];
+}
+- (void)changeToRegion:(NSDictionary *)region{
+    NSURL *regionURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@/%@/all_region_data.json",rootURL,region[@"name"]]];
+    NSURLSessionDataTask *regionData = [session dataTaskWithURL:regionURL completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+        if (data){
+            dispatch_async(dispatch_get_main_queue(), ^{
+                NSDictionary *regionData = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:nil];
+                [self importToCoreData:regionData[@"data"][@"region"]];
+                NSLog(@"All done importing");
+            });
+        }
+    }];
+    [regionData resume];
+}
 @end

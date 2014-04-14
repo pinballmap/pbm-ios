@@ -15,7 +15,11 @@
     newMachine.machineId = data[@"id"];
     newMachine.name = data[@"name"];
     newMachine.manufacturer = data[@"manufacturer"];
-    newMachine.year = data[@"year"];
+    if ([data[@"year"] isKindOfClass:[NSNumber class]]){
+        newMachine.year = data[@"year"];
+    }else{
+        newMachine.year = @1963;
+    }
     
     return newMachine;
 }
