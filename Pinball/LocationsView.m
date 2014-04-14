@@ -35,13 +35,21 @@
     if ([[PinballManager sharedInstance] currentRegion]){
         [self updateRegion];
     }
+    
+    UIRefreshControl *refresh = [UIRefreshControl new];
+    [refresh addTarget:self action:@selector(refreshRegion) forControlEvents:UIControlEventValueChanged];
+    self.refreshControl = refresh;
 }
 - (void)didReceiveMemoryWarning{
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+- (void)refreshRegion{
+    [[PinballManager sharedInstance] refreshRegion];
+}
 #pragma mark - Region Update
 - (void)updateRegion{
+    [self.refreshControl endRefreshing];
     self.navigationItem.title = [NSString stringWithFormat:@"%@ Locations",[[[PinballManager sharedInstance] currentRegion] fullName]];
     managedContext = [[CoreDataManager sharedInstance] managedObjectContext];
     NSFetchRequest *stackRequest = [NSFetchRequest fetchRequestWithEntityName:@"Location"];

@@ -16,4 +16,5 @@
 + (id)sharedInstance;
 - (void)allRegions:(void (^)(NSArray *regions))regionBlock;
 - (void)changeToRegion:(NSDictionary *)region;
+- (void)refreshRegion;
 @end

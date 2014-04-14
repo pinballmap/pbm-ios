@@ -55,7 +55,7 @@
     [cdManager resetStore];
     
     _currentRegion = [Region createRegionWithData:pinballData];
-    NSDictionary *regionDic = @{@"fullName": _currentRegion.fullName};
+    NSDictionary *regionDic = @{@"fullName": _currentRegion.fullName,@"name": _currentRegion.name};
     [[NSUserDefaults standardUserDefaults] setObject:regionDic forKey:@"CurrentRegion"];
     [[NSUserDefaults standardUserDefaults] synchronize];
     // Create all machines.
@@ -144,6 +144,21 @@
     [data writeToFile:[NSString stringWithFormat:@"%@/regions.json",[NSFileManager documentsDirectory]] atomically:YES];
 }
 - (void)changeToRegion:(NSDictionary *)region{
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"UpdatingRegion" object:nil];
+    NSURL *regionURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@/%@/all_region_data.json",rootURL,region[@"name"]]];
+    NSURLSessionDataTask *regionData = [session dataTaskWithURL:regionURL completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+        if (data){
+            dispatch_async(dispatch_get_main_queue(), ^{
+                NSDictionary *regionData = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:nil];
+                [self importToCoreData:regionData[@"data"][@"region"]];
+                NSLog(@"All done importing %@",regionData[@"data"][@"region"][@"fullName"]);
+            });
+        }
+    }];
+    [regionData resume];
+}
+- (void)refreshRegion{
+    NSDictionary *region = [[NSUserDefaults standardUserDefaults] objectForKey:@"CurrentRegion"];
     [[NSNotificationCenter defaultCenter] postNotificationName:@"UpdatingRegion" object:nil];
     NSURL *regionURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@/%@/all_region_data.json",rootURL,region[@"name"]]];
     NSURLSessionDataTask *regionData = [session dataTaskWithURL:regionURL completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
