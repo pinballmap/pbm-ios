@@ -30,6 +30,7 @@
 		DBB71BAB18FC48EC007907DE /* Machine.m in Sources */ = {isa = PBXBuildFile; fileRef = DBB71BAA18FC48EC007907DE /* Machine.m */; };
 		DBB71BAE18FC48EC007907DE /* Location.m in Sources */ = {isa = PBXBuildFile; fileRef = DBB71BAD18FC48EC007907DE /* Location.m */; };
 		DBB71BB118FC5E77007907DE /* NSFileManager+DocumentsDirectory.m in Sources */ = {isa = PBXBuildFile; fileRef = DBB71BB018FC5E77007907DE /* NSFileManager+DocumentsDirectory.m */; };
+		DBB71BB418FC6B04007907DE /* PinballTabController.m in Sources */ = {isa = PBXBuildFile; fileRef = DBB71BB318FC6B04007907DE /* PinballTabController.m */; };
 		DBF06BCF18F96FF500F92912 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DBF06BCE18F96FF500F92912 /* Foundation.framework */; };
 		DBF06BD118F96FF500F92912 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DBF06BD018F96FF500F92912 /* CoreGraphics.framework */; };
 		DBF06BD318F96FF500F92912 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DBF06BD218F96FF500F92912 /* UIKit.framework */; };
@@ -119,6 +120,8 @@
 		DBB71BAD18FC48EC007907DE /* Location.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Location.m; path = ../Location.m; sourceTree = "<group>"; };
 		DBB71BAF18FC5E77007907DE /* NSFileManager+DocumentsDirectory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSFileManager+DocumentsDirectory.h"; sourceTree = "<group>"; };
 		DBB71BB018FC5E77007907DE /* NSFileManager+DocumentsDirectory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSFileManager+DocumentsDirectory.m"; sourceTree = "<group>"; };
+		DBB71BB218FC6B04007907DE /* PinballTabController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PinballTabController.h; sourceTree = "<group>"; };
+		DBB71BB318FC6B04007907DE /* PinballTabController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PinballTabController.m; sourceTree = "<group>"; };
 		DBF06BCB18F96FF500F92912 /* Pinball.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Pinball.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DBF06BCE18F96FF500F92912 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		DBF06BD018F96FF500F92912 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -375,6 +378,8 @@
 				DB52D2D918FAE96C00BB56D8 /* MapView.m */,
 				DB52D2DF18FAF94500BB56D8 /* MachineLocationPin.h */,
 				DB52D2E018FAF94500BB56D8 /* MachineLocationPin.m */,
+				DBB71BB218FC6B04007907DE /* PinballTabController.h */,
+				DBB71BB318FC6B04007907DE /* PinballTabController.m */,
 				DBB71B9918FC482B007907DE /* Settings */,
 				DB52D2E218FB009400BB56D8 /* Events */,
 				DB52D2D718FAE95E00BB56D8 /* Locations */,
@@ -548,6 +553,7 @@
 				DB52D2DE18FAEFC500BB56D8 /* MachineProfileView.m in Sources */,
 				DBF06BDB18F96FF500F92912 /* main.m in Sources */,
 				DBF06C8718F984AF00F92912 /* MachinesView.m in Sources */,
+				DBB71BB418FC6B04007907DE /* PinballTabController.m in Sources */,
 				DBB59CD218FADF6D00F35BFD /* InformationCell.m in Sources */,
 				DBF06C4018F9775600F92912 /* Machine+Create.m in Sources */,
 				DB52D30418FB0DCF00BB56D8 /* UIAlertView+Application.m in Sources */,

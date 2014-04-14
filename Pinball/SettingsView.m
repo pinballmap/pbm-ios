@@ -11,7 +11,7 @@
 @interface SettingsView () {
     IBOutlet UILabel *regionLabel;
 }
-
+- (void)updateRegion;
 @end
 
 @implementation SettingsView
@@ -26,11 +26,15 @@
 - (void)viewDidLoad{
     [super viewDidLoad];
     self.navigationItem.title = @"Settings";
-    regionLabel.text = [[[PinballManager sharedInstance] currentRegion] fullName];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateRegion) name:@"RegionUpdate" object:nil];
+    [self updateRegion];
 }
 - (void)didReceiveMemoryWarning{
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+- (void)updateRegion{
+    regionLabel.text = [[[PinballManager sharedInstance] currentRegion] fullName];
 }
 #pragma mark - Table view data source
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{

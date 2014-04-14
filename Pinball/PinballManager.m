@@ -114,7 +114,7 @@
             if (data && !error){
                 dispatch_async(dispatch_get_main_queue(), ^{
                     [self saveRegionCache:data];
-                    regionBlock([self parseRegions:cacheData]);
+                    regionBlock([self parseRegions:data]);
                 });
             }
         }];
@@ -144,13 +144,14 @@
     [data writeToFile:[NSString stringWithFormat:@"%@/regions.json",[NSFileManager documentsDirectory]] atomically:YES];
 }
 - (void)changeToRegion:(NSDictionary *)region{
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"UpdatingRegion" object:nil];
     NSURL *regionURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@/%@/all_region_data.json",rootURL,region[@"name"]]];
     NSURLSessionDataTask *regionData = [session dataTaskWithURL:regionURL completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
         if (data){
             dispatch_async(dispatch_get_main_queue(), ^{
                 NSDictionary *regionData = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:nil];
                 [self importToCoreData:regionData[@"data"][@"region"]];
-                NSLog(@"All done importing");
+                NSLog(@"All done importing %@",regionData[@"data"][@"region"][@"fullName"]);
             });
         }
     }];
