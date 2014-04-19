@@ -31,7 +31,9 @@
 - (void)viewDidLoad{
     [super viewDidLoad];
     self.navigationItem.title = _currentLocation.name;
-    machines = [NSArray arrayWithArray:[_currentLocation.machines allObjects]];
+    // Sort the machines by name.
+    NSSortDescriptor *asc = [NSSortDescriptor sortDescriptorWithKey:@"machine.name" ascending:YES];
+    machines = [[_currentLocation.machines allObjects] sortedArrayUsingDescriptors:@[asc]];
 }
 - (void)didReceiveMemoryWarning{
     [super didReceiveMemoryWarning];
