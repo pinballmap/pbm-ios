@@ -172,4 +172,9 @@
     }];
     [regionData resume];
 }
+#pragma mark - Machines
+- (void)createNewMachine:(NSDictionary *)machineData withCompletion:(void (^)(NSDictionary *))completionBlock{
+    
+}
+
 @end

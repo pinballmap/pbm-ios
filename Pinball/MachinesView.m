@@ -114,7 +114,7 @@
         currentMachine = searchResults[indexPath.row];
     }
     cell.textLabel.text = currentMachine.name;
-    cell.detailTextLabel.text = [NSString stringWithFormat:@"Locations: %i",currentMachine.machineLocations.count];
+    cell.detailTextLabel.text = [NSString stringWithFormat:@"Locations: %lu",(unsigned long)currentMachine.machineLocations.count];
     return cell;
 }
 

@@ -31,7 +31,7 @@
 }
 - (void)updateEventBadge{
     NSInteger eventCounts = [[[[PinballManager sharedInstance] currentRegion] events] count];
-    [[[self.viewControllers objectAtIndex:2] tabBarItem] setBadgeValue:[NSString stringWithFormat:@"%i",eventCounts]];
+    [[[self.viewControllers objectAtIndex:2] tabBarItem] setBadgeValue:[NSString stringWithFormat:@"%li",(long)eventCounts]];
 }
 - (void)updatingRegion{
     [UIAlertView simpleApplicationAlertWithMessage:@"Updating Region" cancelButton:@"Ok"];

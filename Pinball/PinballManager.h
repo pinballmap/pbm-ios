@@ -17,4 +17,6 @@
 - (void)allRegions:(void (^)(NSArray *regions))regionBlock;
 - (void)changeToRegion:(NSDictionary *)region;
 - (void)refreshRegion;
+// Machine Routes
+- (void)createNewMachine:(NSDictionary *)machineData withCompletion:(void(^)(NSDictionary *status))completionBlock;
 @end

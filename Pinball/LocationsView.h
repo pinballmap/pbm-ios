@@ -10,4 +10,7 @@
 
 @interface LocationsView : UITableViewController
 
+@property (nonatomic)BOOL isSelecting;
+@property (nonatomic)id selectingViewController;
+
 @end

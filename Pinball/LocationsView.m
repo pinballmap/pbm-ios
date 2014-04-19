@@ -9,6 +9,7 @@
 #import "LocationsView.h"
 #import "Location.h"
 #import "LocationProfileView.h"
+#import "NewMachineView.h"
 
 @interface LocationsView () <NSFetchedResultsControllerDelegate,UIActionSheetDelegate,UISearchBarDelegate> {
     NSFetchedResultsController *fetchedResults;
@@ -35,7 +36,6 @@
     if ([[PinballManager sharedInstance] currentRegion]){
         [self updateRegion];
     }
-    
     UIRefreshControl *refresh = [UIRefreshControl new];
     [refresh addTarget:self action:@selector(refreshRegion) forControlEvents:UIControlEventValueChanged];
     self.refreshControl = refresh;
@@ -46,6 +46,10 @@
 }
 - (void)refreshRegion{
     [[PinballManager sharedInstance] refreshRegion];
+}
+- (void)setIsSelecting:(BOOL)isSelecting{
+    _isSelecting = isSelecting;
+    self.navigationItem.leftBarButtonItem = nil;
 }
 #pragma mark - Region Update
 - (void)updateRegion{
@@ -90,6 +94,12 @@
 - (IBAction)filterResults:(id)sender{
     UIActionSheet *sheet = [[UIActionSheet alloc] initWithTitle:@"Location Filter" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Location (Closets)",@"Number of Machines",@"Name", nil];
     [sheet showFromTabBar:self.tabBarController.tabBar];
+}
+- (BOOL)shouldPerformSegueWithIdentifier:(NSString *)identifier sender:(id)sender{
+    if ([identifier isEqualToString:@"LocationProfileView"] && _isSelecting){
+        return NO;
+    }
+    return YES;
 }
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
     if ([segue.identifier isEqualToString:@"LocationProfileView"]){
@@ -180,6 +190,19 @@
     cell.textLabel.text = currentLocation.name;
     cell.detailTextLabel.text = [NSString stringWithFormat:@"Machines: %lu",(unsigned long)currentLocation.machines.count];
     return cell;
+}
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    if (_isSelecting){
+        Location *currentLocation;
+        if (!isSearching){
+            currentLocation = [fetchedResults objectAtIndexPath:indexPath];
+        }else{
+            currentLocation = [searchResults objectAtIndex:indexPath.row];
+        }
+        [(NewMachineView *)_selectingViewController setMachineLocation:currentLocation];
+        [self.navigationController popToRootViewControllerAnimated:YES];
+    }
 }
 #pragma mark - NSFetchedResultsControllerDelegate
 - (void)controllerWillChangeContent:(NSFetchedResultsController *)controller{
