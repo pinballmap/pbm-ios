@@ -14,6 +14,7 @@
 #import "Machine.h"
 #import "MapView.h"
 #import "MachineConditionView.h"
+#import "NewMachineView.h"
 
 @interface LocationProfileView () {
     NSArray *machines;
@@ -47,17 +48,17 @@
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     if (section == 0){
-        return 3;
+        return 4;
     }else{
         return [_currentLocation.machineCount integerValue];
     }
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.section == 0){
-        if (indexPath.row <= 1){
-            return 67;
-        }else{
+        if (indexPath.row  == 2){
             return 122;
+        }else{
+            return 67;
         }
     }else if (indexPath.section == 1){
         MachineLocation *currentMachine = machines[indexPath.row];
@@ -114,7 +115,11 @@
                     cell.mapImage.image = snapshot.image;
                 }
             }];
-
+            return cell;
+        }else if (indexPath.row == 3){
+            UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MachineCell" forIndexPath:indexPath];
+            cell.textLabel.text = @"Add Machine";
+            cell.detailTextLabel.text = nil;
             return cell;
         }
     }else if (indexPath.section == 1){
@@ -141,6 +146,10 @@
             }
         }else if (indexPath.row == 1){
             [self performSegueWithIdentifier:@"MapView" sender:[tableView cellForRowAtIndexPath:indexPath]];
+        }else if (indexPath.row == 3){
+            NewMachineView *vc = (NewMachineView *)[[[self.storyboard instantiateViewControllerWithIdentifier:@"NewMachineView"] viewControllers] lastObject];
+            vc.machineLocation = _currentLocation;
+            [self.navigationController presentViewController:vc.parentViewController animated:YES completion:nil];
         }
     }
 }

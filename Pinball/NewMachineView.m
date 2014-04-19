@@ -29,6 +29,7 @@
 }
 - (void)viewDidLoad{
     [super viewDidLoad];
+    locationName.text = _machineLocation.name;
 }
 - (void)didReceiveMemoryWarning{
     [super didReceiveMemoryWarning];

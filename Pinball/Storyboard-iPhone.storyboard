@@ -79,7 +79,7 @@
                     <navigationItem key="navigationItem" id="db2-bk-bIs">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="NN2-AK-Edt">
                             <connections>
-                                <segue destination="s1Q-xY-Q0v" kind="modal" id="GGO-5C-m0Z"/>
+                                <segue destination="s1Q-xY-Q0v" kind="modal" identifier="" id="GGO-5C-m0Z"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -413,7 +413,9 @@
                             <outlet property="delegate" destination="i73-al-Ljc" id="0Ug-rE-6bU"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="daF-pR-PaV"/>
+                    <navigationItem key="navigationItem" id="daF-pR-PaV">
+                        <barButtonItem key="rightBarButtonItem" systemItem="edit" id="nVJ-9Q-7yZ"/>
+                    </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ebf-cG-edK" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -806,7 +808,7 @@
         <!--Navigation Controller-->
         <scene sceneID="L34-CY-u2Z">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="s1Q-xY-Q0v" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="NewMachineView" automaticallyAdjustsScrollViewInsets="NO" id="s1Q-xY-Q0v" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="IBZ-ln-63x">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
