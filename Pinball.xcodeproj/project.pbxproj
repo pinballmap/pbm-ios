@@ -23,6 +23,7 @@
 		DB66F4121902DB6F007272D1 /* Machine.m in Sources */ = {isa = PBXBuildFile; fileRef = DB66F4111902DB6F007272D1 /* Machine.m */; };
 		DB66F4151902DB6F007272D1 /* MachineLocation.m in Sources */ = {isa = PBXBuildFile; fileRef = DB66F4141902DB6F007272D1 /* MachineLocation.m */; };
 		DB66F4181902E414007272D1 /* NewMachineView.m in Sources */ = {isa = PBXBuildFile; fileRef = DB66F4171902E414007272D1 /* NewMachineView.m */; };
+		DBA10B431902F244004ED2D4 /* MachineConditionView.m in Sources */ = {isa = PBXBuildFile; fileRef = DBA10B421902F244004ED2D4 /* MachineConditionView.m */; };
 		DBB59CCA18FAD9AC00F35BFD /* LocationProfileView.m in Sources */ = {isa = PBXBuildFile; fileRef = DBB59CC918FAD9AC00F35BFD /* LocationProfileView.m */; };
 		DBB59CD218FADF6D00F35BFD /* InformationCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DBB59CD118FADF6D00F35BFD /* InformationCell.m */; };
 		DBB59CD518FADF7A00F35BFD /* LocationMapCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DBB59CD418FADF7A00F35BFD /* LocationMapCell.m */; };
@@ -109,6 +110,8 @@
 		DB66F4141902DB6F007272D1 /* MachineLocation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MachineLocation.m; sourceTree = "<group>"; };
 		DB66F4161902E414007272D1 /* NewMachineView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewMachineView.h; sourceTree = "<group>"; };
 		DB66F4171902E414007272D1 /* NewMachineView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewMachineView.m; sourceTree = "<group>"; };
+		DBA10B411902F244004ED2D4 /* MachineConditionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MachineConditionView.h; sourceTree = "<group>"; };
+		DBA10B421902F244004ED2D4 /* MachineConditionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MachineConditionView.m; sourceTree = "<group>"; };
 		DBB59CC818FAD9AC00F35BFD /* LocationProfileView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationProfileView.h; sourceTree = "<group>"; };
 		DBB59CC918FAD9AC00F35BFD /* LocationProfileView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocationProfileView.m; sourceTree = "<group>"; };
 		DBB59CD018FADF6D00F35BFD /* InformationCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InformationCell.h; sourceTree = "<group>"; };
@@ -223,6 +226,8 @@
 				DB52D2DD18FAEFC500BB56D8 /* MachineProfileView.m */,
 				DB66F4161902E414007272D1 /* NewMachineView.h */,
 				DB66F4171902E414007272D1 /* NewMachineView.m */,
+				DBA10B411902F244004ED2D4 /* MachineConditionView.h */,
+				DBA10B421902F244004ED2D4 /* MachineConditionView.m */,
 			);
 			name = Machines;
 			sourceTree = "<group>";
@@ -545,6 +550,7 @@
 				DB52D2DA18FAE96C00BB56D8 /* MapView.m in Sources */,
 				DB66F4091902DB6E007272D1 /* Event.m in Sources */,
 				DBF06C6418F97C5F00F92912 /* MachineLocation+Create.m in Sources */,
+				DBA10B431902F244004ED2D4 /* MachineConditionView.m in Sources */,
 				DB66F4181902E414007272D1 /* NewMachineView.m in Sources */,
 				DBB59CCA18FAD9AC00F35BFD /* LocationProfileView.m in Sources */,
 				DB52D2E118FAF94500BB56D8 /* MachineLocationPin.m in Sources */,
