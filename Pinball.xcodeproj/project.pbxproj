@@ -19,6 +19,7 @@
 		DB52D30418FB0DCF00BB56D8 /* UIAlertView+Application.m in Sources */ = {isa = PBXBuildFile; fileRef = DB52D30318FB0DCF00BB56D8 /* UIAlertView+Application.m */; };
 		DB636D0D1903EEEB00576521 /* AboutView.m in Sources */ = {isa = PBXBuildFile; fileRef = DB636D0C1903EEEB00576521 /* AboutView.m */; };
 		DB636D131903EF8E00576521 /* AboutInfo.plist in Resources */ = {isa = PBXBuildFile; fileRef = DB636D121903EF8E00576521 /* AboutInfo.plist */; };
+		DB636D1619040C5D00576521 /* NewEventView.m in Sources */ = {isa = PBXBuildFile; fileRef = DB636D1519040C5D00576521 /* NewEventView.m */; };
 		DB66F4091902DB6E007272D1 /* Event.m in Sources */ = {isa = PBXBuildFile; fileRef = DB66F4081902DB6E007272D1 /* Event.m */; };
 		DB66F40C1902DB6E007272D1 /* Region.m in Sources */ = {isa = PBXBuildFile; fileRef = DB66F40B1902DB6E007272D1 /* Region.m */; };
 		DB66F40F1902DB6F007272D1 /* Location.m in Sources */ = {isa = PBXBuildFile; fileRef = DB66F40E1902DB6F007272D1 /* Location.m */; };
@@ -103,6 +104,8 @@
 		DB636D0B1903EEEB00576521 /* AboutView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AboutView.h; sourceTree = "<group>"; };
 		DB636D0C1903EEEB00576521 /* AboutView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AboutView.m; sourceTree = "<group>"; };
 		DB636D121903EF8E00576521 /* AboutInfo.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = AboutInfo.plist; sourceTree = "<group>"; };
+		DB636D1419040C5D00576521 /* NewEventView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewEventView.h; sourceTree = "<group>"; };
+		DB636D1519040C5D00576521 /* NewEventView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewEventView.m; sourceTree = "<group>"; };
 		DB66F4071902DB6E007272D1 /* Event.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Event.h; sourceTree = "<group>"; };
 		DB66F4081902DB6E007272D1 /* Event.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Event.m; sourceTree = "<group>"; };
 		DB66F40A1902DB6E007272D1 /* Region.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Region.h; sourceTree = "<group>"; };
@@ -244,6 +247,8 @@
 				DB52D2E418FB054200BB56D8 /* EventsView.m */,
 				DB52D2FB18FB0AD300BB56D8 /* EventProfileView.h */,
 				DB52D2FC18FB0AD300BB56D8 /* EventProfileView.m */,
+				DB636D1419040C5D00576521 /* NewEventView.h */,
+				DB636D1519040C5D00576521 /* NewEventView.m */,
 			);
 			name = Events;
 			sourceTree = "<group>";
@@ -585,6 +590,7 @@
 				DBF06C0618F9707400F92912 /* Pinball.xcdatamodeld in Sources */,
 				DB52D2DE18FAEFC500BB56D8 /* MachineProfileView.m in Sources */,
 				DBF06BDB18F96FF500F92912 /* main.m in Sources */,
+				DB636D1619040C5D00576521 /* NewEventView.m in Sources */,
 				DB66F4121902DB6F007272D1 /* Machine.m in Sources */,
 				DBF06C8718F984AF00F92912 /* MachinesView.m in Sources */,
 				DBB71BB418FC6B04007907DE /* PinballTabController.m in Sources */,

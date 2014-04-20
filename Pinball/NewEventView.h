@@ -1,15 +1,14 @@
 //
-//  NewMachineView.h
+//  NewEventView.h
 //  Pinball
 //
-//  Created by Frank Michael on 4/19/14.
+//  Created by Frank Michael on 4/20/14.
 //  Copyright (c) 2014 Frank Michael Sanchez. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
-#import "Location.h"
 
-@interface NewMachineView : UITableViewController
+@interface NewEventView : UITableViewController
 
 @property (nonatomic)Location *location;
 

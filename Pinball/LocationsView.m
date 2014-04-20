@@ -200,7 +200,9 @@
         }else{
             currentLocation = [searchResults objectAtIndex:indexPath.row];
         }
-        [(NewMachineView *)_selectingViewController setMachineLocation:currentLocation];
+        if ([_selectingViewController respondsToSelector:@selector(setLocation:)]){
+            [_selectingViewController setLocation:currentLocation];
+        }
         [self.navigationController popToRootViewControllerAnimated:YES];
     }
 }

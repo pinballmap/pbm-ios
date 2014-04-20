@@ -148,7 +148,7 @@
             [self performSegueWithIdentifier:@"MapView" sender:[tableView cellForRowAtIndexPath:indexPath]];
         }else if (indexPath.row == 3){
             NewMachineView *vc = (NewMachineView *)[[[self.storyboard instantiateViewControllerWithIdentifier:@"NewMachineView"] viewControllers] lastObject];
-            vc.machineLocation = _currentLocation;
+            vc.location = _currentLocation;
             [self.navigationController presentViewController:vc.parentViewController animated:YES completion:nil];
         }
     }

@@ -29,7 +29,7 @@
 }
 - (void)viewDidLoad{
     [super viewDidLoad];
-    locationName.text = _machineLocation.name;
+    locationName.text = _location.name;
 }
 - (void)didReceiveMemoryWarning{
     [super didReceiveMemoryWarning];
@@ -42,21 +42,21 @@
         locations.selectingViewController = self;
     }
 }
-- (void)setMachineLocation:(Location *)machineLocation{
-    _machineLocation = machineLocation;
-    locationName.text = _machineLocation.name;
+- (void)setLocation:(Location *)location{
+    _location = location;
+    locationName.text = _location.name;
 }
 #pragma mark - Actions
 - (IBAction)saveMachine:(id)sender{
-    if (_machineLocation && machineName.text.length > 0){
+    if (_location && machineName.text.length > 0){
         #pragma message("TODO: API Interaction for adding machines.")
-        NSDictionary *machine = @{@"name": machineName.text,@"location": _machineLocation};
+        NSDictionary *machine = @{@"name": machineName.text,@"location": _location};
         NSLog(@"%@",machine);
         [self dismissViewControllerAnimated:YES completion:nil];
     }else{
         if (machineName.text.length == 0){
             [UIAlertView simpleApplicationAlertWithMessage:@"You must enter a machine name." cancelButton:@"Ok"];
-        }else if (!_machineLocation){
+        }else if (!_location){
             [UIAlertView simpleApplicationAlertWithMessage:@"You must select a location for this machine." cancelButton:@"Ok"];
         }
     }
