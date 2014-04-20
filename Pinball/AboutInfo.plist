@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<array>
+	<dict>
+		<key>sectionTitle</key>
+		<string>Pinballmap.com</string>
+		<key>people</key>
+		<array>
+			<dict>
+				<key>name</key>
+				<string>Scott Wainstock</string>
+				<key>url</key>
+				<string>http://scottwainstock.com</string>
+			</dict>
+			<dict>
+				<key>name</key>
+				<string>Ryan Gratzer</string>
+				<key>url</key>
+				<string>http://blueskiesabove.us/</string>
+			</dict>
+		</array>
+	</dict>
+	<dict>
+		<key>sectionTitle</key>
+		<string>iOS App</string>
+		<key>people</key>
+		<array>
+			<dict>
+				<key>name</key>
+				<string>Frank Michael Sanchez</string>
+				<key>url</key>
+				<string>http://fmscode.com</string>
+			</dict>
+			<dict>
+				<key>name</key>
+				<string>Scott Wainstock</string>
+				<key>url</key>
+				<string>http://scottwainstock.com/</string>
+			</dict>
+			<dict>
+				<key>name</key>
+				<string>Isaac Ruiz</string>
+				<key>url</key>
+				<string>http://isaacruiz.net/</string>
+			</dict>
+		</array>
+	</dict>
+	<dict>
+		<key>sectionTitle</key>
+		<string>Special Thanks</string>
+		<key>people</key>
+		<array>
+			<dict>
+				<key>name</key>
+				<string>Nicholas Kula</string>
+				<key>url</key>
+				<string></string>
+			</dict>
+			<dict>
+				<key>name</key>
+				<string>Mark Weaber</string>
+				<key>url</key>
+				<string></string>
+			</dict>
+			<dict>
+				<key>name</key>
+				<string>Eric Hill</string>
+				<key>url</key>
+				<string></string>
+			</dict>
+			<dict>
+				<key>name</key>
+				<string>Pat Castaldo</string>
+				<key>url</key>
+				<string></string>
+			</dict>
+			<dict>
+				<key>name</key>
+				<string>J.D. Yeager</string>
+				<key>url</key>
+				<string></string>
+			</dict>
+			<dict>
+				<key>name</key>
+				<string>Karri Pearcey</string>
+				<key>url</key>
+				<string></string>
+			</dict>
+			<dict>
+				<key>name</key>
+				<string>Steve Lampros</string>
+				<key>url</key>
+				<string></string>
+			</dict>
+			<dict>
+				<key>name</key>
+				<string>Josh Brake</string>
+				<key>url</key>
+				<string></string>
+			</dict>
+		</array>
+	</dict>
+</array>
+</plist>
