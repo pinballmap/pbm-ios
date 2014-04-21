@@ -15,6 +15,7 @@
 #import "MapView.h"
 #import "MachineConditionView.h"
 #import "NewMachineView.h"
+#import "NSDate+DateFormatting.h"
 
 @interface LocationProfileView () {
     NSArray *machines;
@@ -63,10 +64,17 @@
     }else if (indexPath.section == 1){
         MachineLocation *currentMachine = machines[indexPath.row];
         NSString *cellTitle = currentMachine.machine.name;
+        NSString *cellDetail = [NSString stringWithFormat:@"%@ updated on %@",currentMachine.condition,[currentMachine.conditionUpdate monthDayYearPretty:YES]];
         
-        CGRect stringSize = [cellTitle boundingRectWithSize:CGSizeMake(290, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName: [UIFont systemFontOfSize:18]} context:nil];
+//        CGRect stringSize = [cellTitle boundingRectWithSize:CGSizeMake(290, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName: [UIFont systemFontOfSize:18]} context:nil];
         
-        stringSize.size.height = stringSize.size.height+10;   // Take into account the 10 points of padding within a cell.
+        CGRect textLabel = [cellTitle boundingRectWithSize:CGSizeMake(290, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName: [UIFont systemFontOfSize:18]} context:nil];
+        CGRect detailLabel = [cellDetail boundingRectWithSize:CGSizeMake(290, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName: [UIFont systemFontOfSize:12]} context:nil];
+        // Add 6 pixel padding present in subtitle style.
+        CGRect stringSize = CGRectMake(0, 0, 290, textLabel.size.height+detailLabel.size.height+6);
+
+        
+//        stringSize.size.height = stringSize.size.height+10;   // Take into account the 10 points of padding within a cell.
         if (stringSize.size.height+10 < 44){
             return 44;
         }else{
@@ -126,9 +134,14 @@
         MachineLocation *currentMachine = machines[indexPath.row];
         UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MachineCell" forIndexPath:indexPath];
         cell.textLabel.text = currentMachine.machine.name;
+        cell.detailTextLabel.numberOfLines = 0;
         // If no condition is available, just don't set the detail text label.
         if (![currentMachine.condition isEqualToString:@"N/A"]){
-            cell.detailTextLabel.text = currentMachine.condition;
+            if (currentMachine.conditionUpdate){
+                cell.detailTextLabel.text = [NSString stringWithFormat:@"%@ updated on %@",currentMachine.condition,[currentMachine.conditionUpdate monthDayYearPretty:YES]];
+            }else{
+                cell.detailTextLabel.text = currentMachine.condition;
+            }
         }else{
             cell.detailTextLabel.text = nil;
         }
