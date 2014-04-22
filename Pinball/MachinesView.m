@@ -104,9 +104,28 @@
     }
     return rows;
 }
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    float defaultWidth = 270;
+    
+    Machine *currentMachine;
+    if (!isSearching){
+        currentMachine = [fetchedResults objectAtIndexPath:indexPath];
+    }else{
+        currentMachine = searchResults[indexPath.row];
+    }
+    NSString *mainString = currentMachine.name;
+    NSString *detailString = [NSString stringWithFormat:@"Locations: %lu",(unsigned long)currentMachine.machineLocations.count];
+
+    CGRect textLabel = [mainString boundingRectWithSize:CGSizeMake(defaultWidth, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName: [UIFont systemFontOfSize:18]} context:nil];
+    CGRect detailLabel = [detailString boundingRectWithSize:CGSizeMake(defaultWidth, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName: [UIFont systemFontOfSize:12]} context:nil];
+    // Add 6 pixel padding present in subtitle style.
+    CGRect stringSize = CGRectMake(0, 0, defaultWidth, textLabel.size.height+detailLabel.size.height+6);
+    return stringSize.size.height;
+}
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MachineCell" forIndexPath:indexPath];
-    
+    cell.textLabel.numberOfLines = 0;
+    cell.detailTextLabel.numberOfLines = 0;
     Machine *currentMachine;
     if (!isSearching){
         currentMachine = [fetchedResults objectAtIndexPath:indexPath];
