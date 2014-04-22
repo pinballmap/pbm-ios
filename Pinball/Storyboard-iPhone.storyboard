@@ -1029,11 +1029,17 @@
                             <outlet property="delegate" destination="9Nt-tE-aEj" id="t6l-ki-sOi"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="Lyw-vI-mMk"/>
+                    <navigationItem key="navigationItem" id="Lyw-vI-mMk">
+                        <barButtonItem key="rightBarButtonItem" title="Request" id="4HH-rG-fRi">
+                            <connections>
+                                <action selector="requestRegion:" destination="9Nt-tE-aEj" id="Xel-Mb-WRs"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GJS-iw-zUa" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1833" y="3312"/>
+            <point key="canvasLocation" x="1851" y="3288"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="L34-CY-u2Z">

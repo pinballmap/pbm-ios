@@ -36,6 +36,7 @@
 		DBB71B9F18FC4846007907DE /* RegionsView.m in Sources */ = {isa = PBXBuildFile; fileRef = DBB71B9E18FC4846007907DE /* RegionsView.m */; };
 		DBB71BB118FC5E77007907DE /* NSFileManager+DocumentsDirectory.m in Sources */ = {isa = PBXBuildFile; fileRef = DBB71BB018FC5E77007907DE /* NSFileManager+DocumentsDirectory.m */; };
 		DBB71BB418FC6B04007907DE /* PinballTabController.m in Sources */ = {isa = PBXBuildFile; fileRef = DBB71BB318FC6B04007907DE /* PinballTabController.m */; };
+		DBD4F3E919067D690023D98B /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DBD4F3E819067D690023D98B /* MessageUI.framework */; };
 		DBF06BCF18F96FF500F92912 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DBF06BCE18F96FF500F92912 /* Foundation.framework */; };
 		DBF06BD118F96FF500F92912 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DBF06BD018F96FF500F92912 /* CoreGraphics.framework */; };
 		DBF06BD318F96FF500F92912 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DBF06BD218F96FF500F92912 /* UIKit.framework */; };
@@ -136,6 +137,7 @@
 		DBB71BB018FC5E77007907DE /* NSFileManager+DocumentsDirectory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSFileManager+DocumentsDirectory.m"; sourceTree = "<group>"; };
 		DBB71BB218FC6B04007907DE /* PinballTabController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PinballTabController.h; sourceTree = "<group>"; };
 		DBB71BB318FC6B04007907DE /* PinballTabController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PinballTabController.m; sourceTree = "<group>"; };
+		DBD4F3E819067D690023D98B /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		DBF06BCB18F96FF500F92912 /* Pinball.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Pinball.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DBF06BCE18F96FF500F92912 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		DBF06BD018F96FF500F92912 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -190,6 +192,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DBD4F3E919067D690023D98B /* MessageUI.framework in Frameworks */,
 				DB52D30018FB0D7400BB56D8 /* EventKit.framework in Frameworks */,
 				DB52D30118FB0D7400BB56D8 /* EventKitUI.framework in Frameworks */,
 				DBB59CD918FAE0E100F35BFD /* MapKit.framework in Frameworks */,
@@ -315,6 +318,7 @@
 		DBF06BCD18F96FF500F92912 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				DBD4F3E819067D690023D98B /* MessageUI.framework */,
 				DB52D2FE18FB0D7400BB56D8 /* EventKit.framework */,
 				DB52D2FF18FB0D7400BB56D8 /* EventKitUI.framework */,
 				DBB59CD818FAE0E100F35BFD /* MapKit.framework */,

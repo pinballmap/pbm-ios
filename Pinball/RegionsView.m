@@ -7,12 +7,15 @@
 //
 
 #import "RegionsView.h"
+#import <MessageUI/MessageUI.h>
+#import "UIAlertView+Application.h"
 
-@interface RegionsView () <UISearchBarDelegate> {
+@interface RegionsView () <UISearchBarDelegate,MFMailComposeViewControllerDelegate> {
     NSMutableArray *allRegions;
     BOOL isSearching;
     NSMutableArray *searchResults;
 }
+- (IBAction)requestRegion:(id)sender;
 
 @end
 
@@ -39,6 +42,25 @@
 - (void)didReceiveMemoryWarning{
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+#pragma mark - Class actions
+- (IBAction)requestRegion:(id)sender{
+    if ([MFMailComposeViewController canSendMail]){
+        MFMailComposeViewController *requestMessage = [[MFMailComposeViewController alloc] init];
+        requestMessage.mailComposeDelegate = self;
+        [requestMessage setSubject:@"Adding my region to PinballMap.com"];
+        [requestMessage setToRecipients:@[@"gratzer@gmail.com"]];
+        [self presentViewController:requestMessage animated:YES completion:nil];
+    }
+}
+#pragma mark - MFMailComposeDelegate
+- (void)mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error{
+    if (result == MFMailComposeResultFailed){
+        [UIAlertView simpleApplicationAlertWithMessage:@"Message failed to send." cancelButton:@"Ok"];
+    }else if (result == MFMailComposeResultSent){
+        [UIAlertView simpleApplicationAlertWithMessage:@"Message sent. Thank You!" cancelButton:@"Ok"];
+    }
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 #pragma mark - Searchbar Delegate
 - (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar{
