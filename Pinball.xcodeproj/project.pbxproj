@@ -26,6 +26,9 @@
 		DB66F4121902DB6F007272D1 /* Machine.m in Sources */ = {isa = PBXBuildFile; fileRef = DB66F4111902DB6F007272D1 /* Machine.m */; };
 		DB66F4151902DB6F007272D1 /* MachineLocation.m in Sources */ = {isa = PBXBuildFile; fileRef = DB66F4141902DB6F007272D1 /* MachineLocation.m */; };
 		DB66F4181902E414007272D1 /* NewMachineView.m in Sources */ = {isa = PBXBuildFile; fileRef = DB66F4171902E414007272D1 /* NewMachineView.m */; };
+		DB99C3AC1906D85500AFDF0F /* NewLocationsView.m in Sources */ = {isa = PBXBuildFile; fileRef = DB99C3AB1906D85500AFDF0F /* NewLocationsView.m */; };
+		DB99C3AE1906DCD200AFDF0F /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DB99C3AD1906DCD200AFDF0F /* AddressBook.framework */; };
+		DB99C3B11906FA4100AFDF0F /* MachinePickingView.m in Sources */ = {isa = PBXBuildFile; fileRef = DB99C3B01906FA4100AFDF0F /* MachinePickingView.m */; };
 		DBA10B431902F244004ED2D4 /* MachineConditionView.m in Sources */ = {isa = PBXBuildFile; fileRef = DBA10B421902F244004ED2D4 /* MachineConditionView.m */; };
 		DBB59CCA18FAD9AC00F35BFD /* LocationProfileView.m in Sources */ = {isa = PBXBuildFile; fileRef = DBB59CC918FAD9AC00F35BFD /* LocationProfileView.m */; };
 		DBB59CD218FADF6D00F35BFD /* InformationCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DBB59CD118FADF6D00F35BFD /* InformationCell.m */; };
@@ -119,6 +122,11 @@
 		DB66F4141902DB6F007272D1 /* MachineLocation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MachineLocation.m; sourceTree = "<group>"; };
 		DB66F4161902E414007272D1 /* NewMachineView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewMachineView.h; sourceTree = "<group>"; };
 		DB66F4171902E414007272D1 /* NewMachineView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewMachineView.m; sourceTree = "<group>"; };
+		DB99C3AA1906D85500AFDF0F /* NewLocationsView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewLocationsView.h; sourceTree = "<group>"; };
+		DB99C3AB1906D85500AFDF0F /* NewLocationsView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewLocationsView.m; sourceTree = "<group>"; };
+		DB99C3AD1906DCD200AFDF0F /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
+		DB99C3AF1906FA4100AFDF0F /* MachinePickingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MachinePickingView.h; sourceTree = "<group>"; };
+		DB99C3B01906FA4100AFDF0F /* MachinePickingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MachinePickingView.m; sourceTree = "<group>"; };
 		DBA10B411902F244004ED2D4 /* MachineConditionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MachineConditionView.h; sourceTree = "<group>"; };
 		DBA10B421902F244004ED2D4 /* MachineConditionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MachineConditionView.m; sourceTree = "<group>"; };
 		DBB59CC818FAD9AC00F35BFD /* LocationProfileView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationProfileView.h; sourceTree = "<group>"; };
@@ -192,6 +200,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DB99C3AE1906DCD200AFDF0F /* AddressBook.framework in Frameworks */,
 				DBD4F3E919067D690023D98B /* MessageUI.framework in Frameworks */,
 				DB52D30018FB0D7400BB56D8 /* EventKit.framework in Frameworks */,
 				DB52D30118FB0D7400BB56D8 /* EventKitUI.framework in Frameworks */,
@@ -224,6 +233,8 @@
 				DBF06C6C18F97E6300F92912 /* LocationsView.m */,
 				DBB59CC818FAD9AC00F35BFD /* LocationProfileView.h */,
 				DBB59CC918FAD9AC00F35BFD /* LocationProfileView.m */,
+				DB99C3AA1906D85500AFDF0F /* NewLocationsView.h */,
+				DB99C3AB1906D85500AFDF0F /* NewLocationsView.m */,
 			);
 			name = Locations;
 			sourceTree = "<group>";
@@ -239,6 +250,8 @@
 				DB66F4171902E414007272D1 /* NewMachineView.m */,
 				DBA10B411902F244004ED2D4 /* MachineConditionView.h */,
 				DBA10B421902F244004ED2D4 /* MachineConditionView.m */,
+				DB99C3AF1906FA4100AFDF0F /* MachinePickingView.h */,
+				DB99C3B01906FA4100AFDF0F /* MachinePickingView.m */,
 			);
 			name = Machines;
 			sourceTree = "<group>";
@@ -318,6 +331,7 @@
 		DBF06BCD18F96FF500F92912 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				DB99C3AD1906DCD200AFDF0F /* AddressBook.framework */,
 				DBD4F3E819067D690023D98B /* MessageUI.framework */,
 				DB52D2FE18FB0D7400BB56D8 /* EventKit.framework */,
 				DB52D2FF18FB0D7400BB56D8 /* EventKitUI.framework */,
@@ -589,10 +603,12 @@
 				DB52D2FD18FB0AD300BB56D8 /* EventProfileView.m in Sources */,
 				DBB71B9C18FC4838007907DE /* SettingsView.m in Sources */,
 				DB52D2FA18FB09AF00BB56D8 /* NSDate+DateFormatting.m in Sources */,
+				DB99C3B11906FA4100AFDF0F /* MachinePickingView.m in Sources */,
 				DBF06C4318F9788900F92912 /* Location+Create.m in Sources */,
 				DBF06BDF18F96FF500F92912 /* AppDelegate.m in Sources */,
 				DBF06C0618F9707400F92912 /* Pinball.xcdatamodeld in Sources */,
 				DB52D2DE18FAEFC500BB56D8 /* MachineProfileView.m in Sources */,
+				DB99C3AC1906D85500AFDF0F /* NewLocationsView.m in Sources */,
 				DBF06BDB18F96FF500F92912 /* main.m in Sources */,
 				DB636D1619040C5D00576521 /* NewEventView.m in Sources */,
 				DB66F4121902DB6F007272D1 /* Machine.m in Sources */,
