@@ -43,6 +43,9 @@
 - (void)setupUI{
     machineName.text = _currentMachine.machine.name;
     locationName.text = _currentMachine.location.name;
+    if (![_currentMachine.condition isEqualToString:@"N/A"]){
+        machineCondition.text = _currentMachine.condition;
+    }
 }
 #pragma mark - Class Actions
 - (IBAction)cancelCondition:(id)sender{
