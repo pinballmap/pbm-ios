@@ -36,6 +36,11 @@
         
         CLLocationCoordinate2D coord = CLLocationCoordinate2DMake([_currentLocation.latitude doubleValue],[_currentLocation.longitude doubleValue]);
         mainMapView.region = MKCoordinateRegionMake(coord, MKCoordinateSpanMake(0.002, 0.002));
+        
+        MKPointAnnotation *locationPin = [[MKPointAnnotation alloc] init];
+        locationPin.title = _currentLocation.name;
+        locationPin.coordinate = CLLocationCoordinate2DMake([_currentLocation.latitude doubleValue], [_currentLocation.longitude doubleValue]);
+        [mainMapView addAnnotation:locationPin];
     }else if (_currentMachine) {
         [_currentMachine.machineLocations enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
             MachineLocation *loc = obj;

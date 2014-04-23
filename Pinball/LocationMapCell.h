@@ -13,4 +13,6 @@
 @property (nonatomic) IBOutlet UIImageView *mapImage;
 @property (nonatomic) IBOutlet UIActivityIndicatorView *loadingView;
 
+
+- (void)addAnnotation;
 @end

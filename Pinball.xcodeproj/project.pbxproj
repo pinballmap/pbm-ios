@@ -20,15 +20,15 @@
 		DB636D0D1903EEEB00576521 /* AboutView.m in Sources */ = {isa = PBXBuildFile; fileRef = DB636D0C1903EEEB00576521 /* AboutView.m */; };
 		DB636D131903EF8E00576521 /* AboutInfo.plist in Resources */ = {isa = PBXBuildFile; fileRef = DB636D121903EF8E00576521 /* AboutInfo.plist */; };
 		DB636D1619040C5D00576521 /* NewEventView.m in Sources */ = {isa = PBXBuildFile; fileRef = DB636D1519040C5D00576521 /* NewEventView.m */; };
-		DB66F4091902DB6E007272D1 /* Event.m in Sources */ = {isa = PBXBuildFile; fileRef = DB66F4081902DB6E007272D1 /* Event.m */; };
-		DB66F40C1902DB6E007272D1 /* Region.m in Sources */ = {isa = PBXBuildFile; fileRef = DB66F40B1902DB6E007272D1 /* Region.m */; };
-		DB66F40F1902DB6F007272D1 /* Location.m in Sources */ = {isa = PBXBuildFile; fileRef = DB66F40E1902DB6F007272D1 /* Location.m */; };
-		DB66F4121902DB6F007272D1 /* Machine.m in Sources */ = {isa = PBXBuildFile; fileRef = DB66F4111902DB6F007272D1 /* Machine.m */; };
-		DB66F4151902DB6F007272D1 /* MachineLocation.m in Sources */ = {isa = PBXBuildFile; fileRef = DB66F4141902DB6F007272D1 /* MachineLocation.m */; };
 		DB66F4181902E414007272D1 /* NewMachineView.m in Sources */ = {isa = PBXBuildFile; fileRef = DB66F4171902E414007272D1 /* NewMachineView.m */; };
 		DB99C3AC1906D85500AFDF0F /* NewLocationsView.m in Sources */ = {isa = PBXBuildFile; fileRef = DB99C3AB1906D85500AFDF0F /* NewLocationsView.m */; };
 		DB99C3AE1906DCD200AFDF0F /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DB99C3AD1906DCD200AFDF0F /* AddressBook.framework */; };
 		DB99C3B11906FA4100AFDF0F /* MachinePickingView.m in Sources */ = {isa = PBXBuildFile; fileRef = DB99C3B01906FA4100AFDF0F /* MachinePickingView.m */; };
+		DB99C3B41908019500AFDF0F /* Event.m in Sources */ = {isa = PBXBuildFile; fileRef = DB99C3B31908019500AFDF0F /* Event.m */; };
+		DB99C3B71908019600AFDF0F /* Machine.m in Sources */ = {isa = PBXBuildFile; fileRef = DB99C3B61908019600AFDF0F /* Machine.m */; };
+		DB99C3BA1908019600AFDF0F /* Location.m in Sources */ = {isa = PBXBuildFile; fileRef = DB99C3B91908019600AFDF0F /* Location.m */; };
+		DB99C3BD1908019600AFDF0F /* MachineLocation.m in Sources */ = {isa = PBXBuildFile; fileRef = DB99C3BC1908019600AFDF0F /* MachineLocation.m */; };
+		DB99C3C01908019600AFDF0F /* Region.m in Sources */ = {isa = PBXBuildFile; fileRef = DB99C3BF1908019600AFDF0F /* Region.m */; };
 		DBA10B431902F244004ED2D4 /* MachineConditionView.m in Sources */ = {isa = PBXBuildFile; fileRef = DBA10B421902F244004ED2D4 /* MachineConditionView.m */; };
 		DBB59CCA18FAD9AC00F35BFD /* LocationProfileView.m in Sources */ = {isa = PBXBuildFile; fileRef = DBB59CC918FAD9AC00F35BFD /* LocationProfileView.m */; };
 		DBB59CD218FADF6D00F35BFD /* InformationCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DBB59CD118FADF6D00F35BFD /* InformationCell.m */; };
@@ -110,16 +110,6 @@
 		DB636D121903EF8E00576521 /* AboutInfo.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = AboutInfo.plist; sourceTree = "<group>"; };
 		DB636D1419040C5D00576521 /* NewEventView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewEventView.h; sourceTree = "<group>"; };
 		DB636D1519040C5D00576521 /* NewEventView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewEventView.m; sourceTree = "<group>"; };
-		DB66F4071902DB6E007272D1 /* Event.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Event.h; sourceTree = "<group>"; };
-		DB66F4081902DB6E007272D1 /* Event.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Event.m; sourceTree = "<group>"; };
-		DB66F40A1902DB6E007272D1 /* Region.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Region.h; sourceTree = "<group>"; };
-		DB66F40B1902DB6E007272D1 /* Region.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Region.m; sourceTree = "<group>"; };
-		DB66F40D1902DB6F007272D1 /* Location.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Location.h; sourceTree = "<group>"; };
-		DB66F40E1902DB6F007272D1 /* Location.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Location.m; sourceTree = "<group>"; };
-		DB66F4101902DB6F007272D1 /* Machine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Machine.h; sourceTree = "<group>"; };
-		DB66F4111902DB6F007272D1 /* Machine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Machine.m; sourceTree = "<group>"; };
-		DB66F4131902DB6F007272D1 /* MachineLocation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MachineLocation.h; sourceTree = "<group>"; };
-		DB66F4141902DB6F007272D1 /* MachineLocation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MachineLocation.m; sourceTree = "<group>"; };
 		DB66F4161902E414007272D1 /* NewMachineView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewMachineView.h; sourceTree = "<group>"; };
 		DB66F4171902E414007272D1 /* NewMachineView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewMachineView.m; sourceTree = "<group>"; };
 		DB99C3AA1906D85500AFDF0F /* NewLocationsView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewLocationsView.h; sourceTree = "<group>"; };
@@ -127,6 +117,16 @@
 		DB99C3AD1906DCD200AFDF0F /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
 		DB99C3AF1906FA4100AFDF0F /* MachinePickingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MachinePickingView.h; sourceTree = "<group>"; };
 		DB99C3B01906FA4100AFDF0F /* MachinePickingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MachinePickingView.m; sourceTree = "<group>"; };
+		DB99C3B21908019500AFDF0F /* Event.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Event.h; sourceTree = "<group>"; };
+		DB99C3B31908019500AFDF0F /* Event.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Event.m; sourceTree = "<group>"; };
+		DB99C3B51908019600AFDF0F /* Machine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Machine.h; sourceTree = "<group>"; };
+		DB99C3B61908019600AFDF0F /* Machine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Machine.m; sourceTree = "<group>"; };
+		DB99C3B81908019600AFDF0F /* Location.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Location.h; sourceTree = "<group>"; };
+		DB99C3B91908019600AFDF0F /* Location.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Location.m; sourceTree = "<group>"; };
+		DB99C3BB1908019600AFDF0F /* MachineLocation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MachineLocation.h; sourceTree = "<group>"; };
+		DB99C3BC1908019600AFDF0F /* MachineLocation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MachineLocation.m; sourceTree = "<group>"; };
+		DB99C3BE1908019600AFDF0F /* Region.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Region.h; sourceTree = "<group>"; };
+		DB99C3BF1908019600AFDF0F /* Region.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Region.m; sourceTree = "<group>"; };
 		DBA10B411902F244004ED2D4 /* MachineConditionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MachineConditionView.h; sourceTree = "<group>"; };
 		DBA10B421902F244004ED2D4 /* MachineConditionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MachineConditionView.m; sourceTree = "<group>"; };
 		DBB59CC818FAD9AC00F35BFD /* LocationProfileView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationProfileView.h; sourceTree = "<group>"; };
@@ -443,16 +443,16 @@
 				DBF06C3D18F9767400F92912 /* PinballModels.h */,
 				DBF06C3918F975B600F92912 /* Model Helpers */,
 				DBF06C0418F9707400F92912 /* Pinball.xcdatamodeld */,
-				DB66F4131902DB6F007272D1 /* MachineLocation.h */,
-				DB66F4141902DB6F007272D1 /* MachineLocation.m */,
-				DB66F4101902DB6F007272D1 /* Machine.h */,
-				DB66F4111902DB6F007272D1 /* Machine.m */,
-				DB66F40D1902DB6F007272D1 /* Location.h */,
-				DB66F40E1902DB6F007272D1 /* Location.m */,
-				DB66F40A1902DB6E007272D1 /* Region.h */,
-				DB66F40B1902DB6E007272D1 /* Region.m */,
-				DB66F4071902DB6E007272D1 /* Event.h */,
-				DB66F4081902DB6E007272D1 /* Event.m */,
+				DB99C3BE1908019600AFDF0F /* Region.h */,
+				DB99C3BF1908019600AFDF0F /* Region.m */,
+				DB99C3BB1908019600AFDF0F /* MachineLocation.h */,
+				DB99C3BC1908019600AFDF0F /* MachineLocation.m */,
+				DB99C3B81908019600AFDF0F /* Location.h */,
+				DB99C3B91908019600AFDF0F /* Location.m */,
+				DB99C3B51908019600AFDF0F /* Machine.h */,
+				DB99C3B61908019600AFDF0F /* Machine.m */,
+				DB99C3B21908019500AFDF0F /* Event.h */,
+				DB99C3B31908019500AFDF0F /* Event.m */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -585,23 +585,24 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DB99C3B41908019500AFDF0F /* Event.m in Sources */,
+				DB99C3BA1908019600AFDF0F /* Location.m in Sources */,
 				DB52D2E518FB054200BB56D8 /* EventsView.m in Sources */,
 				DBF06C6D18F97E6300F92912 /* LocationsView.m in Sources */,
 				DB52D2DA18FAE96C00BB56D8 /* MapView.m in Sources */,
-				DB66F4091902DB6E007272D1 /* Event.m in Sources */,
 				DB636D0D1903EEEB00576521 /* AboutView.m in Sources */,
 				DBF06C6418F97C5F00F92912 /* MachineLocation+Create.m in Sources */,
 				DBA10B431902F244004ED2D4 /* MachineConditionView.m in Sources */,
 				DB66F4181902E414007272D1 /* NewMachineView.m in Sources */,
 				DBB59CCA18FAD9AC00F35BFD /* LocationProfileView.m in Sources */,
 				DB52D2E118FAF94500BB56D8 /* MachineLocationPin.m in Sources */,
-				DB66F40C1902DB6E007272D1 /* Region.m in Sources */,
 				DBB71B9F18FC4846007907DE /* RegionsView.m in Sources */,
-				DB66F4151902DB6F007272D1 /* MachineLocation.m in Sources */,
 				DBF06C1918F9749F00F92912 /* PinballManager.m in Sources */,
 				DBF06C0118F9703E00F92912 /* CoreDataManager.m in Sources */,
+				DB99C3BD1908019600AFDF0F /* MachineLocation.m in Sources */,
 				DB52D2FD18FB0AD300BB56D8 /* EventProfileView.m in Sources */,
 				DBB71B9C18FC4838007907DE /* SettingsView.m in Sources */,
+				DB99C3B71908019600AFDF0F /* Machine.m in Sources */,
 				DB52D2FA18FB09AF00BB56D8 /* NSDate+DateFormatting.m in Sources */,
 				DB99C3B11906FA4100AFDF0F /* MachinePickingView.m in Sources */,
 				DBF06C4318F9788900F92912 /* Location+Create.m in Sources */,
@@ -609,9 +610,9 @@
 				DBF06C0618F9707400F92912 /* Pinball.xcdatamodeld in Sources */,
 				DB52D2DE18FAEFC500BB56D8 /* MachineProfileView.m in Sources */,
 				DB99C3AC1906D85500AFDF0F /* NewLocationsView.m in Sources */,
+				DB99C3C01908019600AFDF0F /* Region.m in Sources */,
 				DBF06BDB18F96FF500F92912 /* main.m in Sources */,
 				DB636D1619040C5D00576521 /* NewEventView.m in Sources */,
-				DB66F4121902DB6F007272D1 /* Machine.m in Sources */,
 				DBF06C8718F984AF00F92912 /* MachinesView.m in Sources */,
 				DBB71BB418FC6B04007907DE /* PinballTabController.m in Sources */,
 				DBB59CD218FADF6D00F35BFD /* InformationCell.m in Sources */,
@@ -619,7 +620,6 @@
 				DB52D30418FB0DCF00BB56D8 /* UIAlertView+Application.m in Sources */,
 				DB52D2E818FB06EC00BB56D8 /* Event+Create.m in Sources */,
 				DBF06C3C18F975C500F92912 /* Region+Create.m in Sources */,
-				DB66F40F1902DB6F007272D1 /* Location.m in Sources */,
 				DBB59CD518FADF7A00F35BFD /* LocationMapCell.m in Sources */,
 				DBB71BB118FC5E77007907DE /* NSFileManager+DocumentsDirectory.m in Sources */,
 			);

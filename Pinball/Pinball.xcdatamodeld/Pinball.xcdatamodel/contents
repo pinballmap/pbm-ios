@@ -13,6 +13,7 @@
     <entity name="Location" representedClassName="Location" syncable="YES">
         <attribute name="city" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="latitude" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="locationDescription" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="locationId" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
         <attribute name="locationZone" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="longitude" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
@@ -54,7 +55,7 @@
     </entity>
     <elements>
         <element name="Event" positionX="-2529" positionY="-720" width="128" height="163"/>
-        <element name="Location" positionX="-2036" positionY="-598" width="128" height="283"/>
+        <element name="Location" positionX="-2036" positionY="-598" width="128" height="298"/>
         <element name="Machine" positionX="-2736" positionY="-549" width="128" height="133"/>
         <element name="MachineLocation" positionX="-2504" positionY="-490" width="128" height="103"/>
         <element name="Region" positionX="-2520" positionY="-949" width="128" height="163"/>

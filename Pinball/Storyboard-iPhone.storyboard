@@ -636,21 +636,32 @@
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="66"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fB4-ak-e3q">
+                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fB4-ak-e3q">
                                             <rect key="frame" x="20" y="9" width="280" height="21"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <color key="textColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="S9t-S0-RvY">
+                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="280" translatesAutoresizingMaskIntoConstraints="NO" id="S9t-S0-RvY">
                                             <rect key="frame" x="30" y="38" width="280" height="21"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="21" id="VKh-af-gsk"/>
+                                            </constraints>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
+                                    <constraints>
+                                        <constraint firstItem="S9t-S0-RvY" firstAttribute="top" secondItem="fB4-ak-e3q" secondAttribute="bottom" constant="8" symbolic="YES" id="76i-fe-7y3"/>
+                                        <constraint firstItem="S9t-S0-RvY" firstAttribute="leading" secondItem="uee-DG-gV8" secondAttribute="leading" constant="30" id="BND-J2-YuV"/>
+                                        <constraint firstAttribute="bottom" secondItem="S9t-S0-RvY" secondAttribute="bottom" constant="7" id="CYq-Qb-gU9"/>
+                                        <constraint firstAttribute="trailing" secondItem="fB4-ak-e3q" secondAttribute="trailing" constant="20" symbolic="YES" id="G7Y-R6-Rgk"/>
+                                        <constraint firstItem="fB4-ak-e3q" firstAttribute="leading" secondItem="uee-DG-gV8" secondAttribute="leading" constant="20" symbolic="YES" id="Tgr-WL-akn"/>
+                                        <constraint firstAttribute="trailing" secondItem="S9t-S0-RvY" secondAttribute="trailing" constant="10" id="u3V-81-pbY"/>
+                                    </constraints>
                                 </tableViewCellContentView>
                                 <connections>
                                     <outlet property="dataLabel" destination="S9t-S0-RvY" id="TpO-Yb-D69"/>
@@ -723,8 +734,8 @@
             <objects>
                 <viewController storyboardIdentifier="MapView" id="vmD-ty-UrL" customClass="MapView" sceneMemberID="viewController">
                     <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="bQX-xc-Yhn"/>
-                        <viewControllerLayoutGuide type="bottom" id="NEZ-iA-9TC"/>
+                        <viewControllerLayoutGuide type="top" id="RmD-wB-7bl"/>
+                        <viewControllerLayoutGuide type="bottom" id="m3z-db-GcI"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="D4C-XQ-Xe5">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>

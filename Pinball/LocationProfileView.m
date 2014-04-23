@@ -19,6 +19,7 @@
 
 @interface LocationProfileView () {
     NSArray *machines;
+    UIImage *mapSnapshot;
 }
 
 @end
@@ -49,15 +50,22 @@
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     if (section == 0){
-        return 4;
+        return 5;
     }else{
         return [_currentLocation.machineCount integerValue];
     }
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.section == 0){
-        if (indexPath.row  == 2){
+        if (indexPath.row  == 3){
             return 122;
+        }else if (indexPath.row == 2){
+            CGRect textLabel = [_currentLocation.locationDescription boundingRectWithSize:CGSizeMake(280, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName: [UIFont systemFontOfSize:17]} context:nil];
+            textLabel.size.height = textLabel.size.height+45;
+            if (textLabel.size.height <= 67){
+                return 67;
+            }
+            return textLabel.size.height;
         }else{
             return 67;
         }
@@ -66,15 +74,11 @@
         NSString *cellTitle = currentMachine.machine.name;
         NSString *cellDetail = [NSString stringWithFormat:@"%@ updated on %@",currentMachine.condition,[currentMachine.conditionUpdate monthDayYearPretty:YES]];
         
-//        CGRect stringSize = [cellTitle boundingRectWithSize:CGSizeMake(290, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName: [UIFont systemFontOfSize:18]} context:nil];
-        
         CGRect textLabel = [cellTitle boundingRectWithSize:CGSizeMake(290, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName: [UIFont systemFontOfSize:18]} context:nil];
         CGRect detailLabel = [cellDetail boundingRectWithSize:CGSizeMake(290, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName: [UIFont systemFontOfSize:12]} context:nil];
         // Add 6 pixel padding present in subtitle style.
         CGRect stringSize = CGRectMake(0, 0, 290, textLabel.size.height+detailLabel.size.height+6);
 
-        
-//        stringSize.size.height = stringSize.size.height+10;   // Take into account the 10 points of padding within a cell.
         if (stringSize.size.height+10 < 44){
             return 44;
         }else{
@@ -93,7 +97,7 @@
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.section == 0){
-        if (indexPath.row == 0 || indexPath.row == 1){
+        if (indexPath.row == 0 || indexPath.row == 1 || indexPath.row == 2){
             InformationCell *cell = (InformationCell *)[tableView dequeueReusableCellWithIdentifier:@"InfoCell" forIndexPath:indexPath];
             if (indexPath.row == 0){
                 cell.infoLabel.text = @"Phone";
@@ -101,30 +105,39 @@
             }else if (indexPath.row == 1){
                 cell.infoLabel.text = @"Location";
                 cell.dataLabel.text = _currentLocation.street;
+            }else if (indexPath.row == 2){
+                cell.infoLabel.text = @"Description";
+                cell.dataLabel.text = _currentLocation.locationDescription;
             }
             return cell;
-        }else if (indexPath.row == 2){
-            LocationMapCell *cell = (LocationMapCell *)[tableView dequeueReusableCellWithIdentifier:@"MapCell" forIndexPath:indexPath];
-            [cell.loadingView startAnimating];
-            CLLocationCoordinate2D coord = CLLocationCoordinate2DMake([_currentLocation.latitude doubleValue],[_currentLocation.longitude doubleValue]);
-            
-            MKMapSnapshotOptions *options = [[MKMapSnapshotOptions alloc] init];
-            options.size = cell.mapImage.frame.size;
-            options.region = MKCoordinateRegionMake(coord, MKCoordinateSpanMake(.002, .002));
-            options.mapType = MKMapTypeHybrid;
-            options.showsPointsOfInterest = NO;
-            MKMapSnapshotter *snapShooter2 = [[MKMapSnapshotter alloc] initWithOptions:options];
-            [snapShooter2 startWithCompletionHandler:^(MKMapSnapshot *snapshot, NSError *error) {
-                NSLog(@"Loaded Snap");
-                if (error){
-                    NSLog(@"%@",error);
-                }else{
-                    [cell.loadingView stopAnimating];
-                    cell.mapImage.image = snapshot.image;
-                }
-            }];
-            return cell;
         }else if (indexPath.row == 3){
+            LocationMapCell *cell = (LocationMapCell *)[tableView dequeueReusableCellWithIdentifier:@"MapCell" forIndexPath:indexPath];
+            if (!mapSnapshot){
+                [cell.loadingView startAnimating];
+                CLLocationCoordinate2D coord = CLLocationCoordinate2DMake([_currentLocation.latitude doubleValue],[_currentLocation.longitude doubleValue]);
+                
+                MKMapSnapshotOptions *options = [[MKMapSnapshotOptions alloc] init];
+                options.size = cell.mapImage.frame.size;
+                options.region = MKCoordinateRegionMake(coord, MKCoordinateSpanMake(.002, .002));
+                options.mapType = MKMapTypeHybrid;
+                options.showsPointsOfInterest = NO;
+                MKMapSnapshotter *snapShooter2 = [[MKMapSnapshotter alloc] initWithOptions:options];
+                [snapShooter2 startWithCompletionHandler:^(MKMapSnapshot *snapshot, NSError *error) {
+                    NSLog(@"Loaded Snap");
+                    if (error){
+                        NSLog(@"%@",error);
+                    }else{
+                        [cell.loadingView stopAnimating];
+                        cell.mapImage.image = snapshot.image;
+                        mapSnapshot = snapshot.image;
+                        [cell addAnnotation];
+                    }
+                }];
+            }else{
+                cell.mapImage.image = mapSnapshot;
+            }
+            return cell;
+        }else if (indexPath.row == 4){
             UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MachineCell" forIndexPath:indexPath];
             cell.textLabel.text = @"Add Machine";
             cell.detailTextLabel.text = nil;
@@ -159,7 +172,7 @@
             }
         }else if (indexPath.row == 1){
             [self performSegueWithIdentifier:@"MapView" sender:[tableView cellForRowAtIndexPath:indexPath]];
-        }else if (indexPath.row == 3){
+        }else if (indexPath.row == 4){
             NewMachineView *vc = (NewMachineView *)[[[self.storyboard instantiateViewControllerWithIdentifier:@"NewMachineView"] viewControllers] lastObject];
             vc.location = _currentLocation;
             [self.navigationController presentViewController:vc.parentViewController animated:YES completion:nil];

@@ -52,6 +52,12 @@
     }else{
         newLocation.machineCount = 0;
     }
+    if (![data[@"description"] isKindOfClass:[NSNull class]] && [data[@"description"] length] > 0){
+        newLocation.locationDescription = data[@"description"];
+    }else{
+        newLocation.locationDescription = @"N/A";
+    }
+    
     return newLocation;
 }
 
