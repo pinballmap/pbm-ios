@@ -715,6 +715,25 @@
                                     </subviews>
                                 </tableViewCellContentView>
                             </tableViewCell>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="InputCell" id="1IR-do-OYq" customClass="InputCell">
+                                <rect key="frame" x="0.0" y="352" width="320" height="44"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="1IR-do-OYq" id="Znf-Yt-dte">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="vXT-QS-zP4">
+                                            <rect key="frame" x="20" y="0.0" width="280" height="43"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                            <textInputTraits key="textInputTraits"/>
+                                        </textField>
+                                    </subviews>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="inputField" destination="vXT-QS-zP4" id="jH5-PB-NSo"/>
+                                </connections>
+                            </tableViewCell>
                         </prototypes>
                         <connections>
                             <outlet property="dataSource" destination="i73-al-Ljc" id="fpR-sp-1aR"/>
@@ -722,7 +741,11 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" id="daF-pR-PaV">
-                        <barButtonItem key="rightBarButtonItem" systemItem="edit" id="nVJ-9Q-7yZ"/>
+                        <barButtonItem key="rightBarButtonItem" systemItem="edit" id="nVJ-9Q-7yZ">
+                            <connections>
+                                <action selector="editLocation:" destination="i73-al-Ljc" id="GJw-Zm-Wq4"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ebf-cG-edK" userLabel="First Responder" sceneMemberID="firstResponder"/>

@@ -65,10 +65,11 @@
         pinView.pinColor = MKPinAnnotationColorRed;
         pinView.animatesDrop = YES;
         pinView.canShowCallout = YES;
-        
-        UIButton *rightButton = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
-        [rightButton addTarget:nil action:nil forControlEvents:UIControlEventTouchUpInside];
-        pinView.rightCalloutAccessoryView = rightButton;
+        if ([annotation isKindOfClass:[MachineLocationPin class]]){
+            UIButton *rightButton = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
+            [rightButton addTarget:nil action:nil forControlEvents:UIControlEventTouchUpInside];
+            pinView.rightCalloutAccessoryView = rightButton;
+        }
     }else{
         pinView.annotation = annotation;
     }
