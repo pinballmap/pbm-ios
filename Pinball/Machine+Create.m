@@ -14,9 +14,6 @@
     Machine *newMachine = [NSEntityDescription insertNewObjectForEntityForName:@"Machine" inManagedObjectContext:[[CoreDataManager sharedInstance] managedObjectContext]];
     newMachine.machineId = data[@"id"];
     newMachine.name = data[@"name"];
-    if ([newMachine.name rangeOfString:data[@"manufacturer"] options:NSCaseInsensitiveSearch].location == NSNotFound){
-        newMachine.name = [NSString stringWithFormat:@"%@ (%@)",newMachine.name,data[@"manufacturer"]];
-    }
     newMachine.manufacturer = data[@"manufacturer"];
     if ([data[@"year"] isKindOfClass:[NSNumber class]]){
         newMachine.year = data[@"year"];

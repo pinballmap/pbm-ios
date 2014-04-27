@@ -17,3 +17,4 @@
 #import "Event+Create.h"
 #import "MachineLocation.h"
 #import "MachineLocation+Create.h"
+#import "Machine+CellHelpers.h"

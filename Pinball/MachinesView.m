@@ -117,13 +117,14 @@
     }else{
         currentMachine = searchResults[indexPath.row];
     }
-    NSString *mainString = currentMachine.name;
+    
     NSString *detailString = [NSString stringWithFormat:@"Locations: %lu",(unsigned long)currentMachine.machineLocations.count];
-
-    CGRect textLabel = [mainString boundingRectWithSize:CGSizeMake(defaultWidth, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName: [UIFont systemFontOfSize:18]} context:nil];
+    
+    CGRect titleLabel = [currentMachine.machineTitle boundingRectWithSize:CGSizeMake(defaultWidth, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin context:nil];
+    
     CGRect detailLabel = [detailString boundingRectWithSize:CGSizeMake(defaultWidth, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName: [UIFont systemFontOfSize:12]} context:nil];
     // Add 6 pixel padding present in subtitle style.
-    CGRect stringSize = CGRectMake(0, 0, defaultWidth, textLabel.size.height+detailLabel.size.height+6);
+    CGRect stringSize = CGRectMake(0, 0, defaultWidth, titleLabel.size.height+detailLabel.size.height+6);
     return stringSize.size.height;
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -136,7 +137,7 @@
     }else{
         currentMachine = searchResults[indexPath.row];
     }
-    cell.textLabel.text = currentMachine.name;
+    cell.textLabel.attributedText = currentMachine.machineTitle;
     cell.detailTextLabel.text = [NSString stringWithFormat:@"Locations: %lu",(unsigned long)currentMachine.machineLocations.count];
     return cell;
 }

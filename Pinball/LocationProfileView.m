@@ -119,13 +119,12 @@
             }
         }else if (indexPath.section == 1){
             MachineLocation *currentMachine = machines[indexPath.row];
-            NSString *cellTitle = currentMachine.machine.name;
             NSString *cellDetail = [NSString stringWithFormat:@"%@ updated on %@",currentMachine.condition,[currentMachine.conditionUpdate monthDayYearPretty:YES]];
             
-            CGRect textLabel = [cellTitle boundingRectWithSize:CGSizeMake(290, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName: [UIFont systemFontOfSize:18]} context:nil];
+            CGRect titleLabel = [currentMachine.machine.machineTitle boundingRectWithSize:CGSizeMake(290, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin context:nil];
             CGRect detailLabel = [cellDetail boundingRectWithSize:CGSizeMake(290, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName: [UIFont systemFontOfSize:12]} context:nil];
             // Add 6 pixel padding present in subtitle style.
-            CGRect stringSize = CGRectMake(0, 0, 290, textLabel.size.height+detailLabel.size.height+6);
+            CGRect stringSize = CGRectMake(0, 0, 290, titleLabel.size.height+detailLabel.size.height+6);
 
             if (stringSize.size.height+10 < 44){
                 return 44;
@@ -222,7 +221,7 @@
         }else if (indexPath.section == 1){
             MachineLocation *currentMachine = machines[indexPath.row];
             UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MachineCell" forIndexPath:indexPath];
-            cell.textLabel.text = currentMachine.machine.name;
+            cell.textLabel.attributedText = currentMachine.machine.machineTitle;
             cell.detailTextLabel.numberOfLines = 0;
             // If no condition is available, just don't set the detail text label.
             if (![currentMachine.condition isEqualToString:@"N/A"]){
