@@ -7,11 +7,13 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <CoreLocation/CoreLocation.h>
 #import "PinballModels.h"
 
 @interface PinballManager : NSObject
 
 @property (nonatomic) Region *currentRegion;
+@property (nonatomic,readonly) CLLocation *userLocation;
 
 + (id)sharedInstance;
 - (void)allRegions:(void (^)(NSArray *regions))regionBlock;

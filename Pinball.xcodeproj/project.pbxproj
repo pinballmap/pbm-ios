@@ -26,7 +26,6 @@
 		DB99C3B11906FA4100AFDF0F /* MachinePickingView.m in Sources */ = {isa = PBXBuildFile; fileRef = DB99C3B01906FA4100AFDF0F /* MachinePickingView.m */; };
 		DB99C3B41908019500AFDF0F /* Event.m in Sources */ = {isa = PBXBuildFile; fileRef = DB99C3B31908019500AFDF0F /* Event.m */; };
 		DB99C3B71908019600AFDF0F /* Machine.m in Sources */ = {isa = PBXBuildFile; fileRef = DB99C3B61908019600AFDF0F /* Machine.m */; };
-		DB99C3BA1908019600AFDF0F /* Location.m in Sources */ = {isa = PBXBuildFile; fileRef = DB99C3B91908019600AFDF0F /* Location.m */; };
 		DB99C3BD1908019600AFDF0F /* MachineLocation.m in Sources */ = {isa = PBXBuildFile; fileRef = DB99C3BC1908019600AFDF0F /* MachineLocation.m */; };
 		DB99C3C01908019600AFDF0F /* Region.m in Sources */ = {isa = PBXBuildFile; fileRef = DB99C3BF1908019600AFDF0F /* Region.m */; };
 		DBA10B431902F244004ED2D4 /* MachineConditionView.m in Sources */ = {isa = PBXBuildFile; fileRef = DBA10B421902F244004ED2D4 /* MachineConditionView.m */; };
@@ -41,6 +40,8 @@
 		DBB71BB118FC5E77007907DE /* NSFileManager+DocumentsDirectory.m in Sources */ = {isa = PBXBuildFile; fileRef = DBB71BB018FC5E77007907DE /* NSFileManager+DocumentsDirectory.m */; };
 		DBB71BB418FC6B04007907DE /* PinballTabController.m in Sources */ = {isa = PBXBuildFile; fileRef = DBB71BB318FC6B04007907DE /* PinballTabController.m */; };
 		DBD4F3E919067D690023D98B /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DBD4F3E819067D690023D98B /* MessageUI.framework */; };
+		DBE50374190D2BBA002BDE0D /* Location+UpdateDistance.m in Sources */ = {isa = PBXBuildFile; fileRef = DBE50373190D2BBA002BDE0D /* Location+UpdateDistance.m */; };
+		DBE50377190D2BFD002BDE0D /* Location.m in Sources */ = {isa = PBXBuildFile; fileRef = DBE50376190D2BFD002BDE0D /* Location.m */; };
 		DBF06BCF18F96FF500F92912 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DBF06BCE18F96FF500F92912 /* Foundation.framework */; };
 		DBF06BD118F96FF500F92912 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DBF06BD018F96FF500F92912 /* CoreGraphics.framework */; };
 		DBF06BD318F96FF500F92912 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DBF06BD218F96FF500F92912 /* UIKit.framework */; };
@@ -122,8 +123,6 @@
 		DB99C3B31908019500AFDF0F /* Event.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Event.m; sourceTree = "<group>"; };
 		DB99C3B51908019600AFDF0F /* Machine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Machine.h; sourceTree = "<group>"; };
 		DB99C3B61908019600AFDF0F /* Machine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Machine.m; sourceTree = "<group>"; };
-		DB99C3B81908019600AFDF0F /* Location.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Location.h; sourceTree = "<group>"; };
-		DB99C3B91908019600AFDF0F /* Location.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Location.m; sourceTree = "<group>"; };
 		DB99C3BB1908019600AFDF0F /* MachineLocation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MachineLocation.h; sourceTree = "<group>"; };
 		DB99C3BC1908019600AFDF0F /* MachineLocation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MachineLocation.m; sourceTree = "<group>"; };
 		DB99C3BE1908019600AFDF0F /* Region.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Region.h; sourceTree = "<group>"; };
@@ -149,6 +148,10 @@
 		DBB71BB218FC6B04007907DE /* PinballTabController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PinballTabController.h; sourceTree = "<group>"; };
 		DBB71BB318FC6B04007907DE /* PinballTabController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PinballTabController.m; sourceTree = "<group>"; };
 		DBD4F3E819067D690023D98B /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
+		DBE50372190D2BBA002BDE0D /* Location+UpdateDistance.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Location+UpdateDistance.h"; sourceTree = "<group>"; };
+		DBE50373190D2BBA002BDE0D /* Location+UpdateDistance.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Location+UpdateDistance.m"; sourceTree = "<group>"; };
+		DBE50375190D2BFD002BDE0D /* Location.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Location.h; sourceTree = "<group>"; };
+		DBE50376190D2BFD002BDE0D /* Location.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Location.m; sourceTree = "<group>"; };
 		DBF06BCB18F96FF500F92912 /* Pinball.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Pinball.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DBF06BCE18F96FF500F92912 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		DBF06BD018F96FF500F92912 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -448,12 +451,12 @@
 				DBF06C3D18F9767400F92912 /* PinballModels.h */,
 				DBF06C3918F975B600F92912 /* Model Helpers */,
 				DBF06C0418F9707400F92912 /* Pinball.xcdatamodeld */,
+				DBE50375190D2BFD002BDE0D /* Location.h */,
+				DBE50376190D2BFD002BDE0D /* Location.m */,
 				DB99C3BE1908019600AFDF0F /* Region.h */,
 				DB99C3BF1908019600AFDF0F /* Region.m */,
 				DB99C3BB1908019600AFDF0F /* MachineLocation.h */,
 				DB99C3BC1908019600AFDF0F /* MachineLocation.m */,
-				DB99C3B81908019600AFDF0F /* Location.h */,
-				DB99C3B91908019600AFDF0F /* Location.m */,
 				DB99C3B51908019600AFDF0F /* Machine.h */,
 				DB99C3B61908019600AFDF0F /* Machine.m */,
 				DB99C3B21908019500AFDF0F /* Event.h */,
@@ -475,6 +478,8 @@
 				DBF06C6318F97C5F00F92912 /* MachineLocation+Create.m */,
 				DB52D2E618FB06EC00BB56D8 /* Event+Create.h */,
 				DB52D2E718FB06EC00BB56D8 /* Event+Create.m */,
+				DBE50372190D2BBA002BDE0D /* Location+UpdateDistance.h */,
+				DBE50373190D2BBA002BDE0D /* Location+UpdateDistance.m */,
 			);
 			name = "Model Helpers";
 			sourceTree = "<group>";
@@ -591,7 +596,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				DB99C3B41908019500AFDF0F /* Event.m in Sources */,
-				DB99C3BA1908019600AFDF0F /* Location.m in Sources */,
+				DBE50377190D2BFD002BDE0D /* Location.m in Sources */,
 				DB52D2E518FB054200BB56D8 /* EventsView.m in Sources */,
 				DBF06C6D18F97E6300F92912 /* LocationsView.m in Sources */,
 				DB52D2DA18FAE96C00BB56D8 /* MapView.m in Sources */,
@@ -626,6 +631,7 @@
 				DB52D30418FB0DCF00BB56D8 /* UIAlertView+Application.m in Sources */,
 				DB52D2E818FB06EC00BB56D8 /* Event+Create.m in Sources */,
 				DBF06C3C18F975C500F92912 /* Region+Create.m in Sources */,
+				DBE50374190D2BBA002BDE0D /* Location+UpdateDistance.m in Sources */,
 				DBB59CD518FADF7A00F35BFD /* LocationMapCell.m in Sources */,
 				DBB71BB118FC5E77007907DE /* NSFileManager+DocumentsDirectory.m in Sources */,
 			);
@@ -745,11 +751,13 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Pinball/Pinball-Prefix.pch";
 				INFOPLIST_FILE = "Pinball/Pinball-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "A26B3F80-A342-4B04-892E-D3DFE0D266AA";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -760,11 +768,13 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Pinball/Pinball-Prefix.pch";
 				INFOPLIST_FILE = "Pinball/Pinball-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "A26B3F80-A342-4B04-892E-D3DFE0D266AA";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

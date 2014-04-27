@@ -11,8 +11,9 @@
 
 #define rootURL @"http://pinballmap.com/"
 
-@interface PinballManager () {
+@interface PinballManager () <CLLocationManagerDelegate>{
     NSURLSession *session;
+    CLLocationManager *locationManager;
 }
 
 @end
@@ -31,6 +32,7 @@
 - (id)init{
     self = [super init];
     if (self){
+        [self getUserLocation];
         session = [NSURLSession sharedSession];
         NSDictionary *region = [[NSUserDefaults standardUserDefaults] objectForKey:@"CurrentRegion"];
         if (region){
@@ -49,6 +51,14 @@
         }
     }
     return self;
+}
+- (void)getUserLocation{
+    if (!locationManager){
+        locationManager = [CLLocationManager new];
+    }
+    locationManager.delegate = self;
+    locationManager.desiredAccuracy = kCLLocationAccuracyBest;
+    [locationManager startUpdatingLocation];
 }
 - (void)importToCoreData:(NSDictionary *)pinballData{
     CoreDataManager *cdManager = [CoreDataManager sharedInstance];
@@ -175,6 +185,13 @@
 #pragma mark - Machines
 - (void)createNewMachine:(NSDictionary *)machineData withCompletion:(void (^)(NSDictionary *))completionBlock{
     
+}
+#pragma mark - CLLocationManager Delegate
+- (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations{
+    NSLog(@"Location updated.");
+    CLLocation *foundLocation = [locations lastObject];
+    _userLocation = foundLocation;
+    [manager stopUpdatingLocation];
 }
 
 @end

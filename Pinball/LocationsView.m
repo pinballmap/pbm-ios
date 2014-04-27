@@ -16,6 +16,7 @@
     NSManagedObjectContext *managedContext;
     BOOL isSearching;
     NSMutableArray *searchResults;
+    BOOL isClosets;
 }
 - (IBAction)filterResults:(id)sender;
 
@@ -119,8 +120,17 @@
     if (buttonIndex != actionSheet.cancelButtonIndex){
         NSFetchRequest *stackRequest = [NSFetchRequest fetchRequestWithEntityName:@"Location"];
         stackRequest.predicate = nil;
+        isClosets = NO;
         if (buttonIndex == 0){
+            isClosets = YES;
             // Location
+            NSArray *locations = [[[fetchedResults sections] lastObject] objects];
+            [locations enumerateObjectsUsingBlock:^(Location *obj, NSUInteger idx, BOOL *stop) {
+                [obj updateDistance];
+            }];
+            [[CoreDataManager sharedInstance] saveContext];
+            locations = nil;
+            stackRequest.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"locationDistance" ascending:YES]];
         }else if (buttonIndex == 1){
             // Number
             stackRequest.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"machineCount" ascending:NO]];
@@ -188,7 +198,11 @@
         currentLocation = [searchResults objectAtIndex:indexPath.row];
     }
     cell.textLabel.text = currentLocation.name;
-    cell.detailTextLabel.text = [NSString stringWithFormat:@"Machines: %lu",(unsigned long)currentLocation.machines.count];
+    if (isClosets){
+        cell.detailTextLabel.text = [NSString stringWithFormat:@"%.02f miles",[currentLocation.locationDistance floatValue]];
+    }else{
+        cell.detailTextLabel.text = [NSString stringWithFormat:@"Machines: %lu",(unsigned long)currentLocation.machines.count];
+    }
     return cell;
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{

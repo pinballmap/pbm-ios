@@ -12,6 +12,7 @@
 #import "Region+Create.h"
 #import "Location.h"
 #import "Location+Create.h"
+#import "Location+UpdateDistance.h"
 #import "Event.h"
 #import "Event+Create.h"
 #import "MachineLocation.h"
