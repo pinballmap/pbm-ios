@@ -9,7 +9,9 @@
 #import "PinballTabController.h"
 #import "UIAlertView+Application.h"
 
-@interface PinballTabController ()
+@interface PinballTabController () {
+    UIAlertView *updatingAlert;
+}
 - (void)updateEventBadge;
 - (void)updatingRegion;
 @end
@@ -32,9 +34,11 @@
 - (void)updateEventBadge{
     NSInteger eventCounts = [[[[PinballManager sharedInstance] currentRegion] events] count];
     [[[self.viewControllers objectAtIndex:2] tabBarItem] setBadgeValue:[NSString stringWithFormat:@"%li",(long)eventCounts]];
+    [updatingAlert dismissWithClickedButtonIndex:0 animated:YES];
 }
 - (void)updatingRegion{
-    [UIAlertView simpleApplicationAlertWithMessage:@"Updating Region" cancelButton:@"Ok"];
+    updatingAlert = [UIAlertView applicationAlertWithMessage:@"Updating Region" delegate:nil cancelButton:@"Ok" otherButtons:nil, nil];
+    [updatingAlert show];
 }
 - (void)didReceiveMemoryWarning{
     [super didReceiveMemoryWarning];
