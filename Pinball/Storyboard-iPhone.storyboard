@@ -815,27 +815,10 @@
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
-                            <tableViewSection headerTitle="Machine" id="J2X-FU-iDO">
+                            <tableViewSection headerTitle="Location" id="J2X-FU-iDO">
                                 <cells>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="meY-Bp-Jp3" style="IBUITableViewCellStyleDefault" id="A5V-ae-f8v">
-                                        <rect key="frame" x="0.0" y="310" width="320" height="44"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="A5V-ae-f8v" id="hdc-4O-wjQ">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Machine Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="meY-Bp-Jp3">
-                                                    <rect key="frame" x="15" y="0.0" width="290" height="43"/>
-                                                    <autoresizingMask key="autoresizingMask"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                            </subviews>
-                                        </tableViewCellContentView>
-                                    </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="5SP-0d-Hmt" style="IBUITableViewCellStyleDefault" id="CDh-mY-Xgc">
-                                        <rect key="frame" x="0.0" y="354" width="320" height="44"/>
+                                        <rect key="frame" x="0.0" y="310" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="CDh-mY-Xgc" id="bKK-DS-u3Y">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
@@ -874,7 +857,6 @@
                     <connections>
                         <outlet property="locationName" destination="5SP-0d-Hmt" id="JpR-ae-xgD"/>
                         <outlet property="machineCondition" destination="NKw-OU-suU" id="US2-Zm-3Xq"/>
-                        <outlet property="machineName" destination="meY-Bp-Jp3" id="7oh-FQ-bI1"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="z7o-CN-OLp" userLabel="First Responder" sceneMemberID="firstResponder"/>

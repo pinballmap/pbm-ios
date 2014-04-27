@@ -10,7 +10,6 @@
 
 @interface MachineConditionView () <UITextViewDelegate> {
     IBOutlet UITextView *machineCondition;
-    IBOutlet UILabel *machineName;
     IBOutlet UILabel *locationName;
 }
 - (IBAction)cancelCondition:(id)sender;
@@ -41,7 +40,6 @@
 }
 #pragma mark - Class
 - (void)setupUI{
-    machineName.text = _currentMachine.machine.name;
     locationName.text = _currentMachine.location.name;
     if (![_currentMachine.condition isEqualToString:@"N/A"]){
         machineCondition.text = _currentMachine.condition;
@@ -54,6 +52,13 @@
 - (IBAction)saveCondition:(id)sender{
     #pragma message("TODO: API Interaction for updating a machines condition in a location")
     [self dismissViewControllerAnimated:YES completion:nil];
+}
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section{
+    if (section == 0){
+        return _currentMachine.machine.name;
+    }else{
+        return @"Location";
+    }
 }
 #pragma mark - UITextViewDelegate
 - (void)textViewDidBeginEditing:(UITextView *)textView{
