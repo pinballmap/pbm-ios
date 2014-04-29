@@ -34,10 +34,10 @@
     if (self){
         [self getUserLocation];
         session = [NSURLSession sharedSession];
-        NSDictionary *region = [[NSUserDefaults standardUserDefaults] objectForKey:@"CurrentRegion"];
-        if (region){
+        _regionInfo = [[NSUserDefaults standardUserDefaults] objectForKey:@"CurrentRegion"];
+        if (_regionInfo){
             NSFetchRequest *regionRequest = [NSFetchRequest fetchRequestWithEntityName:@"Region"];
-            regionRequest.predicate = [NSPredicate predicateWithFormat:@"fullName = %@",region[@"fullName"]];
+            regionRequest.predicate = [NSPredicate predicateWithFormat:@"fullName = %@",_regionInfo[@"fullName"]];
             regionRequest.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"fullName" ascending:YES]];
             NSManagedObjectContext *context = [[CoreDataManager sharedInstance] managedObjectContext];
             NSArray *results = [context executeFetchRequest:regionRequest error:nil];
@@ -62,56 +62,59 @@
 }
 - (void)importToCoreData:(NSDictionary *)pinballData{
     CoreDataManager *cdManager = [CoreDataManager sharedInstance];
-    [cdManager resetStore];
+
+    dispatch_queue_t queue;
+    queue = dispatch_queue_create("com.pinballmap.import", NULL);
     
-    _currentRegion = [Region createRegionWithData:pinballData];
-    NSDictionary *regionDic = @{@"fullName": _currentRegion.fullName,@"name": _currentRegion.name};
-    [[NSUserDefaults standardUserDefaults] setObject:regionDic forKey:@"CurrentRegion"];
-    [[NSUserDefaults standardUserDefaults] synchronize];
-    // Create all machines.
-    // Save the machines to a array to be used when creating the MachineLocation objects to ref.
-    NSMutableSet *machines = [NSMutableSet new];
-    [pinballData[@"machines"] enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-        NSDictionary *machineData = obj[@"machine"];
-        Machine *newMachine = [Machine createMachineWithData:machineData];
-        [machines addObject:newMachine];
-    }];
-    [cdManager saveContext];
-    // Add machines to region object.
-    [_currentRegion addMachines:machines];
-    // Create all locations
-    NSMutableSet *locations = [NSMutableSet new];
-    [pinballData[@"locations"] enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-        NSDictionary *location = obj[@"location"];
-        Location *newLocation = [Location createLocationWithData:location];
-        [location[@"machines"] enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-            NSDictionary *machineLocation = obj[@"machine"];
-            NSPredicate *pred = [NSPredicate predicateWithFormat:@"machineId = %@" argumentArray:@[machineLocation[@"id"]]];
-            NSSet *found = [machines filteredSetUsingPredicate:pred];
-            
-            MachineLocation *locMachine = [MachineLocation createMachineLocationWithData:machineLocation];
-            locMachine.machine = [found anyObject];
-            locMachine.location = newLocation;
-            [newLocation addMachinesObject:locMachine];
+    dispatch_sync(queue, ^{
+        _currentRegion = [Region createRegionWithData:pinballData andContext:cdManager.privateObjectContext];
+        NSDictionary *regionDic = @{@"fullName": _currentRegion.fullName,@"name": _currentRegion.name};
+        [[NSUserDefaults standardUserDefaults] setObject:regionDic forKey:@"CurrentRegion"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+        // Create all machines.
+        // Save the machines to a array to be used when creating the MachineLocation objects to ref.
+        NSMutableSet *machines = [NSMutableSet new];
+        [pinballData[@"machines"] enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+            NSDictionary *machineData = obj[@"machine"];
+            Machine *newMachine = [Machine createMachineWithData:machineData andContext:cdManager.privateObjectContext];
+            [machines addObject:newMachine];
         }];
-        [locations addObject:newLocation];
-        [_currentRegion addLocationsObject:newLocation];
-    }];
-    machines = nil;
-    [cdManager saveContext];
-    // Craete all events
-    [pinballData[@"events"] enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-        NSDictionary *event = obj[@"event"];
-        Event *newEvent = [Event createEventWithData:event];
-        if (![event[@"locationNo"] isKindOfClass:[NSNull class]]){
-            NSPredicate *pred = [NSPredicate predicateWithFormat:@"locationId = %@" argumentArray:@[event[@"locationNo"]]];
-            NSSet *found = [locations filteredSetUsingPredicate:pred];
-            newEvent.location = [found anyObject];
-            newEvent.region = newEvent.location.region;
-        }
-    }];
-    [cdManager saveContext];
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"RegionUpdate" object:nil];
+        [cdManager.privateObjectContext save:nil];
+        // Add machines to region object.
+        [_currentRegion addMachines:machines];
+        // Create all locations
+        NSMutableSet *locations = [NSMutableSet new];
+        [pinballData[@"locations"] enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+            NSDictionary *location = obj[@"location"];
+            Location *newLocation = [Location createLocationWithData:location andContext:cdManager.privateObjectContext];
+            [location[@"machines"] enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+                NSDictionary *machineLocation = obj[@"machine"];
+                NSPredicate *pred = [NSPredicate predicateWithFormat:@"machineId = %@" argumentArray:@[machineLocation[@"id"]]];
+                NSSet *found = [machines filteredSetUsingPredicate:pred];
+                
+                MachineLocation *locMachine = [MachineLocation createMachineLocationWithData:machineLocation andContext:cdManager.privateObjectContext];
+                locMachine.machine = [found anyObject];
+                locMachine.location = newLocation;
+                [newLocation addMachinesObject:locMachine];
+            }];
+            [locations addObject:newLocation];
+            [_currentRegion addLocationsObject:newLocation];
+        }];
+        machines = nil;
+        [cdManager.privateObjectContext save:nil];
+        // Craete all events
+        [pinballData[@"events"] enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+            NSDictionary *event = obj[@"event"];
+            Event *newEvent = [Event createEventWithData:event andContext:cdManager.privateObjectContext];
+            if (![event[@"locationNo"] isKindOfClass:[NSNull class]]){
+                NSPredicate *pred = [NSPredicate predicateWithFormat:@"locationId = %@" argumentArray:@[event[@"locationNo"]]];
+                NSSet *found = [locations filteredSetUsingPredicate:pred];
+                newEvent.location = [found anyObject];
+                newEvent.region = newEvent.location.region;
+            }
+        }];
+        [cdManager.privateObjectContext save:nil];
+    });
 }
 - (void)allRegions:(void (^)(NSArray *regions))regionBlock{
     NSData *cacheData = [self regionCacheData];

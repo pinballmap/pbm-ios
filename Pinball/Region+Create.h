@@ -10,6 +10,6 @@
 
 @interface Region (Create)
 
-+ (instancetype)createRegionWithData:(NSDictionary *)data;
++ (instancetype)createRegionWithData:(NSDictionary *)data andContext:(NSManagedObjectContext *)context;
 
 @end

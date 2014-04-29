@@ -10,6 +10,6 @@
 
 @interface Location (Create)
 
-+ (instancetype)createLocationWithData:(NSDictionary *)data;
++ (instancetype)createLocationWithData:(NSDictionary *)data andContext:(NSManagedObjectContext *)context;
 
 @end

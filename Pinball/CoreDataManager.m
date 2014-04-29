@@ -33,6 +33,21 @@
     self = [super init];
     if (self){
         [self createManagedObjectContext];
+        _privateObjectContext = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSPrivateQueueConcurrencyType];
+        _privateObjectContext.persistentStoreCoordinator = persistentStoreCoordinator;
+        [[NSNotificationCenter defaultCenter] addObserverForName:NSManagedObjectContextDidSaveNotification
+                                                          object:nil
+                                                           queue:nil
+                                                      usingBlock:^(NSNotification* note) {
+                                                          NSManagedObjectContext *moc = self.managedObjectContext;
+                                                          if (note.object != moc) {
+                                                              [moc performBlock:^(){
+                                                                  [moc mergeChangesFromContextDidSaveNotification:note];
+                                                                  [[NSNotificationCenter defaultCenter] postNotificationName:@"RegionUpdate" object:nil];
+                                                              }];
+                                                          }
+                                                      }];
+
     }
     return self;
 }
@@ -66,7 +81,7 @@
     
     NSPersistentStoreCoordinator *coordinator = [self persistentStoreCoordinator];
     if (coordinator != nil) {
-        _managedObjectContext = [[NSManagedObjectContext alloc] init];
+        _managedObjectContext = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSMainQueueConcurrencyType];
         [_managedObjectContext setPersistentStoreCoordinator:coordinator];
     }
 }
@@ -81,7 +96,7 @@
     
     NSPersistentStoreCoordinator *coordinator = [self persistentStoreCoordinator];
     if (coordinator != nil) {
-        _managedObjectContext = [[NSManagedObjectContext alloc] init];
+        _managedObjectContext = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSMainQueueConcurrencyType];
         [_managedObjectContext setPersistentStoreCoordinator:coordinator];
     }
     return _managedObjectContext;

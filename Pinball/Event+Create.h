@@ -10,6 +10,6 @@
 
 @interface Event (Create)
 
-+ (instancetype)createEventWithData:(NSDictionary *)data;
++ (instancetype)createEventWithData:(NSDictionary *)data andContext:(NSManagedObjectContext *)context;
 
 @end

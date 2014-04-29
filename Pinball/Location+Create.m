@@ -10,8 +10,11 @@
 
 @implementation Location (Create)
 
-+ (instancetype)createLocationWithData:(NSDictionary *)data{
-    Location *newLocation = [NSEntityDescription insertNewObjectForEntityForName:@"Location" inManagedObjectContext:[[CoreDataManager sharedInstance] managedObjectContext]];
++ (instancetype)createLocationWithData:(NSDictionary *)data andContext:(NSManagedObjectContext *)context{
+    if (!context){
+        context = [[CoreDataManager sharedInstance] managedObjectContext];
+    }
+    Location *newLocation = [NSEntityDescription insertNewObjectForEntityForName:@"Location" inManagedObjectContext:context];
     newLocation.locationId = data[@"id"];
     newLocation.name = data[@"name"];
     NSNumberFormatter *stringNumber = [NSNumberFormatter new];

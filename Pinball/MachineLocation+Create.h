@@ -10,6 +10,6 @@
 
 @interface MachineLocation (Create)
 
-+ (instancetype)createMachineLocationWithData:(NSDictionary *)data;
++ (instancetype)createMachineLocationWithData:(NSDictionary *)data andContext:(NSManagedObjectContext *)context;
 
 @end

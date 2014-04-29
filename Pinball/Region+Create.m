@@ -10,8 +10,11 @@
 
 @implementation Region (Create)
 
-+ (instancetype)createRegionWithData:(NSDictionary *)data{
-    Region *newRegion = [NSEntityDescription insertNewObjectForEntityForName:@"Region" inManagedObjectContext:[[CoreDataManager sharedInstance] managedObjectContext]];
++ (instancetype)createRegionWithData:(NSDictionary *)data andContext:(NSManagedObjectContext *)context{
+    if (!context){
+        context = [[CoreDataManager sharedInstance] managedObjectContext];
+    }
+    Region *newRegion = [NSEntityDescription insertNewObjectForEntityForName:@"Region" inManagedObjectContext:context];
     newRegion.name = data[@"name"];
     newRegion.fullName = data[@"fullName"];
     newRegion.latitude = data[@"lat"];

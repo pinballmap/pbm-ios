@@ -12,6 +12,7 @@
 
 @interface PinballManager : NSObject
 
+@property (nonatomic) NSDictionary *regionInfo;
 @property (nonatomic) Region *currentRegion;
 @property (nonatomic,readonly) CLLocation *userLocation;
 

@@ -10,6 +10,6 @@
 
 @interface Machine (Create)
 
-+ (instancetype)createMachineWithData:(NSDictionary *)data;
++ (instancetype)createMachineWithData:(NSDictionary *)data andContext:(NSManagedObjectContext *)context;
 
 @end

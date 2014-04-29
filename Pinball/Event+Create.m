@@ -11,8 +11,11 @@
 
 @implementation Event (Create)
 
-+ (instancetype)createEventWithData:(NSDictionary *)data{
-    Event *newEvent = [NSEntityDescription insertNewObjectForEntityForName:@"Event" inManagedObjectContext:[[CoreDataManager sharedInstance] managedObjectContext]];
++ (instancetype)createEventWithData:(NSDictionary *)data andContext:(NSManagedObjectContext *)context{
+    if (!context){
+        context = [[CoreDataManager sharedInstance] managedObjectContext];
+    }
+    Event *newEvent = [NSEntityDescription insertNewObjectForEntityForName:@"Event" inManagedObjectContext:context];
     newEvent.name = data[@"name"];
     if (![data[@"longDesc"] isKindOfClass:[NSNull class]]){
         newEvent.eventDescription = data[@"longDesc"];

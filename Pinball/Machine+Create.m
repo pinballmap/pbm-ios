@@ -10,8 +10,11 @@
 
 @implementation Machine (Create)
 
-+ (instancetype)createMachineWithData:(NSDictionary *)data{
-    Machine *newMachine = [NSEntityDescription insertNewObjectForEntityForName:@"Machine" inManagedObjectContext:[[CoreDataManager sharedInstance] managedObjectContext]];
++ (instancetype)createMachineWithData:(NSDictionary *)data andContext:(NSManagedObjectContext *)context{
+    if (!context){
+        context = [[CoreDataManager sharedInstance] managedObjectContext];
+    }
+    Machine *newMachine = [NSEntityDescription insertNewObjectForEntityForName:@"Machine" inManagedObjectContext:context];
     newMachine.machineId = data[@"id"];
     newMachine.name = data[@"name"];
     newMachine.manufacturer = data[@"manufacturer"];

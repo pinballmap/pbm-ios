@@ -10,8 +10,11 @@
 
 @implementation MachineLocation (Create)
 
-+ (instancetype)createMachineLocationWithData:(NSDictionary *)data{
-    MachineLocation *newMachine = [NSEntityDescription insertNewObjectForEntityForName:@"MachineLocation" inManagedObjectContext:[[CoreDataManager sharedInstance] managedObjectContext]];
++ (instancetype)createMachineLocationWithData:(NSDictionary *)data andContext:(NSManagedObjectContext *)context{
+    if (!context){
+        context = [[CoreDataManager sharedInstance] managedObjectContext];
+    }
+    MachineLocation *newMachine = [NSEntityDescription insertNewObjectForEntityForName:@"MachineLocation" inManagedObjectContext:context];
     if (![data[@"condition"] isKindOfClass:[NSNull class]]){
         newMachine.condition = data[@"condition"];
     }else{
