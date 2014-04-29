@@ -62,7 +62,7 @@
 }
 - (void)importToCoreData:(NSDictionary *)pinballData{
     CoreDataManager *cdManager = [CoreDataManager sharedInstance];
-
+    [cdManager resetStore];
     dispatch_queue_t queue;
     queue = dispatch_queue_create("com.pinballmap.import", NULL);
     
