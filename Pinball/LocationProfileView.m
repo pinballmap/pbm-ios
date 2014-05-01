@@ -18,14 +18,14 @@
 #import "NSDate+DateFormatting.h"
 #import "InputCell.h"
 #import "MachineProfileView.h"
+#import "TextEditorView.h"
 
-@interface LocationProfileView () {
+@interface LocationProfileView () <TextEditorDelegate> {
     NSArray *machines;
     UIImage *mapSnapshot;
 
     UISegmentedControl *dataSetSeg;
 }
-- (IBAction)changeDataSet:(id)sender;
 @end
 
 @implementation LocationProfileView
@@ -74,6 +74,14 @@
     NewMachineView *vc = (NewMachineView *)[[[self.storyboard instantiateViewControllerWithIdentifier:@"NewMachineView"] viewControllers] lastObject];
     vc.location = _currentLocation;
     [self.navigationController presentViewController:vc.parentViewController animated:YES completion:nil];
+}
+#pragma mark - TextEditor Delegate
+- (void)editorDidComplete:(NSString *)text{
+    NSLog(@"%@",text);
+#pragma message ("TODO: API interaction to update location description")
+}
+- (void)editorDidCancel{
+    
 }
 #pragma mark - Table view data source
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
@@ -220,6 +228,12 @@
                 }
             }else if (indexPath.row == 1){
                 [self showMap];
+            }else if (indexPath.row == 2){
+                TextEditorView *editor = [[[self.storyboard instantiateViewControllerWithIdentifier:@"TextEditorView"] viewControllers] lastObject];
+                editor.delegate = self;
+                editor.editorTitle = @"Location Description";
+                editor.textContent  =_currentLocation.locationDescription;
+                [self.navigationController presentViewController:editor.parentViewController animated:YES completion:nil];
             }
         }else if (dataSetSeg.selectedSegmentIndex == 1){
             MachineConditionView *vc = (MachineConditionView *)[[[self.storyboard instantiateViewControllerWithIdentifier:@"MachineCondition"] viewControllers] lastObject];

@@ -726,6 +726,61 @@
             </objects>
             <point key="canvasLocation" x="1833" y="-85"/>
         </scene>
+        <!--Text Editor View-->
+        <scene sceneID="FXy-o5-gbm">
+            <objects>
+                <viewController id="S1g-C2-P4h" customClass="TextEditorView" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="3r1-WR-37e"/>
+                        <viewControllerLayoutGuide type="bottom" id="hEh-Dz-ID8"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="kCR-cW-pOT">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="v46-4j-b6X">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" relation="lessThanOrEqual" constant="568" id="K7t-Vf-C2N"/>
+                                </constraints>
+                                <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                <connections>
+                                    <outlet property="delegate" destination="S1g-C2-P4h" id="Vte-dh-vy3"/>
+                                </connections>
+                            </textView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="v46-4j-b6X" firstAttribute="top" secondItem="kCR-cW-pOT" secondAttribute="top" id="Sy3-ie-0o5"/>
+                            <constraint firstAttribute="trailing" secondItem="v46-4j-b6X" secondAttribute="trailing" id="TDC-tk-Xx5"/>
+                            <constraint firstItem="v46-4j-b6X" firstAttribute="leading" secondItem="kCR-cW-pOT" secondAttribute="leading" id="nVe-Vg-asP"/>
+                            <constraint firstAttribute="bottom" secondItem="v46-4j-b6X" secondAttribute="bottom" id="uPu-Se-jah"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="NQW-UD-ggq">
+                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="xdc-iI-Lhz">
+                            <connections>
+                                <action selector="cancelEditor:" destination="S1g-C2-P4h" id="Q87-I5-BXD"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="cxh-dm-vw3">
+                            <connections>
+                                <action selector="saveEditor:" destination="S1g-C2-P4h" id="ouC-5Z-AAX"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="textView" destination="v46-4j-b6X" id="33B-Op-xYS"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="9Lh-Wi-F7Z" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2644" y="-91"/>
+        </scene>
         <!--Map View-->
         <scene sceneID="5JO-g6-gzS">
             <objects>
@@ -835,7 +890,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="z7o-CN-OLp" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3261" y="-109"/>
+            <point key="canvasLocation" x="3787" y="-109"/>
         </scene>
         <!--Navigation Controller - Events-->
         <scene sceneID="caA-Ft-Sam">
@@ -1362,7 +1417,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="m5M-eg-FCn" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2834" y="-109"/>
+            <point key="canvasLocation" x="3360" y="-109"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="kWb-Xf-IfP">
@@ -1417,6 +1472,24 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ciz-8T-Ve5" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2632" y="-866"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="VO8-Qi-ThV">
+            <objects>
+                <navigationController storyboardIdentifier="TextEditorView" automaticallyAdjustsScrollViewInsets="NO" id="Ki0-pL-sOc" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="w6H-iz-he7">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="S1g-C2-P4h" kind="relationship" relationship="rootViewController" id="kAP-Zr-DmH"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Zua-gs-Ikx" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2244" y="-91"/>
         </scene>
     </scenes>
     <resources>
