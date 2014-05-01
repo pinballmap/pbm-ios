@@ -30,6 +30,8 @@
     // Do any additional setup after loading the view.
     if (_textContent){
         textView.text = _textContent;
+    }else{
+        textView.text = @"";
     }
     if (_editorTitle){
         self.navigationItem.title = _editorTitle;

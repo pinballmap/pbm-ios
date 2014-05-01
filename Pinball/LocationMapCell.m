@@ -35,7 +35,12 @@
     UIView *anno = [[UIView alloc] initWithFrame:CGRectMake(CGRectGetWidth(self.frame)/2, CGRectGetHeight(self.frame)/2, 10, 10)];
     anno.backgroundColor = [UIColor redColor];
     anno.layer.cornerRadius = 5;
-    [self addSubview:anno];
+    UIImage *image = [UIImage imageNamed:@"pin"];
+    UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(CGRectGetWidth(self.frame)/2, CGRectGetHeight(self.frame)/2-image.size.height, image.size.width, image.size.height)];
+    imageView.image = image;
+    [self addSubview:imageView];
+//    [self addSubview:anno];
+    
 }
 
 @end

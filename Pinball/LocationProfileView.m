@@ -237,9 +237,14 @@
     }else if (indexPath.section == 1){
         if (dataSetSeg.selectedSegmentIndex == 0){
             if (indexPath.row == 0){
-                if (_currentLocation.phone.length > 0 && ![_currentLocation.phone isEqualToString:@"N/A"]){
+                if (_currentLocation.phone.length > 0 && ![_currentLocation.phone isEqualToString:@"Tap to edit"]){
                     NSString *contactsPhoneNumber = [@"tel:+" stringByAppendingString:_currentLocation.phone];
                     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:contactsPhoneNumber]];
+                }else if ([_currentLocation.phone isEqualToString:@"Tap to edit"]){
+                    TextEditorView *editor = [[[self.storyboard instantiateViewControllerWithIdentifier:@"TextEditorView"] viewControllers] lastObject];
+                    editor.delegate = self;
+                    editor.editorTitle = @"Location Phone";
+                    [self.navigationController presentViewController:editor.parentViewController animated:YES completion:nil];
                 }
             }else if (indexPath.row == 1){
                 [self showMap];
@@ -247,7 +252,9 @@
                 TextEditorView *editor = [[[self.storyboard instantiateViewControllerWithIdentifier:@"TextEditorView"] viewControllers] lastObject];
                 editor.delegate = self;
                 editor.editorTitle = @"Location Description";
-                editor.textContent  =_currentLocation.locationDescription;
+                if (![_currentLocation.locationDescription isEqualToString:@"Tap to edit"]){
+                    editor.textContent  =_currentLocation.locationDescription;
+                }
                 [self.navigationController presentViewController:editor.parentViewController animated:YES completion:nil];
             }
         }else if (dataSetSeg.selectedSegmentIndex == 1){

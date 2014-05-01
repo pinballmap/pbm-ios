@@ -28,7 +28,7 @@
     newLocation.zip = data[@"zip"];
     if (![data[@"phone"] isKindOfClass:[NSNull class]]){
         if ([data[@"phone"] length] == 0){
-            newLocation.phone = @"N/A";
+            newLocation.phone = @"Tap to edit";
         }else{
             newLocation.phone = data[@"phone"];
         }
@@ -58,7 +58,7 @@
     if (![data[@"description"] isKindOfClass:[NSNull class]] && [data[@"description"] length] > 0){
         newLocation.locationDescription = data[@"description"];
     }else{
-        newLocation.locationDescription = @"N/A";
+        newLocation.locationDescription = @"Tap to edit";
     }
     
     return newLocation;
