@@ -30,7 +30,7 @@
 }
 - (void)viewDidLoad{
     [super viewDidLoad];
-    self.navigationItem.title = _currentEvent.name;
+    self.navigationItem.title = @"Event";
 }
 - (void)didReceiveMemoryWarning{
     [super didReceiveMemoryWarning];
@@ -42,6 +42,23 @@
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     return 4;
+}
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section{
+    return _currentEvent.name;
+}
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    NSString *detailText;
+    if (indexPath.row == 0){
+        detailText = _currentEvent.eventDescription;
+    }
+    
+    CGRect textLabel = [detailText boundingRectWithSize:CGSizeMake(280, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName: [UIFont systemFontOfSize:17]} context:nil];
+    textLabel.size.height = textLabel.size.height+45;
+    if (textLabel.size.height <= 67){
+        return 67;
+    }
+    return textLabel.size.height;
+
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     InformationCell *cell = [tableView dequeueReusableCellWithIdentifier:@"InfoCell" forIndexPath:indexPath];

@@ -450,10 +450,10 @@
 				DB0537FE1912B88100B17FA1 /* TextEditorView.h */,
 				DB0537FF1912B88100B17FA1 /* TextEditorView.m */,
 				DB52D2D718FAE95E00BB56D8 /* Locations */,
+				DB52D2DB18FAEFB100BB56D8 /* Machines */,
+				DB52D2E218FB009400BB56D8 /* Events */,
 				DB636D0A1903EEE000576521 /* About */,
 				DBB71B9918FC482B007907DE /* Settings */,
-				DB52D2E218FB009400BB56D8 /* Events */,
-				DB52D2DB18FAEFB100BB56D8 /* Machines */,
 			);
 			name = "View Controllers";
 			sourceTree = "<group>";
