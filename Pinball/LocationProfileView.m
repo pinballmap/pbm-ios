@@ -120,16 +120,22 @@
         return 122;
     }else if (indexPath.section == 1){
         if (dataSetSeg.selectedSegmentIndex == 0){
-            if (indexPath.row == 2){
-                CGRect textLabel = [_currentLocation.locationDescription boundingRectWithSize:CGSizeMake(280, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName: [UIFont systemFontOfSize:17]} context:nil];
-                textLabel.size.height = textLabel.size.height+45;
-                if (textLabel.size.height <= 67){
-                    return 67;
-                }
-                return textLabel.size.height;
-            }else{
+            NSString *detailText;
+            if (indexPath.row == 0){
+                detailText = _currentLocation.phone;
+            }else if (indexPath.row == 1){
+                detailText = _currentLocation.fullAddress;
+            }else if (indexPath.row == 2){
+                detailText = _currentLocation.locationDescription;
+            }
+
+            CGRect textLabel = [detailText boundingRectWithSize:CGSizeMake(280, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName: [UIFont systemFontOfSize:17]} context:nil];
+            textLabel.size.height = textLabel.size.height+45;
+            if (textLabel.size.height <= 67){
                 return 67;
             }
+            return textLabel.size.height;
+
         }else if (dataSetSeg.selectedSegmentIndex == 1){
             MachineLocation *currentMachine = machines[indexPath.row];
             NSString *cellDetail = [NSString stringWithFormat:@"%@ updated on %@",currentMachine.condition,[currentMachine.conditionUpdate monthDayYearPretty:YES]];
@@ -185,7 +191,7 @@
                 cell.dataLabel.text = _currentLocation.phone;
             }else if (indexPath.row == 1){
                 cell.infoLabel.text = @"Location";
-                cell.dataLabel.text = _currentLocation.street;
+                cell.dataLabel.text = _currentLocation.fullAddress;
             }else if (indexPath.row == 2){
                 cell.infoLabel.text = @"Description";
                 cell.dataLabel.text = _currentLocation.locationDescription;

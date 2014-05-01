@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		DB0538001912B88100B17FA1 /* TextEditorView.m in Sources */ = {isa = PBXBuildFile; fileRef = DB0537FF1912B88100B17FA1 /* TextEditorView.m */; };
+		DB3B4EF91912BBEE0015407B /* Location+CellHelpers.m in Sources */ = {isa = PBXBuildFile; fileRef = DB3B4EF81912BBEE0015407B /* Location+CellHelpers.m */; };
 		DB4D82BE190D77530048156E /* Machine+CellHelpers.m in Sources */ = {isa = PBXBuildFile; fileRef = DB4D82BD190D77530048156E /* Machine+CellHelpers.m */; };
 		DB52D2DA18FAE96C00BB56D8 /* MapView.m in Sources */ = {isa = PBXBuildFile; fileRef = DB52D2D918FAE96C00BB56D8 /* MapView.m */; };
 		DB52D2DE18FAEFC500BB56D8 /* MachineProfileView.m in Sources */ = {isa = PBXBuildFile; fileRef = DB52D2DD18FAEFC500BB56D8 /* MachineProfileView.m */; };
@@ -94,6 +95,8 @@
 /* Begin PBXFileReference section */
 		DB0537FE1912B88100B17FA1 /* TextEditorView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TextEditorView.h; sourceTree = "<group>"; };
 		DB0537FF1912B88100B17FA1 /* TextEditorView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TextEditorView.m; sourceTree = "<group>"; };
+		DB3B4EF71912BBEE0015407B /* Location+CellHelpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Location+CellHelpers.h"; sourceTree = "<group>"; };
+		DB3B4EF81912BBEE0015407B /* Location+CellHelpers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Location+CellHelpers.m"; sourceTree = "<group>"; };
 		DB4D82BC190D77530048156E /* Machine+CellHelpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Machine+CellHelpers.h"; sourceTree = "<group>"; };
 		DB4D82BD190D77530048156E /* Machine+CellHelpers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Machine+CellHelpers.m"; sourceTree = "<group>"; };
 		DB52D2D818FAE96C00BB56D8 /* MapView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapView.h; sourceTree = "<group>"; };
@@ -493,6 +496,8 @@
 				DB9330BB190D49AB0054C779 /* SeattleLocation.gpx */,
 				DB4D82BC190D77530048156E /* Machine+CellHelpers.h */,
 				DB4D82BD190D77530048156E /* Machine+CellHelpers.m */,
+				DB3B4EF71912BBEE0015407B /* Location+CellHelpers.h */,
+				DB3B4EF81912BBEE0015407B /* Location+CellHelpers.m */,
 			);
 			name = "Model Helpers";
 			sourceTree = "<group>";
@@ -613,6 +618,7 @@
 				DBE50377190D2BFD002BDE0D /* Location.m in Sources */,
 				DB52D2E518FB054200BB56D8 /* EventsView.m in Sources */,
 				DBF06C6D18F97E6300F92912 /* LocationsView.m in Sources */,
+				DB3B4EF91912BBEE0015407B /* Location+CellHelpers.m in Sources */,
 				DB52D2DA18FAE96C00BB56D8 /* MapView.m in Sources */,
 				DB636D0D1903EEEB00576521 /* AboutView.m in Sources */,
 				DBF06C6418F97C5F00F92912 /* MachineLocation+Create.m in Sources */,

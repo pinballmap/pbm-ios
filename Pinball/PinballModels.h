@@ -18,3 +18,4 @@
 #import "MachineLocation.h"
 #import "MachineLocation+Create.h"
 #import "Machine+CellHelpers.h"
+#import "Location+CellHelpers.h"
