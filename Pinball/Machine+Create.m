@@ -17,7 +17,11 @@
     Machine *newMachine = [NSEntityDescription insertNewObjectForEntityForName:@"Machine" inManagedObjectContext:context];
     newMachine.machineId = data[@"id"];
     newMachine.name = data[@"name"];
-    newMachine.manufacturer = data[@"manufacturer"];
+    if (![data[@"manufacturer"] isKindOfClass:[NSNull class]]){
+        newMachine.manufacturer = data[@"manufacturer"];
+    }else{
+        newMachine.manufacturer = @"N/A";
+    }
     if ([data[@"year"] isKindOfClass:[NSNumber class]]){
         newMachine.year = data[@"year"];
     }else{

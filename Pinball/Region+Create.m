@@ -16,7 +16,7 @@
     }
     Region *newRegion = [NSEntityDescription insertNewObjectForEntityForName:@"Region" inManagedObjectContext:context];
     newRegion.name = data[@"name"];
-    newRegion.fullName = data[@"fullName"];
+    newRegion.fullName = data[@"full_name"];
     newRegion.latitude = data[@"lat"];
     newRegion.longitude = data[@"lon"];
     return newRegion;

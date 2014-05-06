@@ -68,7 +68,7 @@
     searchBar.showsCancelButton = YES;
 }
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText{
-    NSPredicate *searchPred = [NSPredicate predicateWithFormat:@"formalName CONTAINS[cd] %@",searchText];
+    NSPredicate *searchPred = [NSPredicate predicateWithFormat:@"full_name CONTAINS[cd] %@",searchText];
     [searchResults removeAllObjects];
     searchResults = nil;
     searchResults = [NSMutableArray new];
@@ -102,7 +102,7 @@
     }else{
         region = searchResults[indexPath.row];
     }
-    cell.textLabel.text = region[@"formalName"];
+    cell.textLabel.text = region[@"full_name"];
     
     return cell;
 }
@@ -114,7 +114,8 @@
     }else{
         region = searchResults[indexPath.row];
     }
-    [[PinballManager sharedInstance] changeToRegion:region];
+    NSDictionary *cleanRegion = @{@"full_name":region[@"full_name"],@"id":region[@"id"],@"lat":region[@"lat"],@"lon":region[@"lon"],@"name":region[@"name"],@"primary_email_contact":region[@"primary_email_contact"]};
+    [[PinballManager sharedInstance] changeToRegion:cleanRegion];
     [self.navigationController popToRootViewControllerAnimated:YES];
 }
 /*
