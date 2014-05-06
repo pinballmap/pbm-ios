@@ -59,7 +59,7 @@
     // Dispose of any resources that can be recreated.
 }
 - (void)showMap{
-    MapView *map = [self.storyboard instantiateViewControllerWithIdentifier:@"MapView"];
+    MapView *map = [[[self.storyboard instantiateViewControllerWithIdentifier:@"MapView"] viewControllers] lastObject];
     map.currentLocation = _currentLocation;
     [self.navigationController pushViewController:map animated:YES];
 }

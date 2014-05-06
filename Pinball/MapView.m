@@ -15,7 +15,7 @@
 @interface MapView () <MKMapViewDelegate> {
     IBOutlet MKMapView *mainMapView;
 }
-
+- (IBAction)showInMaps:(id)sender;
 @end
 
 @implementation MapView
@@ -74,6 +74,13 @@
         pinView.annotation = annotation;
     }
     return pinView;
+}
+- (IBAction)showInMaps:(id)sender{
+    CLLocationCoordinate2D coord = CLLocationCoordinate2DMake([_currentLocation.latitude doubleValue],[_currentLocation.longitude doubleValue]);
+
+    MKPlacemark *placemark = [[MKPlacemark alloc] initWithCoordinate:coord addressDictionary:nil];
+    MKMapItem *item = [[MKMapItem alloc] initWithPlacemark:placemark];
+    [MKMapItem openMapsWithItems:@[item] launchOptions:nil];
 }
 #pragma mark - Machine Map
 - (void)mapView:(MKMapView *)mapView annotationView:(MKAnnotationView *)view calloutAccessoryControlTapped:(UIControl *)control{

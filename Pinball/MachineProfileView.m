@@ -103,9 +103,9 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     if (indexPath.section == 1){
         if (indexPath.row == 0){
-            MapView *map = [self.storyboard instantiateViewControllerWithIdentifier:@"MapView"];
+            MapView *map = [[[self.storyboard instantiateViewControllerWithIdentifier:@"MapView"] viewControllers] lastObject];
             map.currentMachine = _currentMachine;
-            [self.navigationController pushViewController:map animated:YES];
+            [self.navigationController pushViewController:map.parentViewController animated:YES];
         }else{
             MachineLocation *machine = _currentMachine.machineLocations[indexPath.row-1];
             LocationProfileView *locationProfile = [self.storyboard instantiateViewControllerWithIdentifier:@"LocationProfileView"];
