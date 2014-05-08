@@ -54,6 +54,16 @@
     #pragma message("TODO: API interaction for adding a event")
     [self dismissViewControllerAnimated:YES completion:nil];
 }
+#pragma mark - TableView Delegate
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    if (indexPath.section == 1 && indexPath.row == 0){
+        LocationsView *locations = [self.storyboard instantiateViewControllerWithIdentifier:@"LocationsView"];
+        locations.isSelecting = YES;
+        locations.selectingViewController = self;
+        [self.navigationController pushViewController:locations animated:YES];
+    }
+}
 #pragma mark - Class
 - (void)setLocation:(Location *)location{
     _location = location;
