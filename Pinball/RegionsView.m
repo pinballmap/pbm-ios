@@ -68,7 +68,7 @@
     searchBar.showsCancelButton = YES;
 }
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText{
-    NSPredicate *searchPred = [NSPredicate predicateWithFormat:@"full_name CONTAINS[cd] %@",searchText];
+    NSPredicate *searchPred = [NSPredicate predicateWithFormat:@"fullName CONTAINS[cd] %@",searchText];
     [searchResults removeAllObjects];
     searchResults = nil;
     searchResults = [NSMutableArray new];
@@ -96,26 +96,25 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"RegionCell" forIndexPath:indexPath];
     
-    NSDictionary *region;
+    Region *region;
     if (!isSearching){
         region = allRegions[indexPath.row];
     }else{
         region = searchResults[indexPath.row];
     }
-    cell.textLabel.text = region[@"full_name"];
+    cell.textLabel.text = region.fullName;
     
     return cell;
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    NSDictionary *region;
+    Region *region;
     if (!isSearching){
         region = allRegions[indexPath.row];
     }else{
         region = searchResults[indexPath.row];
     }
-    NSDictionary *cleanRegion = @{@"full_name":region[@"full_name"],@"id":region[@"id"],@"lat":region[@"lat"],@"lon":region[@"lon"],@"name":region[@"name"],@"primary_email_contact":region[@"primary_email_contact"]};
-    [[PinballManager sharedInstance] changeToRegion:cleanRegion];
+    [[PinballManager sharedInstance] changeToRegion:region];
     [self.navigationController popToRootViewControllerAnimated:YES];
 }
 /*

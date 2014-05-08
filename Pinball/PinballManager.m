@@ -48,17 +48,17 @@ typedef NS_ENUM(NSInteger, PBMDataAPI) {
         _regionInfo = [[NSUserDefaults standardUserDefaults] objectForKey:@"CurrentRegion"];
         if (_regionInfo){
             NSFetchRequest *regionRequest = [NSFetchRequest fetchRequestWithEntityName:@"Region"];
-            regionRequest.predicate = [NSPredicate predicateWithFormat:@"fullName = %@",_regionInfo[@"full_name"]];
+            regionRequest.predicate = [NSPredicate predicateWithFormat:@"name = %@",_regionInfo[@"name"]];
             regionRequest.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"fullName" ascending:YES]];
             NSManagedObjectContext *context = [[CoreDataManager sharedInstance] managedObjectContext];
             NSArray *results = [context executeFetchRequest:regionRequest error:nil];
             if (results.count == 1){
                 _currentRegion = results[0];
             }else{
-                [self changeToRegion:@{@"full_name":@"Seattle",@"id":@3,@"lat":@48,@"lon":@(-122),@"name":@"seattle",@"primary_email_contact":@"morganshilling@gmail.com"}];
+                [self changeToRegion:nil];
             }
         }else{
-            [self changeToRegion:@{@"full_name":@"Seattle",@"id":@3,@"lat":@48,@"lon":@(-122),@"name":@"seattle",@"primary_email_contact":@"morganshilling@gmail.com"}];
+            [self changeToRegion:nil];
         }
     }
     return self;
@@ -129,46 +129,33 @@ typedef NS_ENUM(NSInteger, PBMDataAPI) {
 }
 #pragma mark - Regions listing
 - (void)allRegions:(void (^)(NSArray *regions))regionBlock{
-    NSData *cacheData = [self regionCacheData];
-    
-    if (cacheData){
-        regionBlock([self parseRegions:cacheData]);
-    }else{
-        NSURL *regionURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@api/v1/regions.json",apiRootURL]];
-        NSURLSessionDataTask *regionData = [session dataTaskWithURL:regionURL completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
-            if (data && !error){
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    [self saveRegionCache:data];
-                    regionBlock([self parseRegions:data]);
-                });
+    NSArray *currentRegions = [self coreDataRegions];
+    NSLog(@"Existing Region Count: %i",currentRegions.count);
+    NSMutableArray *regionIds = [NSMutableArray new];
+    [currentRegions enumerateObjectsUsingBlock:^(Region *obj, NSUInteger idx, BOOL *stop) {
+        [regionIds addObject:obj.regionId];
+    }];
+    currentRegions = nil;
+    NSURLRequest *regionRequest = [NSURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@api/v1/regions.json",apiRootURL]]];
+    AFHTTPRequestOperation *regionAPI = [[AFHTTPRequestOperation alloc] initWithRequest:regionRequest];
+    regionAPI.responseSerializer = [AFJSONResponseSerializer serializer];
+    [regionAPI setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSArray *regions = operation.responseObject;
+        [regions enumerateObjectsUsingBlock:^(NSDictionary *obj, NSUInteger idx, BOOL *stop) {
+            if (![regionIds containsObject:obj[@"id"]]){
+                [Region createRegionWithData:obj andContext:[[CoreDataManager sharedInstance] managedObjectContext]];
             }
         }];
-        [regionData resume];
-    }
-}
-- (NSArray *)parseRegions:(NSData *)apiData{
-    NSArray *jsonData = [NSJSONSerialization JSONObjectWithData:apiData options:NSJSONReadingAllowFragments error:nil];
-    if (jsonData){
-        NSMutableArray *regions = [NSMutableArray new];
-        [jsonData enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-            [regions addObject:obj];
-        }];
-        NSSortDescriptor *sorter = [NSSortDescriptor sortDescriptorWithKey:@"formalName" ascending:YES];
-        return [regions sortedArrayUsingDescriptors:@[sorter]];
-    }
-    return nil;
-}
-- (NSData *)regionCacheData{
-    if ([[NSFileManager defaultManager] fileExistsAtPath:[NSString stringWithFormat:@"%@/regions.json",[NSFileManager documentsDirectory]]]){
-        return [NSData dataWithContentsOfFile:[NSString stringWithFormat:@"%@/regions.json",[NSFileManager documentsDirectory]]];
-    }
-    return nil;
-}
-- (void)saveRegionCache:(NSData *)data{
-    [data writeToFile:[NSString stringWithFormat:@"%@/regions.json",[NSFileManager documentsDirectory]] atomically:YES];
+        [[CoreDataManager sharedInstance] saveContext];
+        NSLog(@"New Region Count: %i",[self coreDataRegions].count);
+        regionBlock([self coreDataRegions]);
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        
+    }];
+    [[NSOperationQueue mainQueue] addOperation:regionAPI];
 }
 #pragma mark - Region Data Load
-- (void)changeToRegion:(NSDictionary *)region{
+- (void)changeToRegion:(Region *)region{
     [[NSNotificationCenter defaultCenter] postNotificationName:@"UpdatingRegion" object:nil];
     [self reloadRegionData:region];
 }
@@ -194,12 +181,12 @@ typedef NS_ENUM(NSInteger, PBMDataAPI) {
     }];
     [[NSOperationQueue mainQueue] addOperations:api waitUntilFinished:NO];
 }
-- (void)reloadRegionData:(NSDictionary *)region{
-    [[NSUserDefaults standardUserDefaults] setObject:region forKey:@"CurrentRegion"];
+- (void)reloadRegionData:(Region *)region{
+    [[NSUserDefaults standardUserDefaults] setObject:@{@"name": region.name} forKey:@"CurrentRegion"];
     [[NSUserDefaults standardUserDefaults] synchronize];
     
     // Find region.
-    _currentRegion = [self regionWithData:region];
+    _currentRegion = region;
     NSLog(@"Locations: %i",_currentRegion.locations.count);
     NSLog(@"Events: %i",_currentRegion.events.count);
     [self clearDataForRegion:_currentRegion];
@@ -260,6 +247,14 @@ typedef NS_ENUM(NSInteger, PBMDataAPI) {
     return apiOperation;
 }
 #pragma mark - Region Model Interaction
+- (NSArray *)coreDataRegions{
+    CoreDataManager *cdManager = [CoreDataManager sharedInstance];
+    NSFetchRequest *regionsFetch = [self fetchRequestForModel:@"Region"];
+    regionsFetch.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"fullName" ascending:YES]];
+    NSArray *regions = [cdManager.managedObjectContext executeFetchRequest:regionsFetch error:nil];
+    
+    return regions;
+}
 // Will look for a region with the given name. If one does not exist it will create it and return it.
 - (Region *)regionWithData:(NSDictionary *)region{
     CoreDataManager *cdManager = [CoreDataManager sharedInstance];

@@ -19,6 +19,7 @@
     newRegion.fullName = data[@"full_name"];
     newRegion.latitude = data[@"lat"];
     newRegion.longitude = data[@"lon"];
+    newRegion.regionId = data[@"id"];
     return newRegion;
 }
 
