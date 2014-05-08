@@ -45,8 +45,10 @@
         <relationship name="machine" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Machine" inverseName="machineLocations" inverseEntity="Machine" syncable="YES"/>
     </entity>
     <entity name="Region" representedClassName="Region" syncable="YES">
+        <attribute name="eventsEtag" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="fullName" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="latitude" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="locationsEtag" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="longitude" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="regionId" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
@@ -59,6 +61,6 @@
         <element name="Location" positionX="-2250" positionY="-702" width="128" height="313"/>
         <element name="Machine" positionX="-2736" positionY="-549" width="128" height="133"/>
         <element name="MachineLocation" positionX="-2504" positionY="-490" width="128" height="103"/>
-        <element name="Region" positionX="-2520" positionY="-949" width="128" height="163"/>
+        <element name="Region" positionX="-2520" positionY="-949" width="128" height="193"/>
     </elements>
 </model>

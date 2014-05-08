@@ -162,11 +162,6 @@ typedef NS_ENUM(NSInteger, PBMDataAPI) {
     [self reloadRegionData:region];
 }
 - (void)refreshRegion{
-    NSLog(@"Locations: %i",_currentRegion.locations.count);
-    NSLog(@"Events: %i",_currentRegion.events.count);
-    [self clearDataForRegion:_currentRegion];
-    NSLog(@"Locations: %i",_currentRegion.locations.count);
-    NSLog(@"Events: %i",_currentRegion.events.count);
 
     NSArray *apiOperations = @[[self requestForData:PBMDataAPILocations],[self requestForData:PBMDataAPIEvents]];
     
@@ -180,10 +175,25 @@ typedef NS_ENUM(NSInteger, PBMDataAPI) {
         __block NSMutableSet *createdLocations;
         [operations enumerateObjectsUsingBlock:^(AFHTTPRequestOperation *obj, NSUInteger idx, BOOL *stop) {
             if (idx == 0){
-                createdLocations = [self importLocations:obj.responseObject withMachines:machines];
+                if (![_currentRegion.locationsEtag isEqualToString:obj.response.allHeaderFields[@"Etag"]]){
+                    NSLog(@"New Locations Etag");
+                    createdLocations = [self importLocations:obj.responseObject withMachines:machines];
+                    _currentRegion.locationsEtag = obj.response.allHeaderFields[@"Etag"];
+                    [[CoreDataManager sharedInstance] saveContext];
+                }else{
+                    NSLog(@"Locations Same Etag");
+                }
             }else if (idx == 1){
-                [self importEvents:obj.responseObject withLocations:createdLocations];
+                if (![_currentRegion.eventsEtag isEqualToString:obj.response.allHeaderFields[@"Etag"]]){
+                    NSLog(@"New Events Etag");
+                    [self clearData:PBMDataAPIEvents forRegion:_currentRegion];
+                    [self importEvents:obj.responseObject withLocations:createdLocations];
+                    _currentRegion.eventsEtag = obj.response.allHeaderFields[@"Etag"];
+                }else{
+                    NSLog(@"Events Same Etag");
+                }
             }
+            [[CoreDataManager sharedInstance] saveContext];
         }];
         [[NSNotificationCenter defaultCenter] postNotificationName:@"RegionUpdate" object:nil];
     }];
@@ -195,11 +205,6 @@ typedef NS_ENUM(NSInteger, PBMDataAPI) {
     
     // Find region.
     _currentRegion = region;
-    NSLog(@"Locations: %i",_currentRegion.locations.count);
-    NSLog(@"Events: %i",_currentRegion.events.count);
-    [self clearDataForRegion:_currentRegion];
-    NSLog(@"Locations: %i",_currentRegion.locations.count);
-    NSLog(@"Events: %i",_currentRegion.events.count);
 
     NSArray *apiOperations = @[[self requestForData:PBMDataAPIMachines],[self requestForData:PBMDataAPILocations],[self requestForData:PBMDataAPIEvents]];
     
@@ -215,10 +220,25 @@ typedef NS_ENUM(NSInteger, PBMDataAPI) {
             if (idx == 0){
                 createdMachines = [self importMachines:obj.responseObject];
             }else if (idx == 1){
-                createdLocations = [self importLocations:obj.responseObject withMachines:createdMachines];
+                if (![_currentRegion.locationsEtag isEqualToString:obj.response.allHeaderFields[@"Etag"]]){
+                    NSLog(@"New Locations Etag");
+                    [self clearData:PBMDataAPILocations forRegion:_currentRegion];
+                    createdLocations = [self importLocations:obj.responseObject withMachines:createdMachines];
+                    _currentRegion.locationsEtag = obj.response.allHeaderFields[@"Etag"];
+                }else{
+                    NSLog(@"Locations Same Etag");
+                }
             }else if (idx == 2){
-                [self importEvents:obj.responseObject withLocations:createdLocations];
+                if (![_currentRegion.eventsEtag isEqualToString:obj.response.allHeaderFields[@"Etag"]]){
+                    NSLog(@"New Events Etag");
+                    [self clearData:PBMDataAPIEvents forRegion:_currentRegion];
+                    [self importEvents:obj.responseObject withLocations:createdLocations];
+                    _currentRegion.eventsEtag = obj.response.allHeaderFields[@"Etag"];
+                }else{
+                    NSLog(@"Events Same Etag");
+                }
             }
+            [[CoreDataManager sharedInstance] saveContext];
         }];
         [[NSNotificationCenter defaultCenter] postNotificationName:@"RegionUpdate" object:nil];
     }];
@@ -281,14 +301,17 @@ typedef NS_ENUM(NSInteger, PBMDataAPI) {
     }
     return foundRegion;
 }
-- (void)clearDataForRegion:(Region *)region{
+- (void)clearData:(PBMDataAPI)dataType forRegion:(Region *)region{
     CoreDataManager *cdManager = [CoreDataManager sharedInstance];
-    [region.locations enumerateObjectsUsingBlock:^(Location *obj, BOOL *stop) {
-        [cdManager.managedObjectContext deleteObject:obj];
-    }];
-    [region.events enumerateObjectsUsingBlock:^(Event *obj, BOOL *stop) {
-        [cdManager.managedObjectContext deleteObject:obj];
-    }];
+    if (dataType == PBMDataAPILocations){
+        [region.locations enumerateObjectsUsingBlock:^(Location *obj, BOOL *stop) {
+            [cdManager.managedObjectContext deleteObject:obj];
+        }];
+    }else if (dataType == PBMDataAPIEvents){
+        [region.events enumerateObjectsUsingBlock:^(Event *obj, BOOL *stop) {
+            [cdManager.managedObjectContext deleteObject:obj];
+        }];
+    }
     [cdManager saveContext];
 }
 #pragma mark - CoreData import
