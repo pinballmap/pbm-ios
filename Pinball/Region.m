@@ -9,7 +9,6 @@
 #import "Region.h"
 #import "Event.h"
 #import "Location.h"
-#import "Machine.h"
 
 
 @implementation Region
@@ -23,6 +22,5 @@
 @dynamic eventsEtag;
 @dynamic events;
 @dynamic locations;
-@dynamic machines;
 
 @end

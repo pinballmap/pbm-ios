@@ -36,7 +36,6 @@
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="year" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
         <relationship name="machineLocations" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="MachineLocation" inverseName="machine" inverseEntity="MachineLocation" syncable="YES"/>
-        <relationship name="region" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Region" inverseName="machines" inverseEntity="Region" syncable="YES"/>
     </entity>
     <entity name="MachineLocation" representedClassName="MachineLocation" syncable="YES">
         <attribute name="condition" optional="YES" attributeType="String" syncable="YES"/>
@@ -54,13 +53,12 @@
         <attribute name="regionId" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
         <relationship name="events" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Event" inverseName="region" inverseEntity="Event" syncable="YES"/>
         <relationship name="locations" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Location" inverseName="region" inverseEntity="Location" syncable="YES"/>
-        <relationship name="machines" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Machine" inverseName="region" inverseEntity="Machine" syncable="YES"/>
     </entity>
     <elements>
         <element name="Event" positionX="-2529" positionY="-720" width="128" height="163"/>
         <element name="Location" positionX="-2250" positionY="-702" width="128" height="313"/>
-        <element name="Machine" positionX="-2736" positionY="-549" width="128" height="133"/>
+        <element name="Machine" positionX="-2808" positionY="-603" width="128" height="118"/>
         <element name="MachineLocation" positionX="-2504" positionY="-490" width="128" height="103"/>
-        <element name="Region" positionX="-2520" positionY="-949" width="128" height="193"/>
+        <element name="Region" positionX="-2520" positionY="-949" width="128" height="178"/>
     </elements>
 </model>

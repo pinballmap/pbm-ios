@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 
-@class Event, Location, Machine;
+@class Event, Location;
 
 @interface Region : NSManagedObject
 
@@ -22,7 +22,6 @@
 @property (nonatomic, retain) NSString * eventsEtag;
 @property (nonatomic, retain) NSSet *events;
 @property (nonatomic, retain) NSSet *locations;
-@property (nonatomic, retain) NSSet *machines;
 @end
 
 @interface Region (CoreDataGeneratedAccessors)
@@ -36,10 +35,5 @@
 - (void)removeLocationsObject:(Location *)value;
 - (void)addLocations:(NSSet *)values;
 - (void)removeLocations:(NSSet *)values;
-
-- (void)addMachinesObject:(Machine *)value;
-- (void)removeMachinesObject:(Machine *)value;
-- (void)addMachines:(NSSet *)values;
-- (void)removeMachines:(NSSet *)values;
 
 @end
