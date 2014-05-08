@@ -7,7 +7,7 @@
 //
 
 #import "RegionsView.h"
-#import <MessageUI/MessageUI.h>
+@import MessageUI;
 #import "UIAlertView+Application.h"
 
 @interface RegionsView () <UISearchBarDelegate,MFMailComposeViewControllerDelegate> {

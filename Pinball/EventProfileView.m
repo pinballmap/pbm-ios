@@ -10,8 +10,8 @@
 #import "InformationCell.h"
 #import "NSDate+DateFormatting.h"
 #import "LocationProfileView.h"
-#import <EventKit/EventKit.h>
-#import <EventKitUI/EventKitUI.h>
+@import EventKit;
+@import EventKitUI;
 #import "UIAlertView+Application.h"
 @interface EventProfileView () <EKEventViewDelegate>{
     

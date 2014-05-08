@@ -9,8 +9,8 @@
 #import "LocationProfileView.h"
 #import "InformationCell.h"
 #import "LocationMapCell.h"
-#import <CoreLocation/CoreLocation.h>
-#import <MapKit/MapKit.h>
+@import CoreLocation;
+@import MapKit;
 #import "Machine.h"
 #import "MapView.h"
 #import "MachineConditionView.h"

@@ -7,7 +7,7 @@
 //
 
 #import "Location+UpdateDistance.h"
-#import <CoreLocation/CoreLocation.h>
+@import CoreLocation;
 
 @implementation Location (UpdateDistance)
 

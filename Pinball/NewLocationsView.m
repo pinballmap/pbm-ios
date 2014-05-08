@@ -7,8 +7,8 @@
 //
 
 #import "NewLocationsView.h"
-#import <CoreLocation/CoreLocation.h>
-#import <AddressBook/AddressBook.h> // Do this so we can easily pull out the address keys from the geocoder.
+@import CoreLocation;
+@import AddressBook; // Do this so we can easily pull out the address keys from the geocoder.
 #import "UIAlertView+Application.h"
 #import "MachinePickingView.h"
 

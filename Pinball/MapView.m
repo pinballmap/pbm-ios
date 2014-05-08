@@ -7,7 +7,8 @@
 //
 
 #import "MapView.h"
-#import <MapKit/MapKit.h>
+@import MapKit;
+@import AddressBook;
 #import "MachineLocation.h"
 #import "MachineLocationPin.h"
 #import "LocationProfileView.h"

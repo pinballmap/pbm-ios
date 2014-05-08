@@ -6,7 +6,7 @@
 //  Copyright (c) 2014 Frank Michael Sanchez. All rights reserved.
 //
 
-#import <MapKit/MapKit.h>
+@import MapKit;
 
 @interface MachineLocationPin : MKPointAnnotation
 

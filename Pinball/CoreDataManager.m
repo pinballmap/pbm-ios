@@ -7,7 +7,7 @@
 //
 
 #import "CoreDataManager.h"
-#import <CoreData/CoreData.h>
+@import CoreData;
 
 #define dataModel @"Pinball"
 
