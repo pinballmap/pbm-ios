@@ -160,6 +160,12 @@ typedef NS_ENUM(NSInteger, PBMDataAPI) {
     [self reloadRegionData:region];
 }
 - (void)refreshRegion{
+    NSLog(@"Locations: %i",_currentRegion.locations.count);
+    NSLog(@"Events: %i",_currentRegion.events.count);
+    [self clearDataForRegion:_currentRegion];
+    NSLog(@"Locations: %i",_currentRegion.locations.count);
+    NSLog(@"Events: %i",_currentRegion.events.count);
+
     NSArray *apiOperations = @[[self requestForData:PBMDataAPILocations],[self requestForData:PBMDataAPIEvents]];
     
     NSArray *api = [AFURLConnectionOperation batchOfRequestOperations:apiOperations progressBlock:^(NSUInteger numberOfFinishedOperations, NSUInteger totalNumberOfOperations) {
