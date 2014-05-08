@@ -55,10 +55,12 @@ typedef NS_ENUM(NSInteger, PBMDataAPI) {
             if (results.count == 1){
                 _currentRegion = results[0];
             }else{
-                [self changeToRegion:nil];
+                _currentRegion = [self regionWithData:@{@"full_name":@"Seattle",@"id":@3,@"lat":@48,@"lon":@(-122),@"name":@"seattle",@"primary_email_contact":@"morganshilling@gmail.com"}];
+                [self changeToRegion:_currentRegion];
             }
         }else{
-            [self changeToRegion:nil];
+            _currentRegion = [self regionWithData:@{@"full_name":@"Seattle",@"id":@3,@"lat":@48,@"lon":@(-122),@"name":@"seattle",@"primary_email_contact":@"morganshilling@gmail.com"}];
+            [self changeToRegion:_currentRegion];
         }
     }
     return self;
