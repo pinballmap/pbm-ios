@@ -13,8 +13,8 @@
 @interface MachinePickingView : UITableViewController
 
 @property (nonatomic,assign) id delegate; // PickingDelegate
-
 @property (nonatomic,assign) NSArray *pickedMachines;
+@property (nonatomic,assign) BOOL canPickMultiple;
 
 @end
 

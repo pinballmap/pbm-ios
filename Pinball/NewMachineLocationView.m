@@ -6,19 +6,20 @@
 //  Copyright (c) 2014 Frank Michael Sanchez. All rights reserved.
 //
 
-#import "NewMachineView.h"
+#import "NewMachineLocationView.h"
 #import "LocationsView.h"
 #import "UIAlertView+Application.h"
+#import "MachinePickingView.h"
 
-@interface NewMachineView () {
-    IBOutlet UITextField *machineName;
+@interface NewMachineLocationView () <PickingDelegate>{
+    IBOutlet UILabel *machineName;
     IBOutlet UILabel *locationName;
 }
 - (IBAction)saveMachine:(id)sender;
 - (IBAction)cancelMachine:(id)sender;
 @end
 
-@implementation NewMachineView
+@implementation NewMachineLocationView
 
 - (id)initWithStyle:(UITableViewStyle)style{
     self = [super initWithStyle:style];
@@ -40,11 +41,30 @@
         LocationsView *locations = segue.destinationViewController;
         locations.isSelecting = YES;
         locations.selectingViewController = self;
+    }else if ([segue.identifier isEqualToString:@"MachineSelect"]){
+        MachinePickingView *pickingView = [[segue.destinationViewController viewControllers] lastObject];
+        pickingView.delegate = self;
+        pickingView.canPickMultiple = NO;
     }
 }
 - (void)setLocation:(Location *)location{
     _location = location;
     locationName.text = _location.name;
+}
+#pragma mark - Machine Picking View Delegate
+- (void)pickedMachines:(NSArray *)machines{
+    Machine *pickedMachine = [machines lastObject];
+    machineName.text = pickedMachine.name;
+}
+#pragma mark - TableView Delegate
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    if (indexPath.section == 0){
+        MachinePickingView *pickingView = [[[self.storyboard instantiateViewControllerWithIdentifier:@"MachinePickingView"] viewControllers] lastObject];
+        pickingView.delegate = self;
+        pickingView.canPickMultiple = NO;
+        [self.navigationController presentViewController:pickingView.parentViewController animated:YES completion:nil];
+    }
 }
 #pragma mark - Actions
 - (IBAction)saveMachine:(id)sender{

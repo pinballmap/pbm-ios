@@ -183,6 +183,10 @@
     }else{
         [pickedMachines addObject:currentMachine];
     }
-    [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+    if (!_canPickMultiple){
+        [self savePicked:nil];
+    }else{
+        [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+    }
 }
 @end

@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "Location.h"
 
-@interface NewMachineView : UITableViewController
+@interface NewMachineLocationView : UITableViewController
 
 @property (nonatomic)Location *location;
 

@@ -9,7 +9,7 @@
 #import "LocationsView.h"
 #import "Location.h"
 #import "LocationProfileView.h"
-#import "NewMachineView.h"
+#import "NewMachineLocationView.h"
 
 @interface LocationsView () <NSFetchedResultsControllerDelegate,UIActionSheetDelegate,UISearchBarDelegate> {
     NSFetchedResultsController *fetchedResults;

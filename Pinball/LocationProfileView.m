@@ -14,7 +14,7 @@
 #import "Machine.h"
 #import "MapView.h"
 #import "MachineConditionView.h"
-#import "NewMachineView.h"
+#import "NewMachineLocationView.h"
 #import "NSDate+DateFormatting.h"
 #import "InputCell.h"
 #import "MachineProfileView.h"
@@ -71,7 +71,7 @@
     [self.tableView reloadData];
 }
 - (IBAction)addNewMachine:(id)sender{
-    NewMachineView *vc = (NewMachineView *)[[[self.storyboard instantiateViewControllerWithIdentifier:@"NewMachineView"] viewControllers] lastObject];
+    NewMachineLocationView *vc = (NewMachineLocationView *)[[[self.storyboard instantiateViewControllerWithIdentifier:@"NewMachineView"] viewControllers] lastObject];
     vc.location = _currentLocation;
     [self.navigationController presentViewController:vc.parentViewController animated:YES completion:nil];
 }

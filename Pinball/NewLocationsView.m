@@ -97,6 +97,7 @@
         if (indexPath.row == 4){
             MachinePickingView *pickingView = [[(UINavigationController *)[self.storyboard instantiateViewControllerWithIdentifier:@"MachinePickingView"] viewControllers] lastObject];
             pickingView.delegate = self;
+            pickingView.canPickMultiple = YES;
             if (pickedMachines.count > 0){
                 pickingView.pickedMachines = pickedMachines;
             }
