@@ -114,7 +114,7 @@
     }else{
         region = searchResults[indexPath.row];
     }
-    [[PinballManager sharedInstance] changeToRegion:region];
+    [[PinballManager sharedInstance] loadRegionData:region];
     [self.navigationController popToRootViewControllerAnimated:YES];
 }
 /*

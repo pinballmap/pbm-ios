@@ -25,7 +25,6 @@ typedef NS_ENUM(NSInteger, PBMDataAPI) {
     NSURLSession *session;
     CLLocationManager *locationManager;
 }
-+ (AFHTTPRequestOperation *)requestForData:(PBMDataAPI)apiType;
 
 @end
 
@@ -55,12 +54,12 @@ typedef NS_ENUM(NSInteger, PBMDataAPI) {
             if (results.count == 1){
                 _currentRegion = results[0];
             }else{
-                _currentRegion = [self regionWithData:@{@"full_name":@"Seattle",@"id":@3,@"lat":@48,@"lon":@(-122),@"name":@"seattle",@"primary_email_contact":@"morganshilling@gmail.com"}];
-                [self changeToRegion:_currentRegion];
+                _currentRegion = [self regionWithData:@{@"full_name":@"Seattle",@"id":@3,@"lat":@48,@"lon":@(-122),@"name":@"seattle",@"primary_email_contact":@"morganshilling@gmail.com"} shouldCreate:YES];
+                [self loadRegionData:_currentRegion];
             }
         }else{
-            _currentRegion = [self regionWithData:@{@"full_name":@"Seattle",@"id":@3,@"lat":@48,@"lon":@(-122),@"name":@"seattle",@"primary_email_contact":@"morganshilling@gmail.com"}];
-            [self changeToRegion:_currentRegion];
+            _currentRegion = [self regionWithData:@{@"full_name":@"Seattle",@"id":@3,@"lat":@48,@"lon":@(-122),@"name":@"seattle",@"primary_email_contact":@"morganshilling@gmail.com"} shouldCreate:YES];
+            [self loadRegionData:_currentRegion];
         }
     }
     return self;
@@ -72,62 +71,6 @@ typedef NS_ENUM(NSInteger, PBMDataAPI) {
     locationManager.delegate = self;
     locationManager.desiredAccuracy = kCLLocationAccuracyBest;
     [locationManager startUpdatingLocation];
-}
-- (void)importToCoreData:(NSDictionary *)pinballData{
-    CoreDataManager *cdManager = [CoreDataManager sharedInstance];
-    [cdManager resetStore];
-    dispatch_queue_t queue;
-    queue = dispatch_queue_create("com.pinballmap.import", NULL);
-    
-    dispatch_sync(queue, ^{
-        _currentRegion = [Region createRegionWithData:pinballData andContext:cdManager.privateObjectContext];
-        NSDictionary *regionDic = @{@"fullName": _currentRegion.fullName,@"name": _currentRegion.name};
-        [[NSUserDefaults standardUserDefaults] setObject:regionDic forKey:@"CurrentRegion"];
-        [[NSUserDefaults standardUserDefaults] synchronize];
-        // Create all machines.
-        // Save the machines to a array to be used when creating the MachineLocation objects to ref.
-        NSMutableSet *machines = [NSMutableSet new];
-        [pinballData[@"machines"] enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-            NSDictionary *machineData = obj[@"machine"];
-            Machine *newMachine = [Machine createMachineWithData:machineData andContext:cdManager.privateObjectContext];
-            [machines addObject:newMachine];
-        }];
-        [cdManager.privateObjectContext save:nil];
-        // Add machines to region object.
-        [_currentRegion addMachines:machines];
-        // Create all locations
-        NSMutableSet *locations = [NSMutableSet new];
-        [pinballData[@"locations"] enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-            NSDictionary *location = obj[@"location"];
-            Location *newLocation = [Location createLocationWithData:location andContext:cdManager.privateObjectContext];
-            [location[@"machines"] enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-                NSDictionary *machineLocation = obj[@"machine"];
-                NSPredicate *pred = [NSPredicate predicateWithFormat:@"machineId = %@" argumentArray:@[machineLocation[@"id"]]];
-                NSSet *found = [machines filteredSetUsingPredicate:pred];
-                
-                MachineLocation *locMachine = [MachineLocation createMachineLocationWithData:machineLocation andContext:cdManager.privateObjectContext];
-                locMachine.machine = [found anyObject];
-                locMachine.location = newLocation;
-                [newLocation addMachinesObject:locMachine];
-            }];
-            [locations addObject:newLocation];
-            [_currentRegion addLocationsObject:newLocation];
-        }];
-        machines = nil;
-        [cdManager.privateObjectContext save:nil];
-        // Craete all events
-        [pinballData[@"events"] enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-            NSDictionary *event = obj[@"event"];
-            Event *newEvent = [Event createEventWithData:event andContext:cdManager.privateObjectContext];
-            if (![event[@"locationNo"] isKindOfClass:[NSNull class]]){
-                NSPredicate *pred = [NSPredicate predicateWithFormat:@"locationId = %@" argumentArray:@[event[@"locationNo"]]];
-                NSSet *found = [locations filteredSetUsingPredicate:pred];
-                newEvent.location = [found anyObject];
-                newEvent.region = newEvent.location.region;
-            }
-        }];
-        [cdManager.privateObjectContext save:nil];
-    });
 }
 #pragma mark - Regions listing
 - (void)allRegions:(void (^)(NSArray *regions))regionBlock{
@@ -157,10 +100,6 @@ typedef NS_ENUM(NSInteger, PBMDataAPI) {
     [[NSOperationQueue mainQueue] addOperation:regionAPI];
 }
 #pragma mark - Region Data Load
-- (void)changeToRegion:(Region *)region{
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"UpdatingRegion" object:nil];
-    [self reloadRegionData:region];
-}
 - (void)refreshRegion{
 
     NSArray *apiOperations = @[[self requestForData:PBMDataAPILocations],[self requestForData:PBMDataAPIEvents]];
@@ -175,23 +114,9 @@ typedef NS_ENUM(NSInteger, PBMDataAPI) {
         __block NSMutableSet *createdLocations;
         [operations enumerateObjectsUsingBlock:^(AFHTTPRequestOperation *obj, NSUInteger idx, BOOL *stop) {
             if (idx == 0){
-                if (![_currentRegion.locationsEtag isEqualToString:obj.response.allHeaderFields[@"Etag"]]){
-                    NSLog(@"New Locations Etag");
-                    createdLocations = [self importLocations:obj.responseObject withMachines:machines];
-                    _currentRegion.locationsEtag = obj.response.allHeaderFields[@"Etag"];
-                    [[CoreDataManager sharedInstance] saveContext];
-                }else{
-                    NSLog(@"Locations Same Etag");
-                }
+                createdLocations = [self importLocationsWithRequest:obj andMachines:machines];
             }else if (idx == 1){
-                if (![_currentRegion.eventsEtag isEqualToString:obj.response.allHeaderFields[@"Etag"]]){
-                    NSLog(@"New Events Etag");
-                    [self clearData:PBMDataAPIEvents forRegion:_currentRegion];
-                    [self importEvents:obj.responseObject withLocations:createdLocations];
-                    _currentRegion.eventsEtag = obj.response.allHeaderFields[@"Etag"];
-                }else{
-                    NSLog(@"Events Same Etag");
-                }
+                [self importEventsWithRequest:obj andLocations:createdLocations];
             }
             [[CoreDataManager sharedInstance] saveContext];
         }];
@@ -199,7 +124,9 @@ typedef NS_ENUM(NSInteger, PBMDataAPI) {
     }];
     [[NSOperationQueue mainQueue] addOperations:api waitUntilFinished:NO];
 }
-- (void)reloadRegionData:(Region *)region{
+- (void)loadRegionData:(Region *)region{
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"UpdatingRegion" object:nil];
+
     [[NSUserDefaults standardUserDefaults] setObject:@{@"name": region.name} forKey:@"CurrentRegion"];
     [[NSUserDefaults standardUserDefaults] synchronize];
     
@@ -218,25 +145,11 @@ typedef NS_ENUM(NSInteger, PBMDataAPI) {
         [operations enumerateObjectsUsingBlock:^(AFHTTPRequestOperation *obj, NSUInteger idx, BOOL *stop) {
             NSLog(@"%@",obj.request.URL);
             if (idx == 0){
-                createdMachines = [self importMachines:obj.responseObject];
+                createdMachines = [self importMachinesWithRequest:obj];
             }else if (idx == 1){
-                if (![_currentRegion.locationsEtag isEqualToString:obj.response.allHeaderFields[@"Etag"]]){
-                    NSLog(@"New Locations Etag");
-                    [self clearData:PBMDataAPILocations forRegion:_currentRegion];
-                    createdLocations = [self importLocations:obj.responseObject withMachines:createdMachines];
-                    _currentRegion.locationsEtag = obj.response.allHeaderFields[@"Etag"];
-                }else{
-                    NSLog(@"Locations Same Etag");
-                }
+                createdLocations = [self importLocationsWithRequest:obj andMachines:createdMachines];
             }else if (idx == 2){
-                if (![_currentRegion.eventsEtag isEqualToString:obj.response.allHeaderFields[@"Etag"]]){
-                    NSLog(@"New Events Etag");
-                    [self clearData:PBMDataAPIEvents forRegion:_currentRegion];
-                    [self importEvents:obj.responseObject withLocations:createdLocations];
-                    _currentRegion.eventsEtag = obj.response.allHeaderFields[@"Etag"];
-                }else{
-                    NSLog(@"Events Same Etag");
-                }
+                [self importEventsWithRequest:obj andLocations:createdLocations];
             }
             [[CoreDataManager sharedInstance] saveContext];
         }];
@@ -254,15 +167,12 @@ typedef NS_ENUM(NSInteger, PBMDataAPI) {
         case PBMDataAPIMachines:
             apiURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@api/v1/machines.json",apiRootURL]];
             break;
-            
         case PBMDataAPILocationTypes:
             apiURL = [NSURL URLWithString:[NSString stringWithFormat:@"api/v1/location_types.json"]];
             break;
-            
         case PBMDataAPILocations:
             apiURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@api/v1/region/%@/locations.json",apiRootURL,_currentRegion.name]];
             break;
-            
         case PBMDataAPIEvents:
             apiURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@api/v1/region/%@/events.json",apiRootURL,_currentRegion.name]];
             break;
@@ -284,14 +194,14 @@ typedef NS_ENUM(NSInteger, PBMDataAPI) {
     return regions;
 }
 // Will look for a region with the given name. If one does not exist it will create it and return it.
-- (Region *)regionWithData:(NSDictionary *)region{
+- (Region *)regionWithData:(NSDictionary *)region shouldCreate:(BOOL)create{
     CoreDataManager *cdManager = [CoreDataManager sharedInstance];
     NSFetchRequest *regionRequest = [self fetchRequestForModel:@"Region"];
     regionRequest.predicate = [NSPredicate predicateWithFormat:@"name = %@",region[@"name"]];
     regionRequest.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES]];
     NSArray *foundRegions = [cdManager.managedObjectContext executeFetchRequest:regionRequest error:nil];
     Region *foundRegion;
-    if (foundRegions.count == 0){
+    if (foundRegions.count == 0 && create){
         // Create region
         NSLog(@"Creating New Region");
         foundRegion = [Region createRegionWithData:region andContext:cdManager.managedObjectContext];
@@ -315,7 +225,8 @@ typedef NS_ENUM(NSInteger, PBMDataAPI) {
     [cdManager saveContext];
 }
 #pragma mark - CoreData import
-- (NSMutableSet *)importMachines:(NSArray *)machineData{
+- (NSMutableSet *)importMachinesWithRequest:(AFHTTPRequestOperation *)request{
+    
     CoreDataManager *cdManager = [CoreDataManager sharedInstance];
     // All current machine ids.
     NSFetchRequest *machineFetch = [self fetchRequestForModel:@"Machine"];
@@ -329,7 +240,7 @@ typedef NS_ENUM(NSInteger, PBMDataAPI) {
     // Create all machines.
     // Save the machines to a array to be used when creating the MachineLocation objects to ref.
     NSMutableSet *machines = [NSMutableSet new];
-    [machineData enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+    [request.responseObject enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
         NSDictionary *machineData = obj;
         if (![existingMachineIds containsObject:machineData[@"id"]]){
             Machine *newMachine = [Machine createMachineWithData:machineData andContext:cdManager.managedObjectContext];
@@ -338,45 +249,64 @@ typedef NS_ENUM(NSInteger, PBMDataAPI) {
     }];
     [cdManager saveContext];
     return machines;
+
 }
-- (NSMutableSet *)importLocations:(NSArray *)locations withMachines:(NSMutableSet *)machines{
-    CoreDataManager *cdManager = [CoreDataManager sharedInstance];
-    NSMutableSet *allLocations = [NSMutableSet new];
-    [locations enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-        NSDictionary *location = obj;
-        Location *newLocation = [Location createLocationWithData:location andContext:cdManager.managedObjectContext];
-        [location[@"machines"] enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-            NSDictionary *machineLocation = obj;
-            NSPredicate *pred = [NSPredicate predicateWithFormat:@"machineId = %@" argumentArray:@[machineLocation[@"id"]]];
-            NSSet *found = [machines filteredSetUsingPredicate:pred];
-            
-            MachineLocation *locMachine = [MachineLocation createMachineLocationWithData:machineLocation andContext:cdManager.managedObjectContext];
-            locMachine.machine = [found anyObject];
-            locMachine.location = newLocation;
-            [newLocation addMachinesObject:locMachine];
-        }];
-        [allLocations addObject:newLocation];
+- (NSMutableSet *)importLocationsWithRequest:(AFHTTPRequestOperation *)request andMachines:(NSMutableSet *)machines{
+    if (![_currentRegion.locationsEtag isEqualToString:request.response.allHeaderFields[@"Etag"]]){
+        NSLog(@"New Locations Etag");
+        [self clearData:PBMDataAPILocations forRegion:_currentRegion];
         
-        [_currentRegion addLocationsObject:newLocation];
-    }];
-    machines = nil;
-    [cdManager saveContext];
-    return allLocations;
+        CoreDataManager *cdManager = [CoreDataManager sharedInstance];
+        NSMutableSet *allLocations = [NSMutableSet new];
+        
+        [request.responseObject enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+            NSDictionary *location = obj;
+            Location *newLocation = [Location createLocationWithData:location andContext:cdManager.managedObjectContext];
+            [location[@"machines"] enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+                NSDictionary *machineLocation = obj;
+                NSPredicate *pred = [NSPredicate predicateWithFormat:@"machineId = %@" argumentArray:@[machineLocation[@"id"]]];
+                NSSet *found = [machines filteredSetUsingPredicate:pred];
+                
+                MachineLocation *locMachine = [MachineLocation createMachineLocationWithData:machineLocation andContext:cdManager.managedObjectContext];
+                locMachine.machine = [found anyObject];
+                locMachine.location = newLocation;
+                [newLocation addMachinesObject:locMachine];
+            }];
+            [allLocations addObject:newLocation];
+            
+            [_currentRegion addLocationsObject:newLocation];
+        }];
+        machines = nil;
+        _currentRegion.locationsEtag = request.response.allHeaderFields[@"Etag"];
+        [cdManager saveContext];
+        return allLocations;
+    }else{
+        NSLog(@"Locations Same Etag");
+        return nil;
+    }
 }
-- (void)importEvents:(NSArray *)events withLocations:(NSMutableSet *)locations{
-    CoreDataManager *cdManager = [CoreDataManager sharedInstance];
-    [events enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-        NSDictionary *event = obj;
-        Event *newEvent = [Event createEventWithData:event andContext:cdManager.managedObjectContext];
-        if (![event[@"locationNo"] isKindOfClass:[NSNull class]]){
-            NSPredicate *pred = [NSPredicate predicateWithFormat:@"locationId = %@" argumentArray:@[event[@"location_id"]]];
-            NSSet *found = [locations filteredSetUsingPredicate:pred];
-            newEvent.location = [found anyObject];
-            newEvent.region = newEvent.location.region;
-        }
-        [_currentRegion addEventsObject:newEvent];
-    }];
-    [cdManager saveContext];
+- (void)importEventsWithRequest:(AFHTTPRequestOperation *)request andLocations:(NSMutableSet *)locations{
+    if (![_currentRegion.eventsEtag isEqualToString:request.response.allHeaderFields[@"Etag"]]){
+        NSLog(@"New Events Etag");
+        [self clearData:PBMDataAPIEvents forRegion:_currentRegion];
+
+        CoreDataManager *cdManager = [CoreDataManager sharedInstance];
+        [request.responseObject enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+            NSDictionary *event = obj;
+            Event *newEvent = [Event createEventWithData:event andContext:cdManager.managedObjectContext];
+            if (![event[@"locationNo"] isKindOfClass:[NSNull class]]){
+                NSPredicate *pred = [NSPredicate predicateWithFormat:@"locationId = %@" argumentArray:@[event[@"location_id"]]];
+                NSSet *found = [locations filteredSetUsingPredicate:pred];
+                newEvent.location = [found anyObject];
+                newEvent.region = newEvent.location.region;
+            }
+            [_currentRegion addEventsObject:newEvent];
+        }];
+        _currentRegion.eventsEtag = request.response.allHeaderFields[@"Etag"];
+        [cdManager saveContext];
+    }else{
+        NSLog(@"Events Same Etag");
+    }
 }
 #pragma mark - Object Fetch Requests
 - (NSFetchRequest *)fetchRequestForModel:(NSString *)model{
