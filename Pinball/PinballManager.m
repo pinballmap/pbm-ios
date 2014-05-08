@@ -198,13 +198,14 @@ typedef NS_ENUM(NSInteger, PBMDataAPI) {
     [[NSUserDefaults standardUserDefaults] setObject:region forKey:@"CurrentRegion"];
     [[NSUserDefaults standardUserDefaults] synchronize];
     
-    CoreDataManager *cdManager = [CoreDataManager sharedInstance];
-    [cdManager resetStore];
-    // Create region.
-    _currentRegion = [Region createRegionWithData:region andContext:cdManager.managedObjectContext];
-    [cdManager saveContext];
+    // Find region.
+    _currentRegion = [self regionWithData:region];
+    NSLog(@"Locations: %i",_currentRegion.locations.count);
+    NSLog(@"Events: %i",_currentRegion.events.count);
+    [self clearDataForRegion:_currentRegion];
+    NSLog(@"Locations: %i",_currentRegion.locations.count);
+    NSLog(@"Events: %i",_currentRegion.events.count);
 
-    
     NSArray *apiOperations = @[[self requestForData:PBMDataAPIMachines],[self requestForData:PBMDataAPILocations],[self requestForData:PBMDataAPIEvents]];
     
     
@@ -217,11 +218,8 @@ typedef NS_ENUM(NSInteger, PBMDataAPI) {
         [operations enumerateObjectsUsingBlock:^(AFHTTPRequestOperation *obj, NSUInteger idx, BOOL *stop) {
             NSLog(@"%@",obj.request.URL);
             if (idx == 0){
-                // Machines Data
-                NSLog(@"%@",obj.responseObject);
                 createdMachines = [self importMachines:obj.responseObject];
             }else if (idx == 1){
-                // Loction
                 createdLocations = [self importLocations:obj.responseObject withMachines:createdMachines];
             }else if (idx == 2){
                 [self importEvents:obj.responseObject withLocations:createdLocations];
@@ -261,19 +259,58 @@ typedef NS_ENUM(NSInteger, PBMDataAPI) {
     apiOperation.responseSerializer = [AFJSONResponseSerializer serializer];
     return apiOperation;
 }
+#pragma mark - Region Model Interaction
+// Will look for a region with the given name. If one does not exist it will create it and return it.
+- (Region *)regionWithData:(NSDictionary *)region{
+    CoreDataManager *cdManager = [CoreDataManager sharedInstance];
+    NSFetchRequest *regionRequest = [self fetchRequestForModel:@"Region"];
+    regionRequest.predicate = [NSPredicate predicateWithFormat:@"name = %@",region[@"name"]];
+    regionRequest.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES]];
+    NSArray *foundRegions = [cdManager.managedObjectContext executeFetchRequest:regionRequest error:nil];
+    Region *foundRegion;
+    if (foundRegions.count == 0){
+        // Create region
+        NSLog(@"Creating New Region");
+        foundRegion = [Region createRegionWithData:region andContext:cdManager.managedObjectContext];
+        [cdManager saveContext];
+    }else{
+        foundRegion = [foundRegions lastObject];
+    }
+    return foundRegion;
+}
+- (void)clearDataForRegion:(Region *)region{
+    CoreDataManager *cdManager = [CoreDataManager sharedInstance];
+    [region.locations enumerateObjectsUsingBlock:^(Location *obj, BOOL *stop) {
+        [cdManager.managedObjectContext deleteObject:obj];
+    }];
+    [region.events enumerateObjectsUsingBlock:^(Event *obj, BOOL *stop) {
+        [cdManager.managedObjectContext deleteObject:obj];
+    }];
+    [cdManager saveContext];
+}
 #pragma mark - CoreData import
 - (NSMutableSet *)importMachines:(NSArray *)machineData{
     CoreDataManager *cdManager = [CoreDataManager sharedInstance];
-
+    // All current machine ids.
+    NSFetchRequest *machineFetch = [self fetchRequestForModel:@"Machine"];
+    NSArray *machinesExisting = [[cdManager managedObjectContext] executeFetchRequest:machineFetch error:nil];
+    NSMutableArray *existingMachineIds = [NSMutableArray new];
+    [machinesExisting enumerateObjectsUsingBlock:^(Machine *obj, NSUInteger idx, BOOL *stop) {
+        [existingMachineIds addObject:obj.machineId];
+    }];
+    machinesExisting = nil;
+    machineFetch = nil;
     // Create all machines.
     // Save the machines to a array to be used when creating the MachineLocation objects to ref.
     NSMutableSet *machines = [NSMutableSet new];
     [machineData enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
         NSDictionary *machineData = obj;
-        Machine *newMachine = [Machine createMachineWithData:machineData andContext:cdManager.managedObjectContext];
-        [machines addObject:newMachine];
+        if (![existingMachineIds containsObject:machineData[@"id"]]){
+            Machine *newMachine = [Machine createMachineWithData:machineData andContext:cdManager.managedObjectContext];
+            [machines addObject:newMachine];
+        }
     }];
-    [cdManager.privateObjectContext save:nil];
+    [cdManager saveContext];
     return machines;
 }
 - (NSMutableSet *)importLocations:(NSArray *)locations withMachines:(NSMutableSet *)machines{
@@ -296,7 +333,7 @@ typedef NS_ENUM(NSInteger, PBMDataAPI) {
         [_currentRegion addLocationsObject:newLocation];
     }];
     machines = nil;
-    [cdManager.managedObjectContext save:nil];
+    [cdManager saveContext];
     return allLocations;
 }
 - (void)importEvents:(NSArray *)events withLocations:(NSMutableSet *)locations{
@@ -310,8 +347,16 @@ typedef NS_ENUM(NSInteger, PBMDataAPI) {
             newEvent.location = [found anyObject];
             newEvent.region = newEvent.location.region;
         }
+        [_currentRegion addEventsObject:newEvent];
     }];
-    [cdManager.managedObjectContext save:nil];
+    [cdManager saveContext];
+}
+#pragma mark - Object Fetch Requests
+- (NSFetchRequest *)fetchRequestForModel:(NSString *)model{
+    NSFetchRequest *modelFetch = [NSFetchRequest new];
+    modelFetch.entity = [NSEntityDescription entityForName:model inManagedObjectContext:[[CoreDataManager sharedInstance] managedObjectContext]];
+    
+    return modelFetch;
 }
 #pragma mark - Machines
 - (void)createNewMachine:(NSDictionary *)machineData withCompletion:(void (^)(NSDictionary *))completionBlock{
