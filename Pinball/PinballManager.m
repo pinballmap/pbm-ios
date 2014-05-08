@@ -10,12 +10,22 @@
 #import "NSFileManager+DocumentsDirectory.h"
 #import <AFNetworking.h>
 
-#define rootURL @"http://pinballmap.com/"
+static const NSString *apiRootURL = @"http://pinballmap.com/";
+
+typedef NS_ENUM(NSInteger, PBMDataAPI) {
+    PBMDataAPIRegions = 0,
+    PBMDataAPIMachines,
+    PBMDataAPILocationTypes,
+    PBMDataAPILocations,
+    PBMDataAPIEvents
+};
+
 
 @interface PinballManager () <CLLocationManagerDelegate>{
     NSURLSession *session;
     CLLocationManager *locationManager;
 }
++ (AFHTTPRequestOperation *)requestForData:(PBMDataAPI)apiType;
 
 @end
 
@@ -117,13 +127,14 @@
         [cdManager.privateObjectContext save:nil];
     });
 }
+#pragma mark - Regions listing
 - (void)allRegions:(void (^)(NSArray *regions))regionBlock{
     NSData *cacheData = [self regionCacheData];
     
     if (cacheData){
         regionBlock([self parseRegions:cacheData]);
     }else{
-        NSURL *regionURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@api/v1/regions.json",rootURL]];
+        NSURL *regionURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@api/v1/regions.json",apiRootURL]];
         NSURLSessionDataTask *regionData = [session dataTaskWithURL:regionURL completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
             if (data && !error){
                 dispatch_async(dispatch_get_main_queue(), ^{
@@ -156,35 +167,32 @@
 - (void)saveRegionCache:(NSData *)data{
     [data writeToFile:[NSString stringWithFormat:@"%@/regions.json",[NSFileManager documentsDirectory]] atomically:YES];
 }
+#pragma mark - Region Data Load
 - (void)changeToRegion:(NSDictionary *)region{
     [[NSNotificationCenter defaultCenter] postNotificationName:@"UpdatingRegion" object:nil];
     [self reloadRegionData:region];
-//    NSURL *regionURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@/%@/all_region_data.json",rootURL,region[@"name"]]];
-//    NSURLSessionDataTask *regionData = [session dataTaskWithURL:regionURL completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
-//        if (data){
-//            dispatch_async(dispatch_get_main_queue(), ^{
-//                NSDictionary *regionData = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:nil];
-//                [self importToCoreData:regionData[@"data"][@"region"]];
-//                NSLog(@"All done importing %@",regionData[@"data"][@"region"][@"fullName"]);
-//            });
-//        }
-//    }];
-//    [regionData resume];
 }
 - (void)refreshRegion{
-    NSDictionary *region = [[NSUserDefaults standardUserDefaults] objectForKey:@"CurrentRegion"];
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"UpdatingRegion" object:nil];
-    NSURL *regionURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@/%@/all_region_data.json",rootURL,region[@"name"]]];
-    NSURLSessionDataTask *regionData = [session dataTaskWithURL:regionURL completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
-        if (data){
-            dispatch_async(dispatch_get_main_queue(), ^{
-                NSDictionary *regionData = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:nil];
-                [self importToCoreData:regionData[@"data"][@"region"]];
-                NSLog(@"All done importing %@",regionData[@"data"][@"region"][@"fullName"]);
-            });
-        }
+    NSArray *apiOperations = @[[self requestForData:PBMDataAPILocations],[self requestForData:PBMDataAPIEvents]];
+    
+    NSArray *api = [AFURLConnectionOperation batchOfRequestOperations:apiOperations progressBlock:^(NSUInteger numberOfFinishedOperations, NSUInteger totalNumberOfOperations) {
+        NSLog(@"Completed %lu of %lu",(unsigned long)numberOfFinishedOperations,(unsigned long)totalNumberOfOperations);
+    } completionBlock:^(NSArray *operations) {
+        NSFetchRequest *stackRequest = [NSFetchRequest fetchRequestWithEntityName:@"Machine"];
+        stackRequest.predicate = nil;
+        stackRequest.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES]];
+        __block NSMutableSet *machines = [NSMutableSet setWithArray:[[[CoreDataManager sharedInstance] managedObjectContext] executeFetchRequest:stackRequest error:nil]];
+        __block NSMutableSet *createdLocations;
+        [operations enumerateObjectsUsingBlock:^(AFHTTPRequestOperation *obj, NSUInteger idx, BOOL *stop) {
+            if (idx == 0){
+                createdLocations = [self importLocations:obj.responseObject withMachines:machines];
+            }else if (idx == 1){
+                [self importEvents:obj.responseObject withLocations:createdLocations];
+            }
+        }];
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"RegionUpdate" object:nil];
     }];
-    [regionData resume];
+    [[NSOperationQueue mainQueue] addOperations:api waitUntilFinished:NO];
 }
 - (void)reloadRegionData:(NSDictionary *)region{
     [[NSUserDefaults standardUserDefaults] setObject:region forKey:@"CurrentRegion"];
@@ -195,21 +203,10 @@
     // Create region.
     _currentRegion = [Region createRegionWithData:region andContext:cdManager.managedObjectContext];
     [cdManager saveContext];
+
     
-    NSMutableArray *apiOperations = [NSMutableArray new];
+    NSArray *apiOperations = @[[self requestForData:PBMDataAPIMachines],[self requestForData:PBMDataAPILocations],[self requestForData:PBMDataAPIEvents]];
     
-    NSURLRequest *machineRequest = [NSURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@api/v1/machines.json",rootURL]]];
-    AFHTTPRequestOperation *machineOperation = [[AFHTTPRequestOperation alloc] initWithRequest:machineRequest];
-    machineOperation.responseSerializer = [AFJSONResponseSerializer serializer];
-    [apiOperations addObject:machineOperation];
-    NSURLRequest *locationRequests = [NSURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@api/v1/region/%@/locations.json",rootURL,region[@"name"]]]];
-    AFHTTPRequestOperation *locationsOperation = [[AFHTTPRequestOperation alloc] initWithRequest:locationRequests];
-    locationsOperation.responseSerializer = [AFJSONResponseSerializer serializer];
-    [apiOperations addObject:locationsOperation];
-    NSURLRequest *eventsRequest = [NSURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@api/v1/region/%@/events.json",rootURL,region[@"name"]]]];
-    AFHTTPRequestOperation *eventOperation = [[AFHTTPRequestOperation alloc] initWithRequest:eventsRequest];
-    eventOperation.responseSerializer = [AFJSONResponseSerializer serializer];
-    [apiOperations addObject:eventOperation];
     
     NSArray *api = [AFURLConnectionOperation batchOfRequestOperations:apiOperations progressBlock:^(NSUInteger numberOfFinishedOperations, NSUInteger totalNumberOfOperations) {
         NSLog(@"Completed %lu of %lu",(unsigned long)numberOfFinishedOperations,(unsigned long)totalNumberOfOperations);
@@ -234,6 +231,35 @@
     }];
     NSLog(@"Started");
     [[NSOperationQueue mainQueue] addOperations:api waitUntilFinished:NO];
+}
+- (AFHTTPRequestOperation *)requestForData:(PBMDataAPI)apiType{
+    NSURL *apiURL;
+    switch (apiType) {
+        case PBMDataAPIRegions:
+            apiURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@api/v1/regions.json",apiRootURL]];
+            break;
+        case PBMDataAPIMachines:
+            apiURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@api/v1/machines.json",apiRootURL]];
+            break;
+            
+        case PBMDataAPILocationTypes:
+            apiURL = [NSURL URLWithString:[NSString stringWithFormat:@"api/v1/location_types.json"]];
+            break;
+            
+        case PBMDataAPILocations:
+            apiURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@api/v1/region/%@/locations.json",apiRootURL,_currentRegion.name]];
+            break;
+            
+        case PBMDataAPIEvents:
+            apiURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@api/v1/region/%@/events.json",apiRootURL,_currentRegion.name]];
+            break;
+        default:
+            break;
+    }
+    NSURLRequest *apiRequest = [NSURLRequest requestWithURL:apiURL];
+    AFHTTPRequestOperation *apiOperation = [[AFHTTPRequestOperation alloc] initWithRequest:apiRequest];
+    apiOperation.responseSerializer = [AFJSONResponseSerializer serializer];
+    return apiOperation;
 }
 #pragma mark - CoreData import
 - (NSMutableSet *)importMachines:(NSArray *)machineData{
