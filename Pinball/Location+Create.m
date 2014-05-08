@@ -50,11 +50,7 @@
     }else{
         newLocation.locationZone = @"N/A";
     }
-    if (![data[@"numMachines"] isKindOfClass:[NSNull class]]){
-        newLocation.machineCount = data[@"numMachines"];
-    }else{
-        newLocation.machineCount = 0;
-    }
+    newLocation.machineCount = @([(NSArray *)data[@"machines"] count]);
     if (![data[@"description"] isKindOfClass:[NSNull class]] && [data[@"description"] length] > 0){
         newLocation.locationDescription = data[@"description"];
     }else{

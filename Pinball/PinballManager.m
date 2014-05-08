@@ -325,6 +325,7 @@ typedef NS_ENUM(NSInteger, PBMDataAPI) {
             [newLocation addMachinesObject:locMachine];
         }];
         [allLocations addObject:newLocation];
+        
         [_currentRegion addLocationsObject:newLocation];
     }];
     machines = nil;
