@@ -58,7 +58,7 @@
     self.navigationItem.title = [NSString stringWithFormat:@"%@ Locations",[[[PinballManager sharedInstance] currentRegion] fullName]];
     managedContext = [[CoreDataManager sharedInstance] managedObjectContext];
     NSFetchRequest *stackRequest = [NSFetchRequest fetchRequestWithEntityName:@"Location"];
-    stackRequest.predicate = nil;
+    stackRequest.predicate = [NSPredicate predicateWithFormat:@"region.name = %@",[[[PinballManager sharedInstance] currentRegion] name]];
     stackRequest.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"machineCount" ascending:NO]];
     fetchedResults = [[NSFetchedResultsController alloc] initWithFetchRequest:stackRequest
                                                          managedObjectContext:managedContext
@@ -75,13 +75,12 @@
 }
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText{
     NSFetchRequest *searchrequest = [NSFetchRequest fetchRequestWithEntityName:@"Location"];
-    searchrequest.predicate = [NSPredicate predicateWithFormat:@"name CONTAINS[cd] %@",searchText];
+    searchrequest.predicate = [NSPredicate predicateWithFormat:@"name CONTAINS[cd] %@ AND region.name = %@",searchText,[[[PinballManager sharedInstance] currentRegion] name]];
     [searchResults removeAllObjects];
     searchResults = nil;
     searchResults = [NSMutableArray new];
     NSError *error = nil;
     [searchResults addObjectsFromArray:[managedContext executeFetchRequest:searchrequest error:&error]];
-    NSLog(@"%@",error);
     [self.tableView reloadData];
 }
 - (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar{

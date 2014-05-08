@@ -40,7 +40,7 @@
     self.navigationItem.title = [NSString stringWithFormat:@"%@ Events",[[[PinballManager sharedInstance] currentRegion] fullName]];
     managedContext = [[CoreDataManager sharedInstance] managedObjectContext];
     NSFetchRequest *stackRequest = [NSFetchRequest fetchRequestWithEntityName:@"Event"];
-    stackRequest.predicate = nil;
+    stackRequest.predicate = [NSPredicate predicateWithFormat:@"region.name = %@",[[[PinballManager sharedInstance] currentRegion] name]];
     stackRequest.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"startDate" ascending:NO]];
     fetchedResults = [[NSFetchedResultsController alloc] initWithFetchRequest:stackRequest
                                                          managedObjectContext:managedContext
