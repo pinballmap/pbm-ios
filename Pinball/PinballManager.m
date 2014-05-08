@@ -238,16 +238,20 @@ typedef NS_ENUM(NSInteger, PBMDataAPI) {
     machinesExisting = nil;
     machineFetch = nil;
     // Create all machines.
-    // Save the machines to a array to be used when creating the MachineLocation objects to ref.
-    NSMutableSet *machines = [NSMutableSet new];
     [request.responseObject enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
         NSDictionary *machineData = obj;
         if (![existingMachineIds containsObject:machineData[@"id"]]){
-            Machine *newMachine = [Machine createMachineWithData:machineData andContext:cdManager.managedObjectContext];
-            [machines addObject:newMachine];
+            [Machine createMachineWithData:machineData andContext:cdManager.managedObjectContext];
         }
     }];
     [cdManager saveContext];
+    NSMutableSet *machines = [NSMutableSet new];
+    if (machines.count == 0){
+        // No new machines so pull them all from CoreData
+        NSFetchRequest *machineFetch = [self fetchRequestForModel:@"Machine"];
+        NSArray *machinesExisting = [[cdManager managedObjectContext] executeFetchRequest:machineFetch error:nil];
+        [machines addObjectsFromArray:machinesExisting];
+    }
     return machines;
 
 }
