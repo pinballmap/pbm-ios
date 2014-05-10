@@ -2,7 +2,7 @@
 //  Machine.h
 //  Pinball
 //
-//  Created by Frank Michael on 5/8/14.
+//  Created by Frank Michael on 5/10/14.
 //  Copyright (c) 2014 Frank Michael Sanchez. All rights reserved.
 //
 
@@ -17,6 +17,7 @@
 @property (nonatomic, retain) NSString * manufacturer;
 @property (nonatomic, retain) NSString * name;
 @property (nonatomic, retain) NSNumber * year;
+@property (nonatomic, retain) NSString * ipdbLink;
 @property (nonatomic, retain) NSOrderedSet *machineLocations;
 @end
 

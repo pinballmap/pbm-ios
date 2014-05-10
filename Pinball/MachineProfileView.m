@@ -11,6 +11,7 @@
 #import "InformationCell.h"
 #import "MapView.h"
 #import "LocationProfileView.h"
+#import <ReuseWebView.h>
 
 @interface MachineProfileView ()
 
@@ -40,7 +41,7 @@
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     if (section == 0){
-        return 2;
+        return 3;
     }else if (section == 1){
         return _currentMachine.machineLocations.count+1;
     }
@@ -82,6 +83,13 @@
         }else if (indexPath.row == 1){
             cell.infoLabel.text = @"Year";
             cell.dataLabel.text = [NSString stringWithFormat:@"%@",_currentMachine.year];
+        }else if (indexPath.row == 2){
+            cell.infoLabel.text = @"Internet Pinball Database";
+            if (![_currentMachine.ipdbLink isEqualToString:@"N/A"]){
+                cell.dataLabel.text = @"View";
+            }else{
+                cell.dataLabel.text = @"N/A";
+            }
         }
         return cell;
     }else if (indexPath.section == 1){
@@ -101,7 +109,13 @@
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    if (indexPath.section == 1){
+    if (indexPath.section == 0){
+        if (indexPath.row == 2){
+            ReuseWebView *webView = [[ReuseWebView alloc] initWithURL:[NSURL URLWithString:@"http://github.com/blog"]];
+            webView.webTitle = @"IPDB";
+            [self.navigationController presentViewController:[[UINavigationController alloc] initWithRootViewController:webView] animated:YES completion:nil];
+        }
+    }else if (indexPath.section == 1){
         if (indexPath.row == 0){
             MapView *map = [[[self.storyboard instantiateViewControllerWithIdentifier:@"MapView"] viewControllers] lastObject];
             map.currentMachine = _currentMachine;

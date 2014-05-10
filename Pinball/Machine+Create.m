@@ -27,6 +27,11 @@
     }else{
         newMachine.year = @1963;
     }
+    if (![data[@"ipdb_link"] isKindOfClass:[NSNull class]]){
+        newMachine.ipdbLink = data[@"ipdb_link"];
+    }else{
+        newMachine.ipdbLink = @"N/A";
+    }
     
     return newMachine;
 }

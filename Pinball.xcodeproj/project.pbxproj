@@ -44,7 +44,6 @@
 		DBB95931191BB19F00D0847D /* MachineLocation.m in Sources */ = {isa = PBXBuildFile; fileRef = DBB95930191BB19F00D0847D /* MachineLocation.m */; };
 		DBB95934191BB1A000D0847D /* Event.m in Sources */ = {isa = PBXBuildFile; fileRef = DBB95933191BB1A000D0847D /* Event.m */; };
 		DBB95937191BB1A000D0847D /* Region.m in Sources */ = {isa = PBXBuildFile; fileRef = DBB95936191BB1A000D0847D /* Region.m */; };
-		DBB9593A191BB1A000D0847D /* Machine.m in Sources */ = {isa = PBXBuildFile; fileRef = DBB95939191BB1A000D0847D /* Machine.m */; };
 		DBB9593D191BB1A000D0847D /* Location.m in Sources */ = {isa = PBXBuildFile; fileRef = DBB9593C191BB1A000D0847D /* Location.m */; };
 		DBD4F3E919067D690023D98B /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DBD4F3E819067D690023D98B /* MessageUI.framework */; };
 		DBE50374190D2BBA002BDE0D /* Location+UpdateDistance.m in Sources */ = {isa = PBXBuildFile; fileRef = DBE50373190D2BBA002BDE0D /* Location+UpdateDistance.m */; };
@@ -83,6 +82,7 @@
 		DBF06C8418F9840B00F92912 /* pinball@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DBF06C8218F9840B00F92912 /* pinball@2x.png */; };
 		DBF06C8718F984AF00F92912 /* MachinesView.m in Sources */ = {isa = PBXBuildFile; fileRef = DBF06C8618F984AF00F92912 /* MachinesView.m */; };
 		DBF711EF191E4DD3008656EE /* NewMachineView.m in Sources */ = {isa = PBXBuildFile; fileRef = DBF711EE191E4DD3008656EE /* NewMachineView.m */; };
+		DBF711F2191E59B8008656EE /* Machine.m in Sources */ = {isa = PBXBuildFile; fileRef = DBF711F1191E59B8008656EE /* Machine.m */; };
 		F5C71114D7FB464CA0CB927C /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 767AEE54A0274802B59CA4A5 /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -164,8 +164,6 @@
 		DBB95933191BB1A000D0847D /* Event.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Event.m; sourceTree = "<group>"; };
 		DBB95935191BB1A000D0847D /* Region.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Region.h; sourceTree = "<group>"; };
 		DBB95936191BB1A000D0847D /* Region.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Region.m; sourceTree = "<group>"; };
-		DBB95938191BB1A000D0847D /* Machine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Machine.h; sourceTree = "<group>"; };
-		DBB95939191BB1A000D0847D /* Machine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Machine.m; sourceTree = "<group>"; };
 		DBB9593B191BB1A000D0847D /* Location.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Location.h; sourceTree = "<group>"; };
 		DBB9593C191BB1A000D0847D /* Location.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Location.m; sourceTree = "<group>"; };
 		DBD4F3E819067D690023D98B /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
@@ -220,6 +218,8 @@
 		DBF06C8618F984AF00F92912 /* MachinesView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MachinesView.m; sourceTree = "<group>"; };
 		DBF711ED191E4DD3008656EE /* NewMachineView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewMachineView.h; sourceTree = "<group>"; };
 		DBF711EE191E4DD3008656EE /* NewMachineView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewMachineView.m; sourceTree = "<group>"; };
+		DBF711F0191E59B8008656EE /* Machine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Machine.h; sourceTree = "<group>"; };
+		DBF711F1191E59B8008656EE /* Machine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Machine.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -481,10 +481,10 @@
 				DBF06C3D18F9767400F92912 /* PinballModels.h */,
 				DBF06C3918F975B600F92912 /* Model Helpers */,
 				DBF06C0418F9707400F92912 /* Pinball.xcdatamodeld */,
+				DBF711F0191E59B8008656EE /* Machine.h */,
+				DBF711F1191E59B8008656EE /* Machine.m */,
 				DBB9593B191BB1A000D0847D /* Location.h */,
 				DBB9593C191BB1A000D0847D /* Location.m */,
-				DBB95938191BB1A000D0847D /* Machine.h */,
-				DBB95939191BB1A000D0847D /* Machine.m */,
 				DBB95935191BB1A000D0847D /* Region.h */,
 				DBB95936191BB1A000D0847D /* Region.m */,
 				DBB95932191BB1A000D0847D /* Event.h */,
@@ -672,6 +672,7 @@
 				DBF06C6D18F97E6300F92912 /* LocationsView.m in Sources */,
 				DB3B4EF91912BBEE0015407B /* Location+CellHelpers.m in Sources */,
 				DB52D2DA18FAE96C00BB56D8 /* MapView.m in Sources */,
+				DBF711F2191E59B8008656EE /* Machine.m in Sources */,
 				DB636D0D1903EEEB00576521 /* AboutView.m in Sources */,
 				DBB95934191BB1A000D0847D /* Event.m in Sources */,
 				DBF711EF191E4DD3008656EE /* NewMachineView.m in Sources */,
@@ -687,7 +688,6 @@
 				DB52D2FD18FB0AD300BB56D8 /* EventProfileView.m in Sources */,
 				DBB71B9C18FC4838007907DE /* SettingsView.m in Sources */,
 				DB52D2FA18FB09AF00BB56D8 /* NSDate+DateFormatting.m in Sources */,
-				DBB9593A191BB1A000D0847D /* Machine.m in Sources */,
 				DB99C3B11906FA4100AFDF0F /* MachinePickingView.m in Sources */,
 				DBB95937191BB1A000D0847D /* Region.m in Sources */,
 				DBF06C4318F9788900F92912 /* Location+Create.m in Sources */,

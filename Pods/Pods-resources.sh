@@ -41,6 +41,12 @@ install_resource()
       ;;
   esac
 }
+install_resource "FMSKit/Assets/765-arrow-left.png"
+install_resource "FMSKit/Assets/765-arrow-left@2x.png"
+install_resource "FMSKit/Assets/766-arrow-right.png"
+install_resource "FMSKit/Assets/766-arrow-right@2x.png"
+install_resource "FMSKit/Assets/782-compass.png"
+install_resource "FMSKit/Assets/782-compass@2x.png"
 
 rsync -avr --copy-links --no-relative --exclude '*/.svn/*' --files-from="$RESOURCES_TO_COPY" / "${CONFIGURATION_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}"
 if [[ "${ACTION}" == "install" ]]; then

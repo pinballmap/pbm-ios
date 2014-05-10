@@ -17,6 +17,7 @@
     [[UITabBar appearance] setTintColor:pinkColor];
     [[UISearchBar appearance] setTintColor:pinkColor];
     [[UINavigationBar appearance] setTintColor:pinkColor];
+    [[UIToolbar appearance] setTintColor:pinkColor];
 //    [[CoreDataManager sharedInstance] resetStore];
     return YES;
 }

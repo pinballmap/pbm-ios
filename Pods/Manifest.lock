@@ -18,11 +18,18 @@ PODS:
   - AFNetworking/UIKit (2.2.3):
     - AFNetworking/NSURLConnection
     - AFNetworking/NSURLSession
+  - FMSKit (0.3.2)
 
 DEPENDENCIES:
   - AFNetworking (~> 2.0)
+  - FMSKit (from `https://github.com/fmscode/FMSKit.git`)
+
+EXTERNAL SOURCES:
+  FMSKit:
+    :git: https://github.com/fmscode/FMSKit.git
 
 SPEC CHECKSUMS:
   AFNetworking: ae513199cca79e9d7af2708ccabe2ed075550c42
+  FMSKit: 1d6f92a467facd4da7232eece5fd629eebd46cee
 
 COCOAPODS: 0.32.1
