@@ -15,6 +15,7 @@
     BOOL isSearching;
     NSMutableArray *searchResults;
 }
+- (IBAction)addMachine:(id)sender;
 
 @end
 
@@ -27,13 +28,11 @@
     }
     return self;
 }
-
 - (void)viewDidLoad{
     [super viewDidLoad];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateRegion) name:@"RegionUpdate" object:nil];
     [self updateRegion];
 }
-
 - (void)didReceiveMemoryWarning{
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -50,6 +49,11 @@
         MachineProfileView *profileView = segue.destinationViewController;
         profileView.currentMachine = currentMachine;
     }
+}
+#pragma mark - Class Actions
+- (IBAction)addMachine:(id)sender{
+    UINavigationController *newMachine = [self.storyboard instantiateViewControllerWithIdentifier:@"NewMachineView"];
+    [self.navigationController presentViewController:newMachine animated:YES completion:nil];
 }
 #pragma mark - Region Update
 - (void)updateRegion{
