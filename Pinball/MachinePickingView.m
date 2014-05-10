@@ -139,9 +139,8 @@
     }else{
         currentMachine = [fetchedResults objectAtIndexPath:indexPath];
     }
-    NSString *mainString = currentMachine.name;
     
-    CGRect stringSize = [mainString boundingRectWithSize:CGSizeMake(defaultWidth, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName: [UIFont systemFontOfSize:18]} context:nil];
+    CGRect stringSize = [currentMachine.machineTitle boundingRectWithSize:CGSizeMake(defaultWidth, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin context:nil];
     if (stringSize.size.height <= 44){
         return 44;
     }
@@ -165,7 +164,7 @@
     }else{
         cell.accessoryType = UITableViewCellAccessoryNone;
     }
-    cell.textLabel.text = currentMachine.name;
+    cell.textLabel.attributedText = currentMachine.machineTitle;
     return cell;
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
