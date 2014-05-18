@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="5064" systemVersion="13C1021" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="5064" systemVersion="13D65" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
     <entity name="Event" representedClassName="Event" syncable="YES">
         <attribute name="categoryNo" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
         <attribute name="eventDescription" optional="YES" attributeType="String" syncable="YES"/>
@@ -24,6 +24,7 @@
         <attribute name="phone" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="state" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="street" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="website" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="zip" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="zoneNo" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
         <relationship name="events" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="Event" inverseName="location" inverseEntity="Event" syncable="YES"/>
@@ -57,7 +58,7 @@
     </entity>
     <elements>
         <element name="Event" positionX="-2529" positionY="-720" width="128" height="163"/>
-        <element name="Location" positionX="-2250" positionY="-702" width="128" height="313"/>
+        <element name="Location" positionX="-2250" positionY="-702" width="128" height="328"/>
         <element name="Machine" positionX="-2808" positionY="-603" width="128" height="133"/>
         <element name="MachineLocation" positionX="-2504" positionY="-490" width="128" height="103"/>
         <element name="Region" positionX="-2520" positionY="-949" width="128" height="178"/>

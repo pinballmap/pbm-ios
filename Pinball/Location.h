@@ -2,7 +2,7 @@
 //  Location.h
 //  Pinball
 //
-//  Created by Frank Michael on 5/8/14.
+//  Created by Frank Michael on 5/18/14.
 //  Copyright (c) 2014 Frank Michael Sanchez. All rights reserved.
 //
 
@@ -28,6 +28,7 @@
 @property (nonatomic, retain) NSString * street;
 @property (nonatomic, retain) NSString * zip;
 @property (nonatomic, retain) NSNumber * zoneNo;
+@property (nonatomic, retain) NSString * website;
 @property (nonatomic, retain) NSOrderedSet *events;
 @property (nonatomic, retain) NSSet *machines;
 @property (nonatomic, retain) Region *region;

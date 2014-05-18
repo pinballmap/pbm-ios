@@ -19,6 +19,7 @@
 #import "InputCell.h"
 #import "MachineProfileView.h"
 #import "TextEditorView.h"
+#import <ReuseWebView.h>
 
 @interface LocationProfileView () <TextEditorDelegate> {
     NSArray *machines;
@@ -92,7 +93,7 @@
         return 1;
     }else{
         if (dataSetSeg.selectedSegmentIndex == 0){
-            return 3;
+            return 4;
         }else if (dataSetSeg.selectedSegmentIndex == 1){
             return machines.count;
         }
@@ -127,6 +128,8 @@
                 detailText = _currentLocation.fullAddress;
             }else if (indexPath.row == 2){
                 detailText = _currentLocation.locationDescription;
+            }else if (indexPath.row == 3){
+                detailText = _currentLocation.website;
             }
 
             CGRect textLabel = [detailText boundingRectWithSize:CGSizeMake(280, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName: [UIFont systemFontOfSize:17]} context:nil];
@@ -204,6 +207,9 @@
             }else if (indexPath.row == 2){
                 cell.infoLabel.text = @"Description";
                 cell.dataLabel.text = _currentLocation.locationDescription;
+            }else  if (indexPath.row == 3){
+                cell.infoLabel.text = @"Website";
+                cell.dataLabel.text = _currentLocation.website;
             }
             return cell;
         }else if (dataSetSeg.selectedSegmentIndex == 1){
@@ -256,6 +262,17 @@
                     editor.textContent  =_currentLocation.locationDescription;
                 }
                 [self.navigationController presentViewController:editor.parentViewController animated:YES completion:nil];
+            }else if (indexPath.row == 3){
+                if (_currentLocation.website.length > 0 && ![_currentLocation.website isEqualToString:@"Tap to edit"]){
+                    ReuseWebView *webView = [[ReuseWebView alloc] initWithURL:[NSURL URLWithString:_currentLocation.website]];
+                    webView.webTitle = _currentLocation.name;
+                    [self.navigationController presentViewController:[[UINavigationController alloc] initWithRootViewController:webView] animated:YES completion:nil];
+                }else{
+                    TextEditorView *editor = [[[self.storyboard instantiateViewControllerWithIdentifier:@"TextEditorView"] viewControllers] lastObject];
+                    editor.delegate = self;
+                    editor.editorTitle = @"Location Website";
+                    [self.navigationController presentViewController:editor.parentViewController animated:YES completion:nil];
+                }
             }
         }else if (dataSetSeg.selectedSegmentIndex == 1){
             MachineConditionView *vc = (MachineConditionView *)[[[self.storyboard instantiateViewControllerWithIdentifier:@"MachineCondition"] viewControllers] lastObject];

@@ -2,7 +2,7 @@
 //  Location.m
 //  Pinball
 //
-//  Created by Frank Michael on 5/8/14.
+//  Created by Frank Michael on 5/18/14.
 //  Copyright (c) 2014 Frank Michael Sanchez. All rights reserved.
 //
 
@@ -29,6 +29,7 @@
 @dynamic street;
 @dynamic zip;
 @dynamic zoneNo;
+@dynamic website;
 @dynamic events;
 @dynamic machines;
 @dynamic region;
