@@ -11,9 +11,11 @@
 #import "UIAlertView+Application.h"
 #import "MachinePickingView.h"
 
-@interface NewMachineLocationView () <PickingDelegate>{
+@interface NewMachineLocationView () <PickingDelegate,UITextViewDelegate>{
     IBOutlet UILabel *machineName;
     IBOutlet UILabel *locationName;
+    IBOutlet UITextView *machineCondition;
+    Machine *pickedMachine;
 }
 - (IBAction)saveMachine:(id)sender;
 - (IBAction)cancelMachine:(id)sender;
@@ -53,7 +55,7 @@
 }
 #pragma mark - Machine Picking View Delegate
 - (void)pickedMachines:(NSArray *)machines{
-    Machine *pickedMachine = [machines lastObject];
+    pickedMachine = [machines lastObject];
     machineName.text = pickedMachine.name;
 }
 #pragma mark - TableView Delegate
@@ -66,11 +68,17 @@
         [self.navigationController presentViewController:pickingView.parentViewController animated:YES completion:nil];
     }
 }
+#pragma mark - TextView delegate
+- (void)textViewDidBeginEditing:(UITextView *)textView{
+    if ([textView.text isEqualToString:@"Condition"]){
+        textView.text = @"";
+    }
+}
 #pragma mark - Actions
 - (IBAction)saveMachine:(id)sender{
     if (_location && machineName.text.length > 0){
         #pragma message("TODO: API Interaction for adding machines.")
-        NSDictionary *machine = @{@"name": machineName.text,@"location": _location};
+        NSDictionary *machine = @{@"name": pickedMachine.machineId,@"location": _location.locationId,@"condition": machineCondition.text};
         NSLog(@"%@",machine);
         [self dismissViewControllerAnimated:YES completion:nil];
     }else{

@@ -189,12 +189,32 @@
                                             </subviews>
                                         </tableViewCellContentView>
                                     </tableViewCell>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="106" id="hTg-XM-aB9">
+                                        <rect key="frame" x="0.0" y="163" width="320" height="106"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="hTg-XM-aB9" id="xaX-54-rnN">
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="105"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" scrollEnabled="NO" text="Condition" translatesAutoresizingMaskIntoConstraints="NO" id="bcm-Yy-hjD">
+                                                    <rect key="frame" x="11" y="5" width="299" height="95"/>
+                                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                    <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                                    <connections>
+                                                        <outlet property="delegate" destination="emT-5L-4bB" id="aJn-vS-jbS"/>
+                                                    </connections>
+                                                </textView>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
                                 </cells>
                             </tableViewSection>
                             <tableViewSection headerTitle="Location" id="tzB-MI-lCm">
                                 <cells>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="SLI-IT-8ek" style="IBUITableViewCellStyleDefault" id="Lrb-L1-LyR">
-                                        <rect key="frame" x="0.0" y="211" width="320" height="44"/>
+                                        <rect key="frame" x="0.0" y="317" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Lrb-L1-LyR" id="cvZ-ky-bns">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
@@ -232,6 +252,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="locationName" destination="SLI-IT-8ek" id="sBf-rc-uUG"/>
+                        <outlet property="machineCondition" destination="bcm-Yy-hjD" id="KQt-Ir-OxG"/>
                         <outlet property="machineName" destination="qMS-Kk-gXk" id="Rkh-rL-WuU"/>
                     </connections>
                 </tableViewController>
