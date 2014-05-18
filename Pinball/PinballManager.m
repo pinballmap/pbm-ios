@@ -85,7 +85,7 @@ typedef NS_ENUM(NSInteger, PBMDataAPI) {
     AFHTTPRequestOperation *regionAPI = [[AFHTTPRequestOperation alloc] initWithRequest:regionRequest];
     regionAPI.responseSerializer = [AFJSONResponseSerializer serializer];
     [regionAPI setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
-        NSArray *regions = operation.responseObject;
+        NSArray *regions = operation.responseObject[@"regions"];
         [regions enumerateObjectsUsingBlock:^(NSDictionary *obj, NSUInteger idx, BOOL *stop) {
             if (![regionIds containsObject:obj[@"id"]]){
                 [Region createRegionWithData:obj andContext:[[CoreDataManager sharedInstance] managedObjectContext]];
@@ -95,7 +95,7 @@ typedef NS_ENUM(NSInteger, PBMDataAPI) {
         NSLog(@"New Region Count: %i",[self coreDataRegions].count);
         regionBlock([self coreDataRegions]);
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        
+        NSLog(@"%@",error);
     }];
     [[NSOperationQueue mainQueue] addOperation:regionAPI];
 }
@@ -238,7 +238,7 @@ typedef NS_ENUM(NSInteger, PBMDataAPI) {
     machinesExisting = nil;
     machineFetch = nil;
     // Create all machines.
-    [request.responseObject enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+    [request.responseObject[@"machines"] enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
         NSDictionary *machineData = obj;
         if (![existingMachineIds containsObject:machineData[@"id"]]){
             [Machine createMachineWithData:machineData andContext:cdManager.managedObjectContext];
@@ -263,12 +263,12 @@ typedef NS_ENUM(NSInteger, PBMDataAPI) {
         CoreDataManager *cdManager = [CoreDataManager sharedInstance];
         NSMutableSet *allLocations = [NSMutableSet new];
         
-        [request.responseObject enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+        [request.responseObject[@"locations"] enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
             NSDictionary *location = obj;
             Location *newLocation = [Location createLocationWithData:location andContext:cdManager.managedObjectContext];
-            [location[@"machines"] enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+            [location[@"location_machine_xrefs"] enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
                 NSDictionary *machineLocation = obj;
-                NSPredicate *pred = [NSPredicate predicateWithFormat:@"machineId = %@" argumentArray:@[machineLocation[@"id"]]];
+                NSPredicate *pred = [NSPredicate predicateWithFormat:@"machineId = %@" argumentArray:@[machineLocation[@"machine_id"]]];
                 NSSet *found = [machines filteredSetUsingPredicate:pred];
                 
                 MachineLocation *locMachine = [MachineLocation createMachineLocationWithData:machineLocation andContext:cdManager.managedObjectContext];
@@ -277,7 +277,7 @@ typedef NS_ENUM(NSInteger, PBMDataAPI) {
                 [newLocation addMachinesObject:locMachine];
             }];
             [allLocations addObject:newLocation];
-            
+            newLocation.machineCount = @(newLocation.machines.count);
             [_currentRegion addLocationsObject:newLocation];
         }];
         machines = nil;
@@ -295,7 +295,7 @@ typedef NS_ENUM(NSInteger, PBMDataAPI) {
         [self clearData:PBMDataAPIEvents forRegion:_currentRegion];
 
         CoreDataManager *cdManager = [CoreDataManager sharedInstance];
-        [request.responseObject enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+        [request.responseObject[@"events"] enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
             NSDictionary *event = obj;
             Event *newEvent = [Event createEventWithData:event andContext:cdManager.managedObjectContext];
             if (![event[@"locationNo"] isKindOfClass:[NSNull class]]){
