@@ -323,6 +323,16 @@ typedef NS_ENUM(NSInteger, PBMDataAPI) {
 - (void)createNewMachine:(NSDictionary *)machineData withCompletion:(void (^)(NSDictionary *))completionBlock{
     
 }
+- (void)createNewMachineLocation:(NSDictionary *)machineData withCompletion:(void (^)(NSDictionary *))completionBlock{
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    manager.requestSerializer = [AFJSONRequestSerializer serializer];
+    [manager POST:[NSString stringWithFormat:@"%@api/v1/location_machine_xrefs.json",apiRootURL] parameters:machineData success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        [self refreshRegion];
+        completionBlock(responseObject);
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"%@",error);
+    }];
+}
 #pragma mark - CLLocationManager Delegate
 - (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations{
     NSLog(@"Location updated.");

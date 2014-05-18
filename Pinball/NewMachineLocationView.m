@@ -78,9 +78,12 @@
 - (IBAction)saveMachine:(id)sender{
     if (_location && machineName.text.length > 0){
         #pragma message("TODO: API Interaction for adding machines.")
-        NSDictionary *machine = @{@"name": pickedMachine.machineId,@"location": _location.locationId,@"condition": machineCondition.text};
-        NSLog(@"%@",machine);
-        [self dismissViewControllerAnimated:YES completion:nil];
+        NSDictionary *machine = @{@"machine_id": pickedMachine.machineId,@"location_id": _location.locationId,@"condition": machineCondition.text};
+        [[PinballManager sharedInstance] createNewMachineLocation:machine withCompletion:^(NSDictionary *status) {
+            NSLog(@"%@",status);
+            NSLog(@"%@",machine);
+            [self dismissViewControllerAnimated:YES completion:nil];
+        }];
     }else{
         if (machineName.text.length == 0){
             [UIAlertView simpleApplicationAlertWithMessage:@"You must enter a machine name." cancelButton:@"Ok"];

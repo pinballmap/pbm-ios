@@ -22,4 +22,5 @@
 - (void)refreshRegion;
 // Machine Routes
 - (void)createNewMachine:(NSDictionary *)machineData withCompletion:(void(^)(NSDictionary *status))completionBlock;
+- (void)createNewMachineLocation:(NSDictionary *)machineData withCompletion:(void(^)(NSDictionary *status))completionBlock;
 @end
