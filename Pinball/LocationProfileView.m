@@ -20,10 +20,18 @@
 #import "MachineProfileView.h"
 #import "TextEditorView.h"
 #import <ReuseWebView.h>
+#import "UIAlertView+Application.h"
+
+typedef enum : NSUInteger {
+    LocationEditingTypePhone,
+    LocationEditingTypeDescription,
+    LocationEditingTypeWebsite,
+} LocationEditingType;
 
 @interface LocationProfileView () <TextEditorDelegate,NSFetchedResultsControllerDelegate> {
     NSFetchedResultsController *machinesFetch;
     UIImage *mapSnapshot;
+    LocationEditingType editingType;
 
     UISegmentedControl *dataSetSeg;
 }
@@ -60,12 +68,21 @@
     [dataSetSeg setSelectedSegmentIndex:0];
     
     self.tableView.allowsSelectionDuringEditing = YES;
-    UIBarButtonItem *addMachine = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addNewMachine:)];
-    self.navigationItem.rightBarButtonItem = addMachine;
+    [self setupRightBarButton];
 }
 - (void)didReceiveMemoryWarning{
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+#pragma mark - Class
+- (void)setupRightBarButton{
+    if (dataSetSeg.selectedSegmentIndex == 1){
+        UIBarButtonItem *addMachine = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addNewMachine:)];
+        self.navigationItem.rightBarButtonItem = addMachine;
+    }else{
+        UIBarButtonItem *editLocation = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemEdit target:self action:@selector(editLocation:)];
+        self.navigationItem.rightBarButtonItem = editLocation;
+    }
 }
 - (void)showMap{
     MapView *map = [[[self.storyboard instantiateViewControllerWithIdentifier:@"MapView"] viewControllers] lastObject];
@@ -77,6 +94,8 @@
     #pragma message("TODO: API interaction to save new location information")
 }
 - (IBAction)changeData:(id)sender{
+    [self.tableView setEditing:NO];
+    [self setupRightBarButton];
     [self.tableView reloadData];
 }
 - (IBAction)addNewMachine:(id)sender{
@@ -84,10 +103,58 @@
     vc.location = _currentLocation;
     [self.navigationController presentViewController:vc.parentViewController animated:YES completion:nil];
 }
+- (IBAction)editLocation:(id)sender{
+    BOOL editing = YES;
+    if (self.tableView.editing){
+        editing = NO;
+    }
+    [self.tableView setEditing:editing];
+    [self.tableView reloadData];
+}
 #pragma mark - TextEditor Delegate
 - (void)editorDidComplete:(NSString *)text{
-    NSLog(@"%@",text);
-#pragma message ("TODO: API interaction to update location description")
+    NSDictionary *editedData;
+    switch (editingType) {
+        case LocationEditingTypeWebsite:
+            editedData = @{@"website": text};
+            break;
+        case LocationEditingTypeDescription:
+            editedData = @{@"description": text};
+            break;
+        case LocationEditingTypePhone:
+#pragma message ("TODO: REGEX for phone number search")
+            editedData = @{@"phone": text};
+            break;
+        default:
+            break;
+    }
+    [[PinballManager sharedInstance] updateLocation:_currentLocation withData:editedData andCompletion:^(NSDictionary *status) {
+        if (status[@"errors"]){
+            if ([status[@"errors"] isKindOfClass:[NSArray class]]){
+                NSString *errors = [status[@"errors"] componentsJoinedByString:@","];
+                [UIAlertView simpleApplicationAlertWithMessage:errors cancelButton:@"Ok"];
+            }
+        }else{
+            switch (editingType) {
+                case LocationEditingTypeWebsite:
+                    _currentLocation.website = text;
+                    break;
+                case LocationEditingTypeDescription:
+                    _currentLocation.locationDescription = text;
+                    break;
+                case LocationEditingTypePhone:
+                    _currentLocation.phone = text;
+                    break;
+                default:
+                    break;
+            }
+            editingType = -1;
+            [[CoreDataManager sharedInstance] saveContext];
+            [self.tableView setEditing:NO];
+            [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:1] withRowAnimation:UITableViewRowAnimationAutomatic];
+        }
+    }];
+    
 }
 - (void)editorDidCancel{
     
@@ -211,6 +278,7 @@
         if (dataSetSeg.selectedSegmentIndex == 0){
             // Profile data with InfoCell
             InformationCell *cell = (InformationCell *)[tableView dequeueReusableCellWithIdentifier:@"InfoCell" forIndexPath:indexPath];
+            
             if (indexPath.row == 0){
                 cell.infoLabel.text = @"Phone";
                 cell.dataLabel.text = _currentLocation.phone;
@@ -256,13 +324,17 @@
     }else if (indexPath.section == 1){
         if (dataSetSeg.selectedSegmentIndex == 0){
             if (indexPath.row == 0){
-                if (_currentLocation.phone.length > 0 && ![_currentLocation.phone isEqualToString:@"Tap to edit"]){
+                if (_currentLocation.phone.length > 0 && ![_currentLocation.phone isEqualToString:@"Tap to edit"] && !self.tableView.editing){
                     NSString *contactsPhoneNumber = [@"tel:+" stringByAppendingString:_currentLocation.phone];
                     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:contactsPhoneNumber]];
-                }else if ([_currentLocation.phone isEqualToString:@"Tap to edit"]){
+                }else{
                     TextEditorView *editor = [[[self.storyboard instantiateViewControllerWithIdentifier:@"TextEditorView"] viewControllers] lastObject];
                     editor.delegate = self;
                     editor.editorTitle = @"Location Phone";
+                    if (![_currentLocation.phone isEqualToString:@"Tap to edit"]){
+                        editor.textContent = _currentLocation.phone;
+                    }
+                    editingType = LocationEditingTypePhone;
                     [self.navigationController presentViewController:editor.parentViewController animated:YES completion:nil];
                 }
             }else if (indexPath.row == 1){
@@ -271,12 +343,13 @@
                 TextEditorView *editor = [[[self.storyboard instantiateViewControllerWithIdentifier:@"TextEditorView"] viewControllers] lastObject];
                 editor.delegate = self;
                 editor.editorTitle = @"Location Description";
+                editingType = LocationEditingTypeDescription;
                 if (![_currentLocation.locationDescription isEqualToString:@"Tap to edit"]){
                     editor.textContent  =_currentLocation.locationDescription;
                 }
                 [self.navigationController presentViewController:editor.parentViewController animated:YES completion:nil];
             }else if (indexPath.row == 3){
-                if (_currentLocation.website.length > 0 && ![_currentLocation.website isEqualToString:@"Tap to edit"]){
+                if (_currentLocation.website.length > 0 && ![_currentLocation.website isEqualToString:@"Tap to edit"] && !self.tableView.editing){
                     ReuseWebView *webView = [[ReuseWebView alloc] initWithURL:[NSURL URLWithString:_currentLocation.website]];
                     webView.webTitle = _currentLocation.name;
                     [self.navigationController presentViewController:[[UINavigationController alloc] initWithRootViewController:webView] animated:YES completion:nil];
@@ -284,6 +357,10 @@
                     TextEditorView *editor = [[[self.storyboard instantiateViewControllerWithIdentifier:@"TextEditorView"] viewControllers] lastObject];
                     editor.delegate = self;
                     editor.editorTitle = @"Location Website";
+                    if (![_currentLocation.website isEqualToString:@"Tap to edit"]){
+                        editor.textContent = _currentLocation.website;
+                    }
+                    editingType = LocationEditingTypeWebsite;
                     [self.navigationController presentViewController:editor.parentViewController animated:YES completion:nil];
                 }
             }
@@ -295,6 +372,14 @@
         }
     }
 }
+- (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath{
+    if (indexPath.section == 1){
+        if (dataSetSeg.selectedSegmentIndex == 0){
+            return UITableViewCellEditingStyleInsert;
+        }
+    }
+    return UITableViewCellEditingStyleDelete;
+}
 - (void)tableView:(UITableView *)tableView accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.section == 1){
         MachineLocation *currentMachine = [machinesFetch objectAtIndexPath:[NSIndexPath indexPathForRow:indexPath.row inSection:0]];
@@ -303,9 +388,15 @@
         [self.navigationController pushViewController:machineProfile animated:YES];
     }
 }
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath{
-    if (indexPath.section == 1 && dataSetSeg.selectedSegmentIndex == 1){
-        return YES;
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath{    
+    if (indexPath.section == 1){
+        if (dataSetSeg.selectedSegmentIndex == 1){
+            return YES;
+        }else{
+            if (indexPath.row != 1){
+                return YES;
+            }
+        }
     }
     return NO;
 }
