@@ -21,8 +21,8 @@
 #import "TextEditorView.h"
 #import <ReuseWebView.h>
 
-@interface LocationProfileView () <TextEditorDelegate> {
-    NSArray *machines;
+@interface LocationProfileView () <TextEditorDelegate,NSFetchedResultsControllerDelegate> {
+    NSFetchedResultsController *machinesFetch;
     UIImage *mapSnapshot;
 
     UISegmentedControl *dataSetSeg;
@@ -42,8 +42,16 @@
     [super viewDidLoad];
     self.navigationItem.title = _currentLocation.name;
     // Sort the machines by name.
+    NSFetchRequest *locationMachines = [NSFetchRequest fetchRequestWithEntityName:@"MachineLocation"];
+    locationMachines.predicate = [NSPredicate predicateWithFormat:@"location.locationId = %@",_currentLocation.locationId];
+    locationMachines.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"conditionUpdate" ascending:YES]];
+    machinesFetch = [[NSFetchedResultsController alloc] initWithFetchRequest:locationMachines managedObjectContext:[[CoreDataManager sharedInstance] managedObjectContext] sectionNameKeyPath:nil cacheName:nil];
+    machinesFetch.delegate = self;
+    [machinesFetch performFetch:nil];
+    
+    
     NSSortDescriptor *asc = [NSSortDescriptor sortDescriptorWithKey:@"machine.name" ascending:YES];
-    machines = [[_currentLocation.machines allObjects] sortedArrayUsingDescriptors:@[asc]];
+
     dataSetSeg = [[UISegmentedControl alloc] init];
     dataSetSeg.frame = CGRectMake(5, 7, 310, 29);
     [dataSetSeg insertSegmentWithTitle:@"Info" atIndex:0 animated:YES];
@@ -95,7 +103,12 @@
         if (dataSetSeg.selectedSegmentIndex == 0){
             return 4;
         }else if (dataSetSeg.selectedSegmentIndex == 1){
-            return machines.count;
+            NSInteger rows = 0;
+            if ([[machinesFetch sections] count] > 0) {
+                id <NSFetchedResultsSectionInfo> sectionInfo = [[machinesFetch sections] objectAtIndex:0];
+                rows = [sectionInfo numberOfObjects];
+            }
+            return rows;
         }
     }
     return 0;
@@ -140,7 +153,7 @@
             return textLabel.size.height;
 
         }else if (dataSetSeg.selectedSegmentIndex == 1){
-            MachineLocation *currentMachine = machines[indexPath.row];
+            MachineLocation *currentMachine = [machinesFetch objectAtIndexPath:[NSIndexPath indexPathForRow:indexPath.row inSection:0]];
             NSString *cellDetail = [NSString stringWithFormat:@"%@ updated on %@",currentMachine.condition,[currentMachine.conditionUpdate monthDayYearPretty:YES]];
             
             CGRect titleLabel = [currentMachine.machine.machineTitle boundingRectWithSize:CGSizeMake(238, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin context:nil];
@@ -216,20 +229,20 @@
 
             UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MachineCell" forIndexPath:indexPath];
                 // Machine cell.
-                MachineLocation *currentMachine = machines[indexPath.row];
-                cell.textLabel.attributedText = currentMachine.machine.machineTitle;
-                cell.detailTextLabel.numberOfLines = 0;
-                // If no condition is available, just don't set the detail text label.
-                if (![currentMachine.condition isEqualToString:@"N/A"]){
-                    if (currentMachine.conditionUpdate){
-                        cell.detailTextLabel.text = [NSString stringWithFormat:@"%@ updated on %@",currentMachine.condition,[currentMachine.conditionUpdate monthDayYearPretty:YES]];
-                    }else{
-                        cell.detailTextLabel.text = currentMachine.condition;
-                    }
+            MachineLocation *currentMachine = [machinesFetch objectAtIndexPath:[NSIndexPath indexPathForRow:indexPath.row inSection:0]];
+            cell.textLabel.attributedText = currentMachine.machine.machineTitle;
+            cell.detailTextLabel.numberOfLines = 0;
+            // If no condition is available, just don't set the detail text label.
+            if (![currentMachine.condition isEqualToString:@"N/A"]){
+                if (currentMachine.conditionUpdate){
+                    cell.detailTextLabel.text = [NSString stringWithFormat:@"%@ updated on %@",currentMachine.condition,[currentMachine.conditionUpdate monthDayYearPretty:YES]];
                 }else{
-                    cell.detailTextLabel.text = nil;
+                    cell.detailTextLabel.text = currentMachine.condition;
                 }
-                return cell;
+            }else{
+                cell.detailTextLabel.text = nil;
+            }
+            return cell;
 
         }
     }
@@ -276,7 +289,7 @@
             }
         }else if (dataSetSeg.selectedSegmentIndex == 1){
             MachineConditionView *vc = (MachineConditionView *)[[[self.storyboard instantiateViewControllerWithIdentifier:@"MachineCondition"] viewControllers] lastObject];
-            vc.currentMachine = machines[indexPath.row];
+            vc.currentMachine = [machinesFetch objectAtIndexPath:[NSIndexPath indexPathForRow:indexPath.row inSection:0]];
             [tableView setEditing:NO];
             [self.navigationController presentViewController:vc.parentViewController animated:YES completion:nil];
         }
@@ -284,7 +297,7 @@
 }
 - (void)tableView:(UITableView *)tableView accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.section == 1){
-        MachineLocation *currentMachine = machines[indexPath.row];
+        MachineLocation *currentMachine = [machinesFetch objectAtIndexPath:[NSIndexPath indexPathForRow:indexPath.row inSection:0]];
         MachineProfileView *machineProfile = [self.storyboard instantiateViewControllerWithIdentifier:@"MachineProfile"];
         machineProfile.currentMachine = currentMachine.machine;
         [self.navigationController pushViewController:machineProfile animated:YES];
@@ -299,10 +312,39 @@
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath{
     if (editingStyle == UITableViewCellEditingStyleDelete){
         MachineConditionView *vc = (MachineConditionView *)[[[self.storyboard instantiateViewControllerWithIdentifier:@"MachineCondition"] viewControllers] lastObject];
-        vc.currentMachine = machines[indexPath.row];
+        vc.currentMachine = [machinesFetch objectAtIndexPath:[NSIndexPath indexPathForRow:indexPath.row inSection:0]];
         [tableView setEditing:NO];
         [self.navigationController presentViewController:vc.parentViewController animated:YES completion:nil];
     }
+}
+#pragma mark - NSFetchedResultsControllerDelegate
+- (void)controllerWillChangeContent:(NSFetchedResultsController *)controller{
+    [self.tableView beginUpdates];
+}
+- (void)controller:(NSFetchedResultsController *)controller
+   didChangeObject:(id)anObject
+	   atIndexPath:(NSIndexPath *)indexPath
+	 forChangeType:(NSFetchedResultsChangeType)type
+	  newIndexPath:(NSIndexPath *)newIndexPath{
+    switch(type)
+    {
+        case NSFetchedResultsChangeInsert:
+            [self.tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForRow:newIndexPath.row inSection:1]] withRowAnimation:UITableViewRowAnimationFade];
+            break;
+            
+        case NSFetchedResultsChangeDelete:
+            [self.tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForRow:indexPath.row inSection:1]] withRowAnimation:UITableViewRowAnimationFade];
+            break;
+            
+        case NSFetchedResultsChangeUpdate:
+            if (dataSetSeg.selectedSegmentIndex == 1){
+                [self.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForRow:indexPath.row inSection:1]] withRowAnimation:UITableViewRowAnimationFade];
+            }
+            break;
+    }
+}
+- (void)controllerDidChangeContent:(NSFetchedResultsController *)controller{
+    [self.tableView endUpdates];
 }
 
 @end

@@ -7,6 +7,7 @@
 //
 
 #import "MachineConditionView.h"
+#import "UIAlertView+Application.h"
 
 @interface MachineConditionView () <UITextViewDelegate> {
     IBOutlet UITextView *machineCondition;
@@ -50,8 +51,16 @@
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 - (IBAction)saveCondition:(id)sender{
-    #pragma message("TODO: API Interaction for updating a machines condition in a location")
-    [self dismissViewControllerAnimated:YES completion:nil];
+    [[PinballManager sharedInstance] updateMachineCondition:_currentMachine withCondition:machineCondition.text withCompletion:^(NSDictionary *status) {
+        if (status[@"errors"]){
+            [UIAlertView simpleApplicationAlertWithMessage:status[@"errors"] cancelButton:@"Ok"];
+        }else{
+            _currentMachine.condition = machineCondition.text;
+            _currentMachine.conditionUpdate = [NSDate date];
+            [[CoreDataManager sharedInstance] saveContext];
+            [self dismissViewControllerAnimated:YES completion:nil];
+        }
+    }];
 }
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section{
     if (section == 0){

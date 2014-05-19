@@ -2,7 +2,7 @@
 //  MachineLocation.m
 //  Pinball
 //
-//  Created by Frank Michael on 5/8/14.
+//  Created by Frank Michael on 5/18/14.
 //  Copyright (c) 2014 Frank Michael Sanchez. All rights reserved.
 //
 
@@ -15,6 +15,7 @@
 
 @dynamic condition;
 @dynamic conditionUpdate;
+@dynamic machineLocationId;
 @dynamic location;
 @dynamic machine;
 

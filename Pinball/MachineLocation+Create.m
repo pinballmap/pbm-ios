@@ -15,6 +15,7 @@
         context = [[CoreDataManager sharedInstance] managedObjectContext];
     }
     MachineLocation *newMachine = [NSEntityDescription insertNewObjectForEntityForName:@"MachineLocation" inManagedObjectContext:context];
+    newMachine.machineLocationId = data[@"id"];
     if (![data[@"condition"] isKindOfClass:[NSNull class]]){
         newMachine.condition = data[@"condition"];
     }else{

@@ -42,6 +42,7 @@
     <entity name="MachineLocation" representedClassName="MachineLocation" syncable="YES">
         <attribute name="condition" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="conditionUpdate" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="machineLocationId" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
         <relationship name="location" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Location" inverseName="machines" inverseEntity="Location" syncable="YES"/>
         <relationship name="machine" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Machine" inverseName="machineLocations" inverseEntity="Machine" syncable="YES"/>
     </entity>
@@ -60,7 +61,7 @@
         <element name="Event" positionX="-2529" positionY="-720" width="128" height="163"/>
         <element name="Location" positionX="-2250" positionY="-702" width="128" height="328"/>
         <element name="Machine" positionX="-2808" positionY="-603" width="128" height="133"/>
-        <element name="MachineLocation" positionX="-2504" positionY="-490" width="128" height="103"/>
+        <element name="MachineLocation" positionX="-2504" positionY="-490" width="128" height="118"/>
         <element name="Region" positionX="-2520" positionY="-949" width="128" height="178"/>
     </elements>
 </model>
