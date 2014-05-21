@@ -10,6 +10,8 @@
 #import "Machine+Create.h"
 #import "Region.h"
 #import "Region+Create.h"
+#import "LocationType.h"
+#import "LocationType+Create.h"
 #import "Location.h"
 #import "Location+Create.h"
 #import "Location+UpdateDistance.h"

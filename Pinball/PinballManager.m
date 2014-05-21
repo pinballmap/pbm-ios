@@ -102,7 +102,7 @@ typedef NS_ENUM(NSInteger, PBMDataAPI) {
 #pragma mark - Region Data Load
 - (void)refreshRegion{
 
-    NSArray *apiOperations = @[[self requestForData:PBMDataAPILocations],[self requestForData:PBMDataAPIEvents]];
+    NSArray *apiOperations = @[[self requestForData:PBMDataAPILocationTypes],[self requestForData:PBMDataAPILocations],[self requestForData:PBMDataAPIEvents]];
     
     NSArray *api = [AFURLConnectionOperation batchOfRequestOperations:apiOperations progressBlock:^(NSUInteger numberOfFinishedOperations, NSUInteger totalNumberOfOperations) {
         NSLog(@"Completed %lu of %lu",(unsigned long)numberOfFinishedOperations,(unsigned long)totalNumberOfOperations);
@@ -111,11 +111,14 @@ typedef NS_ENUM(NSInteger, PBMDataAPI) {
         stackRequest.predicate = nil;
         stackRequest.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES]];
         __block NSMutableSet *machines = [NSMutableSet setWithArray:[[[CoreDataManager sharedInstance] managedObjectContext] executeFetchRequest:stackRequest error:nil]];
+        __block NSMutableSet *locationTypes;
         __block NSMutableSet *createdLocations;
         [operations enumerateObjectsUsingBlock:^(AFHTTPRequestOperation *obj, NSUInteger idx, BOOL *stop) {
             if (idx == 0){
-                createdLocations = [self importLocationsWithRequest:obj andMachines:machines];
+                locationTypes = [self importLocationTypesWithRequest:obj];
             }else if (idx == 1){
+                createdLocations = [self importLocationsWithRequest:obj andMachines:machines andLocationTypes:locationTypes];
+            }else if (idx == 2){
                 [self importEventsWithRequest:obj andLocations:createdLocations];
             }
             [[CoreDataManager sharedInstance] saveContext];
@@ -133,7 +136,7 @@ typedef NS_ENUM(NSInteger, PBMDataAPI) {
     // Find region.
     _currentRegion = region;
 
-    NSArray *apiOperations = @[[self requestForData:PBMDataAPIMachines],[self requestForData:PBMDataAPILocations],[self requestForData:PBMDataAPIEvents]];
+    NSArray *apiOperations = @[[self requestForData:PBMDataAPIMachines],[self requestForData:PBMDataAPILocationTypes],[self requestForData:PBMDataAPILocations],[self requestForData:PBMDataAPIEvents]];
     
     
     NSArray *api = [AFURLConnectionOperation batchOfRequestOperations:apiOperations progressBlock:^(NSUInteger numberOfFinishedOperations, NSUInteger totalNumberOfOperations) {
@@ -141,14 +144,17 @@ typedef NS_ENUM(NSInteger, PBMDataAPI) {
     } completionBlock:^(NSArray *operations) {
         NSLog(@"All Done");
         __block NSMutableSet *createdMachines;
+        __block NSMutableSet *createdLocationTypes;
         __block NSMutableSet *createdLocations;
         [operations enumerateObjectsUsingBlock:^(AFHTTPRequestOperation *obj, NSUInteger idx, BOOL *stop) {
             NSLog(@"%@",obj.request.URL);
             if (idx == 0){
                 createdMachines = [self importMachinesWithRequest:obj];
             }else if (idx == 1){
-                createdLocations = [self importLocationsWithRequest:obj andMachines:createdMachines];
+                createdLocationTypes = [self importLocationTypesWithRequest:obj];
             }else if (idx == 2){
+                createdLocations = [self importLocationsWithRequest:obj andMachines:createdMachines andLocationTypes:createdLocationTypes];
+            }else if (idx == 3){
                 [self importEventsWithRequest:obj andLocations:createdLocations];
             }
             [[CoreDataManager sharedInstance] saveContext];
@@ -168,7 +174,7 @@ typedef NS_ENUM(NSInteger, PBMDataAPI) {
             apiURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@api/v1/machines.json",apiRootURL]];
             break;
         case PBMDataAPILocationTypes:
-            apiURL = [NSURL URLWithString:[NSString stringWithFormat:@"api/v1/location_types.json"]];
+            apiURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@api/v1/location_types.json",apiRootURL]];
             break;
         case PBMDataAPILocations:
             apiURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@api/v1/region/%@/locations.json",apiRootURL,_currentRegion.name]];
@@ -255,7 +261,34 @@ typedef NS_ENUM(NSInteger, PBMDataAPI) {
     return machines;
 
 }
-- (NSMutableSet *)importLocationsWithRequest:(AFHTTPRequestOperation *)request andMachines:(NSMutableSet *)machines{
+- (NSMutableSet *)importLocationTypesWithRequest:(AFHTTPRequestOperation *)request{
+    CoreDataManager *cdManager = [CoreDataManager sharedInstance];
+    // All current location type ids.
+    NSFetchRequest *locationTypesFetch = [self fetchRequestForModel:@"LocationType"];
+    NSArray *locationTypesExisting = [[cdManager managedObjectContext] executeFetchRequest:locationTypesFetch error:nil];
+    NSMutableArray *existingLocationTypes = [NSMutableArray new];
+    [locationTypesExisting enumerateObjectsUsingBlock:^(LocationType *obj, NSUInteger idx, BOOL *stop) {
+        [existingLocationTypes addObject:obj.locationTypeId];
+    }];
+    locationTypesExisting = nil;
+    locationTypesFetch = nil;
+    [request.responseObject[@"location_types"] enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+        NSDictionary *locationTypeData = obj;
+        if (![existingLocationTypes containsObject:locationTypeData[@"id"]]){
+            [LocationType createLocationTypeWithData:locationTypeData andContext:cdManager.managedObjectContext];
+        }
+    }];
+    [cdManager saveContext];
+    NSMutableSet *locationTypes = [NSMutableSet new];
+    if (locationTypes.count == 0){
+        NSFetchRequest *locationTypeFetch = [self fetchRequestForModel:@"LocationType"];
+        NSArray *locationTypesExisting = [[cdManager managedObjectContext] executeFetchRequest:locationTypeFetch error:nil];
+        [locationTypes addObjectsFromArray:locationTypesExisting];
+    }
+    
+    return locationTypes;
+}
+- (NSMutableSet *)importLocationsWithRequest:(AFHTTPRequestOperation *)request andMachines:(NSMutableSet *)machines andLocationTypes:(NSMutableSet *)locationTypes{
     if (![_currentRegion.locationsEtag isEqualToString:request.response.allHeaderFields[@"Etag"]]){
         NSLog(@"New Locations Etag");
         [self clearData:PBMDataAPILocations forRegion:_currentRegion];
@@ -278,6 +311,13 @@ typedef NS_ENUM(NSInteger, PBMDataAPI) {
             }];
             [allLocations addObject:newLocation];
             newLocation.machineCount = @(newLocation.machines.count);
+            
+            NSPredicate *locationTypePred = [NSPredicate predicateWithFormat:@"locationTypeId = %@" argumentArray:@[location[@"location_type_id"]]];
+            NSSet *found = [locationTypes filteredSetUsingPredicate:locationTypePred];
+            if (found.count > 0){
+                newLocation.locationType = [found anyObject];
+            }
+
             [_currentRegion addLocationsObject:newLocation];
         }];
         machines = nil;

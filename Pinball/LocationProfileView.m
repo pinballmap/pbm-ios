@@ -168,7 +168,7 @@ typedef enum : NSUInteger {
         return 1;
     }else{
         if (dataSetSeg.selectedSegmentIndex == 0){
-            return 4;
+            return 5;
         }else if (dataSetSeg.selectedSegmentIndex == 1){
             NSInteger rows = 0;
             if ([[machinesFetch sections] count] > 0) {
@@ -207,11 +207,13 @@ typedef enum : NSUInteger {
             }else if (indexPath.row == 1){
                 detailText = _currentLocation.fullAddress;
             }else if (indexPath.row == 2){
-                detailText = _currentLocation.locationDescription;
+                detailText = _currentLocation.locationType.name;
             }else if (indexPath.row == 3){
+                detailText = _currentLocation.locationDescription;
+            }else if (indexPath.row == 4){
                 detailText = _currentLocation.website;
             }
-
+            
             CGRect textLabel = [detailText boundingRectWithSize:CGSizeMake(280, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName: [UIFont systemFontOfSize:17]} context:nil];
             textLabel.size.height = textLabel.size.height+45;
             if (textLabel.size.height <= 67){
@@ -286,9 +288,16 @@ typedef enum : NSUInteger {
                 cell.infoLabel.text = @"Location";
                 cell.dataLabel.text = _currentLocation.fullAddress;
             }else if (indexPath.row == 2){
+                cell.infoLabel.text = @"Type";
+                if (!_currentLocation.locationType){
+                    cell.dataLabel.text = @"Tap to Add";
+                }else{
+                    cell.dataLabel.text = _currentLocation.locationType.name;
+                }
+            }else if (indexPath.row == 3){
                 cell.infoLabel.text = @"Description";
                 cell.dataLabel.text = _currentLocation.locationDescription;
-            }else  if (indexPath.row == 3){
+            }else  if (indexPath.row == 4){
                 cell.infoLabel.text = @"Website";
                 cell.dataLabel.text = _currentLocation.website;
             }
@@ -339,7 +348,7 @@ typedef enum : NSUInteger {
                 }
             }else if (indexPath.row == 1){
                 [self showMap];
-            }else if (indexPath.row == 2){
+            }else if (indexPath.row == 3){
                 TextEditorView *editor = [[[self.storyboard instantiateViewControllerWithIdentifier:@"TextEditorView"] viewControllers] lastObject];
                 editor.delegate = self;
                 editor.editorTitle = @"Location Description";
@@ -348,7 +357,7 @@ typedef enum : NSUInteger {
                     editor.textContent  =_currentLocation.locationDescription;
                 }
                 [self.navigationController presentViewController:editor.parentViewController animated:YES completion:nil];
-            }else if (indexPath.row == 3){
+            }else if (indexPath.row == 4){
                 if (_currentLocation.website.length > 0 && ![_currentLocation.website isEqualToString:@"Tap to edit"] && !self.tableView.editing){
                     ReuseWebView *webView = [[ReuseWebView alloc] initWithURL:[NSURL URLWithString:_currentLocation.website]];
                     webView.webTitle = _currentLocation.name;

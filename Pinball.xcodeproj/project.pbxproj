@@ -44,6 +44,9 @@
 		DBD4F3E919067D690023D98B /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DBD4F3E819067D690023D98B /* MessageUI.framework */; };
 		DBE50374190D2BBA002BDE0D /* Location+UpdateDistance.m in Sources */ = {isa = PBXBuildFile; fileRef = DBE50373190D2BBA002BDE0D /* Location+UpdateDistance.m */; };
 		DBE712D91929134D0046DFA8 /* MachineLocation.m in Sources */ = {isa = PBXBuildFile; fileRef = DBE712D81929134D0046DFA8 /* MachineLocation.m */; };
+		DBEAA1FA192A9DF40096F2A9 /* Location.m in Sources */ = {isa = PBXBuildFile; fileRef = DBEAA1F9192A9DF40096F2A9 /* Location.m */; };
+		DBEAA1FD192A9E140096F2A9 /* LocationType.m in Sources */ = {isa = PBXBuildFile; fileRef = DBEAA1FC192A9E140096F2A9 /* LocationType.m */; };
+		DBEAA200192A9E4A0096F2A9 /* LocationType+Create.m in Sources */ = {isa = PBXBuildFile; fileRef = DBEAA1FF192A9E4A0096F2A9 /* LocationType+Create.m */; };
 		DBF06BCF18F96FF500F92912 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DBF06BCE18F96FF500F92912 /* Foundation.framework */; };
 		DBF06BD118F96FF500F92912 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DBF06BD018F96FF500F92912 /* CoreGraphics.framework */; };
 		DBF06BD318F96FF500F92912 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DBF06BD218F96FF500F92912 /* UIKit.framework */; };
@@ -78,7 +81,6 @@
 		DBF06C8318F9840B00F92912 /* pinball.png in Resources */ = {isa = PBXBuildFile; fileRef = DBF06C8118F9840B00F92912 /* pinball.png */; };
 		DBF06C8418F9840B00F92912 /* pinball@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DBF06C8218F9840B00F92912 /* pinball@2x.png */; };
 		DBF06C8718F984AF00F92912 /* MachinesView.m in Sources */ = {isa = PBXBuildFile; fileRef = DBF06C8618F984AF00F92912 /* MachinesView.m */; };
-		DBF0BF8A19290B8600DCB679 /* Location.m in Sources */ = {isa = PBXBuildFile; fileRef = DBF0BF8919290B8600DCB679 /* Location.m */; };
 		DBF711EF191E4DD3008656EE /* NewMachineView.m in Sources */ = {isa = PBXBuildFile; fileRef = DBF711EE191E4DD3008656EE /* NewMachineView.m */; };
 		DBF711F2191E59B8008656EE /* Machine.m in Sources */ = {isa = PBXBuildFile; fileRef = DBF711F1191E59B8008656EE /* Machine.m */; };
 		F5C71114D7FB464CA0CB927C /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 767AEE54A0274802B59CA4A5 /* libPods.a */; };
@@ -161,6 +163,12 @@
 		DBE50373190D2BBA002BDE0D /* Location+UpdateDistance.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Location+UpdateDistance.m"; sourceTree = "<group>"; };
 		DBE712D71929134D0046DFA8 /* MachineLocation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MachineLocation.h; sourceTree = "<group>"; };
 		DBE712D81929134D0046DFA8 /* MachineLocation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MachineLocation.m; sourceTree = "<group>"; };
+		DBEAA1F8192A9DF40096F2A9 /* Location.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Location.h; sourceTree = "<group>"; };
+		DBEAA1F9192A9DF40096F2A9 /* Location.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Location.m; sourceTree = "<group>"; };
+		DBEAA1FB192A9E140096F2A9 /* LocationType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationType.h; sourceTree = "<group>"; };
+		DBEAA1FC192A9E140096F2A9 /* LocationType.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocationType.m; sourceTree = "<group>"; };
+		DBEAA1FE192A9E4A0096F2A9 /* LocationType+Create.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "LocationType+Create.h"; sourceTree = "<group>"; };
+		DBEAA1FF192A9E4A0096F2A9 /* LocationType+Create.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "LocationType+Create.m"; sourceTree = "<group>"; };
 		DBF06BCB18F96FF500F92912 /* Pinball.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Pinball.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DBF06BCE18F96FF500F92912 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		DBF06BD018F96FF500F92912 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -208,8 +216,6 @@
 		DBF06C8218F9840B00F92912 /* pinball@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "pinball@2x.png"; sourceTree = "<group>"; };
 		DBF06C8518F984AF00F92912 /* MachinesView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MachinesView.h; sourceTree = "<group>"; };
 		DBF06C8618F984AF00F92912 /* MachinesView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MachinesView.m; sourceTree = "<group>"; };
-		DBF0BF8819290B8600DCB679 /* Location.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Location.h; sourceTree = "<group>"; };
-		DBF0BF8919290B8600DCB679 /* Location.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Location.m; sourceTree = "<group>"; };
 		DBF711ED191E4DD3008656EE /* NewMachineView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewMachineView.h; sourceTree = "<group>"; };
 		DBF711EE191E4DD3008656EE /* NewMachineView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewMachineView.m; sourceTree = "<group>"; };
 		DBF711F0191E59B8008656EE /* Machine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Machine.h; sourceTree = "<group>"; };
@@ -473,8 +479,10 @@
 				DBE712D71929134D0046DFA8 /* MachineLocation.h */,
 				DBE712D81929134D0046DFA8 /* MachineLocation.m */,
 				DBF06C0418F9707400F92912 /* Pinball.xcdatamodeld */,
-				DBF0BF8819290B8600DCB679 /* Location.h */,
-				DBF0BF8919290B8600DCB679 /* Location.m */,
+				DBEAA1FB192A9E140096F2A9 /* LocationType.h */,
+				DBEAA1FC192A9E140096F2A9 /* LocationType.m */,
+				DBEAA1F8192A9DF40096F2A9 /* Location.h */,
+				DBEAA1F9192A9DF40096F2A9 /* Location.m */,
 				DBF711F0191E59B8008656EE /* Machine.h */,
 				DBF711F1191E59B8008656EE /* Machine.m */,
 				DBB95935191BB1A000D0847D /* Region.h */,
@@ -494,6 +502,8 @@
 				DBF06C3B18F975C500F92912 /* Region+Create.m */,
 				DBF06C4118F9788900F92912 /* Location+Create.h */,
 				DBF06C4218F9788900F92912 /* Location+Create.m */,
+				DBEAA1FE192A9E4A0096F2A9 /* LocationType+Create.h */,
+				DBEAA1FF192A9E4A0096F2A9 /* LocationType+Create.m */,
 				DBF06C6218F97C5F00F92912 /* MachineLocation+Create.h */,
 				DBF06C6318F97C5F00F92912 /* MachineLocation+Create.m */,
 				DB52D2E618FB06EC00BB56D8 /* Event+Create.h */,
@@ -678,8 +688,10 @@
 				DB52D2FD18FB0AD300BB56D8 /* EventProfileView.m in Sources */,
 				DBB71B9C18FC4838007907DE /* SettingsView.m in Sources */,
 				DB52D2FA18FB09AF00BB56D8 /* NSDate+DateFormatting.m in Sources */,
+				DBEAA200192A9E4A0096F2A9 /* LocationType+Create.m in Sources */,
 				DB99C3B11906FA4100AFDF0F /* MachinePickingView.m in Sources */,
 				DBE712D91929134D0046DFA8 /* MachineLocation.m in Sources */,
+				DBEAA1FA192A9DF40096F2A9 /* Location.m in Sources */,
 				DBB95937191BB1A000D0847D /* Region.m in Sources */,
 				DBF06C4318F9788900F92912 /* Location+Create.m in Sources */,
 				DBF06BDF18F96FF500F92912 /* AppDelegate.m in Sources */,
@@ -689,13 +701,13 @@
 				DB4D82BE190D77530048156E /* Machine+CellHelpers.m in Sources */,
 				DBF06C8718F984AF00F92912 /* MachinesView.m in Sources */,
 				DBB71BB418FC6B04007907DE /* PinballTabController.m in Sources */,
-				DBF0BF8A19290B8600DCB679 /* Location.m in Sources */,
 				DBB59CD218FADF6D00F35BFD /* InformationCell.m in Sources */,
 				DBF06C4018F9775600F92912 /* Machine+Create.m in Sources */,
 				DBA3B60A190846D900ACBC69 /* InputCell.m in Sources */,
 				DB52D30418FB0DCF00BB56D8 /* UIAlertView+Application.m in Sources */,
 				DB52D2E818FB06EC00BB56D8 /* Event+Create.m in Sources */,
 				DBF06C3C18F975C500F92912 /* Region+Create.m in Sources */,
+				DBEAA1FD192A9E140096F2A9 /* LocationType.m in Sources */,
 				DBE50374190D2BBA002BDE0D /* Location+UpdateDistance.m in Sources */,
 				DBB59CD518FADF7A00F35BFD /* LocationMapCell.m in Sources */,
 				DBB71BB118FC5E77007907DE /* NSFileManager+DocumentsDirectory.m in Sources */,

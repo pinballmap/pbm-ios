@@ -2,14 +2,14 @@
 //  Location.h
 //  Pinball
 //
-//  Created by Frank Michael on 5/18/14.
+//  Created by Frank Michael on 5/19/14.
 //  Copyright (c) 2014 Frank Michael Sanchez. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 
-@class Event, MachineLocation, Region;
+@class Event, LocationType, MachineLocation, Region;
 
 @interface Location : NSManagedObject
 
@@ -26,12 +26,13 @@
 @property (nonatomic, retain) NSString * phone;
 @property (nonatomic, retain) NSString * state;
 @property (nonatomic, retain) NSString * street;
+@property (nonatomic, retain) NSString * website;
 @property (nonatomic, retain) NSString * zip;
 @property (nonatomic, retain) NSNumber * zoneNo;
-@property (nonatomic, retain) NSString * website;
 @property (nonatomic, retain) NSOrderedSet *events;
 @property (nonatomic, retain) NSSet *machines;
 @property (nonatomic, retain) Region *region;
+@property (nonatomic, retain) LocationType *locationType;
 @end
 
 @interface Location (CoreDataGeneratedAccessors)
