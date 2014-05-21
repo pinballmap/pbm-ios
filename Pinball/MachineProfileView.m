@@ -119,7 +119,7 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     if (indexPath.section == 0){
         if (indexPath.row == 2){
-            ReuseWebView *webView = [[ReuseWebView alloc] initWithURL:[NSURL URLWithString:@"http://github.com/blog"]];
+            ReuseWebView *webView = [[ReuseWebView alloc] initWithURL:[NSURL URLWithString:_currentMachine.ipdbLink]];
             webView.webTitle = @"IPDB";
             [self.navigationController presentViewController:[[UINavigationController alloc] initWithRootViewController:webView] animated:YES completion:nil];
         }
@@ -127,7 +127,7 @@
         if (indexPath.row == 0){
             MapView *map = [[[self.storyboard instantiateViewControllerWithIdentifier:@"MapView"] viewControllers] lastObject];
             map.currentMachine = _currentMachine;
-            [self.navigationController pushViewController:map.parentViewController animated:YES];
+            [self.navigationController presentViewController:map.parentViewController animated:YES completion:nil];
         }else{
             MachineLocation *machine = machineLocations[indexPath.row-1];
             LocationProfileView *locationProfile = [self.storyboard instantiateViewControllerWithIdentifier:@"LocationProfileView"];

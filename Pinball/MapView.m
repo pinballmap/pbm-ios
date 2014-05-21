@@ -17,6 +17,7 @@
     IBOutlet MKMapView *mainMapView;
 }
 - (IBAction)showInMaps:(id)sender;
+- (IBAction)dismissMap:(id)sender;
 @end
 
 @implementation MapView
@@ -32,6 +33,11 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     mainMapView.delegate = self;
+    if (self.presentingViewController){
+        UIBarButtonItem *doneMap = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(dismissMap:)];
+        self.navigationItem.leftBarButtonItem = doneMap;
+    }
+    
     if (_currentLocation){
         self.navigationItem.title = [NSString stringWithFormat:@"%@",_currentLocation.name];
         
@@ -75,6 +81,9 @@
         pinView.annotation = annotation;
     }
     return pinView;
+}
+- (IBAction)dismissMap:(id)sender{
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 - (IBAction)showInMaps:(id)sender{
     CLLocationCoordinate2D coord = CLLocationCoordinate2DMake([_currentLocation.latitude doubleValue],[_currentLocation.longitude doubleValue]);
