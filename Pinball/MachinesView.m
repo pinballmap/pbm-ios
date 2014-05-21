@@ -60,11 +60,11 @@
     self.navigationItem.title = [NSString stringWithFormat:@"%@ Machines",[[[PinballManager sharedInstance] currentRegion] fullName]];
     managedContext = [[CoreDataManager sharedInstance] managedObjectContext];
     NSFetchRequest *stackRequest = [NSFetchRequest fetchRequestWithEntityName:@"Machine"];
-    stackRequest.predicate = nil;
+    stackRequest.predicate = [NSPredicate predicateWithFormat:@"machineLocations.location.region CONTAINS %@" argumentArray:@[[[PinballManager sharedInstance] currentRegion]]];
     stackRequest.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES]];
     fetchedResults = [[NSFetchedResultsController alloc] initWithFetchRequest:stackRequest
                                                          managedObjectContext:managedContext
-                                                           sectionNameKeyPath:nil
+                                                           sectionNameKeyPath:@"name"
                                                                     cacheName:nil];
     fetchedResults.delegate = self;
     [fetchedResults performFetch:nil];
@@ -100,6 +100,15 @@
         return 1;
     }
 }
+- (NSArray *)sectionIndexTitlesForTableView:(UITableView *)tableView{
+    if (!isSearching){
+        return [fetchedResults sectionIndexTitles];
+    }
+    return @[];
+}
+- (NSInteger)tableView:(UITableView *)tableView sectionForSectionIndexTitle:(NSString *)title atIndex:(NSInteger)index{
+    return [fetchedResults sectionForSectionIndexTitle:title atIndex:index];
+}
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     NSInteger rows = 0;
     if (!isSearching){
@@ -122,9 +131,9 @@
         currentMachine = searchResults[indexPath.row];
     }
     
-    NSString *detailString = [NSString stringWithFormat:@"Locations: %lu",(unsigned long)currentMachine.machineLocations.count];
+    NSString *detailString = [NSString stringWithFormat:@"%@, %@",currentMachine.manufacturer,currentMachine.year];
     
-    CGRect titleLabel = [currentMachine.machineTitle boundingRectWithSize:CGSizeMake(defaultWidth, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin context:nil];
+    CGRect titleLabel = [currentMachine.name boundingRectWithSize:CGSizeMake(defaultWidth, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName: [UIFont boldSystemFontOfSize:18]} context:nil];//boundingRectWithSize:CGSizeMake(defaultWidth, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin context:nil];
     
     CGRect detailLabel = [detailString boundingRectWithSize:CGSizeMake(defaultWidth, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName: [UIFont systemFontOfSize:12]} context:nil];
     // Add 6 pixel padding present in subtitle style.
@@ -141,8 +150,8 @@
     }else{
         currentMachine = searchResults[indexPath.row];
     }
-    cell.textLabel.attributedText = currentMachine.machineTitle;
-    cell.detailTextLabel.text = [NSString stringWithFormat:@"Locations: %lu",(unsigned long)currentMachine.machineLocations.count];
+    cell.textLabel.text = currentMachine.name;
+    cell.detailTextLabel.text = [NSString stringWithFormat:@"%@, %@",currentMachine.manufacturer,currentMachine.year];
     return cell;
 }
 #pragma mark - NSFetchedResultsControllerDelegate

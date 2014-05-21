@@ -13,7 +13,9 @@
 #import "LocationProfileView.h"
 #import <ReuseWebView.h>
 
-@interface MachineProfileView ()
+@interface MachineProfileView () {
+    NSArray *machineLocations;
+}
 
 @end
 
@@ -30,6 +32,12 @@
     [super viewDidLoad];
     
     self.navigationItem.title = _currentMachine.name;
+    
+    NSFetchRequest *locationRequest = [NSFetchRequest fetchRequestWithEntityName:@"MachineLocation"];
+    locationRequest.predicate = [NSPredicate predicateWithFormat:@"location.region = %@ AND machine = %@" argumentArray:@[[[PinballManager sharedInstance] currentRegion],_currentMachine]];
+    locationRequest.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"location.name" ascending:YES]];
+    machineLocations = [[[CoreDataManager sharedInstance] managedObjectContext] executeFetchRequest:locationRequest error:nil];
+    
 }
 - (void)didReceiveMemoryWarning{
     [super didReceiveMemoryWarning];
@@ -43,7 +51,7 @@
     if (section == 0){
         return 3;
     }else if (section == 1){
-        return _currentMachine.machineLocations.count+1;
+        return machineLocations.count+1;
     }
     return 0;
 }
@@ -60,7 +68,7 @@
         return 67;
     }else{
         if (indexPath.section == 1 && indexPath.row > 0){
-            MachineLocation *machine = _currentMachine.machineLocations[indexPath.row-1];
+            MachineLocation *machine = machineLocations[indexPath.row-1];
             CGRect stringSize = [machine.location.name boundingRectWithSize:CGSizeMake(290, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName: [UIFont systemFontOfSize:18]} context:nil];
             
             stringSize.size.height = stringSize.size.height+10;   // Take into account the 10 points of padding within a cell.
@@ -98,7 +106,7 @@
             cell.textLabel.text = @"View on Map";
             cell.detailTextLabel.text = nil;
         }else if (indexPath.row > 0){
-            MachineLocation *machine = _currentMachine.machineLocations[indexPath.row-1];
+            MachineLocation *machine = machineLocations[indexPath.row-1];
             cell.textLabel.text = machine.location.name;
             cell.detailTextLabel.text = [NSString stringWithFormat:@"%@, %@",machine.location.street,machine.location.city];
         }
@@ -121,7 +129,7 @@
             map.currentMachine = _currentMachine;
             [self.navigationController pushViewController:map.parentViewController animated:YES];
         }else{
-            MachineLocation *machine = _currentMachine.machineLocations[indexPath.row-1];
+            MachineLocation *machine = machineLocations[indexPath.row-1];
             LocationProfileView *locationProfile = [self.storyboard instantiateViewControllerWithIdentifier:@"LocationProfileView"];
             locationProfile.currentLocation = machine.location;
             [self.navigationController pushViewController:locationProfile animated:YES];
