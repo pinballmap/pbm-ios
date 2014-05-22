@@ -28,11 +28,13 @@ typedef enum : NSUInteger {
     LocationEditingTypeWebsite,
 } LocationEditingType;
 
-@interface LocationProfileView () <TextEditorDelegate,NSFetchedResultsControllerDelegate> {
+@interface LocationProfileView () <TextEditorDelegate,NSFetchedResultsControllerDelegate,UIAlertViewDelegate> {
     NSFetchedResultsController *machinesFetch;
     UIImage *mapSnapshot;
     LocationEditingType editingType;
 
+    UIAlertView *deleteConfirm;
+    NSIndexPath *deletePath;
     UISegmentedControl *dataSetSeg;
 }
 @end
@@ -158,6 +160,17 @@ typedef enum : NSUInteger {
 }
 - (void)editorDidCancel{
     
+}
+#pragma mark - UIAlertView Delegate
+- (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex{
+    if (buttonIndex != alertView.cancelButtonIndex){
+        if (alertView == deleteConfirm){
+            [[[PinballManager sharedInstance] managedObjectContext] deleteObject:[machinesFetch objectAtIndexPath:deletePath]];
+            #pragma message("TODO: API interaction to remove machine")
+            [self.tableView deleteRowsAtIndexPaths:@[deletePath] withRowAnimation:UITableViewRowAnimationAutomatic];
+            deletePath = nil;
+        }
+    }
 }
 #pragma mark - Table view data source
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
@@ -411,10 +424,9 @@ typedef enum : NSUInteger {
 }
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath{
     if (editingStyle == UITableViewCellEditingStyleDelete){
-        MachineConditionView *vc = (MachineConditionView *)[[[self.storyboard instantiateViewControllerWithIdentifier:@"MachineCondition"] viewControllers] lastObject];
-        vc.currentMachine = [machinesFetch objectAtIndexPath:[NSIndexPath indexPathForRow:indexPath.row inSection:0]];
-        [tableView setEditing:NO];
-        [self.navigationController presentViewController:vc.parentViewController animated:YES completion:nil];
+        deletePath = indexPath;
+        deleteConfirm = [UIAlertView applicationAlertWithMessage:@"Are you sure you want to remove this machine." delegate:self cancelButton:@"No" otherButtons:@"Yes", nil];
+        [deleteConfirm show];
     }
 }
 #pragma mark - NSFetchedResultsControllerDelegate
