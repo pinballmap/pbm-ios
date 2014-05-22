@@ -21,6 +21,7 @@
 #import "TextEditorView.h"
 #import <ReuseWebView.h>
 #import "UIAlertView+Application.h"
+#import "LocationTypesView.h"
 
 typedef enum : NSUInteger {
     LocationEditingTypePhone,
@@ -28,7 +29,7 @@ typedef enum : NSUInteger {
     LocationEditingTypeWebsite,
 } LocationEditingType;
 
-@interface LocationProfileView () <TextEditorDelegate,NSFetchedResultsControllerDelegate,UIAlertViewDelegate> {
+@interface LocationProfileView () <TextEditorDelegate,NSFetchedResultsControllerDelegate,UIAlertViewDelegate,LocationTypeDelegate> {
     NSFetchedResultsController *machinesFetch;
     UIImage *mapSnapshot;
     LocationEditingType editingType;
@@ -160,6 +161,17 @@ typedef enum : NSUInteger {
 }
 - (void)editorDidCancel{
     
+}
+#pragma mark - Locaiton Type Delegate
+- (void)pickedType:(LocationType *)type{
+    NSLog(@"%@",type);
+    if (type){
+        [[PinballManager sharedInstance] updateLocation:_currentLocation withData:@{@"location_type": type.locationTypeId} andCompletion:^(NSDictionary *status) {
+            _currentLocation.locationType = type;
+            [[CoreDataManager sharedInstance] saveContext];
+            [self.tableView reloadData];
+        }];
+    }
 }
 #pragma mark - UIAlertView Delegate
 - (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex{
@@ -361,7 +373,14 @@ typedef enum : NSUInteger {
                 }
             }else if (indexPath.row == 1){
                 [self showMap];
-            }else if (indexPath.row == 3){
+            }else if (indexPath.row == 2){
+                if (!_currentLocation.locationType){
+                    LocationTypesView *typesView = [[[self.storyboard instantiateViewControllerWithIdentifier:@"LocationTypesView"] viewControllers] lastObject];
+                    typesView.delegate = self;
+                    [self.navigationController presentViewController:typesView.parentViewController animated:YES completion:nil];
+                }
+            }
+            else if (indexPath.row == 3){
                 TextEditorView *editor = [[[self.storyboard instantiateViewControllerWithIdentifier:@"TextEditorView"] viewControllers] lastObject];
                 editor.delegate = self;
                 editor.editorTitle = @"Location Description";
