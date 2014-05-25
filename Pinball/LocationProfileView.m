@@ -375,11 +375,9 @@ typedef enum : NSUInteger {
             }else if (indexPath.row == 1){
                 [self showMap];
             }else if (indexPath.row == 2){
-                if (!_currentLocation.locationType){
-                    LocationTypesView *typesView = [[[self.storyboard instantiateViewControllerWithIdentifier:@"LocationTypesView"] viewControllers] lastObject];
-                    typesView.delegate = self;
-                    [self.navigationController presentViewController:typesView.parentViewController animated:YES completion:nil];
-                }
+                LocationTypesView *typesView = [[[self.storyboard instantiateViewControllerWithIdentifier:@"LocationTypesView"] viewControllers] lastObject];
+                typesView.delegate = self;
+                [self.navigationController presentViewController:typesView.parentViewController animated:YES completion:nil];
             }
             else if (indexPath.row == 3){
                 TextEditorView *editor = [[[self.storyboard instantiateViewControllerWithIdentifier:@"TextEditorView"] viewControllers] lastObject];
