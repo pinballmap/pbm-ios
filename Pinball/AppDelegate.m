@@ -8,6 +8,7 @@
 
 #import "AppDelegate.h"
 #import "PinballManager.h"
+#import <HockeySDK/HockeySDK.h>
 
 @implementation AppDelegate
 
@@ -18,6 +19,13 @@
     [[UISearchBar appearance] setTintColor:pinkColor];
     [[UINavigationBar appearance] setTintColor:pinkColor];
     [[UIToolbar appearance] setTintColor:pinkColor];
+
+    [[BITHockeyManager sharedHockeyManager] configureWithIdentifier:@"9df362e5aa49991c0c332aefdcdfdcd7"];
+    [[BITHockeyManager sharedHockeyManager].authenticator setAuthenticationSecret:@"40e42e27b4656b3ff6a7c380a5433cc0"];
+    [[BITHockeyManager sharedHockeyManager].authenticator setIdentificationType:BITAuthenticatorIdentificationTypeHockeyAppEmail];
+    [[BITHockeyManager sharedHockeyManager] startManager];
+    [[BITHockeyManager sharedHockeyManager].authenticator authenticateInstallation];
+
 //    [[CoreDataManager sharedInstance] resetStore];
     return YES;
 }
