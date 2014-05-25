@@ -307,6 +307,9 @@ typedef NS_ENUM(NSInteger, PBMDataAPI) {
             [LocationType createLocationTypeWithData:locationTypeData andContext:cdManager.managedObjectContext];
         }
     }];
+    if (![existingLocationTypes containsObject:@(-1)]){
+        [LocationType createLocationTypeWithData:@{@"name": @"Unclassified",@"id": @(-1)} andContext:cdManager.managedObjectContext];
+    }
     [cdManager saveContext];
     NSMutableSet *locationTypes = [NSMutableSet new];
     if (locationTypes.count == 0){
@@ -349,12 +352,17 @@ typedef NS_ENUM(NSInteger, PBMDataAPI) {
             [allLocations addObject:newLocation];
             newLocation.machineCount = @(newLocation.machines.count);
             
-            NSPredicate *locationTypePred = [NSPredicate predicateWithFormat:@"locationTypeId = %@" argumentArray:@[location[@"location_type_id"]]];
+            NSNumber *locationType = location[@"location_type_id"];
+            if ([locationType isKindOfClass:[NSNull class]]){
+                locationType = @(-1);
+            }
+            
+            NSPredicate *locationTypePred = [NSPredicate predicateWithFormat:@"locationTypeId = %@" argumentArray:@[locationType]];
             NSSet *found = [locationTypes filteredSetUsingPredicate:locationTypePred];
             if (found.count > 0){
                 newLocation.locationType = [found anyObject];
             }
-
+            
             [_currentRegion addLocationsObject:newLocation];
         }];
         machines = nil;

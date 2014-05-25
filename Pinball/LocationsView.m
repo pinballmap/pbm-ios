@@ -92,7 +92,7 @@
 }
 #pragma mark - Class
 - (IBAction)filterResults:(id)sender{
-    UIActionSheet *sheet = [[UIActionSheet alloc] initWithTitle:@"Location Filter" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Location (Closets)",@"Number of Machines",@"Name",@"Zone", nil];
+    UIActionSheet *sheet = [[UIActionSheet alloc] initWithTitle:@"Location Filter" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Location (Closets)",@"Number of Machines",@"Name",@"Zone",@"Type",nil];
     [sheet showFromTabBar:self.tabBarController.tabBar];
 }
 - (BOOL)shouldPerformSegueWithIdentifier:(NSString *)identifier sender:(id)sender{
@@ -144,6 +144,10 @@
             stackRequest.predicate = [NSPredicate predicateWithFormat:@"region.name = %@",[[[PinballManager sharedInstance] currentRegion] name]];
             stackRequest.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"parentZone.name" ascending:YES]];
             sectionName = @"parentZone.name";
+        }else if (buttonIndex == 4){
+            stackRequest.predicate = [NSPredicate predicateWithFormat:@"region.name = %@",[[[PinballManager sharedInstance] currentRegion] name]];
+            stackRequest.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"locationType.name" ascending:YES]];
+            sectionName = @"locationType.name";
         }
         
         fetchedResults = nil;
@@ -179,7 +183,8 @@
 }
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section{
     if ([[fetchedResults sections] count] > 1){
-        return [[[fetchedResults sections] objectAtIndex:section] name];
+        NSString *sectionName = [[[fetchedResults sections] objectAtIndex:section] name];
+        return sectionName;
     }
     return @"";
 }
