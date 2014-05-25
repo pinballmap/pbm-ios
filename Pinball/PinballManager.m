@@ -17,7 +17,8 @@ typedef NS_ENUM(NSInteger, PBMDataAPI) {
     PBMDataAPIMachines,
     PBMDataAPILocationTypes,
     PBMDataAPILocations,
-    PBMDataAPIEvents
+    PBMDataAPIEvents,
+    PBMDataAPIZones
 };
 
 
@@ -102,7 +103,7 @@ typedef NS_ENUM(NSInteger, PBMDataAPI) {
 #pragma mark - Region Data Load
 - (void)refreshRegion{
 
-    NSArray *apiOperations = @[[self requestForData:PBMDataAPILocationTypes],[self requestForData:PBMDataAPILocations],[self requestForData:PBMDataAPIEvents]];
+    NSArray *apiOperations = @[[self requestForData:PBMDataAPILocationTypes],[self requestForData:PBMDataAPIZones],[self requestForData:PBMDataAPILocations],[self requestForData:PBMDataAPIEvents]];
     
     NSArray *api = [AFURLConnectionOperation batchOfRequestOperations:apiOperations progressBlock:^(NSUInteger numberOfFinishedOperations, NSUInteger totalNumberOfOperations) {
         NSLog(@"Completed %lu of %lu",(unsigned long)numberOfFinishedOperations,(unsigned long)totalNumberOfOperations);
@@ -112,13 +113,16 @@ typedef NS_ENUM(NSInteger, PBMDataAPI) {
         stackRequest.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES]];
         __block NSMutableSet *machines = [NSMutableSet setWithArray:[[[CoreDataManager sharedInstance] managedObjectContext] executeFetchRequest:stackRequest error:nil]];
         __block NSMutableSet *locationTypes;
+        __block NSMutableSet *locationZones;
         __block NSMutableSet *createdLocations;
         [operations enumerateObjectsUsingBlock:^(AFHTTPRequestOperation *obj, NSUInteger idx, BOOL *stop) {
             if (idx == 0){
                 locationTypes = [self importLocationTypesWithRequest:obj];
             }else if (idx == 1){
-                createdLocations = [self importLocationsWithRequest:obj andMachines:machines andLocationTypes:locationTypes];
+                locationZones = [self importZonesWithRequest:obj];
             }else if (idx == 2){
+                createdLocations = [self importLocationsWithRequest:obj andMachines:machines andLocationTypes:locationTypes andZones:locationZones];
+            }else if (idx == 3){
                 [self importEventsWithRequest:obj andLocations:createdLocations];
             }
             [[CoreDataManager sharedInstance] saveContext];
@@ -136,7 +140,7 @@ typedef NS_ENUM(NSInteger, PBMDataAPI) {
     // Find region.
     _currentRegion = region;
 
-    NSArray *apiOperations = @[[self requestForData:PBMDataAPIMachines],[self requestForData:PBMDataAPILocationTypes],[self requestForData:PBMDataAPILocations],[self requestForData:PBMDataAPIEvents]];
+    NSArray *apiOperations = @[[self requestForData:PBMDataAPIMachines],[self requestForData:PBMDataAPILocationTypes],[self requestForData:PBMDataAPIZones],[self requestForData:PBMDataAPILocations],[self requestForData:PBMDataAPIEvents]];
     
     
     NSArray *api = [AFURLConnectionOperation batchOfRequestOperations:apiOperations progressBlock:^(NSUInteger numberOfFinishedOperations, NSUInteger totalNumberOfOperations) {
@@ -145,6 +149,7 @@ typedef NS_ENUM(NSInteger, PBMDataAPI) {
         NSLog(@"All Done");
         __block NSMutableSet *createdMachines;
         __block NSMutableSet *createdLocationTypes;
+        __block NSMutableSet *createdZones;
         __block NSMutableSet *createdLocations;
         [operations enumerateObjectsUsingBlock:^(AFHTTPRequestOperation *obj, NSUInteger idx, BOOL *stop) {
             NSLog(@"%@",obj.request.URL);
@@ -153,8 +158,10 @@ typedef NS_ENUM(NSInteger, PBMDataAPI) {
             }else if (idx == 1){
                 createdLocationTypes = [self importLocationTypesWithRequest:obj];
             }else if (idx == 2){
-                createdLocations = [self importLocationsWithRequest:obj andMachines:createdMachines andLocationTypes:createdLocationTypes];
+                createdZones = [self importZonesWithRequest:obj];
             }else if (idx == 3){
+                createdLocations = [self importLocationsWithRequest:obj andMachines:createdMachines andLocationTypes:createdLocationTypes andZones:createdZones];
+            }else if (idx == 4){
                 [self importEventsWithRequest:obj andLocations:createdLocations];
             }
             [[CoreDataManager sharedInstance] saveContext];
@@ -181,6 +188,9 @@ typedef NS_ENUM(NSInteger, PBMDataAPI) {
             break;
         case PBMDataAPIEvents:
             apiURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@api/v1/region/%@/events.json",apiRootURL,_currentRegion.name]];
+            break;
+        case PBMDataAPIZones:
+            apiURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@api/v1/region/%@/zones.json",apiRootURL,_currentRegion.name]];
             break;
         default:
             break;
@@ -227,6 +237,10 @@ typedef NS_ENUM(NSInteger, PBMDataAPI) {
         [region.events enumerateObjectsUsingBlock:^(Event *obj, BOOL *stop) {
             [cdManager.managedObjectContext deleteObject:obj];
         }];
+    }else if (dataType == PBMDataAPIZones){
+        [region.zones enumerateObjectsUsingBlock:^(id obj, BOOL *stop) {
+            [cdManager.managedObjectContext deleteObject:obj];
+        }];
     }
     [cdManager saveContext];
 }
@@ -261,6 +275,19 @@ typedef NS_ENUM(NSInteger, PBMDataAPI) {
     return machines;
 
 }
+- (NSMutableSet *)importZonesWithRequest:(AFHTTPRequestOperation *)request{
+    CoreDataManager *cdManager = [CoreDataManager sharedInstance];
+    // Clear existing
+    [self clearData:PBMDataAPIZones forRegion:_currentRegion];
+    NSMutableSet *allZones = [NSMutableSet new];
+    // Create all zones
+    [request.responseObject[@"zones"] enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+        Zone *newZone = [Zone createZoneWithData:obj andContext:cdManager.managedObjectContext];
+        [allZones addObject:newZone];
+    }];
+    [cdManager saveContext];
+    return allZones;
+}
 - (NSMutableSet *)importLocationTypesWithRequest:(AFHTTPRequestOperation *)request{
     CoreDataManager *cdManager = [CoreDataManager sharedInstance];
     // All current location type ids.
@@ -288,7 +315,7 @@ typedef NS_ENUM(NSInteger, PBMDataAPI) {
     
     return locationTypes;
 }
-- (NSMutableSet *)importLocationsWithRequest:(AFHTTPRequestOperation *)request andMachines:(NSMutableSet *)machines andLocationTypes:(NSMutableSet *)locationTypes{
+- (NSMutableSet *)importLocationsWithRequest:(AFHTTPRequestOperation *)request andMachines:(NSMutableSet *)machines andLocationTypes:(NSMutableSet *)locationTypes andZones:(NSMutableSet *)zones{
     if (![_currentRegion.locationsEtag isEqualToString:request.response.allHeaderFields[@"Etag"]]){
         NSLog(@"New Locations Etag");
         [self clearData:PBMDataAPILocations forRegion:_currentRegion];
@@ -309,6 +336,16 @@ typedef NS_ENUM(NSInteger, PBMDataAPI) {
                 locMachine.location = newLocation;
                 [newLocation addMachinesObject:locMachine];
             }];
+            // Set the zone object to the location
+            if (![newLocation.zoneNo isEqual:@(-1)] && newLocation.zoneNo){
+                NSPredicate *zonePred = [NSPredicate predicateWithFormat:@"zoneId = %@" argumentArray:@[newLocation.zoneNo]];
+                NSSet *foundZones = [zones filteredSetUsingPredicate:zonePred];
+                
+                if (foundZones.count > 0){
+                    newLocation.parentZone = [foundZones anyObject];
+                }
+            }
+            
             [allLocations addObject:newLocation];
             newLocation.machineCount = @(newLocation.machines.count);
             

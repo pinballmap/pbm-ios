@@ -21,3 +21,5 @@
 #import "MachineLocation+Create.h"
 #import "Machine+CellHelpers.h"
 #import "Location+CellHelpers.h"
+#import "Zone.h"
+#import "Zone+Create.h"

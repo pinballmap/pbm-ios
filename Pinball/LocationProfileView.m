@@ -51,6 +51,7 @@ typedef enum : NSUInteger {
 }
 - (void)viewDidLoad{
     [super viewDidLoad];
+
     self.navigationItem.title = _currentLocation.name;
     // Sort the machines by name.
     NSFetchRequest *locationMachines = [NSFetchRequest fetchRequestWithEntityName:@"MachineLocation"];

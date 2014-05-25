@@ -30,6 +30,7 @@
         <relationship name="events" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="Event" inverseName="location" inverseEntity="Event" syncable="YES"/>
         <relationship name="locationType" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="LocationType" inverseName="locations" inverseEntity="LocationType" syncable="YES"/>
         <relationship name="machines" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="MachineLocation" inverseName="location" inverseEntity="MachineLocation" syncable="YES"/>
+        <relationship name="parentZone" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Zone" inverseName="locations" inverseEntity="Zone" syncable="YES"/>
         <relationship name="region" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Region" inverseName="locations" inverseEntity="Region" syncable="YES"/>
     </entity>
     <entity name="LocationType" representedClassName="LocationType" syncable="YES">
@@ -62,13 +63,22 @@
         <attribute name="regionId" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
         <relationship name="events" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Event" inverseName="region" inverseEntity="Event" syncable="YES"/>
         <relationship name="locations" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Location" inverseName="region" inverseEntity="Location" syncable="YES"/>
+        <relationship name="zones" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Zone" inverseName="region" inverseEntity="Zone" syncable="YES"/>
+    </entity>
+    <entity name="Zone" representedClassName="Zone" syncable="YES">
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="shortName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="zoneId" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <relationship name="locations" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Location" inverseName="parentZone" inverseEntity="Location" syncable="YES"/>
+        <relationship name="region" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Region" inverseName="zones" inverseEntity="Region" syncable="YES"/>
     </entity>
     <elements>
         <element name="Event" positionX="-2529" positionY="-720" width="128" height="163"/>
-        <element name="Location" positionX="-2250" positionY="-702" width="128" height="343"/>
+        <element name="Location" positionX="-2250" positionY="-702" width="128" height="358"/>
+        <element name="LocationType" positionX="-2063" positionY="-619" width="128" height="88"/>
         <element name="Machine" positionX="-2808" positionY="-603" width="128" height="133"/>
         <element name="MachineLocation" positionX="-2504" positionY="-490" width="128" height="118"/>
-        <element name="Region" positionX="-2520" positionY="-949" width="128" height="178"/>
-        <element name="LocationType" positionX="-2063" positionY="-619" width="128" height="88"/>
+        <element name="Region" positionX="-2520" positionY="-949" width="128" height="193"/>
+        <element name="Zone" positionX="-2252" positionY="-877" width="128" height="118"/>
     </elements>
 </model>

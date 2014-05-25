@@ -35,10 +35,10 @@
     }else{
         newLocation.phone = @"N/A";
     }
-    if (![data[@"zoneNo"] isKindOfClass:[NSNull class]]){
-        newLocation.zoneNo = data[@"zoneNo"];
+    if (![data[@"zone_id"] isKindOfClass:[NSNull class]]){
+        newLocation.zoneNo = data[@"zone_id"];
     }else{
-        newLocation.zoneNo = @0;
+        newLocation.zoneNo = @(-1);
     }
     if (![data[@"neighborhood"] isKindOfClass:[NSNull class]]){
         newLocation.neighborhood = data[@"neighborhood"];
