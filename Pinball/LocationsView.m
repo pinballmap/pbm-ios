@@ -92,7 +92,7 @@
 }
 #pragma mark - Class
 - (IBAction)filterResults:(id)sender{
-    UIActionSheet *sheet = [[UIActionSheet alloc] initWithTitle:@"Location Filter" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Location (Closets)",@"Number of Machines",@"Name", nil];
+    UIActionSheet *sheet = [[UIActionSheet alloc] initWithTitle:@"Location Filter" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Location (Closets)",@"Number of Machines",@"Name",@"Zone", nil];
     [sheet showFromTabBar:self.tabBarController.tabBar];
 }
 - (BOOL)shouldPerformSegueWithIdentifier:(NSString *)identifier sender:(id)sender{
@@ -120,6 +120,7 @@
         NSFetchRequest *stackRequest = [NSFetchRequest fetchRequestWithEntityName:@"Location"];
         stackRequest.predicate = nil;
         isClosets = NO;
+        NSString *sectionName;
         if (buttonIndex == 0){
             isClosets = YES;
             // Location
@@ -139,12 +140,16 @@
             // Name
             stackRequest.predicate = [NSPredicate predicateWithFormat:@"region.name = %@",[[[PinballManager sharedInstance] currentRegion] name]];
             stackRequest.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES]];
+        }else if (buttonIndex == 3){
+            stackRequest.predicate = [NSPredicate predicateWithFormat:@"region.name = %@",[[[PinballManager sharedInstance] currentRegion] name]];
+            stackRequest.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"parentZone.name" ascending:YES]];
+            sectionName = @"parentZone.name";
         }
         
         fetchedResults = nil;
         fetchedResults = [[NSFetchedResultsController alloc] initWithFetchRequest:stackRequest
                                                              managedObjectContext:managedContext
-                                                               sectionNameKeyPath:nil
+                                                               sectionNameKeyPath:sectionName
                                                                         cacheName:nil];
         fetchedResults.delegate = self;
         [fetchedResults performFetch:nil];
@@ -171,6 +176,12 @@
         rows = searchResults.count;
     }
     return rows;
+}
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section{
+    if ([[fetchedResults sections] count] > 1){
+        return [[[fetchedResults sections] objectAtIndex:section] name];
+    }
+    return @"";
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     Location *currentLocation;

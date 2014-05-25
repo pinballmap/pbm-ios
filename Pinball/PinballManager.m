@@ -280,6 +280,8 @@ typedef NS_ENUM(NSInteger, PBMDataAPI) {
     // Clear existing
     [self clearData:PBMDataAPIZones forRegion:_currentRegion];
     NSMutableSet *allZones = [NSMutableSet new];
+    Zone *emptyZone = [Zone createZoneWithData:@{@"id": @(-1),@"name": @"Unclassified"} andContext:cdManager.managedObjectContext];
+    [allZones addObject:emptyZone];
     // Create all zones
     [request.responseObject[@"zones"] enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
         Zone *newZone = [Zone createZoneWithData:obj andContext:cdManager.managedObjectContext];
@@ -337,13 +339,11 @@ typedef NS_ENUM(NSInteger, PBMDataAPI) {
                 [newLocation addMachinesObject:locMachine];
             }];
             // Set the zone object to the location
-            if (![newLocation.zoneNo isEqual:@(-1)] && newLocation.zoneNo){
-                NSPredicate *zonePred = [NSPredicate predicateWithFormat:@"zoneId = %@" argumentArray:@[newLocation.zoneNo]];
-                NSSet *foundZones = [zones filteredSetUsingPredicate:zonePred];
-                
-                if (foundZones.count > 0){
-                    newLocation.parentZone = [foundZones anyObject];
-                }
+            NSPredicate *zonePred = [NSPredicate predicateWithFormat:@"zoneId = %@" argumentArray:@[newLocation.zoneNo]];
+            NSSet *foundZones = [zones filteredSetUsingPredicate:zonePred];
+            
+            if (foundZones.count > 0){
+                newLocation.parentZone = [foundZones anyObject];
             }
             
             [allLocations addObject:newLocation];
