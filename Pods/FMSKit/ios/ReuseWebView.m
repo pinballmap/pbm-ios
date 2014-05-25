@@ -45,6 +45,7 @@
         mainWebView = [[UIWebView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
         mainWebView.backgroundColor = [UIColor whiteColor];
         mainWebView.delegate = self;
+        mainWebView.scalesPageToFit = YES;
         UIEdgeInsets contentInsets;
         if ([self.parentViewController isKindOfClass:[UINavigationController class]]){
             contentInsets = UIEdgeInsetsMake(0, 0, 44, 0);

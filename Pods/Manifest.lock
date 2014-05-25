@@ -1,24 +1,24 @@
 PODS:
-  - AFNetworking (2.2.3):
+  - AFNetworking (2.2.4):
     - AFNetworking/NSURLConnection
     - AFNetworking/NSURLSession
     - AFNetworking/Reachability
     - AFNetworking/Security
     - AFNetworking/Serialization
     - AFNetworking/UIKit
-  - AFNetworking/NSURLConnection (2.2.3):
+  - AFNetworking/NSURLConnection (2.2.4):
     - AFNetworking/Reachability
     - AFNetworking/Security
     - AFNetworking/Serialization
-  - AFNetworking/NSURLSession (2.2.3):
+  - AFNetworking/NSURLSession (2.2.4):
     - AFNetworking/NSURLConnection
-  - AFNetworking/Reachability (2.2.3)
-  - AFNetworking/Security (2.2.3)
-  - AFNetworking/Serialization (2.2.3)
-  - AFNetworking/UIKit (2.2.3):
+  - AFNetworking/Reachability (2.2.4)
+  - AFNetworking/Security (2.2.4)
+  - AFNetworking/Serialization (2.2.4)
+  - AFNetworking/UIKit (2.2.4):
     - AFNetworking/NSURLConnection
     - AFNetworking/NSURLSession
-  - FMSKit (0.3.2)
+  - FMSKit (0.3.3)
 
 DEPENDENCIES:
   - AFNetworking (~> 2.0)
@@ -29,7 +29,7 @@ EXTERNAL SOURCES:
     :git: https://github.com/fmscode/FMSKit.git
 
 SPEC CHECKSUMS:
-  AFNetworking: ae513199cca79e9d7af2708ccabe2ed075550c42
-  FMSKit: 1d6f92a467facd4da7232eece5fd629eebd46cee
+  AFNetworking: ab63e259fe91eef4519b371ef0a4955af0e73e64
+  FMSKit: fe12bbd6ede96401e6c9456435f0669a50e5eec5
 
 COCOAPODS: 0.32.1

@@ -14,5 +14,7 @@
 
 @property (nonatomic)NSURL *webURL;
 @property (nonatomic)NSString *webTitle;
+// Default is true.
+@property (nonatomic)BOOL scalePages;
 
 @end
