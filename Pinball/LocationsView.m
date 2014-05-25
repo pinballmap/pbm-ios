@@ -55,14 +55,15 @@
 #pragma mark - Region Update
 - (void)updateRegion{
     [self.refreshControl endRefreshing];
+    isClosets = NO;
     self.navigationItem.title = [NSString stringWithFormat:@"%@ Locations",[[[PinballManager sharedInstance] currentRegion] fullName]];
     managedContext = [[CoreDataManager sharedInstance] managedObjectContext];
     NSFetchRequest *stackRequest = [NSFetchRequest fetchRequestWithEntityName:@"Location"];
     stackRequest.predicate = [NSPredicate predicateWithFormat:@"region.name = %@",[[[PinballManager sharedInstance] currentRegion] name]];
-    stackRequest.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"machineCount" ascending:NO]];
+    stackRequest.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"locationType.name" ascending:YES]];
     fetchedResults = [[NSFetchedResultsController alloc] initWithFetchRequest:stackRequest
                                                          managedObjectContext:managedContext
-                                                           sectionNameKeyPath:nil
+                                                           sectionNameKeyPath:@"locationType.name"
                                                                     cacheName:nil];
     fetchedResults.delegate = self;
     [fetchedResults performFetch:nil];
