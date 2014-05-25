@@ -19,6 +19,8 @@
     IBOutlet UITextField *locationWebsite;
     IBOutlet UITextField *locationOperator;
     IBOutlet UILabel *machineLabel;
+    IBOutlet UITextField *userName;
+    IBOutlet UITextField *userEmail;
     // Location information
     IBOutlet UITextField *locationStreet;
     IBOutlet UITextField *locationCity;
@@ -73,7 +75,9 @@
     [formFields enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
         NSDictionary *field = obj;
         if ([(UITextField *)field[@"field"] text].length == 0){
-            [UIAlertView simpleApplicationAlertWithMessage:[NSString stringWithFormat:@"%@ must be set.",field[@"display"]]cancelButton:@"Ok"];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [UIAlertView simpleApplicationAlertWithMessage:[NSString stringWithFormat:@"%@ must be set.",field[@"display"]]cancelButton:@"Ok"];
+            });
             infoStatus = NO;
             *stop = true;
         }
@@ -83,8 +87,32 @@
 #pragma mark - Class Actions
 - (IBAction)saveLocation:(id)sender{
     if ([self checkInformation]){
-        #pragma message("TODO: API Interaction for adding a location.")
-        [self dismissViewControllerAnimated:YES completion:nil];
+        NSDictionary *suggestingInfo = @{@"region_id": [[[PinballManager sharedInstance] currentRegion] regionId],
+                                         @"location_name": locationName.text,
+                                         @"location_street": locationStreet.text,
+                                         @"location_city": locationCity.text,
+                                         @"location_state": locationState.text,
+                                         @"location_zip": locationZip.text,
+                                         @"location_phone": locationPhone.text,
+                                         @"location_website": locationWebsite.text,
+                                         @"location_operator": locationOperator.text,
+                                         @"location_machines": @"Machine names",
+                                         @"submitter_name" : userName.text,
+                                         @"submitter_email": userEmail.text};
+        [[PinballManager sharedInstance] suggestLocation:suggestingInfo andCompletion:^(NSDictionary *status) {
+            if (status[@"errors"]){
+                NSString *errors;
+                if ([status[@"errors"] isKindOfClass:[NSArray class]]){
+                    errors = [status[@"errors"] componentsJoinedByString:@","];
+                }else{
+                    errors = status[@"errors"];
+                }
+                [UIAlertView simpleApplicationAlertWithMessage:errors cancelButton:@"Ok"];
+            }else{
+                [UIAlertView simpleApplicationAlertWithMessage:status[@"response"] cancelButton:@"Ok"];
+                [self dismissViewControllerAnimated:YES completion:nil];
+            }
+        }];
     }
 }
 - (IBAction)cancelLocation:(id)sender{

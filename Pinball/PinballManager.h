@@ -26,4 +26,5 @@
 - (void)updateMachineCondition:(MachineLocation *)machine withCondition:(NSString *)newCondition withCompletion:(void(^)(NSDictionary *status))completionBlock;
 // Location Routes
 - (void)updateLocation:(Location *)location withData:(NSDictionary *)locationData andCompletion:(void(^)(NSDictionary *status))completionBlock;
+- (void)suggestLocation:(NSDictionary *)locationData andCompletion:(void(^)(NSDictionary *status))completionBlock;
 @end
