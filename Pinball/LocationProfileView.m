@@ -56,14 +56,11 @@ typedef enum : NSUInteger {
     // Sort the machines by name.
     NSFetchRequest *locationMachines = [NSFetchRequest fetchRequestWithEntityName:@"MachineLocation"];
     locationMachines.predicate = [NSPredicate predicateWithFormat:@"location.locationId = %@",_currentLocation.locationId];
-    locationMachines.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"conditionUpdate" ascending:YES]];
+    locationMachines.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"machine.name" ascending:YES]];
     machinesFetch = [[NSFetchedResultsController alloc] initWithFetchRequest:locationMachines managedObjectContext:[[CoreDataManager sharedInstance] managedObjectContext] sectionNameKeyPath:nil cacheName:nil];
     machinesFetch.delegate = self;
     [machinesFetch performFetch:nil];
     
-    
-    NSSortDescriptor *asc = [NSSortDescriptor sortDescriptorWithKey:@"machine.name" ascending:YES];
-
     dataSetSeg = [[UISegmentedControl alloc] init];
     dataSetSeg.frame = CGRectMake(5, 7, 310, 29);
     [dataSetSeg insertSegmentWithTitle:@"Info" atIndex:0 animated:YES];
