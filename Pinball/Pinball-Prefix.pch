@@ -17,4 +17,6 @@
     #import "CoreDataManager.h"
     #import "PinballManager.h"
     #import "PinballModels.h"
+    #import "UIViewController+Helpers.h"
+    #import "UIDevice+ModelCheck.h"
 #endif

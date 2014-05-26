@@ -53,30 +53,39 @@ typedef enum : NSUInteger {
 - (void)viewDidLoad{
     [super viewDidLoad];
 
-    self.navigationItem.title = _currentLocation.name;
     // Sort the machines by name.
-    NSFetchRequest *locationMachines = [NSFetchRequest fetchRequestWithEntityName:@"MachineLocation"];
-    locationMachines.predicate = [NSPredicate predicateWithFormat:@"location.locationId = %@",_currentLocation.locationId];
-    locationMachines.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"machine.name" ascending:YES]];
-    machinesFetch = [[NSFetchedResultsController alloc] initWithFetchRequest:locationMachines managedObjectContext:[[CoreDataManager sharedInstance] managedObjectContext] sectionNameKeyPath:nil cacheName:nil];
-    machinesFetch.delegate = self;
-    [machinesFetch performFetch:nil];
-    
     dataSetSeg = [[UISegmentedControl alloc] init];
+    dataSetSeg.translatesAutoresizingMaskIntoConstraints = NO;
     dataSetSeg.frame = CGRectMake(5, 7, 310, 29);
     [dataSetSeg insertSegmentWithTitle:@"Info" atIndex:0 animated:YES];
     [dataSetSeg insertSegmentWithTitle:@"Machines" atIndex:1 animated:YES];
     [dataSetSeg addTarget:self action:@selector(changeData:) forControlEvents:UIControlEventValueChanged];
     [dataSetSeg setSelectedSegmentIndex:0];
-    
-    self.tableView.allowsSelectionDuringEditing = YES;
-    [self setupRightBarButton];
+
+    if (_currentLocation){
+        [self setupUI];
+    }
 }
 - (void)didReceiveMemoryWarning{
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
 #pragma mark - Class
+- (void)setupUI{
+    self.navigationItem.title = _currentLocation.name;
+
+    NSFetchRequest *locationMachines = [NSFetchRequest fetchRequestWithEntityName:@"MachineLocation"];
+    locationMachines.predicate = [NSPredicate predicateWithFormat:@"location.locationId = %@",_currentLocation.locationId];
+    locationMachines.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"machine.name" ascending:YES]];
+    machinesFetch = nil;
+    machinesFetch = [[NSFetchedResultsController alloc] initWithFetchRequest:locationMachines managedObjectContext:[[CoreDataManager sharedInstance] managedObjectContext] sectionNameKeyPath:nil cacheName:nil];
+    machinesFetch.delegate = self;
+    [machinesFetch performFetch:nil];
+    
+    self.tableView.allowsSelectionDuringEditing = YES;
+    [self setupRightBarButton];
+    [self.tableView reloadData];
+}
 - (void)setupRightBarButton{
     if (dataSetSeg.selectedSegmentIndex == 1){
         UIBarButtonItem *addMachine = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addNewMachine:)];
@@ -90,6 +99,11 @@ typedef enum : NSUInteger {
     MapView *map = [[[self.storyboard instantiateViewControllerWithIdentifier:@"MapView"] viewControllers] lastObject];
     map.currentLocation = _currentLocation;
     [self.navigationController pushViewController:map animated:YES];
+}
+- (void)setCurrentLocation:(Location *)currentLocation{
+    _currentLocation = currentLocation;
+    mapSnapshot = nil;
+    [self setupUI];
 }
 #pragma mark - Class Actions
 - (IBAction)changeData:(id)sender{
@@ -198,7 +212,10 @@ typedef enum : NSUInteger {
 }
 #pragma mark - Table view data source
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    return 2;
+    if (_currentLocation){
+        return 2;
+    }
+    return 0;
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     if (section == 0){
@@ -228,6 +245,10 @@ typedef enum : NSUInteger {
         UIView *dataSegView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.frame.size.width, 44)];
         [dataSegView setBackgroundColor:[UIColor whiteColor]];
         [dataSegView addSubview:dataSetSeg];
+        if (dataSetSeg){
+            NSArray *verticalConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-(10)-[seg]-(10)-|" options:NSLayoutFormatAlignmentMask metrics:nil views:@{@"seg": dataSetSeg}];
+            [dataSegView addConstraints:verticalConstraints];
+        }
         return dataSegView;
     }
     return nil;
@@ -396,14 +417,16 @@ typedef enum : NSUInteger {
                 editor.editorTitle = @"Location Description";
                 editingType = LocationEditingTypeDescription;
                 if (![_currentLocation.locationDescription isEqualToString:@"Tap to edit"]){
-                    editor.textContent  =_currentLocation.locationDescription;
+                    editor.textContent = _currentLocation.locationDescription;
                 }
                 [self.navigationController presentViewController:editor.parentViewController animated:YES completion:nil];
             }else if (indexPath.row == 4){
                 if (_currentLocation.website.length > 0 && ![_currentLocation.website isEqualToString:@"Tap to edit"] && !self.tableView.editing){
                     ReuseWebView *webView = [[ReuseWebView alloc] initWithURL:[NSURL URLWithString:_currentLocation.website]];
                     webView.webTitle = _currentLocation.name;
-                    [self.navigationController presentViewController:[[UINavigationController alloc] initWithRootViewController:webView] animated:YES completion:nil];
+                    UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:webView];
+                    navController.modalPresentationStyle = UIModalPresentationFormSheet;
+                    [self.navigationController presentViewController:navController animated:YES completion:nil];
                 }else{
                     TextEditorView *editor = [[[self.storyboard instantiateViewControllerWithIdentifier:@"TextEditorView"] viewControllers] lastObject];
                     editor.delegate = self;

@@ -226,17 +226,22 @@
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    Location *currentLocation;
+    if (!isSearching){
+        currentLocation = [fetchedResults objectAtIndexPath:indexPath];
+    }else{
+        currentLocation = [searchResults objectAtIndex:indexPath.row];
+    }
+
     if (_isSelecting){
-        Location *currentLocation;
-        if (!isSearching){
-            currentLocation = [fetchedResults objectAtIndexPath:indexPath];
-        }else{
-            currentLocation = [searchResults objectAtIndex:indexPath.row];
-        }
         if ([_selectingViewController respondsToSelector:@selector(setLocation:)]){
             [_selectingViewController setLocation:currentLocation];
         }
         [self.navigationController popToRootViewControllerAnimated:YES];
+    }
+    if ([[[UIDevice currentDevice] model] rangeOfString:@"iPad"].location != NSNotFound){
+        LocationProfileView *profileView = (LocationProfileView *)[[self.splitViewController detailViewForSplitView] navigationRootViewController];
+        [profileView setCurrentLocation:currentLocation];
     }
 }
 #pragma mark - NSFetchedResultsControllerDelegate

@@ -59,6 +59,9 @@
 		DBB71BB118FC5E77007907DE /* NSFileManager+DocumentsDirectory.m in Sources */ = {isa = PBXBuildFile; fileRef = DBB71BB018FC5E77007907DE /* NSFileManager+DocumentsDirectory.m */; };
 		DBB71BB418FC6B04007907DE /* PinballTabController.m in Sources */ = {isa = PBXBuildFile; fileRef = DBB71BB318FC6B04007907DE /* PinballTabController.m */; };
 		DBB95934191BB1A000D0847D /* Event.m in Sources */ = {isa = PBXBuildFile; fileRef = DBB95933191BB1A000D0847D /* Event.m */; };
+		DBBB4BED193387AB004E433F /* Storyboard-iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DBBB4BEC193387AB004E433F /* Storyboard-iPad.storyboard */; };
+		DBBB4BF019338A03004E433F /* UIViewController+Helpers.m in Sources */ = {isa = PBXBuildFile; fileRef = DBBB4BEF19338A03004E433F /* UIViewController+Helpers.m */; };
+		DBBB4BF319338FB5004E433F /* UIDevice+ModelCheck.m in Sources */ = {isa = PBXBuildFile; fileRef = DBBB4BF219338FB5004E433F /* UIDevice+ModelCheck.m */; };
 		DBD4F3E919067D690023D98B /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DBD4F3E819067D690023D98B /* MessageUI.framework */; };
 		DBE50374190D2BBA002BDE0D /* Location+UpdateDistance.m in Sources */ = {isa = PBXBuildFile; fileRef = DBE50373190D2BBA002BDE0D /* Location+UpdateDistance.m */; };
 		DBE712D91929134D0046DFA8 /* MachineLocation.m in Sources */ = {isa = PBXBuildFile; fileRef = DBE712D81929134D0046DFA8 /* MachineLocation.m */; };
@@ -200,6 +203,11 @@
 		DBB71BB318FC6B04007907DE /* PinballTabController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PinballTabController.m; sourceTree = "<group>"; };
 		DBB95932191BB1A000D0847D /* Event.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Event.h; sourceTree = "<group>"; };
 		DBB95933191BB1A000D0847D /* Event.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Event.m; sourceTree = "<group>"; };
+		DBBB4BEC193387AB004E433F /* Storyboard-iPad.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = "Storyboard-iPad.storyboard"; sourceTree = "<group>"; };
+		DBBB4BEE19338A03004E433F /* UIViewController+Helpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+Helpers.h"; sourceTree = "<group>"; };
+		DBBB4BEF19338A03004E433F /* UIViewController+Helpers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+Helpers.m"; sourceTree = "<group>"; };
+		DBBB4BF119338FB5004E433F /* UIDevice+ModelCheck.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIDevice+ModelCheck.h"; sourceTree = "<group>"; };
+		DBBB4BF219338FB5004E433F /* UIDevice+ModelCheck.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIDevice+ModelCheck.m"; sourceTree = "<group>"; };
 		DBD4F3E819067D690023D98B /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		DBE50372190D2BBA002BDE0D /* Location+UpdateDistance.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Location+UpdateDistance.h"; sourceTree = "<group>"; };
 		DBE50373190D2BBA002BDE0D /* Location+UpdateDistance.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Location+UpdateDistance.m"; sourceTree = "<group>"; };
@@ -471,6 +479,7 @@
 				DBF06BDD18F96FF500F92912 /* AppDelegate.h */,
 				DBF06BDE18F96FF500F92912 /* AppDelegate.m */,
 				DBF06BFD18F9700F00F92912 /* Storyboard-iPhone.storyboard */,
+				DBBB4BEC193387AB004E433F /* Storyboard-iPad.storyboard */,
 				DBB59CCB18FADC3B00F35BFD /* Views */,
 				DBF06C0818F972DD00F92912 /* View Controllers */,
 				DBF06C0718F972D700F92912 /* Data */,
@@ -555,6 +564,10 @@
 				DB52D2E218FB009400BB56D8 /* Events */,
 				DB636D0A1903EEE000576521 /* About */,
 				DBB71B9918FC482B007907DE /* Settings */,
+				DBBB4BEE19338A03004E433F /* UIViewController+Helpers.h */,
+				DBBB4BEF19338A03004E433F /* UIViewController+Helpers.m */,
+				DBBB4BF119338FB5004E433F /* UIDevice+ModelCheck.h */,
+				DBBB4BF219338FB5004E433F /* UIDevice+ModelCheck.m */,
 			);
 			name = "View Controllers";
 			sourceTree = "<group>";
@@ -714,6 +727,7 @@
 				DBF06C1318F973D200F92912 /* 740-gear.png in Resources */,
 				DBF06C8418F9840B00F92912 /* pinball@2x.png in Resources */,
 				DB070C43193243780018D521 /* CHANGELOG in Resources */,
+				DBBB4BED193387AB004E433F /* Storyboard-iPad.storyboard in Resources */,
 				DBF06C7018F9805200F92912 /* 798-filter.png in Resources */,
 				DBF06C0C18F9733C00F92912 /* 852-map@2x.png in Resources */,
 			);
@@ -783,6 +797,7 @@
 				DBB59CCA18FAD9AC00F35BFD /* LocationProfileView.m in Sources */,
 				DB52D2E118FAF94500BB56D8 /* MachineLocationPin.m in Sources */,
 				DB070BF7193226120018D521 /* NewLocationsView.m in Sources */,
+				DBBB4BF019338A03004E433F /* UIViewController+Helpers.m in Sources */,
 				DB070BF1193202ED0018D521 /* Zone.m in Sources */,
 				DB7B4C1119335B76002AF484 /* MachineLocationProfileView.m in Sources */,
 				DBB71B9F18FC4846007907DE /* RegionsView.m in Sources */,
@@ -810,6 +825,7 @@
 				DBA3B60A190846D900ACBC69 /* InputCell.m in Sources */,
 				DB52D30418FB0DCF00BB56D8 /* UIAlertView+Application.m in Sources */,
 				DB7B4C1719336717002AF484 /* NewMachineScoreView.m in Sources */,
+				DBBB4BF319338FB5004E433F /* UIDevice+ModelCheck.m in Sources */,
 				DB52D2E818FB06EC00BB56D8 /* Event+Create.m in Sources */,
 				DBF06C3C18F975C500F92912 /* Region+Create.m in Sources */,
 				DBEAA1FD192A9E140096F2A9 /* LocationType.m in Sources */,
@@ -943,9 +959,10 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Pinball/Pinball-Prefix.pch";
 				INFOPLIST_FILE = "Pinball/Pinball-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "A26B3F80-A342-4B04-892E-D3DFE0D266AA";
+				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -965,9 +982,10 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Pinball/Pinball-Prefix.pch";
 				INFOPLIST_FILE = "Pinball/Pinball-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "A26B3F80-A342-4B04-892E-D3DFE0D266AA";
+				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
