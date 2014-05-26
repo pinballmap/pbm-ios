@@ -109,7 +109,7 @@
                 }
                 [UIAlertView simpleApplicationAlertWithMessage:errors cancelButton:@"Ok"];
             }else{
-                [UIAlertView simpleApplicationAlertWithMessage:status[@"response"] cancelButton:@"Ok"];
+                [UIAlertView simpleApplicationAlertWithMessage:status[@"msg"] cancelButton:@"Ok"];
                 [self dismissViewControllerAnimated:YES completion:nil];
             }
         }];

@@ -38,9 +38,7 @@
     UIImage *image = [UIImage imageNamed:@"pin"];
     UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(CGRectGetWidth(self.frame)/2, CGRectGetHeight(self.frame)/2-image.size.height, image.size.width, image.size.height)];
     imageView.image = image;
-    [self addSubview:imageView];
-//    [self addSubview:anno];
-    
+    [self addSubview:imageView];    
 }
 
 @end

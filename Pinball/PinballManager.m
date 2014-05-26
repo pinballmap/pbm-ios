@@ -76,7 +76,7 @@ typedef NS_ENUM(NSInteger, PBMDataAPI) {
 #pragma mark - Regions listing
 - (void)allRegions:(void (^)(NSArray *regions))regionBlock{
     NSArray *currentRegions = [self coreDataRegions];
-    NSLog(@"Existing Region Count: %i",currentRegions.count);
+
     NSMutableArray *regionIds = [NSMutableArray new];
     [currentRegions enumerateObjectsUsingBlock:^(Region *obj, NSUInteger idx, BOOL *stop) {
         [regionIds addObject:obj.regionId];
@@ -93,7 +93,7 @@ typedef NS_ENUM(NSInteger, PBMDataAPI) {
             }
         }];
         [[CoreDataManager sharedInstance] saveContext];
-        NSLog(@"New Region Count: %i",[self coreDataRegions].count);
+
         regionBlock([self coreDataRegions]);
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"%@",error);

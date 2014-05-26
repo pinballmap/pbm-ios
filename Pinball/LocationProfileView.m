@@ -92,9 +92,6 @@ typedef enum : NSUInteger {
     [self.navigationController pushViewController:map animated:YES];
 }
 #pragma mark - Class Actions
-- (IBAction)saveLocation:(id)sender{
-    #pragma message("TODO: API interaction to save new location information")
-}
 - (IBAction)changeData:(id)sender{
     [self.tableView setEditing:NO];
     [self setupRightBarButton];

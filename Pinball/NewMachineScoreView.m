@@ -64,7 +64,7 @@
             if (_delegate){
                 [_delegate didAddScore];
             }
-            [UIAlertView simpleApplicationAlertWithMessage:status[@"response"] cancelButton:@"Ok"];
+            [UIAlertView simpleApplicationAlertWithMessage:status[@"msg"] cancelButton:@"Ok"];
             [self dismissViewControllerAnimated:YES completion:nil];
         }
     }];
