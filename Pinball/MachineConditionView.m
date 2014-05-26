@@ -53,7 +53,13 @@
 - (IBAction)saveCondition:(id)sender{
     [[PinballManager sharedInstance] updateMachineCondition:_currentMachine withCondition:machineCondition.text withCompletion:^(NSDictionary *status) {
         if (status[@"errors"]){
-            [UIAlertView simpleApplicationAlertWithMessage:status[@"errors"] cancelButton:@"Ok"];
+            NSString *errors;
+            if ([status[@"errors"] isKindOfClass:[NSArray class]]){
+                errors = [status[@"errors"] componentsJoinedByString:@","];
+            }else{
+                errors = status[@"errors"];
+            }
+            [UIAlertView simpleApplicationAlertWithMessage:errors cancelButton:@"Ok"];
         }else{
             _currentMachine.condition = machineCondition.text;
             _currentMachine.conditionUpdate = [NSDate date];

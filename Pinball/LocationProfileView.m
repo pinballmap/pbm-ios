@@ -129,10 +129,13 @@ typedef enum : NSUInteger {
     }
     [[PinballManager sharedInstance] updateLocation:_currentLocation withData:editedData andCompletion:^(NSDictionary *status) {
         if (status[@"errors"]){
+            NSString *errors;
             if ([status[@"errors"] isKindOfClass:[NSArray class]]){
-                NSString *errors = [status[@"errors"] componentsJoinedByString:@","];
-                [UIAlertView simpleApplicationAlertWithMessage:errors cancelButton:@"Ok"];
+                errors = [status[@"errors"] componentsJoinedByString:@","];
+            }else{
+                errors = status[@"errors"];
             }
+            [UIAlertView simpleApplicationAlertWithMessage:errors cancelButton:@"Ok"];
         }else{
             switch (editingType) {
                 case LocationEditingTypeWebsite:
