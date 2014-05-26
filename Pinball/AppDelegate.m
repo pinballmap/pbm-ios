@@ -26,7 +26,6 @@
     [[BITHockeyManager sharedHockeyManager] startManager];
     [[BITHockeyManager sharedHockeyManager].authenticator authenticateInstallation];
 
-//    [[CoreDataManager sharedInstance] resetStore];
     return YES;
 }
 

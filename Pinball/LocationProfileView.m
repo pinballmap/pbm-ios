@@ -22,6 +22,7 @@
 #import <ReuseWebView.h>
 #import "UIAlertView+Application.h"
 #import "LocationTypesView.h"
+#import "MachineLocationProfileView.h"
 
 typedef enum : NSUInteger {
     LocationEditingTypePhone,
@@ -402,7 +403,7 @@ typedef enum : NSUInteger {
                 }
             }
         }else if (dataSetSeg.selectedSegmentIndex == 1){
-            MachineConditionView *vc = (MachineConditionView *)[[[self.storyboard instantiateViewControllerWithIdentifier:@"MachineCondition"] viewControllers] lastObject];
+            MachineLocationProfileView *vc = [[[self.storyboard instantiateViewControllerWithIdentifier:@"MachineLocationProfileView"] viewControllers] lastObject];
             vc.currentMachine = [machinesFetch objectAtIndexPath:[NSIndexPath indexPathForRow:indexPath.row inSection:0]];
             [tableView setEditing:NO];
             [self.navigationController presentViewController:vc.parentViewController animated:YES completion:nil];

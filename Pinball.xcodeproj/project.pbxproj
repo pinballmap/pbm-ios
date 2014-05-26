@@ -39,6 +39,9 @@
 		DB636D0D1903EEEB00576521 /* AboutView.m in Sources */ = {isa = PBXBuildFile; fileRef = DB636D0C1903EEEB00576521 /* AboutView.m */; };
 		DB636D131903EF8E00576521 /* AboutInfo.plist in Resources */ = {isa = PBXBuildFile; fileRef = DB636D121903EF8E00576521 /* AboutInfo.plist */; };
 		DB66F4181902E414007272D1 /* NewMachineLocationView.m in Sources */ = {isa = PBXBuildFile; fileRef = DB66F4171902E414007272D1 /* NewMachineLocationView.m */; };
+		DB7B4C1119335B76002AF484 /* MachineLocationProfileView.m in Sources */ = {isa = PBXBuildFile; fileRef = DB7B4C1019335B76002AF484 /* MachineLocationProfileView.m */; };
+		DB7B4C14193361AA002AF484 /* MachineScore.m in Sources */ = {isa = PBXBuildFile; fileRef = DB7B4C13193361AA002AF484 /* MachineScore.m */; };
+		DB7B4C1719336717002AF484 /* NewMachineScoreView.m in Sources */ = {isa = PBXBuildFile; fileRef = DB7B4C1619336717002AF484 /* NewMachineScoreView.m */; };
 		DB9293C81912CBEB001EE904 /* pin.png in Resources */ = {isa = PBXBuildFile; fileRef = DB9293C61912CBEB001EE904 /* pin.png */; };
 		DB9293C91912CBEB001EE904 /* pin@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DB9293C71912CBEB001EE904 /* pin@2x.png */; };
 		DB9330BC190D49AB0054C779 /* SeattleLocation.gpx in Resources */ = {isa = PBXBuildFile; fileRef = DB9330BB190D49AB0054C779 /* SeattleLocation.gpx */; };
@@ -84,7 +87,6 @@
 		DBF06C1018F9734C00F92912 /* 851-calendar@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DBF06C0E18F9734C00F92912 /* 851-calendar@2x.png */; };
 		DBF06C1318F973D200F92912 /* 740-gear.png in Resources */ = {isa = PBXBuildFile; fileRef = DBF06C1118F973D200F92912 /* 740-gear.png */; };
 		DBF06C1418F973D200F92912 /* 740-gear@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DBF06C1218F973D200F92912 /* 740-gear@2x.png */; };
-		DBF06C1618F9746F00F92912 /* pinball_data.json in Resources */ = {isa = PBXBuildFile; fileRef = DBF06C1518F9746F00F92912 /* pinball_data.json */; };
 		DBF06C1918F9749F00F92912 /* PinballManager.m in Sources */ = {isa = PBXBuildFile; fileRef = DBF06C1818F9749F00F92912 /* PinballManager.m */; };
 		DBF06C3C18F975C500F92912 /* Region+Create.m in Sources */ = {isa = PBXBuildFile; fileRef = DBF06C3B18F975C500F92912 /* Region+Create.m */; };
 		DBF06C4018F9775600F92912 /* Machine+Create.m in Sources */ = {isa = PBXBuildFile; fileRef = DBF06C3F18F9775600F92912 /* Machine+Create.m */; };
@@ -164,6 +166,12 @@
 		DB636D121903EF8E00576521 /* AboutInfo.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = AboutInfo.plist; sourceTree = "<group>"; };
 		DB66F4161902E414007272D1 /* NewMachineLocationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewMachineLocationView.h; sourceTree = "<group>"; };
 		DB66F4171902E414007272D1 /* NewMachineLocationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewMachineLocationView.m; sourceTree = "<group>"; };
+		DB7B4C0F19335B76002AF484 /* MachineLocationProfileView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MachineLocationProfileView.h; sourceTree = "<group>"; };
+		DB7B4C1019335B76002AF484 /* MachineLocationProfileView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MachineLocationProfileView.m; sourceTree = "<group>"; };
+		DB7B4C12193361AA002AF484 /* MachineScore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MachineScore.h; sourceTree = "<group>"; };
+		DB7B4C13193361AA002AF484 /* MachineScore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MachineScore.m; sourceTree = "<group>"; };
+		DB7B4C1519336717002AF484 /* NewMachineScoreView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewMachineScoreView.h; sourceTree = "<group>"; };
+		DB7B4C1619336717002AF484 /* NewMachineScoreView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewMachineScoreView.m; sourceTree = "<group>"; };
 		DB9293C61912CBEB001EE904 /* pin.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pin.png; sourceTree = "<group>"; };
 		DB9293C71912CBEB001EE904 /* pin@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "pin@2x.png"; sourceTree = "<group>"; };
 		DB9330BB190D49AB0054C779 /* SeattleLocation.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = SeattleLocation.gpx; sourceTree = "<group>"; };
@@ -230,7 +238,6 @@
 		DBF06C0E18F9734C00F92912 /* 851-calendar@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "851-calendar@2x.png"; sourceTree = "<group>"; };
 		DBF06C1118F973D200F92912 /* 740-gear.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "740-gear.png"; sourceTree = "<group>"; };
 		DBF06C1218F973D200F92912 /* 740-gear@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "740-gear@2x.png"; sourceTree = "<group>"; };
-		DBF06C1518F9746F00F92912 /* pinball_data.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = pinball_data.json; sourceTree = "<group>"; };
 		DBF06C1718F9749F00F92912 /* PinballManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PinballManager.h; sourceTree = "<group>"; };
 		DBF06C1818F9749F00F92912 /* PinballManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PinballManager.m; sourceTree = "<group>"; };
 		DBF06C3A18F975C500F92912 /* Region+Create.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Region+Create.h"; sourceTree = "<group>"; };
@@ -347,6 +354,10 @@
 				DB52D2DD18FAEFC500BB56D8 /* MachineProfileView.m */,
 				DB66F4161902E414007272D1 /* NewMachineLocationView.h */,
 				DB66F4171902E414007272D1 /* NewMachineLocationView.m */,
+				DB7B4C0F19335B76002AF484 /* MachineLocationProfileView.h */,
+				DB7B4C1019335B76002AF484 /* MachineLocationProfileView.m */,
+				DB7B4C1519336717002AF484 /* NewMachineScoreView.h */,
+				DB7B4C1619336717002AF484 /* NewMachineScoreView.m */,
 				DBF711ED191E4DD3008656EE /* NewMachineView.h */,
 				DBF711EE191E4DD3008656EE /* NewMachineView.m */,
 				DBA10B411902F244004ED2D4 /* MachineConditionView.h */,
@@ -460,7 +471,6 @@
 				DBF06BDD18F96FF500F92912 /* AppDelegate.h */,
 				DBF06BDE18F96FF500F92912 /* AppDelegate.m */,
 				DBF06BFD18F9700F00F92912 /* Storyboard-iPhone.storyboard */,
-				DBF06C1518F9746F00F92912 /* pinball_data.json */,
 				DBB59CCB18FADC3B00F35BFD /* Views */,
 				DBF06C0818F972DD00F92912 /* View Controllers */,
 				DBF06C0718F972D700F92912 /* Data */,
@@ -569,6 +579,8 @@
 				DBF711F1191E59B8008656EE /* Machine.m */,
 				DBB95932191BB1A000D0847D /* Event.h */,
 				DBB95933191BB1A000D0847D /* Event.m */,
+				DB7B4C12193361AA002AF484 /* MachineScore.h */,
+				DB7B4C13193361AA002AF484 /* MachineScore.m */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -684,7 +696,6 @@
 				DBF06C1018F9734C00F92912 /* 851-calendar@2x.png in Resources */,
 				DBF06C1418F973D200F92912 /* 740-gear@2x.png in Resources */,
 				DB9293C91912CBEB001EE904 /* pin@2x.png in Resources */,
-				DBF06C1618F9746F00F92912 /* pinball_data.json in Resources */,
 				DB636D131903EF8E00576521 /* AboutInfo.plist in Resources */,
 				DBF06C0B18F9733C00F92912 /* 852-map.png in Resources */,
 				DB070C49193243780018D521 /* README.md in Resources */,
@@ -773,6 +784,7 @@
 				DB52D2E118FAF94500BB56D8 /* MachineLocationPin.m in Sources */,
 				DB070BF7193226120018D521 /* NewLocationsView.m in Sources */,
 				DB070BF1193202ED0018D521 /* Zone.m in Sources */,
+				DB7B4C1119335B76002AF484 /* MachineLocationProfileView.m in Sources */,
 				DBB71B9F18FC4846007907DE /* RegionsView.m in Sources */,
 				DB070BF4193203200018D521 /* Zone+Create.m in Sources */,
 				DBF06C1918F9749F00F92912 /* PinballManager.m in Sources */,
@@ -789,6 +801,7 @@
 				DB52D2DE18FAEFC500BB56D8 /* MachineProfileView.m in Sources */,
 				DBF06BDB18F96FF500F92912 /* main.m in Sources */,
 				DB070BEB193202ED0018D521 /* Location.m in Sources */,
+				DB7B4C14193361AA002AF484 /* MachineScore.m in Sources */,
 				DB4D82BE190D77530048156E /* Machine+CellHelpers.m in Sources */,
 				DBF06C8718F984AF00F92912 /* MachinesView.m in Sources */,
 				DBB71BB418FC6B04007907DE /* PinballTabController.m in Sources */,
@@ -796,6 +809,7 @@
 				DBF06C4018F9775600F92912 /* Machine+Create.m in Sources */,
 				DBA3B60A190846D900ACBC69 /* InputCell.m in Sources */,
 				DB52D30418FB0DCF00BB56D8 /* UIAlertView+Application.m in Sources */,
+				DB7B4C1719336717002AF484 /* NewMachineScoreView.m in Sources */,
 				DB52D2E818FB06EC00BB56D8 /* Event+Create.m in Sources */,
 				DBF06C3C18F975C500F92912 /* Region+Create.m in Sources */,
 				DBEAA1FD192A9E140096F2A9 /* LocationType.m in Sources */,

@@ -427,6 +427,24 @@ typedef NS_ENUM(NSInteger, PBMDataAPI) {
         completionBlock(@{@"errors": error.localizedDescription});
     }];
 }
+- (void)allScoresForMachine:(MachineLocation *)machine withCompletion:(void (^)(NSDictionary *))completionBlock{
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    manager.requestSerializer = [AFJSONRequestSerializer serializer];
+    [manager GET:[NSString stringWithFormat:@"%@api/v1/machine_score_xrefs/%@.json",apiRootURL,machine.machineLocationId] parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        completionBlock(responseObject);
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        completionBlock(@{@"errors": error.localizedDescription});
+    }];
+}
+- (void)addScore:(NSDictionary *)scoreData forMachine:(MachineLocation *)machine withCompletion:(void (^)(NSDictionary *))completionBlock{
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    manager.requestSerializer = [AFJSONRequestSerializer serializer];
+    [manager POST:[NSString stringWithFormat:@"%@api/v1/machine_score_xrefs.json",apiRootURL] parameters:scoreData success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        completionBlock(responseObject);
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        completionBlock(@{@"errors": error.localizedDescription});
+    }];
+}
 #pragma mark - Locations
 - (void)updateLocation:(Location *)location withData:(NSDictionary *)locationData andCompletion:(void (^)(NSDictionary *))completionBlock{
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
