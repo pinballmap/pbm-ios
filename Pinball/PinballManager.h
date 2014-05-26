@@ -10,6 +10,7 @@
 @import CoreLocation;
 #import "PinballModels.h"
 
+typedef void (^APIComplete)(NSDictionary *status);
 @interface PinballManager : NSObject
 
 @property (nonatomic) NSDictionary *regionInfo;
@@ -21,12 +22,12 @@
 - (void)loadRegionData:(Region *)region;
 - (void)refreshRegion;
 // Machine Routes
-- (void)createNewMachine:(NSDictionary *)machineData withCompletion:(void(^)(NSDictionary *status))completionBlock;
-- (void)createNewMachineLocation:(NSDictionary *)machineData withCompletion:(void(^)(NSDictionary *status))completionBlock;
-- (void)updateMachineCondition:(MachineLocation *)machine withCondition:(NSString *)newCondition withCompletion:(void(^)(NSDictionary *status))completionBlock;
-- (void)allScoresForMachine:(MachineLocation *)machine withCompletion:(void(^)(NSDictionary *status))completionBlock;
-- (void)addScore:(NSDictionary *)scoreData forMachine:(MachineLocation *)machine withCompletion:(void(^)(NSDictionary *status))completionBlock;
+- (void)createNewMachine:(NSDictionary *)machineData withCompletion:(APIComplete)completionBlock;
+- (void)createNewMachineLocation:(NSDictionary *)machineData withCompletion:(APIComplete)completionBlock;
+- (void)updateMachineCondition:(MachineLocation *)machine withCondition:(NSString *)newCondition withCompletion:(APIComplete)completionBlock;
+- (void)allScoresForMachine:(MachineLocation *)machine withCompletion:(APIComplete)completionBlock;
+- (void)addScore:(NSDictionary *)scoreData forMachine:(MachineLocation *)machine withCompletion:(APIComplete)completionBlock;
 // Location Routes
-- (void)updateLocation:(Location *)location withData:(NSDictionary *)locationData andCompletion:(void(^)(NSDictionary *status))completionBlock;
-- (void)suggestLocation:(NSDictionary *)locationData andCompletion:(void(^)(NSDictionary *status))completionBlock;
+- (void)updateLocation:(Location *)location withData:(NSDictionary *)locationData andCompletion:(APIComplete)completionBlock;
+- (void)suggestLocation:(NSDictionary *)locationData andCompletion:(APIComplete)completionBlock;
 @end

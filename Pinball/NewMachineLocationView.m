@@ -77,12 +77,19 @@
 #pragma mark - Actions
 - (IBAction)saveMachine:(id)sender{
     if (_location && machineName.text.length > 0){
-        #pragma message("TODO: API Interaction for adding machines.")
         NSDictionary *machine = @{@"machine_id": pickedMachine.machineId,@"location_id": _location.locationId,@"condition": machineCondition.text};
         [[PinballManager sharedInstance] createNewMachineLocation:machine withCompletion:^(NSDictionary *status) {
-            NSLog(@"%@",status);
-            NSLog(@"%@",machine);
-            [self dismissViewControllerAnimated:YES completion:nil];
+            if (status[@"errors"]){
+                NSString *errors;
+                if ([status[@"errors"] isKindOfClass:[NSArray class]]){
+                    errors = [status[@"errors"] componentsJoinedByString:@","];
+                }else{
+                    errors = status[@"errors"];
+                }
+                [UIAlertView simpleApplicationAlertWithMessage:errors cancelButton:@"Ok"];
+            }else{
+                [self dismissViewControllerAnimated:YES completion:nil];
+            }
         }];
     }else{
         if (machineName.text.length == 0){

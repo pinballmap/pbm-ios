@@ -10,7 +10,7 @@
 #import "NSFileManager+DocumentsDirectory.h"
 #import <AFNetworking.h>
 
-static const NSString *apiRootURL = @"http://pinballmap.com/";
+static const NSString *apiRootURL = @"http://localhost:3000/";//@"http://pinballmap.com/";
 
 typedef NS_ENUM(NSInteger, PBMDataAPI) {
     PBMDataAPIRegions = 0,
@@ -405,20 +405,20 @@ typedef NS_ENUM(NSInteger, PBMDataAPI) {
     return modelFetch;
 }
 #pragma mark - Machines
-- (void)createNewMachine:(NSDictionary *)machineData withCompletion:(void (^)(NSDictionary *))completionBlock{
+- (void)createNewMachine:(NSDictionary *)machineData withCompletion:(APIComplete)completionBlock{
     
 }
-- (void)createNewMachineLocation:(NSDictionary *)machineData withCompletion:(void (^)(NSDictionary *))completionBlock{
+- (void)createNewMachineLocation:(NSDictionary *)machineData withCompletion:(APIComplete)completionBlock{
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     manager.requestSerializer = [AFJSONRequestSerializer serializer];
     [manager POST:[NSString stringWithFormat:@"%@api/v1/location_machine_xrefs.json",apiRootURL] parameters:machineData success:^(AFHTTPRequestOperation *operation, id responseObject) {
         [self refreshRegion];
         completionBlock(responseObject);
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        NSLog(@"%@",error);
+        completionBlock(@{@"errors": error.localizedDescription});
     }];
 }
-- (void)updateMachineCondition:(MachineLocation *)machine withCondition:(NSString *)newCondition withCompletion:(void (^)(NSDictionary *))completionBlock{
+- (void)updateMachineCondition:(MachineLocation *)machine withCondition:(NSString *)newCondition withCompletion:(APIComplete)completionBlock{
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     manager.requestSerializer = [AFJSONRequestSerializer serializer];
     [manager PUT:[NSString stringWithFormat:@"%@api/v1/location_machine_xrefs/%@.json",apiRootURL,machine.machineLocationId] parameters:@{@"condition": newCondition} success:^(AFHTTPRequestOperation *operation, id responseObject) {
@@ -427,7 +427,7 @@ typedef NS_ENUM(NSInteger, PBMDataAPI) {
         completionBlock(@{@"errors": error.localizedDescription});
     }];
 }
-- (void)allScoresForMachine:(MachineLocation *)machine withCompletion:(void (^)(NSDictionary *))completionBlock{
+- (void)allScoresForMachine:(MachineLocation *)machine withCompletion:(APIComplete)completionBlock{
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     manager.requestSerializer = [AFJSONRequestSerializer serializer];
     [manager GET:[NSString stringWithFormat:@"%@api/v1/machine_score_xrefs/%@.json",apiRootURL,machine.machineLocationId] parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
@@ -436,7 +436,7 @@ typedef NS_ENUM(NSInteger, PBMDataAPI) {
         completionBlock(@{@"errors": error.localizedDescription});
     }];
 }
-- (void)addScore:(NSDictionary *)scoreData forMachine:(MachineLocation *)machine withCompletion:(void (^)(NSDictionary *))completionBlock{
+- (void)addScore:(NSDictionary *)scoreData forMachine:(MachineLocation *)machine withCompletion:(APIComplete)completionBlock{
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     manager.requestSerializer = [AFJSONRequestSerializer serializer];
     [manager POST:[NSString stringWithFormat:@"%@api/v1/machine_score_xrefs.json",apiRootURL] parameters:scoreData success:^(AFHTTPRequestOperation *operation, id responseObject) {
@@ -446,7 +446,7 @@ typedef NS_ENUM(NSInteger, PBMDataAPI) {
     }];
 }
 #pragma mark - Locations
-- (void)updateLocation:(Location *)location withData:(NSDictionary *)locationData andCompletion:(void (^)(NSDictionary *))completionBlock{
+- (void)updateLocation:(Location *)location withData:(NSDictionary *)locationData andCompletion:(APIComplete)completionBlock{
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     manager.requestSerializer = [AFJSONRequestSerializer serializer];
     [manager PUT:[NSString stringWithFormat:@"%@api/v1/locations/%@.json",apiRootURL,location.locationId] parameters:locationData success:^(AFHTTPRequestOperation *operation, id responseObject) {
@@ -455,7 +455,7 @@ typedef NS_ENUM(NSInteger, PBMDataAPI) {
         completionBlock(@{@"errors": error.localizedDescription});
     }];
 }
-- (void)suggestLocation:(NSDictionary *)locationData andCompletion:(void (^)(NSDictionary *))completionBlock{
+- (void)suggestLocation:(NSDictionary *)locationData andCompletion:(APIComplete)completionBlock{
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     manager.requestSerializer = [AFJSONRequestSerializer serializer];
     [manager POST:[NSString stringWithFormat:@"%@api/v1/locations/suggest.json",apiRootURL] parameters:locationData success:^(AFHTTPRequestOperation *operation, id responseObject) {
