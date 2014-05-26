@@ -173,10 +173,23 @@ typedef enum : NSUInteger {
 - (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex{
     if (buttonIndex != alertView.cancelButtonIndex){
         if (alertView == deleteConfirm){
-            [[[PinballManager sharedInstance] managedObjectContext] deleteObject:[machinesFetch objectAtIndexPath:deletePath]];
-            #pragma message("TODO: API interaction to remove machine")
-            [self.tableView deleteRowsAtIndexPaths:@[deletePath] withRowAnimation:UITableViewRowAnimationAutomatic];
-            deletePath = nil;
+            MachineLocation *machine = [machinesFetch objectAtIndexPath:[NSIndexPath indexPathForItem:deletePath.row inSection:0]];
+            [[PinballManager sharedInstance] removeMachine:machine withCompletion:^(NSDictionary *status) {
+                if (status[@"errors"]){
+                    NSString *errors;
+                    if ([status[@"errors"] isKindOfClass:[NSArray class]]){
+                        errors = [status[@"errors"] componentsJoinedByString:@","];
+                    }else{
+                        errors = status[@"errors"];
+                    }
+                    [UIAlertView simpleApplicationAlertWithMessage:errors cancelButton:@"Ok"];
+                }else{
+                    [[[CoreDataManager sharedInstance] managedObjectContext] deleteObject:machine];
+                    [[CoreDataManager sharedInstance] saveContext];
+                    deletePath = nil;
+                    [UIAlertView simpleApplicationAlertWithMessage:@"Removed machine!" cancelButton:@"Ok"];
+                }
+            }];
         }
     }
 }

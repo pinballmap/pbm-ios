@@ -27,6 +27,7 @@ typedef void (^APIComplete)(NSDictionary *status);
 - (void)updateMachineCondition:(MachineLocation *)machine withCondition:(NSString *)newCondition withCompletion:(APIComplete)completionBlock;
 - (void)allScoresForMachine:(MachineLocation *)machine withCompletion:(APIComplete)completionBlock;
 - (void)addScore:(NSDictionary *)scoreData forMachine:(MachineLocation *)machine withCompletion:(APIComplete)completionBlock;
+- (void)removeMachine:(MachineLocation *)machine withCompletion:(APIComplete)completionBlock;
 // Location Routes
 - (void)updateLocation:(Location *)location withData:(NSDictionary *)locationData andCompletion:(APIComplete)completionBlock;
 - (void)suggestLocation:(NSDictionary *)locationData andCompletion:(APIComplete)completionBlock;
