@@ -31,21 +31,35 @@
 - (void)viewDidLoad{
     [super viewDidLoad];
     
-    self.navigationItem.title = _currentMachine.name;
-    
-    NSFetchRequest *locationRequest = [NSFetchRequest fetchRequestWithEntityName:@"MachineLocation"];
-    locationRequest.predicate = [NSPredicate predicateWithFormat:@"location.region = %@ AND machine = %@" argumentArray:@[[[PinballManager sharedInstance] currentRegion],_currentMachine]];
-    locationRequest.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"location.name" ascending:YES]];
-    machineLocations = [[[CoreDataManager sharedInstance] managedObjectContext] executeFetchRequest:locationRequest error:nil];
-    
+    if (_currentMachine){
+        [self setupUI];
+    }
 }
 - (void)didReceiveMemoryWarning{
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+#pragma mark - Class
+- (void)setupUI{
+    self.navigationItem.title = _currentMachine.name;
+
+    NSFetchRequest *locationRequest = [NSFetchRequest fetchRequestWithEntityName:@"MachineLocation"];
+    locationRequest.predicate = [NSPredicate predicateWithFormat:@"location.region = %@ AND machine = %@" argumentArray:@[[[PinballManager sharedInstance] currentRegion],_currentMachine]];
+    locationRequest.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"location.name" ascending:YES]];
+    machineLocations = [[[CoreDataManager sharedInstance] managedObjectContext] executeFetchRequest:locationRequest error:nil];
+    [self.tableView reloadData];
+}
+- (void)setCurrentMachine:(Machine *)currentMachine{
+    _currentMachine = currentMachine;
+    [self setupUI];
+}
 #pragma mark - Table view data source
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    return 2;
+    if (_currentMachine){
+        return 2;
+    }else{
+        return 0;
+    }
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     if (section == 0){
@@ -121,7 +135,9 @@
         if (indexPath.row == 2){
             ReuseWebView *webView = [[ReuseWebView alloc] initWithURL:[NSURL URLWithString:_currentMachine.ipdbLink]];
             webView.webTitle = @"IPDB";
-            [self.navigationController presentViewController:[[UINavigationController alloc] initWithRootViewController:webView] animated:YES completion:nil];
+            UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:webView];
+            navController.modalPresentationStyle = UIModalPresentationFormSheet;
+            [self.navigationController presentViewController:navController animated:YES completion:nil];
         }
     }else if (indexPath.section == 1){
         if (indexPath.row == 0){

@@ -9,6 +9,7 @@
 #import "MachinesView.h"
 #import "MachineLocation.h"
 #import "MachineProfileView.h"
+
 @interface MachinesView () <NSFetchedResultsControllerDelegate,UISearchBarDelegate>{
     NSFetchedResultsController *fetchedResults;
     NSManagedObjectContext *managedContext;
@@ -153,6 +154,19 @@
     cell.textLabel.text = currentMachine.name;
     cell.detailTextLabel.text = [NSString stringWithFormat:@"%@, %@",currentMachine.manufacturer,currentMachine.year];
     return cell;
+}
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    Machine *currentMachine;
+    if (!isSearching){
+        currentMachine = [fetchedResults objectAtIndexPath:indexPath];
+    }else{
+        currentMachine = searchResults[indexPath.row];
+    }
+    if ([UIDevice iPad]){
+        MachineProfileView *profileView = (MachineProfileView *)[[self.splitViewController detailViewForSplitView] navigationRootViewController];
+        [profileView setCurrentMachine:currentMachine];
+    }
 }
 #pragma mark - NSFetchedResultsControllerDelegate
 - (void)controllerWillChangeContent:(NSFetchedResultsController *)controller{
