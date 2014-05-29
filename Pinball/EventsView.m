@@ -9,6 +9,7 @@
 #import "EventsView.h"
 #import "NSDate+DateFormatting.h"
 #import "EventProfileView.h"
+#import "UIViewController+Helpers.h"
 
 @interface EventsView () <NSFetchedResultsControllerDelegate> {
     NSFetchedResultsController *fetchedResults;
@@ -82,6 +83,12 @@
     cell.detailTextLabel.text = [currentEvent.startDate monthDayYearPretty:YES];
     
     return cell;
+}
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    Event *currentEvent = [fetchedResults objectAtIndexPath:indexPath];
+    EventProfileView *profileView = (EventProfileView *)[(UINavigationController *)[self.splitViewController detailViewForSplitView] navigationRootViewController];
+    profileView.currentEvent = currentEvent;
 }
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
     if ([segue.identifier isEqualToString:@"EventProfileView"]){
