@@ -115,7 +115,11 @@
         region = searchResults[indexPath.row];
     }
     [[PinballManager sharedInstance] loadRegionData:region];
-    [self.navigationController popToRootViewControllerAnimated:YES];
+    if ([[[UIDevice currentDevice] model] rangeOfString:@"iPad"].location != NSNotFound){
+        [self dismissViewControllerAnimated:YES completion:nil];
+    }else{
+        [self.navigationController popToRootViewControllerAnimated:YES];
+    }
 }
 /*
 // Override to support conditional editing of the table view.

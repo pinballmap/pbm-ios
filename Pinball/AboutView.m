@@ -11,7 +11,7 @@
 @interface AboutView () {
     NSArray *aboutInfo;
 }
-
+- (IBAction)dismissAbout:(id)sender;
 @end
 
 @implementation AboutView
@@ -31,6 +31,9 @@
 - (void)didReceiveMemoryWarning{
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+- (IBAction)dismissAbout:(id)sender{
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 #pragma mark - TableView Datasource/Delegate
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
