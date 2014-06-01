@@ -58,6 +58,16 @@
     NSString *detailText;
     if (indexPath.row == 0){
         detailText = _currentEvent.eventDescription;
+    }else if (indexPath.row == 1){
+        detailText = _currentEvent.link;
+    }else if (indexPath.row == 2){
+        detailText = [_currentEvent.startDate monthDayYearPretty:YES];
+    }else if (indexPath.row == 3){
+        if (!_currentEvent.location.name){
+            detailText = _currentEvent.externalLocationName;
+        }else{
+            detailText = _currentEvent.location.name;
+        }
     }
     
     CGRect textLabel = [detailText boundingRectWithSize:CGSizeMake(280, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName: [UIFont systemFontOfSize:17]} context:nil];
@@ -82,7 +92,11 @@
         cell.dataLabel.text = [_currentEvent.startDate monthDayYearPretty:YES];
     }else if (indexPath.row == 3){
         cell.infoLabel.text = @"Location";
-        cell.dataLabel.text = _currentEvent.location.name;
+        if (!_currentEvent.location.name){
+            cell.dataLabel.text = _currentEvent.externalLocationName;
+        }else{
+            cell.dataLabel.text = _currentEvent.location.name;
+        }
     }
     
     return cell;
@@ -118,9 +132,11 @@
             });
         }];
     }else if (indexPath.row == 3){
-        LocationProfileView *locationProfile = [self.storyboard instantiateViewControllerWithIdentifier:@"LocationProfileView"];
-        locationProfile.currentLocation = _currentEvent.location;
-        [self.navigationController pushViewController:locationProfile animated:YES];
+        if (_currentEvent.location){
+            LocationProfileView *locationProfile = [self.storyboard instantiateViewControllerWithIdentifier:@"LocationProfileView"];
+            locationProfile.currentLocation = _currentEvent.location;
+            [self.navigationController pushViewController:locationProfile animated:YES];
+        }
     }
 }
 #pragma mark - EventView Delegate

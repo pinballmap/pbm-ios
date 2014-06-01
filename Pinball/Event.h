@@ -2,7 +2,7 @@
 //  Event.h
 //  Pinball
 //
-//  Created by Frank Michael on 5/8/14.
+//  Created by Frank Michael on 6/1/14.
 //  Copyright (c) 2014 Frank Michael Sanchez. All rights reserved.
 //
 
@@ -19,6 +19,9 @@
 @property (nonatomic, retain) NSString * link;
 @property (nonatomic, retain) NSString * name;
 @property (nonatomic, retain) NSDate * startDate;
+@property (nonatomic, retain) NSString * categoryTitle;
+@property (nonatomic, retain) NSDate * endDate;
+@property (nonatomic, retain) NSString * externalLocationName;
 @property (nonatomic, retain) Location *location;
 @property (nonatomic, retain) Region *region;
 

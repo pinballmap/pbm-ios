@@ -30,11 +30,19 @@
 - (void)viewDidLoad{
     [super viewDidLoad];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateRegion) name:@"RegionUpdate" object:nil];
-    [self updateRegion];
+    if ([[PinballManager sharedInstance] currentRegion]){
+        [self updateRegion];
+    }
+    UIRefreshControl *refresh = [UIRefreshControl new];
+    [refresh addTarget:self action:@selector(refreshRegion) forControlEvents:UIControlEventValueChanged];
+    self.refreshControl = refresh;
 }
 - (void)didReceiveMemoryWarning{
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+- (void)refreshRegion{
+    [[PinballManager sharedInstance] refreshRegion];
 }
 #pragma mark - Region Update
 - (void)updateRegion{
@@ -50,6 +58,7 @@
     fetchedResults.delegate = self;
     [fetchedResults performFetch:nil];
     [self.tableView reloadData];
+    [self.refreshControl endRefreshing];
 }
 #pragma mark - Table view data source
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
