@@ -4,10 +4,10 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
     </dependencies>
     <scenes>
-        <!--Tab Bar Controller-->
+        <!--Pinball Tab Controller-->
         <scene sceneID="wSd-0W-O84">
             <objects>
-                <tabBarController definesPresentationContext="YES" id="lfY-k9-Zhd" sceneMemberID="viewController">
+                <tabBarController definesPresentationContext="YES" id="lfY-k9-Zhd" customClass="PinballTabController" sceneMemberID="viewController">
                     <nil key="simulatedBottomBarMetrics"/>
                     <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" id="jU1-nj-bQO">

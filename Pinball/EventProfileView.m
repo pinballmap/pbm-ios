@@ -13,7 +13,9 @@
 @import EventKit;
 @import EventKitUI;
 #import "UIAlertView+Application.h"
-@interface EventProfileView () <EKEventViewDelegate>{
+#import <ReuseWebView.h>
+
+@interface EventProfileView () <EKEventEditViewDelegate>{
     
 }
 
@@ -105,7 +107,11 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     if (indexPath.row == 1){
         if (_currentEvent.link.length > 0 && ![_currentEvent.link isEqualToString:@"N/A"]){
-            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:_currentEvent.link]];
+            ReuseWebView *webView = [[ReuseWebView alloc] initWithURL:[NSURL URLWithString:_currentEvent.link]];
+            webView.webTitle = _currentEvent.name;
+            UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:webView];
+            navController.modalPresentationStyle = UIModalPresentationFormSheet;
+            [self.navigationController presentViewController:navController animated:YES completion:nil];
         }
     }else if (indexPath.row == 2){
         EKEventStore *store = [[EKEventStore alloc] init];
@@ -117,15 +123,18 @@
                     newEvent.endDate = _currentEvent.startDate;
                     newEvent.location = _currentEvent.location.name;
                     newEvent.title = _currentEvent.name;
+                    newEvent.notes = _currentEvent.eventDescription;
                     newEvent.allDay = YES;
                     newEvent.URL = [NSURL URLWithString:_currentEvent.link];
                     
-                    EKEventViewController *eventView = [[EKEventViewController alloc] init];
+                    EKEventEditViewController *eventView = [[EKEventEditViewController alloc] init];
+                    eventView.eventStore = store;
                     eventView.event = newEvent;
-                    eventView.allowsEditing = YES;
-                    eventView.delegate = self;
-                    UINavigationController *eventNav = [[UINavigationController alloc] initWithRootViewController:eventView];
-                    [self.navigationController presentViewController:eventNav animated:YES completion:nil];
+                    eventView.editViewDelegate = self;
+                    if ([[[UIDevice currentDevice] model] rangeOfString:@"iPad"].location != NSNotFound){
+                        eventView.modalPresentationStyle = UIModalPresentationFormSheet;
+                    }
+                    [self presentViewController:eventView animated:YES completion:nil];
                 }else{
                     [UIAlertView simpleApplicationAlertWithMessage:@"You must grant access to your calender to save this event." cancelButton:@"Ok"];
                 }
@@ -139,9 +148,9 @@
         }
     }
 }
-#pragma mark - EventView Delegate
-- (void)eventViewController:(EKEventViewController *)controller didCompleteWithAction:(EKEventViewAction)action{
-    if (action == EKEventViewActionDone || action == EKEventViewActionResponded){
+#pragma mark - EventEditView Delegate
+- (void)eventEditViewController:(EKEventEditViewController *)controller didCompleteWithAction:(EKEventEditViewAction)action{
+    if (action == EKEventEditViewActionSaved){
         [UIAlertView simpleApplicationAlertWithMessage:@"Added Event!" cancelButton:@"Ok"];
     }
     [controller dismissViewControllerAnimated:YES completion:nil];
