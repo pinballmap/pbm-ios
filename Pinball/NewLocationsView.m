@@ -87,6 +87,12 @@
 #pragma mark - Class Actions
 - (IBAction)saveLocation:(id)sender{
     if ([self checkInformation]){
+
+        __block NSString *pickedMachineNames = @"";
+        [pickedMachines enumerateObjectsUsingBlock:^(Machine *obj, NSUInteger idx, BOOL *stop) {
+            pickedMachineNames = [pickedMachineNames stringByAppendingString:[NSString stringWithFormat:@"%@-%@,",obj.name,obj.manufacturer]];
+        }];
+
         NSDictionary *suggestingInfo = @{@"region_id": [[[PinballManager sharedInstance] currentRegion] regionId],
                                          @"location_name": locationName.text,
                                          @"location_street": locationStreet.text,
@@ -96,7 +102,7 @@
                                          @"location_phone": locationPhone.text,
                                          @"location_website": locationWebsite.text,
                                          @"location_operator": locationOperator.text,
-                                         @"location_machines": @"Machine names",
+                                         @"location_machines": pickedMachineNames,
                                          @"submitter_name" : userName.text,
                                          @"submitter_email": userEmail.text};
         [[PinballManager sharedInstance] suggestLocation:suggestingInfo andCompletion:^(NSDictionary *status) {
