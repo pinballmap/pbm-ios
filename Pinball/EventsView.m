@@ -74,9 +74,9 @@
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     Event *currentEvent = [fetchedResults objectAtIndexPath:indexPath];
-    NSString *cellTitle = currentEvent.name;
+    NSAttributedString *cellTitle = currentEvent.eventTitle;
 
-    CGRect stringSize = [cellTitle boundingRectWithSize:CGSizeMake(270, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName: [UIFont systemFontOfSize:18]} context:nil];
+    CGRect stringSize = [cellTitle boundingRectWithSize:CGSizeMake(270, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin context:nil];//boundingRectWithSize:CGSizeMake(270, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName: [UIFont systemFontOfSize:18]} context:nil];
 
     stringSize.size.height = stringSize.size.height+10;   // Take into account the 10 points of padding within a cell.
     if (stringSize.size.height+10 < 44){
@@ -88,7 +88,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"EventCell" forIndexPath:indexPath];
     Event *currentEvent = [fetchedResults objectAtIndexPath:indexPath];
-    cell.textLabel.text = currentEvent.name;
+    cell.textLabel.attributedText = currentEvent.eventTitle;
     cell.detailTextLabel.text = [currentEvent.startDate monthDayYearPretty:YES];
     
     return cell;

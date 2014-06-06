@@ -45,6 +45,8 @@
     }
     if (![data[@"category"] isKindOfClass:[NSNull class]]){
         newEvent.categoryTitle = data[@"category"];
+    }else {
+        newEvent.categoryTitle = @"N/A";
     }
     
     return newEvent;

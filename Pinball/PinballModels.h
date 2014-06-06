@@ -17,6 +17,7 @@
 #import "Location+UpdateDistance.h"
 #import "Event.h"
 #import "Event+Create.h"
+#import "Event+CellHelpers.h"
 #import "MachineLocation.h"
 #import "MachineLocation+Create.h"
 #import "Machine+CellHelpers.h"

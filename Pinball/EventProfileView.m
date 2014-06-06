@@ -51,7 +51,7 @@
     }
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return 4;
+    return 5;
 }
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section{
     return _currentEvent.name;
@@ -70,6 +70,8 @@
         }else{
             detailText = _currentEvent.location.name;
         }
+    }else if (indexPath.row == 4){
+        detailText = _currentEvent.categoryTitle;
     }
     
     CGRect textLabel = [detailText boundingRectWithSize:CGSizeMake(280, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName: [UIFont systemFontOfSize:17]} context:nil];
@@ -99,6 +101,10 @@
         }else{
             cell.dataLabel.text = _currentEvent.location.name;
         }
+    }else if (indexPath.row == 4){
+        cell.infoLabel.text = @"Category";
+        cell.dataLabel.text = _currentEvent.categoryTitle;
+        
     }
     
     return cell;
