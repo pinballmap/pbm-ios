@@ -60,7 +60,7 @@
     managedContext = [[CoreDataManager sharedInstance] managedObjectContext];
     NSFetchRequest *stackRequest = [NSFetchRequest fetchRequestWithEntityName:@"Location"];
     stackRequest.predicate = [NSPredicate predicateWithFormat:@"region.name = %@",[[[PinballManager sharedInstance] currentRegion] name]];
-    stackRequest.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"locationType.name" ascending:YES]];
+    stackRequest.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"locationType.name" ascending:YES],[NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES]];
     fetchedResults = [[NSFetchedResultsController alloc] initWithFetchRequest:stackRequest
                                                          managedObjectContext:managedContext
                                                            sectionNameKeyPath:@"locationType.name"
@@ -143,11 +143,11 @@
             stackRequest.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES]];
         }else if (buttonIndex == 3){
             stackRequest.predicate = [NSPredicate predicateWithFormat:@"region.name = %@",[[[PinballManager sharedInstance] currentRegion] name]];
-            stackRequest.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"parentZone.name" ascending:YES]];
+            stackRequest.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"parentZone.name" ascending:YES],[NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES]];
             sectionName = @"parentZone.name";
         }else if (buttonIndex == 4){
             stackRequest.predicate = [NSPredicate predicateWithFormat:@"region.name = %@",[[[PinballManager sharedInstance] currentRegion] name]];
-            stackRequest.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"locationType.name" ascending:YES]];
+            stackRequest.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"locationType.name" ascending:YES],[NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES]];
             sectionName = @"locationType.name";
         }
         
