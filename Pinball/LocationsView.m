@@ -19,7 +19,6 @@
     NSMutableArray *searchResults;
     BOOL isClosets;
 }
-- (IBAction)filterResults:(id)sender;
 
 @end
 
@@ -61,10 +60,10 @@
     managedContext = [[CoreDataManager sharedInstance] managedObjectContext];
     NSFetchRequest *stackRequest = [NSFetchRequest fetchRequestWithEntityName:@"Location"];
     stackRequest.predicate = [NSPredicate predicateWithFormat:@"region.name = %@",[[[PinballManager sharedInstance] currentRegion] name]];
-    stackRequest.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"locationType.name" ascending:YES],[NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES]];
+    stackRequest.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES]];
     fetchedResults = [[NSFetchedResultsController alloc] initWithFetchRequest:stackRequest
                                                          managedObjectContext:managedContext
-                                                           sectionNameKeyPath:@"locationType.name"
+                                                           sectionNameKeyPath:nil
                                                                     cacheName:nil];
     fetchedResults.delegate = self;
     [fetchedResults performFetch:nil];

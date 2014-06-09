@@ -112,7 +112,7 @@
     if (indexPath.section == 0){
         InformationCell *cell = [tableView dequeueReusableCellWithIdentifier:@"InfoCell" forIndexPath:indexPath];
         if (indexPath.row == 0){
-            cell.infoLabel.text = @"Manufacture";
+            cell.infoLabel.text = @"Manufacturer";
             cell.dataLabel.text = _currentMachine.manufacturer;
         }else if (indexPath.row == 1){
             cell.infoLabel.text = @"Year";

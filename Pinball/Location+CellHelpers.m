@@ -11,7 +11,7 @@
 @implementation Location (CellHelpers)
 
 - (NSString *)fullAddress{
-    return [NSString stringWithFormat:@"%@, %@, %@",self.street,self.city,self.state];
+    return [NSString stringWithFormat:@"%@,\n%@,\n%@",self.street,self.city,self.state];
 }
 - (void)saveMapShot:(UIImage *)snapshot{
     NSArray *caches = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES);

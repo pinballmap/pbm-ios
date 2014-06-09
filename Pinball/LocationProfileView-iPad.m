@@ -9,10 +9,12 @@
 #import "LocationProfileView-iPad.h"
 #import "LocationProfileView.h"
 #import <MapKit/MapKit.h>
+#import "LocationsView.h"
 #import "UIViewController+Helpers.h"
 
 @interface LocationProfileView_iPad () <MKMapViewDelegate>{
     LocationProfileView *profileViewController;
+    LocationsView *locationsViewController;
     Region *currentRegion;
 }
 @property (nonatomic) IBOutlet UIView *locationsListingView;
@@ -33,18 +35,26 @@
 
 - (void)viewDidLoad{
     [super viewDidLoad];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateRegion) name:@"RegionUpdate" object:nil];
+
     // Do any additional setup after loading the view.
     _locationProfile.frame = CGRectMake(1024, 0, CGRectGetWidth(_locationProfile.frame), CGRectGetHeight(_locationProfile.frame));
     
+    [self updateRegion];
+}
+- (void)updateRegion{
+    [_mapView removeAnnotations:_mapView.annotations];
     currentRegion = [[PinballManager sharedInstance] currentRegion];
     CLLocationCoordinate2D regionCoord = CLLocationCoordinate2DMake(currentRegion.latitude.doubleValue, currentRegion.longitude.doubleValue);
     _mapView.region = MKCoordinateRegionMake(regionCoord, MKCoordinateSpanMake(1.0, 1.0));
     _mapView.delegate = self;
     if (!_currentLocation){
         self.navigationItem.title = currentRegion.fullName;
+        UIBarButtonItem *filterButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"798-filter"] style:UIBarButtonItemStylePlain target:locationsViewController action:@selector(filterResults:)];
+        self.navigationItem.leftBarButtonItem = filterButton;
     }
+    [self showListingsView:nil];
 }
-
 - (void)didReceiveMemoryWarning{
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -77,6 +87,8 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
     if ([segue.destinationViewController isKindOfClass:[LocationProfileView class]]){
         profileViewController = segue.destinationViewController;
+    }else if ([segue.destinationViewController isKindOfClass:[LocationsView class]]){
+        locationsViewController = segue.destinationViewController;
     }
 }
 #pragma mark - Class Actions
@@ -90,6 +102,8 @@
     self.navigationItem.rightBarButtonItem = nil;
     self.navigationItem.leftBarButtonItem = nil;
     self.navigationItem.title = currentRegion.fullName;
+    UIBarButtonItem *filterButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"798-filter"] style:UIBarButtonItemStylePlain target:locationsViewController action:@selector(filterResults:)];
+    self.navigationItem.leftBarButtonItem = filterButton;
 }
 #pragma mark - Map Annotation
 - (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id<MKAnnotation>)annotation{

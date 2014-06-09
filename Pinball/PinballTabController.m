@@ -35,6 +35,8 @@
     NSInteger eventCounts = [[[[PinballManager sharedInstance] currentRegion] events] count];
     if (eventCounts > 0){
         [[[self.viewControllers objectAtIndex:2] tabBarItem] setBadgeValue:[NSString stringWithFormat:@"%li",(long)eventCounts]];
+    }else{
+        [[[self.viewControllers objectAtIndex:2] tabBarItem] setBadgeValue:nil];
     }
     [updatingAlert dismissWithClickedButtonIndex:0 animated:YES];
 }

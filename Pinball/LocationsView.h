@@ -13,4 +13,7 @@
 @property (nonatomic)BOOL isSelecting;
 @property (nonatomic)id selectingViewController;
 
+- (IBAction)filterResults:(id)sender;
+
+
 @end

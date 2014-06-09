@@ -1806,6 +1806,11 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" id="C8J-kN-0ew">
+                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="iK2-if-C1Q">
+                            <connections>
+                                <action selector="cancelRegion:" destination="oRH-GT-Kpi" id="FgI-E6-Ycj"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="Request" id="pNG-Ev-nAa">
                             <connections>
                                 <action selector="requestRegion:" destination="oRH-GT-Kpi" id="2Mc-iY-lks"/>

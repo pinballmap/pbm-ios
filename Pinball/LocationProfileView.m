@@ -352,8 +352,8 @@ typedef enum : NSUInteger {
                 cell.dataLabel.text = _currentLocation.fullAddress;
             }else if (indexPath.row == 2){
                 cell.infoLabel.text = @"Type";
-                if (!_currentLocation.locationType){
-                    cell.dataLabel.text = @"Tap to Add";
+                if (!_currentLocation.locationType || [_currentLocation.locationType.name isEqualToString:@"Unclassified"]){
+                    cell.dataLabel.text = @"Tap to edit";
                 }else{
                     cell.dataLabel.text = _currentLocation.locationType.name;
                 }
@@ -440,7 +440,7 @@ typedef enum : NSUInteger {
                     [self.navigationController presentViewController:editor.parentViewController animated:YES completion:nil];
                 }
             }else if (indexPath.row == 4){
-                if (_currentLocation.website.length > 0 && ![_currentLocation.website isEqualToString:@"Tap to edit"] && !self.tableView.editing){
+                if (_currentLocation.website.length > 0 && ![_currentLocation.website isEqualToString:@"N/A"] && !self.tableView.editing){
                     ReuseWebView *webView = [[ReuseWebView alloc] initWithURL:[NSURL URLWithString:_currentLocation.website]];
                     webView.webTitle = _currentLocation.name;
                     UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:webView];
@@ -449,20 +449,6 @@ typedef enum : NSUInteger {
                         [self.parentViewController.navigationController presentViewController:navController animated:YES completion:nil];
                     }else{
                         [self.navigationController presentViewController:navController animated:YES completion:nil];
-                    }
-                }else{
-                    TextEditorView *editor = [[[self.storyboard instantiateViewControllerWithIdentifier:@"TextEditorView"] viewControllers] lastObject];
-                    editor.delegate = self;
-                    editor.editorTitle = @"Location Website";
-                    if (![_currentLocation.website isEqualToString:@"Tap to edit"]){
-                        editor.textContent = _currentLocation.website;
-                    }
-                    editingType = LocationEditingTypeWebsite;
-                    
-                    if ([UIDevice currentModel] == ModelTypeiPad){
-                        [self.parentViewController.navigationController presentViewController:editor.parentViewController animated:YES completion:nil];
-                    }else{
-                        [self.navigationController presentViewController:editor.parentViewController animated:YES completion:nil];
                     }
                 }
             }
@@ -506,7 +492,7 @@ typedef enum : NSUInteger {
         if (dataSetSeg.selectedSegmentIndex == 1){
             return YES;
         }else{
-            if (indexPath.row != 1){
+            if (indexPath.row != 1 && indexPath.row != 4){
                 return YES;
             }
         }

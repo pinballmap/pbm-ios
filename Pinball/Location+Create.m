@@ -60,7 +60,7 @@
     if (![data[@"website"] isKindOfClass:[NSNull class]] && [data[@"website"] length] > 0){
         newLocation.website = data[@"website"];
     }else{
-        newLocation.website = @"Tap to edit";
+        newLocation.website = @"N/A";
     }
     
     

@@ -15,6 +15,7 @@
     BOOL isSearching;
     NSMutableArray *searchResults;
 }
+- (IBAction)cancelRegion:(id)sender;    // iPad only.
 - (IBAction)requestRegion:(id)sender;
 
 @end
@@ -52,6 +53,9 @@
         [requestMessage setToRecipients:@[@"gratzer@gmail.com"]];
         [self presentViewController:requestMessage animated:YES completion:nil];
     }
+}
+- (IBAction)cancelRegion:(id)sender{
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 #pragma mark - MFMailComposeDelegate
 - (void)mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error{
