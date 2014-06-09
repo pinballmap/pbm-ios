@@ -1,8 +1,8 @@
 //
 //  UIAlertView+Application.m
+//  FMSKit
 //
-//  Created by Frank Michael Sanchez on 11/5/13.
-//  Copyright (c) 2013 Frank Frank Michael Sanchez. All rights reserved.
+//  Copyright (c) 2014 Frank Michael Sanchez. All rights reserved.
 //
 
 #import "UIAlertView+Application.h"

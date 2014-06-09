@@ -1,17 +1,17 @@
 //
 //  UIApplication+Version.h
+//  FMSKit
 //
-//  Created by Frank Michael Sanchez on 8/11/13.
-//  Copyright (c) 2013 Frank Michael Sanchez. All rights reserved.
+//  Copyright (c) 2014 Frank Michael Sanchez. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
 
 @interface UIApplication (Version)
 
-// Pulls the current version of the application using the info.plist file.
+// Current version of the application from info.plist
 + (NSString *)version;
-// Pulls current version of build of the application using the info.plist file.
+// Current build number of the application from info.plist
 + (NSString *)build;
 
 @end

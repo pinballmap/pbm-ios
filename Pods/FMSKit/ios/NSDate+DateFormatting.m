@@ -1,8 +1,8 @@
 //
 //  NSDate+DateFormatting.m
+//  FMSKit
 //
-//  Created by Frank Michael on 12/22/13.
-//  Copyright (c) 2013 Frank Michael Sanchez. All rights reserved.
+//  Copyright (c) 2014 Frank Michael Sanchez. All rights reserved.
 //
 
 #import "NSDate+DateFormatting.h"

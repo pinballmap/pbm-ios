@@ -1,10 +1,9 @@
 //
 //  UIColor+Gradient.m
+//  FMSKit
 //
-//  Created by Frank Michael Sanchez on 3/27/13.
-//  Copyright (c) 2013 Frank Michael Sanchez. All rights reserved.
-//  https://github.com/fmscode/Objective-C-Categories
-//  Inspired by: http://danielbeard.wordpress.com/2012/02/25/gradient-background-for-uiview-in-ios/
+//  Copyright (c) 2014 Frank Michael Sanchez. All rights reserved.
+//
 
 #import "UIColor+Gradient.h"
 
