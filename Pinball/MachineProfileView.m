@@ -34,6 +34,7 @@
     if (_currentMachine){
         [self setupUI];
     }
+    
 }
 - (void)didReceiveMemoryWarning{
     [super didReceiveMemoryWarning];
@@ -48,10 +49,21 @@
     locationRequest.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"location.name" ascending:YES]];
     machineLocations = [[[CoreDataManager sharedInstance] managedObjectContext] executeFetchRequest:locationRequest error:nil];
     [self.tableView reloadData];
+    
 }
 - (void)setCurrentMachine:(Machine *)currentMachine{
     _currentMachine = currentMachine;
     [self setupUI];
+}
+- (void)setIsModal:(BOOL)isModal{
+    _isModal = isModal;
+    if (_isModal){
+        UIBarButtonItem *dismiss = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(dismissProfile:)];
+        self.navigationItem.leftBarButtonItem = dismiss;
+    }
+}
+- (IBAction)dismissProfile:(id)sender{
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 #pragma mark - Table view data source
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{

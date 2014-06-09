@@ -13,6 +13,7 @@
 
 @interface LocationProfileView_iPad () <MKMapViewDelegate>{
     LocationProfileView *profileViewController;
+    Region *currentRegion;
 }
 @property (nonatomic) IBOutlet UIView *locationsListingView;
 @property (nonatomic) IBOutlet UIView *locationProfile;
@@ -35,10 +36,13 @@
     // Do any additional setup after loading the view.
     _locationProfile.frame = CGRectMake(1024, 0, CGRectGetWidth(_locationProfile.frame), CGRectGetHeight(_locationProfile.frame));
     
-    Region *currentRegion = [[PinballManager sharedInstance] currentRegion];
+    currentRegion = [[PinballManager sharedInstance] currentRegion];
     CLLocationCoordinate2D regionCoord = CLLocationCoordinate2DMake(currentRegion.latitude.doubleValue, currentRegion.longitude.doubleValue);
     _mapView.region = MKCoordinateRegionMake(regionCoord, MKCoordinateSpanMake(1.0, 1.0));
     _mapView.delegate = self;
+    if (!_currentLocation){
+        self.navigationItem.title = currentRegion.fullName;
+    }
 }
 
 - (void)didReceiveMemoryWarning{
@@ -77,12 +81,15 @@
 }
 #pragma mark - Class Actions
 - (IBAction)showListingsView:(id)sender{
+    _currentLocation = nil;
     [UIView animateWithDuration:.3 animations:^{
         _locationsListingView.frame = CGRectMake(0, 0, _locationsListingView.frame.size.width, _locationsListingView.frame.size.height);
         _mapView.frame = CGRectMake(280, 0, 744, self.view.frame.size.height);
         _locationProfile.frame = CGRectMake(1024, 0, CGRectGetWidth(_locationProfile.frame), CGRectGetHeight(_locationProfile.frame));
     }];
+    self.navigationItem.rightBarButtonItem = nil;
     self.navigationItem.leftBarButtonItem = nil;
+    self.navigationItem.title = currentRegion.fullName;
 }
 #pragma mark - Map Annotation
 - (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id<MKAnnotation>)annotation{

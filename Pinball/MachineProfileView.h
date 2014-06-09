@@ -12,5 +12,6 @@
 @interface MachineProfileView : UITableViewController
 
 @property (nonatomic) Machine *currentMachine;
+@property (nonatomic) BOOL isModal;
 
 @end

@@ -343,7 +343,7 @@ typedef enum : NSUInteger {
         if (dataSetSeg.selectedSegmentIndex == 0){
             // Profile data with InfoCell
             InformationCell *cell = (InformationCell *)[tableView dequeueReusableCellWithIdentifier:@"InfoCell" forIndexPath:indexPath];
-            
+
             if (indexPath.row == 0){
                 cell.infoLabel.text = @"Phone";
                 cell.dataLabel.text = _currentLocation.phone;
@@ -491,7 +491,14 @@ typedef enum : NSUInteger {
         MachineLocation *currentMachine = [machinesFetch objectAtIndexPath:[NSIndexPath indexPathForRow:indexPath.row inSection:0]];
         MachineProfileView *machineProfile = [self.storyboard instantiateViewControllerWithIdentifier:@"MachineProfile"];
         machineProfile.currentMachine = currentMachine.machine;
-        [self.navigationController pushViewController:machineProfile animated:YES];
+        if ([UIDevice currentModel] == ModelTypeiPad){
+            machineProfile.isModal = YES;
+            UINavigationController *machineNav = [[UINavigationController alloc] initWithRootViewController:machineProfile];
+            machineNav.modalPresentationStyle = UIModalPresentationFormSheet;
+            [self.parentViewController.navigationController presentViewController:machineNav animated:YES completion:nil];
+        }else{
+            [self.navigationController pushViewController:machineProfile animated:YES];
+        }
     }
 }
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath{    
