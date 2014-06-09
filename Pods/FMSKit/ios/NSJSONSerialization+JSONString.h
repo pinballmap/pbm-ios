@@ -1,8 +1,8 @@
 //
 //  NSJSONSerialization+JSONString.h
+//  FMSKit
 //
-//  Created by Frank Michael Sanchez on 6/3/13.
-//  Copyright (c) 2013 Frank Michael Sanchez. All rights reserved.
+//  Copyright (c) 2014 Frank Michael Sanchez. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>

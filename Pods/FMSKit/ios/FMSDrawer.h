@@ -1,8 +1,7 @@
 //
 //  FMSDrawer.h
-//  FMSDrawer
+//  FMSKit
 //
-//  Created by Frank Michael on 1/19/14.
 //  Copyright (c) 2014 Frank Michael Sanchez. All rights reserved.
 //
 

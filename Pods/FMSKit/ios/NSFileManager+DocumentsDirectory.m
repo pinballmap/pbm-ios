@@ -1,9 +1,9 @@
 //
 //  NSFileManager+DocumentsDirectory.m
+//  FMSKit
 //
-//  Created by Frank Michael Sanchez on 3/27/13.
-//  Copyright (c) 2013 Frank Michael Sanchez. All rights reserved.
-//  https://github.com/fmscode/Objective-C-Categories
+//  Copyright (c) 2014 Frank Michael Sanchez. All rights reserved.
+//
 
 #import "NSFileManager+DocumentsDirectory.h"
 

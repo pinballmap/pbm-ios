@@ -18,7 +18,7 @@ PODS:
   - AFNetworking/UIKit (2.2.4):
     - AFNetworking/NSURLConnection
     - AFNetworking/NSURLSession
-  - FMSKit (0.3.3)
+  - FMSKit (0.4.0)
 
 DEPENDENCIES:
   - AFNetworking (~> 2.0)
@@ -30,6 +30,6 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   AFNetworking: ab63e259fe91eef4519b371ef0a4955af0e73e64
-  FMSKit: fe12bbd6ede96401e6c9456435f0669a50e5eec5
+  FMSKit: ced3f371375ca176c023161480f7eae7a3ce4a30
 
-COCOAPODS: 0.32.1
+COCOAPODS: 0.33.1

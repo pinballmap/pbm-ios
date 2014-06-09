@@ -23,6 +23,7 @@
 #import "UIAlertView+Application.h"
 #import "LocationTypesView.h"
 #import "MachineLocationProfileView.h"
+#import <UIDevice+Model.h>
 
 typedef enum : NSUInteger {
     LocationEditingTypePhone,
@@ -213,12 +214,16 @@ typedef enum : NSUInteger {
 #pragma mark - Table view data source
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     if (_currentLocation){
-        return 2;
+        if ([UIDevice currentModel] == ModelTypeiPhone){
+            return 2;
+        }else{
+            return 1;
+        }
     }
     return 0;
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    if (section == 0){
+    if (section == 0 && [UIDevice currentModel] == ModelTypeiPhone){
         return 1;
     }else{
         if (dataSetSeg.selectedSegmentIndex == 0){
@@ -235,13 +240,13 @@ typedef enum : NSUInteger {
     return 0;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
-    if (section == 1){
+    if ((section == 1 && [UIDevice currentModel] == ModelTypeiPhone) || ([UIDevice currentModel] == ModelTypeiPad && section == 0)){
         return 44;
     }
     return 0;
 }
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
-    if (section == 1){
+    if ((section == 1 && [UIDevice currentModel] == ModelTypeiPhone) || ([UIDevice currentModel] == ModelTypeiPad && section == 0)){
         UIView *dataSegView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.frame.size.width, 44)];
         [dataSegView setBackgroundColor:[UIColor whiteColor]];
         [dataSegView addSubview:dataSetSeg];
@@ -254,10 +259,10 @@ typedef enum : NSUInteger {
     return nil;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    if (indexPath.section == 0){
+    if (indexPath.section == 0 && [UIDevice currentModel] == ModelTypeiPhone){
         // Map image.
         return 122;
-    }else if (indexPath.section == 1){
+    }else{
         if (dataSetSeg.selectedSegmentIndex == 0){
             NSString *detailText;
             if (indexPath.row == 0){
@@ -299,7 +304,7 @@ typedef enum : NSUInteger {
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    if (indexPath.section == 0){
+    if (indexPath.section == 0 && [UIDevice currentModel] == ModelTypeiPhone){
         // Map Cell
         LocationMapCell *cell = (LocationMapCell *)[tableView dequeueReusableCellWithIdentifier:@"MapCell" forIndexPath:indexPath];
         if (!mapSnapshot){
@@ -334,11 +339,11 @@ typedef enum : NSUInteger {
             }
         }
         return cell;
-    }else if (indexPath.section == 1){
+    }else{
         if (dataSetSeg.selectedSegmentIndex == 0){
             // Profile data with InfoCell
             InformationCell *cell = (InformationCell *)[tableView dequeueReusableCellWithIdentifier:@"InfoCell" forIndexPath:indexPath];
-            
+
             if (indexPath.row == 0){
                 cell.infoLabel.text = @"Phone";
                 cell.dataLabel.text = _currentLocation.phone;
@@ -386,9 +391,9 @@ typedef enum : NSUInteger {
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
-    if (indexPath.section == 0){
+    if (indexPath.section == 0 && [UIDevice currentModel] == ModelTypeiPhone){
         [self showMap];
-    }else if (indexPath.section == 1){
+    }else{
         if (dataSetSeg.selectedSegmentIndex == 0){
             if (indexPath.row == 0){
                 if (_currentLocation.phone.length > 0 && ![_currentLocation.phone isEqualToString:@"Tap to edit"] && !self.tableView.editing){
@@ -402,14 +407,24 @@ typedef enum : NSUInteger {
                         editor.textContent = _currentLocation.phone;
                     }
                     editingType = LocationEditingTypePhone;
-                    [self.navigationController presentViewController:editor.parentViewController animated:YES completion:nil];
+                    if ([UIDevice currentModel] == ModelTypeiPad){
+                        [self.parentViewController.navigationController presentViewController:editor.parentViewController animated:YES completion:nil];
+                    }else{
+                        [self.navigationController presentViewController:editor.parentViewController animated:YES completion:nil];
+                    }
                 }
             }else if (indexPath.row == 1){
-                [self showMap];
+                if ([UIDevice currentModel] == ModelTypeiPhone){
+                    [self showMap];
+                }
             }else if (indexPath.row == 2){
                 LocationTypesView *typesView = [[[self.storyboard instantiateViewControllerWithIdentifier:@"LocationTypesView"] viewControllers] lastObject];
                 typesView.delegate = self;
-                [self.navigationController presentViewController:typesView.parentViewController animated:YES completion:nil];
+                if ([UIDevice currentModel] == ModelTypeiPad){
+                    [self.parentViewController.navigationController presentViewController:typesView.parentViewController animated:YES completion:nil];
+                }else{
+                    [self.navigationController presentViewController:typesView.parentViewController animated:YES completion:nil];
+                }
             }
             else if (indexPath.row == 3){
                 TextEditorView *editor = [[[self.storyboard instantiateViewControllerWithIdentifier:@"TextEditorView"] viewControllers] lastObject];
@@ -419,14 +434,22 @@ typedef enum : NSUInteger {
                 if (![_currentLocation.locationDescription isEqualToString:@"Tap to edit"]){
                     editor.textContent = _currentLocation.locationDescription;
                 }
-                [self.navigationController presentViewController:editor.parentViewController animated:YES completion:nil];
+                if ([UIDevice currentModel] == ModelTypeiPad){
+                    [self.parentViewController.navigationController presentViewController:editor.parentViewController animated:YES completion:nil];
+                }else{
+                    [self.navigationController presentViewController:editor.parentViewController animated:YES completion:nil];
+                }
             }else if (indexPath.row == 4){
                 if (_currentLocation.website.length > 0 && ![_currentLocation.website isEqualToString:@"Tap to edit"] && !self.tableView.editing){
                     ReuseWebView *webView = [[ReuseWebView alloc] initWithURL:[NSURL URLWithString:_currentLocation.website]];
                     webView.webTitle = _currentLocation.name;
                     UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:webView];
                     navController.modalPresentationStyle = UIModalPresentationFormSheet;
-                    [self.navigationController presentViewController:navController animated:YES completion:nil];
+                    if ([UIDevice currentModel] == ModelTypeiPad){
+                        [self.parentViewController.navigationController presentViewController:navController animated:YES completion:nil];
+                    }else{
+                        [self.navigationController presentViewController:navController animated:YES completion:nil];
+                    }
                 }else{
                     TextEditorView *editor = [[[self.storyboard instantiateViewControllerWithIdentifier:@"TextEditorView"] viewControllers] lastObject];
                     editor.delegate = self;
@@ -435,19 +458,28 @@ typedef enum : NSUInteger {
                         editor.textContent = _currentLocation.website;
                     }
                     editingType = LocationEditingTypeWebsite;
-                    [self.navigationController presentViewController:editor.parentViewController animated:YES completion:nil];
+                    
+                    if ([UIDevice currentModel] == ModelTypeiPad){
+                        [self.parentViewController.navigationController presentViewController:editor.parentViewController animated:YES completion:nil];
+                    }else{
+                        [self.navigationController presentViewController:editor.parentViewController animated:YES completion:nil];
+                    }
                 }
             }
         }else if (dataSetSeg.selectedSegmentIndex == 1){
             MachineLocationProfileView *vc = [[[self.storyboard instantiateViewControllerWithIdentifier:@"MachineLocationProfileView"] viewControllers] lastObject];
             vc.currentMachine = [machinesFetch objectAtIndexPath:[NSIndexPath indexPathForRow:indexPath.row inSection:0]];
             [tableView setEditing:NO];
-            [self.navigationController presentViewController:vc.parentViewController animated:YES completion:nil];
+            if ([UIDevice currentModel] == ModelTypeiPad){
+                [self.parentViewController.navigationController presentViewController:vc.parentViewController animated:YES completion:nil];
+            }else{
+                [self.navigationController presentViewController:vc.parentViewController animated:YES completion:nil];
+            }
         }
     }
 }
 - (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath{
-    if (indexPath.section == 1){
+    if ((indexPath.section == 1 && [UIDevice currentModel] == ModelTypeiPhone) || (indexPath.section == 0 && [UIDevice currentModel] == ModelTypeiPad)){
         if (dataSetSeg.selectedSegmentIndex == 0){
             return UITableViewCellEditingStyleInsert;
         }
@@ -455,15 +487,22 @@ typedef enum : NSUInteger {
     return UITableViewCellEditingStyleDelete;
 }
 - (void)tableView:(UITableView *)tableView accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *)indexPath{
-    if (indexPath.section == 1){
+    if ((indexPath.section == 1 && [UIDevice currentModel] == ModelTypeiPhone) || (indexPath.section == 0 && [UIDevice currentModel] == ModelTypeiPad)){
         MachineLocation *currentMachine = [machinesFetch objectAtIndexPath:[NSIndexPath indexPathForRow:indexPath.row inSection:0]];
         MachineProfileView *machineProfile = [self.storyboard instantiateViewControllerWithIdentifier:@"MachineProfile"];
         machineProfile.currentMachine = currentMachine.machine;
-        [self.navigationController pushViewController:machineProfile animated:YES];
+        if ([UIDevice currentModel] == ModelTypeiPad){
+            machineProfile.isModal = YES;
+            UINavigationController *machineNav = [[UINavigationController alloc] initWithRootViewController:machineProfile];
+            machineNav.modalPresentationStyle = UIModalPresentationFormSheet;
+            [self.parentViewController.navigationController presentViewController:machineNav animated:YES completion:nil];
+        }else{
+            [self.navigationController pushViewController:machineProfile animated:YES];
+        }
     }
 }
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath{    
-    if (indexPath.section == 1){
+    if ((indexPath.section == 1 && [UIDevice currentModel] == ModelTypeiPhone) || (indexPath.section == 0 && [UIDevice currentModel] == ModelTypeiPad)){
         if (dataSetSeg.selectedSegmentIndex == 1){
             return YES;
         }else{

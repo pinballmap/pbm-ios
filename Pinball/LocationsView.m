@@ -10,6 +10,7 @@
 #import "Location.h"
 #import "LocationProfileView.h"
 #import "NewMachineLocationView.h"
+#import "LocationProfileView-iPad.h"
 
 @interface LocationsView () <NSFetchedResultsControllerDelegate,UIActionSheetDelegate,UISearchBarDelegate> {
     NSFetchedResultsController *fetchedResults;
@@ -240,7 +241,8 @@
         [self.navigationController popToRootViewControllerAnimated:YES];
     }
     if ([[[UIDevice currentDevice] model] rangeOfString:@"iPad"].location != NSNotFound){
-        LocationProfileView *profileView = (LocationProfileView *)[[self.splitViewController detailViewForSplitView] navigationRootViewController];
+        NSLog(@"%@",self.parentViewController);
+        LocationProfileView_iPad *profileView = (LocationProfileView_iPad *)self.parentViewController;
         [profileView setCurrentLocation:currentLocation];
     }
 }

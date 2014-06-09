@@ -13,4 +13,6 @@
 
 @property (nonatomic) Location *currentLocation;
 
+- (IBAction)editLocation:(id)sender;
+
 @end
