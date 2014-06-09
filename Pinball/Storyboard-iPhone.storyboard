@@ -76,13 +76,7 @@
                             <outlet property="delegate" destination="4JZ-1e-lFv" id="DaC-Mf-evt"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="db2-bk-bIs">
-                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="NN2-AK-Edt">
-                            <connections>
-                                <action selector="addMachine:" destination="4JZ-1e-lFv" id="mw4-Zx-LPr"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" id="db2-bk-bIs"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DXr-6Q-fi1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -1199,7 +1193,6 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" id="DtT-3B-Bfb">
-                        <barButtonItem key="leftBarButtonItem" title="Support" id="4D7-XU-hhJ"/>
                         <barButtonItem key="rightBarButtonItem" title="About" id="eCb-MP-J1q">
                             <connections>
                                 <segue destination="sob-yA-k2w" kind="push" id="NKT-dU-pPf"/>

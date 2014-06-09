@@ -133,7 +133,7 @@
             pickingView.delegate = self;
             pickingView.canPickMultiple = YES;
             if (pickedMachines.count > 0){
-                pickingView.pickedMachines = pickedMachines;
+                pickingView.existingPickedMachines = pickedMachines;
             }
             [self presentViewController:pickingView.parentViewController animated:YES completion:nil];
         }

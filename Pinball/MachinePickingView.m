@@ -56,11 +56,11 @@
 }
 #pragma mark - Class
 - (void)setPickedMachines:(NSArray *)pickedMachinesInput{
-    _pickedMachines = pickedMachinesInput;
+    _existingPickedMachines = pickedMachinesInput;
     if (!pickedMachines){
         pickedMachines = [NSMutableArray new];
     }
-    [pickedMachines addObjectsFromArray:_pickedMachines];
+    [pickedMachines addObjectsFromArray:_existingPickedMachines];
 }
 #pragma mark - Class Actions
 - (IBAction)savePicked:(id)sender{
