@@ -168,7 +168,11 @@ typedef enum : NSUInteger {
             editingType = -1;
             [[CoreDataManager sharedInstance] saveContext];
             [self.tableView setEditing:NO];
-            [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:1] withRowAnimation:UITableViewRowAnimationAutomatic];
+            if ([UIDevice currentModel] == ModelTypeiPhone){
+                [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:1] withRowAnimation:UITableViewRowAnimationAutomatic];
+            }else{
+                [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationAutomatic];
+            }
         }
     }];
     
