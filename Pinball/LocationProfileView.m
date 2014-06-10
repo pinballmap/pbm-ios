@@ -90,10 +90,19 @@ typedef enum : NSUInteger {
 - (void)setupRightBarButton{
     if (dataSetSeg.selectedSegmentIndex == 1){
         UIBarButtonItem *addMachine = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addNewMachine:)];
-        self.navigationItem.rightBarButtonItem = addMachine;
+        if ([UIDevice currentModel] == ModelTypeiPad){
+            self.parentViewController.navigationItem.rightBarButtonItem = addMachine;
+        }else{
+            self.navigationItem.rightBarButtonItem = addMachine;
+        }
     }else{
         UIBarButtonItem *editLocation = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemEdit target:self action:@selector(editLocation:)];
-        self.navigationItem.rightBarButtonItem = editLocation;
+        NSLog(@"%@",self.parentViewController);
+        if ([UIDevice currentModel] == ModelTypeiPad){
+            self.parentViewController.navigationItem.rightBarButtonItem = editLocation;
+        }else{
+            self.navigationItem.rightBarButtonItem = editLocation;
+        }
     }
 }
 - (void)showMap{
