@@ -69,11 +69,12 @@
     CLLocationCoordinate2D locationCoord = CLLocationCoordinate2DMake(_currentLocation.latitude.doubleValue, _currentLocation.longitude.doubleValue);
     MKPointAnnotation *locationPin = [[MKPointAnnotation alloc] init];
     locationPin.title = _currentLocation.name;
-    locationPin.subtitle = [NSString stringWithFormat:@"%.02f miles",[currentLocation.currentDistance floatValue]];
+    locationPin.subtitle = [NSString stringWithFormat:@"%.02f miles",[_currentLocation.currentDistance floatValue]];
     locationPin.coordinate = locationCoord;
     [_mapView addAnnotation:locationPin];
     [_mapView selectAnnotation:locationPin animated:YES];
-    _mapView.region = MKCoordinateRegionMake(locationCoord, MKCoordinateSpanMake(0.1, 0.1));
+    NSLog(@"%f",locationCoord.latitude);
+    _mapView.region = MKCoordinateRegionMake(locationCoord, MKCoordinateSpanMake(0.6, 0.6));
     
     [UIView animateWithDuration:.3 animations:^{
         _locationsListingView.frame = CGRectMake(-90, 0, _locationsListingView.frame.size.width, _locationsListingView.frame.size.height);

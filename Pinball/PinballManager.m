@@ -71,6 +71,7 @@ typedef NS_ENUM(NSInteger, PBMDataAPI) {
     }
     locationManager.delegate = self;
     locationManager.desiredAccuracy = kCLLocationAccuracyBest;
+    locationManager.distanceFilter = 5;
     [locationManager startUpdatingLocation];
 }
 #pragma mark - Regions listing
@@ -482,7 +483,6 @@ typedef NS_ENUM(NSInteger, PBMDataAPI) {
     NSLog(@"Location updated.");
     CLLocation *foundLocation = [locations lastObject];
     _userLocation = foundLocation;
-    [manager stopUpdatingLocation];
 }
 
 @end
