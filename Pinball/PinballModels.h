@@ -20,6 +20,7 @@
 #import "Event+CellHelpers.h"
 #import "MachineLocation.h"
 #import "MachineLocation+Create.h"
+#import "MachineLocation+CellHelpers.h"
 #import "Machine+CellHelpers.h"
 #import "Location+CellHelpers.h"
 #import "Zone.h"

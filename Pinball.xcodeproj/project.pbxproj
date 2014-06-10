@@ -28,6 +28,7 @@
 		DB3B4EF91912BBEE0015407B /* Location+CellHelpers.m in Sources */ = {isa = PBXBuildFile; fileRef = DB3B4EF81912BBEE0015407B /* Location+CellHelpers.m */; };
 		DB43E48419464D6400A641E3 /* 798-filter.png in Resources */ = {isa = PBXBuildFile; fileRef = DB43E48219464D6400A641E3 /* 798-filter.png */; };
 		DB43E48519464D6400A641E3 /* 798-filter@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DB43E48319464D6400A641E3 /* 798-filter@2x.png */; };
+		DB43E4881947194C00A641E3 /* MachineLocation+CellHelpers.m in Sources */ = {isa = PBXBuildFile; fileRef = DB43E4871947194C00A641E3 /* MachineLocation+CellHelpers.m */; };
 		DB4D82BE190D77530048156E /* Machine+CellHelpers.m in Sources */ = {isa = PBXBuildFile; fileRef = DB4D82BD190D77530048156E /* Machine+CellHelpers.m */; };
 		DB52D2DA18FAE96C00BB56D8 /* MapView.m in Sources */ = {isa = PBXBuildFile; fileRef = DB52D2D918FAE96C00BB56D8 /* MapView.m */; };
 		DB52D2DE18FAEFC500BB56D8 /* MachineProfileView.m in Sources */ = {isa = PBXBuildFile; fileRef = DB52D2DD18FAEFC500BB56D8 /* MachineProfileView.m */; };
@@ -149,6 +150,8 @@
 		DB3B4EF81912BBEE0015407B /* Location+CellHelpers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Location+CellHelpers.m"; sourceTree = "<group>"; };
 		DB43E48219464D6400A641E3 /* 798-filter.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "798-filter.png"; sourceTree = "<group>"; };
 		DB43E48319464D6400A641E3 /* 798-filter@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "798-filter@2x.png"; sourceTree = "<group>"; };
+		DB43E4861947194C00A641E3 /* MachineLocation+CellHelpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MachineLocation+CellHelpers.h"; sourceTree = "<group>"; };
+		DB43E4871947194C00A641E3 /* MachineLocation+CellHelpers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MachineLocation+CellHelpers.m"; sourceTree = "<group>"; };
 		DB4D82BC190D77530048156E /* Machine+CellHelpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Machine+CellHelpers.h"; sourceTree = "<group>"; };
 		DB4D82BD190D77530048156E /* Machine+CellHelpers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Machine+CellHelpers.m"; sourceTree = "<group>"; };
 		DB52D2D818FAE96C00BB56D8 /* MapView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapView.h; sourceTree = "<group>"; };
@@ -627,6 +630,8 @@
 				DB3B4EF81912BBEE0015407B /* Location+CellHelpers.m */,
 				DB2D132C1942687F0082B8F9 /* Event+CellHelpers.h */,
 				DB2D132D1942687F0082B8F9 /* Event+CellHelpers.m */,
+				DB43E4861947194C00A641E3 /* MachineLocation+CellHelpers.h */,
+				DB43E4871947194C00A641E3 /* MachineLocation+CellHelpers.m */,
 			);
 			name = "Model Helpers";
 			sourceTree = "<group>";
@@ -788,6 +793,7 @@
 			files = (
 				DB52D2E518FB054200BB56D8 /* EventsView.m in Sources */,
 				DBF06C6D18F97E6300F92912 /* LocationsView.m in Sources */,
+				DB43E4881947194C00A641E3 /* MachineLocation+CellHelpers.m in Sources */,
 				DB3B4EF91912BBEE0015407B /* Location+CellHelpers.m in Sources */,
 				DBF04F83192E5C56000716A8 /* LocationTypesView.m in Sources */,
 				DB52D2DA18FAE96C00BB56D8 /* MapView.m in Sources */,

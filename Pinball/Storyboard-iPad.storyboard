@@ -677,7 +677,7 @@
             </objects>
             <point key="canvasLocation" x="6108" y="-2580"/>
         </scene>
-        <!--Machine Location Profile View - Machine Location-->
+        <!--Machine Location Profile View - Machine Details-->
         <scene sceneID="xsw-y6-PUA">
             <objects>
                 <tableViewController id="XQE-N8-M2Z" customClass="MachineLocationProfileView" sceneMemberID="viewController">
@@ -733,7 +733,7 @@
                             <outlet property="delegate" destination="XQE-N8-M2Z" id="5RK-dA-efk"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Machine Location" id="6gp-EL-7TL">
+                    <navigationItem key="navigationItem" title="Machine Details" id="6gp-EL-7TL">
                         <barButtonItem key="leftBarButtonItem" systemItem="done" id="e9S-Rd-db2">
                             <connections>
                                 <action selector="dismissProfile:" destination="XQE-N8-M2Z" id="YmI-Dz-u3N"/>

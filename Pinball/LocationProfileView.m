@@ -299,7 +299,7 @@ typedef enum : NSUInteger {
 
         }else if (dataSetSeg.selectedSegmentIndex == 1){
             MachineLocation *currentMachine = [machinesFetch objectAtIndexPath:[NSIndexPath indexPathForRow:indexPath.row inSection:0]];
-            NSString *cellDetail = [NSString stringWithFormat:@"%@ updated on %@",currentMachine.condition,[currentMachine.conditionUpdate monthDayYearPretty:YES]];
+            NSString *cellDetail = currentMachine.conditionWithUpdateDate;//[NSString stringWithFormat:@"%@ updated on %@",currentMachine.condition,[currentMachine.conditionUpdate monthDayYearPretty:YES]];
             
             CGRect titleLabel = [currentMachine.machine.machineTitle boundingRectWithSize:CGSizeMake(238, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin context:nil];
             CGRect detailLabel = [cellDetail boundingRectWithSize:CGSizeMake(238, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName: [UIFont systemFontOfSize:12]} context:nil];
@@ -388,7 +388,7 @@ typedef enum : NSUInteger {
             // If no condition is available, just don't set the detail text label.
             if (![currentMachine.condition isEqualToString:@"N/A"]){
                 if (currentMachine.conditionUpdate){
-                    cell.detailTextLabel.text = [NSString stringWithFormat:@"%@ updated on %@",currentMachine.condition,[currentMachine.conditionUpdate monthDayYearPretty:YES]];
+                    cell.detailTextLabel.text = currentMachine.conditionWithUpdateDate;//[NSString stringWithFormat:@"%@ updated on %@",currentMachine.condition,[currentMachine.conditionUpdate monthDayYearPretty:YES]];
                 }else{
                     cell.detailTextLabel.text = currentMachine.condition;
                 }
