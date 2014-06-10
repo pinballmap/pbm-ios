@@ -104,6 +104,13 @@
     self.navigationItem.title = currentRegion.fullName;
     UIBarButtonItem *filterButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"798-filter"] style:UIBarButtonItemStylePlain target:locationsViewController action:@selector(filterResults:)];
     self.navigationItem.leftBarButtonItem = filterButton;
+    UIBarButtonItem *newLocation = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(showNewLocationView:)];
+    self.navigationItem.rightBarButtonItem = newLocation;
+}
+- (IBAction)showNewLocationView:(id)sender{
+    UINavigationController *navController = [self.storyboard instantiateViewControllerWithIdentifier:@"NewLocationView"];
+    navController.modalPresentationStyle = UIModalPresentationFormSheet;
+    [self.navigationController presentViewController:navController animated:YES completion:nil];
 }
 #pragma mark - Map Annotation
 - (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id<MKAnnotation>)annotation{
