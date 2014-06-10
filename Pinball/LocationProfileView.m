@@ -376,6 +376,8 @@ typedef enum : NSUInteger {
                 cell.infoLabel.text = @"Description";
                 cell.dataLabel.text = _currentLocation.locationDescription;
             }
+            [cell.dataLabel updateConstraints];
+
             return cell;
         }else if (dataSetSeg.selectedSegmentIndex == 1){
 

@@ -125,6 +125,7 @@
                 cell.dataLabel.text = @"N/A";
             }
         }
+        [cell.dataLabel updateConstraints];
         return cell;
     }else if (indexPath.section == 1){
         UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"LocationCell" forIndexPath:indexPath];

@@ -14,6 +14,7 @@
 @import EventKitUI;
 #import "UIAlertView+Application.h"
 #import <ReuseWebView.h>
+#import "UIDevice+ModelCheck.h"
 
 @interface EventProfileView () <EKEventEditViewDelegate>{
     
@@ -74,7 +75,12 @@
         detailText = _currentEvent.categoryTitle;
     }
     
-    CGRect textLabel = [detailText boundingRectWithSize:CGSizeMake(280, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName: [UIFont systemFontOfSize:17]} context:nil];
+    CGFloat detailWidth = 280;
+    if ([UIDevice iPad]){
+        detailWidth = 663;
+    }
+    
+    CGRect textLabel = [detailText boundingRectWithSize:CGSizeMake(detailWidth, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName: [UIFont systemFontOfSize:17]} context:nil];
     textLabel.size.height = textLabel.size.height+45;
     if (textLabel.size.height <= 67){
         return 67;
@@ -106,7 +112,7 @@
         cell.dataLabel.text = _currentEvent.categoryTitle;
         
     }
-    
+    [cell.dataLabel updateConstraints];
     return cell;
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
