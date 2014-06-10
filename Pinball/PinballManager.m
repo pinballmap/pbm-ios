@@ -76,7 +76,11 @@ typedef NS_ENUM(NSInteger, PBMDataAPI) {
 #pragma mark - Regions listing
 - (void)allRegions:(void (^)(NSArray *regions))regionBlock{
     NSArray *currentRegions = [self coreDataRegions];
-
+    
+    if (currentRegions.count > 0){
+        regionBlock(currentRegions);
+    }
+    
     NSMutableArray *regionIds = [NSMutableArray new];
     [currentRegions enumerateObjectsUsingBlock:^(Region *obj, NSUInteger idx, BOOL *stop) {
         [regionIds addObject:obj.regionId];
