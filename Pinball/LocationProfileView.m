@@ -357,7 +357,11 @@ typedef enum : NSUInteger {
             // Profile data with InfoCell
             InformationCell *cell = (InformationCell *)[tableView dequeueReusableCellWithIdentifier:@"InfoCell" forIndexPath:indexPath];
             if (indexPath.row == 0){
-                cell.infoLabel.text = [NSString stringWithFormat:@"Address (%.02f miles)",[_currentLocation.currentDistance floatValue]];
+                if ([_currentLocation.currentDistance isEqual:@(0)]){
+                    cell.infoLabel.text = @"Address";
+                }else{
+                    cell.infoLabel.text = [NSString stringWithFormat:@"Address (%.02f miles)",[_currentLocation.currentDistance floatValue]];
+                }
                 cell.dataLabel.text = _currentLocation.fullAddress;
             }else if (indexPath.row == 1){
                 cell.infoLabel.text = @"Phone";

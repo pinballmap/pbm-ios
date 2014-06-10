@@ -218,7 +218,11 @@
     }
     cell.textLabel.text = currentLocation.name;
     if (isClosets){
-        cell.detailTextLabel.text = [NSString stringWithFormat:@"%.02f miles",[currentLocation.currentDistance floatValue]];
+        if ([currentLocation.currentDistance isEqual:@(0)]){
+            cell.detailTextLabel.text = [NSString stringWithFormat:@"Machines: %lu",(unsigned long)currentLocation.machines.count];
+        }else{
+            cell.detailTextLabel.text = [NSString stringWithFormat:@"%.02f miles",[currentLocation.currentDistance floatValue]];
+        }
     }else{
         cell.detailTextLabel.text = [NSString stringWithFormat:@"Machines: %lu",(unsigned long)currentLocation.machines.count];
     }
