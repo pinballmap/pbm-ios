@@ -14,6 +14,8 @@
 
 @interface MachineLocationProfileView () <ScoreDelegate> {
     NSMutableArray *machineScores;
+    UIAlertView *deleteConfirm;
+    NSIndexPath *deletePath;
 }
 
 
@@ -73,28 +75,56 @@
 - (void)didAddScore{
     [self reloadScores];
 }
+#pragma mark - UIAlertView Delegate
+- (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex{
+    if (buttonIndex != alertView.cancelButtonIndex){
+        if (alertView == deleteConfirm){
+            MachineLocation *machine = _currentMachine;//[machinesFetch objectAtIndexPath:[NSIndexPath indexPathForItem:deletePath.row inSection:0]];
+            [[PinballManager sharedInstance] removeMachine:machine withCompletion:^(NSDictionary *status) {
+                if (status[@"errors"]){
+                    NSString *errors;
+                    if ([status[@"errors"] isKindOfClass:[NSArray class]]){
+                        errors = [status[@"errors"] componentsJoinedByString:@","];
+                    }else{
+                        errors = status[@"errors"];
+                    }
+                    [UIAlertView simpleApplicationAlertWithMessage:errors cancelButton:@"Ok"];
+                }else{
+                    [[[CoreDataManager sharedInstance] managedObjectContext] deleteObject:machine];
+                    [[CoreDataManager sharedInstance] saveContext];
+                    deletePath = nil;
+                    [UIAlertView simpleApplicationAlertWithMessage:@"Removed machine!" cancelButton:@"Ok"];
+                    [self dismissViewControllerAnimated:YES completion:nil];
+                }
+            }];
+        }
+    }
+}
 #pragma mark - Table view data source
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    return 2;
+    return 3;
 }
-
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     if (section == 0){
         return 1;
-    }else{
+    }else if (section == 1){
         return machineScores.count+1;
+    }else{
+        return 1;
     }
 }
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section{
     if (section == 0){
         return @"Machine Condition (tap to edit)";
-    }else{
+    }else if (section == 1){
         return @"Scores";
+    }else{
+        return nil;
     }
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    if (indexPath.section == 1){
+    if (indexPath.section == 1 || indexPath.section == 2){
         return 44;
     }
     CGRect conditionHeight = [_currentMachine.condition boundingRectWithSize:CGSizeMake(290, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName: [UIFont systemFontOfSize:18]} context:nil];
@@ -106,7 +136,7 @@
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     UITableViewCell *cell;
-    if (indexPath.section == 0){
+    if (indexPath.section == 0 || indexPath.section == 2){
         cell = [tableView dequeueReusableCellWithIdentifier:@"BasicCell"];
     }else{
         if (indexPath.row == 0){
@@ -119,7 +149,7 @@
     cell.textLabel.textAlignment = NSTextAlignmentLeft;
     if (indexPath.section == 0){
         cell.textLabel.text = _currentMachine.condition;
-    }else{
+    }else if (indexPath.section == 1){
         if (indexPath.row == 0){
             cell.textLabel.text = @"Add your score";
             cell.textLabel.textAlignment = NSTextAlignmentCenter;
@@ -128,6 +158,9 @@
             cell.textLabel.text = [NSString stringWithFormat:@"%@ (%@)",score.score,score.initials];
             cell.detailTextLabel.text = [NSString stringWithFormat:@"%@",[MachineScore wordingForRank:score.rank]];
         }
+    }else if (indexPath.section == 2){
+        cell.textLabel.text = @"Remove Machine";
+        cell.textLabel.textAlignment = NSTextAlignmentCenter;
     }
     
     return cell;
@@ -144,6 +177,10 @@
         scoreView.currentMachine = _currentMachine;
         scoreView.delegate = self;
         [self.navigationController presentViewController:scoreView.parentViewController animated:YES completion:nil];
+    }else if (indexPath.section == 2){
+        deletePath = indexPath;
+        deleteConfirm = [UIAlertView applicationAlertWithMessage:@"Are you sure you want to remove this machine." delegate:self cancelButton:@"No" otherButtons:@"Yes", nil];
+        [deleteConfirm show];
     }
 }
 
