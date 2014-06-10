@@ -1732,7 +1732,7 @@
     </scenes>
     <resources>
         <image name="740-gear.png" width="28" height="28"/>
-        <image name="798-filter.png" width="28" height="28"/>
+        <image name="798-filter.png" width="24" height="24"/>
         <image name="851-calendar.png" width="28" height="28"/>
         <image name="852-map.png" width="28" height="24"/>
         <image name="pinball.png" width="28" height="28"/>

@@ -96,7 +96,7 @@
     _currentLocation = nil;
     [UIView animateWithDuration:.3 animations:^{
         _locationsListingView.frame = CGRectMake(0, 0, _locationsListingView.frame.size.width, _locationsListingView.frame.size.height);
-        _mapView.frame = CGRectMake(280, 0, 744, self.view.frame.size.height);
+        _mapView.frame = CGRectMake(321, 0, 703, self.view.frame.size.height);
         _locationProfile.frame = CGRectMake(1024, 0, CGRectGetWidth(_locationProfile.frame), CGRectGetHeight(_locationProfile.frame));
     }];
     self.navigationItem.rightBarButtonItem = nil;
