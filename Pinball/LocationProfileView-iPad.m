@@ -65,13 +65,14 @@
     profileViewController.currentLocation = _currentLocation;
     UIBarButtonItem *editButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemEdit target:profileViewController action:@selector(editLocation:)];
     self.navigationItem.rightBarButtonItem = editButton;
-    
+
     CLLocationCoordinate2D locationCoord = CLLocationCoordinate2DMake(_currentLocation.latitude.doubleValue, _currentLocation.longitude.doubleValue);
     MKPointAnnotation *locationPin = [[MKPointAnnotation alloc] init];
     locationPin.title = _currentLocation.name;
     locationPin.subtitle = [NSString stringWithFormat:@"%.02f miles",[currentLocation.currentDistance floatValue]];
     locationPin.coordinate = locationCoord;
     [_mapView addAnnotation:locationPin];
+    [_mapView selectAnnotation:locationPin animated:YES];
     _mapView.region = MKCoordinateRegionMake(locationCoord, MKCoordinateSpanMake(0.1, 0.1));
     
     [UIView animateWithDuration:.3 animations:^{
@@ -124,7 +125,6 @@
         pinView.pinColor = MKPinAnnotationColorRed;
         pinView.animatesDrop = YES;
         pinView.canShowCallout = YES;
-        [pinView setSelected:YES animated:YES];
     }else{
         pinView.annotation = annotation;
     }
