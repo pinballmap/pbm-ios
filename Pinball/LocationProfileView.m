@@ -279,15 +279,15 @@ typedef enum : NSUInteger {
         if (dataSetSeg.selectedSegmentIndex == 0){
             NSString *detailText;
             if (indexPath.row == 0){
-                detailText = _currentLocation.phone;
-            }else if (indexPath.row == 1){
                 detailText = _currentLocation.fullAddress;
+            }else if (indexPath.row == 1){
+                detailText = _currentLocation.phone;
             }else if (indexPath.row == 2){
-                detailText = _currentLocation.locationType.name;
-            }else if (indexPath.row == 3){
-                detailText = _currentLocation.locationDescription;
-            }else if (indexPath.row == 4){
                 detailText = _currentLocation.website;
+            }else if (indexPath.row == 3){
+                detailText = _currentLocation.locationType.name;
+            }else if (indexPath.row == 4){
+                detailText = _currentLocation.locationDescription;
             }
             
             CGRect textLabel = [detailText boundingRectWithSize:CGSizeMake(280, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName: [UIFont systemFontOfSize:17]} context:nil];
@@ -356,26 +356,25 @@ typedef enum : NSUInteger {
         if (dataSetSeg.selectedSegmentIndex == 0){
             // Profile data with InfoCell
             InformationCell *cell = (InformationCell *)[tableView dequeueReusableCellWithIdentifier:@"InfoCell" forIndexPath:indexPath];
-
             if (indexPath.row == 0){
+                cell.infoLabel.text = @"Address";
+                cell.dataLabel.text = _currentLocation.fullAddress;
+            }else if (indexPath.row == 1){
                 cell.infoLabel.text = @"Phone";
                 cell.dataLabel.text = _currentLocation.phone;
-            }else if (indexPath.row == 1){
-                cell.infoLabel.text = @"Location";
-                cell.dataLabel.text = _currentLocation.fullAddress;
             }else if (indexPath.row == 2){
+                cell.infoLabel.text = @"Website";
+                cell.dataLabel.text = _currentLocation.website;
+            }else if (indexPath.row == 3){
                 cell.infoLabel.text = @"Type";
                 if (!_currentLocation.locationType || [_currentLocation.locationType.name isEqualToString:@"Unclassified"]){
                     cell.dataLabel.text = @"Tap to edit";
                 }else{
                     cell.dataLabel.text = _currentLocation.locationType.name;
                 }
-            }else if (indexPath.row == 3){
+            }else  if (indexPath.row == 4){
                 cell.infoLabel.text = @"Description";
                 cell.dataLabel.text = _currentLocation.locationDescription;
-            }else  if (indexPath.row == 4){
-                cell.infoLabel.text = @"Website";
-                cell.dataLabel.text = _currentLocation.website;
             }
             return cell;
         }else if (dataSetSeg.selectedSegmentIndex == 1){
@@ -409,6 +408,12 @@ typedef enum : NSUInteger {
     }else{
         if (dataSetSeg.selectedSegmentIndex == 0){
             if (indexPath.row == 0){
+                // Address
+                if ([UIDevice currentModel] == ModelTypeiPhone){
+                    [self showMap];
+                }
+            }else if (indexPath.row == 1){
+                // Phone
                 if (_currentLocation.phone.length > 0 && ![_currentLocation.phone isEqualToString:@"Tap to edit"] && !self.tableView.editing){
                     NSString *contactsPhoneNumber = [@"tel:+" stringByAppendingString:_currentLocation.phone];
                     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:contactsPhoneNumber]];
@@ -426,11 +431,22 @@ typedef enum : NSUInteger {
                         [self.navigationController presentViewController:editor.parentViewController animated:YES completion:nil];
                     }
                 }
-            }else if (indexPath.row == 1){
-                if ([UIDevice currentModel] == ModelTypeiPhone){
-                    [self showMap];
-                }
             }else if (indexPath.row == 2){
+                // Website
+                if (_currentLocation.website.length > 0 && ![_currentLocation.website isEqualToString:@"N/A"] && !self.tableView.editing){
+                    ReuseWebView *webView = [[ReuseWebView alloc] initWithURL:[NSURL URLWithString:_currentLocation.website]];
+                    webView.webTitle = _currentLocation.name;
+                    UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:webView];
+                    navController.modalPresentationStyle = UIModalPresentationFormSheet;
+                    if ([UIDevice currentModel] == ModelTypeiPad){
+                        [self.parentViewController.navigationController presentViewController:navController animated:YES completion:nil];
+                    }else{
+                        [self.navigationController presentViewController:navController animated:YES completion:nil];
+                    }
+                }
+            }
+            else if (indexPath.row == 3){
+                // Type
                 LocationTypesView *typesView = [[[self.storyboard instantiateViewControllerWithIdentifier:@"LocationTypesView"] viewControllers] lastObject];
                 typesView.delegate = self;
                 if ([UIDevice currentModel] == ModelTypeiPad){
@@ -438,8 +454,8 @@ typedef enum : NSUInteger {
                 }else{
                     [self.navigationController presentViewController:typesView.parentViewController animated:YES completion:nil];
                 }
-            }
-            else if (indexPath.row == 3){
+            }else if (indexPath.row == 4){
+                // Description
                 TextEditorView *editor = [[[self.storyboard instantiateViewControllerWithIdentifier:@"TextEditorView"] viewControllers] lastObject];
                 editor.delegate = self;
                 editor.editorTitle = @"Location Description";
@@ -451,18 +467,6 @@ typedef enum : NSUInteger {
                     [self.parentViewController.navigationController presentViewController:editor.parentViewController animated:YES completion:nil];
                 }else{
                     [self.navigationController presentViewController:editor.parentViewController animated:YES completion:nil];
-                }
-            }else if (indexPath.row == 4){
-                if (_currentLocation.website.length > 0 && ![_currentLocation.website isEqualToString:@"N/A"] && !self.tableView.editing){
-                    ReuseWebView *webView = [[ReuseWebView alloc] initWithURL:[NSURL URLWithString:_currentLocation.website]];
-                    webView.webTitle = _currentLocation.name;
-                    UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:webView];
-                    navController.modalPresentationStyle = UIModalPresentationFormSheet;
-                    if ([UIDevice currentModel] == ModelTypeiPad){
-                        [self.parentViewController.navigationController presentViewController:navController animated:YES completion:nil];
-                    }else{
-                        [self.navigationController presentViewController:navController animated:YES completion:nil];
-                    }
                 }
             }
         }else if (dataSetSeg.selectedSegmentIndex == 1){
@@ -505,7 +509,7 @@ typedef enum : NSUInteger {
         if (dataSetSeg.selectedSegmentIndex == 1){
             return YES;
         }else{
-            if (indexPath.row != 1 && indexPath.row != 4){
+            if (indexPath.row != 0 && indexPath.row != 2){
                 return YES;
             }
         }
