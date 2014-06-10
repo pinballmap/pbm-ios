@@ -94,7 +94,11 @@
 #pragma mark - Class
 - (IBAction)filterResults:(id)sender{
     UIActionSheet *sheet = [[UIActionSheet alloc] initWithTitle:@"Location Filter" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Location (Closest)",@"Number of Machines",@"Name",@"Zone",@"Location Type",nil];
-    [sheet showFromTabBar:self.tabBarController.tabBar];
+    if ([UIDevice iPad]){
+        [sheet showFromBarButtonItem:self.parentViewController.navigationItem.leftBarButtonItem animated:YES];
+    }else{
+        [sheet showFromTabBar:self.tabBarController.tabBar];
+    }
 }
 - (BOOL)shouldPerformSegueWithIdentifier:(NSString *)identifier sender:(id)sender{
     if ([identifier isEqualToString:@"LocationProfileView"] && _isSelecting){

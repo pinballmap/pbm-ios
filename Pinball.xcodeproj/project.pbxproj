@@ -105,6 +105,7 @@
 		DBF06C8718F984AF00F92912 /* MachinesView.m in Sources */ = {isa = PBXBuildFile; fileRef = DBF06C8618F984AF00F92912 /* MachinesView.m */; };
 		DBF711EF191E4DD3008656EE /* NewMachineView.m in Sources */ = {isa = PBXBuildFile; fileRef = DBF711EE191E4DD3008656EE /* NewMachineView.m */; };
 		DBF711F2191E59B8008656EE /* Machine.m in Sources */ = {isa = PBXBuildFile; fileRef = DBF711F1191E59B8008656EE /* Machine.m */; };
+		DBFB652319477DB700993697 /* LocationAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = DBFB652219477DB700993697 /* LocationAnnotation.m */; };
 		F5C71114D7FB464CA0CB927C /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 767AEE54A0274802B59CA4A5 /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -275,6 +276,8 @@
 		DBF711EE191E4DD3008656EE /* NewMachineView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewMachineView.m; sourceTree = "<group>"; };
 		DBF711F0191E59B8008656EE /* Machine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Machine.h; sourceTree = "<group>"; };
 		DBF711F1191E59B8008656EE /* Machine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Machine.m; sourceTree = "<group>"; };
+		DBFB652119477DB700993697 /* LocationAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationAnnotation.h; sourceTree = "<group>"; };
+		DBFB652219477DB700993697 /* LocationAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocationAnnotation.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -357,6 +360,8 @@
 				DBF04F82192E5C56000716A8 /* LocationTypesView.m */,
 				DB070BF5193226120018D521 /* NewLocationsView.h */,
 				DB070BF6193226120018D521 /* NewLocationsView.m */,
+				DBFB652119477DB700993697 /* LocationAnnotation.h */,
+				DBFB652219477DB700993697 /* LocationAnnotation.m */,
 			);
 			name = Locations;
 			sourceTree = "<group>";
@@ -806,6 +811,7 @@
 				DBB59CCA18FAD9AC00F35BFD /* LocationProfileView.m in Sources */,
 				DB52D2E118FAF94500BB56D8 /* MachineLocationPin.m in Sources */,
 				DB070BF7193226120018D521 /* NewLocationsView.m in Sources */,
+				DBFB652319477DB700993697 /* LocationAnnotation.m in Sources */,
 				DBBB4BF019338A03004E433F /* UIViewController+Helpers.m in Sources */,
 				DB23E871193B5F08000C1E69 /* Event.m in Sources */,
 				DB070BF1193202ED0018D521 /* Zone.m in Sources */,

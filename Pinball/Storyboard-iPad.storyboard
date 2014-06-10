@@ -122,11 +122,7 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Locations" id="xha-EL-Uw6">
-                        <barButtonItem key="leftBarButtonItem" image="798-filter.png" id="tz0-jq-7N7">
-                            <connections>
-                                <action selector="filterResults:" destination="Pdd-BG-1qn" id="n6h-qz-vsb"/>
-                            </connections>
-                        </barButtonItem>
+                        <barButtonItem key="leftBarButtonItem" image="798-filter.png" id="tz0-jq-7N7"/>
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="JZu-zS-VgZ"/>
                     </navigationItem>
                 </tableViewController>
