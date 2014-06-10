@@ -11,5 +11,6 @@
 @interface Location (UpdateDistance)
 
 - (void)updateDistance;
+- (NSNumber *)currentDistance;
 
 @end
