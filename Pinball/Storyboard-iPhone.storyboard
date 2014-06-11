@@ -282,12 +282,12 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <searchBar key="tableHeaderView" contentMode="redraw" id="cia-cV-3n1">
+                        <searchBar key="tableHeaderView" contentMode="redraw" id="BM7-qE-26C">
                             <rect key="frame" x="0.0" y="64" width="320" height="44"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                             <textInputTraits key="textInputTraits"/>
                             <connections>
-                                <outlet property="delegate" destination="DU6-XU-okl" id="f2E-Yr-8MV"/>
+                                <outlet property="delegate" destination="DU6-XU-okl" id="eRd-6N-MWj"/>
                             </connections>
                         </searchBar>
                         <prototypes>
@@ -314,9 +314,6 @@
                                         </label>
                                     </subviews>
                                 </tableViewCellContentView>
-                                <connections>
-                                    <segue destination="vJT-js-QIr" kind="push" identifier="LocationProfileView" id="a4B-55-Ezi"/>
-                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -336,8 +333,20 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="searchDisplayController" destination="HOo-44-gmh" id="DJI-Pr-LzK"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pZx-RF-fii" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <searchDisplayController id="HOo-44-gmh">
+                    <connections>
+                        <outlet property="delegate" destination="DU6-XU-okl" id="Coa-Ti-dCQ"/>
+                        <outlet property="searchBar" destination="BM7-qE-26C" id="469-VZ-mKH"/>
+                        <outlet property="searchContentsController" destination="DU6-XU-okl" id="fh6-Hj-PTf"/>
+                        <outlet property="searchResultsDataSource" destination="DU6-XU-okl" id="TgP-x4-Bby"/>
+                        <outlet property="searchResultsDelegate" destination="DU6-XU-okl" id="2hX-wk-f0t"/>
+                    </connections>
+                </searchDisplayController>
             </objects>
             <point key="canvasLocation" x="1359" y="-85"/>
         </scene>
@@ -424,13 +433,13 @@
         <scene sceneID="txd-5B-KBH">
             <objects>
                 <tableViewController storyboardIdentifier="LocationProfileView" id="vJT-js-QIr" customClass="LocationProfileView" sceneMemberID="viewController">
-                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="TTy-ox-FCG">
+                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" restorationIdentifier="LocationProfileView" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="TTy-ox-FCG">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="MapCell" rowHeight="122" id="lNG-JM-qyY" customClass="LocationMapCell">
-                                <rect key="frame" x="0.0" y="86" width="320" height="122"/>
+                                <rect key="frame" x="0.0" y="22" width="320" height="122"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="lNG-JM-qyY" id="htN-57-oE2">
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="121"/>
@@ -452,7 +461,7 @@
                                 </connections>
                             </tableViewCell>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="InfoCell" rowHeight="67" id="fpZ-sQ-7b1" customClass="InformationCell">
-                                <rect key="frame" x="0.0" y="208" width="320" height="67"/>
+                                <rect key="frame" x="0.0" y="144" width="320" height="67"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="fpZ-sQ-7b1" id="9Ca-qG-khm">
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="66"/>
@@ -492,7 +501,7 @@
                                 </connections>
                             </tableViewCell>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="detailDisclosureButton" indentationWidth="10" reuseIdentifier="MachineCell" textLabel="d7E-XQ-ceL" detailTextLabel="56h-da-kMN" rowHeight="44" style="IBUITableViewCellStyleSubtitle" id="ec7-xD-IdX">
-                                <rect key="frame" x="0.0" y="275" width="320" height="44"/>
+                                <rect key="frame" x="0.0" y="211" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ec7-xD-IdX" id="TLD-zl-Bez">
                                     <rect key="frame" x="0.0" y="0.0" width="253" height="43"/>

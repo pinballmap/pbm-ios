@@ -14,10 +14,10 @@
 #import "MapView.h"
 #import "UIViewController+Helpers.h"
 
-@interface LocationsView () <NSFetchedResultsControllerDelegate,UIActionSheetDelegate,UISearchBarDelegate> {
+@interface LocationsView () <NSFetchedResultsControllerDelegate,UIActionSheetDelegate,UISearchBarDelegate,UISearchDisplayDelegate> {
     NSFetchedResultsController *fetchedResults;
     NSManagedObjectContext *managedContext;
-    BOOL isSearching;
+
     NSMutableArray *searchResults;
     BOOL isClosets;
 }
@@ -73,25 +73,31 @@
 }
 #pragma mark - Searchbar Delegate
 - (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar{
-    isSearching = YES;
     searchBar.showsCancelButton = YES;
 }
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText{
+}
+- (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar{
+    searchBar.text = @"";
+    [searchBar resignFirstResponder];
+    searchBar.showsCancelButton = NO;
+    [self.tableView reloadData];
+}
+#pragma mark - UISearchDisplayController Delegate Methods
+- (BOOL)searchDisplayController:(UISearchDisplayController *)controller shouldReloadTableForSearchString:(NSString *)searchString{
+    NSLog(@"%@",searchString);
     NSFetchRequest *searchrequest = [NSFetchRequest fetchRequestWithEntityName:@"Location"];
-    searchrequest.predicate = [NSPredicate predicateWithFormat:@"name CONTAINS[cd] %@ AND region.name = %@",searchText,[[[PinballManager sharedInstance] currentRegion] name]];
+    searchrequest.predicate = [NSPredicate predicateWithFormat:@"name CONTAINS[cd] %@ AND region.name = %@",searchString,[[[PinballManager sharedInstance] currentRegion] name]];
+    
+    
+    
     [searchResults removeAllObjects];
     searchResults = nil;
     searchResults = [NSMutableArray new];
     NSError *error = nil;
     [searchResults addObjectsFromArray:[managedContext executeFetchRequest:searchrequest error:&error]];
-    [self.tableView reloadData];
-}
-- (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar{
-    isSearching = NO;
-    searchBar.text = @"";
-    [searchBar resignFirstResponder];
-    searchBar.showsCancelButton = NO;
-    [self.tableView reloadData];
+
+    return YES;
 }
 #pragma mark - Class Actions
 - (IBAction)filterResults:(id)sender{
@@ -119,19 +125,6 @@
         return NO;
     }
     return YES;
-}
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
-    if ([segue.identifier isEqualToString:@"LocationProfileView"]){
-        NSIndexPath *indexPath = [self.tableView indexPathForCell:sender];
-        Location *currentLocation;
-        if (!isSearching){
-            currentLocation = [fetchedResults objectAtIndexPath:indexPath];
-        }else{
-            currentLocation = [searchResults objectAtIndex:indexPath.row];
-        }
-        LocationProfileView *profile = segue.destinationViewController;
-        profile.currentLocation = currentLocation;
-    }
 }
 #pragma mark - UIActionSheetDelegate
 - (void)actionSheet:(UIActionSheet *)actionSheet didDismissWithButtonIndex:(NSInteger)buttonIndex{
@@ -185,7 +178,7 @@
 }
 #pragma mark - Table view data source
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    if (!isSearching){
+    if (tableView == self.tableView){
         return [[fetchedResults sections] count];
     }else{
         return 1;
@@ -193,7 +186,7 @@
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     NSInteger rows = 0;
-    if (!isSearching){
+    if (tableView == self.tableView){
         if ([[fetchedResults sections] count] > 0) {
             id <NSFetchedResultsSectionInfo> sectionInfo = [[fetchedResults sections] objectAtIndex:section];
             rows = [sectionInfo numberOfObjects];
@@ -212,7 +205,7 @@
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     Location *currentLocation;
-    if (!isSearching){
+    if (tableView == self.tableView){
         currentLocation = [fetchedResults objectAtIndexPath:indexPath];
     }else{
         currentLocation = [searchResults objectAtIndex:indexPath.row];
@@ -229,10 +222,20 @@
     }
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"LocationCell" forIndexPath:indexPath];
+    
+    UITableViewCell *cell;
+    
+    if (tableView == self.tableView){
+        cell = [tableView dequeueReusableCellWithIdentifier:@"LocationCell" forIndexPath:indexPath];
+    }else{
+        cell = [tableView dequeueReusableCellWithIdentifier:@"LocationCell"];
+        if (cell == nil){
+            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"LocationCell"];
+        }
+    }
     
     Location *currentLocation;
-    if (!isSearching){
+    if (tableView == self.tableView){
         currentLocation = [fetchedResults objectAtIndexPath:indexPath];
     }else{
         currentLocation = [searchResults objectAtIndex:indexPath.row];
@@ -252,22 +255,25 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     Location *currentLocation;
-    if (!isSearching){
+    if (tableView == self.tableView){
         currentLocation = [fetchedResults objectAtIndexPath:indexPath];
     }else{
         currentLocation = [searchResults objectAtIndex:indexPath.row];
+        [self.searchDisplayController.searchBar resignFirstResponder];
     }
-
     if (_isSelecting){
         if ([_selectingViewController respondsToSelector:@selector(setLocation:)]){
             [_selectingViewController setLocation:currentLocation];
         }
         [self.navigationController popToRootViewControllerAnimated:YES];
     }
-    if ([[[UIDevice currentDevice] model] rangeOfString:@"iPad"].location != NSNotFound){
-        NSLog(@"%@",self.parentViewController);
+    if ([UIDevice iPad]){
         LocationProfileView_iPad *profileView = (LocationProfileView_iPad *)self.parentViewController;
         [profileView setCurrentLocation:currentLocation];
+    }else{
+        LocationProfileView *profile = [self.storyboard instantiateViewControllerWithIdentifier:@"LocationProfileView"];
+        profile.currentLocation = currentLocation;
+        [self.navigationController pushViewController:profile animated:YES];
     }
 }
 #pragma mark - NSFetchedResultsControllerDelegate
