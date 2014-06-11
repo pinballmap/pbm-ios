@@ -14,5 +14,6 @@
 
 @property (nonatomic)Location *currentLocation;
 @property (nonatomic)Machine *currentMachine;
+@property (nonatomic)NSArray *locations;        // Array of locations to display.
 
 @end

@@ -713,13 +713,7 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" id="UxV-ya-2X9">
-                        <barButtonItem key="rightBarButtonItem" systemItem="action" id="nVv-h4-ezY">
-                            <connections>
-                                <action selector="showInMaps:" destination="vmD-ty-UrL" id="jqe-cf-f4h"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" id="UxV-ya-2X9"/>
                     <connections>
                         <outlet property="mainMapView" destination="EfV-l3-7Iz" id="IWQ-Jm-yWq"/>
                     </connections>

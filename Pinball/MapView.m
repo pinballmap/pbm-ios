@@ -12,6 +12,7 @@
 #import "MachineLocation.h"
 #import "MachineLocationPin.h"
 #import "LocationProfileView.h"
+#import "LocationAnnotation.h"
 
 @interface MapView () <MKMapViewDelegate> {
     IBOutlet MKMapView *mainMapView;
@@ -38,6 +39,11 @@
         self.navigationItem.leftBarButtonItem = doneMap;
     }
     
+    if (!_locations){
+        UIBarButtonItem *openInMap = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:@selector(showInMaps:)];
+        self.navigationItem.leftBarButtonItem = openInMap;
+    }
+    
     if (_currentLocation){
         self.navigationItem.title = [NSString stringWithFormat:@"%@",_currentLocation.name];
         
@@ -59,6 +65,25 @@
             [mainMapView addAnnotation:annotation];
             mainMapView.region = MKCoordinateRegionMake(annotation.coordinate, MKCoordinateSpanMake(1.0, 1.0));
         }];
+    }else if (_locations){
+        Region *currentRegion = [[PinballManager sharedInstance] currentRegion];
+        CLLocationCoordinate2D regionCoord = CLLocationCoordinate2DMake(currentRegion.latitude.doubleValue, currentRegion.longitude.doubleValue);
+        mainMapView.region = MKCoordinateRegionMake(regionCoord, MKCoordinateSpanMake(1.0, 1.0));
+        
+        
+        [_locations enumerateObjectsUsingBlock:^(Location *location, NSUInteger idx, BOOL *stop) {
+            CLLocationCoordinate2D locationCoord = CLLocationCoordinate2DMake(location.latitude.doubleValue, location.longitude.doubleValue);
+            LocationAnnotation *locationPin = [[LocationAnnotation alloc] init];
+            locationPin.title = location.name;
+            locationPin.location = location;
+            if ([location.currentDistance isEqual:@(0)]){
+                locationPin.subtitle = nil;
+            }else{
+                locationPin.subtitle = [NSString stringWithFormat:@"%.02f miles",[location.currentDistance floatValue]];
+            }
+            locationPin.coordinate = locationCoord;
+            [mainMapView addAnnotation:locationPin];
+        }];
     }
 }
 - (void)didReceiveMemoryWarning{
@@ -70,9 +95,14 @@
     if (!pinView){
         pinView = [[MKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:@"locpin"];
         pinView.pinColor = MKPinAnnotationColorRed;
-        pinView.animatesDrop = YES;
+        // Only animate if we are not browsing.
+        if (_locations){
+            
+        }else{
+            pinView.animatesDrop = YES;
+        }
         pinView.canShowCallout = YES;
-        if ([annotation isKindOfClass:[MachineLocationPin class]]){
+        if ([annotation isKindOfClass:[MachineLocationPin class]] ||[annotation isKindOfClass:[LocationAnnotation class]]){
             UIButton *rightButton = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
             [rightButton addTarget:nil action:nil forControlEvents:UIControlEventTouchUpInside];
             pinView.rightCalloutAccessoryView = rightButton;
@@ -96,7 +126,13 @@
 #pragma mark - Machine Map
 - (void)mapView:(MKMapView *)mapView annotationView:(MKAnnotationView *)view calloutAccessoryControlTapped:(UIControl *)control{
     LocationProfileView *locationProfile = [self.storyboard instantiateViewControllerWithIdentifier:@"LocationProfileView"];
-    locationProfile.currentLocation = [[(MachineLocationPin *)view.annotation currentMachine] location];
+    Location *pinLocation;
+    if ([view.annotation isKindOfClass:[MachineLocationPin class]]){
+        pinLocation = [[(MachineLocationPin *)view.annotation currentMachine] location];
+    }else if ([view.annotation isKindOfClass:[LocationAnnotation class]]){
+        pinLocation = [(LocationAnnotation *)view.annotation location];
+    }
+    locationProfile.currentLocation = pinLocation;
     [self.navigationController pushViewController:locationProfile animated:YES];
 }
 

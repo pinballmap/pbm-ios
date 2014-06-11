@@ -11,6 +11,8 @@
 #import "LocationProfileView.h"
 #import "NewMachineLocationView.h"
 #import "LocationProfileView-iPad.h"
+#import "MapView.h"
+#import "UIViewController+Helpers.h"
 
 @interface LocationsView () <NSFetchedResultsControllerDelegate,UIActionSheetDelegate,UISearchBarDelegate> {
     NSFetchedResultsController *fetchedResults;
@@ -56,7 +58,7 @@
 - (void)updateRegion{
     [self.refreshControl endRefreshing];
     isClosets = NO;
-    self.navigationItem.title = [NSString stringWithFormat:@"%@ Locations",[[[PinballManager sharedInstance] currentRegion] fullName]];
+    self.navigationItem.title = [NSString stringWithFormat:@"%@",[[[PinballManager sharedInstance] currentRegion] fullName]];
     managedContext = [[CoreDataManager sharedInstance] managedObjectContext];
     NSFetchRequest *stackRequest = [NSFetchRequest fetchRequestWithEntityName:@"Location"];
     stackRequest.predicate = [NSPredicate predicateWithFormat:@"region.name = %@",[[[PinballManager sharedInstance] currentRegion] name]];
@@ -91,15 +93,27 @@
     searchBar.showsCancelButton = NO;
     [self.tableView reloadData];
 }
-#pragma mark - Class
+#pragma mark - Class Actions
 - (IBAction)filterResults:(id)sender{
-    UIActionSheet *sheet = [[UIActionSheet alloc] initWithTitle:@"Location Filter" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Location (Closest)",@"Number of Machines",@"Name",@"Zone",@"Location Type",nil];
+    UIActionSheet *sheet = [[UIActionSheet alloc] initWithTitle:@"Location Filter" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Location (Closest)",@"Number of Machines",@"Name",@"Zone",@"Location Type",@"Browse",nil];
     if ([UIDevice iPad]){
         [sheet showFromBarButtonItem:self.parentViewController.navigationItem.leftBarButtonItem animated:YES];
     }else{
         [sheet showFromTabBar:self.tabBarController.tabBar];
     }
 }
+- (IBAction)browseLocations:(id)sender{
+    NSFetchRequest *stackRequest = [NSFetchRequest fetchRequestWithEntityName:@"Location"];
+    stackRequest.predicate = [NSPredicate predicateWithFormat:@"region.name = %@",[[[PinballManager sharedInstance] currentRegion] name]];
+    stackRequest.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES]];
+    
+    NSArray *locations = [[[CoreDataManager sharedInstance] managedObjectContext] executeFetchRequest:stackRequest error:nil];
+
+    MapView *map = (MapView *)[(UINavigationController *)[self.storyboard instantiateViewControllerWithIdentifier:@"MapView"] navigationRootViewController];
+    map.locations = locations;
+    [self.navigationController presentViewController:map.parentViewController animated:YES completion:nil];
+}
+#pragma mark - Class
 - (BOOL)shouldPerformSegueWithIdentifier:(NSString *)identifier sender:(id)sender{
     if ([identifier isEqualToString:@"LocationProfileView"] && _isSelecting){
         return NO;
@@ -153,6 +167,9 @@
             stackRequest.predicate = [NSPredicate predicateWithFormat:@"region.name = %@",[[[PinballManager sharedInstance] currentRegion] name]];
             stackRequest.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"locationType.name" ascending:YES],[NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES]];
             sectionName = @"locationType.name";
+        }else if (buttonIndex == 5){
+            [self browseLocations:nil];
+            return;
         }
         
         fetchedResults = nil;
