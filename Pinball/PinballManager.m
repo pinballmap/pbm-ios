@@ -151,13 +151,11 @@ typedef NS_ENUM(NSInteger, PBMDataAPI) {
     NSArray *api = [AFURLConnectionOperation batchOfRequestOperations:apiOperations progressBlock:^(NSUInteger numberOfFinishedOperations, NSUInteger totalNumberOfOperations) {
         NSLog(@"Completed %lu of %lu",(unsigned long)numberOfFinishedOperations,(unsigned long)totalNumberOfOperations);
     } completionBlock:^(NSArray *operations) {
-        NSLog(@"All Done");
         __block NSMutableSet *createdMachines;
         __block NSMutableSet *createdLocationTypes;
         __block NSMutableSet *createdZones;
         __block NSMutableSet *createdLocations;
         [operations enumerateObjectsUsingBlock:^(AFHTTPRequestOperation *obj, NSUInteger idx, BOOL *stop) {
-            NSLog(@"%@",obj.request.URL);
             if (idx == 0){
                 createdMachines = [self importMachinesWithRequest:obj];
             }else if (idx == 1){
@@ -173,7 +171,6 @@ typedef NS_ENUM(NSInteger, PBMDataAPI) {
         }];
         [[NSNotificationCenter defaultCenter] postNotificationName:@"RegionUpdate" object:nil];
     }];
-    NSLog(@"Started");
     [[NSOperationQueue mainQueue] addOperations:api waitUntilFinished:NO];
 }
 - (AFHTTPRequestOperation *)requestForData:(PBMDataAPI)apiType{
@@ -224,7 +221,6 @@ typedef NS_ENUM(NSInteger, PBMDataAPI) {
     Region *foundRegion;
     if (foundRegions.count == 0 && create){
         // Create region
-        NSLog(@"Creating New Region");
         foundRegion = [Region createRegionWithData:region andContext:cdManager.managedObjectContext];
         [cdManager saveContext];
     }else{
@@ -327,7 +323,6 @@ typedef NS_ENUM(NSInteger, PBMDataAPI) {
 }
 - (NSMutableSet *)importLocationsWithRequest:(AFHTTPRequestOperation *)request andMachines:(NSMutableSet *)machines andLocationTypes:(NSMutableSet *)locationTypes andZones:(NSMutableSet *)zones{
     if (![_currentRegion.locationsEtag isEqualToString:request.response.allHeaderFields[@"Etag"]]){
-        NSLog(@"New Locations Etag");
         [self clearData:PBMDataAPILocations forRegion:_currentRegion];
         
         CoreDataManager *cdManager = [CoreDataManager sharedInstance];

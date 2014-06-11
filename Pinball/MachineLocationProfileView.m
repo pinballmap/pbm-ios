@@ -49,7 +49,6 @@
     }
     [machineScores removeAllObjects];
     [[PinballManager sharedInstance] allScoresForMachine:_currentMachine withCompletion:^(NSDictionary *status) {
-        NSLog(@"%@",status);
         if (status[@"errors"]){
             NSString *errors;
             if ([status[@"errors"] isKindOfClass:[NSArray class]]){

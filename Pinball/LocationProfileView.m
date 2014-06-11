@@ -97,7 +97,6 @@ typedef enum : NSUInteger {
         }
     }else{
         UIBarButtonItem *editLocation = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemEdit target:self action:@selector(editLocation:)];
-        NSLog(@"%@",self.parentViewController);
         if ([UIDevice currentModel] == ModelTypeiPad){
             self.parentViewController.navigationItem.rightBarButtonItem = editLocation;
         }else{
@@ -191,7 +190,6 @@ typedef enum : NSUInteger {
 }
 #pragma mark - Locaiton Type Delegate
 - (void)pickedType:(LocationType *)type{
-    NSLog(@"%@",type);
     if (type){
         [[PinballManager sharedInstance] updateLocation:_currentLocation withData:@{@"location_type": type.locationTypeId} andCompletion:^(NSDictionary *status) {
             _currentLocation.locationType = type;
@@ -338,7 +336,6 @@ typedef enum : NSUInteger {
                 options.showsPointsOfInterest = NO;
                 MKMapSnapshotter *snapShooter2 = [[MKMapSnapshotter alloc] initWithOptions:options];
                 [snapShooter2 startWithCompletionHandler:^(MKMapSnapshot *snapshot, NSError *error) {
-                    NSLog(@"Loaded Snap");
                     if (error){
                         NSLog(@"%@",error);
                     }else{

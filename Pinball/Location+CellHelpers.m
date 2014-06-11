@@ -19,7 +19,6 @@
     NSData *data = [NSKeyedArchiver archivedDataWithRootObject:snapshot];
     NSString *fileName = [self.name stringByReplacingOccurrencesOfString:@" " withString:@"_"];
     [data writeToFile:[NSString stringWithFormat:@"%@/%@.mapsnapshot",cacheDirectory,fileName] atomically:YES];
-    NSLog(@"%@",caches);
 }
 - (UIImage *)mapShot{
     NSArray *caches = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES);

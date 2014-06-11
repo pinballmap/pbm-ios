@@ -78,7 +78,6 @@
         [_mapView addAnnotation:locationPin];
         [_mapView selectAnnotation:locationPin animated:YES];
 
-        NSLog(@"%f",locationCoord.latitude);
         _mapView.region = MKCoordinateRegionMake(locationCoord, MKCoordinateSpanMake(0.6, 0.6));
         
         [UIView animateWithDuration:.3 animations:^{

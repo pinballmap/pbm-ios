@@ -85,7 +85,6 @@
 }
 #pragma mark - UISearchDisplayController Delegate Methods
 - (BOOL)searchDisplayController:(UISearchDisplayController *)controller shouldReloadTableForSearchString:(NSString *)searchString{
-    NSLog(@"%@",searchString);
     NSFetchRequest *searchrequest = [NSFetchRequest fetchRequestWithEntityName:@"Location"];
     searchrequest.predicate = [NSPredicate predicateWithFormat:@"name CONTAINS[cd] %@ AND region.name = %@",searchString,[[[PinballManager sharedInstance] currentRegion] name]];
     
