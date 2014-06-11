@@ -240,15 +240,13 @@
         currentLocation = [searchResults objectAtIndex:indexPath.row];
     }
     cell.textLabel.text = currentLocation.name;
-    if (isClosets){
-        if ([currentLocation.currentDistance isEqual:@(0)]){
-            cell.detailTextLabel.text = [NSString stringWithFormat:@"Machines: %lu",(unsigned long)currentLocation.machines.count];
-        }else{
-            cell.detailTextLabel.text = [NSString stringWithFormat:@"%.02f miles",[currentLocation.currentDistance floatValue]];
-        }
-    }else{
+
+    if ([currentLocation.currentDistance isEqual:@(0)]){
         cell.detailTextLabel.text = [NSString stringWithFormat:@"Machines: %lu",(unsigned long)currentLocation.machines.count];
+    }else{
+        cell.detailTextLabel.text = [NSString stringWithFormat:@"%.02f miles",[currentLocation.currentDistance floatValue]];
     }
+
     return cell;
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{

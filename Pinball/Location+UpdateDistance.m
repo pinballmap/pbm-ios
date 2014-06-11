@@ -17,8 +17,9 @@
     self.locationDistance = [NSNumber numberWithDouble:([currentLocation distanceFromLocation:location] * 0.00062137)];
 }
 - (NSNumber *)currentDistance{
-    [self updateDistance];
-    return self.locationDistance;
+    CLLocation *currentLocation = [[PinballManager sharedInstance] userLocation];
+    CLLocation *location = [[CLLocation alloc] initWithLatitude:[self.latitude doubleValue] longitude:[self.longitude doubleValue]];
+    return [NSNumber numberWithDouble:([currentLocation distanceFromLocation:location] * 0.00062137)];
 }
 
 @end
