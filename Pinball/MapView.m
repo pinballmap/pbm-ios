@@ -39,9 +39,9 @@
         self.navigationItem.leftBarButtonItem = doneMap;
     }
     
-    if (!_locations){
+    if (_currentLocation){
         UIBarButtonItem *openInMap = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:@selector(showInMaps:)];
-        self.navigationItem.leftBarButtonItem = openInMap;
+        self.navigationItem.rightBarButtonItem = openInMap;
     }
     
     if (_currentLocation){
@@ -116,12 +116,14 @@
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 - (IBAction)showInMaps:(id)sender{
-    CLLocationCoordinate2D coord = CLLocationCoordinate2DMake([_currentLocation.latitude doubleValue],[_currentLocation.longitude doubleValue]);
-    NSDictionary *dic = [NSDictionary dictionaryWithObjects:@[_currentLocation.street,_currentLocation.city,_currentLocation.state,_currentLocation.zip] forKeys:[NSArray arrayWithObjects:(NSString *)kABPersonAddressStreetKey,kABPersonAddressCityKey,kABPersonAddressStateKey,kABPersonAddressZIPKey, nil]];
+    if (_currentLocation){
+        CLLocationCoordinate2D coord = CLLocationCoordinate2DMake([_currentLocation.latitude doubleValue],[_currentLocation.longitude doubleValue]);
+        NSDictionary *dic = [NSDictionary dictionaryWithObjects:@[_currentLocation.street,_currentLocation.city,_currentLocation.state,_currentLocation.zip] forKeys:[NSArray arrayWithObjects:(NSString *)kABPersonAddressStreetKey,kABPersonAddressCityKey,kABPersonAddressStateKey,kABPersonAddressZIPKey, nil]];
 
-    MKPlacemark *placemark = [[MKPlacemark alloc] initWithCoordinate:coord addressDictionary:dic];
-    MKMapItem *item = [[MKMapItem alloc] initWithPlacemark:placemark];
-    [MKMapItem openMapsWithItems:@[item] launchOptions:nil];
+        MKPlacemark *placemark = [[MKPlacemark alloc] initWithCoordinate:coord addressDictionary:dic];
+        MKMapItem *item = [[MKMapItem alloc] initWithPlacemark:placemark];
+        [MKMapItem openMapsWithItems:@[item] launchOptions:nil];
+    }
 }
 #pragma mark - Machine Map
 - (void)mapView:(MKMapView *)mapView annotationView:(MKAnnotationView *)view calloutAccessoryControlTapped:(UIControl *)control{
