@@ -388,7 +388,8 @@ typedef enum : NSUInteger {
     }else{
         if (dataSetSeg.selectedSegmentIndex == 0){
             // Profile data with InfoCell
-            InformationCell *cell = (InformationCell *)[tableView dequeueReusableCellWithIdentifier:@"InfoCell" forIndexPath:indexPath];
+            InformationCell *cell = (InformationCell *)[tableView dequeueReusableCellWithIdentifier:@"InfoCell"];
+            cell.dataLabel.numberOfLines = 0;
             if (indexPath.row == 0){
                 if ([_currentLocation.currentDistance isEqual:@(0)]){
                     cell.infoLabel.text = @"Address";
