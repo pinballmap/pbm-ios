@@ -12,4 +12,6 @@
 
 @property (nonatomic) Location *currentLocation;
 
+- (IBAction)showListingsView:(id)sender;
+
 @end
