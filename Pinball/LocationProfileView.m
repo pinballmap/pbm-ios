@@ -7,10 +7,11 @@
 //
 
 #import "LocationProfileView.h"
-#import "InformationCell.h"
-#import "LocationMapCell.h"
 @import CoreLocation;
 @import MapKit;
+@import AddressBook;
+#import "InformationCell.h"
+#import "LocationMapCell.h"
 #import "Machine.h"
 #import "MapView.h"
 #import "MachineConditionView.h"
@@ -39,6 +40,8 @@ typedef enum : NSUInteger {
     UIAlertView *deleteConfirm;
     NSIndexPath *deletePath;
     UISegmentedControl *dataSetSeg;
+    
+    UIAlertView *openInMapsConfirm;
 }
 @end
 
@@ -245,6 +248,13 @@ typedef enum : NSUInteger {
                     [UIAlertView simpleApplicationAlertWithMessage:@"Removed machine!" cancelButton:@"Ok"];
                 }
             }];
+        }else if (alertView == openInMapsConfirm){
+            CLLocationCoordinate2D coord = CLLocationCoordinate2DMake([_currentLocation.latitude doubleValue],[_currentLocation.longitude doubleValue]);
+            NSDictionary *dic = [NSDictionary dictionaryWithObjects:@[_currentLocation.street,_currentLocation.city,_currentLocation.state,_currentLocation.zip] forKeys:[NSArray arrayWithObjects:(NSString *)kABPersonAddressStreetKey,kABPersonAddressCityKey,kABPersonAddressStateKey,kABPersonAddressZIPKey, nil]];
+            
+            MKPlacemark *placemark = [[MKPlacemark alloc] initWithCoordinate:coord addressDictionary:dic];
+            MKMapItem *item = [[MKMapItem alloc] initWithPlacemark:placemark];
+            [MKMapItem openMapsWithItems:@[item] launchOptions:nil];
         }
     }
 }
@@ -440,6 +450,9 @@ typedef enum : NSUInteger {
                 // Address
                 if ([UIDevice currentModel] == ModelTypeiPhone){
                     [self showMap];
+                }else{
+                    openInMapsConfirm = [UIAlertView applicationAlertWithMessage:@"Do you want to open this location in Maps?" delegate:self cancelButton:@"No" otherButtons:@"Yes", nil];
+                    [openInMapsConfirm show];
                 }
             }else if (indexPath.row == 1){
                 // Phone
