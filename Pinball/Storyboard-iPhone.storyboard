@@ -1252,7 +1252,7 @@
         <!--Regions View-->
         <scene sceneID="6hD-Xm-Uer">
             <objects>
-                <tableViewController id="9Nt-tE-aEj" customClass="RegionsView" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="RegionsView" id="9Nt-tE-aEj" customClass="RegionsView" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="rIu-T2-1c8">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

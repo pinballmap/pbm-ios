@@ -59,8 +59,9 @@ typedef NS_ENUM(NSInteger, PBMDataAPI) {
                 [self loadRegionData:_currentRegion];
             }
         }else{
-            _currentRegion = [self regionWithData:@{@"full_name":@"Seattle",@"id":@3,@"lat":@48,@"lon":@(-122),@"name":@"seattle",@"primary_email_contact":@"morganshilling@gmail.com"} shouldCreate:YES];
-            [self loadRegionData:_currentRegion];
+            _currentRegion = nil;
+//            _currentRegion = [self regionWithData:@{@"full_name":@"Seattle",@"id":@3,@"lat":@48,@"lon":@(-122),@"name":@"seattle",@"primary_email_contact":@"morganshilling@gmail.com"} shouldCreate:YES];
+//            [self loadRegionData:_currentRegion];
         }
     }
     return self;

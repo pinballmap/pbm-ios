@@ -46,11 +46,20 @@
 - (void)updateRegion{
     [_mapView removeAnnotations:_mapView.annotations];
     currentRegion = [[PinballManager sharedInstance] currentRegion];
-    CLLocationCoordinate2D regionCoord = CLLocationCoordinate2DMake(currentRegion.latitude.doubleValue, currentRegion.longitude.doubleValue);
-    _mapView.region = MKCoordinateRegionMake(regionCoord, MKCoordinateSpanMake(1.0, 1.0));
-    _mapView.delegate = self;
-
-    [self showListingsView:nil];
+    if (currentRegion){
+        CLLocationCoordinate2D regionCoord = CLLocationCoordinate2DMake(currentRegion.latitude.doubleValue, currentRegion.longitude.doubleValue);
+        _mapView.region = MKCoordinateRegionMake(regionCoord, MKCoordinateSpanMake(1.0, 1.0));
+        _mapView.delegate = self;
+        
+        /* Region coordinate location
+        CLLocationCoordinate2D locationCoord = CLLocationCoordinate2DMake(currentRegion.latitude.doubleValue, currentRegion.longitude.doubleValue);
+        MKPointAnnotation *locationPin = [[MKPointAnnotation alloc] init];
+        locationPin.coordinate = locationCoord;
+        locationPin.title = currentRegion.name;
+        [_mapView addAnnotation:locationPin];
+        */
+        [self showListingsView:nil];
+    }
 }
 - (void)didReceiveMemoryWarning{
     [super didReceiveMemoryWarning];

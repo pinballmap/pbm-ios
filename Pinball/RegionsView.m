@@ -119,7 +119,8 @@
         region = searchResults[indexPath.row];
     }
     [[PinballManager sharedInstance] loadRegionData:region];
-    if ([[[UIDevice currentDevice] model] rangeOfString:@"iPad"].location != NSNotFound){
+
+    if (self.parentViewController.modalPresentationStyle){
         [self dismissViewControllerAnimated:YES completion:nil];
     }else{
         [self.navigationController popToRootViewControllerAnimated:YES];

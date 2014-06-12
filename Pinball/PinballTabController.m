@@ -8,6 +8,7 @@
 
 #import "PinballTabController.h"
 #import "UIAlertView+Application.h"
+#import "RegionsView.h"
 
 @interface PinballTabController () {
     UIAlertView *updatingAlert;
@@ -30,6 +31,15 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateEventBadge) name:@"RegionUpdate" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updatingRegion) name:@"UpdatingRegion" object:nil];
     [self updateEventBadge];
+}
+- (void)viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:animated];
+    if (![[PinballManager sharedInstance] currentRegion]){
+        RegionsView *regions = [self.storyboard instantiateViewControllerWithIdentifier:@"RegionsView"];
+        UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:regions];
+        nav.modalPresentationStyle = UIModalPresentationFormSheet;
+        [self presentViewController:nav animated:YES completion:nil];
+    }
 }
 - (void)updateEventBadge{
     NSInteger eventCounts = [[[[PinballManager sharedInstance] currentRegion] events] count];
