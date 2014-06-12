@@ -140,6 +140,7 @@
 #pragma mark - Class Actions
 - (IBAction)showListingsView:(id)sender{
     _currentLocation = nil;
+    profileViewController.currentLocation = nil;
     [UIView animateWithDuration:.3 animations:^{
         _locationsListingView.frame = CGRectMake(0, 0, _locationsListingView.frame.size.width, _locationsListingView.frame.size.height);
         _mapView.frame = CGRectMake(321, 0, 703, self.view.frame.size.height);
