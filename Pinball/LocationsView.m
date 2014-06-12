@@ -13,6 +13,7 @@
 #import "LocationProfileView-iPad.h"
 #import "MapView.h"
 #import "UIViewController+Helpers.h"
+#import "LocationCell.h"
 
 @interface LocationsView () <NSFetchedResultsControllerDelegate,UIActionSheetDelegate,UISearchBarDelegate,UISearchDisplayDelegate> {
     NSFetchedResultsController *fetchedResults;
@@ -213,7 +214,7 @@
     }
     NSString *cellTitle = currentLocation.name;
     
-    CGRect stringSize = [cellTitle boundingRectWithSize:CGSizeMake(270, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName: [UIFont systemFontOfSize:18]} context:nil];
+    CGRect stringSize = [cellTitle boundingRectWithSize:CGSizeMake(230, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName: [UIFont systemFontOfSize:18]} context:nil];
     
     stringSize.size.height = stringSize.size.height+10;   // Take into account the 10 points of padding within a cell.
     if (stringSize.size.height+10 < 44){
@@ -224,14 +225,14 @@
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    UITableViewCell *cell;
+    LocationCell *cell;
     
     if (tableView == self.tableView){
         cell = [tableView dequeueReusableCellWithIdentifier:@"LocationCell" forIndexPath:indexPath];
     }else{
         cell = [tableView dequeueReusableCellWithIdentifier:@"LocationCell"];
         if (cell == nil){
-            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"LocationCell"];
+            cell = (LocationCell *)[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"LocationCell"];
         }
     }
     
@@ -241,13 +242,15 @@
     }else{
         currentLocation = [searchResults objectAtIndex:indexPath.row];
     }
-    cell.textLabel.text = currentLocation.name;
+    cell.locationName.text = currentLocation.name;
 
     if ([currentLocation.currentDistance isEqual:@(0)]){
-        cell.detailTextLabel.text = [NSString stringWithFormat:@"Machines: %lu",(unsigned long)currentLocation.machines.count];
+        cell.locationDetail.text = [NSString stringWithFormat:@"%@ ,%@",currentLocation.street,currentLocation.city];
     }else{
-        cell.detailTextLabel.text = [NSString stringWithFormat:@"%.02f miles",[currentLocation.currentDistance floatValue]];
+        cell.locationDetail.text = [NSString stringWithFormat:@"%.02f miles",[currentLocation.currentDistance floatValue]];
     }
+    
+    cell.machineCount.text = [NSString stringWithFormat:@"%lu",(unsigned long)currentLocation.machines.count];
 
     return cell;
 }

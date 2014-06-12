@@ -90,29 +90,58 @@
                             </connections>
                         </searchBar>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="LocationCell" textLabel="aBD-Gt-AGo" detailTextLabel="Shi-EF-UWR" style="IBUITableViewCellStyleSubtitle" id="OFG-A1-V4g">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="LocationCell" id="OAW-Cu-YAX" customClass="LocationCell">
                                 <rect key="frame" x="0.0" y="66" width="320" height="44"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="OFG-A1-V4g" id="1Kd-f9-FAU">
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="OAW-Cu-YAX" id="2sA-FH-VJt">
                                     <rect key="frame" x="0.0" y="0.0" width="287" height="43"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="34" id="aBD-Gt-AGo">
-                                            <rect key="frame" x="15" y="3" width="34" height="22"/>
-                                            <autoresizingMask key="autoresizingMask"/>
+                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="230" translatesAutoresizingMaskIntoConstraints="NO" id="Rqf-sy-5aW">
+                                            <rect key="frame" x="15" y="3" width="230" height="24"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="24" id="lYE-Bc-qaZ"/>
+                                            </constraints>
                                             <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Subtitle" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Shi-EF-UWR">
-                                            <rect key="frame" x="15" y="25" width="43" height="15"/>
-                                            <autoresizingMask key="autoresizingMask"/>
+                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JUF-I1-dzx">
+                                            <rect key="frame" x="15" y="25" width="230" height="15"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="300" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3Z0-ZD-AUF">
+                                            <rect key="frame" x="257" y="7" width="30" height="30"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <color key="backgroundColor" red="0.97212550949999998" green="0.0" blue="0.87446945249999997" alpha="1" colorSpace="calibratedRGB"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="30" id="0o3-wy-BM4"/>
+                                                <constraint firstAttribute="height" constant="30" id="hkO-0k-tzi"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
+                                    <constraints>
+                                        <constraint firstAttribute="centerY" secondItem="3Z0-ZD-AUF" secondAttribute="centerY" id="85P-N7-Ecq"/>
+                                        <constraint firstAttribute="bottom" secondItem="JUF-I1-dzx" secondAttribute="bottom" constant="3" id="9OD-aZ-Zs2"/>
+                                        <constraint firstItem="Rqf-sy-5aW" firstAttribute="leading" secondItem="2sA-FH-VJt" secondAttribute="leading" constant="15" id="GpG-13-fRD"/>
+                                        <constraint firstAttribute="trailing" secondItem="3Z0-ZD-AUF" secondAttribute="trailing" id="IsV-dC-vlK"/>
+                                        <constraint firstAttribute="trailing" secondItem="JUF-I1-dzx" secondAttribute="trailing" constant="42" id="fuE-Hg-3Tr"/>
+                                        <constraint firstAttribute="trailing" secondItem="Rqf-sy-5aW" secondAttribute="trailing" constant="42" id="gMP-uc-4M8"/>
+                                        <constraint firstItem="Rqf-sy-5aW" firstAttribute="top" secondItem="2sA-FH-VJt" secondAttribute="top" constant="3" id="nNM-EG-r2I"/>
+                                        <constraint firstItem="JUF-I1-dzx" firstAttribute="top" secondItem="Rqf-sy-5aW" secondAttribute="bottom" constant="-2" id="oeg-CA-6jE"/>
+                                        <constraint firstItem="JUF-I1-dzx" firstAttribute="leading" secondItem="2sA-FH-VJt" secondAttribute="leading" constant="15" id="wuC-rk-MX3"/>
+                                    </constraints>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="locationDetail" destination="JUF-I1-dzx" id="MsU-xJ-vjW"/>
+                                    <outlet property="locationName" destination="Rqf-sy-5aW" id="80a-1d-mwH"/>
+                                    <outlet property="machineCount" destination="3Z0-ZD-AUF" id="mqA-X6-JNh"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
