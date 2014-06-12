@@ -82,25 +82,43 @@ typedef enum : NSUInteger {
     machinesFetch = [[NSFetchedResultsController alloc] initWithFetchRequest:locationMachines managedObjectContext:[[CoreDataManager sharedInstance] managedObjectContext] sectionNameKeyPath:nil cacheName:nil];
     machinesFetch.delegate = self;
     [machinesFetch performFetch:nil];
-    
+    dataSetSeg.selectedSegmentIndex = 0;
     self.tableView.allowsSelectionDuringEditing = YES;
     [self setupRightBarButton];
     [self.tableView reloadData];
 }
 - (void)setupRightBarButton{
-    if (dataSetSeg.selectedSegmentIndex == 1){
-        UIBarButtonItem *addMachine = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addNewMachine:)];
-        if ([UIDevice currentModel] == ModelTypeiPad){
-            self.parentViewController.navigationItem.rightBarButtonItem = addMachine;
+    if (![UIDevice iPad]){
+        if (dataSetSeg.selectedSegmentIndex == 1){
+            UIBarButtonItem *addMachine = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addNewMachine:)];
+            if ([UIDevice currentModel] == ModelTypeiPad){
+                self.parentViewController.navigationItem.rightBarButtonItem = addMachine;
+            }else{
+                self.navigationItem.rightBarButtonItem = addMachine;
+            }
         }else{
-            self.navigationItem.rightBarButtonItem = addMachine;
+            UIBarButtonItem *editLocation = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemEdit target:self action:@selector(editLocation:)];
+            if ([UIDevice currentModel] == ModelTypeiPad){
+                self.parentViewController.navigationItem.rightBarButtonItem = editLocation;
+            }else{
+                self.navigationItem.rightBarButtonItem = editLocation;
+            }
         }
     }else{
-        UIBarButtonItem *editLocation = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemEdit target:self action:@selector(editLocation:)];
-        if ([UIDevice currentModel] == ModelTypeiPad){
-            self.parentViewController.navigationItem.rightBarButtonItem = editLocation;
+        if (self.tableView.editing){
+            UIBarButtonItem *editLocation = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(editLocation:)];
+            UIBarButtonItem *fixedSpace = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace target:nil action:nil];
+            fixedSpace.width = 250.0;
+            
+            self.parentViewController.navigationItem.rightBarButtonItems = nil;
+            self.parentViewController.navigationItem.rightBarButtonItems = @[fixedSpace,editLocation];
         }else{
-            self.navigationItem.rightBarButtonItem = editLocation;
+            UIBarButtonItem *addMachine = [[UIBarButtonItem alloc] initWithTitle:@"Add Machine" style:UIBarButtonItemStylePlain target:self action:@selector(addNewMachine:)];
+            
+            UIBarButtonItem *fixedSpace = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace target:nil action:nil];
+            fixedSpace.width = 160.0;
+            UIBarButtonItem *editLocation = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemEdit target:self action:@selector(editLocation:)];
+            self.parentViewController.navigationItem.rightBarButtonItems = @[addMachine,fixedSpace,editLocation];
         }
     }
 }
@@ -126,11 +144,13 @@ typedef enum : NSUInteger {
     [self.navigationController presentViewController:vc.parentViewController animated:YES completion:nil];
 }
 - (IBAction)editLocation:(id)sender{
+    [dataSetSeg setSelectedSegmentIndex:0];
     BOOL editing = YES;
     if (self.tableView.editing){
         editing = NO;
     }
     [self.tableView setEditing:editing];
+    [self setupRightBarButton];
     [self.tableView reloadData];
 }
 #pragma mark - TextEditor Delegate

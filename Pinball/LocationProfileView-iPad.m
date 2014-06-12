@@ -60,8 +60,6 @@
 - (void)setCurrentLocation:(Location *)currentLocation{
     _currentLocation = currentLocation;
     profileViewController.currentLocation = _currentLocation;
-    UIBarButtonItem *editButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemEdit target:profileViewController action:@selector(editLocation:)];
-    self.navigationItem.rightBarButtonItem = editButton;
 
     if (!isBrowsing){
         [_mapView removeAnnotations:_mapView.annotations];
@@ -152,9 +150,10 @@
     self.navigationItem.title = currentRegion.fullName;
     UIBarButtonItem *filterButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"798-filter"] style:UIBarButtonItemStylePlain target:locationsViewController action:@selector(filterResults:)];
     UIBarButtonItem *browseLocations = [[UIBarButtonItem alloc] initWithTitle:@"Browse" style:UIBarButtonItemStylePlain target:self action:@selector(browseLocations)];
-    self.navigationItem.leftBarButtonItems = @[filterButton,browseLocations];
-    UIBarButtonItem *newLocation = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(showNewLocationView:)];
-    self.navigationItem.rightBarButtonItem = newLocation;
+    UIBarButtonItem *fixedSpace = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace target:nil action:nil];
+    fixedSpace.width = 110.0;
+    UIBarButtonItem *newLocation = [[UIBarButtonItem alloc] initWithTitle:@"Suggest" style:UIBarButtonItemStylePlain target:self action:@selector(showNewLocationView:)];
+    self.navigationItem.leftBarButtonItems = @[filterButton,browseLocations,fixedSpace,newLocation];
 }
 - (IBAction)showNewLocationView:(id)sender{
     UINavigationController *navController = [self.storyboard instantiateViewControllerWithIdentifier:@"NewLocationView"];

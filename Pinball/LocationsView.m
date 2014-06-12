@@ -100,10 +100,12 @@
 }
 #pragma mark - Class Actions
 - (IBAction)filterResults:(id)sender{
-    UIActionSheet *sheet = [[UIActionSheet alloc] initWithTitle:@"Location Filter" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Location (Closest)",@"Number of Machines",@"Name",@"Zone",@"Location Type",@"Browse",nil];
+    UIActionSheet *sheet = [[UIActionSheet alloc] initWithTitle:@"Location Filter" delegate:self cancelButtonTitle:nil destructiveButtonTitle:nil otherButtonTitles:@"Location (Closest)",@"Number of Machines",@"Name",@"Zone",@"Location Type",nil];
     if ([UIDevice iPad]){
         [sheet showFromBarButtonItem:self.parentViewController.navigationItem.leftBarButtonItem animated:YES];
     }else{
+        [sheet addButtonWithTitle:@"Browse"];
+        [sheet setCancelButtonIndex:[sheet addButtonWithTitle:@"Cancel"]];
         [sheet showFromTabBar:self.tabBarController.tabBar];
     }
 }
