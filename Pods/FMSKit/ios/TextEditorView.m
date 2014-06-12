@@ -56,8 +56,10 @@
         [self.view addConstraints:horizontal];
         [self.view addConstraints:vertical];
     }
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardShown:) name:UIKeyboardDidShowNotification object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDismissed:) name:UIKeyboardDidHideNotification object:nil];
+    if ([[[UIDevice currentDevice] model] rangeOfString:@"iPad"].location == NSNotFound){
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardShown:) name:UIKeyboardDidShowNotification object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDismissed:) name:UIKeyboardDidHideNotification object:nil];
+    }
     UIBarButtonItem *saveAction = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSave target:self action:@selector(saveEditor:)];
     UIBarButtonItem *cancelAction = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancelEditor:)];
     self.navigationItem.leftBarButtonItem = cancelAction;
