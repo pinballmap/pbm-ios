@@ -38,10 +38,9 @@
 - (void)viewDidLoad{
     [super viewDidLoad];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateRegion) name:@"RegionUpdate" object:nil];
-
     // Do any additional setup after loading the view.
     _locationProfile.frame = CGRectMake(1024, 0, CGRectGetWidth(_locationProfile.frame), CGRectGetHeight(_locationProfile.frame));
-    
+
     [self updateRegion];
 }
 - (void)updateRegion{
@@ -81,7 +80,7 @@
         [UIView animateWithDuration:.3 animations:^{
             _locationsListingView.frame = CGRectMake(-90, 0, _locationsListingView.frame.size.width, _locationsListingView.frame.size.height);
             _mapView.frame = CGRectMake(0, 0, 703, self.view.frame.size.height);
-            _locationProfile.frame = CGRectMake(704, 0, 320, self.view.frame.size.height);
+            _locationProfile.frame = CGRectMake(704, 0, 320, CGRectGetHeight(_locationProfile.frame));
         }];
         UIBarButtonItem *showListings = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"766-arrow-right.png"] style:UIBarButtonItemStylePlain target:self action:@selector(showListingsView:)];
         self.navigationItem.leftBarButtonItems = @[showListings];
@@ -89,7 +88,7 @@
     }else{
         [UIView animateWithDuration:.3 animations:^{
             _mapView.frame = CGRectMake(0, 0, 703, self.view.frame.size.height);
-            _locationProfile.frame = CGRectMake(704, 0, 320, self.view.frame.size.height);
+            _locationProfile.frame = CGRectMake(704, 0, 320, CGRectGetHeight(_locationProfile.frame));
         }];
     }
 }
