@@ -407,7 +407,13 @@ typedef NS_ENUM(NSInteger, PBMDataAPI) {
 }
 #pragma mark - Machines
 - (void)createNewMachine:(NSDictionary *)machineData withCompletion:(APIComplete)completionBlock{
-    
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    manager.requestSerializer = [AFJSONRequestSerializer serializer];
+    [manager POST:[NSString stringWithFormat:@"%@api/v1/machines.json",apiRootURL] parameters:machineData success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        completionBlock(responseObject);
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        completionBlock(@{@"errors": error.localizedDescription});
+    }];
 }
 - (void)createNewMachineLocation:(NSDictionary *)machineData withCompletion:(APIComplete)completionBlock{
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];

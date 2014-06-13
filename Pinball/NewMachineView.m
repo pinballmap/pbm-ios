@@ -8,13 +8,13 @@
 
 #import "NewMachineView.h"
 #import "UIAlertView+Application.h"
+#import "LocationsView.h"
 
 @interface NewMachineView () {
-    
+    Location *selectedLocation;
 }
 @property (nonatomic) IBOutlet UITextField *machineName;
-@property (nonatomic) IBOutlet UITextField *machineYear;
-@property (nonatomic) IBOutlet UITextField *machineManufacturer;
+@property (nonatomic) IBOutlet UILabel *locationTitle;
 
 - (IBAction)saveMachine:(id)sender;
 - (IBAction)cancelMachine:(id)sender;
@@ -44,27 +44,41 @@
 }
 #pragma mark - Class Actions
 - (IBAction)saveMachine:(id)sender{
-    if ([self checkMachineForm]){
-        NSDictionary *machine = @{@"name": _machineName.text,@"year": _machineYear.text,@"manufacturer":_machineManufacturer.text};
-        #pragma message("TODO: API Interaction for adding a new machine.")
-        [self dismissViewControllerAnimated:YES completion:nil];
+    if (selectedLocation && _machineName.text.length > 0){
+        NSDictionary *machineData = @{@"machine_name": _machineName.text,@"location_id": selectedLocation.locationId};
+        [[PinballManager sharedInstance] createNewMachine:machineData withCompletion:^(NSDictionary *status) {
+            if (status[@"errors"]){
+                NSString *errors;
+                if ([status[@"errors"] isKindOfClass:[NSArray class]]){
+                    errors = [status[@"errors"] componentsJoinedByString:@","];
+                }else{
+                    errors = status[@"errors"];
+                }
+                [UIAlertView simpleApplicationAlertWithMessage:errors cancelButton:@"Ok"];
+            }else{
+                [UIAlertView simpleApplicationAlertWithMessage:@"New machine received!" cancelButton:@"Ok"];
+                [self dismissViewControllerAnimated:YES completion:nil];
+            }
+        }];
     }
 }
 - (IBAction)cancelMachine:(id)sender{
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 #pragma mark - Class
-- (BOOL)checkMachineForm{
-    if (_machineYear.text.length != 4){
-        [UIAlertView simpleApplicationAlertWithMessage:@"The year must be set." cancelButton:@"Ok"];
-        return NO;
-    }else if (_machineName.text.length == 0){
-        [UIAlertView simpleApplicationAlertWithMessage:@"You must set the machine name." cancelButton:@"Ok"];
-        return NO;
-    }else if (_machineManufacturer.text.length == 0){
-        [UIAlertView simpleApplicationAlertWithMessage:@"You must set the manufacturer." cancelButton:@"Ok"];
-        return NO;
+- (void)setLocation:(Location *)location{
+    selectedLocation = location;
+    _locationTitle.text = location.name;
+}
+#pragma mark - TableViewDelegate
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    if (indexPath.section == 1){
+        LocationsView *locations = [self.storyboard instantiateViewControllerWithIdentifier:@"LocationsView"];
+        locations.isSelecting = YES;
+        locations.selectingViewController = self;
+        [self.navigationController pushViewController:locations animated:YES];
     }
-    return YES;
+    
 }
 @end
