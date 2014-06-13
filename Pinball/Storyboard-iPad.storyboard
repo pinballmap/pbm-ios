@@ -75,7 +75,7 @@
         <!--Locations View - Locations-->
         <scene sceneID="adF-46-h5c">
             <objects>
-                <tableViewController id="Pdd-BG-1qn" customClass="LocationsView" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="LocationsView" id="Pdd-BG-1qn" customClass="LocationsView" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="Azu-zK-PVy">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="650"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -895,111 +895,6 @@
             </objects>
             <point key="canvasLocation" x="7387" y="-2580"/>
         </scene>
-        <!--New Machine View - New Machine-->
-        <scene sceneID="pWR-MI-OUD">
-            <objects>
-                <tableViewController id="wfE-dW-Jfe" customClass="NewMachineView" sceneMemberID="viewController">
-                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" dataMode="static" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="2tC-Uo-hXA">
-                        <rect key="frame" x="0.0" y="0.0" width="540" height="620"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
-                        <sections>
-                            <tableViewSection headerTitle="Machine" id="N7s-bJ-dXn">
-                                <cells>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="fJb-5T-u7L">
-                                        <rect key="frame" x="0.0" y="119" width="540" height="44"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="fJb-5T-u7L" id="bp6-4h-UOZ">
-                                            <rect key="frame" x="0.0" y="0.0" width="540" height="43"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Name" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="YIo-Ee-9bt">
-                                                    <rect key="frame" x="20" y="0.0" width="500" height="43"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <textInputTraits key="textInputTraits" autocapitalizationType="words"/>
-                                                </textField>
-                                            </subviews>
-                                        </tableViewCellContentView>
-                                    </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="R7M-0U-um6">
-                                        <rect key="frame" x="0.0" y="163" width="540" height="44"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="R7M-0U-um6" id="pro-EY-DSJ">
-                                            <rect key="frame" x="0.0" y="0.0" width="540" height="43"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Manufacturer" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Dtc-O0-G8K">
-                                                    <rect key="frame" x="20" y="0.0" width="500" height="43"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <textInputTraits key="textInputTraits" autocapitalizationType="words"/>
-                                                </textField>
-                                            </subviews>
-                                        </tableViewCellContentView>
-                                    </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="xDz-VF-Xdg">
-                                        <rect key="frame" x="0.0" y="207" width="540" height="44"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="xDz-VF-Xdg" id="9vu-M3-NHC">
-                                            <rect key="frame" x="0.0" y="0.0" width="540" height="43"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Year" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="01e-Gu-fPP">
-                                                    <rect key="frame" x="20" y="0.0" width="500" height="43"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
-                                                </textField>
-                                            </subviews>
-                                        </tableViewCellContentView>
-                                    </tableViewCell>
-                                </cells>
-                            </tableViewSection>
-                        </sections>
-                        <connections>
-                            <outlet property="dataSource" destination="wfE-dW-Jfe" id="KyP-Q3-JHG"/>
-                            <outlet property="delegate" destination="wfE-dW-Jfe" id="VW5-ht-qiP"/>
-                        </connections>
-                    </tableView>
-                    <navigationItem key="navigationItem" title="New Machine" id="eVv-uh-Wnc">
-                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="P8O-JN-X7X">
-                            <connections>
-                                <action selector="cancelMachine:" destination="wfE-dW-Jfe" id="Flc-Iu-K8W"/>
-                            </connections>
-                        </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="DRo-Tv-7CR">
-                            <connections>
-                                <action selector="saveMachine:" destination="wfE-dW-Jfe" id="hJa-BW-ztX"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
-                    <connections>
-                        <outlet property="machineManufacturer" destination="Dtc-O0-G8K" id="E0Y-qQ-CJ6"/>
-                        <outlet property="machineName" destination="YIo-Ee-9bt" id="vFV-nS-scW"/>
-                        <outlet property="machineYear" destination="01e-Gu-fPP" id="zpb-cP-hE0"/>
-                    </connections>
-                </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="i1T-4T-jk8" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="9276" y="-1826"/>
-        </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="8Js-LW-SGV">
-            <objects>
-                <navigationController storyboardIdentifier="NewMachineView" automaticallyAdjustsScrollViewInsets="NO" modalPresentationStyle="formSheet" id="XhU-3D-Ewl" sceneMemberID="viewController">
-                    <toolbarItems/>
-                    <modalFormSheetSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="UTS-PO-HAS">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="wfE-dW-Jfe" kind="relationship" relationship="rootViewController" id="5sB-Ai-5vC"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="uLh-1v-9ZS" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="8617" y="-1826"/>
-        </scene>
         <!--New Machine Score View - New Score-->
         <scene sceneID="pvK-J9-l0C">
             <objects>
@@ -1413,7 +1308,13 @@
                             <outlet property="delegate" destination="F3F-QE-z6O" id="ddG-a8-LQS"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="dT1-sY-VzE"/>
+                    <navigationItem key="navigationItem" id="dT1-sY-VzE">
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="QyU-6h-5cM">
+                            <connections>
+                                <action selector="addMachine:" destination="F3F-QE-z6O" id="ZYy-KV-Wan"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7Ki-Cc-tFf" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -1911,6 +1812,103 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1GG-eI-vL1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1295" y="-1335"/>
+        </scene>
+        <!--New Machine View - New Machine-->
+        <scene sceneID="8Dd-nL-D8O">
+            <objects>
+                <tableViewController id="Jp1-lS-H4L" customClass="NewMachineView" sceneMemberID="viewController">
+                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" dataMode="static" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="kFr-75-KVD">
+                        <rect key="frame" x="0.0" y="0.0" width="540" height="620"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <sections>
+                            <tableViewSection headerTitle="Machine" id="hml-Yr-wtS">
+                                <cells>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="lAB-Ag-v4W">
+                                        <rect key="frame" x="0.0" y="119" width="540" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="lAB-Ag-v4W" id="4qY-tN-zU7">
+                                            <rect key="frame" x="0.0" y="0.0" width="540" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Name" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="JvN-9z-FHH">
+                                                    <rect key="frame" x="20" y="0.0" width="280" height="43"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <textInputTraits key="textInputTraits" autocapitalizationType="words"/>
+                                                </textField>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
+                            <tableViewSection headerTitle="Location" id="6QP-Of-Uqx">
+                                <cells>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="Fue-ZL-pID" style="IBUITableViewCellStyleDefault" id="LGG-x7-Ewz">
+                                        <rect key="frame" x="0.0" y="211" width="540" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="LGG-x7-Ewz" id="Fmk-qo-17Y">
+                                            <rect key="frame" x="0.0" y="0.0" width="540" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Select Location" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Fue-ZL-pID">
+                                                    <rect key="frame" x="15" y="0.0" width="510" height="43"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
+                        </sections>
+                        <connections>
+                            <outlet property="dataSource" destination="Jp1-lS-H4L" id="SsB-bj-wRU"/>
+                            <outlet property="delegate" destination="Jp1-lS-H4L" id="Lee-4e-sac"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="New Machine" id="em4-CU-r25">
+                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="pxM-sO-14p">
+                            <connections>
+                                <action selector="cancelMachine:" destination="Jp1-lS-H4L" id="kz9-JF-gNu"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="WbO-ol-yiQ">
+                            <connections>
+                                <action selector="saveMachine:" destination="Jp1-lS-H4L" id="s3s-6q-k18"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <modalFormSheetSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <connections>
+                        <outlet property="locationTitle" destination="Fue-ZL-pID" id="ysJ-sj-ZVC"/>
+                        <outlet property="machineName" destination="JvN-9z-FHH" id="y3M-Oh-QIO"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Y2o-Ku-GBs" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="9276" y="-1826"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="cIm-8y-HIF">
+            <objects>
+                <navigationController storyboardIdentifier="NewMachineView" automaticallyAdjustsScrollViewInsets="NO" id="PjC-e6-yZc" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <modalFormSheetSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="iXq-wl-a9a">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="Jp1-lS-H4L" kind="relationship" relationship="rootViewController" id="6DN-v1-4qW"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="eQO-1v-v5C" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="8617" y="-1826"/>
         </scene>
     </scenes>
     <resources>

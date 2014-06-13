@@ -54,6 +54,9 @@
 #pragma mark - Class Actions
 - (IBAction)addMachine:(id)sender{
     UINavigationController *newMachine = [self.storyboard instantiateViewControllerWithIdentifier:@"NewMachineView"];
+    if ([UIDevice iPad]){
+        newMachine.modalPresentationStyle = UIModalPresentationFormSheet;
+    }
     [self.navigationController presentViewController:newMachine animated:YES completion:nil];
 }
 #pragma mark - Region Update
