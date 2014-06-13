@@ -290,61 +290,6 @@
                                 <outlet property="delegate" destination="DU6-XU-okl" id="eRd-6N-MWj"/>
                             </connections>
                         </searchBar>
-                        <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="LocationCell" id="IL3-bX-4Sa" customClass="LocationCell">
-                                <rect key="frame" x="0.0" y="130" width="320" height="44"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="IL3-bX-4Sa" id="ywq-mI-tcw">
-                                    <rect key="frame" x="0.0" y="0.0" width="287" height="43"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                    <subviews>
-                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="230" translatesAutoresizingMaskIntoConstraints="NO" id="xFE-aA-4d5">
-                                            <rect key="frame" x="15" y="3" width="230" height="24"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <constraints>
-                                                <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="24" id="1Ly-St-T8s"/>
-                                            </constraints>
-                                            <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZsB-36-NHS">
-                                            <rect key="frame" x="15" y="25" width="230" height="15"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="300" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Nia-JC-DtK">
-                                            <rect key="frame" x="257" y="7" width="30" height="30"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <color key="backgroundColor" red="0.97212550949999998" green="0.0" blue="0.87446945249999997" alpha="1" colorSpace="calibratedRGB"/>
-                                            <constraints>
-                                                <constraint firstAttribute="height" constant="30" id="2pW-Wo-wFp"/>
-                                                <constraint firstAttribute="width" constant="30" id="mOP-vh-bqp"/>
-                                            </constraints>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                    </subviews>
-                                    <constraints>
-                                        <constraint firstItem="xFE-aA-4d5" firstAttribute="top" secondItem="ywq-mI-tcw" secondAttribute="top" constant="3" id="0HL-Ke-kbm"/>
-                                        <constraint firstItem="ZsB-36-NHS" firstAttribute="leading" secondItem="ywq-mI-tcw" secondAttribute="leading" constant="15" id="AMO-Is-JTh"/>
-                                        <constraint firstAttribute="bottom" secondItem="ZsB-36-NHS" secondAttribute="bottom" constant="3" id="DJW-Zx-EFz"/>
-                                        <constraint firstAttribute="trailing" secondItem="ZsB-36-NHS" secondAttribute="trailing" constant="42" id="ZET-5s-slW"/>
-                                        <constraint firstAttribute="trailing" secondItem="Nia-JC-DtK" secondAttribute="trailing" id="aVM-qS-XUx"/>
-                                        <constraint firstItem="xFE-aA-4d5" firstAttribute="leading" secondItem="ywq-mI-tcw" secondAttribute="leading" constant="15" id="bcY-IN-UfW"/>
-                                        <constraint firstItem="ZsB-36-NHS" firstAttribute="top" secondItem="xFE-aA-4d5" secondAttribute="bottom" constant="-2" id="ezf-Ws-FoB"/>
-                                        <constraint firstAttribute="trailing" secondItem="xFE-aA-4d5" secondAttribute="trailing" constant="42" id="vNS-Pn-PKQ"/>
-                                        <constraint firstAttribute="centerY" secondItem="Nia-JC-DtK" secondAttribute="centerY" id="zBr-G8-cXD"/>
-                                    </constraints>
-                                </tableViewCellContentView>
-                                <connections>
-                                    <outlet property="locationDetail" destination="ZsB-36-NHS" id="tG4-0s-qaZ"/>
-                                    <outlet property="locationName" destination="xFE-aA-4d5" id="uQ7-GS-sR9"/>
-                                    <outlet property="machineCount" destination="Nia-JC-DtK" id="GCv-bb-9Mt"/>
-                                </connections>
-                            </tableViewCell>
-                        </prototypes>
                         <connections>
                             <outlet property="dataSource" destination="DU6-XU-okl" id="cx5-fb-dv3"/>
                             <outlet property="delegate" destination="DU6-XU-okl" id="X2r-QV-zVk"/>

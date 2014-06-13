@@ -43,6 +43,9 @@
     UIRefreshControl *refresh = [UIRefreshControl new];
     [refresh addTarget:self action:@selector(refreshRegion) forControlEvents:UIControlEventValueChanged];
     self.refreshControl = refresh;
+    
+    [self.tableView registerNib:[UINib nibWithNibName:@"LocationCell" bundle:nil] forCellReuseIdentifier:@"LocationCell"];
+    [self.searchDisplayController.searchResultsTableView registerNib:[UINib nibWithNibName:@"LocationCell" bundle:nil] forCellReuseIdentifier:@"LocationCell"];
 }
 - (void)didReceiveMemoryWarning{
     [super didReceiveMemoryWarning];
@@ -231,9 +234,6 @@
         cell = [tableView dequeueReusableCellWithIdentifier:@"LocationCell" forIndexPath:indexPath];
     }else{
         cell = [tableView dequeueReusableCellWithIdentifier:@"LocationCell"];
-        if (cell == nil){
-            cell = (LocationCell *)[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"LocationCell"];
-        }
     }
     
     Location *currentLocation;
@@ -268,6 +268,7 @@
             [_selectingViewController setLocation:currentLocation];
         }
         [self.navigationController popToRootViewControllerAnimated:YES];
+        return;
     }
     if ([UIDevice iPad]){
         LocationProfileView_iPad *profileView = (LocationProfileView_iPad *)self.parentViewController;

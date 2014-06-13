@@ -27,6 +27,7 @@
 		DB2D132E1942687F0082B8F9 /* Event+CellHelpers.m in Sources */ = {isa = PBXBuildFile; fileRef = DB2D132D1942687F0082B8F9 /* Event+CellHelpers.m */; };
 		DB314278194A10F80097B312 /* LocationCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DB314277194A10F80097B312 /* LocationCell.m */; };
 		DB3B4EF91912BBEE0015407B /* Location+CellHelpers.m in Sources */ = {isa = PBXBuildFile; fileRef = DB3B4EF81912BBEE0015407B /* Location+CellHelpers.m */; };
+		DB3F807B194B25100089F3D0 /* LocationCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DB3F807A194B25100089F3D0 /* LocationCell.xib */; };
 		DB43E48419464D6400A641E3 /* 798-filter.png in Resources */ = {isa = PBXBuildFile; fileRef = DB43E48219464D6400A641E3 /* 798-filter.png */; };
 		DB43E48519464D6400A641E3 /* 798-filter@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DB43E48319464D6400A641E3 /* 798-filter@2x.png */; };
 		DB43E4881947194C00A641E3 /* MachineLocation+CellHelpers.m in Sources */ = {isa = PBXBuildFile; fileRef = DB43E4871947194C00A641E3 /* MachineLocation+CellHelpers.m */; };
@@ -152,6 +153,7 @@
 		DB314277194A10F80097B312 /* LocationCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocationCell.m; sourceTree = "<group>"; };
 		DB3B4EF71912BBEE0015407B /* Location+CellHelpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Location+CellHelpers.h"; sourceTree = "<group>"; };
 		DB3B4EF81912BBEE0015407B /* Location+CellHelpers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Location+CellHelpers.m"; sourceTree = "<group>"; };
+		DB3F807A194B25100089F3D0 /* LocationCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LocationCell.xib; sourceTree = "<group>"; };
 		DB43E48219464D6400A641E3 /* 798-filter.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "798-filter.png"; sourceTree = "<group>"; };
 		DB43E48319464D6400A641E3 /* 798-filter@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "798-filter@2x.png"; sourceTree = "<group>"; };
 		DB43E4861947194C00A641E3 /* MachineLocation+CellHelpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MachineLocation+CellHelpers.h"; sourceTree = "<group>"; };
@@ -426,6 +428,7 @@
 			children = (
 				DBB59CD018FADF6D00F35BFD /* InformationCell.h */,
 				DBB59CD118FADF6D00F35BFD /* InformationCell.m */,
+				DB3F807A194B25100089F3D0 /* LocationCell.xib */,
 				DBB59CD318FADF7A00F35BFD /* LocationMapCell.h */,
 				DBB59CD418FADF7A00F35BFD /* LocationMapCell.m */,
 				DBA3B608190846D900ACBC69 /* InputCell.h */,
@@ -746,6 +749,7 @@
 				DB43E48519464D6400A641E3 /* 798-filter@2x.png in Resources */,
 				DB9330BC190D49AB0054C779 /* SeattleLocation.gpx in Resources */,
 				DBF06C1318F973D200F92912 /* 740-gear.png in Resources */,
+				DB3F807B194B25100089F3D0 /* LocationCell.xib in Resources */,
 				DBF06C8418F9840B00F92912 /* pinball@2x.png in Resources */,
 				DB070C43193243780018D521 /* CHANGELOG in Resources */,
 				DBBB4BED193387AB004E433F /* Storyboard-iPad.storyboard in Resources */,
