@@ -245,7 +245,7 @@
     cell.locationName.text = currentLocation.name;
 
     if ([currentLocation.currentDistance isEqual:@(0)]){
-        cell.locationDetail.text = [NSString stringWithFormat:@"%@ ,%@",currentLocation.street,currentLocation.city];
+        cell.locationDetail.text = [NSString stringWithFormat:@"%@, %@",currentLocation.street,currentLocation.city];
     }else{
         cell.locationDetail.text = [NSString stringWithFormat:@"%.02f miles",[currentLocation.currentDistance floatValue]];
     }
