@@ -17,8 +17,20 @@
     Region *newRegion = [NSEntityDescription insertNewObjectForEntityForName:@"Region" inManagedObjectContext:context];
     newRegion.name = data[@"name"];
     newRegion.fullName = data[@"full_name"];
-    newRegion.latitude = data[@"lat"];
-    newRegion.longitude = data[@"lon"];
+    
+    NSNumberFormatter *stringNumber = [NSNumberFormatter new];
+    stringNumber.numberStyle = NSNumberFormatterDecimalStyle;
+    
+    if ([data[@"lat"] isKindOfClass:[NSString class]]){
+        newRegion.latitude = [stringNumber numberFromString:data[@"lat"]];
+    }else{
+       newRegion.latitude = data[@"lat"];
+    }
+    if ([data[@"lon"] isKindOfClass:[NSString class]]){
+        newRegion.longitude = [stringNumber numberFromString:data[@"lon"]];
+    }else{
+        newRegion.longitude = data[@"lon"];
+    }
     newRegion.regionId = data[@"id"];
     return newRegion;
 }
