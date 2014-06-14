@@ -13,7 +13,6 @@
 @interface PinballTabController () {
     UIAlertView *updatingAlert;
 }
-- (void)updateEventBadge;
 - (void)updatingRegion;
 @end
 
@@ -28,9 +27,9 @@
 }
 - (void)viewDidLoad{
     [super viewDidLoad];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateEventBadge) name:@"RegionUpdate" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateTabInfo) name:@"RegionUpdate" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updatingRegion) name:@"UpdatingRegion" object:nil];
-    [self updateEventBadge];
+    [self updateTabInfo];
 }
 - (void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
@@ -42,13 +41,17 @@
         [self presentViewController:nav animated:YES completion:nil];
     }
 }
-- (void)updateEventBadge{
-    NSInteger eventCounts = [[[[PinballManager sharedInstance] currentRegion] events] count];
+- (void)updateTabInfo{
+    Region *currentRegion = [[PinballManager sharedInstance] currentRegion];
+    NSInteger eventCounts = [[currentRegion events] count];
     if (eventCounts > 0){
         [[[self.viewControllers objectAtIndex:2] tabBarItem] setBadgeValue:[NSString stringWithFormat:@"%li",(long)eventCounts]];
     }else{
         [[[self.viewControllers objectAtIndex:2] tabBarItem] setBadgeValue:nil];
     }
+    
+    [[[self.viewControllers objectAtIndex:0] tabBarItem] setTitle:currentRegion.fullName];
+    
     [updatingAlert dismissWithClickedButtonIndex:0 animated:YES];
 }
 - (void)updatingRegion{
