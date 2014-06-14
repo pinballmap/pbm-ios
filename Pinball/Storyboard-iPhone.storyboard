@@ -1105,11 +1105,11 @@
             </objects>
             <point key="canvasLocation" x="841" y="1328"/>
         </scene>
-        <!--Navigation Controller - Settings-->
+        <!--Navigation Controller - Regions-->
         <scene sceneID="BGI-Du-Pqt">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Eg8-cD-jls" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Settings" image="740-gear.png" id="dlc-w4-RcL"/>
+                    <tabBarItem key="tabBarItem" title="Regions" image="849-radar.png" id="dlc-w4-RcL"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="pqt-iu-FDn">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -1117,7 +1117,7 @@
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="Oba-JZ-DAa" kind="relationship" relationship="rootViewController" id="jhm-wL-9wo"/>
+                        <segue destination="9Nt-tE-aEj" kind="relationship" relationship="rootViewController" id="dwu-Ne-FDp"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iA6-Ga-04C" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1136,7 +1136,7 @@
                             <tableViewSection headerTitle="Region" id="AR2-4c-ZCQ">
                                 <cells>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="JiT-RD-5E6" style="IBUITableViewCellStyleDefault" id="Htm-NU-Cub">
-                                        <rect key="frame" x="0.0" y="119" width="320" height="44"/>
+                                        <rect key="frame" x="0.0" y="55" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Htm-NU-Cub" id="UQK-3a-psP">
                                             <rect key="frame" x="0.0" y="0.0" width="287" height="43"/>
@@ -1151,9 +1151,6 @@
                                                 </label>
                                             </subviews>
                                         </tableViewCellContentView>
-                                        <connections>
-                                            <segue destination="9Nt-tE-aEj" kind="push" id="g7J-FZ-Wux"/>
-                                        </connections>
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
@@ -1163,20 +1160,14 @@
                             <outlet property="delegate" destination="Oba-JZ-DAa" id="iBg-nr-CQK"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="DtT-3B-Bfb">
-                        <barButtonItem key="rightBarButtonItem" title="About" id="eCb-MP-J1q">
-                            <connections>
-                                <segue destination="sob-yA-k2w" kind="push" id="NKT-dU-pPf"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" id="DtT-3B-Bfb"/>
                     <connections>
                         <outlet property="regionLabel" destination="JiT-RD-5E6" id="606-Fp-tyQ"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="EOb-eX-N9D" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1359" y="2092"/>
+            <point key="canvasLocation" x="1342" y="2830"/>
         </scene>
         <!--About View - About-->
         <scene sceneID="Wrc-e4-lul">
@@ -1215,7 +1206,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pk3-Lt-OHW" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1851" y="2830"/>
+            <point key="canvasLocation" x="1841" y="2087"/>
         </scene>
         <!--Regions View-->
         <scene sceneID="6hD-Xm-Uer">
@@ -1258,6 +1249,11 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" id="Lyw-vI-mMk">
+                        <barButtonItem key="leftBarButtonItem" title="About" id="eCb-MP-J1q">
+                            <connections>
+                                <segue destination="sob-yA-k2w" kind="push" id="NKT-dU-pPf"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="Request" id="4HH-rG-fRi">
                             <connections>
                                 <action selector="requestRegion:" destination="9Nt-tE-aEj" id="Xel-Mb-WRs"/>
@@ -1267,7 +1263,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GJS-iw-zUa" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1851" y="2092"/>
+            <point key="canvasLocation" x="1359" y="2087"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="L34-CY-u2Z">
@@ -1702,8 +1698,8 @@
         </scene>
     </scenes>
     <resources>
-        <image name="740-gear.png" width="28" height="28"/>
         <image name="798-filter.png" width="24" height="24"/>
+        <image name="849-radar.png" width="28" height="28"/>
         <image name="851-calendar.png" width="28" height="28"/>
         <image name="852-map.png" width="28" height="24"/>
         <image name="pinball.png" width="28" height="28"/>

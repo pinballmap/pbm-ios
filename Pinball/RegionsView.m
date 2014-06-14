@@ -106,6 +106,14 @@
     }else{
         region = searchResults[indexPath.row];
     }
+    cell.accessoryType = UITableViewCellAccessoryNone;
+    
+    Region *selectedRegion = [[PinballManager sharedInstance] currentRegion];
+    if ([region.name isEqualToString:selectedRegion.name]){
+        cell.accessoryType = UITableViewCellAccessoryCheckmark;
+        
+    }
+    
     cell.textLabel.text = region.fullName;
     
     return cell;
@@ -118,13 +126,9 @@
     }else{
         region = searchResults[indexPath.row];
     }
+    
     [[PinballManager sharedInstance] loadRegionData:region];
-
-    if (self.parentViewController.modalPresentationStyle){
-        [self dismissViewControllerAnimated:YES completion:nil];
-    }else{
-        [self.navigationController popToRootViewControllerAnimated:YES];
-    }
+    [self.tableView reloadData];
 }
 /*
 // Override to support conditional editing of the table view.

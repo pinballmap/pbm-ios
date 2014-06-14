@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		DB0596F5194C6366003A0C48 /* 849-radar.png in Resources */ = {isa = PBXBuildFile; fileRef = DB0596F3194C6366003A0C48 /* 849-radar.png */; };
+		DB0596F6194C6366003A0C48 /* 849-radar@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DB0596F4194C6366003A0C48 /* 849-radar@2x.png */; };
 		DB070BEB193202ED0018D521 /* Location.m in Sources */ = {isa = PBXBuildFile; fileRef = DB070BEA193202ED0018D521 /* Location.m */; };
 		DB070BEE193202ED0018D521 /* Region.m in Sources */ = {isa = PBXBuildFile; fileRef = DB070BED193202ED0018D521 /* Region.m */; };
 		DB070BF1193202ED0018D521 /* Zone.m in Sources */ = {isa = PBXBuildFile; fileRef = DB070BF0193202ED0018D521 /* Zone.m */; };
@@ -124,6 +126,8 @@
 /* Begin PBXFileReference section */
 		767AEE54A0274802B59CA4A5 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		C95F05FACC264AF1B9D99B61 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
+		DB0596F3194C6366003A0C48 /* 849-radar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "849-radar.png"; sourceTree = "<group>"; };
+		DB0596F4194C6366003A0C48 /* 849-radar@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "849-radar@2x.png"; sourceTree = "<group>"; };
 		DB070BE9193202ED0018D521 /* Location.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Location.h; sourceTree = "<group>"; };
 		DB070BEA193202ED0018D521 /* Location.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Location.m; sourceTree = "<group>"; };
 		DB070BEC193202ED0018D521 /* Region.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Region.h; sourceTree = "<group>"; };
@@ -442,10 +446,10 @@
 		DBB71B9918FC482B007907DE /* Settings */ = {
 			isa = PBXGroup;
 			children = (
-				DBB71B9A18FC4838007907DE /* SettingsView.h */,
-				DBB71B9B18FC4838007907DE /* SettingsView.m */,
 				DBB71B9D18FC4846007907DE /* RegionsView.h */,
 				DBB71B9E18FC4846007907DE /* RegionsView.m */,
+				DBB71B9A18FC4838007907DE /* SettingsView.h */,
+				DBB71B9B18FC4838007907DE /* SettingsView.m */,
 			);
 			name = Settings;
 			sourceTree = "<group>";
@@ -513,6 +517,8 @@
 		DBF06BD518F96FF500F92912 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				DB0596F3194C6366003A0C48 /* 849-radar.png */,
+				DB0596F4194C6366003A0C48 /* 849-radar@2x.png */,
 				DB43E48219464D6400A641E3 /* 798-filter.png */,
 				DB43E48319464D6400A641E3 /* 798-filter@2x.png */,
 				DB9293C61912CBEB001EE904 /* pin.png */,
@@ -741,6 +747,7 @@
 				DBF06BFE18F9700F00F92912 /* Storyboard-iPhone.storyboard in Resources */,
 				DB9293C81912CBEB001EE904 /* pin.png in Resources */,
 				DBF06C8318F9840B00F92912 /* pinball.png in Resources */,
+				DB0596F5194C6366003A0C48 /* 849-radar.png in Resources */,
 				DB070C44193243780018D521 /* de.bitstadium.HockeySDK-iOS-3.5.4.docset in Resources */,
 				DB070C48193243780018D521 /* LICENSE in Resources */,
 				DBF06BD918F96FF500F92912 /* InfoPlist.strings in Resources */,
@@ -751,6 +758,7 @@
 				DBF06C1318F973D200F92912 /* 740-gear.png in Resources */,
 				DB3F807B194B25100089F3D0 /* LocationCell.xib in Resources */,
 				DBF06C8418F9840B00F92912 /* pinball@2x.png in Resources */,
+				DB0596F6194C6366003A0C48 /* 849-radar@2x.png in Resources */,
 				DB070C43193243780018D521 /* CHANGELOG in Resources */,
 				DBBB4BED193387AB004E433F /* Storyboard-iPad.storyboard in Resources */,
 				DBF06C0C18F9733C00F92912 /* 852-map@2x.png in Resources */,
