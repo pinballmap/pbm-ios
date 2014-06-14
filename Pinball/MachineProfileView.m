@@ -166,7 +166,7 @@
                 [self.navigationController pushViewController:locationProfile animated:YES];
             }else{
                 [self.tabBarController setSelectedIndex:0];
-                LocationProfileView_iPad *locationView = [[self.tabBarController.viewControllers firstObject] navigationRootViewController];
+                LocationProfileView_iPad *locationView = (LocationProfileView_iPad *)[[self.tabBarController.viewControllers firstObject] navigationRootViewController];
                 [locationView setCurrentLocation:machine.location];
             }
         }

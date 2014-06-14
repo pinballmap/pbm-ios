@@ -173,7 +173,6 @@ typedef enum : NSUInteger {
             editedData = @{@"description": text};
             break;
         case LocationEditingTypePhone:
-#pragma message ("TODO: REGEX for phone number search")
             editedData = @{@"phone": text};
             break;
         default:

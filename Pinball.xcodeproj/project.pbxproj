@@ -7,8 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		DB0596F5194C6366003A0C48 /* 849-radar.png in Resources */ = {isa = PBXBuildFile; fileRef = DB0596F3194C6366003A0C48 /* 849-radar.png */; };
-		DB0596F6194C6366003A0C48 /* 849-radar@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DB0596F4194C6366003A0C48 /* 849-radar@2x.png */; };
 		DB070BEB193202ED0018D521 /* Location.m in Sources */ = {isa = PBXBuildFile; fileRef = DB070BEA193202ED0018D521 /* Location.m */; };
 		DB070BEE193202ED0018D521 /* Region.m in Sources */ = {isa = PBXBuildFile; fileRef = DB070BED193202ED0018D521 /* Region.m */; };
 		DB070BF1193202ED0018D521 /* Zone.m in Sources */ = {isa = PBXBuildFile; fileRef = DB070BF0193202ED0018D521 /* Zone.m */; };
@@ -30,8 +28,6 @@
 		DB314278194A10F80097B312 /* LocationCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DB314277194A10F80097B312 /* LocationCell.m */; };
 		DB3B4EF91912BBEE0015407B /* Location+CellHelpers.m in Sources */ = {isa = PBXBuildFile; fileRef = DB3B4EF81912BBEE0015407B /* Location+CellHelpers.m */; };
 		DB3F807B194B25100089F3D0 /* LocationCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DB3F807A194B25100089F3D0 /* LocationCell.xib */; };
-		DB43E48419464D6400A641E3 /* 798-filter.png in Resources */ = {isa = PBXBuildFile; fileRef = DB43E48219464D6400A641E3 /* 798-filter.png */; };
-		DB43E48519464D6400A641E3 /* 798-filter@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DB43E48319464D6400A641E3 /* 798-filter@2x.png */; };
 		DB43E4881947194C00A641E3 /* MachineLocation+CellHelpers.m in Sources */ = {isa = PBXBuildFile; fileRef = DB43E4871947194C00A641E3 /* MachineLocation+CellHelpers.m */; };
 		DB4D82BE190D77530048156E /* Machine+CellHelpers.m in Sources */ = {isa = PBXBuildFile; fileRef = DB4D82BD190D77530048156E /* Machine+CellHelpers.m */; };
 		DB52D2DA18FAE96C00BB56D8 /* MapView.m in Sources */ = {isa = PBXBuildFile; fileRef = DB52D2D918FAE96C00BB56D8 /* MapView.m */; };
@@ -51,8 +47,6 @@
 		DB7B4C1119335B76002AF484 /* MachineLocationProfileView.m in Sources */ = {isa = PBXBuildFile; fileRef = DB7B4C1019335B76002AF484 /* MachineLocationProfileView.m */; };
 		DB7B4C14193361AA002AF484 /* MachineScore.m in Sources */ = {isa = PBXBuildFile; fileRef = DB7B4C13193361AA002AF484 /* MachineScore.m */; };
 		DB7B4C1719336717002AF484 /* NewMachineScoreView.m in Sources */ = {isa = PBXBuildFile; fileRef = DB7B4C1619336717002AF484 /* NewMachineScoreView.m */; };
-		DB9293C81912CBEB001EE904 /* pin.png in Resources */ = {isa = PBXBuildFile; fileRef = DB9293C61912CBEB001EE904 /* pin.png */; };
-		DB9293C91912CBEB001EE904 /* pin@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DB9293C71912CBEB001EE904 /* pin@2x.png */; };
 		DB9330BC190D49AB0054C779 /* SeattleLocation.gpx in Resources */ = {isa = PBXBuildFile; fileRef = DB9330BB190D49AB0054C779 /* SeattleLocation.gpx */; };
 		DB99C3AE1906DCD200AFDF0F /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DB99C3AD1906DCD200AFDF0F /* AddressBook.framework */; };
 		DB99C3B11906FA4100AFDF0F /* MachinePickingView.m in Sources */ = {isa = PBXBuildFile; fileRef = DB99C3B01906FA4100AFDF0F /* MachinePickingView.m */; };
@@ -92,20 +86,12 @@
 		DBF06C0118F9703E00F92912 /* CoreDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = DBF06C0018F9703E00F92912 /* CoreDataManager.m */; };
 		DBF06C0318F9704F00F92912 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DBF06C0218F9704F00F92912 /* CoreData.framework */; };
 		DBF06C0618F9707400F92912 /* Pinball.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = DBF06C0418F9707400F92912 /* Pinball.xcdatamodeld */; };
-		DBF06C0B18F9733C00F92912 /* 852-map.png in Resources */ = {isa = PBXBuildFile; fileRef = DBF06C0918F9733C00F92912 /* 852-map.png */; };
-		DBF06C0C18F9733C00F92912 /* 852-map@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DBF06C0A18F9733C00F92912 /* 852-map@2x.png */; };
-		DBF06C0F18F9734C00F92912 /* 851-calendar.png in Resources */ = {isa = PBXBuildFile; fileRef = DBF06C0D18F9734C00F92912 /* 851-calendar.png */; };
-		DBF06C1018F9734C00F92912 /* 851-calendar@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DBF06C0E18F9734C00F92912 /* 851-calendar@2x.png */; };
-		DBF06C1318F973D200F92912 /* 740-gear.png in Resources */ = {isa = PBXBuildFile; fileRef = DBF06C1118F973D200F92912 /* 740-gear.png */; };
-		DBF06C1418F973D200F92912 /* 740-gear@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DBF06C1218F973D200F92912 /* 740-gear@2x.png */; };
 		DBF06C1918F9749F00F92912 /* PinballManager.m in Sources */ = {isa = PBXBuildFile; fileRef = DBF06C1818F9749F00F92912 /* PinballManager.m */; };
 		DBF06C3C18F975C500F92912 /* Region+Create.m in Sources */ = {isa = PBXBuildFile; fileRef = DBF06C3B18F975C500F92912 /* Region+Create.m */; };
 		DBF06C4018F9775600F92912 /* Machine+Create.m in Sources */ = {isa = PBXBuildFile; fileRef = DBF06C3F18F9775600F92912 /* Machine+Create.m */; };
 		DBF06C4318F9788900F92912 /* Location+Create.m in Sources */ = {isa = PBXBuildFile; fileRef = DBF06C4218F9788900F92912 /* Location+Create.m */; };
 		DBF06C6418F97C5F00F92912 /* MachineLocation+Create.m in Sources */ = {isa = PBXBuildFile; fileRef = DBF06C6318F97C5F00F92912 /* MachineLocation+Create.m */; };
 		DBF06C6D18F97E6300F92912 /* LocationsView.m in Sources */ = {isa = PBXBuildFile; fileRef = DBF06C6C18F97E6300F92912 /* LocationsView.m */; };
-		DBF06C8318F9840B00F92912 /* pinball.png in Resources */ = {isa = PBXBuildFile; fileRef = DBF06C8118F9840B00F92912 /* pinball.png */; };
-		DBF06C8418F9840B00F92912 /* pinball@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DBF06C8218F9840B00F92912 /* pinball@2x.png */; };
 		DBF06C8718F984AF00F92912 /* MachinesView.m in Sources */ = {isa = PBXBuildFile; fileRef = DBF06C8618F984AF00F92912 /* MachinesView.m */; };
 		DBF711EF191E4DD3008656EE /* NewMachineView.m in Sources */ = {isa = PBXBuildFile; fileRef = DBF711EE191E4DD3008656EE /* NewMachineView.m */; };
 		DBF711F2191E59B8008656EE /* Machine.m in Sources */ = {isa = PBXBuildFile; fileRef = DBF711F1191E59B8008656EE /* Machine.m */; };
@@ -126,8 +112,6 @@
 /* Begin PBXFileReference section */
 		767AEE54A0274802B59CA4A5 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		C95F05FACC264AF1B9D99B61 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
-		DB0596F3194C6366003A0C48 /* 849-radar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "849-radar.png"; sourceTree = "<group>"; };
-		DB0596F4194C6366003A0C48 /* 849-radar@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "849-radar@2x.png"; sourceTree = "<group>"; };
 		DB070BE9193202ED0018D521 /* Location.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Location.h; sourceTree = "<group>"; };
 		DB070BEA193202ED0018D521 /* Location.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Location.m; sourceTree = "<group>"; };
 		DB070BEC193202ED0018D521 /* Region.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Region.h; sourceTree = "<group>"; };
@@ -158,8 +142,6 @@
 		DB3B4EF71912BBEE0015407B /* Location+CellHelpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Location+CellHelpers.h"; sourceTree = "<group>"; };
 		DB3B4EF81912BBEE0015407B /* Location+CellHelpers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Location+CellHelpers.m"; sourceTree = "<group>"; };
 		DB3F807A194B25100089F3D0 /* LocationCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LocationCell.xib; sourceTree = "<group>"; };
-		DB43E48219464D6400A641E3 /* 798-filter.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "798-filter.png"; sourceTree = "<group>"; };
-		DB43E48319464D6400A641E3 /* 798-filter@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "798-filter@2x.png"; sourceTree = "<group>"; };
 		DB43E4861947194C00A641E3 /* MachineLocation+CellHelpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MachineLocation+CellHelpers.h"; sourceTree = "<group>"; };
 		DB43E4871947194C00A641E3 /* MachineLocation+CellHelpers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MachineLocation+CellHelpers.m"; sourceTree = "<group>"; };
 		DB4D82BC190D77530048156E /* Machine+CellHelpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Machine+CellHelpers.h"; sourceTree = "<group>"; };
@@ -195,8 +177,6 @@
 		DB7B4C13193361AA002AF484 /* MachineScore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MachineScore.m; sourceTree = "<group>"; };
 		DB7B4C1519336717002AF484 /* NewMachineScoreView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewMachineScoreView.h; sourceTree = "<group>"; };
 		DB7B4C1619336717002AF484 /* NewMachineScoreView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewMachineScoreView.m; sourceTree = "<group>"; };
-		DB9293C61912CBEB001EE904 /* pin.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pin.png; sourceTree = "<group>"; };
-		DB9293C71912CBEB001EE904 /* pin@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "pin@2x.png"; sourceTree = "<group>"; };
 		DB9330BB190D49AB0054C779 /* SeattleLocation.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = SeattleLocation.gpx; sourceTree = "<group>"; };
 		DB99C3AD1906DCD200AFDF0F /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
 		DB99C3AF1906FA4100AFDF0F /* MachinePickingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MachinePickingView.h; sourceTree = "<group>"; };
@@ -258,12 +238,6 @@
 		DBF06C0018F9703E00F92912 /* CoreDataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoreDataManager.m; sourceTree = "<group>"; };
 		DBF06C0218F9704F00F92912 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		DBF06C0518F9707400F92912 /* Pinball.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Pinball.xcdatamodel; sourceTree = "<group>"; };
-		DBF06C0918F9733C00F92912 /* 852-map.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "852-map.png"; sourceTree = "<group>"; };
-		DBF06C0A18F9733C00F92912 /* 852-map@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "852-map@2x.png"; sourceTree = "<group>"; };
-		DBF06C0D18F9734C00F92912 /* 851-calendar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "851-calendar.png"; sourceTree = "<group>"; };
-		DBF06C0E18F9734C00F92912 /* 851-calendar@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "851-calendar@2x.png"; sourceTree = "<group>"; };
-		DBF06C1118F973D200F92912 /* 740-gear.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "740-gear.png"; sourceTree = "<group>"; };
-		DBF06C1218F973D200F92912 /* 740-gear@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "740-gear@2x.png"; sourceTree = "<group>"; };
 		DBF06C1718F9749F00F92912 /* PinballManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PinballManager.h; sourceTree = "<group>"; };
 		DBF06C1818F9749F00F92912 /* PinballManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PinballManager.m; sourceTree = "<group>"; };
 		DBF06C3A18F975C500F92912 /* Region+Create.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Region+Create.h"; sourceTree = "<group>"; };
@@ -277,8 +251,6 @@
 		DBF06C6318F97C5F00F92912 /* MachineLocation+Create.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MachineLocation+Create.m"; sourceTree = "<group>"; };
 		DBF06C6B18F97E6300F92912 /* LocationsView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationsView.h; sourceTree = "<group>"; };
 		DBF06C6C18F97E6300F92912 /* LocationsView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocationsView.m; sourceTree = "<group>"; };
-		DBF06C8118F9840B00F92912 /* pinball.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pinball.png; sourceTree = "<group>"; };
-		DBF06C8218F9840B00F92912 /* pinball@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "pinball@2x.png"; sourceTree = "<group>"; };
 		DBF06C8518F984AF00F92912 /* MachinesView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MachinesView.h; sourceTree = "<group>"; };
 		DBF06C8618F984AF00F92912 /* MachinesView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MachinesView.m; sourceTree = "<group>"; };
 		DBF711ED191E4DD3008656EE /* NewMachineView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewMachineView.h; sourceTree = "<group>"; };
@@ -517,26 +489,12 @@
 		DBF06BD518F96FF500F92912 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				DB0596F3194C6366003A0C48 /* 849-radar.png */,
-				DB0596F4194C6366003A0C48 /* 849-radar@2x.png */,
-				DB43E48219464D6400A641E3 /* 798-filter.png */,
-				DB43E48319464D6400A641E3 /* 798-filter@2x.png */,
-				DB9293C61912CBEB001EE904 /* pin.png */,
-				DB9293C71912CBEB001EE904 /* pin@2x.png */,
 				DBB71BAF18FC5E77007907DE /* NSFileManager+DocumentsDirectory.h */,
 				DBB71BB018FC5E77007907DE /* NSFileManager+DocumentsDirectory.m */,
 				DB52D30218FB0DCF00BB56D8 /* UIAlertView+Application.h */,
 				DB52D30318FB0DCF00BB56D8 /* UIAlertView+Application.m */,
 				DB52D2F818FB09AF00BB56D8 /* NSDate+DateFormatting.h */,
 				DB52D2F918FB09AF00BB56D8 /* NSDate+DateFormatting.m */,
-				DBF06C8118F9840B00F92912 /* pinball.png */,
-				DBF06C8218F9840B00F92912 /* pinball@2x.png */,
-				DBF06C0918F9733C00F92912 /* 852-map.png */,
-				DBF06C0A18F9733C00F92912 /* 852-map@2x.png */,
-				DBF06C0D18F9734C00F92912 /* 851-calendar.png */,
-				DBF06C0E18F9734C00F92912 /* 851-calendar@2x.png */,
-				DBF06C1118F973D200F92912 /* 740-gear.png */,
-				DBF06C1218F973D200F92912 /* 740-gear@2x.png */,
 				DBF06BD618F96FF500F92912 /* Pinball-Info.plist */,
 				DBF06BD718F96FF500F92912 /* InfoPlist.strings */,
 				DBF06BDA18F96FF500F92912 /* main.m */,
@@ -735,33 +693,19 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DB43E48419464D6400A641E3 /* 798-filter.png in Resources */,
-				DBF06C1018F9734C00F92912 /* 851-calendar@2x.png in Resources */,
-				DBF06C1418F973D200F92912 /* 740-gear@2x.png in Resources */,
-				DB9293C91912CBEB001EE904 /* pin@2x.png in Resources */,
 				DB636D131903EF8E00576521 /* AboutInfo.plist in Resources */,
-				DBF06C0B18F9733C00F92912 /* 852-map.png in Resources */,
 				DB070C49193243780018D521 /* README.md in Resources */,
 				DB070C46193243780018D521 /* HockeySDK.xcconfig in Resources */,
 				DB070C47193243780018D521 /* HockeySDKResources.bundle in Resources */,
 				DBF06BFE18F9700F00F92912 /* Storyboard-iPhone.storyboard in Resources */,
-				DB9293C81912CBEB001EE904 /* pin.png in Resources */,
-				DBF06C8318F9840B00F92912 /* pinball.png in Resources */,
-				DB0596F5194C6366003A0C48 /* 849-radar.png in Resources */,
 				DB070C44193243780018D521 /* de.bitstadium.HockeySDK-iOS-3.5.4.docset in Resources */,
 				DB070C48193243780018D521 /* LICENSE in Resources */,
 				DBF06BD918F96FF500F92912 /* InfoPlist.strings in Resources */,
 				DBF06BE118F96FF500F92912 /* Images.xcassets in Resources */,
-				DBF06C0F18F9734C00F92912 /* 851-calendar.png in Resources */,
-				DB43E48519464D6400A641E3 /* 798-filter@2x.png in Resources */,
 				DB9330BC190D49AB0054C779 /* SeattleLocation.gpx in Resources */,
-				DBF06C1318F973D200F92912 /* 740-gear.png in Resources */,
 				DB3F807B194B25100089F3D0 /* LocationCell.xib in Resources */,
-				DBF06C8418F9840B00F92912 /* pinball@2x.png in Resources */,
-				DB0596F6194C6366003A0C48 /* 849-radar@2x.png in Resources */,
 				DB070C43193243780018D521 /* CHANGELOG in Resources */,
 				DBBB4BED193387AB004E433F /* Storyboard-iPad.storyboard in Resources */,
-				DBF06C0C18F9733C00F92912 /* 852-map@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
