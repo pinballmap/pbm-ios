@@ -39,6 +39,10 @@
         [self.tableView reloadData];
     }];
     searchResults = [NSMutableArray new];
+    if (_isSelecting){
+        self.navigationItem.leftBarButtonItem = nil;
+        self.navigationItem.rightBarButtonItem = nil;
+    }
 }
 - (void)didReceiveMemoryWarning{
     [super didReceiveMemoryWarning];
@@ -129,6 +133,9 @@
     
     [[PinballManager sharedInstance] loadRegionData:region];
     [self.tableView reloadData];
+    if (_isSelecting){
+        [self dismissViewControllerAnimated:YES completion:nil];
+    }
 }
 /*
 // Override to support conditional editing of the table view.

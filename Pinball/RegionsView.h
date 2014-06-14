@@ -10,4 +10,6 @@
 
 @interface RegionsView : UITableViewController
 
+@property (nonatomic) BOOL isSelecting;
+
 @end
