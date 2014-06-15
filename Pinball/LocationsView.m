@@ -14,6 +14,7 @@
 #import "MapView.h"
 #import "UIViewController+Helpers.h"
 #import "LocationCell.h"
+#import "UIAlertView+Application.h"
 
 @interface LocationsView () <NSFetchedResultsControllerDelegate,UIActionSheetDelegate,UISearchBarDelegate,UISearchDisplayDelegate> {
     UIActionSheet *filterSheet;
@@ -143,8 +144,12 @@
             isClosets = NO;
             NSString *sectionName;
             if (buttonIndex == 0){
-                closestSheet = [[UIActionSheet alloc] initWithTitle:@"Distance" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"1 Mile", @"5 Miles", @"10 Miles", @"15 Miles", nil];
-                [closestSheet showFromTabBar:self.tabBarController.tabBar];
+                if ([[PinballManager sharedInstance] userLocation]){
+                    closestSheet = [[UIActionSheet alloc] initWithTitle:@"Distance" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"1 Mile", @"5 Miles", @"10 Miles", @"15 Miles", nil];
+                    [closestSheet showFromTabBar:self.tabBarController.tabBar];
+                }else{
+                    [UIAlertView simpleApplicationAlertWithMessage:@"Location services are not enabled. Please enable to filter by distance." cancelButton:@"Ok"];
+                }
                 return;
             }else if (buttonIndex == 1){
                 // Number
