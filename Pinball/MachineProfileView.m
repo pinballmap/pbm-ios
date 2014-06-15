@@ -1,6 +1,6 @@
 //
 //  MachineProfileView.m
-//  Pinball
+//  PinballMap
 //
 //  Created by Frank Michael on 4/13/14.
 //  Copyright (c) 2014 Frank Michael Sanchez. All rights reserved.
@@ -46,7 +46,7 @@
     self.navigationItem.title = _currentMachine.name;
 
     NSFetchRequest *locationRequest = [NSFetchRequest fetchRequestWithEntityName:@"MachineLocation"];
-    locationRequest.predicate = [NSPredicate predicateWithFormat:@"location.region = %@ AND machine = %@" argumentArray:@[[[PinballManager sharedInstance] currentRegion],_currentMachine]];
+    locationRequest.predicate = [NSPredicate predicateWithFormat:@"location.region = %@ AND machine = %@" argumentArray:@[[[PinballMapManager sharedInstance] currentRegion],_currentMachine]];
     locationRequest.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"location.name" ascending:YES]];
     machineLocations = [[[CoreDataManager sharedInstance] managedObjectContext] executeFetchRequest:locationRequest error:nil];
     [self.tableView reloadData];

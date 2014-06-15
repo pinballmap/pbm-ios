@@ -1,6 +1,6 @@
 //
 //  SettingsView.m
-//  Pinball
+//  PinballMap
 //
 //  Created by Frank Michael on 4/14/14.
 //  Copyright (c) 2014 Frank Michael Sanchez. All rights reserved.
@@ -34,7 +34,7 @@
     // Dispose of any resources that can be recreated.
 }
 - (void)updateRegion{
-    regionLabel.text = [[[PinballManager sharedInstance] currentRegion] fullName];
+    regionLabel.text = [[[PinballMapManager sharedInstance] currentRegion] fullName];
 }
 #pragma mark - Table view data source
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{

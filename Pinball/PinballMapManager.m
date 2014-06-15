@@ -1,12 +1,12 @@
 //
-//  PinballManager.m
-//  Pinball
+//  PinballMapManager.m
+//  PinballMap
 //
 //  Created by Frank Michael on 4/12/14.
 //  Copyright (c) 2014 Frank Michael Sanchez. All rights reserved.
 //
 
-#import "PinballManager.h"
+#import "PinballMapManager.h"
 #import "NSFileManager+DocumentsDirectory.h"
 #import <AFNetworking.h>
 
@@ -22,7 +22,7 @@ typedef NS_ENUM(NSInteger, PBMDataAPI) {
 };
 
 
-@interface PinballManager () <CLLocationManagerDelegate>{
+@interface PinballMapManager () <CLLocationManagerDelegate>{
     NSURLSession *session;
     CLLocationManager *locationManager;
 }
@@ -30,7 +30,7 @@ typedef NS_ENUM(NSInteger, PBMDataAPI) {
 @end
 
 
-@implementation PinballManager
+@implementation PinballMapManager
 
 + (id)sharedInstance{
     static dispatch_once_t p = 0;

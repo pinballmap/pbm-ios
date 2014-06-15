@@ -1,6 +1,6 @@
 //
 //  NewMachineView.m
-//  Pinball
+//  PinballMap
 //
 //  Created by Frank Michael on 4/19/14.
 //  Copyright (c) 2014 Frank Michael Sanchez. All rights reserved.
@@ -78,7 +78,7 @@
 - (IBAction)saveMachine:(id)sender{
     if (_location && machineName.text.length > 0){
         NSDictionary *machine = @{@"machine_id": pickedMachine.machineId,@"location_id": _location.locationId,@"condition": machineCondition.text};
-        [[PinballManager sharedInstance] createNewMachineLocation:machine withCompletion:^(NSDictionary *status) {
+        [[PinballMapManager sharedInstance] createNewMachineLocation:machine withCompletion:^(NSDictionary *status) {
             if (status[@"errors"]){
                 NSString *errors;
                 if ([status[@"errors"] isKindOfClass:[NSArray class]]){

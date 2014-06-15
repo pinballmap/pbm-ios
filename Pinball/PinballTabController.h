@@ -1,6 +1,6 @@
 //
-//  PinballTabController.h
-//  Pinball
+//  PinballMapTabController.h
+//  PinballMap
 //
 //  Created by Frank Michael on 4/14/14.
 //  Copyright (c) 2014 Frank Michael Sanchez. All rights reserved.

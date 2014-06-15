@@ -1,6 +1,6 @@
 //
 //  LocationsView.m
-//  Pinball
+//  PinballMap
 //
 //  Created by Frank Michael on 4/12/14.
 //  Copyright (c) 2014 Frank Michael Sanchez. All rights reserved.
@@ -41,7 +41,7 @@
 - (void)viewDidLoad{
     [super viewDidLoad];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateRegion) name:@"RegionUpdate" object:nil];
-    if ([[PinballManager sharedInstance] currentRegion]){
+    if ([[PinballMapManager sharedInstance] currentRegion]){
         [self updateRegion];
     }
     UIRefreshControl *refresh = [UIRefreshControl new];
@@ -56,7 +56,7 @@
     // Dispose of any resources that can be recreated.
 }
 - (void)refreshRegion{
-    [[PinballManager sharedInstance] refreshRegion];
+    [[PinballMapManager sharedInstance] refreshRegion];
 }
 - (void)setIsSelecting:(BOOL)isSelecting{
     _isSelecting = isSelecting;
@@ -66,10 +66,10 @@
 - (void)updateRegion{
     [self.refreshControl endRefreshing];
     isClosets = NO;
-    self.navigationItem.title = [NSString stringWithFormat:@"%@",[[[PinballManager sharedInstance] currentRegion] fullName]];
+    self.navigationItem.title = [NSString stringWithFormat:@"%@",[[[PinballMapManager sharedInstance] currentRegion] fullName]];
     managedContext = [[CoreDataManager sharedInstance] managedObjectContext];
     NSFetchRequest *stackRequest = [NSFetchRequest fetchRequestWithEntityName:@"Location"];
-    stackRequest.predicate = [NSPredicate predicateWithFormat:@"region.name = %@",[[[PinballManager sharedInstance] currentRegion] name]];
+    stackRequest.predicate = [NSPredicate predicateWithFormat:@"region.name = %@",[[[PinballMapManager sharedInstance] currentRegion] name]];
     stackRequest.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES]];
     fetchedResults = [[NSFetchedResultsController alloc] initWithFetchRequest:stackRequest
                                                          managedObjectContext:managedContext
@@ -94,7 +94,7 @@
 #pragma mark - UISearchDisplayController Delegate Methods
 - (BOOL)searchDisplayController:(UISearchDisplayController *)controller shouldReloadTableForSearchString:(NSString *)searchString{
     NSFetchRequest *searchrequest = [NSFetchRequest fetchRequestWithEntityName:@"Location"];
-    searchrequest.predicate = [NSPredicate predicateWithFormat:@"name CONTAINS[cd] %@ AND region.name = %@",searchString,[[[PinballManager sharedInstance] currentRegion] name]];
+    searchrequest.predicate = [NSPredicate predicateWithFormat:@"name CONTAINS[cd] %@ AND region.name = %@",searchString,[[[PinballMapManager sharedInstance] currentRegion] name]];
     
     
     
@@ -119,7 +119,7 @@
 }
 - (IBAction)browseLocations:(id)sender{
     NSFetchRequest *stackRequest = [NSFetchRequest fetchRequestWithEntityName:@"Location"];
-    stackRequest.predicate = [NSPredicate predicateWithFormat:@"region.name = %@",[[[PinballManager sharedInstance] currentRegion] name]];
+    stackRequest.predicate = [NSPredicate predicateWithFormat:@"region.name = %@",[[[PinballMapManager sharedInstance] currentRegion] name]];
     stackRequest.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES]];
     
     NSArray *locations = [[[CoreDataManager sharedInstance] managedObjectContext] executeFetchRequest:stackRequest error:nil];
@@ -144,7 +144,7 @@
             isClosets = NO;
             NSString *sectionName;
             if (buttonIndex == 0){
-                if ([[PinballManager sharedInstance] userLocation]){
+                if ([[PinballMapManager sharedInstance] userLocation]){
                     closestSheet = [[UIActionSheet alloc] initWithTitle:@"Distance" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"1 Mile", @"5 Miles", @"10 Miles", @"15 Miles", nil];
                     [closestSheet showFromTabBar:self.tabBarController.tabBar];
                 }else{
@@ -153,18 +153,18 @@
                 return;
             }else if (buttonIndex == 1){
                 // Number
-                stackRequest.predicate = [NSPredicate predicateWithFormat:@"region.name = %@",[[[PinballManager sharedInstance] currentRegion] name]];
+                stackRequest.predicate = [NSPredicate predicateWithFormat:@"region.name = %@",[[[PinballMapManager sharedInstance] currentRegion] name]];
                 stackRequest.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"machineCount" ascending:NO]];
             }else if (buttonIndex == 2){
                 // Name
-                stackRequest.predicate = [NSPredicate predicateWithFormat:@"region.name = %@",[[[PinballManager sharedInstance] currentRegion] name]];
+                stackRequest.predicate = [NSPredicate predicateWithFormat:@"region.name = %@",[[[PinballMapManager sharedInstance] currentRegion] name]];
                 stackRequest.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES]];
             }else if (buttonIndex == 3){
-                stackRequest.predicate = [NSPredicate predicateWithFormat:@"region.name = %@",[[[PinballManager sharedInstance] currentRegion] name]];
+                stackRequest.predicate = [NSPredicate predicateWithFormat:@"region.name = %@",[[[PinballMapManager sharedInstance] currentRegion] name]];
                 stackRequest.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"parentZone.name" ascending:YES],[NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES]];
                 sectionName = @"parentZone.name";
             }else if (buttonIndex == 4){
-                stackRequest.predicate = [NSPredicate predicateWithFormat:@"region.name = %@",[[[PinballManager sharedInstance] currentRegion] name]];
+                stackRequest.predicate = [NSPredicate predicateWithFormat:@"region.name = %@",[[[PinballMapManager sharedInstance] currentRegion] name]];
                 stackRequest.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"locationType.name" ascending:YES],[NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES]];
                 sectionName = @"locationType.name";
             }else if (buttonIndex == 5){
@@ -182,7 +182,7 @@
             [self.tableView reloadData];
         }else if (actionSheet == closestSheet){
             
-            CLLocation *currentLocation = [[PinballManager sharedInstance] userLocation];
+            CLLocation *currentLocation = [[PinballMapManager sharedInstance] userLocation];
             isClosets = YES;
             // Logic from http://www.objc.io/issue-4/core-data-fetch-requests.html
             float distance;
@@ -211,7 +211,7 @@
             
             
             NSFetchRequest *locationFetch = [NSFetchRequest fetchRequestWithEntityName:@"Location"];
-            locationFetch.predicate = [NSPredicate predicateWithFormat:@"region.name = %@ AND (%@ <= longitude) AND (longitude <= %@) AND (%@ <= latitude) AND (latitude <= %@)",[[[PinballManager sharedInstance] currentRegion] name],@(minLong),@(maxLong),@(minLat),@(maxLat)];
+            locationFetch.predicate = [NSPredicate predicateWithFormat:@"region.name = %@ AND (%@ <= longitude) AND (longitude <= %@) AND (%@ <= latitude) AND (latitude <= %@)",[[[PinballMapManager sharedInstance] currentRegion] name],@(minLong),@(maxLong),@(minLat),@(maxLat)];
             locationFetch.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES]];
 //            NSArray *items = [[[CoreDataManager sharedInstance] managedObjectContext] executeFetchRequest:locationFetch error:nil];
 

@@ -1,6 +1,6 @@
 //
 //  LocationMapView.m
-//  Pinball
+//  PinballMap
 //
 //  Created by Frank Michael on 4/13/14.
 //  Copyright (c) 2014 Frank Michael Sanchez. All rights reserved.
@@ -66,7 +66,7 @@
             mainMapView.region = MKCoordinateRegionMake(annotation.coordinate, MKCoordinateSpanMake(1.0, 1.0));
         }];
     }else if (_locations){
-        Region *currentRegion = [[PinballManager sharedInstance] currentRegion];
+        Region *currentRegion = [[PinballMapManager sharedInstance] currentRegion];
         CLLocationCoordinate2D regionCoord = CLLocationCoordinate2DMake(currentRegion.latitude.doubleValue, currentRegion.longitude.doubleValue);
         mainMapView.region = MKCoordinateRegionMake(regionCoord, MKCoordinateSpanMake(1.0, 1.0));
         

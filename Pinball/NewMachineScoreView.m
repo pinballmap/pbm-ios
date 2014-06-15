@@ -1,6 +1,6 @@
 //
 //  NewMachineScoreView.m
-//  Pinball
+//  PinballMap
 //
 //  Created by Frank Michael on 5/26/14.
 //  Copyright (c) 2014 Frank Michael Sanchez. All rights reserved.
@@ -51,7 +51,7 @@
 #pragma mark - Class Actions
 - (IBAction)saveScore:(id)sender{
     NSDictionary *scoreData = @{@"location_machine_xref_id": _currentMachine.machineLocationId,@"score":_score.text,@"rank":pickedRank[@"id"],@"initials":_initials.text};
-    [[PinballManager sharedInstance] addScore:scoreData forMachine:_currentMachine withCompletion:^(NSDictionary *status) {
+    [[PinballMapManager sharedInstance] addScore:scoreData forMachine:_currentMachine withCompletion:^(NSDictionary *status) {
         if (status[@"errors"]){
             NSString *errors;
             if ([status[@"errors"] isKindOfClass:[NSArray class]]){

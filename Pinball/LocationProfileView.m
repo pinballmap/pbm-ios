@@ -1,6 +1,6 @@
 //
 //  LocationProfileView.m
-//  Pinball
+//  PinballMap
 //
 //  Created by Frank Michael on 4/13/14.
 //  Copyright (c) 2014 Frank Michael Sanchez. All rights reserved.
@@ -178,7 +178,7 @@ typedef enum : NSUInteger {
         default:
             break;
     }
-    [[PinballManager sharedInstance] updateLocation:_currentLocation withData:editedData andCompletion:^(NSDictionary *status) {
+    [[PinballMapManager sharedInstance] updateLocation:_currentLocation withData:editedData andCompletion:^(NSDictionary *status) {
         if (status[@"errors"]){
             NSString *errors;
             if ([status[@"errors"] isKindOfClass:[NSArray class]]){
@@ -219,7 +219,7 @@ typedef enum : NSUInteger {
 #pragma mark - Locaiton Type Delegate
 - (void)pickedType:(LocationType *)type{
     if (type){
-        [[PinballManager sharedInstance] updateLocation:_currentLocation withData:@{@"location_type": type.locationTypeId} andCompletion:^(NSDictionary *status) {
+        [[PinballMapManager sharedInstance] updateLocation:_currentLocation withData:@{@"location_type": type.locationTypeId} andCompletion:^(NSDictionary *status) {
             _currentLocation.locationType = type;
             [[CoreDataManager sharedInstance] saveContext];
             [self.tableView reloadData];
@@ -231,7 +231,7 @@ typedef enum : NSUInteger {
     if (buttonIndex != alertView.cancelButtonIndex){
         if (alertView == deleteConfirm){
             MachineLocation *machine = [machinesFetch objectAtIndexPath:[NSIndexPath indexPathForItem:deletePath.row inSection:0]];
-            [[PinballManager sharedInstance] removeMachine:machine withCompletion:^(NSDictionary *status) {
+            [[PinballMapManager sharedInstance] removeMachine:machine withCompletion:^(NSDictionary *status) {
                 if (status[@"errors"]){
                     NSString *errors;
                     if ([status[@"errors"] isKindOfClass:[NSArray class]]){

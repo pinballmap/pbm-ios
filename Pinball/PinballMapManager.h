@@ -1,6 +1,6 @@
 //
-//  PinballManager.h
-//  Pinball
+//  PinballMapManager.h
+//  PinballMap
 //
 //  Created by Frank Michael on 4/12/14.
 //  Copyright (c) 2014 Frank Michael Sanchez. All rights reserved.
@@ -11,7 +11,7 @@
 #import "PinballModels.h"
 
 typedef void (^APIComplete)(NSDictionary *status);
-@interface PinballManager : NSObject
+@interface PinballMapManager : NSObject
 
 @property (nonatomic) NSDictionary *regionInfo;
 @property (nonatomic) Region *currentRegion;

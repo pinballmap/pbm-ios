@@ -1,6 +1,6 @@
 //
 //  EventsView.m
-//  Pinball
+//  PinballMap
 //
 //  Created by Frank Michael on 4/13/14.
 //  Copyright (c) 2014 Frank Michael Sanchez. All rights reserved.
@@ -30,7 +30,7 @@
 - (void)viewDidLoad{
     [super viewDidLoad];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateRegion) name:@"RegionUpdate" object:nil];
-    if ([[PinballManager sharedInstance] currentRegion]){
+    if ([[PinballMapManager sharedInstance] currentRegion]){
         [self updateRegion];
     }
     UIRefreshControl *refresh = [UIRefreshControl new];
@@ -42,14 +42,14 @@
     // Dispose of any resources that can be recreated.
 }
 - (void)refreshRegion{
-    [[PinballManager sharedInstance] refreshRegion];
+    [[PinballMapManager sharedInstance] refreshRegion];
 }
 #pragma mark - Region Update
 - (void)updateRegion{
-    self.navigationItem.title = [NSString stringWithFormat:@"%@ Events",[[[PinballManager sharedInstance] currentRegion] fullName]];
+    self.navigationItem.title = [NSString stringWithFormat:@"%@ Events",[[[PinballMapManager sharedInstance] currentRegion] fullName]];
     managedContext = [[CoreDataManager sharedInstance] managedObjectContext];
     NSFetchRequest *stackRequest = [NSFetchRequest fetchRequestWithEntityName:@"Event"];
-    stackRequest.predicate = [NSPredicate predicateWithFormat:@"region.name = %@",[[[PinballManager sharedInstance] currentRegion] name]];
+    stackRequest.predicate = [NSPredicate predicateWithFormat:@"region.name = %@",[[[PinballMapManager sharedInstance] currentRegion] name]];
     stackRequest.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"startDate" ascending:NO]];
     fetchedResults = [[NSFetchedResultsController alloc] initWithFetchRequest:stackRequest
                                                          managedObjectContext:managedContext

@@ -1,6 +1,6 @@
 //
 //  RegionsView.m
-//  Pinball
+//  PinballMap
 //
 //  Created by Frank Michael on 4/14/14.
 //  Copyright (c) 2014 Frank Michael Sanchez. All rights reserved.
@@ -33,7 +33,7 @@
     [super viewDidLoad];
     self.navigationItem.title = @"Regions";
     allRegions = [NSMutableArray new];
-    [[PinballManager sharedInstance] allRegions:^(NSArray *regions) {
+    [[PinballMapManager sharedInstance] allRegions:^(NSArray *regions) {
         [allRegions removeAllObjects];
         [allRegions addObjectsFromArray:regions];
         [self.tableView reloadData];
@@ -112,7 +112,7 @@
     }
     cell.accessoryType = UITableViewCellAccessoryNone;
     
-    Region *selectedRegion = [[PinballManager sharedInstance] currentRegion];
+    Region *selectedRegion = [[PinballMapManager sharedInstance] currentRegion];
     if ([region.name isEqualToString:selectedRegion.name]){
         cell.accessoryType = UITableViewCellAccessoryCheckmark;
         
@@ -131,7 +131,7 @@
         region = searchResults[indexPath.row];
     }
     
-    [[PinballManager sharedInstance] loadRegionData:region];
+    [[PinballMapManager sharedInstance] loadRegionData:region];
     [self.tableView reloadData];
     if (_isSelecting){
         [self dismissViewControllerAnimated:YES completion:nil];

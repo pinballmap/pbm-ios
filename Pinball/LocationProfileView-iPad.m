@@ -1,6 +1,6 @@
 //
 //  LocationProfileView-iPad.m
-//  Pinball
+//  PinballMap
 //
 //  Created by Frank Michael on 6/9/14.
 //  Copyright (c) 2014 Frank Michael Sanchez. All rights reserved.
@@ -45,7 +45,7 @@
 }
 - (void)updateRegion{
     [_mapView removeAnnotations:_mapView.annotations];
-    currentRegion = [[PinballManager sharedInstance] currentRegion];
+    currentRegion = [[PinballMapManager sharedInstance] currentRegion];
     if (currentRegion){
         CLLocationCoordinate2D regionCoord = CLLocationCoordinate2DMake(currentRegion.latitude.doubleValue, currentRegion.longitude.doubleValue);
         _mapView.region = MKCoordinateRegionMake(regionCoord, MKCoordinateSpanMake(1.0, 1.0));
@@ -106,7 +106,7 @@
         [_mapView removeAnnotations:_mapView.annotations];
         isBrowsing = YES;
         NSFetchRequest *stackRequest = [NSFetchRequest fetchRequestWithEntityName:@"Location"];
-        stackRequest.predicate = [NSPredicate predicateWithFormat:@"region.name = %@",[[[PinballManager sharedInstance] currentRegion] name]];
+        stackRequest.predicate = [NSPredicate predicateWithFormat:@"region.name = %@",[[[PinballMapManager sharedInstance] currentRegion] name]];
         stackRequest.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES]];
         
         NSArray *locations = [[[CoreDataManager sharedInstance] managedObjectContext] executeFetchRequest:stackRequest error:nil];

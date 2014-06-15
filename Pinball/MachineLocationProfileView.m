@@ -1,6 +1,6 @@
 //
 //  MachineLocationProfileView.m
-//  Pinball
+//  PinballMap
 //
 //  Created by Frank Michael on 5/26/14.
 //  Copyright (c) 2014 Frank Michael Sanchez. All rights reserved.
@@ -49,7 +49,7 @@
         machineScores = [NSMutableArray new];
     }
     [machineScores removeAllObjects];
-    [[PinballManager sharedInstance] allScoresForMachine:_currentMachine withCompletion:^(NSDictionary *status) {
+    [[PinballMapManager sharedInstance] allScoresForMachine:_currentMachine withCompletion:^(NSDictionary *status) {
         if (status[@"errors"]){
             NSString *errors;
             if ([status[@"errors"] isKindOfClass:[NSArray class]]){
@@ -80,7 +80,7 @@
     if (buttonIndex != alertView.cancelButtonIndex){
         if (alertView == deleteConfirm){
             MachineLocation *machine = _currentMachine;//[machinesFetch objectAtIndexPath:[NSIndexPath indexPathForItem:deletePath.row inSection:0]];
-            [[PinballManager sharedInstance] removeMachine:machine withCompletion:^(NSDictionary *status) {
+            [[PinballMapManager sharedInstance] removeMachine:machine withCompletion:^(NSDictionary *status) {
                 if (status[@"errors"]){
                     NSString *errors;
                     if ([status[@"errors"] isKindOfClass:[NSArray class]]){

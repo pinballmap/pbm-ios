@@ -1,6 +1,6 @@
 //
 //  MachineConditionView.m
-//  Pinball
+//  PinballMap
 //
 //  Created by Frank Michael on 4/19/14.
 //  Copyright (c) 2014 Frank Michael Sanchez. All rights reserved.
@@ -51,7 +51,7 @@
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 - (IBAction)saveCondition:(id)sender{
-    [[PinballManager sharedInstance] updateMachineCondition:_currentMachine withCondition:machineCondition.text withCompletion:^(NSDictionary *status) {
+    [[PinballMapManager sharedInstance] updateMachineCondition:_currentMachine withCondition:machineCondition.text withCompletion:^(NSDictionary *status) {
         if (status[@"errors"]){
             NSString *errors;
             if ([status[@"errors"] isKindOfClass:[NSArray class]]){

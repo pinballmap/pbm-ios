@@ -1,6 +1,6 @@
 //
-//  PinballTabController.m
-//  Pinball
+//  PinballMapTabController.m
+//  PinballMap
 //
 //  Created by Frank Michael on 4/14/14.
 //  Copyright (c) 2014 Frank Michael Sanchez. All rights reserved.
@@ -33,7 +33,7 @@
 }
 - (void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
-    if (![[PinballManager sharedInstance] currentRegion]){
+    if (![[PinballMapManager sharedInstance] currentRegion]){
         RegionsView *regions = [self.storyboard instantiateViewControllerWithIdentifier:@"RegionsView"];
         regions.isSelecting = YES;
         UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:regions];
@@ -42,7 +42,7 @@
     }
 }
 - (void)updateTabInfo{
-    Region *currentRegion = [[PinballManager sharedInstance] currentRegion];
+    Region *currentRegion = [[PinballMapManager sharedInstance] currentRegion];
     NSInteger eventCounts = [[currentRegion events] count];
     if (eventCounts > 0){
         [[[self.viewControllers objectAtIndex:2] tabBarItem] setBadgeValue:[NSString stringWithFormat:@"%li",(long)eventCounts]];

@@ -1,6 +1,6 @@
 //
 //  NewLocationsView.m
-//  Pinball
+//  PinballMap
 //
 //  Created by Frank Michael on 4/22/14.
 //  Copyright (c) 2014 Frank Michael Sanchez. All rights reserved.
@@ -93,7 +93,7 @@
             pickedMachineNames = [pickedMachineNames stringByAppendingString:[NSString stringWithFormat:@"%@-%@,",obj.name,obj.manufacturer]];
         }];
 
-        NSDictionary *suggestingInfo = @{@"region_id": [[[PinballManager sharedInstance] currentRegion] regionId],
+        NSDictionary *suggestingInfo = @{@"region_id": [[[PinballMapManager sharedInstance] currentRegion] regionId],
                                          @"location_name": locationName.text,
                                          @"location_street": locationStreet.text,
                                          @"location_city": locationCity.text,
@@ -105,7 +105,7 @@
                                          @"location_machines": pickedMachineNames,
                                          @"submitter_name" : userName.text,
                                          @"submitter_email": userEmail.text};
-        [[PinballManager sharedInstance] suggestLocation:suggestingInfo andCompletion:^(NSDictionary *status) {
+        [[PinballMapManager sharedInstance] suggestLocation:suggestingInfo andCompletion:^(NSDictionary *status) {
             if (status[@"errors"]){
                 NSString *errors;
                 if ([status[@"errors"] isKindOfClass:[NSArray class]]){
