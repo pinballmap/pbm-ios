@@ -16,6 +16,9 @@
 #import "LocationCell.h"
 
 @interface LocationsView () <NSFetchedResultsControllerDelegate,UIActionSheetDelegate,UISearchBarDelegate,UISearchDisplayDelegate> {
+    UIActionSheet *filterSheet;
+    UIActionSheet *closestSheet;
+    
     NSFetchedResultsController *fetchedResults;
     NSManagedObjectContext *managedContext;
 
@@ -104,13 +107,13 @@
 }
 #pragma mark - Class Actions
 - (IBAction)filterResults:(id)sender{
-    UIActionSheet *sheet = [[UIActionSheet alloc] initWithTitle:@"Location Filter" delegate:self cancelButtonTitle:nil destructiveButtonTitle:nil otherButtonTitles:@"Location (Closest)",@"Number of Machines",@"Name",@"Zone",@"Location Type",nil];
+    filterSheet = [[UIActionSheet alloc] initWithTitle:@"Location Filter" delegate:self cancelButtonTitle:nil destructiveButtonTitle:nil otherButtonTitles:@"Distance",@"Number of Machines",@"Name",@"Zone",@"Location Type",nil];
     if ([UIDevice iPad]){
-        [sheet showFromBarButtonItem:self.parentViewController.navigationItem.leftBarButtonItem animated:YES];
+        [filterSheet showFromTabBar:self.tabBarController.tabBar];
     }else{
-        [sheet addButtonWithTitle:@"Browse"];
-        [sheet setCancelButtonIndex:[sheet addButtonWithTitle:@"Cancel"]];
-        [sheet showFromTabBar:self.tabBarController.tabBar];
+        [filterSheet addButtonWithTitle:@"Browse"];
+        [filterSheet setCancelButtonIndex:[filterSheet addButtonWithTitle:@"Cancel"]];
+        [filterSheet showFromTabBar:self.tabBarController.tabBar];
     }
 }
 - (IBAction)browseLocations:(id)sender{
@@ -134,51 +137,88 @@
 #pragma mark - UIActionSheetDelegate
 - (void)actionSheet:(UIActionSheet *)actionSheet didDismissWithButtonIndex:(NSInteger)buttonIndex{
     if (buttonIndex != actionSheet.cancelButtonIndex){
-        NSFetchRequest *stackRequest = [NSFetchRequest fetchRequestWithEntityName:@"Location"];
-        stackRequest.predicate = nil;
-        isClosets = NO;
-        NSString *sectionName;
-        if (buttonIndex == 0){
+        if (actionSheet == filterSheet){
+            NSFetchRequest *stackRequest = [NSFetchRequest fetchRequestWithEntityName:@"Location"];
+            stackRequest.predicate = nil;
+            isClosets = NO;
+            NSString *sectionName;
+            if (buttonIndex == 0){
+                closestSheet = [[UIActionSheet alloc] initWithTitle:@"Distance" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"1 Mile", @"5 Miles", @"10 Miles", @"15 Miles", nil];
+                [closestSheet showFromTabBar:self.tabBarController.tabBar];
+                return;
+            }else if (buttonIndex == 1){
+                // Number
+                stackRequest.predicate = [NSPredicate predicateWithFormat:@"region.name = %@",[[[PinballManager sharedInstance] currentRegion] name]];
+                stackRequest.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"machineCount" ascending:NO]];
+            }else if (buttonIndex == 2){
+                // Name
+                stackRequest.predicate = [NSPredicate predicateWithFormat:@"region.name = %@",[[[PinballManager sharedInstance] currentRegion] name]];
+                stackRequest.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES]];
+            }else if (buttonIndex == 3){
+                stackRequest.predicate = [NSPredicate predicateWithFormat:@"region.name = %@",[[[PinballManager sharedInstance] currentRegion] name]];
+                stackRequest.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"parentZone.name" ascending:YES],[NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES]];
+                sectionName = @"parentZone.name";
+            }else if (buttonIndex == 4){
+                stackRequest.predicate = [NSPredicate predicateWithFormat:@"region.name = %@",[[[PinballManager sharedInstance] currentRegion] name]];
+                stackRequest.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"locationType.name" ascending:YES],[NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES]];
+                sectionName = @"locationType.name";
+            }else if (buttonIndex == 5){
+                [self browseLocations:nil];
+                return;
+            }
+            
+            fetchedResults = nil;
+            fetchedResults = [[NSFetchedResultsController alloc] initWithFetchRequest:stackRequest
+                                                                 managedObjectContext:managedContext
+                                                                   sectionNameKeyPath:sectionName
+                                                                            cacheName:nil];
+            fetchedResults.delegate = self;
+            [fetchedResults performFetch:nil];
+            [self.tableView reloadData];
+        }else if (actionSheet == closestSheet){
+            
+            CLLocation *currentLocation = [[PinballManager sharedInstance] userLocation];
             isClosets = YES;
-            // Location
-            NSArray *locations = [[[fetchedResults sections] lastObject] objects];
-            [locations enumerateObjectsUsingBlock:^(Location *obj, NSUInteger idx, BOOL *stop) {
-                [obj updateDistance];
-            }];
-            [[CoreDataManager sharedInstance] saveContext];
-            locations = nil;
-            stackRequest.predicate = [NSPredicate predicateWithFormat:@"region.name = %@",[[[PinballManager sharedInstance] currentRegion] name]];
-            stackRequest.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"locationDistance" ascending:YES]];
-        }else if (buttonIndex == 1){
-            // Number
-            stackRequest.predicate = [NSPredicate predicateWithFormat:@"region.name = %@",[[[PinballManager sharedInstance] currentRegion] name]];
-            stackRequest.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"machineCount" ascending:NO]];
-        }else if (buttonIndex == 2){
-            // Name
-            stackRequest.predicate = [NSPredicate predicateWithFormat:@"region.name = %@",[[[PinballManager sharedInstance] currentRegion] name]];
-            stackRequest.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES]];
-        }else if (buttonIndex == 3){
-            stackRequest.predicate = [NSPredicate predicateWithFormat:@"region.name = %@",[[[PinballManager sharedInstance] currentRegion] name]];
-            stackRequest.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"parentZone.name" ascending:YES],[NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES]];
-            sectionName = @"parentZone.name";
-        }else if (buttonIndex == 4){
-            stackRequest.predicate = [NSPredicate predicateWithFormat:@"region.name = %@",[[[PinballManager sharedInstance] currentRegion] name]];
-            stackRequest.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"locationType.name" ascending:YES],[NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES]];
-            sectionName = @"locationType.name";
-        }else if (buttonIndex == 5){
-            [self browseLocations:nil];
-            return;
-        }
-        
-        fetchedResults = nil;
-        fetchedResults = [[NSFetchedResultsController alloc] initWithFetchRequest:stackRequest
-                                                             managedObjectContext:managedContext
-                                                               sectionNameKeyPath:sectionName
-                                                                        cacheName:nil];
-        fetchedResults.delegate = self;
-        [fetchedResults performFetch:nil];
-        [self.tableView reloadData];
+            // Logic from http://www.objc.io/issue-4/core-data-fetch-requests.html
+            float distance;
+            if (buttonIndex == 0){
+                // 1 Mile
+                distance = 1609.344*1.1;
+            }else if (buttonIndex == 1){
+                // 5 Miles
+                distance = 8046.72*1.1;
+            }else if (buttonIndex == 2){
+                // 10 Miles
+                distance = 16093.445*1.1;
+            }else if (buttonIndex == 3){
+                // 15 Miles
+                distance = 24140.16*1.1;
+            }
+            
+            double const earthRadius = 6371009.0;
+            double meanLat = currentLocation.coordinate.latitude * M_PI / 180;
+            double deltaLat = distance/earthRadius * 180 / M_PI;
+            double deltaLong = distance/(earthRadius * cos(meanLat)) * 180 / M_PI;
+            double minLat = currentLocation.coordinate.latitude - deltaLat;
+            double maxLat = currentLocation.coordinate.latitude + deltaLat;
+            double minLong = currentLocation.coordinate.longitude - deltaLong;
+            double maxLong = currentLocation.coordinate.longitude +deltaLong;
+            
+            
+            NSFetchRequest *locationFetch = [NSFetchRequest fetchRequestWithEntityName:@"Location"];
+            locationFetch.predicate = [NSPredicate predicateWithFormat:@"region.name = %@ AND (%@ <= longitude) AND (longitude <= %@) AND (%@ <= latitude) AND (latitude <= %@)",[[[PinballManager sharedInstance] currentRegion] name],@(minLong),@(maxLong),@(minLat),@(maxLat)];
+            locationFetch.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES]];
+//            NSArray *items = [[[CoreDataManager sharedInstance] managedObjectContext] executeFetchRequest:locationFetch error:nil];
 
+            fetchedResults = nil;
+            fetchedResults = [[NSFetchedResultsController alloc] initWithFetchRequest:locationFetch
+                                                                 managedObjectContext:[[CoreDataManager sharedInstance] managedObjectContext]
+                                                                   sectionNameKeyPath:nil
+                                                                            cacheName:nil];
+            fetchedResults.delegate = self;
+            [fetchedResults performFetch:nil];
+            [self.tableView reloadData];
+        }
     }
 }
 #pragma mark - Table view data source
