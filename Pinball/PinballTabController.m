@@ -43,13 +43,7 @@
 }
 - (void)updateTabInfo{
     Region *currentRegion = [[PinballMapManager sharedInstance] currentRegion];
-    NSInteger eventCounts = [[currentRegion events] count];
-    if (eventCounts > 0){
-        [[[self.viewControllers objectAtIndex:2] tabBarItem] setBadgeValue:[NSString stringWithFormat:@"%li",(long)eventCounts]];
-    }else{
-        [[[self.viewControllers objectAtIndex:2] tabBarItem] setBadgeValue:nil];
-    }
-    
+
     [[[self.viewControllers objectAtIndex:0] tabBarItem] setTitle:currentRegion.fullName];
     
     [updatingAlert dismissWithClickedButtonIndex:0 animated:YES];
