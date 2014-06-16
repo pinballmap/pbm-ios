@@ -15,8 +15,9 @@
 #import "UIViewController+Helpers.h"
 #import "LocationCell.h"
 #import "UIAlertView+Application.h"
+#import "ZonesView.h"
 
-@interface LocationsView () <NSFetchedResultsControllerDelegate,UIActionSheetDelegate,UISearchBarDelegate,UISearchDisplayDelegate> {
+@interface LocationsView () <NSFetchedResultsControllerDelegate,UIActionSheetDelegate,UISearchBarDelegate,UISearchDisplayDelegate,ZoneSelectDelegate> {
     UIActionSheet *filterSheet;
     UIActionSheet *closestSheet;
     
@@ -135,10 +136,28 @@
     }
     return YES;
 }
+#pragma mark - Zone Select Delegate
+- (void)selectedZone:(Zone *)zone{
+    self.navigationItem.title = zone.name;
+    
+    NSFetchRequest *fetchRequest = [NSFetchRequest fetchRequestWithEntityName:@"Location"];
+    fetchRequest.predicate = [NSPredicate predicateWithFormat:@"region.name = %@ AND parentZone.zoneId = %@",[[[PinballMapManager sharedInstance] currentRegion] name],zone.zoneId];
+    fetchRequest.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES]];
+    
+    fetchedResults = nil;
+    fetchedResults = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest
+                                                         managedObjectContext:managedContext
+                                                           sectionNameKeyPath:nil
+                                                                    cacheName:nil];
+    fetchedResults.delegate = self;
+    [fetchedResults performFetch:nil];
+    [self.tableView reloadData];
+}
 #pragma mark - UIActionSheetDelegate
 - (void)actionSheet:(UIActionSheet *)actionSheet didDismissWithButtonIndex:(NSInteger)buttonIndex{
     if (buttonIndex != actionSheet.cancelButtonIndex){
         if (actionSheet == filterSheet){
+            self.navigationItem.title = [NSString stringWithFormat:@"%@",[[[PinballMapManager sharedInstance] currentRegion] fullName]];
             NSFetchRequest *stackRequest = [NSFetchRequest fetchRequestWithEntityName:@"Location"];
             stackRequest.predicate = nil;
             isClosets = NO;
@@ -160,9 +179,13 @@
                 stackRequest.predicate = [NSPredicate predicateWithFormat:@"region.name = %@",[[[PinballMapManager sharedInstance] currentRegion] name]];
                 stackRequest.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES]];
             }else if (buttonIndex == 3){
-                stackRequest.predicate = [NSPredicate predicateWithFormat:@"region.name = %@",[[[PinballMapManager sharedInstance] currentRegion] name]];
-                stackRequest.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"parentZone.name" ascending:YES],[NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES]];
-                sectionName = @"parentZone.name";
+                ZonesView *zoneSelect = (ZonesView *)[[self.storyboard instantiateViewControllerWithIdentifier:@"ZonesView"] navigationRootViewController];
+                zoneSelect.delegate = self;
+                if ([UIDevice iPad]){
+                    [zoneSelect.parentViewController setModalPresentationStyle:UIModalPresentationFormSheet];
+                }
+                [self.navigationController presentViewController:zoneSelect.parentViewController animated:YES completion:nil];
+                return;
             }else if (buttonIndex == 4){
                 stackRequest.predicate = [NSPredicate predicateWithFormat:@"region.name = %@",[[[PinballMapManager sharedInstance] currentRegion] name]];
                 stackRequest.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"locationType.name" ascending:YES],[NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES]];

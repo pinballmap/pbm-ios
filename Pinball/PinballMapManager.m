@@ -287,6 +287,7 @@ typedef NS_ENUM(NSInteger, PBMDataAPI) {
     // Create all zones
     [request.responseObject[@"zones"] enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
         Zone *newZone = [Zone createZoneWithData:obj andContext:cdManager.managedObjectContext];
+        newZone.region = _currentRegion;
         [allZones addObject:newZone];
     }];
     [cdManager saveContext];

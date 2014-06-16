@@ -302,7 +302,7 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" id="Qti-vT-LLG">
-                        <barButtonItem key="leftBarButtonItem" image="798-filter.png" id="qLF-xH-1bP">
+                        <barButtonItem key="leftBarButtonItem" image="798-filter" id="qLF-xH-1bP">
                             <connections>
                                 <action selector="filterResults:" destination="DU6-XU-okl" id="Ls6-83-Vts"/>
                             </connections>
@@ -682,6 +682,70 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Oqh-YI-NUQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3035" y="844"/>
+        </scene>
+        <!--Zones View-->
+        <scene sceneID="6lt-Kq-qZx">
+            <objects>
+                <tableViewController id="ZfJ-Di-xe1" customClass="ZonesView" sceneMemberID="viewController">
+                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="5gH-KL-kPK">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <searchBar key="tableHeaderView" contentMode="redraw" id="lnD-IF-c7z">
+                            <rect key="frame" x="0.0" y="64" width="320" height="44"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                            <textInputTraits key="textInputTraits"/>
+                            <connections>
+                                <outlet property="delegate" destination="ZfJ-Di-xe1" id="MSX-58-3Ui"/>
+                            </connections>
+                        </searchBar>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="ZoneCell" textLabel="q22-LO-3pT" style="IBUITableViewCellStyleDefault" id="Ky5-Gz-znQ">
+                                <rect key="frame" x="0.0" y="130" width="320" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Ky5-Gz-znQ" id="VDI-SQ-KHN">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="q22-LO-3pT">
+                                            <rect key="frame" x="15" y="0.0" width="290" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="ZfJ-Di-xe1" id="ab2-3q-Dei"/>
+                            <outlet property="delegate" destination="ZfJ-Di-xe1" id="1ja-VD-YkW"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" id="fgb-uF-cuz">
+                        <barButtonItem key="leftBarButtonItem" systemItem="done" id="5q1-Mj-eta">
+                            <connections>
+                                <action selector="dismissZones:" destination="ZfJ-Di-xe1" id="ukM-MA-PMz"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="searchDisplayController" destination="pgR-eX-fbS" id="vpd-w5-r6y"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="o27-fx-skv" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <searchDisplayController id="pgR-eX-fbS">
+                    <connections>
+                        <outlet property="delegate" destination="ZfJ-Di-xe1" id="h0x-Lo-ppL"/>
+                        <outlet property="searchBar" destination="lnD-IF-c7z" id="MTu-Pc-iXK"/>
+                        <outlet property="searchContentsController" destination="ZfJ-Di-xe1" id="yiE-bE-15U"/>
+                        <outlet property="searchResultsDataSource" destination="ZfJ-Di-xe1" id="SVM-QT-cZu"/>
+                        <outlet property="searchResultsDelegate" destination="ZfJ-Di-xe1" id="3zS-KO-wtG"/>
+                    </connections>
+                </searchDisplayController>
+            </objects>
+            <point key="canvasLocation" x="3035" y="1522"/>
         </scene>
         <!--Map View-->
         <scene sceneID="5JO-g6-gzS">
@@ -1696,9 +1760,27 @@
             </objects>
             <point key="canvasLocation" x="4208" y="844"/>
         </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="OVn-VX-Kd9">
+            <objects>
+                <navigationController storyboardIdentifier="ZonesView" automaticallyAdjustsScrollViewInsets="NO" id="NuI-qh-tZx" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="lnz-52-V4n">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="ZfJ-Di-xe1" kind="relationship" relationship="rootViewController" id="AV3-V5-VCC"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="IPS-KK-TyC" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2648" y="1522"/>
+        </scene>
     </scenes>
     <resources>
-        <image name="798-filter.png" width="24" height="24"/>
+        <image name="798-filter" width="24" height="24"/>
         <image name="849-radar.png" width="28" height="28"/>
         <image name="851-calendar.png" width="28" height="28"/>
         <image name="852-map.png" width="28" height="24"/>

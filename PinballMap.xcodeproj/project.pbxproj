@@ -52,6 +52,7 @@
 		DB99C3B11906FA4100AFDF0F /* MachinePickingView.m in Sources */ = {isa = PBXBuildFile; fileRef = DB99C3B01906FA4100AFDF0F /* MachinePickingView.m */; };
 		DBA10B431902F244004ED2D4 /* MachineConditionView.m in Sources */ = {isa = PBXBuildFile; fileRef = DBA10B421902F244004ED2D4 /* MachineConditionView.m */; };
 		DBA3B60A190846D900ACBC69 /* InputCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DBA3B609190846D900ACBC69 /* InputCell.m */; };
+		DBB20CA8194F126D00D4B2F1 /* ZonesView.m in Sources */ = {isa = PBXBuildFile; fileRef = DBB20CA7194F126D00D4B2F1 /* ZonesView.m */; };
 		DBB59CCA18FAD9AC00F35BFD /* LocationProfileView.m in Sources */ = {isa = PBXBuildFile; fileRef = DBB59CC918FAD9AC00F35BFD /* LocationProfileView.m */; };
 		DBB59CD218FADF6D00F35BFD /* InformationCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DBB59CD118FADF6D00F35BFD /* InformationCell.m */; };
 		DBB59CD518FADF7A00F35BFD /* LocationMapCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DBB59CD418FADF7A00F35BFD /* LocationMapCell.m */; };
@@ -185,6 +186,8 @@
 		DBA10B421902F244004ED2D4 /* MachineConditionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MachineConditionView.m; sourceTree = "<group>"; };
 		DBA3B608190846D900ACBC69 /* InputCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InputCell.h; sourceTree = "<group>"; };
 		DBA3B609190846D900ACBC69 /* InputCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InputCell.m; sourceTree = "<group>"; };
+		DBB20CA6194F126D00D4B2F1 /* ZonesView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZonesView.h; sourceTree = "<group>"; };
+		DBB20CA7194F126D00D4B2F1 /* ZonesView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZonesView.m; sourceTree = "<group>"; };
 		DBB59CC818FAD9AC00F35BFD /* LocationProfileView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationProfileView.h; sourceTree = "<group>"; };
 		DBB59CC918FAD9AC00F35BFD /* LocationProfileView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocationProfileView.m; sourceTree = "<group>"; };
 		DBB59CD018FADF6D00F35BFD /* InformationCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InformationCell.h; sourceTree = "<group>"; };
@@ -343,6 +346,8 @@
 				DB070BF6193226120018D521 /* NewLocationsView.m */,
 				DBFB652119477DB700993697 /* LocationAnnotation.h */,
 				DBFB652219477DB700993697 /* LocationAnnotation.m */,
+				DBB20CA6194F126D00D4B2F1 /* ZonesView.h */,
+				DBB20CA7194F126D00D4B2F1 /* ZonesView.m */,
 			);
 			name = Locations;
 			sourceTree = "<group>";
@@ -775,6 +780,7 @@
 				DB070BF7193226120018D521 /* NewLocationsView.m in Sources */,
 				DBFB652319477DB700993697 /* LocationAnnotation.m in Sources */,
 				DBBB4BF019338A03004E433F /* UIViewController+Helpers.m in Sources */,
+				DBB20CA8194F126D00D4B2F1 /* ZonesView.m in Sources */,
 				DB23E871193B5F08000C1E69 /* Event.m in Sources */,
 				DB070BF1193202ED0018D521 /* Zone.m in Sources */,
 				DB7B4C1119335B76002AF484 /* MachineLocationProfileView.m in Sources */,
