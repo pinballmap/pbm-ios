@@ -19,7 +19,6 @@
 
 @interface LocationsView () <NSFetchedResultsControllerDelegate,UIActionSheetDelegate,UISearchBarDelegate,UISearchDisplayDelegate,ZoneSelectDelegate> {
     UIActionSheet *filterSheet;
-    UIActionSheet *closestSheet;
     
     NSFetchedResultsController *fetchedResults;
     NSManagedObjectContext *managedContext;
@@ -164,12 +163,23 @@
             NSString *sectionName;
             if (buttonIndex == 0){
                 if ([[PinballMapManager sharedInstance] userLocation]){
-                    closestSheet = [[UIActionSheet alloc] initWithTitle:@"Distance" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"1 Mile", @"5 Miles", @"10 Miles", @"15 Miles", nil];
-                    [closestSheet showFromTabBar:self.tabBarController.tabBar];
+                    
+                    
+                    NSFetchRequest *locationRequest = [NSFetchRequest fetchRequestWithEntityName:@"Location"];
+                    locationRequest.predicate = [NSPredicate predicateWithFormat:@"region.name = %@",[[[PinballMapManager sharedInstance] currentRegion] name]];
+                    locationRequest.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES]];
+                    
+                    NSArray *locations = [[[CoreDataManager sharedInstance] managedObjectContext] executeFetchRequest:locationRequest error:nil];
+                    for (Location *location in locations) {
+                        [location updateDistance];
+                    }
+                    locations = nil;
+                    stackRequest = [NSFetchRequest fetchRequestWithEntityName:@"Location"];
+                    stackRequest.predicate = [NSPredicate predicateWithFormat:@"region.name = %@",[[[PinballMapManager sharedInstance] currentRegion] name]];
+                    stackRequest.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"locationDistance" ascending:YES]];
                 }else{
                     [UIAlertView simpleApplicationAlertWithMessage:@"Location services are not enabled. Please enable to filter by distance." cancelButton:@"Ok"];
                 }
-                return;
             }else if (buttonIndex == 1){
                 // Number
                 stackRequest.predicate = [NSPredicate predicateWithFormat:@"region.name = %@",[[[PinballMapManager sharedInstance] currentRegion] name]];
@@ -199,49 +209,6 @@
             fetchedResults = [[NSFetchedResultsController alloc] initWithFetchRequest:stackRequest
                                                                  managedObjectContext:managedContext
                                                                    sectionNameKeyPath:sectionName
-                                                                            cacheName:nil];
-            fetchedResults.delegate = self;
-            [fetchedResults performFetch:nil];
-            [self.tableView reloadData];
-        }else if (actionSheet == closestSheet){
-            
-            CLLocation *currentLocation = [[PinballMapManager sharedInstance] userLocation];
-            isClosets = YES;
-            // Logic from http://www.objc.io/issue-4/core-data-fetch-requests.html
-            float distance;
-            if (buttonIndex == 0){
-                // 1 Mile
-                distance = 1609.344*1.1;
-            }else if (buttonIndex == 1){
-                // 5 Miles
-                distance = 8046.72*1.1;
-            }else if (buttonIndex == 2){
-                // 10 Miles
-                distance = 16093.445*1.1;
-            }else if (buttonIndex == 3){
-                // 15 Miles
-                distance = 24140.16*1.1;
-            }
-            
-            double const earthRadius = 6371009.0;
-            double meanLat = currentLocation.coordinate.latitude * M_PI / 180;
-            double deltaLat = distance/earthRadius * 180 / M_PI;
-            double deltaLong = distance/(earthRadius * cos(meanLat)) * 180 / M_PI;
-            double minLat = currentLocation.coordinate.latitude - deltaLat;
-            double maxLat = currentLocation.coordinate.latitude + deltaLat;
-            double minLong = currentLocation.coordinate.longitude - deltaLong;
-            double maxLong = currentLocation.coordinate.longitude +deltaLong;
-            
-            
-            NSFetchRequest *locationFetch = [NSFetchRequest fetchRequestWithEntityName:@"Location"];
-            locationFetch.predicate = [NSPredicate predicateWithFormat:@"region.name = %@ AND (%@ <= longitude) AND (longitude <= %@) AND (%@ <= latitude) AND (latitude <= %@)",[[[PinballMapManager sharedInstance] currentRegion] name],@(minLong),@(maxLong),@(minLat),@(maxLat)];
-            locationFetch.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES]];
-//            NSArray *items = [[[CoreDataManager sharedInstance] managedObjectContext] executeFetchRequest:locationFetch error:nil];
-
-            fetchedResults = nil;
-            fetchedResults = [[NSFetchedResultsController alloc] initWithFetchRequest:locationFetch
-                                                                 managedObjectContext:[[CoreDataManager sharedInstance] managedObjectContext]
-                                                                   sectionNameKeyPath:nil
                                                                             cacheName:nil];
             fetchedResults.delegate = self;
             [fetchedResults performFetch:nil];
@@ -312,10 +279,10 @@
     }
     cell.locationName.text = currentLocation.name;
 
-    if ([currentLocation.currentDistance isEqual:@(0)]){
+    if ([currentLocation.locationDistance isEqual:@(0)]){
         cell.locationDetail.text = [NSString stringWithFormat:@"%@, %@",currentLocation.street,currentLocation.city];
     }else{
-        cell.locationDetail.text = [NSString stringWithFormat:@"%.02f miles",[currentLocation.currentDistance floatValue]];
+        cell.locationDetail.text = [NSString stringWithFormat:@"%.02f miles",[currentLocation.locationDistance floatValue]];
     }
     
     cell.machineCount.text = [NSString stringWithFormat:@"%lu",(unsigned long)currentLocation.machines.count];
