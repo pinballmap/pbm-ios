@@ -88,6 +88,7 @@
                 }
                 [UIAlertView simpleApplicationAlertWithMessage:errors cancelButton:@"Ok"];
             }else{
+                [UIAlertView simpleApplicationAlertWithMessage:@"Added Machine" cancelButton:@"Ok"];
                 [self dismissViewControllerAnimated:YES completion:nil];
             }
         }];
