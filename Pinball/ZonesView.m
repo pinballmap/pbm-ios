@@ -36,7 +36,7 @@
     self.navigationItem.title = currentRegion.fullName;
     
     NSFetchRequest *zoneFetch = [NSFetchRequest fetchRequestWithEntityName:@"Zone"];
-    zoneFetch.predicate = [NSPredicate predicateWithFormat:@"region.name = %@",currentRegion.name];
+    zoneFetch.predicate = [NSPredicate predicateWithFormat:@"region.name = %@ AND self.locations.@count > 0",currentRegion.name];
     zoneFetch.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES]];
     fetchedResults = [[NSFetchedResultsController alloc] initWithFetchRequest:zoneFetch
                                                          managedObjectContext:[[CoreDataManager sharedInstance] managedObjectContext]

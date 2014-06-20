@@ -68,9 +68,28 @@
     isClosets = NO;
     self.navigationItem.title = [NSString stringWithFormat:@"%@",[[[PinballMapManager sharedInstance] currentRegion] fullName]];
     managedContext = [[CoreDataManager sharedInstance] managedObjectContext];
-    NSFetchRequest *stackRequest = [NSFetchRequest fetchRequestWithEntityName:@"Location"];
-    stackRequest.predicate = [NSPredicate predicateWithFormat:@"region.name = %@",[[[PinballMapManager sharedInstance] currentRegion] name]];
-    stackRequest.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES]];
+    NSFetchRequest *stackRequest;
+    if ([[PinballMapManager sharedInstance] userLocation]){
+        
+        NSFetchRequest *locationRequest = [NSFetchRequest fetchRequestWithEntityName:@"Location"];
+        locationRequest.predicate = [NSPredicate predicateWithFormat:@"region.name = %@",[[[PinballMapManager sharedInstance] currentRegion] name]];
+        locationRequest.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES]];
+        
+        NSArray *locations = [[[CoreDataManager sharedInstance] managedObjectContext] executeFetchRequest:locationRequest error:nil];
+        for (Location *location in locations) {
+            [location updateDistance];
+        }
+        locations = nil;
+        stackRequest = [NSFetchRequest fetchRequestWithEntityName:@"Location"];
+        stackRequest.predicate = [NSPredicate predicateWithFormat:@"region.name = %@",[[[PinballMapManager sharedInstance] currentRegion] name]];
+        stackRequest.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"locationDistance" ascending:YES]];
+    }else{
+        stackRequest = [NSFetchRequest fetchRequestWithEntityName:@"Location"];
+        stackRequest.predicate = [NSPredicate predicateWithFormat:@"region.name = %@",[[[PinballMapManager sharedInstance] currentRegion] name]];
+        stackRequest.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES]];
+    }
+    
+    
     fetchedResults = [[NSFetchedResultsController alloc] initWithFetchRequest:stackRequest
                                                          managedObjectContext:managedContext
                                                            sectionNameKeyPath:nil
@@ -108,11 +127,11 @@
 }
 #pragma mark - Class Actions
 - (IBAction)filterResults:(id)sender{
-    filterSheet = [[UIActionSheet alloc] initWithTitle:@"Location Filter" delegate:self cancelButtonTitle:nil destructiveButtonTitle:nil otherButtonTitles:@"Distance",@"Number of Machines",@"Name",@"Zone",@"Location Type",nil];
+    filterSheet = [[UIActionSheet alloc] initWithTitle:@"Location Sort" delegate:self cancelButtonTitle:nil destructiveButtonTitle:nil otherButtonTitles:@"Location Name",@"Distance",@"Number of Machines",@"Zone",@"Location Type",nil];
     if ([UIDevice iPad]){
         [filterSheet showFromTabBar:self.tabBarController.tabBar];
     }else{
-        [filterSheet addButtonWithTitle:@"Browse"];
+        [filterSheet addButtonWithTitle:@"Browse on Map"];
         [filterSheet setCancelButtonIndex:[filterSheet addButtonWithTitle:@"Cancel"]];
         [filterSheet showFromTabBar:self.tabBarController.tabBar];
     }
@@ -162,9 +181,11 @@
             isClosets = NO;
             NSString *sectionName;
             if (buttonIndex == 0){
+                // Name
+                stackRequest.predicate = [NSPredicate predicateWithFormat:@"region.name = %@",[[[PinballMapManager sharedInstance] currentRegion] name]];
+                stackRequest.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES]];
+            }else if (buttonIndex == 1){
                 if ([[PinballMapManager sharedInstance] userLocation]){
-                    
-                    
                     NSFetchRequest *locationRequest = [NSFetchRequest fetchRequestWithEntityName:@"Location"];
                     locationRequest.predicate = [NSPredicate predicateWithFormat:@"region.name = %@",[[[PinballMapManager sharedInstance] currentRegion] name]];
                     locationRequest.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES]];
@@ -179,15 +200,12 @@
                     stackRequest.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"locationDistance" ascending:YES]];
                 }else{
                     [UIAlertView simpleApplicationAlertWithMessage:@"Location services are not enabled. Please enable to filter by distance." cancelButton:@"Ok"];
+                    return;
                 }
-            }else if (buttonIndex == 1){
+            }else if (buttonIndex == 2){
                 // Number
                 stackRequest.predicate = [NSPredicate predicateWithFormat:@"region.name = %@",[[[PinballMapManager sharedInstance] currentRegion] name]];
                 stackRequest.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"machineCount" ascending:NO]];
-            }else if (buttonIndex == 2){
-                // Name
-                stackRequest.predicate = [NSPredicate predicateWithFormat:@"region.name = %@",[[[PinballMapManager sharedInstance] currentRegion] name]];
-                stackRequest.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES]];
             }else if (buttonIndex == 3){
                 ZonesView *zoneSelect = (ZonesView *)[[self.storyboard instantiateViewControllerWithIdentifier:@"ZonesView"] navigationRootViewController];
                 zoneSelect.delegate = self;
