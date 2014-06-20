@@ -106,6 +106,31 @@ typedef NS_ENUM(NSInteger, PBMDataAPI) {
     }];
     [[NSOperationQueue mainQueue] addOperation:regionAPI];
 }
+- (void)refreshAllRegions{
+    NSArray *currentRegions = [self coreDataRegions];
+
+    NSMutableArray *regionIds = [NSMutableArray new];
+    [currentRegions enumerateObjectsUsingBlock:^(Region *obj, NSUInteger idx, BOOL *stop) {
+        [regionIds addObject:obj.regionId];
+    }];
+    currentRegions = nil;
+    NSURLRequest *regionRequest = [NSURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@api/v1/regions.json",apiRootURL]]];
+    AFHTTPRequestOperation *regionAPI = [[AFHTTPRequestOperation alloc] initWithRequest:regionRequest];
+    regionAPI.responseSerializer = [AFJSONResponseSerializer serializer];
+    [regionAPI setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSLog(@"Found new regions");
+        NSArray *regions = operation.responseObject[@"regions"];
+        [regions enumerateObjectsUsingBlock:^(NSDictionary *obj, NSUInteger idx, BOOL *stop) {
+            if (![regionIds containsObject:obj[@"id"]]){
+                [Region createRegionWithData:obj andContext:[[CoreDataManager sharedInstance] managedObjectContext]];
+            }
+        }];
+        [[CoreDataManager sharedInstance] saveContext];
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"%@",error);
+    }];
+    [[NSOperationQueue mainQueue] addOperation:regionAPI];
+}
 #pragma mark - Region Data Load
 - (void)refreshRegion{
 

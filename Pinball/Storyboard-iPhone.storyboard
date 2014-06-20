@@ -1289,12 +1289,12 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <searchBar key="tableHeaderView" contentMode="redraw" id="Qel-n9-exq">
+                        <searchBar key="tableHeaderView" contentMode="redraw" id="bTW-KI-j9s">
                             <rect key="frame" x="0.0" y="64" width="320" height="44"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                             <textInputTraits key="textInputTraits"/>
                             <connections>
-                                <outlet property="delegate" destination="9Nt-tE-aEj" id="cGa-Me-zbz"/>
+                                <outlet property="delegate" destination="9Nt-tE-aEj" id="YGl-2O-7Cg"/>
                             </connections>
                         </searchBar>
                         <prototypes>
@@ -1328,8 +1328,20 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="searchDisplayController" destination="L3x-Hk-Bv3" id="Ag5-DB-jsW"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GJS-iw-zUa" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <searchDisplayController id="L3x-Hk-Bv3">
+                    <connections>
+                        <outlet property="delegate" destination="9Nt-tE-aEj" id="wTV-Jt-UjR"/>
+                        <outlet property="searchBar" destination="bTW-KI-j9s" id="Yye-cC-T0V"/>
+                        <outlet property="searchContentsController" destination="9Nt-tE-aEj" id="T3r-S4-SGI"/>
+                        <outlet property="searchResultsDataSource" destination="9Nt-tE-aEj" id="Gu1-F8-ED8"/>
+                        <outlet property="searchResultsDelegate" destination="9Nt-tE-aEj" id="iD8-K2-a0P"/>
+                    </connections>
+                </searchDisplayController>
             </objects>
             <point key="canvasLocation" x="1841" y="2748"/>
         </scene>

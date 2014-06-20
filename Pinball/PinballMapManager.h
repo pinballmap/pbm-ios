@@ -19,6 +19,7 @@ typedef void (^APIComplete)(NSDictionary *status);
 
 + (id)sharedInstance;
 - (void)allRegions:(void (^)(NSArray *regions))regionBlock;
+- (void)refreshAllRegions;
 - (void)loadRegionData:(Region *)region;
 - (void)refreshRegion;
 // Machine Routes
