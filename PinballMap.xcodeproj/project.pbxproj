@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		DB01543F195444CA000E65EA /* FloridaLocation.gpx in Resources */ = {isa = PBXBuildFile; fileRef = DB01543E195444CA000E65EA /* FloridaLocation.gpx */; };
 		DB070BEB193202ED0018D521 /* Location.m in Sources */ = {isa = PBXBuildFile; fileRef = DB070BEA193202ED0018D521 /* Location.m */; };
 		DB070BEE193202ED0018D521 /* Region.m in Sources */ = {isa = PBXBuildFile; fileRef = DB070BED193202ED0018D521 /* Region.m */; };
 		DB070BF1193202ED0018D521 /* Zone.m in Sources */ = {isa = PBXBuildFile; fileRef = DB070BF0193202ED0018D521 /* Zone.m */; };
@@ -713,7 +712,6 @@
 				DB9330BC190D49AB0054C779 /* SeattleLocation.gpx in Resources */,
 				DB3F807B194B25100089F3D0 /* LocationCell.xib in Resources */,
 				DB070C43193243780018D521 /* CHANGELOG in Resources */,
-				DB01543F195444CA000E65EA /* FloridaLocation.gpx in Resources */,
 				DBBB4BED193387AB004E433F /* Storyboard-iPad.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
