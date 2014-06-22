@@ -13,6 +13,12 @@
 #import "UIViewController+Helpers.h"
 #import "LocationAnnotation.h"
 
+typedef NS_ENUM(NSUInteger, LayoutType) {
+    LayoutTypeListing = 0,
+    LayoutTypeProfile,
+    LayoutTypeBrowse,
+};
+
 @interface LocationProfileView_iPad () <MKMapViewDelegate>{
     LocationProfileView *profileViewController;
     LocationsView *locationsViewController;
@@ -22,6 +28,10 @@
 @property (nonatomic) IBOutlet UIView *locationsListingView;
 @property (nonatomic) IBOutlet UIView *locationProfile;
 @property (nonatomic) IBOutlet MKMapView *mapView;
+
+
+@property (nonatomic) IBOutlet NSLayoutConstraint *listingLeft;
+@property (nonatomic) IBOutlet NSLayoutConstraint *profileLeft;
 
 @end
 
@@ -34,14 +44,18 @@
     }
     return self;
 }
-
 - (void)viewDidLoad{
     [super viewDidLoad];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateRegion) name:@"RegionUpdate" object:nil];
     // Do any additional setup after loading the view.
-    _locationProfile.frame = CGRectMake(1024, 0, CGRectGetWidth(_locationProfile.frame), CGRectGetHeight(_locationProfile.frame));
-
-    [self updateRegion];
+    if ([[PinballMapManager sharedInstance] currentRegion]){
+        currentRegion = [[PinballMapManager sharedInstance] currentRegion];
+        CLLocationCoordinate2D regionCoord = CLLocationCoordinate2DMake(currentRegion.latitude.doubleValue, currentRegion.longitude.doubleValue);
+        _mapView.region = MKCoordinateRegionMake(regionCoord, MKCoordinateSpanMake(1.0, 1.0));
+        _mapView.delegate = self;
+    }
+    
+    [self setupNavigationWithType:LayoutTypeListing];
 }
 - (void)updateRegion{
     [_mapView removeAnnotations:_mapView.annotations];
@@ -50,14 +64,7 @@
         CLLocationCoordinate2D regionCoord = CLLocationCoordinate2DMake(currentRegion.latitude.doubleValue, currentRegion.longitude.doubleValue);
         _mapView.region = MKCoordinateRegionMake(regionCoord, MKCoordinateSpanMake(1.0, 1.0));
         _mapView.delegate = self;
-        
-        /* Region coordinate location
-        CLLocationCoordinate2D locationCoord = CLLocationCoordinate2DMake(currentRegion.latitude.doubleValue, currentRegion.longitude.doubleValue);
-        MKPointAnnotation *locationPin = [[MKPointAnnotation alloc] init];
-        locationPin.coordinate = locationCoord;
-        locationPin.title = currentRegion.name;
-        [_mapView addAnnotation:locationPin];
-        */
+
         [self showListingsView:nil];
     }
 }
@@ -86,18 +93,21 @@
 
         _mapView.region = MKCoordinateRegionMake(locationCoord, MKCoordinateSpanMake(0.6, 0.6));
         
-        [UIView animateWithDuration:.3 animations:^{
-            _locationsListingView.frame = CGRectMake(-90, 0, _locationsListingView.frame.size.width, _locationsListingView.frame.size.height);
-            _mapView.frame = CGRectMake(0, 0, 703, self.view.frame.size.height);
-            _locationProfile.frame = CGRectMake(704, 0, 320, CGRectGetHeight(_locationProfile.frame));
+        _listingLeft.constant = -321;
+        _profileLeft.constant = 0;
+        
+        [UIView animateWithDuration:.5 animations:^{
+            [self.view layoutIfNeeded];
+        }completion:^(BOOL finished) {
+            NSLog(@"%f",_mapView.frame.size.width);
         }];
-        UIBarButtonItem *showListings = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"766-arrow-right.png"] style:UIBarButtonItemStylePlain target:self action:@selector(showListingsView:)];
-        self.navigationItem.leftBarButtonItems = @[showListings];
-        self.navigationItem.title = _currentLocation.name;
+        [self setupNavigationWithType:LayoutTypeProfile];
+    
     }else{
+        _profileLeft.constant = 0;
+        
         [UIView animateWithDuration:.3 animations:^{
-            _mapView.frame = CGRectMake(0, 0, 703, self.view.frame.size.height);
-            _locationProfile.frame = CGRectMake(704, 0, 320, CGRectGetHeight(_locationProfile.frame));
+            [self.view layoutIfNeeded];
         }];
     }
 }
@@ -124,19 +134,43 @@
             [_mapView addAnnotation:locationPin];
         }];
         
-        [UIView animateWithDuration:.3 animations:^{
-            _locationsListingView.frame = CGRectMake(-90, 0, _locationsListingView.frame.size.width, _locationsListingView.frame.size.height);
-            _mapView.frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height);
-        }];
-        UIBarButtonItem *browseLocations = [[UIBarButtonItem alloc] initWithTitle:@"Done" style:UIBarButtonItemStylePlain target:self action:@selector(browseLocations)];
+        _listingLeft.constant = -322;
         
-        self.navigationItem.leftBarButtonItems = @[browseLocations];
+        [UIView animateWithDuration:.3 animations:^{
+            [self.view layoutIfNeeded];
+        }];
+        
+        [self setupNavigationWithType:LayoutTypeBrowse];
     }else{
         isBrowsing = NO;
         [_mapView removeAnnotations:_mapView.annotations];
         [self showListingsView:nil];
     }
     
+}
+#pragma mark - Class
+- (void)setupNavigationWithType:(LayoutType)type{
+    
+    if (type == LayoutTypeListing){
+        self.navigationItem.rightBarButtonItem = nil;
+        self.navigationItem.leftBarButtonItem = nil;
+        self.navigationItem.title = currentRegion.fullName;
+        UIBarButtonItem *filterButton = [[UIBarButtonItem alloc] initWithTitle:@"Sort" style:UIBarButtonItemStylePlain target:locationsViewController action:@selector(filterResults:)];
+        UIBarButtonItem *browseLocations = [[UIBarButtonItem alloc] initWithTitle:@"Browse on Map" style:UIBarButtonItemStylePlain target:self action:@selector(browseLocations)];
+        UIBarButtonItem *fixedSpace = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace target:nil action:nil];
+        fixedSpace.width = 140.0;
+        UIBarButtonItem *newLocation = [[UIBarButtonItem alloc] initWithTitle:@"Suggest" style:UIBarButtonItemStylePlain target:self action:@selector(showNewLocationView:)];
+        self.navigationItem.leftBarButtonItems = @[filterButton,fixedSpace,browseLocations];
+        self.navigationItem.rightBarButtonItem = newLocation;
+    }else if (type == LayoutTypeProfile){
+        UIBarButtonItem *showListings = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"766-arrow-right.png"] style:UIBarButtonItemStylePlain target:self action:@selector(showListingsView:)];
+        self.navigationItem.leftBarButtonItems = @[showListings];
+        self.navigationItem.title = _currentLocation.name;
+    }else if (type == LayoutTypeBrowse){
+        UIBarButtonItem *browseLocations = [[UIBarButtonItem alloc] initWithTitle:@"Done" style:UIBarButtonItemStylePlain target:self action:@selector(browseLocations)];
+        self.navigationItem.leftBarButtonItems = @[browseLocations];
+        self.navigationItem.rightBarButtonItems = nil;
+    }
 }
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
     if ([segue.destinationViewController isKindOfClass:[LocationProfileView class]]){
@@ -149,20 +183,17 @@
 - (IBAction)showListingsView:(id)sender{
     _currentLocation = nil;
     profileViewController.currentLocation = nil;
-    [UIView animateWithDuration:.3 animations:^{
-        _locationsListingView.frame = CGRectMake(0, 0, _locationsListingView.frame.size.width, _locationsListingView.frame.size.height);
-        _mapView.frame = CGRectMake(321, 0, 703, self.view.frame.size.height);
-        _locationProfile.frame = CGRectMake(1024, 0, CGRectGetWidth(_locationProfile.frame), CGRectGetHeight(_locationProfile.frame));
+
+    _profileLeft.constant = -320;
+    _listingLeft.constant = 0;
+
+    [UIView animateWithDuration:0.5 animations:^{
+        [self.view layoutIfNeeded];
+    }completion:^(BOOL finished) {
+        NSLog(@"%f",_mapView.frame.size.width);
     }];
-    self.navigationItem.rightBarButtonItem = nil;
-    self.navigationItem.leftBarButtonItem = nil;
-    self.navigationItem.title = currentRegion.fullName;
-    UIBarButtonItem *filterButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"798-filter"] style:UIBarButtonItemStylePlain target:locationsViewController action:@selector(filterResults:)];
-    UIBarButtonItem *browseLocations = [[UIBarButtonItem alloc] initWithTitle:@"Browse" style:UIBarButtonItemStylePlain target:self action:@selector(browseLocations)];
-    UIBarButtonItem *fixedSpace = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace target:nil action:nil];
-    fixedSpace.width = 110.0;
-    UIBarButtonItem *newLocation = [[UIBarButtonItem alloc] initWithTitle:@"Suggest" style:UIBarButtonItemStylePlain target:self action:@selector(showNewLocationView:)];
-    self.navigationItem.leftBarButtonItems = @[filterButton,browseLocations,fixedSpace,newLocation];
+    [self setupNavigationWithType:LayoutTypeListing];
+    
 }
 - (IBAction)showNewLocationView:(id)sender{
     UINavigationController *navController = [self.storyboard instantiateViewControllerWithIdentifier:@"NewLocationView"];

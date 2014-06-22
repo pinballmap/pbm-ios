@@ -40,32 +40,55 @@
                         <rect key="frame" x="0.0" y="64" width="1024" height="655"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <containerView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="aeA-g0-D99">
-                                <rect key="frame" x="1024" y="0.0" width="320" height="650"/>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" showsUserLocation="YES" translatesAutoresizingMaskIntoConstraints="NO" id="g9u-as-gqp">
+                                <rect key="frame" x="321" y="0.0" width="703" height="655"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="703" id="csX-Ca-IpM"/>
+                                </constraints>
+                            </mapView>
+                            <containerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aeA-g0-D99" userLabel="Profile View">
+                                <rect key="frame" x="1024" y="0.0" width="320" height="655"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="320" id="EC6-eV-6qP"/>
+                                </constraints>
                                 <connections>
                                     <segue destination="oFB-wf-omc" kind="embed" id="Gyt-CJ-oMK"/>
                                 </connections>
                             </containerView>
-                            <containerView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="LDe-aJ-Ptl">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="650"/>
+                            <containerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LDe-aJ-Ptl">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="655"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="320" id="OhI-er-E8D"/>
+                                </constraints>
                                 <connections>
                                     <segue destination="Pdd-BG-1qn" kind="embed" id="Z9w-xM-d0j"/>
                                 </connections>
                             </containerView>
-                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" mapType="standard" showsUserLocation="YES" translatesAutoresizingMaskIntoConstraints="NO" id="g9u-as-gqp">
-                                <rect key="frame" x="321" y="-25" width="703" height="704"/>
-                            </mapView>
                         </subviews>
                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="LDe-aJ-Ptl" firstAttribute="top" secondItem="aeA-g0-D99" secondAttribute="top" id="31E-jL-egU"/>
+                            <constraint firstItem="LDe-aJ-Ptl" firstAttribute="bottom" secondItem="aeA-g0-D99" secondAttribute="bottom" id="I5T-dg-KrJ"/>
+                            <constraint firstItem="LDe-aJ-Ptl" firstAttribute="centerY" secondItem="g9u-as-gqp" secondAttribute="centerY" id="Ih7-tA-7j6"/>
+                            <constraint firstAttribute="trailing" secondItem="aeA-g0-D99" secondAttribute="trailing" constant="-320" id="KEw-Ru-tIB"/>
+                            <constraint firstItem="g9u-as-gqp" firstAttribute="top" secondItem="aeA-g0-D99" secondAttribute="top" id="OVs-VQ-Wqq"/>
+                            <constraint firstItem="g9u-as-gqp" firstAttribute="centerY" secondItem="Ajw-Ih-5RC" secondAttribute="centerY" id="X5a-PQ-tZ1"/>
+                            <constraint firstItem="LDe-aJ-Ptl" firstAttribute="top" secondItem="Ajw-Ih-5RC" secondAttribute="top" id="ZEC-bR-YF3"/>
+                            <constraint firstItem="LDe-aJ-Ptl" firstAttribute="leading" secondItem="Ajw-Ih-5RC" secondAttribute="leading" id="hbF-lV-Vbr"/>
+                            <constraint firstItem="g9u-as-gqp" firstAttribute="leading" secondItem="LDe-aJ-Ptl" secondAttribute="trailing" constant="1" id="sCf-rx-zsc"/>
+                            <constraint firstItem="aeA-g0-D99" firstAttribute="leading" secondItem="g9u-as-gqp" secondAttribute="trailing" id="yCj-eL-eAi"/>
+                        </constraints>
                         <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                     </view>
                     <navigationItem key="navigationItem" id="4lu-7v-6Tt"/>
                     <connections>
+                        <outlet property="listingLeft" destination="hbF-lV-Vbr" id="dAq-Hj-WmI"/>
                         <outlet property="locationProfile" destination="aeA-g0-D99" id="9ES-dE-ulg"/>
                         <outlet property="locationsListingView" destination="LDe-aJ-Ptl" id="jGk-zg-mDd"/>
                         <outlet property="mapView" destination="g9u-as-gqp" id="PS6-AV-22D"/>
+                        <outlet property="profileLeft" destination="KEw-Ru-tIB" id="WAW-Rf-v4k"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jtQ-uk-hst" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -77,7 +100,7 @@
             <objects>
                 <tableViewController storyboardIdentifier="LocationsView" id="Pdd-BG-1qn" customClass="LocationsView" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="Azu-zK-PVy">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="650"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="655"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
