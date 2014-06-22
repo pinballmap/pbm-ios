@@ -113,7 +113,6 @@
 /* Begin PBXFileReference section */
 		767AEE54A0274802B59CA4A5 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		C95F05FACC264AF1B9D99B61 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
-		DB01543E195444CA000E65EA /* FloridaLocation.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = FloridaLocation.gpx; sourceTree = "<group>"; };
 		DB070BE9193202ED0018D521 /* Location.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Location.h; sourceTree = "<group>"; };
 		DB070BEA193202ED0018D521 /* Location.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Location.m; sourceTree = "<group>"; };
 		DB070BEC193202ED0018D521 /* Region.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Region.h; sourceTree = "<group>"; };
@@ -591,7 +590,6 @@
 			isa = PBXGroup;
 			children = (
 				DB9330BB190D49AB0054C779 /* SeattleLocation.gpx */,
-				DB01543E195444CA000E65EA /* FloridaLocation.gpx */,
 				DBF06C3E18F9775600F92912 /* Machine+Create.h */,
 				DBF06C3F18F9775600F92912 /* Machine+Create.m */,
 				DBF06C3A18F975C500F92912 /* Region+Create.h */,

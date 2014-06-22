@@ -16,8 +16,9 @@
 #import "LocationCell.h"
 #import "UIAlertView+Application.h"
 #import "ZonesView.h"
+#import "LocationTypesView.h"
 
-@interface LocationsView () <NSFetchedResultsControllerDelegate,UIActionSheetDelegate,UISearchBarDelegate,UISearchDisplayDelegate,ZoneSelectDelegate> {
+@interface LocationsView () <NSFetchedResultsControllerDelegate,UIActionSheetDelegate,UISearchBarDelegate,UISearchDisplayDelegate,ZoneSelectDelegate,LocationTypeSelectDelegate> {
     UIActionSheet *filterSheet;
     
     NSFetchedResultsController *fetchedResults;
@@ -127,7 +128,12 @@
 }
 #pragma mark - Class Actions
 - (IBAction)filterResults:(id)sender{
-    filterSheet = [[UIActionSheet alloc] initWithTitle:@"Location Sort" delegate:self cancelButtonTitle:nil destructiveButtonTitle:nil otherButtonTitles:@"Location Name",@"Distance",@"Number of Machines",@"Zone",@"Location Type",nil];
+    filterSheet = [[UIActionSheet alloc] initWithTitle:@"Location Sort" delegate:self cancelButtonTitle:nil destructiveButtonTitle:nil otherButtonTitles:@"Location Name",@"Distance",@"Number of Machines",@"Location Type",nil];
+    Region *currentRegion = [[PinballMapManager sharedInstance] currentRegion];
+    if (currentRegion.zones.count > 0){
+        [filterSheet addButtonWithTitle:@"Zone"];
+    }
+    
     if ([UIDevice iPad]){
         [filterSheet showFromTabBar:self.tabBarController.tabBar];
     }else{
@@ -171,6 +177,25 @@
     [fetchedResults performFetch:nil];
     [self.tableView reloadData];
 }
+#pragma mark - Location Type Delegate
+- (void)selectedLocationType:(LocationType *)type{
+    if (type){
+        self.navigationItem.title = type.name;
+        
+        NSFetchRequest *fetchRequest = [NSFetchRequest fetchRequestWithEntityName:@"Location"];
+        fetchRequest.predicate = [NSPredicate predicateWithFormat:@"region.name = %@ AND locationType.name = %@",[[[PinballMapManager sharedInstance] currentRegion] name],type.name];
+        fetchRequest.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES]];
+        
+        fetchedResults = nil;
+        fetchedResults = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest
+                                                             managedObjectContext:managedContext
+                                                               sectionNameKeyPath:nil
+                                                                        cacheName:nil];
+        fetchedResults.delegate = self;
+        [fetchedResults performFetch:nil];
+        [self.tableView reloadData];
+    }
+}
 #pragma mark - UIActionSheetDelegate
 - (void)actionSheet:(UIActionSheet *)actionSheet didDismissWithButtonIndex:(NSInteger)buttonIndex{
     if (buttonIndex != actionSheet.cancelButtonIndex){
@@ -180,11 +205,16 @@
             stackRequest.predicate = nil;
             isClosets = NO;
             NSString *sectionName;
-            if (buttonIndex == 0){
+            
+            
+            NSString *buttonTitle = [actionSheet buttonTitleAtIndex:buttonIndex];
+
+            
+            if ([buttonTitle isEqualToString:@"Location Name"]){
                 // Name
                 stackRequest.predicate = [NSPredicate predicateWithFormat:@"region.name = %@",[[[PinballMapManager sharedInstance] currentRegion] name]];
                 stackRequest.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES]];
-            }else if (buttonIndex == 1){
+            }else if ([buttonTitle isEqualToString:@"Distance"]){
                 if ([[PinballMapManager sharedInstance] userLocation]){
                     NSFetchRequest *locationRequest = [NSFetchRequest fetchRequestWithEntityName:@"Location"];
                     locationRequest.predicate = [NSPredicate predicateWithFormat:@"region.name = %@",[[[PinballMapManager sharedInstance] currentRegion] name]];
@@ -202,11 +232,19 @@
                     [UIAlertView simpleApplicationAlertWithMessage:@"Location services are not enabled. Please enable to filter by distance." cancelButton:@"Ok"];
                     return;
                 }
-            }else if (buttonIndex == 2){
+            }else if ([buttonTitle isEqualToString:@"Number of Machines"]){
                 // Number
                 stackRequest.predicate = [NSPredicate predicateWithFormat:@"region.name = %@",[[[PinballMapManager sharedInstance] currentRegion] name]];
                 stackRequest.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"machineCount" ascending:NO]];
-            }else if (buttonIndex == 3){
+            }else if ([buttonTitle isEqualToString:@"Location Type"]){
+                LocationTypesView *types = (LocationTypesView *)[[self.storyboard instantiateViewControllerWithIdentifier:@"LocationTypesView"] navigationRootViewController];
+                types.delegate = self;
+                types.type = SelectionTypeRegion;
+                [self.navigationController presentViewController:types.parentViewController animated:YES completion:nil];
+                return;
+                
+
+            }else if ([buttonTitle isEqualToString:@"Zone"]){
                 ZonesView *zoneSelect = (ZonesView *)[[self.storyboard instantiateViewControllerWithIdentifier:@"ZonesView"] navigationRootViewController];
                 zoneSelect.delegate = self;
                 if ([UIDevice iPad]){
@@ -214,15 +252,10 @@
                 }
                 [self.navigationController presentViewController:zoneSelect.parentViewController animated:YES completion:nil];
                 return;
-            }else if (buttonIndex == 4){
-                stackRequest.predicate = [NSPredicate predicateWithFormat:@"region.name = %@",[[[PinballMapManager sharedInstance] currentRegion] name]];
-                stackRequest.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"locationType.name" ascending:YES],[NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES]];
-                sectionName = @"locationType.name";
-            }else if (buttonIndex == 5){
+            }else if ([buttonTitle isEqualToString:@"Browse on Map"]){
                 [self browseLocations:nil];
                 return;
             }
-            
             fetchedResults = nil;
             fetchedResults = [[NSFetchedResultsController alloc] initWithFetchRequest:stackRequest
                                                                  managedObjectContext:managedContext

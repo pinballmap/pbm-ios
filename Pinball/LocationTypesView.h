@@ -9,16 +9,22 @@
 #import <UIKit/UIKit.h>
 #import "LocationType.h"
 
-@protocol LocationTypeDelegate;
+typedef NS_ENUM(NSUInteger, SelectionType) {
+    SelectionTypeAll = 0,       // All Location Types
+    SelectionTypeRegion         // Only Location Types that have locations attached to him
+};
+
+@protocol LocationTypeSelectDelegate;
 @interface LocationTypesView : UITableViewController
 
-@property (nonatomic) id <LocationTypeDelegate> delegate;
+@property (nonatomic) id <LocationTypeSelectDelegate> delegate;
+@property (nonatomic) SelectionType type;
 
 @end
 
 
-@protocol LocationTypeDelegate <NSObject>
+@protocol LocationTypeSelectDelegate <NSObject>
 
-- (void)pickedType:(LocationType *)type;
+- (void)selectedLocationType:(LocationType *)type;
 
 @end

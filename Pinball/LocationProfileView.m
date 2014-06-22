@@ -32,7 +32,7 @@ typedef enum : NSUInteger {
     LocationEditingTypeWebsite,
 } LocationEditingType;
 
-@interface LocationProfileView () <TextEditorDelegate,NSFetchedResultsControllerDelegate,UIAlertViewDelegate,LocationTypeDelegate> {
+@interface LocationProfileView () <TextEditorDelegate,NSFetchedResultsControllerDelegate,UIAlertViewDelegate,LocationTypeSelectDelegate> {
     NSFetchedResultsController *machinesFetch;
     UIImage *mapSnapshot;
     LocationEditingType editingType;
@@ -217,7 +217,7 @@ typedef enum : NSUInteger {
     
 }
 #pragma mark - Locaiton Type Delegate
-- (void)pickedType:(LocationType *)type{
+- (void)selectedLocationType:(LocationType *)type{
     if (type){
         [[PinballMapManager sharedInstance] updateLocation:_currentLocation withData:@{@"location_type": type.locationTypeId} andCompletion:^(NSDictionary *status) {
             _currentLocation.locationType = type;

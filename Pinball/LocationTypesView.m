@@ -27,8 +27,16 @@
 - (void)viewDidLoad{
     [super viewDidLoad];
     
-    NSFetchRequest *typeFetch = [NSFetchRequest fetchRequestWithEntityName:@"LocationType"];
-    typeFetch.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES]];
+    NSFetchRequest *typeFetch;
+    if (_type == SelectionTypeRegion){
+        typeFetch = [NSFetchRequest fetchRequestWithEntityName:@"LocationType"];
+        typeFetch.predicate = [NSPredicate predicateWithFormat:@"ANY locations.region.name = %@",[[[PinballMapManager sharedInstance] currentRegion] name]];
+        typeFetch.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES]];
+    }else{
+        typeFetch = [NSFetchRequest fetchRequestWithEntityName:@"LocationType"];
+        typeFetch.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES]];
+    }
+    
     locationTypesFetch = [[NSFetchedResultsController alloc] initWithFetchRequest:typeFetch
                                                              managedObjectContext:[[CoreDataManager sharedInstance] managedObjectContext]
                                                                sectionNameKeyPath:nil
@@ -43,10 +51,10 @@
 }
 #pragma mark - Class Actions
 - (IBAction)dismissTypes:(id)sender{
-    if (_delegate && [_delegate respondsToSelector:@selector(pickedType:)]){
-        [_delegate pickedType:nil];
-        [self dismissViewControllerAnimated:YES completion:nil];
+    if (_delegate && [_delegate respondsToSelector:@selector(selectedLocationType:)]){
+        [_delegate selectedLocationType:nil];
     }
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 #pragma mark - Table view data source
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
@@ -72,8 +80,8 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     LocationType *type = [locationTypesFetch objectAtIndexPath:indexPath];
-    if (_delegate && [_delegate respondsToSelector:@selector(pickedType:)]){
-        [_delegate pickedType:type];
+    if (_delegate && [_delegate respondsToSelector:@selector(selectedLocationType:)]){
+        [_delegate selectedLocationType:type];
         [self dismissViewControllerAnimated:YES completion:nil];
     }
 }
