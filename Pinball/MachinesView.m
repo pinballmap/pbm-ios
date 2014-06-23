@@ -154,6 +154,7 @@
     }else{
         currentMachine = searchResults[indexPath.row];
     }
+
     cell.textLabel.text = currentMachine.name;
     cell.detailTextLabel.text = [NSString stringWithFormat:@"%@, %@",currentMachine.manufacturer,currentMachine.year];
     return cell;

@@ -73,6 +73,10 @@
 - (void)setTextContent:(NSString *)textContent{
     _textContent = textContent;
 }
+- (void)setEditorPrompt:(NSString *)editorPrompt{
+    _editorPrompt = editorPrompt;
+    self.navigationItem.prompt = _editorPrompt;
+}
 - (void)didReceiveMemoryWarning{
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

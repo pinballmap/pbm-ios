@@ -11,8 +11,9 @@
 #import "UIAlertView+Application.h"
 #import "MachineScore.h"
 #import "NewMachineScoreView.h"
+#import <FMSKit/TextEditorView.h>
 
-@interface MachineLocationProfileView () <ScoreDelegate> {
+@interface MachineLocationProfileView () <ScoreDelegate,TextEditorDelegate> {
     NSMutableArray *machineScores;
     UIAlertView *deleteConfirm;
     NSIndexPath *deletePath;
@@ -186,6 +187,17 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     if (indexPath.section == 1){
+        NSString *string = [NSString stringWithFormat:@"%@ at %@",_currentMachine.machine.name,_currentMachine.location.name];
+        TextEditorView *textEditor = [[TextEditorView alloc] initWithTitle:@"Machine Condition" andDelegate:self];
+        textEditor.textContent = _currentMachine.condition;
+        textEditor.editorPrompt = string;
+        UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:textEditor];
+        if ([UIDevice iPad]){
+            nav.modalPresentationStyle = UIModalPresentationFormSheet;
+        }
+        [self presentViewController:nav animated:YES completion:nil];
+        return;
+        
         MachineConditionView *vc = (MachineConditionView *)[[[self.storyboard instantiateViewControllerWithIdentifier:@"MachineCondition"] viewControllers] lastObject];
         vc.currentMachine = _currentMachine;
         [tableView setEditing:NO];
@@ -201,7 +213,29 @@
         [deleteConfirm show];
     }
 }
-
+#pragma mark - TextEditor Delegate
+- (void)editorDidComplete:(NSString *)text{
+    [[PinballMapManager sharedInstance] updateMachineCondition:_currentMachine withCondition:text withCompletion:^(NSDictionary *status) {
+        if (status[@"errors"]){
+            NSString *errors;
+            if ([status[@"errors"] isKindOfClass:[NSArray class]]){
+                errors = [status[@"errors"] componentsJoinedByString:@","];
+            }else{
+                errors = status[@"errors"];
+            }
+            [UIAlertView simpleApplicationAlertWithMessage:errors cancelButton:@"Ok"];
+        }else{
+            _currentMachine.condition = text;
+            _currentMachine.conditionUpdate = [NSDate date];
+            [[CoreDataManager sharedInstance] saveContext];
+            [UIAlertView simpleApplicationAlertWithMessage:@"Updated condition" cancelButton:@"Ok"];
+            [self.tableView reloadData];
+        }
+    }];
+}
+- (void)editorDidCancel{
+    
+}
 /*
 // Override to support conditional editing of the table view.
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath

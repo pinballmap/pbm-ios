@@ -17,6 +17,7 @@
 @property (nonatomic,assign) id <TextEditorDelegate> delegate;
 @property (nonatomic,assign)NSString *textContent;
 @property (nonatomic,assign)NSString *editorTitle;
+@property (nonatomic,assign)NSString *editorPrompt;
 
 @end
 
