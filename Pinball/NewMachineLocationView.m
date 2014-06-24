@@ -55,8 +55,10 @@
 }
 #pragma mark - Machine Picking View Delegate
 - (void)pickedMachines:(NSArray *)machines{
-    pickedMachine = [machines lastObject];
-    machineName.text = pickedMachine.name;
+    if (machines.count > 0){
+        pickedMachine = [machines lastObject];
+        machineName.text = pickedMachine.name;
+    }
 }
 #pragma mark - TableView Delegate
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -78,7 +80,7 @@
 - (IBAction)saveMachine:(id)sender{
     if (_location && machineName.text.length > 0){
         NSDictionary *machine = @{@"machine_id": pickedMachine.machineId,@"location_id": _location.locationId,@"condition": machineCondition.text};
-        [[PinballMapManager sharedInstance] createNewMachineLocation:machine withCompletion:^(NSDictionary *status) {
+        [[PinballMapManager sharedInstance] createNewMachineWithData:machine andParentMachine:pickedMachine forLocation:_location withCompletion:^(NSDictionary *status) {
             if (status[@"errors"]){
                 NSString *errors;
                 if ([status[@"errors"] isKindOfClass:[NSArray class]]){

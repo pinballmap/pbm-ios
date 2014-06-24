@@ -10,7 +10,7 @@
 #import "NSFileManager+DocumentsDirectory.h"
 #import <AFNetworking.h>
 
-static const NSString *apiRootURL = @"http://pinballmap.com/";
+static const NSString *apiRootURL = @"http://localhost:3000/";//@"http://pinballmap.com/";
 
 typedef NS_ENUM(NSInteger, PBMDataAPI) {
     PBMDataAPIRegions = 0,
@@ -441,11 +441,19 @@ typedef NS_ENUM(NSInteger, PBMDataAPI) {
         completionBlock(@{@"errors": error.localizedDescription});
     }];
 }
-- (void)createNewMachineLocation:(NSDictionary *)machineData withCompletion:(APIComplete)completionBlock{
+- (void)createNewMachineWithData:(NSDictionary *)machineData andParentMachine:(Machine *)machine forLocation:(Location *)location withCompletion:(APIComplete)completionBlock{
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     manager.requestSerializer = [AFJSONRequestSerializer serializer];
     [manager POST:[NSString stringWithFormat:@"%@api/v1/location_machine_xrefs.json",apiRootURL] parameters:machineData success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        [self refreshRegion];
+        
+        NSDictionary *machineLocation = responseObject[@"location_machine"];
+        
+        MachineLocation *newMachine = [MachineLocation createMachineLocationWithData:machineLocation andContext:[[CoreDataManager sharedInstance] managedObjectContext]];
+        newMachine.location = location;
+        newMachine.machine = machine;
+        [location addMachinesObject:newMachine];
+        [[CoreDataManager sharedInstance] saveContext];
+        
         completionBlock(responseObject);
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         completionBlock(@{@"errors": error.localizedDescription});

@@ -24,7 +24,7 @@ typedef void (^APIComplete)(NSDictionary *status);
 - (void)refreshRegion;
 // Machine Routes
 - (void)createNewMachine:(NSDictionary *)machineData withCompletion:(APIComplete)completionBlock;
-- (void)createNewMachineLocation:(NSDictionary *)machineData withCompletion:(APIComplete)completionBlock;
+- (void)createNewMachineWithData:(NSDictionary *)machineData andParentMachine:(Machine *)machine forLocation:(Location *)location withCompletion:(APIComplete)completionBlock;
 - (void)updateMachineCondition:(MachineLocation *)machine withCondition:(NSString *)newCondition withCompletion:(APIComplete)completionBlock;
 - (void)allScoresForMachine:(MachineLocation *)machine withCompletion:(APIComplete)completionBlock;
 - (void)addScore:(NSDictionary *)scoreData forMachine:(MachineLocation *)machine withCompletion:(APIComplete)completionBlock;
