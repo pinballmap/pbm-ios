@@ -126,7 +126,7 @@
     return rows;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    float defaultWidth = 270;
+    float defaultWidth = 255;
     
     Machine *currentMachine;
     if (!isSearching){

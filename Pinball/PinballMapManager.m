@@ -10,7 +10,7 @@
 #import "NSFileManager+DocumentsDirectory.h"
 #import <AFNetworking.h>
 
-static const NSString *apiRootURL = @"http://localhost:3000/";//@"http://pinballmap.com/";
+static const NSString *apiRootURL = @"http://pinballmap.com/";
 
 typedef NS_ENUM(NSInteger, PBMDataAPI) {
     PBMDataAPIRegions = 0,
