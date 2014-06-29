@@ -15,7 +15,6 @@
 - (NSManagedObjectContext *)resetStore;
 
 @property (nonatomic) NSManagedObjectContext *managedObjectContext;
-@property (nonatomic) NSManagedObjectContext *privateObjectContext;
 
 
 @end

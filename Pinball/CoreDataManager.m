@@ -33,20 +33,6 @@
     self = [super init];
     if (self){
         [self createManagedObjectContext];
-        [self createPrivateContext];
-        [[NSNotificationCenter defaultCenter] addObserverForName:NSManagedObjectContextDidSaveNotification
-                                                          object:nil
-                                                           queue:nil
-                                                      usingBlock:^(NSNotification* note) {
-                                                          NSManagedObjectContext *moc = self.managedObjectContext;
-                                                          if (note.object != moc) {
-                                                              [moc performBlock:^(){
-                                                                  [moc mergeChangesFromContextDidSaveNotification:note];
-                                                                  [[NSNotificationCenter defaultCenter] postNotificationName:@"RegionUpdate" object:nil];
-                                                              }];
-                                                          }
-                                                      }];
-
     }
     return self;
 }
@@ -66,11 +52,9 @@
     NSURL *storeURL = [[self applicationDocumentsDirectory] URLByAppendingPathComponent:[NSString stringWithFormat:@"%@.sqlite",dataModel]];
     [[NSFileManager defaultManager] removeItemAtURL:storeURL error:nil];
     _managedObjectContext = nil;
-    _privateObjectContext = nil;
     managedObjectModel = nil;
     persistentStoreCoordinator = nil;
     [self createManagedObjectContext];
-    [self createPrivateContext];
     return _managedObjectContext;
 }
 #pragma mark - Core Data stack
@@ -87,13 +71,6 @@
     }
 }
 
-- (void)createPrivateContext{
-    if (_privateObjectContext){
-        return;
-    }
-    _privateObjectContext = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSPrivateQueueConcurrencyType];
-    _privateObjectContext.persistentStoreCoordinator = persistentStoreCoordinator;
-}
 
 // Returns the managed object context for the application.
 // If the context doesn't already exist, it is created and bound to the persistent store coordinator for the application.
