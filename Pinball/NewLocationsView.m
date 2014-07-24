@@ -26,7 +26,7 @@
     IBOutlet UITextField *locationCity;
     IBOutlet UITextField *locationState;
     IBOutlet UITextField *locationZip;
-    NSArray *formFields;
+
     CLLocationManager *locationManager;
     CLGeocoder *geocoder;
     NSMutableArray *pickedMachines;
@@ -47,15 +47,6 @@
 }
 - (void)viewDidLoad{
     [super viewDidLoad];
-    
-    formFields = @[@{@"display": @"Name", @"field": locationName},
-                   @{@"display": @"Phone", @"field": locationPhone},
-                   @{@"display": @"Website", @"field": locationWebsite},
-                   @{@"display": @"Operator", @"field": locationOperator},
-                   @{@"display": @"Street", @"field": locationStreet},
-                   @{@"display": @"City", @"field": locationCity},
-                   @{@"display": @"State", @"field": locationState},
-                   @{@"display": @"Zip", @"field": locationZip}];
 }
 - (void)didReceiveMemoryWarning{
     [super didReceiveMemoryWarning];
@@ -70,56 +61,41 @@
     locationManager.desiredAccuracy = kCLLocationAccuracyBest;
     [locationManager startUpdatingLocation];
 }
-- (BOOL)checkInformation{
-    __block BOOL infoStatus;
-    [formFields enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-        NSDictionary *field = obj;
-        if ([(UITextField *)field[@"field"] text].length == 0){
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [UIAlertView simpleApplicationAlertWithMessage:[NSString stringWithFormat:@"%@ must be set.",field[@"display"]]cancelButton:@"Ok"];
-            });
-            infoStatus = NO;
-            *stop = true;
-        }
-    }];
-    return infoStatus;
-}
 #pragma mark - Class Actions
 - (IBAction)saveLocation:(id)sender{
-    if ([self checkInformation]){
 
-        __block NSString *pickedMachineNames = @"";
-        [pickedMachines enumerateObjectsUsingBlock:^(Machine *obj, NSUInteger idx, BOOL *stop) {
-            pickedMachineNames = [pickedMachineNames stringByAppendingString:[NSString stringWithFormat:@"%@-%@,",obj.name,obj.manufacturer]];
-        }];
+    __block NSString *pickedMachineNames = @"";
+    [pickedMachines enumerateObjectsUsingBlock:^(Machine *obj, NSUInteger idx, BOOL *stop) {
+        pickedMachineNames = [pickedMachineNames stringByAppendingString:[NSString stringWithFormat:@"%@-%@,",obj.name,obj.manufacturer]];
+    }];
 
-        NSDictionary *suggestingInfo = @{@"region_id": [[[PinballMapManager sharedInstance] currentRegion] regionId],
-                                         @"location_name": locationName.text,
-                                         @"location_street": locationStreet.text,
-                                         @"location_city": locationCity.text,
-                                         @"location_state": locationState.text,
-                                         @"location_zip": locationZip.text,
-                                         @"location_phone": locationPhone.text,
-                                         @"location_website": locationWebsite.text,
-                                         @"location_operator": locationOperator.text,
-                                         @"location_machines": pickedMachineNames,
-                                         @"submitter_name" : userName.text,
-                                         @"submitter_email": userEmail.text};
-        [[PinballMapManager sharedInstance] suggestLocation:suggestingInfo andCompletion:^(NSDictionary *status) {
-            if (status[@"errors"]){
-                NSString *errors;
-                if ([status[@"errors"] isKindOfClass:[NSArray class]]){
-                    errors = [status[@"errors"] componentsJoinedByString:@","];
-                }else{
-                    errors = status[@"errors"];
-                }
-                [UIAlertView simpleApplicationAlertWithMessage:errors cancelButton:@"Ok"];
+    NSDictionary *suggestingInfo = @{@"region_id": [[[PinballMapManager sharedInstance] currentRegion] regionId],
+                                     @"location_name": locationName.text,
+                                     @"location_street": locationStreet.text,
+                                     @"location_city": locationCity.text,
+                                     @"location_state": locationState.text,
+                                     @"location_zip": locationZip.text,
+                                     @"location_phone": locationPhone.text,
+                                     @"location_website": locationWebsite.text,
+                                     @"location_operator": locationOperator.text,
+                                     @"location_machines": pickedMachineNames,
+                                     @"submitter_name" : userName.text,
+                                     @"submitter_email": userEmail.text};
+    [[PinballMapManager sharedInstance] suggestLocation:suggestingInfo andCompletion:^(NSDictionary *status) {
+        if (status[@"errors"]){
+            NSString *errors;
+            if ([status[@"errors"] isKindOfClass:[NSArray class]]){
+                errors = [status[@"errors"] componentsJoinedByString:@","];
             }else{
-                [UIAlertView simpleApplicationAlertWithMessage:status[@"msg"] cancelButton:@"Ok"];
-                [self dismissViewControllerAnimated:YES completion:nil];
+                errors = status[@"errors"];
             }
-        }];
-    }
+            [UIAlertView simpleApplicationAlertWithMessage:errors cancelButton:@"Ok"];
+        }else{
+            [UIAlertView simpleApplicationAlertWithMessage:status[@"msg"] cancelButton:@"Ok"];
+            [self dismissViewControllerAnimated:YES completion:nil];
+        }
+    }];
+
 }
 - (IBAction)cancelLocation:(id)sender{
     [self dismissViewControllerAnimated:YES completion:nil];
