@@ -14,7 +14,7 @@
 {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
-        // Initialization code
+
     }
     return self;
 }
@@ -22,6 +22,11 @@
 - (void)awakeFromNib
 {
     // Initialization code
+    self.infoLabel.tintColor = [UIColor colorWithRed:1.0f green:0.0f blue:146.0f/255.0f alpha:1.0];
+}
+
+- (void)prepareForReuse{
+
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated

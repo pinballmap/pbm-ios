@@ -22,6 +22,9 @@
     [[UISearchBar appearance] setTintColor:pinkColor];
     [[UINavigationBar appearance] setTintColor:pinkColor];
     [[UIToolbar appearance] setTintColor:pinkColor];
+    [[UITableViewCell appearance] setTintColor:pinkColor];
+    [[UITableView appearance] setTintColor:pinkColor];
+    [[UISegmentedControl appearance] setTintColor:pinkColor];
 
     [[BITHockeyManager sharedHockeyManager] configureWithIdentifier:[ThirdPartyKeys hockeyID]];
     [[BITHockeyManager sharedHockeyManager].authenticator setAuthenticationSecret:[ThirdPartyKeys hockeySecret]];
