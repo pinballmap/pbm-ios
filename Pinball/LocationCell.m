@@ -39,4 +39,8 @@
     // Configure the view for the selected state
 }
 
+- (NSString *)accessibilityLabel{
+    return [NSString stringWithFormat:@"%@, %@, %@ machines.",[self.locationName accessibilityLabel],[self.locationDetail accessibilityLabel],[self.machineCount accessibilityLabel]];
+}
+
 @end
