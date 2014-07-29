@@ -9,6 +9,7 @@
 #import "RegionsView.h"
 @import MessageUI;
 #import "UIAlertView+Application.h"
+#import "GAAppHelper.h"
 
 @interface RegionsView () <NSFetchedResultsControllerDelegate,UISearchDisplayDelegate,MFMailComposeViewControllerDelegate> {
     NSFetchedResultsController *fetchedResults;
@@ -44,6 +45,10 @@
     fetchedResults.delegate = self;
     [fetchedResults performFetch:nil];
     [self.tableView reloadData];
+}
+- (void)viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:animated];
+    [GAAppHelper sendAnalyticsDataWithScreen:@"Region Select View"];
 }
 - (void)didReceiveMemoryWarning{
     [super didReceiveMemoryWarning];

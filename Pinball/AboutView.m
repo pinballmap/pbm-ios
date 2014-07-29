@@ -7,6 +7,7 @@
 //
 
 #import "AboutView.h"
+#import "GAAppHelper.h"
 
 @interface AboutView () {
     NSArray *aboutInfo;
@@ -27,6 +28,10 @@
     [super viewDidLoad];
     NSString *aboutFile = [[NSBundle mainBundle] pathForResource:@"AboutInfo" ofType:@"plist"];
     aboutInfo = [NSArray arrayWithContentsOfFile:aboutFile];
+}
+- (void)viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:animated];
+    [GAAppHelper sendAnalyticsDataWithScreen:@"About View"];
 }
 - (void)didReceiveMemoryWarning{
     [super didReceiveMemoryWarning];

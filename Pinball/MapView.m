@@ -14,6 +14,7 @@
 #import "LocationProfileView.h"
 #import "LocationAnnotation.h"
 
+
 @interface MapView () <MKMapViewDelegate> {
     IBOutlet MKMapView *mainMapView;
 }

@@ -17,6 +17,7 @@
 #import "UIAlertView+Application.h"
 #import "ZonesView.h"
 #import "LocationTypesView.h"
+#import "GAAppHelper.h"
 
 @interface LocationsView () <NSFetchedResultsControllerDelegate,UIActionSheetDelegate,UISearchBarDelegate,UISearchDisplayDelegate,ZoneSelectDelegate,LocationTypeSelectDelegate> {
     UIActionSheet *filterSheet;
@@ -51,6 +52,10 @@
     
     [self.tableView registerNib:[UINib nibWithNibName:@"LocationCell" bundle:nil] forCellReuseIdentifier:@"LocationCell"];
     [self.searchDisplayController.searchResultsTableView registerNib:[UINib nibWithNibName:@"LocationCell" bundle:nil] forCellReuseIdentifier:@"LocationCell"];
+}
+- (void)viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:animated];
+    [GAAppHelper sendAnalyticsDataWithScreen:@"Locations View"];
 }
 - (void)didReceiveMemoryWarning{
     [super didReceiveMemoryWarning];

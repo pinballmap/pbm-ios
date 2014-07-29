@@ -10,6 +10,7 @@
 #import "NSDate+DateFormatting.h"
 #import "EventProfileView.h"
 #import "UIViewController+Helpers.h"
+#import "GAAppHelper.h"
 
 @interface EventsView () <NSFetchedResultsControllerDelegate> {
     NSFetchedResultsController *fetchedResults;
@@ -36,6 +37,10 @@
     UIRefreshControl *refresh = [UIRefreshControl new];
     [refresh addTarget:self action:@selector(refreshRegion) forControlEvents:UIControlEventValueChanged];
     self.refreshControl = refresh;
+}
+- (void)viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:animated];
+    [GAAppHelper sendAnalyticsDataWithScreen:@"Events View"];
 }
 - (void)didReceiveMemoryWarning{
     [super didReceiveMemoryWarning];

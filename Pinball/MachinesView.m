@@ -9,6 +9,7 @@
 #import "MachinesView.h"
 #import "MachineLocation.h"
 #import "MachineProfileView.h"
+#import "GAAppHelper.h"
 
 @interface MachinesView () <NSFetchedResultsControllerDelegate,UISearchBarDelegate>{
     NSFetchedResultsController *fetchedResults;
@@ -33,6 +34,10 @@
     [super viewDidLoad];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateRegion) name:@"RegionUpdate" object:nil];
     [self updateRegion];
+}
+- (void)viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:animated];
+    [GAAppHelper sendAnalyticsDataWithScreen:@"Machines View"];
 }
 - (void)didReceiveMemoryWarning{
     [super didReceiveMemoryWarning];
