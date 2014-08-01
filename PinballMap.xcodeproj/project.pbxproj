@@ -992,7 +992,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Frank Michael Sanchez (7XM86QLV5C)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Frank Michael Sanchez (7XM86QLV5C)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1007,7 +1007,7 @@
 					"$(PROJECT_DIR)",
 				);
 				PRODUCT_NAME = PinballMap;
-				PROVISIONING_PROFILE = "A26B3F80-A342-4B04-892E-D3DFE0D266AA";
+				PROVISIONING_PROFILE = "DF1EDC7F-6FE2-41A3-AAB7-AD2453FA791F";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
 			};
@@ -1020,7 +1020,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Frank Michael Sanchez (ZJN6P495U9)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Frank Michael Sanchez (ZJN6P495U9)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/HockeySDK-iOS/HockeySDK.embeddedframework",
@@ -1034,7 +1034,7 @@
 					"$(PROJECT_DIR)",
 				);
 				PRODUCT_NAME = PinballMap;
-				PROVISIONING_PROFILE = "3838E9DE-68E7-409F-B48B-4B619D0B4C92";
+				PROVISIONING_PROFILE = "C3D22758-2CB3-49F6-8D8D-D8EBF4136315";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
 			};
