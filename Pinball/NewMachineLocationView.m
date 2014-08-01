@@ -78,7 +78,7 @@
 }
 #pragma mark - Actions
 - (IBAction)saveMachine:(id)sender{
-    if (_location && machineName.text.length > 0){
+    if (_location && pickedMachine && ![machineName.text isEqualToString:@"Pick Machine"]){
         NSDictionary *machine = @{@"machine_id": pickedMachine.machineId,@"location_id": _location.locationId,@"condition": machineCondition.text};
         [[PinballMapManager sharedInstance] createNewMachineWithData:machine andParentMachine:pickedMachine forLocation:_location withCompletion:^(NSDictionary *status) {
             if (status[@"errors"]){
@@ -95,7 +95,7 @@
             }
         }];
     }else{
-        if (machineName.text.length == 0){
+        if ([machineName.text isEqualToString:@"Pick Machine"]){
             [UIAlertView simpleApplicationAlertWithMessage:@"You must enter a machine name." cancelButton:@"Ok"];
         }else if (!_location){
             [UIAlertView simpleApplicationAlertWithMessage:@"You must select a location for this machine." cancelButton:@"Ok"];
