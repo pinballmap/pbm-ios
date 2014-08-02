@@ -16,20 +16,28 @@
     if (self) {
         // Initialization code
         UIColor *pinkColor = [UIColor colorWithRed:1.0f green:0.0f blue:146.0f/255.0f alpha:1.0];
-
-        _machineCount.layer.cornerRadius = 15;
-        _machineCount.backgroundColor = pinkColor;
+        self.machineCount.layer.cornerRadius = 15;
+        self.machineCount.backgroundColor = pinkColor;
     }
     return self;
 }
 
 - (void)awakeFromNib
 {
-    // Initialization code
+    // Initialization code .
     UIColor *pinkColor = [UIColor colorWithRed:1.0f green:0.0f blue:146.0f/255.0f alpha:1.0];
     
-    _machineCount.layer.cornerRadius = 15;
-    _machineCount.backgroundColor = pinkColor;
+    self.machineCount.layer.cornerRadius = 15;
+    self.machineCount.backgroundColor = pinkColor;
+}
+
+- (void)setHighlighted:(BOOL)highlighted animated:(BOOL)animated{
+    [super setHighlighted:highlighted animated:animated];
+    if (highlighted){
+        UIColor *pinkColor = [UIColor colorWithRed:1.0f green:0.0f blue:146.0f/255.0f alpha:1.0];
+        self.machineCount.layer.cornerRadius = 15;
+        self.machineCount.backgroundColor = pinkColor;
+    }
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated
@@ -37,10 +45,19 @@
     [super setSelected:selected animated:animated];
 
     // Configure the view for the selected state
+    if (selected){
+        UIColor *pinkColor = [UIColor colorWithRed:1.0f green:0.0f blue:146.0f/255.0f alpha:1.0];
+        self.machineCount.layer.cornerRadius = 15;
+        self.machineCount.backgroundColor = pinkColor;
+    }
 }
 
 - (NSString *)accessibilityLabel{
-    return [NSString stringWithFormat:@"%@, %@, %@ machines.",[self.locationName accessibilityLabel],[self.locationDetail accessibilityLabel],[self.machineCount accessibilityLabel]];
+    NSString *machineText = @"Machines";
+    if ([self.machineCount.text isEqualToString:@"1"]){
+        machineText = @"Machine";
+    }
+    return [NSString stringWithFormat:@"%@, %@, %@ %@.",[self.locationName accessibilityLabel],[self.locationDetail accessibilityLabel],[self.machineCount accessibilityLabel],machineText];
 }
 
 @end
