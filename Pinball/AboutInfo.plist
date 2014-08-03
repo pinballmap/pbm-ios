@@ -48,24 +48,60 @@
 	</dict>
 	<dict>
 		<key>sectionTitle</key>
-		<string>Special Thanks</string>
+		<string>Testers</string>
 		<key>people</key>
 		<array>
 			<dict>
 				<key>name</key>
-				<string>Nicholas Kula</string>
+				<string>Brian Hanifin</string>
 				<key>url</key>
 				<string></string>
 			</dict>
 			<dict>
 				<key>name</key>
-				<string>Mark Weaber</string>
+				<string>Dan Burfield</string>
 				<key>url</key>
 				<string></string>
 			</dict>
 			<dict>
 				<key>name</key>
-				<string>Eric Hill</string>
+				<string>Dave </string>
+				<key>url</key>
+				<string></string>
+			</dict>
+			<dict>
+				<key>name</key>
+				<string>Don Walton</string>
+				<key>url</key>
+				<string></string>
+			</dict>
+			<dict>
+				<key>name</key>
+				<string>Edgar</string>
+				<key>url</key>
+				<string></string>
+			</dict>
+			<dict>
+				<key>name</key>
+				<string>Erin Kelly</string>
+				<key>url</key>
+				<string></string>
+			</dict>
+			<dict>
+				<key>name</key>
+				<string>Justin Kleinman</string>
+				<key>url</key>
+				<string></string>
+			</dict>
+			<dict>
+				<key>name</key>
+				<string>Marc Jeray</string>
+				<key>url</key>
+				<string></string>
+			</dict>
+			<dict>
+				<key>name</key>
+				<string>Nick Taseris</string>
 				<key>url</key>
 				<string></string>
 			</dict>
@@ -77,25 +113,13 @@
 			</dict>
 			<dict>
 				<key>name</key>
-				<string>J.D. Yeager</string>
+				<string>Pin Agogo</string>
 				<key>url</key>
 				<string></string>
 			</dict>
 			<dict>
 				<key>name</key>
-				<string>Karri Pearcey</string>
-				<key>url</key>
-				<string></string>
-			</dict>
-			<dict>
-				<key>name</key>
-				<string>Steve Lampros</string>
-				<key>url</key>
-				<string></string>
-			</dict>
-			<dict>
-				<key>name</key>
-				<string>Josh Brake</string>
+				<string>Tom Pavlich</string>
 				<key>url</key>
 				<string></string>
 			</dict>
