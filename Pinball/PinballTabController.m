@@ -29,6 +29,7 @@
     [super viewDidLoad];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateTabInfo) name:@"RegionUpdate" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updatingRegion) name:@"UpdatingRegion" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updatingProgress:) name:@"UpdatingProgress" object:nil];
     [self updateTabInfo];
 }
 - (void)viewDidAppear:(BOOL)animated{
@@ -49,8 +50,12 @@
     [updatingAlert dismissWithClickedButtonIndex:0 animated:YES];
 }
 - (void)updatingRegion{
-    updatingAlert = [UIAlertView applicationAlertWithMessage:@"Updating Region" delegate:nil cancelButton:@"Ok" otherButtons:nil, nil];
+    updatingAlert = [UIAlertView applicationAlertWithMessage:@"Updating Region" delegate:nil cancelButton:nil otherButtons:nil, nil];
     [updatingAlert show];
+}
+- (void)updatingProgress:(NSNotification *)note{
+    NSDictionary *progress = note.object;
+    updatingAlert.message = [NSString stringWithFormat:@"%@ of %@ completed",progress[@"completed"],progress[@"total"]];
 }
 - (void)didReceiveMemoryWarning{
     [super didReceiveMemoryWarning];

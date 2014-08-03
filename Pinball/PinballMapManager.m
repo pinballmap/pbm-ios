@@ -133,10 +133,13 @@ typedef NS_ENUM(NSInteger, PBMDataAPI) {
 }
 #pragma mark - Region Data Load
 - (void)refreshRegion{
-
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"UpdatingRegion" object:nil];
     NSArray *apiOperations = @[[self requestForData:PBMDataAPILocationTypes],[self requestForData:PBMDataAPIZones],[self requestForData:PBMDataAPILocations],[self requestForData:PBMDataAPIEvents]];
     
     NSArray *api = [AFURLConnectionOperation batchOfRequestOperations:apiOperations progressBlock:^(NSUInteger numberOfFinishedOperations, NSUInteger totalNumberOfOperations) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"UpdatingProgress" object:@{@"completed": [NSNumber numberWithLong:numberOfFinishedOperations],@"total": [NSNumber numberWithLong:totalNumberOfOperations]}];
+        });
         NSLog(@"Completed %lu of %lu",(unsigned long)numberOfFinishedOperations,(unsigned long)totalNumberOfOperations);
     } completionBlock:^(NSArray *operations) {
         NSFetchRequest *stackRequest = [NSFetchRequest fetchRequestWithEntityName:@"Machine"];
@@ -175,6 +178,9 @@ typedef NS_ENUM(NSInteger, PBMDataAPI) {
     
     
     NSArray *api = [AFURLConnectionOperation batchOfRequestOperations:apiOperations progressBlock:^(NSUInteger numberOfFinishedOperations, NSUInteger totalNumberOfOperations) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"UpdatingProgress" object:@{@"completed": [NSNumber numberWithLong:numberOfFinishedOperations],@"total": [NSNumber numberWithLong:totalNumberOfOperations]}];
+        });
         NSLog(@"Completed %lu of %lu",(unsigned long)numberOfFinishedOperations,(unsigned long)totalNumberOfOperations);
     } completionBlock:^(NSArray *operations) {
         __block NSMutableSet *createdMachines;
