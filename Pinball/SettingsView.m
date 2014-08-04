@@ -7,11 +7,16 @@
 //
 
 #import "SettingsView.h"
+#import "UIAlertView+Application.h"
 
-@interface SettingsView () {
+@import MessageUI;
+
+@interface SettingsView () <MFMailComposeViewControllerDelegate> {
     IBOutlet UILabel *regionLabel;
 }
 - (void)updateRegion;
+- (IBAction)sendFeedback:(id)sender;
+
 @end
 
 @implementation SettingsView
@@ -35,6 +40,26 @@
 }
 - (void)updateRegion{
     regionLabel.text = [[[PinballMapManager sharedInstance] currentRegion] fullName];
+}
+#pragma mark - Class Actions
+- (IBAction)sendFeedback:(id)sender{
+    if ([MFMailComposeViewController canSendMail]){
+        MFMailComposeViewController *mailComposer = [[MFMailComposeViewController alloc] init];
+        mailComposer.mailComposeDelegate = self;
+        [mailComposer setToRecipients:@[@"pinballmap@outlook.com"]];
+        [self presentViewController:mailComposer animated:YES completion:nil];
+    }else{
+        [UIAlertView simpleApplicationAlertWithMessage:@"Your device is not setup to send an email." cancelButton:@"Ok"];
+    }
+}
+#pragma mark - Mail Compose Delegate
+- (void)mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error{
+    if (result == MFMailComposeResultFailed){
+        [UIAlertView simpleApplicationAlertWithMessage:@"Message failed to send." cancelButton:@"Ok"];
+    }else if (result == MFMailComposeResultSent){
+        [UIAlertView simpleApplicationAlertWithMessage:@"Message sent!" cancelButton:@"Ok"];
+    }
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 #pragma mark - Table view data source
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{

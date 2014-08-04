@@ -1233,6 +1233,11 @@
                                 <segue destination="sob-yA-k2w" kind="push" id="4Ii-mP-wFP"/>
                             </connections>
                         </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="Feedback" id="zpe-Zt-vwe">
+                            <connections>
+                                <action selector="sendFeedback:" destination="Oba-JZ-DAa" id="zEM-6F-01I"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="regionLabel" destination="JiT-RD-5E6" id="606-Fp-tyQ"/>
@@ -1798,7 +1803,7 @@
     <resources>
         <image name="740-gear" width="28" height="28"/>
         <image name="851-calendar.png" width="28" height="28"/>
-        <image name="852-map.png" width="28" height="24"/>
+        <image name="852-map.png" width="24" height="24"/>
         <image name="pinball.png" width="28" height="28"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">

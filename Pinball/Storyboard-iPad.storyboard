@@ -1666,6 +1666,11 @@
                                 <segue destination="AMj-A1-qvi" kind="modal" id="BpL-eo-i4F"/>
                             </connections>
                         </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="Feedback" id="8iR-mH-OWC">
+                            <connections>
+                                <action selector="sendFeedback:" destination="6Dd-gN-KUB" id="X5v-vs-yhp"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
