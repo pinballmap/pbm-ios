@@ -68,33 +68,40 @@
     [pickedMachines enumerateObjectsUsingBlock:^(Machine *obj, NSUInteger idx, BOOL *stop) {
         pickedMachineNames = [pickedMachineNames stringByAppendingString:[NSString stringWithFormat:@"%@-%@,",obj.name,obj.manufacturer]];
     }];
-
-    NSDictionary *suggestingInfo = @{@"region_id": [[[PinballMapManager sharedInstance] currentRegion] regionId],
-                                     @"location_name": locationName.text,
-                                     @"location_street": locationStreet.text,
-                                     @"location_city": locationCity.text,
-                                     @"location_state": locationState.text,
-                                     @"location_zip": locationZip.text,
-                                     @"location_phone": locationPhone.text,
-                                     @"location_website": locationWebsite.text,
-                                     @"location_operator": locationOperator.text,
-                                     @"location_machines": pickedMachineNames,
-                                     @"submitter_name" : userName.text,
-                                     @"submitter_email": userEmail.text};
-    [[PinballMapManager sharedInstance] suggestLocation:suggestingInfo andCompletion:^(NSDictionary *status) {
-        if (status[@"errors"]){
-            NSString *errors;
-            if ([status[@"errors"] isKindOfClass:[NSArray class]]){
-                errors = [status[@"errors"] componentsJoinedByString:@","];
+    
+    
+    if (locationName.text.length > 0 && pickedMachines.count > 0){
+        NSDictionary *suggestingInfo = @{@"region_id": [[[PinballMapManager sharedInstance] currentRegion] regionId],
+                                         @"location_name": locationName.text,
+                                         @"location_street": locationStreet.text,
+                                         @"location_city": locationCity.text,
+                                         @"location_state": locationState.text,
+                                         @"location_zip": locationZip.text,
+                                         @"location_phone": locationPhone.text,
+                                         @"location_website": locationWebsite.text,
+                                         @"location_operator": locationOperator.text,
+                                         @"location_machines": pickedMachineNames,
+                                         @"submitter_name" : userName.text,
+                                         @"submitter_email": userEmail.text};
+        [[PinballMapManager sharedInstance] suggestLocation:suggestingInfo andCompletion:^(NSDictionary *status) {
+            if (status[@"errors"]){
+                NSString *errors;
+                if ([status[@"errors"] isKindOfClass:[NSArray class]]){
+                    errors = [status[@"errors"] componentsJoinedByString:@","];
+                }else{
+                    errors = status[@"errors"];
+                }
+                [UIAlertView simpleApplicationAlertWithMessage:errors cancelButton:@"Ok"];
             }else{
-                errors = status[@"errors"];
+                [UIAlertView simpleApplicationAlertWithMessage:status[@"msg"] cancelButton:@"Ok"];
+                [self dismissViewControllerAnimated:YES completion:nil];
             }
-            [UIAlertView simpleApplicationAlertWithMessage:errors cancelButton:@"Ok"];
-        }else{
-            [UIAlertView simpleApplicationAlertWithMessage:status[@"msg"] cancelButton:@"Ok"];
-            [self dismissViewControllerAnimated:YES completion:nil];
-        }
-    }];
+        }];
+    }else{
+        [UIAlertView simpleApplicationAlertWithMessage:@"You must enter a name and pick at least one machine." cancelButton:@"Ok"];
+    }
+    
+
 
 }
 - (IBAction)cancelLocation:(id)sender{
