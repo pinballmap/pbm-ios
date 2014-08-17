@@ -10,8 +10,9 @@
 @import MessageUI;
 #import "UIAlertView+Application.h"
 #import "GAAppHelper.h"
+#import <ReuseWebView.h>
 
-@interface RegionsView () <NSFetchedResultsControllerDelegate,UISearchDisplayDelegate,MFMailComposeViewControllerDelegate> {
+@interface RegionsView () <NSFetchedResultsControllerDelegate,UISearchDisplayDelegate,MFMailComposeViewControllerDelegate,UIAlertViewDelegate> {
     NSFetchedResultsController *fetchedResults;
     NSMutableArray *searchResults;
 }
@@ -56,13 +57,10 @@
 }
 #pragma mark - Class actions
 - (IBAction)requestRegion:(id)sender{
-    if ([MFMailComposeViewController canSendMail]){
-        MFMailComposeViewController *requestMessage = [[MFMailComposeViewController alloc] init];
-        requestMessage.mailComposeDelegate = self;
-        [requestMessage setSubject:@"Adding my region to PinballMap.com"];
-        [requestMessage setToRecipients:@[@"gratzer@gmail.com"]];
-        [self presentViewController:requestMessage animated:YES completion:nil];
-    }
+
+    UIAlertView *regionAlert = [[UIAlertView alloc] initWithTitle:@"Pinball Map" message:@"When requesting that a map for your area be added, please describe WHY one should be added. Does your region have an active pinball scene? Leagues? How many locations have pinball machines? Are you keeping track of them already? Would you be willing to act as the regional administrator, to help curate your map's data? The more details you give us, the better your request sounds!" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"More Information",@"Request Region",nil];
+    [regionAlert show];
+    
 }
 - (IBAction)cancelRegion:(id)sender{
     [self dismissViewControllerAnimated:YES completion:nil];
@@ -86,6 +84,26 @@
         [UIAlertView simpleApplicationAlertWithMessage:@"Message sent. Thank You!" cancelButton:@"Ok"];
     }
     [self dismissViewControllerAnimated:YES completion:nil];
+}
+#pragma mark - UIAlertView
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
+    if (buttonIndex != alertView.cancelButtonIndex){
+        if (buttonIndex == 1){
+            ReuseWebView *webView = [[ReuseWebView alloc] initWithURL:[NSURL URLWithString:@"http://blog.pinballmap.com/2014/07/21/criteria-for-adding-a-new-pinball-map"]];
+            webView.webTitle = @"Pinball Map";
+            UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:webView];
+            navController.modalPresentationStyle = UIModalPresentationFormSheet;
+            [self.navigationController presentViewController:navController animated:YES completion:nil];
+        }else if (buttonIndex == 2){
+            if ([MFMailComposeViewController canSendMail]){
+                MFMailComposeViewController *requestMessage = [[MFMailComposeViewController alloc] init];
+                requestMessage.mailComposeDelegate = self;
+                [requestMessage setSubject:@"Adding my region to PinballMap.com"];
+                [requestMessage setToRecipients:@[@"pinballmap@outlook.com"]];
+                [self presentViewController:requestMessage animated:YES completion:nil];
+            }
+        }
+    }
 }
 #pragma mark - Table view data source
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
