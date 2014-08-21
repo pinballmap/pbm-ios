@@ -9,6 +9,12 @@
 		<array>
 			<dict>
 				<key>name</key>
+				<string>Pinball Map Site</string>
+				<key>url</key>
+				<string>http://pinballmap.com</string>
+			</dict>
+			<dict>
+				<key>name</key>
 				<string>Scott Wainstock</string>
 				<key>url</key>
 				<string>http://scottwainstock.com</string>
