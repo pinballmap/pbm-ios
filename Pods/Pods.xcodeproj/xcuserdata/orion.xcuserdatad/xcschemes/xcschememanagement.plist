@@ -8,37 +8,31 @@
 		<dict>
 			<key>isShown</key>
 			<false/>
-			<key>orderHint</key>
-			<integer>1</integer>
 		</dict>
 		<key>Pods-FMSKit.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
-			<key>orderHint</key>
-			<integer>2</integer>
 		</dict>
 		<key>Pods.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
-			<key>orderHint</key>
-			<integer>0</integer>
 		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>0053B5D6D5E742E89D8627F6</key>
+		<key>301777A0D81C4658924FDA6C</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>55BD5D352E75439EA29CD471</key>
+		<key>4FDE64E242F8400BBB57654A</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>B8DDC5F7FA2F4A8BAEC83577</key>
+		<key>D0B2DA2D1B1744C5AF2BD497</key>
 		<dict>
 			<key>primary</key>
 			<true/>
