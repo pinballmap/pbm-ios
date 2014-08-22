@@ -49,10 +49,10 @@
 		DB636D131903EF8E00576521 /* AboutInfo.plist in Resources */ = {isa = PBXBuildFile; fileRef = DB636D121903EF8E00576521 /* AboutInfo.plist */; };
 		DB66F4181902E414007272D1 /* NewMachineLocationView.m in Sources */ = {isa = PBXBuildFile; fileRef = DB66F4171902E414007272D1 /* NewMachineLocationView.m */; };
 		DB6A6DC31945E1380097976C /* LocationProfileView-iPad.m in Sources */ = {isa = PBXBuildFile; fileRef = DB6A6DC21945E1380097976C /* LocationProfileView-iPad.m */; };
+		DB6E67FE19A79FD9001B233F /* libGoogleAnalyticsServices.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DB6E67FD19A79FD9001B233F /* libGoogleAnalyticsServices.a */; };
 		DB7B4C1119335B76002AF484 /* MachineLocationProfileView.m in Sources */ = {isa = PBXBuildFile; fileRef = DB7B4C1019335B76002AF484 /* MachineLocationProfileView.m */; };
 		DB7B4C14193361AA002AF484 /* MachineScore.m in Sources */ = {isa = PBXBuildFile; fileRef = DB7B4C13193361AA002AF484 /* MachineScore.m */; };
 		DB7B4C1719336717002AF484 /* NewMachineScoreView.m in Sources */ = {isa = PBXBuildFile; fileRef = DB7B4C1619336717002AF484 /* NewMachineScoreView.m */; };
-		DB80137E19A6159A004A9EA0 /* libGoogleAnalyticsServices.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DB80137D19A6159A004A9EA0 /* libGoogleAnalyticsServices.a */; };
 		DB9330BC190D49AB0054C779 /* SeattleLocation.gpx in Resources */ = {isa = PBXBuildFile; fileRef = DB9330BB190D49AB0054C779 /* SeattleLocation.gpx */; };
 		DB99C3AE1906DCD200AFDF0F /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DB99C3AD1906DCD200AFDF0F /* AddressBook.framework */; };
 		DB99C3B11906FA4100AFDF0F /* MachinePickingView.m in Sources */ = {isa = PBXBuildFile; fileRef = DB99C3B01906FA4100AFDF0F /* MachinePickingView.m */; };
@@ -185,23 +185,23 @@
 		DB66F4171902E414007272D1 /* NewMachineLocationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewMachineLocationView.m; sourceTree = "<group>"; };
 		DB6A6DC11945E1380097976C /* LocationProfileView-iPad.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "LocationProfileView-iPad.h"; sourceTree = "<group>"; };
 		DB6A6DC21945E1380097976C /* LocationProfileView-iPad.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "LocationProfileView-iPad.m"; sourceTree = "<group>"; };
+		DB6E67F319A79FD9001B233F /* GAI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAI.h; sourceTree = "<group>"; };
+		DB6E67F419A79FD9001B233F /* GAIDictionaryBuilder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAIDictionaryBuilder.h; sourceTree = "<group>"; };
+		DB6E67F519A79FD9001B233F /* GAIEcommerceFields.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAIEcommerceFields.h; sourceTree = "<group>"; };
+		DB6E67F619A79FD9001B233F /* GAIEcommerceProduct.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAIEcommerceProduct.h; sourceTree = "<group>"; };
+		DB6E67F719A79FD9001B233F /* GAIEcommerceProductAction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAIEcommerceProductAction.h; sourceTree = "<group>"; };
+		DB6E67F819A79FD9001B233F /* GAIEcommercePromotion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAIEcommercePromotion.h; sourceTree = "<group>"; };
+		DB6E67F919A79FD9001B233F /* GAIFields.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAIFields.h; sourceTree = "<group>"; };
+		DB6E67FA19A79FD9001B233F /* GAILogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAILogger.h; sourceTree = "<group>"; };
+		DB6E67FB19A79FD9001B233F /* GAITrackedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAITrackedViewController.h; sourceTree = "<group>"; };
+		DB6E67FC19A79FD9001B233F /* GAITracker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAITracker.h; sourceTree = "<group>"; };
+		DB6E67FD19A79FD9001B233F /* libGoogleAnalyticsServices.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libGoogleAnalyticsServices.a; sourceTree = "<group>"; };
 		DB7B4C0F19335B76002AF484 /* MachineLocationProfileView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MachineLocationProfileView.h; sourceTree = "<group>"; };
 		DB7B4C1019335B76002AF484 /* MachineLocationProfileView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MachineLocationProfileView.m; sourceTree = "<group>"; };
 		DB7B4C12193361AA002AF484 /* MachineScore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MachineScore.h; sourceTree = "<group>"; };
 		DB7B4C13193361AA002AF484 /* MachineScore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MachineScore.m; sourceTree = "<group>"; };
 		DB7B4C1519336717002AF484 /* NewMachineScoreView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewMachineScoreView.h; sourceTree = "<group>"; };
 		DB7B4C1619336717002AF484 /* NewMachineScoreView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewMachineScoreView.m; sourceTree = "<group>"; };
-		DB80137319A6159A004A9EA0 /* GAI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAI.h; sourceTree = "<group>"; };
-		DB80137419A6159A004A9EA0 /* GAIDictionaryBuilder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAIDictionaryBuilder.h; sourceTree = "<group>"; };
-		DB80137519A6159A004A9EA0 /* GAIEcommerceFields.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAIEcommerceFields.h; sourceTree = "<group>"; };
-		DB80137619A6159A004A9EA0 /* GAIEcommerceProduct.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAIEcommerceProduct.h; sourceTree = "<group>"; };
-		DB80137719A6159A004A9EA0 /* GAIEcommerceProductAction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAIEcommerceProductAction.h; sourceTree = "<group>"; };
-		DB80137819A6159A004A9EA0 /* GAIEcommercePromotion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAIEcommercePromotion.h; sourceTree = "<group>"; };
-		DB80137919A6159A004A9EA0 /* GAIFields.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAIFields.h; sourceTree = "<group>"; };
-		DB80137A19A6159A004A9EA0 /* GAILogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAILogger.h; sourceTree = "<group>"; };
-		DB80137B19A6159A004A9EA0 /* GAITrackedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAITrackedViewController.h; sourceTree = "<group>"; };
-		DB80137C19A6159A004A9EA0 /* GAITracker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAITracker.h; sourceTree = "<group>"; };
-		DB80137D19A6159A004A9EA0 /* libGoogleAnalyticsServices.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libGoogleAnalyticsServices.a; sourceTree = "<group>"; };
 		DB9330BB190D49AB0054C779 /* SeattleLocation.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = SeattleLocation.gpx; sourceTree = "<group>"; };
 		DB99C3AD1906DCD200AFDF0F /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
 		DB99C3AF1906FA4100AFDF0F /* MachinePickingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MachinePickingView.h; sourceTree = "<group>"; };
@@ -296,7 +296,7 @@
 				DB338F5E19606FB8000D0366 /* libsqlite3.dylib in Frameworks */,
 				DB338F4C19606ED2000D0366 /* libz.dylib in Frameworks */,
 				DB338F4A19606E8D000D0366 /* AdSupport.framework in Frameworks */,
-				DB80137E19A6159A004A9EA0 /* libGoogleAnalyticsServices.a in Frameworks */,
+				DB6E67FE19A79FD9001B233F /* libGoogleAnalyticsServices.a in Frameworks */,
 				DB070C51193243A70018D521 /* SystemConfiguration.framework in Frameworks */,
 				DB070C4F193243A00018D521 /* Security.framework in Frameworks */,
 				DB070C4D193243990018D521 /* QuartzCore.framework in Frameworks */,
@@ -424,22 +424,22 @@
 			name = About;
 			sourceTree = "<group>";
 		};
-		DB80137219A6159A004A9EA0 /* Google Analytics */ = {
+		DB6E67F219A79FD9001B233F /* Analytics */ = {
 			isa = PBXGroup;
 			children = (
-				DB80137319A6159A004A9EA0 /* GAI.h */,
-				DB80137419A6159A004A9EA0 /* GAIDictionaryBuilder.h */,
-				DB80137519A6159A004A9EA0 /* GAIEcommerceFields.h */,
-				DB80137619A6159A004A9EA0 /* GAIEcommerceProduct.h */,
-				DB80137719A6159A004A9EA0 /* GAIEcommerceProductAction.h */,
-				DB80137819A6159A004A9EA0 /* GAIEcommercePromotion.h */,
-				DB80137919A6159A004A9EA0 /* GAIFields.h */,
-				DB80137A19A6159A004A9EA0 /* GAILogger.h */,
-				DB80137B19A6159A004A9EA0 /* GAITrackedViewController.h */,
-				DB80137C19A6159A004A9EA0 /* GAITracker.h */,
-				DB80137D19A6159A004A9EA0 /* libGoogleAnalyticsServices.a */,
+				DB6E67F319A79FD9001B233F /* GAI.h */,
+				DB6E67F419A79FD9001B233F /* GAIDictionaryBuilder.h */,
+				DB6E67F519A79FD9001B233F /* GAIEcommerceFields.h */,
+				DB6E67F619A79FD9001B233F /* GAIEcommerceProduct.h */,
+				DB6E67F719A79FD9001B233F /* GAIEcommerceProductAction.h */,
+				DB6E67F819A79FD9001B233F /* GAIEcommercePromotion.h */,
+				DB6E67F919A79FD9001B233F /* GAIFields.h */,
+				DB6E67FA19A79FD9001B233F /* GAILogger.h */,
+				DB6E67FB19A79FD9001B233F /* GAITrackedViewController.h */,
+				DB6E67FC19A79FD9001B233F /* GAITracker.h */,
+				DB6E67FD19A79FD9001B233F /* libGoogleAnalyticsServices.a */,
 			);
-			path = "Google Analytics";
+			path = Analytics;
 			sourceTree = "<group>";
 		};
 		DBB59CCB18FADC3B00F35BFD /* Views */ = {
@@ -500,7 +500,7 @@
 		DBF06BCD18F96FF500F92912 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				DB80137219A6159A004A9EA0 /* Google Analytics */,
+				DB6E67F219A79FD9001B233F /* Analytics */,
 				DB338F5D19606FB8000D0366 /* libsqlite3.dylib */,
 				DB338F4B19606ED2000D0366 /* libz.dylib */,
 				DB338F4919606E8D000D0366 /* AdSupport.framework */,
@@ -1007,6 +1007,7 @@
 					"$(PROJECT_DIR)",
 					"$(PROJECT_DIR)/Google",
 					Analytics,
+					"$(PROJECT_DIR)/Analytics",
 				);
 				PRODUCT_NAME = PinballMap;
 				PROVISIONING_PROFILE = "77080BF7-2EA5-43EB-954D-C0FB89442352";
@@ -1036,6 +1037,7 @@
 					"$(PROJECT_DIR)",
 					"$(PROJECT_DIR)/Google",
 					Analytics,
+					"$(PROJECT_DIR)/Analytics",
 				);
 				PRODUCT_NAME = PinballMap;
 				PROVISIONING_PROFILE = "F6DE7DF0-A94D-44F7-A9F7-91F136F4BDD1";
