@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>6122F6F7-BC7C-4E31-A5E7-6383FAB0A5E3</string>
+	<key>IDESourceControlProjectName</key>
+	<string>PinballMap</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>85FE7862-A361-423F-B379-6843D81FBDC0</key>
+		<string>https://github.com/fmscode/pbm-ios.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>PinballMap.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>85FE7862-A361-423F-B379-6843D81FBDC0</key>
+		<string>..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/fmscode/pbm-ios.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>110</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>85FE7862-A361-423F-B379-6843D81FBDC0</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>85FE7862-A361-423F-B379-6843D81FBDC0</string>
+			<key>IDESourceControlWCCName</key>
+			<string>pbm-ios</string>
+		</dict>
+	</array>
+</dict>
+</plist>

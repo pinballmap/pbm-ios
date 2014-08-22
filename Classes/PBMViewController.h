@@ -1,3 +1,0 @@
-@interface PBMViewController : UIViewController
-
-@end

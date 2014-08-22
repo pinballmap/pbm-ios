@@ -1,3 +1,0 @@
-@interface PBMSplitViewController : UISplitViewController
-
-@end
