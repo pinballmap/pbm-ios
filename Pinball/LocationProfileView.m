@@ -61,8 +61,8 @@ typedef enum : NSUInteger {
     dataSetSeg = [[UISegmentedControl alloc] init];
     dataSetSeg.translatesAutoresizingMaskIntoConstraints = NO;
     dataSetSeg.frame = CGRectMake(5, 7, 310, 29);
-    [dataSetSeg insertSegmentWithTitle:@"Info" atIndex:0 animated:YES];
-    [dataSetSeg insertSegmentWithTitle:@"Machines" atIndex:1 animated:YES];
+    [dataSetSeg insertSegmentWithTitle:@"Machines" atIndex:0 animated:YES];
+    [dataSetSeg insertSegmentWithTitle:@"Info" atIndex:1 animated:YES];
     [dataSetSeg addTarget:self action:@selector(changeData:) forControlEvents:UIControlEventValueChanged];
     [dataSetSeg setSelectedSegmentIndex:0];
 
@@ -93,7 +93,7 @@ typedef enum : NSUInteger {
 - (void)setupRightBarButton{
     if (_currentLocation){
         if (![UIDevice iPad]){
-            if (dataSetSeg.selectedSegmentIndex == 1){
+            if (dataSetSeg.selectedSegmentIndex == 0){
                 UIBarButtonItem *addMachine = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addNewMachine:)];
                 if ([UIDevice currentModel] == ModelTypeiPad){
                     self.parentViewController.navigationItem.rightBarButtonItem = addMachine;
@@ -153,7 +153,7 @@ typedef enum : NSUInteger {
     [self.navigationController presentViewController:vc.parentViewController animated:YES completion:nil];
 }
 - (IBAction)editLocation:(id)sender{
-    [dataSetSeg setSelectedSegmentIndex:0];
+    [dataSetSeg setSelectedSegmentIndex:1];
     BOOL editing = YES;
     if (self.tableView.editing){
         editing = NO;
@@ -273,14 +273,14 @@ typedef enum : NSUInteger {
         return 1;
     }else{
         if (dataSetSeg.selectedSegmentIndex == 0){
-            return 5;
-        }else if (dataSetSeg.selectedSegmentIndex == 1){
             NSInteger rows = 0;
             if ([[machinesFetch sections] count] > 0) {
                 id <NSFetchedResultsSectionInfo> sectionInfo = [[machinesFetch sections] objectAtIndex:0];
                 rows = [sectionInfo numberOfObjects];
             }
             return rows;
+        }else if (dataSetSeg.selectedSegmentIndex == 1){
+            return 5;
         }
     }
     return 0;
@@ -310,6 +310,20 @@ typedef enum : NSUInteger {
         return 122;
     }else{
         if (dataSetSeg.selectedSegmentIndex == 0){
+            MachineLocation *currentMachine = [machinesFetch objectAtIndexPath:[NSIndexPath indexPathForRow:indexPath.row inSection:0]];
+            NSString *cellDetail = currentMachine.conditionWithUpdateDate;//[NSString stringWithFormat:@"%@ updated on %@",currentMachine.condition,[currentMachine.conditionUpdate monthDayYearPretty:YES]];
+            
+            CGRect titleLabel = [currentMachine.machine.machineTitle boundingRectWithSize:CGSizeMake(238, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin context:nil];
+            CGRect detailLabel = [cellDetail boundingRectWithSize:CGSizeMake(238, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName: [UIFont systemFontOfSize:12]} context:nil];
+            // Add 6 pixel padding present in subtitle style.
+            CGRect stringSize = CGRectMake(0, 0, 290, titleLabel.size.height+detailLabel.size.height+6);
+            
+            if (stringSize.size.height+10 < 44){
+                return 44;
+            }else{
+                return stringSize.size.height+10;
+            }
+        }else if (dataSetSeg.selectedSegmentIndex == 1){
             NSString *detailText;
             if (indexPath.row == 0){
                 detailText = _currentLocation.fullAddress;
@@ -329,21 +343,7 @@ typedef enum : NSUInteger {
                 return 67;
             }
             return textLabel.size.height;
-
-        }else if (dataSetSeg.selectedSegmentIndex == 1){
-            MachineLocation *currentMachine = [machinesFetch objectAtIndexPath:[NSIndexPath indexPathForRow:indexPath.row inSection:0]];
-            NSString *cellDetail = currentMachine.conditionWithUpdateDate;//[NSString stringWithFormat:@"%@ updated on %@",currentMachine.condition,[currentMachine.conditionUpdate monthDayYearPretty:YES]];
             
-            CGRect titleLabel = [currentMachine.machine.machineTitle boundingRectWithSize:CGSizeMake(238, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin context:nil];
-            CGRect detailLabel = [cellDetail boundingRectWithSize:CGSizeMake(238, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName: [UIFont systemFontOfSize:12]} context:nil];
-            // Add 6 pixel padding present in subtitle style.
-            CGRect stringSize = CGRectMake(0, 0, 290, titleLabel.size.height+detailLabel.size.height+6);
-            
-            if (stringSize.size.height+10 < 44){
-                return 44;
-            }else{
-                return stringSize.size.height+10;
-            }
         }
     }
     return 0;
@@ -386,6 +386,25 @@ typedef enum : NSUInteger {
         return cell;
     }else{
         if (dataSetSeg.selectedSegmentIndex == 0){
+            
+            UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MachineCell" forIndexPath:indexPath];
+            // Machine cell.
+            MachineLocation *currentMachine = [machinesFetch objectAtIndexPath:[NSIndexPath indexPathForRow:indexPath.row inSection:0]];
+            cell.textLabel.attributedText = currentMachine.machine.machineTitle;
+            cell.detailTextLabel.numberOfLines = 0;
+            // If no condition is available, just don't set the detail text label.
+            if (![currentMachine.condition isEqualToString:@"N/A"]){
+                if (currentMachine.conditionUpdate){
+                    cell.detailTextLabel.text = currentMachine.conditionWithUpdateDate;//[NSString stringWithFormat:@"%@ updated on %@",currentMachine.condition,[currentMachine.conditionUpdate monthDayYearPretty:YES]];
+                }else{
+                    cell.detailTextLabel.text = currentMachine.condition;
+                }
+            }else{
+                cell.detailTextLabel.text = nil;
+            }
+            return cell;
+            
+        }else if (dataSetSeg.selectedSegmentIndex == 1){
             // Profile data with InfoCell
             InformationCell *cell = (InformationCell *)[tableView dequeueReusableCellWithIdentifier:@"InfoCell"];
             cell.dataLabel.numberOfLines = 0;
@@ -416,25 +435,6 @@ typedef enum : NSUInteger {
             [cell.dataLabel updateConstraints];
 
             return cell;
-        }else if (dataSetSeg.selectedSegmentIndex == 1){
-
-            UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MachineCell" forIndexPath:indexPath];
-                // Machine cell.
-            MachineLocation *currentMachine = [machinesFetch objectAtIndexPath:[NSIndexPath indexPathForRow:indexPath.row inSection:0]];
-            cell.textLabel.attributedText = currentMachine.machine.machineTitle;
-            cell.detailTextLabel.numberOfLines = 0;
-            // If no condition is available, just don't set the detail text label.
-            if (![currentMachine.condition isEqualToString:@"N/A"]){
-                if (currentMachine.conditionUpdate){
-                    cell.detailTextLabel.text = currentMachine.conditionWithUpdateDate;//[NSString stringWithFormat:@"%@ updated on %@",currentMachine.condition,[currentMachine.conditionUpdate monthDayYearPretty:YES]];
-                }else{
-                    cell.detailTextLabel.text = currentMachine.condition;
-                }
-            }else{
-                cell.detailTextLabel.text = nil;
-            }
-            return cell;
-
         }
     }
     return nil;
@@ -445,7 +445,18 @@ typedef enum : NSUInteger {
     if (indexPath.section == 0 && [UIDevice currentModel] == ModelTypeiPhone){
         [self showMap];
     }else{
+        
+        
         if (dataSetSeg.selectedSegmentIndex == 0){
+            MachineLocationProfileView *vc = [[[self.storyboard instantiateViewControllerWithIdentifier:@"MachineLocationProfileView"] viewControllers] lastObject];
+            vc.currentMachine = [machinesFetch objectAtIndexPath:[NSIndexPath indexPathForRow:indexPath.row inSection:0]];
+            [tableView setEditing:NO];
+            if ([UIDevice currentModel] == ModelTypeiPad){
+                [self.parentViewController.navigationController presentViewController:vc.parentViewController animated:YES completion:nil];
+            }else{
+                [self.navigationController presentViewController:vc.parentViewController animated:YES completion:nil];
+            }
+        }else if (dataSetSeg.selectedSegmentIndex == 1){
             if (indexPath.row == 0){
                 // Address
                 if ([UIDevice currentModel] == ModelTypeiPhone){
@@ -511,21 +522,14 @@ typedef enum : NSUInteger {
                     [self.navigationController presentViewController:editor.parentViewController animated:YES completion:nil];
                 }
             }
-        }else if (dataSetSeg.selectedSegmentIndex == 1){
-            MachineLocationProfileView *vc = [[[self.storyboard instantiateViewControllerWithIdentifier:@"MachineLocationProfileView"] viewControllers] lastObject];
-            vc.currentMachine = [machinesFetch objectAtIndexPath:[NSIndexPath indexPathForRow:indexPath.row inSection:0]];
-            [tableView setEditing:NO];
-            if ([UIDevice currentModel] == ModelTypeiPad){
-                [self.parentViewController.navigationController presentViewController:vc.parentViewController animated:YES completion:nil];
-            }else{
-                [self.navigationController presentViewController:vc.parentViewController animated:YES completion:nil];
-            }
         }
+        
+        
     }
 }
 - (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath{
     if ((indexPath.section == 1 && [UIDevice currentModel] == ModelTypeiPhone) || (indexPath.section == 0 && [UIDevice currentModel] == ModelTypeiPad)){
-        if (dataSetSeg.selectedSegmentIndex == 0){
+        if (dataSetSeg.selectedSegmentIndex == 1){
             return UITableViewCellEditingStyleInsert;
         }
     }
@@ -548,7 +552,7 @@ typedef enum : NSUInteger {
 }
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath{    
     if ((indexPath.section == 1 && [UIDevice currentModel] == ModelTypeiPhone) || (indexPath.section == 0 && [UIDevice currentModel] == ModelTypeiPad)){
-        if (dataSetSeg.selectedSegmentIndex == 1){
+        if (dataSetSeg.selectedSegmentIndex == 0){
             return YES;
         }else{
             if (indexPath.row != 0 && indexPath.row != 2){
@@ -589,7 +593,7 @@ typedef enum : NSUInteger {
             break;
             
         case NSFetchedResultsChangeUpdate:
-            if (dataSetSeg.selectedSegmentIndex == 1){
+            if (dataSetSeg.selectedSegmentIndex == 0){
                 [self.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForRow:indexPath.row inSection:section.intValue]] withRowAnimation:UITableViewRowAnimationFade];
             }
             break;
