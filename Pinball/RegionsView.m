@@ -11,6 +11,7 @@
 #import "UIAlertView+Application.h"
 #import "GAAppHelper.h"
 #import <ReuseWebView.h>
+#import "Region+UpdateDistance.h"
 
 @interface RegionsView () <NSFetchedResultsControllerDelegate,UISearchDisplayDelegate,MFMailComposeViewControllerDelegate,UIAlertViewDelegate> {
     NSFetchedResultsController *fetchedResults;
@@ -36,8 +37,26 @@
 
     searchResults = [NSMutableArray new];
     [[PinballMapManager sharedInstance] refreshAllRegions];
+    
     NSFetchRequest *regionsFetch = [NSFetchRequest fetchRequestWithEntityName:@"Region"];
-    regionsFetch.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"fullName" ascending:YES]];
+
+    if ([[PinballMapManager sharedInstance] userLocation]){
+        
+        NSFetchRequest *locationRequest = [NSFetchRequest fetchRequestWithEntityName:@"Region"];
+        locationRequest.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"fullName" ascending:YES]];
+        
+        NSArray *locations = [[[CoreDataManager sharedInstance] managedObjectContext] executeFetchRequest:locationRequest error:nil];
+        for (Region *location in locations) {
+            [location updateDistance];
+        }
+        locations = nil;
+        regionsFetch.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"locationDistance" ascending:YES]];
+    }else{
+        regionsFetch.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"fullName" ascending:YES]];
+    }
+
+    
+    
     
     fetchedResults = [[NSFetchedResultsController alloc] initWithFetchRequest:regionsFetch
                                                          managedObjectContext:[[CoreDataManager sharedInstance] managedObjectContext]
@@ -46,6 +65,7 @@
     fetchedResults.delegate = self;
     [fetchedResults performFetch:nil];
     [self.tableView reloadData];
+    
 }
 - (void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
@@ -144,7 +164,6 @@
     Region *selectedRegion = [[PinballMapManager sharedInstance] currentRegion];
     if ([region.name isEqualToString:selectedRegion.name]){
         cell.accessoryType = UITableViewCellAccessoryCheckmark;
-        
     }
     
     cell.textLabel.text = region.fullName;

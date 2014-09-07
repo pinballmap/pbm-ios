@@ -110,23 +110,17 @@
     
     NSURL *storeURL = [[self applicationDocumentsDirectory] URLByAppendingPathComponent:[NSString stringWithFormat:@"%@.sqlite",dataModel]];
     
+    NSDictionary *options = [NSDictionary dictionaryWithObjectsAndKeys:
+                             [NSNumber numberWithBool:YES], NSMigratePersistentStoresAutomaticallyOption,
+                             [NSNumber numberWithBool:YES], NSInferMappingModelAutomaticallyOption, nil];
+
+    
     NSError *error = nil;
     persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:[self managedObjectModel]];
-    [persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:storeURL options:nil error:&error];
+    [persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:storeURL options:options error:&error];
     
     
-    if (error.code == 134100){
-        // Scheme versions are different.
-        // If in Debug mode just clear the store and re-create it.
-#ifdef DEBUG
-        [[NSFileManager defaultManager] removeItemAtURL:storeURL error:nil];
-        [self persistentStoreCoordinator];
-#else
-        // In production try a lightweight migration.
-        [persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:storeURL options:@{NSMigratePersistentStoresAutomaticallyOption:@YES, NSInferMappingModelAutomaticallyOption:@YES} error:&error];
-#endif
-    }
-    
+
     return persistentStoreCoordinator;
 }
 
