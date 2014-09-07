@@ -2,3 +2,4 @@ platform :ios, '7.0'
 
 pod "AFNetworking", "~> 2.0"
 pod "FMSKit", git: 'https://github.com/fmscode/FMSKit.git'
+pod "CupertinoYankee", "~> 1.0.0"

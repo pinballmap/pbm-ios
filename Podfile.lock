@@ -20,10 +20,12 @@ PODS:
   - AFNetworking/UIKit (2.3.1):
     - AFNetworking/NSURLConnection
     - AFNetworking/NSURLSession
+  - CupertinoYankee (1.0.0)
   - FMSKit (0.5.1)
 
 DEPENDENCIES:
   - AFNetworking (~> 2.0)
+  - CupertinoYankee (~> 1.0.0)
   - FMSKit (from `https://github.com/fmscode/FMSKit.git`)
 
 EXTERNAL SOURCES:
@@ -32,6 +34,7 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   AFNetworking: 6d7b76aa5d04c8c37daad3eef4b7e3f2a7620da3
+  CupertinoYankee: 21a0000abd35b13c6b67e7697eabb10ef59b857e
   FMSKit: c9a81baa49b647061f0bbe6fcd2953e23dd42316
 
 COCOAPODS: 0.33.1

@@ -48,6 +48,12 @@
 #define COCOAPODS_VERSION_MINOR_AFNetworking_UIKit 3
 #define COCOAPODS_VERSION_PATCH_AFNetworking_UIKit 1
 
+// CupertinoYankee
+#define COCOAPODS_POD_AVAILABLE_CupertinoYankee
+#define COCOAPODS_VERSION_MAJOR_CupertinoYankee 1
+#define COCOAPODS_VERSION_MINOR_CupertinoYankee 0
+#define COCOAPODS_VERSION_PATCH_CupertinoYankee 0
+
 // FMSKit
 #define COCOAPODS_POD_AVAILABLE_FMSKit
 #define COCOAPODS_VERSION_MAJOR_FMSKit 0
