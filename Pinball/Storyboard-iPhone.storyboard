@@ -639,6 +639,102 @@
             </objects>
             <point key="canvasLocation" x="3821" y="844"/>
         </scene>
+        <!--Contact View - Contact-->
+        <scene sceneID="71Y-VV-uxL">
+            <objects>
+                <tableViewController id="RyA-fv-5yC" customClass="ContactView" sceneMemberID="viewController">
+                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="Mwf-0G-kq5">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <sections>
+                            <tableViewSection id="QrN-KQ-C4d">
+                                <cells>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="bUz-E4-Mhh">
+                                        <rect key="frame" x="0.0" y="99" width="320" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="bUz-E4-Mhh" id="MWi-7l-mjV">
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Name" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="QBf-aW-lc7">
+                                                    <rect key="frame" x="13" y="7" width="280" height="30"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <textInputTraits key="textInputTraits"/>
+                                                </textField>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="DDP-jj-cc3">
+                                        <rect key="frame" x="0.0" y="143" width="320" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="DDP-jj-cc3" id="Y5b-jP-gfI">
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Email" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="nLR-s0-xPa">
+                                                    <rect key="frame" x="13" y="7" width="280" height="30"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <textInputTraits key="textInputTraits"/>
+                                                </textField>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="pVr-yd-nJC">
+                                        <rect key="frame" x="0.0" y="187" width="320" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="pVr-yd-nJC" id="tOG-dX-ls6">
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Message" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="290" translatesAutoresizingMaskIntoConstraints="NO" id="FbP-cr-uaY">
+                                                    <rect key="frame" x="13" y="1" width="290" height="42"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="FbP-cr-uaY" firstAttribute="leading" secondItem="tOG-dX-ls6" secondAttribute="leading" constant="13" id="5ie-g0-3YJ"/>
+                                                <constraint firstAttribute="bottom" secondItem="FbP-cr-uaY" secondAttribute="bottom" id="7Em-IT-nYi"/>
+                                                <constraint firstItem="FbP-cr-uaY" firstAttribute="top" secondItem="tOG-dX-ls6" secondAttribute="top" constant="1" id="BRc-2R-eGS"/>
+                                                <constraint firstAttribute="trailing" secondItem="FbP-cr-uaY" secondAttribute="trailing" constant="17" id="Oaj-QL-JY8"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
+                        </sections>
+                        <connections>
+                            <outlet property="dataSource" destination="RyA-fv-5yC" id="K1y-H5-FZb"/>
+                            <outlet property="delegate" destination="RyA-fv-5yC" id="C9X-xC-C1O"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Contact" id="CZ9-Xo-cxv">
+                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="n9A-cR-aoE">
+                            <connections>
+                                <action selector="cancelMessage:" destination="RyA-fv-5yC" id="tHc-pC-fu2"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="Send" style="done" id="Vb2-ny-tR9">
+                            <connections>
+                                <action selector="sendMessage:" destination="RyA-fv-5yC" id="DmX-OS-9zE"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="emailField" destination="nLR-s0-xPa" id="0Vh-0e-i4H"/>
+                        <outlet property="messageLabel" destination="FbP-cr-uaY" id="hVK-eb-Oxk"/>
+                        <outlet property="nameField" destination="QBf-aW-lc7" id="a4L-6q-PuK"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="t4z-13-lEi" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3821" y="1522"/>
+        </scene>
         <!--Location Types View - Location Type-->
         <scene sceneID="7fS-M8-N7X">
             <objects>
@@ -1083,7 +1179,13 @@
                             <outlet property="delegate" destination="bze-IX-j3X" id="27f-F8-Zt9"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="Vnk-zr-28Q"/>
+                    <navigationItem key="navigationItem" id="Vnk-zr-28Q">
+                        <barButtonItem key="rightBarButtonItem" title="Suggest" id="qEI-Xb-B8N">
+                            <connections>
+                                <action selector="suggestEvent:" destination="bze-IX-j3X" id="Vd6-A2-mfF"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Q8X-O4-8ys" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -1798,6 +1900,24 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="IPS-KK-TyC" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2648" y="1522"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="8MC-pv-7l8">
+            <objects>
+                <navigationController storyboardIdentifier="ContactView" automaticallyAdjustsScrollViewInsets="NO" id="Wde-lv-o09" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="QJT-W3-8aB">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="RyA-fv-5yC" kind="relationship" relationship="rootViewController" id="VEb-6f-Vm3"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="fcd-lk-e2U" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3428" y="1522"/>
         </scene>
     </scenes>
     <resources>

@@ -10,6 +10,14 @@
 @import CoreLocation;
 #import "PinballModels.h"
 
+typedef enum : NSUInteger {
+    ContactTypeRegionContact,
+    ContactTypeRegionSuggest,
+    ContactTypeEvent,
+    ContactTypeAppFeedback
+} ContactType;
+
+
 typedef void (^APIComplete)(NSDictionary *status);
 @interface PinballMapManager : NSObject
 
@@ -32,4 +40,6 @@ typedef void (^APIComplete)(NSDictionary *status);
 // Location Routes
 - (void)updateLocation:(Location *)location withData:(NSDictionary *)locationData andCompletion:(APIComplete)completionBlock;
 - (void)suggestLocation:(NSDictionary *)locationData andCompletion:(APIComplete)completionBlock;
+// General Routes
+- (void)sendMessage:(NSDictionary *)messageData withType:(ContactType)contactType andCompletion:(APIComplete)completionBlock;
 @end

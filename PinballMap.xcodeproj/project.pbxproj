@@ -53,6 +53,7 @@
 		DB7B4C1119335B76002AF484 /* MachineLocationProfileView.m in Sources */ = {isa = PBXBuildFile; fileRef = DB7B4C1019335B76002AF484 /* MachineLocationProfileView.m */; };
 		DB7B4C14193361AA002AF484 /* MachineScore.m in Sources */ = {isa = PBXBuildFile; fileRef = DB7B4C13193361AA002AF484 /* MachineScore.m */; };
 		DB7B4C1719336717002AF484 /* NewMachineScoreView.m in Sources */ = {isa = PBXBuildFile; fileRef = DB7B4C1619336717002AF484 /* NewMachineScoreView.m */; };
+		DB8D1C1719B3A7970065E2C6 /* ContactView.m in Sources */ = {isa = PBXBuildFile; fileRef = DB8D1C1619B3A7970065E2C6 /* ContactView.m */; };
 		DB9330BC190D49AB0054C779 /* SeattleLocation.gpx in Resources */ = {isa = PBXBuildFile; fileRef = DB9330BB190D49AB0054C779 /* SeattleLocation.gpx */; };
 		DB99C3AE1906DCD200AFDF0F /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DB99C3AD1906DCD200AFDF0F /* AddressBook.framework */; };
 		DB99C3B11906FA4100AFDF0F /* MachinePickingView.m in Sources */ = {isa = PBXBuildFile; fileRef = DB99C3B01906FA4100AFDF0F /* MachinePickingView.m */; };
@@ -202,6 +203,8 @@
 		DB7B4C13193361AA002AF484 /* MachineScore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MachineScore.m; sourceTree = "<group>"; };
 		DB7B4C1519336717002AF484 /* NewMachineScoreView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewMachineScoreView.h; sourceTree = "<group>"; };
 		DB7B4C1619336717002AF484 /* NewMachineScoreView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewMachineScoreView.m; sourceTree = "<group>"; };
+		DB8D1C1519B3A7970065E2C6 /* ContactView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactView.h; sourceTree = "<group>"; };
+		DB8D1C1619B3A7970065E2C6 /* ContactView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactView.m; sourceTree = "<group>"; };
 		DB9330BB190D49AB0054C779 /* SeattleLocation.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = SeattleLocation.gpx; sourceTree = "<group>"; };
 		DB99C3AD1906DCD200AFDF0F /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
 		DB99C3AF1906FA4100AFDF0F /* MachinePickingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MachinePickingView.h; sourceTree = "<group>"; };
@@ -469,10 +472,12 @@
 		DBB71B9918FC482B007907DE /* Settings */ = {
 			isa = PBXGroup;
 			children = (
-				DBB71B9D18FC4846007907DE /* RegionsView.h */,
-				DBB71B9E18FC4846007907DE /* RegionsView.m */,
 				DBB71B9A18FC4838007907DE /* SettingsView.h */,
 				DBB71B9B18FC4838007907DE /* SettingsView.m */,
+				DB8D1C1519B3A7970065E2C6 /* ContactView.h */,
+				DB8D1C1619B3A7970065E2C6 /* ContactView.m */,
+				DBB71B9D18FC4846007907DE /* RegionsView.h */,
+				DBB71B9E18FC4846007907DE /* RegionsView.m */,
 			);
 			name = Settings;
 			sourceTree = "<group>";
@@ -867,6 +872,7 @@
 				DB0DAE7A1987B4A800A3FF0F /* GAAppHelper.m in Sources */,
 				DB52D30418FB0DCF00BB56D8 /* UIAlertView+Application.m in Sources */,
 				DB7B4C1719336717002AF484 /* NewMachineScoreView.m in Sources */,
+				DB8D1C1719B3A7970065E2C6 /* ContactView.m in Sources */,
 				DBBB4BF319338FB5004E433F /* UIDevice+ModelCheck.m in Sources */,
 				DB52D2E818FB06EC00BB56D8 /* Event+Create.m in Sources */,
 				DBF06C3C18F975C500F92912 /* Region+Create.m in Sources */,

@@ -526,5 +526,14 @@ typedef NS_ENUM(NSInteger, PBMDataAPI) {
     CLLocation *foundLocation = [locations lastObject];
     _userLocation = foundLocation;
 }
-
+#pragma mark - Contact
+- (void)sendMessage:(NSDictionary *)messageData withType:(ContactType)contactType andCompletion:(APIComplete)completionBlock{
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    manager.requestSerializer = [AFJSONRequestSerializer serializer];
+    [manager POST:@"%@api/v1/regions/contact.json" parameters:messageData success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        completionBlock(responseObject);
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        completionBlock(@{@"errors": error.localizedDescription});
+    }];
+}
 @end

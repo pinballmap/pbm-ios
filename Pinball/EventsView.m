@@ -11,12 +11,13 @@
 #import "EventProfileView.h"
 #import "UIViewController+Helpers.h"
 #import "GAAppHelper.h"
+#import "ContactView.h"
 
 @interface EventsView () <NSFetchedResultsControllerDelegate> {
     NSFetchedResultsController *fetchedResults;
     NSManagedObjectContext *managedContext;
 }
-
+- (IBAction)suggestEvent:(id)sender;
 @end
 
 @implementation EventsView
@@ -48,6 +49,12 @@
 }
 - (void)refreshRegion{
     [[PinballMapManager sharedInstance] refreshRegion];
+}
+#pragma mark - Class Actions
+- (IBAction)suggestEvent:(id)sender{
+    ContactView *eventContact = (ContactView *)[[self.storyboard instantiateViewControllerWithIdentifier:@"ContactView"] navigationRootViewController];
+    eventContact.contactType = ContactTypeEvent;
+    [self.navigationController presentViewController:eventContact.parentViewController animated:YES completion:nil];
 }
 #pragma mark - Region Update
 - (void)updateRegion{
