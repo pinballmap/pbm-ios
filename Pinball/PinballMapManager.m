@@ -165,6 +165,15 @@ typedef NS_ENUM(NSInteger, PBMDataAPI) {
     }];
     [[NSOperationQueue mainQueue] addOperations:api waitUntilFinished:NO];
 }
+- (void)refreshBasicRegionData:(APIComplete)completionBlock{
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    manager.requestSerializer = [AFJSONRequestSerializer serializer];
+    [manager GET:[NSString stringWithFormat:@"%@api/v1/regions/%@.json",apiRootURL,self.currentRegion.regionId] parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        completionBlock(responseObject);
+     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+         completionBlock(@{@"errors": error.localizedDescription});
+     }];
+}
 - (void)loadRegionData:(Region *)region{
     [[NSNotificationCenter defaultCenter] postNotificationName:@"UpdatingRegion" object:nil];
 
@@ -530,7 +539,7 @@ typedef NS_ENUM(NSInteger, PBMDataAPI) {
 - (void)sendMessage:(NSDictionary *)messageData withType:(ContactType)contactType andCompletion:(APIComplete)completionBlock{
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     manager.requestSerializer = [AFJSONRequestSerializer serializer];
-    [manager POST:@"%@api/v1/regions/contact.json" parameters:messageData success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [manager POST:[NSString stringWithFormat:@"%@api/v1/regions/contact.json",apiRootURL] parameters:messageData success:^(AFHTTPRequestOperation *operation, id responseObject) {
         completionBlock(responseObject);
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         completionBlock(@{@"errors": error.localizedDescription});

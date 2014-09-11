@@ -42,4 +42,6 @@ typedef void (^APIComplete)(NSDictionary *status);
 - (void)suggestLocation:(NSDictionary *)locationData andCompletion:(APIComplete)completionBlock;
 // General Routes
 - (void)sendMessage:(NSDictionary *)messageData withType:(ContactType)contactType andCompletion:(APIComplete)completionBlock;
+- (void)refreshBasicRegionData:(APIComplete)completionBlock;
+
 @end
