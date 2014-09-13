@@ -142,7 +142,7 @@
 		DB070C50193243A70018D521 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		DB0DAE781987B4A800A3FF0F /* GAAppHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAAppHelper.h; sourceTree = "<group>"; };
 		DB0DAE791987B4A800A3FF0F /* GAAppHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GAAppHelper.m; sourceTree = "<group>"; };
-		DB1FB5D019BCB8C900E52B01 /* Pinball v2.0.1.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Pinball v2.0.1.xcdatamodel"; sourceTree = "<group>"; };
+		DB1FB5D019BCB8C900E52B01 /* Pinball v3.1.0.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Pinball v3.1.0.xcdatamodel"; sourceTree = "<group>"; };
 		DB1FB5D119BCB93100E52B01 /* Region.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Region.h; sourceTree = "<group>"; };
 		DB1FB5D219BCB93100E52B01 /* Region.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Region.m; sourceTree = "<group>"; };
 		DB1FB5D419BCB95A00E52B01 /* Region+UpdateDistance.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Region+UpdateDistance.h"; sourceTree = "<group>"; };
@@ -1135,10 +1135,10 @@
 		DBF06C0418F9707400F92912 /* Pinball.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
-				DB1FB5D019BCB8C900E52B01 /* Pinball v2.0.1.xcdatamodel */,
+				DB1FB5D019BCB8C900E52B01 /* Pinball v3.1.0.xcdatamodel */,
 				DBF06C0518F9707400F92912 /* Pinball.xcdatamodel */,
 			);
-			currentVersion = DB1FB5D019BCB8C900E52B01 /* Pinball v2.0.1.xcdatamodel */;
+			currentVersion = DB1FB5D019BCB8C900E52B01 /* Pinball v3.1.0.xcdatamodel */;
 			path = Pinball.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
