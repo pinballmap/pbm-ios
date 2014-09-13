@@ -30,6 +30,8 @@ typedef void (^APIComplete)(NSDictionary *status);
 - (void)refreshAllRegions;
 - (void)loadRegionData:(Region *)region;
 - (void)refreshRegion;
+- (BOOL)shouldShowMessageOfDay;
+- (void)showedMessageOfDay;
 // Machine Routes
 - (void)createNewMachine:(NSDictionary *)machineData withCompletion:(APIComplete)completionBlock;
 - (void)createNewMachineWithData:(NSDictionary *)machineData andParentMachine:(Machine *)machine forLocation:(Location *)location withCompletion:(APIComplete)completionBlock;
@@ -43,5 +45,4 @@ typedef void (^APIComplete)(NSDictionary *status);
 // General Routes
 - (void)sendMessage:(NSDictionary *)messageData withType:(ContactType)contactType andCompletion:(APIComplete)completionBlock;
 - (void)refreshBasicRegionData:(APIComplete)completionBlock;
-
 @end

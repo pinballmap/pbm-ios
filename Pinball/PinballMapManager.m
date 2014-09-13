@@ -9,8 +9,10 @@
 #import "PinballMapManager.h"
 #import "NSFileManager+DocumentsDirectory.h"
 #import <AFNetworking.h>
+#import "NSDate+CupertinoYankee.h"
 
 static const NSString *apiRootURL = @"http://pinballmap.com/";
+NSString * const motdKey = @"motd";
 
 typedef NS_ENUM(NSInteger, PBMDataAPI) {
     PBMDataAPIRegions = 0,
@@ -74,6 +76,18 @@ typedef NS_ENUM(NSInteger, PBMDataAPI) {
     locationManager.desiredAccuracy = kCLLocationAccuracyBest;
     locationManager.distanceFilter = 5;
     [locationManager startUpdatingLocation];
+}
+- (BOOL)shouldShowMessageOfDay{
+    NSDate *lastShownDate = [[NSUserDefaults standardUserDefaults] objectForKey:motdKey];
+    if (!lastShownDate){
+        return YES;
+    }
+    BOOL showStatus = ![[[NSDate date] endOfDay] isEqualToDate:lastShownDate];
+    return showStatus;
+}
+- (void)showedMessageOfDay{
+    [[NSUserDefaults standardUserDefaults] setObject:[[NSDate date] endOfDay] forKey:motdKey];
+    [[NSUserDefaults standardUserDefaults] synchronize];
 }
 #pragma mark - Regions listing
 - (void)allRegions:(void (^)(NSArray *regions))regionBlock{
