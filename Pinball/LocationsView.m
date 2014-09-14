@@ -18,6 +18,7 @@
 #import "ZonesView.h"
 #import "LocationTypesView.h"
 #import "GAAppHelper.h"
+#import "RecentlyAddedView.h"
 
 @interface LocationsView () <NSFetchedResultsControllerDelegate,UIActionSheetDelegate,UISearchBarDelegate,UISearchDisplayDelegate,ZoneSelectDelegate,LocationTypeSelectDelegate> {
     UIActionSheet *filterSheet;
@@ -133,7 +134,7 @@
 }
 #pragma mark - Class Actions
 - (IBAction)filterResults:(id)sender{
-    filterSheet = [[UIActionSheet alloc] initWithTitle:@"Location Sort" delegate:self cancelButtonTitle:nil destructiveButtonTitle:nil otherButtonTitles:@"Location Name",@"Distance",@"Number of Machines",@"Location Type",nil];
+    filterSheet = [[UIActionSheet alloc] initWithTitle:@"Location Sort" delegate:self cancelButtonTitle:nil destructiveButtonTitle:nil otherButtonTitles:@"Location Name",@"Distance",@"Number of Machines",@"Location Type",@"Recently Added",nil];
     Region *currentRegion = [[PinballMapManager sharedInstance] currentRegion];
     if (currentRegion.zones.count > 0){
         [filterSheet addButtonWithTitle:@"Zone"];
@@ -247,8 +248,10 @@
                 types.type = SelectionTypeRegion;
                 [self.navigationController presentViewController:types.parentViewController animated:YES completion:nil];
                 return;
-                
-
+            }else if ([buttonTitle isEqualToString:@"Recently Added"]){
+                RecentlyAddedView *recentView = (RecentlyAddedView *)[[self.storyboard instantiateViewControllerWithIdentifier:@"RecentlyAddedView"] navigationRootViewController];
+                [self.navigationController presentViewController:recentView.parentViewController animated:YES completion:nil];
+                return;
             }else if ([buttonTitle isEqualToString:@"Zone"]){
                 ZonesView *zoneSelect = (ZonesView *)[[self.storyboard instantiateViewControllerWithIdentifier:@"ZonesView"] navigationRootViewController];
                 zoneSelect.delegate = self;

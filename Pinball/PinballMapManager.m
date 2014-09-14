@@ -228,6 +228,15 @@ typedef NS_ENUM(NSInteger, PBMDataAPI) {
     }];
     [[NSOperationQueue mainQueue] addOperations:api waitUntilFinished:NO];
 }
+- (void)recentlyAddedMachinesWithCompletion:(APIComplete)completionBlock{
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    manager.requestSerializer = [AFJSONRequestSerializer serializer];
+    [manager GET:[NSString stringWithFormat:@"%@api/v1/region/%@/location_machine_xrefs.json?limit=10",apiRootURL,self.currentRegion.name] parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        completionBlock(responseObject);
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        completionBlock(@{@"errors": error.localizedDescription});
+    }];
+}
 - (AFHTTPRequestOperation *)requestForData:(PBMDataAPI)apiType{
     NSURL *apiURL;
     switch (apiType) {

@@ -32,6 +32,7 @@ typedef void (^APIComplete)(NSDictionary *status);
 - (void)refreshRegion;
 - (BOOL)shouldShowMessageOfDay;
 - (void)showedMessageOfDay;
+- (void)recentlyAddedMachinesWithCompletion:(APIComplete)completionBlock;
 // Machine Routes
 - (void)createNewMachine:(NSDictionary *)machineData withCompletion:(APIComplete)completionBlock;
 - (void)createNewMachineWithData:(NSDictionary *)machineData andParentMachine:(Machine *)machine forLocation:(Location *)location withCompletion:(APIComplete)completionBlock;
