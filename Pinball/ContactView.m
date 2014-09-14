@@ -19,6 +19,8 @@
 @property (nonatomic) IBOutlet UITextField *emailField;
 @property (nonatomic) IBOutlet UILabel *messageLabel;
 @property (nonatomic) IBOutlet UIView *messageCellView;
+@property (nonatomic) IBOutlet UITableViewCell *regionNameCell;
+@property (nonatomic) IBOutlet UITextField *regionNameField;
 
 - (IBAction)cancelMessage:(id)sender;
 - (IBAction)sendMessage:(id)sender;
@@ -36,7 +38,7 @@
 }
 - (void)viewDidLoad{
     [super viewDidLoad];
-    
+    [self.regionNameCell setHidden:YES];
     switch (self.contactType) {
         case ContactTypeEvent:
             self.navigationItem.title = @"Suggest Event";
@@ -46,6 +48,7 @@
             break;
         case ContactTypeRegionSuggest:
             self.navigationItem.title = @"Region Suggest";
+            [self.regionNameCell setHidden:NO];
             break;
         default:
             break;
@@ -62,12 +65,44 @@
 }
 - (IBAction)sendMessage:(id)sender{
     NSDictionary *messageData;
-    if (self.messageContent.length > 0 && ![self.messageContent isEqualToString:@"Message"]){
-        if (self.contactType != ContactTypeAppFeedback){
-            messageData = @{@"region_id": [[[PinballMapManager sharedInstance] currentRegion] regionId],@"message": self.messageContent,@"name": self.nameField.text,@"email": self.emailField.text};
+    Region *currentRegion = [[PinballMapManager sharedInstance] currentRegion];
+    
+    if (self.contactType == ContactTypeRegionSuggest){
+        if (self.nameField.text.length == 0){
+            [UIAlertView simpleApplicationAlertWithMessage:@"You must enter a name" cancelButton:@"Ok"];
+            return;
+        }else if (self.emailField.text.length == 0){
+            [UIAlertView simpleApplicationAlertWithMessage:@"You must enter an email" cancelButton:@"Ok"];
+            return;
+        }else if (self.regionNameField.text.length == 0){
+            [UIAlertView simpleApplicationAlertWithMessage:@"You must enter a region name" cancelButton:@"Ok"];
+            return;
         }
-        
-        [[PinballMapManager sharedInstance] sendMessage:messageData withType:self.contactType andCompletion:^(NSDictionary *status) {
+        messageData = @{
+                        @"name": self.nameField.text,
+                        @"email": self.emailField.text,
+                        @"region_name": self.regionNameField.text,
+                        @"comments": self.messageContent
+                        };
+    }else{
+        if (self.messageContent.length > 0 && ![self.messageContent isEqualToString:@"Message"]){
+            if (self.contactType == ContactTypeAppFeedback){
+                
+            }else{
+                messageData = @{
+                                @"region_id": currentRegion.regionId,
+                                @"message": self.messageContent,
+                                @"name": self.nameField.text,
+                                @"email": self.emailField.text
+                                };
+            }
+        }else{
+            [UIAlertView simpleApplicationAlertWithMessage:@"You must enter a meesage" cancelButton:@"Ok"];
+            return;
+        }
+    }
+
+    [[PinballMapManager sharedInstance] sendMessage:messageData withType:self.contactType andCompletion:^(NSDictionary *status) {
             if (status[@"errors"]){
                 NSString *errors;
                 if ([status[@"errors"] isKindOfClass:[NSArray class]]){
@@ -80,11 +115,7 @@
                 [UIAlertView simpleApplicationAlertWithMessage:status[@"msg"] cancelButton:@"Ok"];
                 [self dismissViewControllerAnimated:YES completion:nil];
             }
-        }];
-    }else{
-        [UIAlertView simpleApplicationAlertWithMessage:@"You must enter a meesage" cancelButton:@"Ok"];
-    }
-
+    }];
 }
 #pragma mark - UITableView Delegate
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{

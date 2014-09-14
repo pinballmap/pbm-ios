@@ -724,6 +724,20 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="pKI-M7-Gv2">
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="pKI-M7-Gv2" id="mh3-s6-IcG">
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Region Name" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="2WF-yW-zHX">
+                                                    <rect key="frame" x="13" y="7" width="280" height="30"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <textInputTraits key="textInputTraits"/>
+                                                </textField>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
                                 </cells>
                             </tableViewSection>
                         </sections>
@@ -748,6 +762,8 @@
                         <outlet property="emailField" destination="nLR-s0-xPa" id="0Vh-0e-i4H"/>
                         <outlet property="messageLabel" destination="FbP-cr-uaY" id="hVK-eb-Oxk"/>
                         <outlet property="nameField" destination="QBf-aW-lc7" id="a4L-6q-PuK"/>
+                        <outlet property="regionNameCell" destination="pKI-M7-Gv2" id="2ze-jR-c3n"/>
+                        <outlet property="regionNameField" destination="2WF-yW-zHX" id="oSO-y1-9d6"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="t4z-13-lEi" userLabel="First Responder" sceneMemberID="firstResponder"/>

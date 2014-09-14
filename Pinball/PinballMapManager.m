@@ -556,7 +556,28 @@ typedef NS_ENUM(NSInteger, PBMDataAPI) {
 - (void)sendMessage:(NSDictionary *)messageData withType:(ContactType)contactType andCompletion:(APIComplete)completionBlock{
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     manager.requestSerializer = [AFJSONRequestSerializer serializer];
-    [manager POST:[NSString stringWithFormat:@"%@api/v1/regions/contact.json",apiRootURL] parameters:messageData success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    
+    NSString *contactRoute;
+    
+    switch (contactType) {
+        case ContactTypeRegionContact:
+            contactRoute = [NSString stringWithFormat:@"%@api/v1/regions/contact.json",apiRootURL];
+            break;
+        case ContactTypeRegionSuggest:
+            contactRoute = [NSString stringWithFormat:@"%@api/v1/regions/suggest.json",apiRootURL];
+            break;
+        case ContactTypeEvent:
+            contactRoute = [NSString stringWithFormat:@"%@api/v1/regions/contact.json",apiRootURL];
+            break;
+        case ContactTypeAppFeedback:
+            contactRoute = [NSString stringWithFormat:@"%@api/v1/regions/app_comment.json",apiRootURL];
+            break;
+        default:
+            break;
+    }
+    
+    
+    [manager POST:contactRoute parameters:messageData success:^(AFHTTPRequestOperation *operation, id responseObject) {
         completionBlock(responseObject);
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         completionBlock(@{@"errors": error.localizedDescription});

@@ -12,6 +12,7 @@
 #import "GAAppHelper.h"
 #import <ReuseWebView.h>
 #import "Region+UpdateDistance.h"
+#import "ContactView.h"
 
 @interface RegionsView () <NSFetchedResultsControllerDelegate,UISearchDisplayDelegate,MFMailComposeViewControllerDelegate,UIAlertViewDelegate> {
     NSFetchedResultsController *fetchedResults;
@@ -115,13 +116,9 @@
             navController.modalPresentationStyle = UIModalPresentationFormSheet;
             [self.navigationController presentViewController:navController animated:YES completion:nil];
         }else if (buttonIndex == 2){
-            if ([MFMailComposeViewController canSendMail]){
-                MFMailComposeViewController *requestMessage = [[MFMailComposeViewController alloc] init];
-                requestMessage.mailComposeDelegate = self;
-                [requestMessage setSubject:@"Adding my region to PinballMap.com"];
-                [requestMessage setToRecipients:@[@"pinballmap@outlook.com"]];
-                [self presentViewController:requestMessage animated:YES completion:nil];
-            }
+            ContactView *eventContact = (ContactView *)[[self.storyboard instantiateViewControllerWithIdentifier:@"ContactView"] navigationRootViewController];
+            eventContact.contactType = ContactTypeRegionSuggest;
+            [self.navigationController presentViewController:eventContact.parentViewController animated:YES completion:nil];
         }
     }
 }
