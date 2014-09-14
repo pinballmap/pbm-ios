@@ -332,20 +332,32 @@ typedef NS_ENUM(NSInteger, PBMDataAPI) {
 
 }
 - (NSMutableSet *)importZonesWithRequest:(AFHTTPRequestOperation *)request{
-    CoreDataManager *cdManager = [CoreDataManager sharedInstance];
-    // Clear existing
-    [self clearData:PBMDataAPIZones forRegion:_currentRegion];
-    NSMutableSet *allZones = [NSMutableSet new];
-    Zone *emptyZone = [Zone createZoneWithData:@{@"id": @(-1),@"name": @"Unclassified"} andContext:cdManager.managedObjectContext];
-    [allZones addObject:emptyZone];
-    // Create all zones
-    [request.responseObject[@"zones"] enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-        Zone *newZone = [Zone createZoneWithData:obj andContext:cdManager.managedObjectContext];
-        newZone.region = _currentRegion;
-        [allZones addObject:newZone];
-    }];
-    [cdManager saveContext];
-    return allZones;
+    if (![_currentRegion.zonesEtag isEqualToString:request.response.allHeaderFields[@"Etag"]]){
+        CoreDataManager *cdManager = [CoreDataManager sharedInstance];
+        // Clear existing
+        [self clearData:PBMDataAPIZones forRegion:_currentRegion];
+        NSMutableSet *allZones = [NSMutableSet new];
+        Zone *emptyZone = [Zone createZoneWithData:@{@"id": @(-1),@"name": @"Unclassified"} andContext:cdManager.managedObjectContext];
+        [allZones addObject:emptyZone];
+        // Create all zones
+        [request.responseObject[@"zones"] enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+            Zone *newZone = [Zone createZoneWithData:obj andContext:cdManager.managedObjectContext];
+            newZone.region = _currentRegion;
+            [allZones addObject:newZone];
+        }];
+        _currentRegion.zonesEtag = request.response.allHeaderFields[@"Etag"];
+        [cdManager saveContext];
+        
+        return allZones;
+    }else{
+        NSLog(@"Zones same Etag");
+        NSFetchRequest *zonesFetch = [NSFetchRequest fetchRequestWithEntityName:@"Zone"];
+        zonesFetch.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES]];
+        
+        NSMutableSet *zones = [[NSMutableSet alloc] initWithArray:[[[CoreDataManager sharedInstance] managedObjectContext] executeFetchRequest:zonesFetch error:nil]];
+        return zones;
+    }
+
 }
 - (NSMutableSet *)importLocationTypesWithRequest:(AFHTTPRequestOperation *)request{
     CoreDataManager *cdManager = [CoreDataManager sharedInstance];

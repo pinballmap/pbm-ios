@@ -2,7 +2,7 @@
 //  Region.m
 //  PinballMap
 //
-//  Created by Frank Michael on 9/7/14.
+//  Created by Frank Michael on 9/14/14.
 //  Copyright (c) 2014 Frank Michael Sanchez. All rights reserved.
 //
 
@@ -17,11 +17,12 @@
 @dynamic eventsEtag;
 @dynamic fullName;
 @dynamic latitude;
+@dynamic locationDistance;
 @dynamic locationsEtag;
 @dynamic longitude;
 @dynamic name;
 @dynamic regionId;
-@dynamic locationDistance;
+@dynamic zonesEtag;
 @dynamic events;
 @dynamic locations;
 @dynamic zones;

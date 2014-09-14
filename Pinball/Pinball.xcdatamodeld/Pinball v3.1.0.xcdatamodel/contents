@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="5064" systemVersion="13E28" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="6244" systemVersion="13E28" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
     <entity name="Event" representedClassName="Event" syncable="YES">
         <attribute name="categoryNo" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
         <attribute name="categoryTitle" optional="YES" attributeType="String" syncable="YES"/>
@@ -65,6 +65,7 @@
         <attribute name="longitude" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="regionId" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="zonesEtag" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="events" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Event" inverseName="region" inverseEntity="Event" syncable="YES"/>
         <relationship name="locations" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Location" inverseName="region" inverseEntity="Location" syncable="YES"/>
         <relationship name="zones" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Zone" inverseName="region" inverseEntity="Zone" syncable="YES"/>
@@ -82,7 +83,7 @@
         <element name="LocationType" positionX="-2063" positionY="-619" width="128" height="88"/>
         <element name="Machine" positionX="-2808" positionY="-603" width="128" height="133"/>
         <element name="MachineLocation" positionX="-2504" positionY="-490" width="128" height="118"/>
-        <element name="Region" positionX="-2520" positionY="-949" width="128" height="210"/>
+        <element name="Region" positionX="-2520" positionY="-949" width="128" height="223"/>
         <element name="Zone" positionX="-2252" positionY="-877" width="128" height="118"/>
     </elements>
 </model>
