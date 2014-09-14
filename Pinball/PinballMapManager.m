@@ -548,6 +548,9 @@ typedef NS_ENUM(NSInteger, PBMDataAPI) {
     NSLog(@"Location updated.");
     CLLocation *foundLocation = [locations lastObject];
     _userLocation = foundLocation;
+    if (self.currentRegion){
+        [Location updateAllForRegion:self.currentRegion];
+    }
 }
 #pragma mark - Contact
 - (void)sendMessage:(NSDictionary *)messageData withType:(ContactType)contactType andCompletion:(APIComplete)completionBlock{

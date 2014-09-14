@@ -7,10 +7,12 @@
 //
 
 #import "Location.h"
+#import "Region.h"
 
 @interface Location (UpdateDistance)
 
 - (void)updateDistance;
 - (NSNumber *)currentDistance;
++ (void)updateAllForRegion:(Region *)currentRegion;
 
 @end
