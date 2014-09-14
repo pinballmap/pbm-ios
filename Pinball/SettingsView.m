@@ -8,6 +8,7 @@
 
 #import "SettingsView.h"
 #import "UIAlertView+Application.h"
+#import "ContactView.h"
 
 @import MessageUI;
 
@@ -64,6 +65,12 @@
 #pragma mark - Table view data source
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    if (indexPath.row == 1){
+        // Region Contact
+        ContactView *eventContact = (ContactView *)[[self.storyboard instantiateViewControllerWithIdentifier:@"ContactView"] navigationRootViewController];
+        eventContact.contactType = ContactTypeRegionContact;
+        [self.navigationController presentViewController:eventContact.parentViewController animated:YES completion:nil];
+    }
 
 }
 

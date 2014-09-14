@@ -62,24 +62,28 @@
 }
 - (IBAction)sendMessage:(id)sender{
     NSDictionary *messageData;
-    if (self.contactType != ContactTypeAppFeedback){
-        messageData = @{@"region_id": [[[PinballMapManager sharedInstance] currentRegion] regionId],@"message": self.messageContent,@"name": self.nameField.text,@"email": self.emailField.text};
-    }
-    
-    [[PinballMapManager sharedInstance] sendMessage:messageData withType:self.contactType andCompletion:^(NSDictionary *status) {
-        if (status[@"errors"]){
-            NSString *errors;
-            if ([status[@"errors"] isKindOfClass:[NSArray class]]){
-                errors = [status[@"errors"] componentsJoinedByString:@","];
-            }else{
-                errors = status[@"errors"];
-            }
-            [UIAlertView simpleApplicationAlertWithMessage:errors cancelButton:@"Ok"];
-        }else{
-            [UIAlertView simpleApplicationAlertWithMessage:status[@"msg"] cancelButton:@"Ok"];
-            [self dismissViewControllerAnimated:YES completion:nil];
+    if (self.messageContent.length > 0 && ![self.messageContent isEqualToString:@"Message"]){
+        if (self.contactType != ContactTypeAppFeedback){
+            messageData = @{@"region_id": [[[PinballMapManager sharedInstance] currentRegion] regionId],@"message": self.messageContent,@"name": self.nameField.text,@"email": self.emailField.text};
         }
-    }];
+        
+        [[PinballMapManager sharedInstance] sendMessage:messageData withType:self.contactType andCompletion:^(NSDictionary *status) {
+            if (status[@"errors"]){
+                NSString *errors;
+                if ([status[@"errors"] isKindOfClass:[NSArray class]]){
+                    errors = [status[@"errors"] componentsJoinedByString:@","];
+                }else{
+                    errors = status[@"errors"];
+                }
+                [UIAlertView simpleApplicationAlertWithMessage:errors cancelButton:@"Ok"];
+            }else{
+                [UIAlertView simpleApplicationAlertWithMessage:status[@"msg"] cancelButton:@"Ok"];
+                [self dismissViewControllerAnimated:YES completion:nil];
+            }
+        }];
+    }else{
+        [UIAlertView simpleApplicationAlertWithMessage:@"You must enter a meesage" cancelButton:@"Ok"];
+    }
 
 }
 #pragma mark - UITableView Delegate
