@@ -23,7 +23,7 @@ typedef void (^APIComplete)(NSDictionary *status);
 
 @property (nonatomic) NSDictionary *regionInfo;
 @property (nonatomic) Region *currentRegion;
-@property (nonatomic,readonly) CLLocation *userLocation;
+@property (nonatomic) CLLocation *userLocation;
 
 + (id)sharedInstance;
 - (void)allRegions:(void (^)(NSArray *regions))regionBlock;

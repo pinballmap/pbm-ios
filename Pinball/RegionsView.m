@@ -38,9 +38,27 @@
 
     searchResults = [NSMutableArray new];
     [[PinballMapManager sharedInstance] refreshAllRegions];
+    [[PinballMapManager sharedInstance] addObserver:self forKeyPath:@"userLocation" options:0 context:nil];
+
+    [self updateForUserLocation];
+    
+}
+- (void)viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:animated];
+    [GAAppHelper sendAnalyticsDataWithScreen:@"Region Select View"];
+}
+- (void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
+    [[PinballMapManager sharedInstance] removeObserver:self forKeyPath:@"userLocation"];
+}
+- (void)didReceiveMemoryWarning{
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+- (void)updateForUserLocation{
     
     NSFetchRequest *regionsFetch = [NSFetchRequest fetchRequestWithEntityName:@"Region"];
-
+    
     if ([[PinballMapManager sharedInstance] userLocation]){
         
         NSFetchRequest *locationRequest = [NSFetchRequest fetchRequestWithEntityName:@"Region"];
@@ -55,10 +73,7 @@
     }else{
         regionsFetch.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"fullName" ascending:YES]];
     }
-
-    
-    
-    
+    fetchedResults = nil;
     fetchedResults = [[NSFetchedResultsController alloc] initWithFetchRequest:regionsFetch
                                                          managedObjectContext:[[CoreDataManager sharedInstance] managedObjectContext]
                                                            sectionNameKeyPath:nil
@@ -67,14 +82,13 @@
     [fetchedResults performFetch:nil];
     [self.tableView reloadData];
     
+    
 }
-- (void)viewDidAppear:(BOOL)animated{
-    [super viewDidAppear:animated];
-    [GAAppHelper sendAnalyticsDataWithScreen:@"Region Select View"];
-}
-- (void)didReceiveMemoryWarning{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context{
+    if ([keyPath isEqualToString:@"userLocation"]){
+        NSLog(@"New userLocation from KVO");
+        [self updateForUserLocation];
+    }
 }
 #pragma mark - Class actions
 - (IBAction)requestRegion:(id)sender{

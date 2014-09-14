@@ -559,7 +559,7 @@ typedef NS_ENUM(NSInteger, PBMDataAPI) {
 - (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations{
     NSLog(@"Location updated.");
     CLLocation *foundLocation = [locations lastObject];
-    _userLocation = foundLocation;
+    self.userLocation = foundLocation;
     if (self.currentRegion){
         [Location updateAllForRegion:self.currentRegion];
     }
