@@ -460,25 +460,19 @@
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="121"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="1aK-X0-5fZ">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="121"/>
-                                        </imageView>
-                                        <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="49v-i1-p3a">
-                                            <rect key="frame" x="150" y="51" width="20" height="20"/>
-                                        </activityIndicatorView>
+                                        <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="J8q-z2-gvg">
+                                            <rect key="frame" x="0.0" y="1" width="320" height="121"/>
+                                        </mapView>
                                     </subviews>
                                     <constraints>
-                                        <constraint firstAttribute="bottom" secondItem="1aK-X0-5fZ" secondAttribute="bottom" id="0Gx-Mq-ppL"/>
-                                        <constraint firstItem="1aK-X0-5fZ" firstAttribute="centerX" secondItem="49v-i1-p3a" secondAttribute="centerX" id="4nz-Kz-wIf"/>
-                                        <constraint firstItem="49v-i1-p3a" firstAttribute="top" secondItem="htN-57-oE2" secondAttribute="topMargin" constant="43" id="8LO-ai-F25"/>
-                                        <constraint firstItem="1aK-X0-5fZ" firstAttribute="top" secondItem="htN-57-oE2" secondAttribute="top" id="DNW-h3-L9I"/>
-                                        <constraint firstItem="1aK-X0-5fZ" firstAttribute="leading" secondItem="htN-57-oE2" secondAttribute="leading" id="cQH-j1-GSQ"/>
-                                        <constraint firstAttribute="trailing" secondItem="1aK-X0-5fZ" secondAttribute="trailing" id="ooz-LY-AaR"/>
+                                        <constraint firstItem="J8q-z2-gvg" firstAttribute="leading" secondItem="htN-57-oE2" secondAttribute="leading" id="3dV-r3-h0B"/>
+                                        <constraint firstAttribute="trailing" secondItem="J8q-z2-gvg" secondAttribute="trailing" id="S5s-vC-abI"/>
+                                        <constraint firstItem="J8q-z2-gvg" firstAttribute="top" secondItem="htN-57-oE2" secondAttribute="topMargin" constant="-7" id="Xix-AN-l77"/>
+                                        <constraint firstAttribute="bottomMargin" secondItem="J8q-z2-gvg" secondAttribute="bottom" constant="-9" id="px5-4z-YVb"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
-                                    <outlet property="loadingView" destination="49v-i1-p3a" id="HZd-W2-feU"/>
-                                    <outlet property="mapImage" destination="1aK-X0-5fZ" id="sYa-T2-gzA"/>
+                                    <outlet property="mapView" destination="J8q-z2-gvg" id="P2h-3K-2wh"/>
                                 </connections>
                             </tableViewCell>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="InfoCell" rowHeight="67" id="fpZ-sQ-7b1" customClass="InformationCell">
@@ -553,7 +547,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6N8-QB-uXO" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1833" y="-85"/>
+            <point key="canvasLocation" x="1833" y="-86"/>
         </scene>
         <!--Text Editor View-->
         <scene sceneID="FXy-o5-gbm">
@@ -906,11 +900,17 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" mapType="standard" showsUserLocation="YES" translatesAutoresizingMaskIntoConstraints="NO" id="EfV-l3-7Iz">
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" showsUserLocation="YES" translatesAutoresizingMaskIntoConstraints="NO" id="EfV-l3-7Iz">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                             </mapView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="EfV-l3-7Iz" firstAttribute="leading" secondItem="D4C-XQ-Xe5" secondAttribute="leading" id="4h1-bs-j3a"/>
+                            <constraint firstAttribute="trailing" secondItem="EfV-l3-7Iz" secondAttribute="trailing" id="8he-ef-dkX"/>
+                            <constraint firstItem="EfV-l3-7Iz" firstAttribute="top" secondItem="D4C-XQ-Xe5" secondAttribute="top" id="ZsA-UA-Bdc"/>
+                            <constraint firstItem="EfV-l3-7Iz" firstAttribute="bottom" secondItem="m3z-db-GcI" secondAttribute="top" id="pHo-CR-aRg"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="UxV-ya-2X9"/>
                     <connections>

@@ -35,14 +35,7 @@
                 <navigationBar contentMode="scaleToFill" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5Ks-Jk-sg7">
                     <rect key="frame" x="0.0" y="20" width="480" height="44"/>
                     <items>
-                        <navigationItem title="Pinball Map" id="Axc-mi-h8O">
-                            <barButtonItem key="leftBarButtonItem" title="Sort" id="jWB-4m-RK9">
-                                <color key="tintColor" red="0.97212550949999998" green="0.0" blue="0.87446945249999997" alpha="1" colorSpace="calibratedRGB"/>
-                            </barButtonItem>
-                            <barButtonItem key="rightBarButtonItem" systemItem="add" id="GJu-nX-fjo">
-                                <color key="tintColor" red="0.97212550949999998" green="0.0" blue="0.87446945249999997" alpha="1" colorSpace="calibratedRGB"/>
-                            </barButtonItem>
-                        </navigationItem>
+                        <navigationItem title="Pinball Map" id="Axc-mi-h8O"/>
                     </items>
                 </navigationBar>
             </subviews>

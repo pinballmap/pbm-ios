@@ -43,6 +43,7 @@ typedef enum : NSUInteger {
     
     UIAlertView *openInMapsConfirm;
 }
+
 @end
 
 @implementation LocationProfileView
@@ -353,36 +354,14 @@ typedef enum : NSUInteger {
     if (indexPath.section == 0 && [UIDevice currentModel] == ModelTypeiPhone){
         // Map Cell
         LocationMapCell *cell = (LocationMapCell *)[tableView dequeueReusableCellWithIdentifier:@"MapCell" forIndexPath:indexPath];
-        if (!mapSnapshot){
-            [cell.loadingView startAnimating];
-            
-            if (_currentLocation.mapShot){
-                [cell.loadingView stopAnimating];
-                cell.mapImage.image = _currentLocation.mapShot;
-                mapSnapshot = _currentLocation.mapShot;
-                [cell addAnnotation];
-            }else{
-                CLLocationCoordinate2D coord = CLLocationCoordinate2DMake([_currentLocation.latitude doubleValue],[_currentLocation.longitude doubleValue]);
-                
-                MKMapSnapshotOptions *options = [[MKMapSnapshotOptions alloc] init];
-                options.size = cell.mapImage.frame.size;
-                options.region = MKCoordinateRegionMake(coord, MKCoordinateSpanMake(.002, .002));
-                options.mapType = MKMapTypeHybrid;
-                options.showsPointsOfInterest = NO;
-                MKMapSnapshotter *snapShooter2 = [[MKMapSnapshotter alloc] initWithOptions:options];
-                [snapShooter2 startWithCompletionHandler:^(MKMapSnapshot *snapshot, NSError *error) {
-                    if (error){
-                        NSLog(@"%@",error);
-                    }else{
-                        [cell.loadingView stopAnimating];
-                        cell.mapImage.image = snapshot.image;
-                        mapSnapshot = snapshot.image;
-                        [cell addAnnotation];
-                        [_currentLocation saveMapShot:snapshot.image];
-                    }
-                }];
-            }
-        }
+        
+        
+        CLLocationCoordinate2D coord = CLLocationCoordinate2DMake([_currentLocation.latitude doubleValue],[_currentLocation.longitude doubleValue]);
+        cell.mapView.region = MKCoordinateRegionMake(coord, MKCoordinateSpanMake(0.002, 0.002));
+        cell.mapView.mapType = MKMapTypeHybrid;
+        cell.mapView.userInteractionEnabled = NO;
+        cell.mapView.showsUserLocation = YES;
+        [cell addAnnotation];
         return cell;
     }else{
         if (dataSetSeg.selectedSegmentIndex == 0){

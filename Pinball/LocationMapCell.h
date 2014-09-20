@@ -7,12 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <MapKit/MapKit.h>
 
 @interface LocationMapCell : UITableViewCell
 
-@property (nonatomic) IBOutlet UIImageView *mapImage;
-@property (nonatomic) IBOutlet UIActivityIndicatorView *loadingView;
-
+@property (nonatomic) IBOutlet MKMapView *mapView;
 
 - (void)addAnnotation;
+
 @end
