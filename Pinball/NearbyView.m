@@ -8,6 +8,7 @@
 
 #import "NearbyView.h"
 #import <MapKit/MapKit.h>
+#import "UIAlertView+Application.h"
 #import "Location+UpdateDistance.h"
 #import "Location+Annotation.h"
 
@@ -23,6 +24,9 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.navigationItem.title = @"Nearby";
+}
+- (void)viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:animated];
     self.mapView.showsUserLocation = YES;
     CLLocation *location = [[PinballMapManager sharedInstance] userLocation];
     if (location){
@@ -33,12 +37,18 @@
         stackRequest.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"locationDistance" ascending:YES]];
         stackRequest.fetchLimit = 20;
         NSArray *locations = [[[CoreDataManager sharedInstance] managedObjectContext] executeFetchRequest:stackRequest error:nil];
-        
-        for (Location *location in locations) {
-            [self.mapView addAnnotation:location.annotation];
-            
+        if (locations.count != 0){
+            for (Location *location in locations) {
+                [self.mapView addAnnotation:location.annotation];
+            }
+        }else{
+            [UIAlertView simpleApplicationAlertWithMessage:@"No locations found nearby" cancelButton:@"Ok"];
         }
     }
+}
+- (void)viewDidDisappear:(BOOL)animated{
+    [super viewDidDisappear:animated];
+    [self.mapView removeAnnotations:self.mapView.annotations];
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
