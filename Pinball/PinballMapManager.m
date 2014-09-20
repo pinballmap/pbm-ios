@@ -62,8 +62,6 @@ typedef NS_ENUM(NSInteger, PBMDataAPI) {
             }
         }else{
             _currentRegion = nil;
-//            _currentRegion = [self regionWithData:@{@"full_name":@"Seattle",@"id":@3,@"lat":@48,@"lon":@(-122),@"name":@"seattle",@"primary_email_contact":@"morganshilling@gmail.com"} shouldCreate:YES];
-//            [self loadRegionData:_currentRegion];
         }
     }
     return self;
@@ -71,6 +69,10 @@ typedef NS_ENUM(NSInteger, PBMDataAPI) {
 - (void)getUserLocation{
     if (!locationManager){
         locationManager = [CLLocationManager new];
+    }
+    #pragma message ("iOS 8 Support for location updating")
+    if ([locationManager respondsToSelector:@selector(requestWhenInUseAuthorization)]){
+        [locationManager requestWhenInUseAuthorization];
     }
     locationManager.delegate = self;
     locationManager.desiredAccuracy = kCLLocationAccuracyBest;

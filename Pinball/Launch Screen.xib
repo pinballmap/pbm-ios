@@ -11,15 +11,6 @@
             <rect key="frame" x="0.0" y="0.0" width="480" height="480"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="0v8-WM-pHo">
-                    <rect key="frame" x="0.0" y="64" width="480" height="367"/>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    <searchBar key="tableHeaderView" contentMode="redraw" id="7Lh-43-tso">
-                        <rect key="frame" x="0.0" y="0.0" width="480" height="44"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                        <textInputTraits key="textInputTraits"/>
-                    </searchBar>
-                </tableView>
                 <tabBar contentMode="scaleToFill" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oKj-OI-deq">
                     <rect key="frame" x="0.0" y="431" width="480" height="49"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -41,20 +32,16 @@
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstItem="0v8-WM-pHo" firstAttribute="top" secondItem="5Ks-Jk-sg7" secondAttribute="bottom" id="Ave-ct-VqM"/>
-                <constraint firstItem="0v8-WM-pHo" firstAttribute="bottom" secondItem="oKj-OI-deq" secondAttribute="top" id="EtW-2B-1nf"/>
-                <constraint firstItem="0v8-WM-pHo" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="Fqw-AH-Xzk"/>
                 <constraint firstItem="5Ks-Jk-sg7" firstAttribute="leading" secondItem="oKj-OI-deq" secondAttribute="leading" id="Pgu-bV-v6Y"/>
                 <constraint firstItem="oKj-OI-deq" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="TrX-eT-dOG"/>
                 <constraint firstItem="5Ks-Jk-sg7" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="20" id="Y0Y-zo-z7i"/>
-                <constraint firstItem="0v8-WM-pHo" firstAttribute="trailing" secondItem="5Ks-Jk-sg7" secondAttribute="trailing" id="e8u-Nr-k7A"/>
                 <constraint firstAttribute="bottom" secondItem="oKj-OI-deq" secondAttribute="bottom" id="f2d-UK-qaS"/>
                 <constraint firstAttribute="trailing" secondItem="oKj-OI-deq" secondAttribute="trailing" id="hMm-HN-aJA"/>
                 <constraint firstItem="5Ks-Jk-sg7" firstAttribute="trailing" secondItem="oKj-OI-deq" secondAttribute="trailing" id="zqS-NE-PfY"/>
             </constraints>
             <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <point key="canvasLocation" x="445" y="538"/>
+            <point key="canvasLocation" x="755" y="517"/>
         </view>
     </objects>
     <resources>
