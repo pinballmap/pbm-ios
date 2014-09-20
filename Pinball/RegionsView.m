@@ -38,7 +38,6 @@
 
     searchResults = [NSMutableArray new];
     [[PinballMapManager sharedInstance] refreshAllRegions];
-    [[PinballMapManager sharedInstance] addObserver:self forKeyPath:@"userLocation" options:0 context:nil];
 
     [self updateForUserLocation];
     
@@ -46,6 +45,7 @@
 - (void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
     [GAAppHelper sendAnalyticsDataWithScreen:@"Region Select View"];
+    [[PinballMapManager sharedInstance] addObserver:self forKeyPath:@"userLocation" options:0 context:nil];
 }
 - (void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
