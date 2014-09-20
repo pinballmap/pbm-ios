@@ -10,8 +10,8 @@
 
 @interface LocationCell : UITableViewCell
 
-@property (nonatomic) IBOutlet UILabel *locationName;
-@property (nonatomic) IBOutlet UILabel *machineCount;
-@property (nonatomic) IBOutlet UILabel *locationDetail;
+@property (weak) IBOutlet UILabel *locationName;
+@property (weak) IBOutlet UILabel *machineCount;
+@property (weak) IBOutlet UILabel *locationDetail;
 
 @end

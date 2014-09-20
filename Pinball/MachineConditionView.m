@@ -9,10 +9,11 @@
 #import "MachineConditionView.h"
 #import "UIAlertView+Application.h"
 
-@interface MachineConditionView () <UITextViewDelegate> {
-    IBOutlet UITextView *machineCondition;
-    IBOutlet UILabel *locationName;
-}
+@interface MachineConditionView () <UITextViewDelegate>
+
+@property (weak) IBOutlet UITextView *machineCondition;
+@property (weak) IBOutlet UILabel *locationName;
+
 - (IBAction)cancelCondition:(id)sender;
 - (IBAction)saveCondition:(id)sender;
 
@@ -41,9 +42,9 @@
 }
 #pragma mark - Class
 - (void)setupUI{
-    locationName.text = _currentMachine.location.name;
+    self.locationName.text = _currentMachine.location.name;
     if (![_currentMachine.condition isEqualToString:@"N/A"]){
-        machineCondition.text = _currentMachine.condition;
+        self.machineCondition.text = _currentMachine.condition;
     }
 }
 #pragma mark - Class Actions
@@ -51,7 +52,7 @@
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 - (IBAction)saveCondition:(id)sender{
-    [[PinballMapManager sharedInstance] updateMachineCondition:_currentMachine withCondition:machineCondition.text withCompletion:^(NSDictionary *status) {
+    [[PinballMapManager sharedInstance] updateMachineCondition:_currentMachine withCondition:self.machineCondition.text withCompletion:^(NSDictionary *status) {
         if (status[@"errors"]){
             NSString *errors;
             if ([status[@"errors"] isKindOfClass:[NSArray class]]){
@@ -61,7 +62,7 @@
             }
             [UIAlertView simpleApplicationAlertWithMessage:errors cancelButton:@"Ok"];
         }else{
-            _currentMachine.condition = machineCondition.text;
+            _currentMachine.condition = self.machineCondition.text;
             _currentMachine.conditionUpdate = [NSDate date];
             [[CoreDataManager sharedInstance] saveContext];
             [self dismissViewControllerAnimated:YES completion:nil];

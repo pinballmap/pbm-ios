@@ -9,11 +9,11 @@
 #import "ZonesView.h"
 #import "Region.h"
 
-@interface ZonesView () <NSFetchedResultsControllerDelegate,UISearchDisplayDelegate> {
-    NSFetchedResultsController *fetchedResults;
-    
-    NSMutableArray *searchResults;
-}
+@interface ZonesView () <NSFetchedResultsControllerDelegate,UISearchDisplayDelegate>
+
+@property (nonatomic) NSFetchedResultsController *fetchedResults;
+@property (nonatomic) NSMutableArray *searchResults;
+
 - (IBAction)dismissZones:(id)sender;
 
 @end
@@ -30,7 +30,7 @@
 - (void)viewDidLoad{
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    searchResults = [NSMutableArray new];
+    self.searchResults = [NSMutableArray new];
     Region *currentRegion = [[PinballMapManager sharedInstance] currentRegion];
     
     self.navigationItem.title = currentRegion.fullName;
@@ -38,12 +38,12 @@
     NSFetchRequest *zoneFetch = [NSFetchRequest fetchRequestWithEntityName:@"Zone"];
     zoneFetch.predicate = [NSPredicate predicateWithFormat:@"region.name = %@ AND self.locations.@count > 0",currentRegion.name];
     zoneFetch.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES]];
-    fetchedResults = [[NSFetchedResultsController alloc] initWithFetchRequest:zoneFetch
+    self.fetchedResults = [[NSFetchedResultsController alloc] initWithFetchRequest:zoneFetch
                                                          managedObjectContext:[[CoreDataManager sharedInstance] managedObjectContext]
                                                            sectionNameKeyPath:nil
                                                                     cacheName:nil];
-    fetchedResults.delegate = self;
-    [fetchedResults performFetch:nil];
+    self.fetchedResults.delegate = self;
+    [self.fetchedResults performFetch:nil];
     [self.tableView reloadData];
 }
 - (void)didReceiveMemoryWarning{
@@ -59,18 +59,18 @@
     NSFetchRequest *searchrequest = [NSFetchRequest fetchRequestWithEntityName:@"Zone"];
     searchrequest.predicate = [NSPredicate predicateWithFormat:@"name CONTAINS[cd] %@ AND region.name = %@",searchString,[[[PinballMapManager sharedInstance] currentRegion] name]];
 
-    [searchResults removeAllObjects];
-    searchResults = nil;
-    searchResults = [NSMutableArray new];
+    [self.searchResults removeAllObjects];
+    self.searchResults = nil;
+    self.searchResults = [NSMutableArray new];
     NSError *error = nil;
-    [searchResults addObjectsFromArray:[[[CoreDataManager sharedInstance] managedObjectContext] executeFetchRequest:searchrequest error:&error]];
+    [self.searchResults addObjectsFromArray:[[[CoreDataManager sharedInstance] managedObjectContext] executeFetchRequest:searchrequest error:&error]];
     
     return YES;
 }
 #pragma mark - TableView Delegate
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     if (tableView == self.tableView){
-        return [[fetchedResults sections] count];
+        return [[self.fetchedResults sections] count];
     }else{
         return 1;
     }
@@ -78,12 +78,12 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     NSInteger rows = 0;
     if (tableView == self.tableView){
-        if ([[fetchedResults sections] count] > 0) {
-            id <NSFetchedResultsSectionInfo> sectionInfo = [[fetchedResults sections] objectAtIndex:section];
+        if ([[self.fetchedResults sections] count] > 0) {
+            id <NSFetchedResultsSectionInfo> sectionInfo = [[self.fetchedResults sections] objectAtIndex:section];
             rows = [sectionInfo numberOfObjects];
         }
     }else{
-        rows = searchResults.count;
+        rows = self.searchResults.count;
     }
     return rows;
 }
@@ -97,9 +97,9 @@
     
     Zone *currentZone;
     if (tableView == self.tableView){
-        currentZone = [fetchedResults objectAtIndexPath:indexPath];
+        currentZone = [self.fetchedResults objectAtIndexPath:indexPath];
     }else{
-        currentZone = [searchResults objectAtIndex:indexPath.row];
+        currentZone = [self.searchResults objectAtIndex:indexPath.row];
     }
     cell.textLabel.text = currentZone.name;
     
@@ -110,9 +110,9 @@
     
     Zone *currentZone;
     if (tableView == self.tableView){
-        currentZone = [fetchedResults objectAtIndexPath:indexPath];
+        currentZone = [self.fetchedResults objectAtIndexPath:indexPath];
     }else{
-        currentZone = [searchResults objectAtIndex:indexPath.row];
+        currentZone = [self.searchResults objectAtIndex:indexPath.row];
     }
 
     if (_delegate && [_delegate respondsToSelector:@selector(selectedZone:)]){

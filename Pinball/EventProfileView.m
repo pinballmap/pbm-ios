@@ -16,9 +16,7 @@
 #import <ReuseWebView.h>
 #import "UIDevice+ModelCheck.h"
 
-@interface EventProfileView () <EKEventEditViewDelegate>{
-    
-}
+@interface EventProfileView () <EKEventEditViewDelegate>
 
 @end
 

@@ -14,11 +14,12 @@
 #import "ContactView.h"
 #import "NSDate+CupertinoYankee.h"
 
-@interface EventsView () <NSFetchedResultsControllerDelegate> {
-    NSFetchedResultsController *fetchedResults;
-    NSManagedObjectContext *managedContext;
-}
-@property (nonatomic) IBOutlet UISegmentedControl *eventSorter;
+@interface EventsView () <NSFetchedResultsControllerDelegate>
+
+@property (nonatomic) NSFetchedResultsController *fetchedResults;
+@property (nonatomic) NSManagedObjectContext *managedContext;
+
+@property (weak) IBOutlet UISegmentedControl *eventSorter;
 
 
 - (IBAction)suggestEvent:(id)sender;
@@ -66,7 +67,7 @@
 #pragma mark - Region Update
 - (void)updateRegion{
     self.navigationItem.title = [NSString stringWithFormat:@"%@ Events",[[[PinballMapManager sharedInstance] currentRegion] fullName]];
-    managedContext = [[CoreDataManager sharedInstance] managedObjectContext];
+    self.managedContext = [[CoreDataManager sharedInstance] managedObjectContext];
    
     NSFetchRequest *stackRequest = [NSFetchRequest fetchRequestWithEntityName:@"Event"];
     stackRequest.predicate = [NSPredicate predicateWithFormat:@"region.name = %@ AND (startDate >= %@ AND startDate <= %@)",[[[PinballMapManager sharedInstance] currentRegion] name],[[NSDate date] beginningOfDay],[[NSDate date] endOfDay]];
@@ -85,29 +86,29 @@
     }
     todayEvents = nil;
     
-    fetchedResults = [[NSFetchedResultsController alloc] initWithFetchRequest:stackRequest
-                                                         managedObjectContext:managedContext
+    self.fetchedResults = [[NSFetchedResultsController alloc] initWithFetchRequest:stackRequest
+                                                         managedObjectContext:self.managedContext
                                                            sectionNameKeyPath:nil
                                                                     cacheName:nil];
-    fetchedResults.delegate = self;
-    [fetchedResults performFetch:nil];
+    self.fetchedResults.delegate = self;
+    [self.fetchedResults performFetch:nil];
     [self.tableView reloadData];
     [self.refreshControl endRefreshing];
 }
 #pragma mark - Table view data source
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    return [[fetchedResults sections] count];
+    return [[self.fetchedResults sections] count];
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     NSInteger rows = 0;
-    if ([[fetchedResults sections] count] > 0) {
-        id <NSFetchedResultsSectionInfo> sectionInfo = [[fetchedResults sections] objectAtIndex:section];
+    if ([[self.fetchedResults sections] count] > 0) {
+        id <NSFetchedResultsSectionInfo> sectionInfo = [[self.fetchedResults sections] objectAtIndex:section];
         rows = [sectionInfo numberOfObjects];
     }
     return rows;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    Event *currentEvent = [fetchedResults objectAtIndexPath:indexPath];
+    Event *currentEvent = [self.fetchedResults objectAtIndexPath:indexPath];
     NSAttributedString *cellTitle = currentEvent.eventTitle;
 
     CGRect stringSize = [cellTitle boundingRectWithSize:CGSizeMake(270, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin context:nil];//boundingRectWithSize:CGSizeMake(270, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName: [UIFont systemFontOfSize:18]} context:nil];
@@ -121,7 +122,7 @@
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"EventCell" forIndexPath:indexPath];
-    Event *currentEvent = [fetchedResults objectAtIndexPath:indexPath];
+    Event *currentEvent = [self.fetchedResults objectAtIndexPath:indexPath];
     cell.textLabel.attributedText = currentEvent.eventTitle;
     cell.detailTextLabel.text = [currentEvent.startDate monthDayYearPretty:YES];
     
@@ -129,13 +130,13 @@
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    Event *currentEvent = [fetchedResults objectAtIndexPath:indexPath];
+    Event *currentEvent = [self.fetchedResults objectAtIndexPath:indexPath];
     EventProfileView *profileView = (EventProfileView *)[(UINavigationController *)[self.splitViewController detailViewForSplitView] navigationRootViewController];
     profileView.currentEvent = currentEvent;
 }
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
     if ([segue.identifier isEqualToString:@"EventProfileView"]){
-        Event *currentEvent = [fetchedResults objectAtIndexPath:[self.tableView indexPathForCell:sender]];
+        Event *currentEvent = [self.fetchedResults objectAtIndexPath:[self.tableView indexPathForCell:sender]];
         EventProfileView *profile = segue.destinationViewController;
         profile.currentEvent = currentEvent;
     }

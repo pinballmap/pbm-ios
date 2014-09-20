@@ -9,9 +9,10 @@
 #import "AboutView.h"
 #import "GAAppHelper.h"
 
-@interface AboutView () {
-    NSArray *aboutInfo;
-}
+@interface AboutView ()
+
+@property (nonatomic) NSArray *aboutInfo;
+
 - (IBAction)dismissAbout:(id)sender;
 @end
 
@@ -27,7 +28,7 @@
 - (void)viewDidLoad{
     [super viewDidLoad];
     NSString *aboutFile = [[NSBundle mainBundle] pathForResource:@"AboutInfo" ofType:@"plist"];
-    aboutInfo = [NSArray arrayWithContentsOfFile:aboutFile];
+    self.aboutInfo = [NSArray arrayWithContentsOfFile:aboutFile];
 }
 - (void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
@@ -42,19 +43,19 @@
 }
 #pragma mark - TableView Datasource/Delegate
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    return aboutInfo.count;
+    return self.aboutInfo.count;
 }
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section{
-    return aboutInfo[section][@"sectionTitle"];
+    return self.aboutInfo[section][@"sectionTitle"];
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return [aboutInfo[section][@"people"] count];
+    return [self.aboutInfo[section][@"people"] count];
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     static NSString *cellIdentifier = @"BasicCell";
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
-    NSDictionary *person = aboutInfo[indexPath.section][@"people"][indexPath.row];
+    NSDictionary *person = self.aboutInfo[indexPath.section][@"people"][indexPath.row];
     cell.textLabel.text = person[@"name"];
     if (!person[@"url"] || [person[@"url"] length] == 0){
         cell.accessoryType = UITableViewCellAccessoryNone;
@@ -66,7 +67,7 @@
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    NSDictionary *person = aboutInfo[indexPath.section][@"people"][indexPath.row];
+    NSDictionary *person = self.aboutInfo[indexPath.section][@"people"][indexPath.row];
     if (person[@"url"] || [person[@"url"] length] > 0){
         [[UIApplication sharedApplication] openURL:[NSURL URLWithString:person[@"url"]]];
     }

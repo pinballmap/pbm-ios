@@ -12,25 +12,28 @@
 #import "UIAlertView+Application.h"
 #import "MachinePickingView.h"
 
-@interface NewLocationsView () <CLLocationManagerDelegate,PickingDelegate> {
-    // Basic Information
-    IBOutlet UITextField *locationName;
-    IBOutlet UITextField *locationPhone;
-    IBOutlet UITextField *locationWebsite;
-    IBOutlet UITextField *locationOperator;
-    IBOutlet UILabel *machineLabel;
-    IBOutlet UITextField *userName;
-    IBOutlet UITextField *userEmail;
-    // Location information
-    IBOutlet UITextField *locationStreet;
-    IBOutlet UITextField *locationCity;
-    IBOutlet UITextField *locationState;
-    IBOutlet UITextField *locationZip;
+@interface NewLocationsView () <CLLocationManagerDelegate,PickingDelegate>
 
-    CLLocationManager *locationManager;
-    CLGeocoder *geocoder;
-    NSMutableArray *pickedMachines;
-}
+// Basic Information
+@property (weak) IBOutlet UITextField *locationName;
+@property (weak) IBOutlet UITextField *locationPhone;
+@property (weak) IBOutlet UITextField *locationWebsite;
+@property (weak) IBOutlet UITextField *locationOperator;
+@property (weak) IBOutlet UILabel *machineLabel;
+@property (weak) IBOutlet UITextField *userName;
+@property (weak) IBOutlet UITextField *userEmail;
+// Location information
+@property (weak) IBOutlet UITextField *locationStreet;
+@property (weak) IBOutlet UITextField *locationCity;
+@property (weak) IBOutlet UITextField *locationState;
+@property (weak) IBOutlet UITextField *locationZip;
+
+
+@property (nonatomic) CLLocationManager *locationManager;
+@property (nonatomic) CLGeocoder *geocoder;
+@property (nonatomic) NSMutableArray *pickedMachines;
+
+
 - (IBAction)saveLocation:(id)sender;
 - (IBAction)cancelLocation:(id)sender;
 - (void)useCurrentLocation;
@@ -54,35 +57,35 @@
 }
 #pragma mark - Class
 - (void)useCurrentLocation{
-    if (!locationManager){
-        locationManager = [CLLocationManager new];
+    if (!self.locationManager){
+        self.locationManager = [CLLocationManager new];
     }
-    locationManager.delegate = self;
-    locationManager.desiredAccuracy = kCLLocationAccuracyBest;
-    [locationManager startUpdatingLocation];
+    self.locationManager.delegate = self;
+    self.locationManager.desiredAccuracy = kCLLocationAccuracyBest;
+    [self.locationManager startUpdatingLocation];
 }
 #pragma mark - Class Actions
 - (IBAction)saveLocation:(id)sender{
 
     __block NSString *pickedMachineNames = @"";
-    [pickedMachines enumerateObjectsUsingBlock:^(Machine *obj, NSUInteger idx, BOOL *stop) {
+    [self.pickedMachines enumerateObjectsUsingBlock:^(Machine *obj, NSUInteger idx, BOOL *stop) {
         pickedMachineNames = [pickedMachineNames stringByAppendingString:[NSString stringWithFormat:@"%@-%@,",obj.name,obj.manufacturer]];
     }];
     
     
-    if (locationName.text.length > 0 && pickedMachines.count > 0){
+    if (self.locationName.text.length > 0 && self.pickedMachines.count > 0){
         NSDictionary *suggestingInfo = @{@"region_id": [[[PinballMapManager sharedInstance] currentRegion] regionId],
-                                         @"location_name": locationName.text,
-                                         @"location_street": locationStreet.text,
-                                         @"location_city": locationCity.text,
-                                         @"location_state": locationState.text,
-                                         @"location_zip": locationZip.text,
-                                         @"location_phone": locationPhone.text,
-                                         @"location_website": locationWebsite.text,
-                                         @"location_operator": locationOperator.text,
+                                         @"location_name": self.locationName.text,
+                                         @"location_street": self.locationStreet.text,
+                                         @"location_city": self.locationCity.text,
+                                         @"location_state": self.locationState.text,
+                                         @"location_zip": self.locationZip.text,
+                                         @"location_phone": self.locationPhone.text,
+                                         @"location_website": self.locationWebsite.text,
+                                         @"location_operator": self.locationOperator.text,
                                          @"location_machines": pickedMachineNames,
-                                         @"submitter_name" : userName.text,
-                                         @"submitter_email": userEmail.text};
+                                         @"submitter_name" : self.userName.text,
+                                         @"submitter_email": self.userEmail.text};
         [[PinballMapManager sharedInstance] suggestLocation:suggestingInfo andCompletion:^(NSDictionary *status) {
             if (status[@"errors"]){
                 NSString *errors;
@@ -115,8 +118,8 @@
             MachinePickingView *pickingView = [[(UINavigationController *)[self.storyboard instantiateViewControllerWithIdentifier:@"MachinePickingView"] viewControllers] lastObject];
             pickingView.delegate = self;
             pickingView.canPickMultiple = YES;
-            if (pickedMachines.count > 0){
-                pickingView.existingPickedMachines = pickedMachines;
+            if (self.pickedMachines.count > 0){
+                pickingView.existingPickedMachines = self.pickedMachines;
             }
             [self presentViewController:pickingView.parentViewController animated:YES completion:nil];
         }
@@ -132,12 +135,12 @@
     if (!machines){
         return;
     }
-    if (!pickedMachines){
-        pickedMachines = [NSMutableArray new];
+    if (!self.pickedMachines){
+        self.pickedMachines = [NSMutableArray new];
     }
-    [pickedMachines removeAllObjects];
-    [pickedMachines addObjectsFromArray:machines];
-    machineLabel.text = [NSString stringWithFormat:@"Add Machine (%lu)",(unsigned long)pickedMachines.count];
+    [self.pickedMachines removeAllObjects];
+    [self.pickedMachines addObjectsFromArray:machines];
+    self.machineLabel.text = [NSString stringWithFormat:@"Add Machine (%lu)",(unsigned long)self.pickedMachines.count];
 }
 #pragma mark - CLLocationManager Delegate
 - (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations{
@@ -151,18 +154,18 @@
 }
 #pragma mark - GeocoderDelegate
 - (void)reverseGeocode:(CLLocation *)location{
-    if (!geocoder){
-        geocoder = [CLGeocoder new];
+    if (!self.geocoder){
+        self.geocoder = [CLGeocoder new];
     }
-    [geocoder reverseGeocodeLocation:location completionHandler:^(NSArray *placemarks, NSError *error) {
+    [self.geocoder reverseGeocodeLocation:location completionHandler:^(NSArray *placemarks, NSError *error) {
         if (!error){
             if (placemarks.count > 0){
                 CLPlacemark *placemark = [placemarks firstObject];
                 dispatch_async(dispatch_get_main_queue(), ^{
-                    locationStreet.text = placemark.addressDictionary[@"Street"];
-                    locationCity.text = placemark.addressDictionary[@"City"];
-                    locationState.text = placemark.addressDictionary[@"State"];
-                    locationZip.text = placemark.addressDictionary[@"ZIP"];
+                    self.locationStreet.text = placemark.addressDictionary[@"Street"];
+                    self.locationCity.text = placemark.addressDictionary[@"City"];
+                    self.locationState.text = placemark.addressDictionary[@"State"];
+                    self.locationZip.text = placemark.addressDictionary[@"ZIP"];
                 });
             }
         }

@@ -13,11 +13,11 @@
 #import "NewMachineScoreView.h"
 #import <FMSKit/TextEditorView.h>
 
-@interface MachineLocationProfileView () <ScoreDelegate,TextEditorDelegate> {
-    NSMutableArray *machineScores;
-    UIAlertView *deleteConfirm;
-    NSIndexPath *deletePath;
-}
+@interface MachineLocationProfileView () <ScoreDelegate,TextEditorDelegate>
+
+@property (nonatomic) NSMutableArray *machineScores;
+@property (nonatomic) UIAlertView *deleteConfirm;
+@property (nonatomic) NSIndexPath *deletePath;
 
 
 - (IBAction)dismissProfile:(id)sender;
@@ -36,7 +36,7 @@
 
 - (void)viewDidLoad{
     [super viewDidLoad];
-    machineScores = [NSMutableArray new];
+    self.machineScores = [NSMutableArray new];
     self.navigationItem.title = _currentMachine.machine.name;
     [self reloadScores];
 }
@@ -46,10 +46,10 @@
 }
 #pragma mark - Class
 - (void)reloadScores{
-    if (!machineScores){
-        machineScores = [NSMutableArray new];
+    if (!self.machineScores){
+        self.machineScores = [NSMutableArray new];
     }
-    [machineScores removeAllObjects];
+    [self.machineScores removeAllObjects];
     [[PinballMapManager sharedInstance] allScoresForMachine:_currentMachine withCompletion:^(NSDictionary *status) {
         if (status[@"errors"]){
             NSString *errors;
@@ -62,7 +62,7 @@
         }else{
             [status[@"machine_scores"] enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
                 MachineScore *score = [[MachineScore alloc] initWithData:obj];
-                [machineScores addObject:score];
+                [self.machineScores addObject:score];
             }];
             [self.tableView reloadData];
         }
@@ -79,7 +79,7 @@
 #pragma mark - UIAlertView Delegate
 - (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex{
     if (buttonIndex != alertView.cancelButtonIndex){
-        if (alertView == deleteConfirm){
+        if (alertView == self.deleteConfirm){
             MachineLocation *machine = _currentMachine;//[machinesFetch objectAtIndexPath:[NSIndexPath indexPathForItem:deletePath.row inSection:0]];
             [[PinballMapManager sharedInstance] removeMachine:machine withCompletion:^(NSDictionary *status) {
                 if (status[@"errors"]){
@@ -93,7 +93,7 @@
                 }else{
                     [[[CoreDataManager sharedInstance] managedObjectContext] deleteObject:machine];
                     [[CoreDataManager sharedInstance] saveContext];
-                    deletePath = nil;
+                    self.deletePath = nil;
                     [UIAlertView simpleApplicationAlertWithMessage:@"Removed machine!" cancelButton:@"Ok"];
                     [self dismissViewControllerAnimated:YES completion:nil];
                 }
@@ -109,7 +109,7 @@
     if (section == 0 || section == 1){
         return 1;
     }else if (section == 2){
-        return machineScores.count+1;
+        return self.machineScores.count+1;
     }else{
         return 1;
     }
@@ -172,7 +172,7 @@
             cell.textLabel.text = @"Add your score";
             cell.textLabel.textAlignment = NSTextAlignmentCenter;
         }else{
-            MachineScore *score = machineScores[indexPath.row-1];
+            MachineScore *score = self.machineScores[indexPath.row-1];
             cell.textLabel.text = [NSString stringWithFormat:@"%@ (%@)",score.score,score.initials];
             cell.detailTextLabel.text = [NSString stringWithFormat:@"%@",[MachineScore wordingForRank:score.rank]];
         }
@@ -208,9 +208,9 @@
         scoreView.delegate = self;
         [self.navigationController presentViewController:scoreView.parentViewController animated:YES completion:nil];
     }else if (indexPath.section == 3){
-        deletePath = indexPath;
-        deleteConfirm = [UIAlertView applicationAlertWithMessage:@"Are you sure you want to remove this machine." delegate:self cancelButton:@"No" otherButtons:@"Yes", nil];
-        [deleteConfirm show];
+        self.deletePath = indexPath;
+        self.deleteConfirm = [UIAlertView applicationAlertWithMessage:@"Are you sure you want to remove this machine." delegate:self cancelButton:@"No" otherButtons:@"Yes", nil];
+        [self.deleteConfirm show];
     }
 }
 #pragma mark - TextEditor Delegate

@@ -11,12 +11,13 @@
 #import "MachineProfileView.h"
 #import "GAAppHelper.h"
 
-@interface MachinesView () <NSFetchedResultsControllerDelegate,UISearchBarDelegate>{
-    NSFetchedResultsController *fetchedResults;
-    NSManagedObjectContext *managedContext;
-    BOOL isSearching;
-    NSMutableArray *searchResults;
-}
+@interface MachinesView () <NSFetchedResultsControllerDelegate,UISearchBarDelegate>
+
+@property (nonatomic) NSFetchedResultsController *fetchedResults;
+@property (nonatomic) NSManagedObjectContext *managedContext;
+@property (nonatomic) BOOL isSearching;
+@property (nonatomic) NSMutableArray *searchResults;
+
 - (IBAction)addMachine:(id)sender;
 
 @end
@@ -47,10 +48,10 @@
     if ([segue.identifier isEqualToString:@"ProfileView"]){
         Machine *currentMachine;
         NSIndexPath *indexPath = [self.tableView indexPathForCell:sender];
-        if (!isSearching){
-            currentMachine = [fetchedResults objectAtIndexPath:indexPath];
+        if (!self.isSearching){
+            currentMachine = [self.fetchedResults objectAtIndexPath:indexPath];
         }else{
-            currentMachine = searchResults[indexPath.row];
+            currentMachine = self.searchResults[indexPath.row];
         }
         MachineProfileView *profileView = segue.destinationViewController;
         profileView.currentMachine = currentMachine;
@@ -67,35 +68,35 @@
 #pragma mark - Region Update
 - (void)updateRegion{
     self.navigationItem.title = [NSString stringWithFormat:@"%@ Machines",[[[PinballMapManager sharedInstance] currentRegion] fullName]];
-    managedContext = [[CoreDataManager sharedInstance] managedObjectContext];
+    self.managedContext = [[CoreDataManager sharedInstance] managedObjectContext];
     NSFetchRequest *stackRequest = [NSFetchRequest fetchRequestWithEntityName:@"Machine"];
     stackRequest.predicate = [NSPredicate predicateWithFormat:@"machineLocations.location.region CONTAINS %@" argumentArray:@[[[PinballMapManager sharedInstance] currentRegion]]];
     stackRequest.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES]];
-    fetchedResults = [[NSFetchedResultsController alloc] initWithFetchRequest:stackRequest
-                                                         managedObjectContext:managedContext
+    self.fetchedResults = [[NSFetchedResultsController alloc] initWithFetchRequest:stackRequest
+                                                         managedObjectContext:self.managedContext
                                                            sectionNameKeyPath:@"name"
                                                                     cacheName:nil];
-    fetchedResults.delegate = self;
-    [fetchedResults performFetch:nil];
+    self.fetchedResults.delegate = self;
+    [self.fetchedResults performFetch:nil];
     [self.tableView reloadData];
 }
 #pragma mark - Searchbar Delegate
 - (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar{
-    isSearching = YES;
+    self.isSearching = YES;
     searchBar.showsCancelButton = YES;
 }
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText{
     NSFetchRequest *searchrequest = [NSFetchRequest fetchRequestWithEntityName:@"Machine"];
     searchrequest.predicate = [NSPredicate predicateWithFormat:@"name CONTAINS[cd] %@",searchText];
-    [searchResults removeAllObjects];
-    searchResults = nil;
-    searchResults = [NSMutableArray new];
+    [self.searchResults removeAllObjects];
+    self.searchResults = nil;
+    self.searchResults = [NSMutableArray new];
     NSError *error = nil;
-    [searchResults addObjectsFromArray:[managedContext executeFetchRequest:searchrequest error:&error]];
+    [self.searchResults addObjectsFromArray:[self.managedContext executeFetchRequest:searchrequest error:&error]];
     [self.tableView reloadData];
 }
 - (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar{
-    isSearching = NO;
+    self.isSearching = NO;
     searchBar.text = @"";
     [searchBar resignFirstResponder];
     searchBar.showsCancelButton = NO;
@@ -103,30 +104,30 @@
 }
 #pragma mark - Table view data source
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    if (!isSearching){
-        return [[fetchedResults sections] count];
+    if (!self.isSearching){
+        return [[self.fetchedResults sections] count];
     }else{
         return 1;
     }
 }
 - (NSArray *)sectionIndexTitlesForTableView:(UITableView *)tableView{
-    if (!isSearching){
-        return [fetchedResults sectionIndexTitles];
+    if (!self.isSearching){
+        return [self.fetchedResults sectionIndexTitles];
     }
     return @[];
 }
 - (NSInteger)tableView:(UITableView *)tableView sectionForSectionIndexTitle:(NSString *)title atIndex:(NSInteger)index{
-    return [fetchedResults sectionForSectionIndexTitle:title atIndex:index];
+    return [self.fetchedResults sectionForSectionIndexTitle:title atIndex:index];
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     NSInteger rows = 0;
-    if (!isSearching){
-        if ([[fetchedResults sections] count] > 0) {
-            id <NSFetchedResultsSectionInfo> sectionInfo = [[fetchedResults sections] objectAtIndex:section];
+    if (!self.isSearching){
+        if ([[self.fetchedResults sections] count] > 0) {
+            id <NSFetchedResultsSectionInfo> sectionInfo = [[self.fetchedResults sections] objectAtIndex:section];
             rows = [sectionInfo numberOfObjects];
         }
     }else{
-        rows = searchResults.count;
+        rows = self.searchResults.count;
     }
     return rows;
 }
@@ -134,10 +135,10 @@
     float defaultWidth = 255;
     
     Machine *currentMachine;
-    if (!isSearching){
-        currentMachine = [fetchedResults objectAtIndexPath:indexPath];
+    if (!self.isSearching){
+        currentMachine = [self.fetchedResults objectAtIndexPath:indexPath];
     }else{
-        currentMachine = searchResults[indexPath.row];
+        currentMachine = self.searchResults[indexPath.row];
     }
     
     NSString *detailString = [NSString stringWithFormat:@"%@, %@",currentMachine.manufacturer,currentMachine.year];
@@ -154,10 +155,10 @@
     cell.textLabel.numberOfLines = 0;
     cell.detailTextLabel.numberOfLines = 0;
     Machine *currentMachine;
-    if (!isSearching){
-        currentMachine = [fetchedResults objectAtIndexPath:indexPath];
+    if (!self.isSearching){
+        currentMachine = [self.fetchedResults objectAtIndexPath:indexPath];
     }else{
-        currentMachine = searchResults[indexPath.row];
+        currentMachine = self.searchResults[indexPath.row];
     }
 
     cell.textLabel.text = currentMachine.name;
@@ -167,10 +168,10 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     Machine *currentMachine;
-    if (!isSearching){
-        currentMachine = [fetchedResults objectAtIndexPath:indexPath];
+    if (!self.isSearching){
+        currentMachine = [self.fetchedResults objectAtIndexPath:indexPath];
     }else{
-        currentMachine = searchResults[indexPath.row];
+        currentMachine = self.searchResults[indexPath.row];
     }
     if ([UIDevice iPad]){
         MachineProfileView *profileView = (MachineProfileView *)[[self.splitViewController detailViewForSplitView] navigationRootViewController];

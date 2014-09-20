@@ -24,10 +24,10 @@ typedef NS_ENUM(NSInteger, PBMDataAPI) {
 };
 
 
-@interface PinballMapManager () <CLLocationManagerDelegate>{
-    NSURLSession *session;
-    CLLocationManager *locationManager;
-}
+@interface PinballMapManager () <CLLocationManagerDelegate>
+
+@property (nonatomic) NSURLSession *session;
+@property (nonatomic) CLLocationManager *locationManager;
 
 @end
 
@@ -46,7 +46,7 @@ typedef NS_ENUM(NSInteger, PBMDataAPI) {
     self = [super init];
     if (self){
         [self getUserLocation];
-        session = [NSURLSession sharedSession];
+        self.session = [NSURLSession sharedSession];
         _regionInfo = [[NSUserDefaults standardUserDefaults] objectForKey:@"CurrentRegion"];
         if (_regionInfo){
             NSFetchRequest *regionRequest = [NSFetchRequest fetchRequestWithEntityName:@"Region"];
@@ -67,17 +67,17 @@ typedef NS_ENUM(NSInteger, PBMDataAPI) {
     return self;
 }
 - (void)getUserLocation{
-    if (!locationManager){
-        locationManager = [CLLocationManager new];
+    if (!self.locationManager){
+        self.locationManager = [CLLocationManager new];
     }
     #pragma message ("iOS 8 Support for location updating")
-    if ([locationManager respondsToSelector:@selector(requestWhenInUseAuthorization)]){
-        [locationManager requestWhenInUseAuthorization];
+    if ([self.locationManager respondsToSelector:@selector(requestWhenInUseAuthorization)]){
+        [self.locationManager requestWhenInUseAuthorization];
     }
-    locationManager.delegate = self;
-    locationManager.desiredAccuracy = kCLLocationAccuracyBest;
-    locationManager.distanceFilter = 5;
-    [locationManager startUpdatingLocation];
+    self.locationManager.delegate = self;
+    self.locationManager.desiredAccuracy = kCLLocationAccuracyBest;
+    self.locationManager.distanceFilter = 5;
+    [self.locationManager startUpdatingLocation];
 }
 - (BOOL)shouldShowMessageOfDay{
     NSDate *lastShownDate = [[NSUserDefaults standardUserDefaults] objectForKey:motdKey];

@@ -10,11 +10,11 @@
 #import "UIAlertView+Application.h"
 #import "LocationsView.h"
 
-@interface NewMachineView () {
-    Location *selectedLocation;
-}
-@property (nonatomic) IBOutlet UITextField *machineName;
-@property (nonatomic) IBOutlet UILabel *locationTitle;
+@interface NewMachineView ()
+
+@property (nonatomic) Location *selectedLocation;
+@property (weak) IBOutlet UITextField *machineName;
+@property (weak) IBOutlet UILabel *locationTitle;
 
 - (IBAction)saveMachine:(id)sender;
 - (IBAction)cancelMachine:(id)sender;
@@ -44,8 +44,8 @@
 }
 #pragma mark - Class Actions
 - (IBAction)saveMachine:(id)sender{
-    if (selectedLocation && _machineName.text.length > 0){
-        NSDictionary *machineData = @{@"machine_name": _machineName.text,@"location_id": selectedLocation.locationId};
+    if (self.selectedLocation && _machineName.text.length > 0){
+        NSDictionary *machineData = @{@"machine_name": _machineName.text,@"location_id": self.selectedLocation.locationId};
         [[PinballMapManager sharedInstance] createNewMachine:machineData withCompletion:^(NSDictionary *status) {
             if (status[@"errors"]){
                 NSString *errors;
@@ -67,7 +67,7 @@
 }
 #pragma mark - Class
 - (void)setLocation:(Location *)location{
-    selectedLocation = location;
+    self.selectedLocation = location;
     _locationTitle.text = location.name;
 }
 #pragma mark - TableViewDelegate

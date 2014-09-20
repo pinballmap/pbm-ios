@@ -10,10 +10,11 @@
 #import "UIAlertView+Application.h"
 #import "RegionsView.h"
 
-@interface PinballTabController () {
-    UIAlertView *updatingAlert;
-}
+@interface PinballTabController ()
+
+@property (nonatomic) UIAlertView *updatingAlert;
 @property (nonatomic) UIView *motdAlert;
+
 - (void)updatingRegion;
 @end
 
@@ -107,15 +108,15 @@
 
     [[[self.viewControllers objectAtIndex:0] tabBarItem] setTitle:currentRegion.fullName];
     
-    [updatingAlert dismissWithClickedButtonIndex:0 animated:YES];
+    [self.updatingAlert dismissWithClickedButtonIndex:0 animated:YES];
 }
 - (void)updatingRegion{
-    updatingAlert = [UIAlertView applicationAlertWithMessage:@"Updating Region" delegate:nil cancelButton:nil otherButtons:nil, nil];
-    [updatingAlert show];
+    self.updatingAlert = [UIAlertView applicationAlertWithMessage:@"Updating Region" delegate:nil cancelButton:nil otherButtons:nil, nil];
+    [self.updatingAlert show];
 }
 - (void)updatingProgress:(NSNotification *)note{
     NSDictionary *progress = note.object;
-    updatingAlert.message = [NSString stringWithFormat:@"%@ of %@ completed",progress[@"completed"],progress[@"total"]];
+    self.updatingAlert.message = [NSString stringWithFormat:@"%@ of %@ completed",progress[@"completed"],progress[@"total"]];
 }
 - (IBAction)viewMessageOfDay:(id)sender{
     [self.motdAlert removeFromSuperview];

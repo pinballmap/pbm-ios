@@ -12,9 +12,10 @@
 
 @import MessageUI;
 
-@interface SettingsView () <MFMailComposeViewControllerDelegate> {
-    IBOutlet UILabel *regionLabel;
-}
+@interface SettingsView () <MFMailComposeViewControllerDelegate>
+
+@property (weak) IBOutlet UILabel *regionLabel;
+
 - (void)updateRegion;
 - (IBAction)sendFeedback:(id)sender;
 
@@ -40,7 +41,7 @@
     // Dispose of any resources that can be recreated.
 }
 - (void)updateRegion{
-    regionLabel.text = [[[PinballMapManager sharedInstance] currentRegion] fullName];
+    self.regionLabel.text = [[[PinballMapManager sharedInstance] currentRegion] fullName];
 }
 #pragma mark - Class Actions
 - (IBAction)sendFeedback:(id)sender{

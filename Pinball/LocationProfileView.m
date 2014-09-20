@@ -32,17 +32,15 @@ typedef enum : NSUInteger {
     LocationEditingTypeWebsite,
 } LocationEditingType;
 
-@interface LocationProfileView () <TextEditorDelegate,NSFetchedResultsControllerDelegate,UIAlertViewDelegate,LocationTypeSelectDelegate> {
-    NSFetchedResultsController *machinesFetch;
-    UIImage *mapSnapshot;
-    LocationEditingType editingType;
+@interface LocationProfileView () <TextEditorDelegate,NSFetchedResultsControllerDelegate,UIAlertViewDelegate,LocationTypeSelectDelegate>
 
-    UIAlertView *deleteConfirm;
-    NSIndexPath *deletePath;
-    UISegmentedControl *dataSetSeg;
-    
-    UIAlertView *openInMapsConfirm;
-}
+@property (nonatomic) NSFetchedResultsController *machinesFetch;
+@property (nonatomic) UIImage *mapSnapshot;
+@property (nonatomic) LocationEditingType editingType;
+@property (nonatomic) UIAlertView *deleteConfirm;
+@property (nonatomic) NSIndexPath *deletePath;
+@property (nonatomic) UISegmentedControl *dataSetSeg;
+@property (nonatomic) UIAlertView *openInMapsConfirm;
 
 @end
 
@@ -59,13 +57,13 @@ typedef enum : NSUInteger {
     [super viewDidLoad];
 
     // Sort the machines by name.
-    dataSetSeg = [[UISegmentedControl alloc] init];
-    dataSetSeg.translatesAutoresizingMaskIntoConstraints = NO;
-    dataSetSeg.frame = CGRectMake(5, 7, 310, 29);
-    [dataSetSeg insertSegmentWithTitle:@"Machines" atIndex:0 animated:YES];
-    [dataSetSeg insertSegmentWithTitle:@"Info" atIndex:1 animated:YES];
-    [dataSetSeg addTarget:self action:@selector(changeData:) forControlEvents:UIControlEventValueChanged];
-    [dataSetSeg setSelectedSegmentIndex:0];
+    self.dataSetSeg = [[UISegmentedControl alloc] init];
+    self.dataSetSeg.translatesAutoresizingMaskIntoConstraints = NO;
+    self.dataSetSeg.frame = CGRectMake(5, 7, 310, 29);
+    [self.dataSetSeg insertSegmentWithTitle:@"Machines" atIndex:0 animated:YES];
+    [self.dataSetSeg insertSegmentWithTitle:@"Info" atIndex:1 animated:YES];
+    [self.dataSetSeg addTarget:self action:@selector(changeData:) forControlEvents:UIControlEventValueChanged];
+    [self.dataSetSeg setSelectedSegmentIndex:0];
 
     if (_currentLocation){
         [self setupUI];
@@ -82,11 +80,11 @@ typedef enum : NSUInteger {
     NSFetchRequest *locationMachines = [NSFetchRequest fetchRequestWithEntityName:@"MachineLocation"];
     locationMachines.predicate = [NSPredicate predicateWithFormat:@"location.locationId = %@",_currentLocation.locationId];
     locationMachines.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"machine.name" ascending:YES]];
-    machinesFetch = nil;
-    machinesFetch = [[NSFetchedResultsController alloc] initWithFetchRequest:locationMachines managedObjectContext:[[CoreDataManager sharedInstance] managedObjectContext] sectionNameKeyPath:nil cacheName:nil];
-    machinesFetch.delegate = self;
-    [machinesFetch performFetch:nil];
-    dataSetSeg.selectedSegmentIndex = 0;
+    self.machinesFetch = nil;
+    self.machinesFetch = [[NSFetchedResultsController alloc] initWithFetchRequest:locationMachines managedObjectContext:[[CoreDataManager sharedInstance] managedObjectContext] sectionNameKeyPath:nil cacheName:nil];
+    self.machinesFetch.delegate = self;
+    [self.machinesFetch performFetch:nil];
+    self.dataSetSeg.selectedSegmentIndex = 0;
     self.tableView.allowsSelectionDuringEditing = YES;
     [self setupRightBarButton];
     [self.tableView reloadData];
@@ -94,7 +92,7 @@ typedef enum : NSUInteger {
 - (void)setupRightBarButton{
     if (_currentLocation){
         if (![UIDevice iPad]){
-            if (dataSetSeg.selectedSegmentIndex == 0){
+            if (self.dataSetSeg.selectedSegmentIndex == 0){
                 UIBarButtonItem *addMachine = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addNewMachine:)];
                 if ([UIDevice currentModel] == ModelTypeiPad){
                     self.parentViewController.navigationItem.rightBarButtonItem = addMachine;
@@ -139,7 +137,7 @@ typedef enum : NSUInteger {
 }
 - (void)setCurrentLocation:(Location *)currentLocation{
     _currentLocation = currentLocation;
-    mapSnapshot = nil;
+    self.mapSnapshot = nil;
     [self setupUI];
 }
 #pragma mark - Class Actions
@@ -154,7 +152,7 @@ typedef enum : NSUInteger {
     [self.navigationController presentViewController:vc.parentViewController animated:YES completion:nil];
 }
 - (IBAction)editLocation:(id)sender{
-    [dataSetSeg setSelectedSegmentIndex:1];
+    [self.dataSetSeg setSelectedSegmentIndex:1];
     BOOL editing = YES;
     if (self.tableView.editing){
         editing = NO;
@@ -166,7 +164,7 @@ typedef enum : NSUInteger {
 #pragma mark - TextEditor Delegate
 - (void)editorDidComplete:(NSString *)text{
     NSDictionary *editedData;
-    switch (editingType) {
+    switch (self.editingType) {
         case LocationEditingTypeWebsite:
             editedData = @{@"website": text};
             break;
@@ -189,7 +187,7 @@ typedef enum : NSUInteger {
             }
             [UIAlertView simpleApplicationAlertWithMessage:errors cancelButton:@"Ok"];
         }else{
-            switch (editingType) {
+            switch (self.editingType) {
                 case LocationEditingTypeWebsite:
                     _currentLocation.website = text;
                     break;
@@ -202,7 +200,7 @@ typedef enum : NSUInteger {
                 default:
                     break;
             }
-            editingType = -1;
+            self.editingType = -1;
             [[CoreDataManager sharedInstance] saveContext];
             [self.tableView setEditing:NO];
             if ([UIDevice currentModel] == ModelTypeiPhone){
@@ -230,8 +228,8 @@ typedef enum : NSUInteger {
 #pragma mark - UIAlertView Delegate
 - (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex{
     if (buttonIndex != alertView.cancelButtonIndex){
-        if (alertView == deleteConfirm){
-            MachineLocation *machine = [machinesFetch objectAtIndexPath:[NSIndexPath indexPathForItem:deletePath.row inSection:0]];
+        if (alertView == self.deleteConfirm){
+            MachineLocation *machine = [self.machinesFetch objectAtIndexPath:[NSIndexPath indexPathForItem:self.deletePath.row inSection:0]];
             [[PinballMapManager sharedInstance] removeMachine:machine withCompletion:^(NSDictionary *status) {
                 if (status[@"errors"]){
                     NSString *errors;
@@ -244,11 +242,11 @@ typedef enum : NSUInteger {
                 }else{
                     [[[CoreDataManager sharedInstance] managedObjectContext] deleteObject:machine];
                     [[CoreDataManager sharedInstance] saveContext];
-                    deletePath = nil;
+                    self.deletePath = nil;
                     [UIAlertView simpleApplicationAlertWithMessage:@"Removed machine!" cancelButton:@"Ok"];
                 }
             }];
-        }else if (alertView == openInMapsConfirm){
+        }else if (alertView == self.openInMapsConfirm){
             CLLocationCoordinate2D coord = CLLocationCoordinate2DMake([_currentLocation.latitude doubleValue],[_currentLocation.longitude doubleValue]);
             NSDictionary *dic = [NSDictionary dictionaryWithObjects:@[_currentLocation.street,_currentLocation.city,_currentLocation.state,_currentLocation.zip] forKeys:[NSArray arrayWithObjects:(NSString *)kABPersonAddressStreetKey,kABPersonAddressCityKey,kABPersonAddressStateKey,kABPersonAddressZIPKey, nil]];
             
@@ -273,14 +271,14 @@ typedef enum : NSUInteger {
     if (section == 0 && [UIDevice currentModel] == ModelTypeiPhone){
         return 1;
     }else{
-        if (dataSetSeg.selectedSegmentIndex == 0){
+        if (self.dataSetSeg.selectedSegmentIndex == 0){
             NSInteger rows = 0;
-            if ([[machinesFetch sections] count] > 0) {
-                id <NSFetchedResultsSectionInfo> sectionInfo = [[machinesFetch sections] objectAtIndex:0];
+            if ([[self.machinesFetch sections] count] > 0) {
+                id <NSFetchedResultsSectionInfo> sectionInfo = [[self.machinesFetch sections] objectAtIndex:0];
                 rows = [sectionInfo numberOfObjects];
             }
             return rows;
-        }else if (dataSetSeg.selectedSegmentIndex == 1){
+        }else if (self.dataSetSeg.selectedSegmentIndex == 1){
             return 5;
         }
     }
@@ -296,9 +294,9 @@ typedef enum : NSUInteger {
     if ((section == 1 && [UIDevice currentModel] == ModelTypeiPhone) || ([UIDevice currentModel] == ModelTypeiPad && section == 0)){
         UIView *dataSegView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.frame.size.width, 44)];
         [dataSegView setBackgroundColor:[UIColor whiteColor]];
-        [dataSegView addSubview:dataSetSeg];
-        if (dataSetSeg){
-            NSArray *verticalConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-(10)-[seg]-(10)-|" options:NSLayoutFormatAlignmentMask metrics:nil views:@{@"seg": dataSetSeg}];
+        [dataSegView addSubview:self.dataSetSeg];
+        if (self.dataSetSeg){
+            NSArray *verticalConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-(10)-[seg]-(10)-|" options:NSLayoutFormatAlignmentMask metrics:nil views:@{@"seg": self.dataSetSeg}];
             [dataSegView addConstraints:verticalConstraints];
         }
         return dataSegView;
@@ -310,8 +308,8 @@ typedef enum : NSUInteger {
         // Map image.
         return 122;
     }else{
-        if (dataSetSeg.selectedSegmentIndex == 0){
-            MachineLocation *currentMachine = [machinesFetch objectAtIndexPath:[NSIndexPath indexPathForRow:indexPath.row inSection:0]];
+        if (self.dataSetSeg.selectedSegmentIndex == 0){
+            MachineLocation *currentMachine = [self.machinesFetch objectAtIndexPath:[NSIndexPath indexPathForRow:indexPath.row inSection:0]];
             NSString *cellDetail = currentMachine.conditionWithUpdateDate;//[NSString stringWithFormat:@"%@ updated on %@",currentMachine.condition,[currentMachine.conditionUpdate monthDayYearPretty:YES]];
             
             CGRect titleLabel = [currentMachine.machine.machineTitle boundingRectWithSize:CGSizeMake(238, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin context:nil];
@@ -324,7 +322,7 @@ typedef enum : NSUInteger {
             }else{
                 return stringSize.size.height+10;
             }
-        }else if (dataSetSeg.selectedSegmentIndex == 1){
+        }else if (self.dataSetSeg.selectedSegmentIndex == 1){
             NSString *detailText;
             if (indexPath.row == 0){
                 detailText = _currentLocation.fullAddress;
@@ -364,11 +362,11 @@ typedef enum : NSUInteger {
         [cell addAnnotation];
         return cell;
     }else{
-        if (dataSetSeg.selectedSegmentIndex == 0){
+        if (self.dataSetSeg.selectedSegmentIndex == 0){
             
             UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MachineCell" forIndexPath:indexPath];
             // Machine cell.
-            MachineLocation *currentMachine = [machinesFetch objectAtIndexPath:[NSIndexPath indexPathForRow:indexPath.row inSection:0]];
+            MachineLocation *currentMachine = [self.machinesFetch objectAtIndexPath:[NSIndexPath indexPathForRow:indexPath.row inSection:0]];
             cell.textLabel.attributedText = currentMachine.machine.machineTitle;
             cell.detailTextLabel.numberOfLines = 0;
             // If no condition is available, just don't set the detail text label.
@@ -383,7 +381,7 @@ typedef enum : NSUInteger {
             }
             return cell;
             
-        }else if (dataSetSeg.selectedSegmentIndex == 1){
+        }else if (self.dataSetSeg.selectedSegmentIndex == 1){
             // Profile data with InfoCell
             InformationCell *cell = (InformationCell *)[tableView dequeueReusableCellWithIdentifier:@"InfoCell"];
             cell.dataLabel.numberOfLines = 0;
@@ -426,23 +424,23 @@ typedef enum : NSUInteger {
     }else{
         
         
-        if (dataSetSeg.selectedSegmentIndex == 0){
+        if (self.dataSetSeg.selectedSegmentIndex == 0){
             MachineLocationProfileView *vc = [[[self.storyboard instantiateViewControllerWithIdentifier:@"MachineLocationProfileView"] viewControllers] lastObject];
-            vc.currentMachine = [machinesFetch objectAtIndexPath:[NSIndexPath indexPathForRow:indexPath.row inSection:0]];
+            vc.currentMachine = [self.machinesFetch objectAtIndexPath:[NSIndexPath indexPathForRow:indexPath.row inSection:0]];
             [tableView setEditing:NO];
             if ([UIDevice currentModel] == ModelTypeiPad){
                 [self.parentViewController.navigationController presentViewController:vc.parentViewController animated:YES completion:nil];
             }else{
                 [self.navigationController presentViewController:vc.parentViewController animated:YES completion:nil];
             }
-        }else if (dataSetSeg.selectedSegmentIndex == 1){
+        }else if (self.dataSetSeg.selectedSegmentIndex == 1){
             if (indexPath.row == 0){
                 // Address
                 if ([UIDevice currentModel] == ModelTypeiPhone){
                     [self showMap];
                 }else{
-                    openInMapsConfirm = [UIAlertView applicationAlertWithMessage:@"Do you want to open this location in Maps?" delegate:self cancelButton:@"No" otherButtons:@"Yes", nil];
-                    [openInMapsConfirm show];
+                    self.openInMapsConfirm = [UIAlertView applicationAlertWithMessage:@"Do you want to open this location in Maps?" delegate:self cancelButton:@"No" otherButtons:@"Yes", nil];
+                    [self.openInMapsConfirm show];
                 }
             }else if (indexPath.row == 1){
                 // Phone
@@ -456,7 +454,7 @@ typedef enum : NSUInteger {
                     if (![_currentLocation.phone isEqualToString:@"Tap to edit"]){
                         editor.textContent = _currentLocation.phone;
                     }
-                    editingType = LocationEditingTypePhone;
+                    self.editingType = LocationEditingTypePhone;
                     if ([UIDevice currentModel] == ModelTypeiPad){
                         [self.parentViewController.navigationController presentViewController:editor.parentViewController animated:YES completion:nil];
                     }else{
@@ -491,7 +489,7 @@ typedef enum : NSUInteger {
                 TextEditorView *editor = [[[self.storyboard instantiateViewControllerWithIdentifier:@"TextEditorView"] viewControllers] lastObject];
                 editor.delegate = self;
                 editor.editorTitle = @"Location Description";
-                editingType = LocationEditingTypeDescription;
+                self.editingType = LocationEditingTypeDescription;
                 if (![_currentLocation.locationDescription isEqualToString:@"Tap to edit"]){
                     editor.textContent = _currentLocation.locationDescription;
                 }
@@ -508,7 +506,7 @@ typedef enum : NSUInteger {
 }
 - (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath{
     if ((indexPath.section == 1 && [UIDevice currentModel] == ModelTypeiPhone) || (indexPath.section == 0 && [UIDevice currentModel] == ModelTypeiPad)){
-        if (dataSetSeg.selectedSegmentIndex == 1){
+        if (self.dataSetSeg.selectedSegmentIndex == 1){
             return UITableViewCellEditingStyleInsert;
         }
     }
@@ -516,7 +514,7 @@ typedef enum : NSUInteger {
 }
 - (void)tableView:(UITableView *)tableView accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *)indexPath{
     if ((indexPath.section == 1 && [UIDevice currentModel] == ModelTypeiPhone) || (indexPath.section == 0 && [UIDevice currentModel] == ModelTypeiPad)){
-        MachineLocation *currentMachine = [machinesFetch objectAtIndexPath:[NSIndexPath indexPathForRow:indexPath.row inSection:0]];
+        MachineLocation *currentMachine = [self.machinesFetch objectAtIndexPath:[NSIndexPath indexPathForRow:indexPath.row inSection:0]];
         MachineProfileView *machineProfile = [self.storyboard instantiateViewControllerWithIdentifier:@"MachineProfile"];
         machineProfile.currentMachine = currentMachine.machine;
         if ([UIDevice currentModel] == ModelTypeiPad){
@@ -531,7 +529,7 @@ typedef enum : NSUInteger {
 }
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath{    
     if ((indexPath.section == 1 && [UIDevice currentModel] == ModelTypeiPhone) || (indexPath.section == 0 && [UIDevice currentModel] == ModelTypeiPad)){
-        if (dataSetSeg.selectedSegmentIndex == 0){
+        if (self.dataSetSeg.selectedSegmentIndex == 0){
             return YES;
         }else{
             if (indexPath.row != 0 && indexPath.row != 2){
@@ -543,9 +541,9 @@ typedef enum : NSUInteger {
 }
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath{
     if (editingStyle == UITableViewCellEditingStyleDelete){
-        deletePath = indexPath;
-        deleteConfirm = [UIAlertView applicationAlertWithMessage:@"Are you sure you want to remove this machine." delegate:self cancelButton:@"No" otherButtons:@"Yes", nil];
-        [deleteConfirm show];
+        self.deletePath = indexPath;
+        self.deleteConfirm = [UIAlertView applicationAlertWithMessage:@"Are you sure you want to remove this machine." delegate:self cancelButton:@"No" otherButtons:@"Yes", nil];
+        [self.deleteConfirm show];
     }
 }
 #pragma mark - NSFetchedResultsControllerDelegate
@@ -572,7 +570,7 @@ typedef enum : NSUInteger {
             break;
             
         case NSFetchedResultsChangeUpdate:
-            if (dataSetSeg.selectedSegmentIndex == 0){
+            if (self.dataSetSeg.selectedSegmentIndex == 0){
                 [self.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForRow:indexPath.row inSection:section.intValue]] withRowAnimation:UITableViewRowAnimationFade];
             }
             break;

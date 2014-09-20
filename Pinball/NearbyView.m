@@ -14,7 +14,7 @@
 
 @interface NearbyView ()
 
-@property (nonatomic) IBOutlet MKMapView *mapView;
+@property (weak) IBOutlet MKMapView *mapView;
 
 @end
 

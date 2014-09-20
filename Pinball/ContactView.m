@@ -11,16 +11,14 @@
 #import "PinballMapManager.h"
 #import "UIAlertView+Application.h"
 
-@interface ContactView () <TextEditorDelegate> {
-    
-}
+@interface ContactView () <TextEditorDelegate>
 @property (nonatomic) NSString *messageContent;
-@property (nonatomic) IBOutlet UITextField *nameField;
-@property (nonatomic) IBOutlet UITextField *emailField;
-@property (nonatomic) IBOutlet UILabel *messageLabel;
-@property (nonatomic) IBOutlet UIView *messageCellView;
-@property (nonatomic) IBOutlet UITableViewCell *regionNameCell;
-@property (nonatomic) IBOutlet UITextField *regionNameField;
+@property (weak) IBOutlet UITextField *nameField;
+@property (weak) IBOutlet UITextField *emailField;
+@property (weak) IBOutlet UILabel *messageLabel;
+@property (weak) IBOutlet UIView *messageCellView;
+@property (weak) IBOutlet UITableViewCell *regionNameCell;
+@property (weak) IBOutlet UITextField *regionNameField;
 
 - (IBAction)cancelMessage:(id)sender;
 - (IBAction)sendMessage:(id)sender;

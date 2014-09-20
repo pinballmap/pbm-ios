@@ -14,10 +14,11 @@
 #import "Region+UpdateDistance.h"
 #import "ContactView.h"
 
-@interface RegionsView () <NSFetchedResultsControllerDelegate,UISearchDisplayDelegate,MFMailComposeViewControllerDelegate,UIAlertViewDelegate> {
-    NSFetchedResultsController *fetchedResults;
-    NSMutableArray *searchResults;
-}
+@interface RegionsView () <NSFetchedResultsControllerDelegate,UISearchDisplayDelegate,MFMailComposeViewControllerDelegate,UIAlertViewDelegate>
+
+@property (nonatomic) NSFetchedResultsController *fetchedResults;
+@property (nonatomic) NSMutableArray *searchResults;
+
 - (IBAction)cancelRegion:(id)sender;    // iPad only.
 - (IBAction)requestRegion:(id)sender;
 
@@ -36,7 +37,7 @@
     [super viewDidLoad];
     self.navigationItem.title = @"Regions";
 
-    searchResults = [NSMutableArray new];
+    self.searchResults = [NSMutableArray new];
     [[PinballMapManager sharedInstance] refreshAllRegions];
 
     [self updateForUserLocation];
@@ -73,13 +74,13 @@
     }else{
         regionsFetch.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"fullName" ascending:YES]];
     }
-    fetchedResults = nil;
-    fetchedResults = [[NSFetchedResultsController alloc] initWithFetchRequest:regionsFetch
+    self.fetchedResults = nil;
+    self.fetchedResults = [[NSFetchedResultsController alloc] initWithFetchRequest:regionsFetch
                                                          managedObjectContext:[[CoreDataManager sharedInstance] managedObjectContext]
                                                            sectionNameKeyPath:nil
                                                                     cacheName:nil];
-    fetchedResults.delegate = self;
-    [fetchedResults performFetch:nil];
+    self.fetchedResults.delegate = self;
+    [self.fetchedResults performFetch:nil];
     [self.tableView reloadData];
     
     
@@ -105,10 +106,10 @@
     NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Region"];
     request.predicate = [NSPredicate predicateWithFormat:@"fullName CONTAINS[cd] %@",searchString];
     
-    [searchResults removeAllObjects];
+    [self.searchResults removeAllObjects];
     NSManagedObjectContext *context = [[CoreDataManager sharedInstance] managedObjectContext];
     
-    [searchResults addObjectsFromArray:[context executeFetchRequest:request error:nil]];
+    [self.searchResults addObjectsFromArray:[context executeFetchRequest:request error:nil]];
     return YES;
 }
 #pragma mark - MFMailComposeDelegate
@@ -143,12 +144,12 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     NSInteger rows = 0;
     if (tableView == self.tableView){
-        if ([[fetchedResults sections] count] > 0) {
-            id <NSFetchedResultsSectionInfo> sectionInfo = [[fetchedResults sections] objectAtIndex:section];
+        if ([[self.fetchedResults sections] count] > 0) {
+            id <NSFetchedResultsSectionInfo> sectionInfo = [[self.fetchedResults sections] objectAtIndex:section];
             rows = [sectionInfo numberOfObjects];
         }
     }else{
-        rows = searchResults.count;
+        rows = self.searchResults.count;
     }
     return rows;
 }
@@ -166,9 +167,9 @@
     
     Region *region;
     if (self.tableView == tableView){
-        region = [fetchedResults objectAtIndexPath:indexPath];
+        region = [self.fetchedResults objectAtIndexPath:indexPath];
     }else{
-        region = searchResults[indexPath.row];
+        region = self.searchResults[indexPath.row];
     }
     cell.accessoryType = UITableViewCellAccessoryNone;
     
@@ -185,9 +186,9 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     Region *region;
     if (self.tableView == tableView){
-        region = [fetchedResults objectAtIndexPath:indexPath];
+        region = [self.fetchedResults objectAtIndexPath:indexPath];
     }else{
-        region = searchResults[indexPath.row];
+        region = self.searchResults[indexPath.row];
     }
     
     [[PinballMapManager sharedInstance] loadRegionData:region];
