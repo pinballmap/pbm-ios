@@ -3,6 +3,7 @@
     <dependencies>
         <deployment defaultVersion="1792" identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--Pinball Tab Controller-->
@@ -102,7 +103,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="bYP-uX-ARn">
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="bYP-uX-ARn">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <connections>
                                     <outlet property="delegate" destination="MIx-Ki-rDd" id="c1E-5K-yq2"/>
@@ -110,6 +111,13 @@
                             </mapView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="bYP-uX-ARn" firstAttribute="top" secondItem="0Ke-O4-9p5" secondAttribute="top" id="GNr-jM-95u"/>
+                            <constraint firstAttribute="trailing" secondItem="bYP-uX-ARn" secondAttribute="trailing" id="Ijx-wm-VI8"/>
+                            <constraint firstItem="bYP-uX-ARn" firstAttribute="leading" secondItem="0Ke-O4-9p5" secondAttribute="leading" id="V2i-fu-HAP"/>
+                            <constraint firstItem="bYP-uX-ARn" firstAttribute="trailing" secondItem="dcG-Kj-Wnf" secondAttribute="trailing" id="fUz-PP-0Gs"/>
+                            <constraint firstAttribute="bottom" secondItem="bYP-uX-ARn" secondAttribute="bottom" id="xZb-Lt-hTn"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="Oib-Po-whs"/>
                     <connections>
@@ -452,13 +460,21 @@
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="121"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1aK-X0-5fZ">
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="1aK-X0-5fZ">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="121"/>
                                         </imageView>
-                                        <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="49v-i1-p3a">
+                                        <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="49v-i1-p3a">
                                             <rect key="frame" x="150" y="51" width="20" height="20"/>
                                         </activityIndicatorView>
                                     </subviews>
+                                    <constraints>
+                                        <constraint firstAttribute="bottom" secondItem="1aK-X0-5fZ" secondAttribute="bottom" id="0Gx-Mq-ppL"/>
+                                        <constraint firstItem="1aK-X0-5fZ" firstAttribute="centerX" secondItem="49v-i1-p3a" secondAttribute="centerX" id="4nz-Kz-wIf"/>
+                                        <constraint firstItem="49v-i1-p3a" firstAttribute="top" secondItem="htN-57-oE2" secondAttribute="topMargin" constant="43" id="8LO-ai-F25"/>
+                                        <constraint firstItem="1aK-X0-5fZ" firstAttribute="top" secondItem="htN-57-oE2" secondAttribute="top" id="DNW-h3-L9I"/>
+                                        <constraint firstItem="1aK-X0-5fZ" firstAttribute="leading" secondItem="htN-57-oE2" secondAttribute="leading" id="cQH-j1-GSQ"/>
+                                        <constraint firstAttribute="trailing" secondItem="1aK-X0-5fZ" secondAttribute="trailing" id="ooz-LY-AaR"/>
+                                    </constraints>
                                 </tableViewCellContentView>
                                 <connections>
                                     <outlet property="loadingView" destination="49v-i1-p3a" id="HZd-W2-feU"/>
@@ -1219,7 +1235,7 @@
                             <rect key="frame" x="0.0" y="64" width="320" height="44"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
-                                <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="7eS-tg-oH9">
+                                <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="7eS-tg-oH9">
                                     <rect key="frame" x="20" y="8" width="280" height="29"/>
                                     <segments>
                                         <segment title="Today"/>
@@ -1231,6 +1247,11 @@
                                 </segmentedControl>
                             </subviews>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                            <constraints>
+                                <constraint firstAttribute="trailing" secondItem="7eS-tg-oH9" secondAttribute="trailing" constant="20" id="73j-rG-Row"/>
+                                <constraint firstItem="7eS-tg-oH9" firstAttribute="leading" secondItem="j0j-Ng-aob" secondAttribute="leading" constant="20" id="BQW-CB-oPc"/>
+                                <constraint firstItem="7eS-tg-oH9" firstAttribute="top" secondItem="j0j-Ng-aob" secondAttribute="topMargin" id="YZE-49-yAG"/>
+                            </constraints>
                         </view>
                         <prototypes>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="EventCell" textLabel="kXA-Oj-ahH" detailTextLabel="saa-wD-RB2" style="IBUITableViewCellStyleSubtitle" id="PTK-nP-fFg">
