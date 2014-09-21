@@ -464,14 +464,19 @@ typedef enum : NSUInteger {
             }else if (indexPath.row == 2){
                 // Website
                 if (_currentLocation.website.length > 0 && ![_currentLocation.website isEqualToString:@"N/A"] && !self.tableView.editing){
-                    ReuseWebView *webView = [[ReuseWebView alloc] initWithURL:[NSURL URLWithString:_currentLocation.website]];
-                    webView.webTitle = _currentLocation.name;
-                    UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:webView];
-                    navController.modalPresentationStyle = UIModalPresentationFormSheet;
-                    if ([UIDevice currentModel] == ModelTypeiPad){
-                        [self.parentViewController.navigationController presentViewController:navController animated:YES completion:nil];
+                    if ([_currentLocation.website rangeOfString:@"facebook.com"].location != NSNotFound){
+                        // Facebook links should open in Safari
+                        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:_currentLocation.website]];
                     }else{
-                        [self.navigationController presentViewController:navController animated:YES completion:nil];
+                        ReuseWebView *webView = [[ReuseWebView alloc] initWithURL:[NSURL URLWithString:_currentLocation.website]];
+                        webView.webTitle = _currentLocation.name;
+                        UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:webView];
+                        navController.modalPresentationStyle = UIModalPresentationFormSheet;
+                        if ([UIDevice currentModel] == ModelTypeiPad){
+                            [self.parentViewController.navigationController presentViewController:navController animated:YES completion:nil];
+                        }else{
+                            [self.navigationController presentViewController:navController animated:YES completion:nil];
+                        }
                     }
                 }
             }

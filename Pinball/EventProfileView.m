@@ -117,11 +117,17 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     if (indexPath.row == 1){
         if (_currentEvent.link.length > 0 && ![_currentEvent.link isEqualToString:@"N/A"]){
-            ReuseWebView *webView = [[ReuseWebView alloc] initWithURL:[NSURL URLWithString:_currentEvent.link]];
-            webView.webTitle = _currentEvent.name;
-            UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:webView];
-            navController.modalPresentationStyle = UIModalPresentationFormSheet;
-            [self.navigationController presentViewController:navController animated:YES completion:nil];
+            
+            if ([_currentEvent.link rangeOfString:@"facebook.com"].location != NSNotFound){
+                // Facebook links should open in Safari
+                [[UIApplication sharedApplication] openURL:[NSURL URLWithString:_currentEvent.link]];
+            }else{
+                ReuseWebView *webView = [[ReuseWebView alloc] initWithURL:[NSURL URLWithString:_currentEvent.link]];
+                webView.webTitle = _currentEvent.name;
+                UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:webView];
+                navController.modalPresentationStyle = UIModalPresentationFormSheet;
+                [self.navigationController presentViewController:navController animated:YES completion:nil];
+            }
         }
     }else if (indexPath.row == 2){
         EKEventStore *store = [[EKEventStore alloc] init];
