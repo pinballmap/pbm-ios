@@ -59,7 +59,7 @@ typedef enum : NSUInteger {
     // Sort the machines by name.
     self.dataSetSeg = [[UISegmentedControl alloc] init];
     self.dataSetSeg.translatesAutoresizingMaskIntoConstraints = NO;
-    self.dataSetSeg.frame = CGRectMake(5, 7, 310, 29);
+    self.dataSetSeg.frame = CGRectMake(0, 0, self.view.frame.size.width+10, 29);
     [self.dataSetSeg insertSegmentWithTitle:@"Machines" atIndex:0 animated:YES];
     [self.dataSetSeg insertSegmentWithTitle:@"Info" atIndex:1 animated:YES];
     [self.dataSetSeg addTarget:self action:@selector(changeData:) forControlEvents:UIControlEventValueChanged];
@@ -286,17 +286,17 @@ typedef enum : NSUInteger {
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
     if ((section == 1 && [UIDevice currentModel] == ModelTypeiPhone) || ([UIDevice currentModel] == ModelTypeiPad && section == 0)){
-        return 44;
+        return 29;
     }
     return 0;
 }
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
     if ((section == 1 && [UIDevice currentModel] == ModelTypeiPhone) || ([UIDevice currentModel] == ModelTypeiPad && section == 0)){
-        UIView *dataSegView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.frame.size.width, 44)];
+        UIView *dataSegView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.frame.size.width, 29)];
         [dataSegView setBackgroundColor:[UIColor whiteColor]];
         [dataSegView addSubview:self.dataSetSeg];
         if (self.dataSetSeg){
-            NSArray *verticalConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-(10)-[seg]-(10)-|" options:NSLayoutFormatAlignmentMask metrics:nil views:@{@"seg": self.dataSetSeg}];
+            NSArray *verticalConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-(-5)-[seg]-(-5)-|" options:NSLayoutFormatAlignmentMask metrics:nil views:@{@"seg": self.dataSetSeg}];
             [dataSegView addConstraints:verticalConstraints];
         }
         return dataSegView;

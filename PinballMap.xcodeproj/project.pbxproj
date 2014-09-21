@@ -1105,7 +1105,7 @@
 					"$(PROJECT_DIR)/Analytics",
 				);
 				PRODUCT_NAME = PinballMap;
-				PROVISIONING_PROFILE = "cf8d3bc1-341b-4532-891e-c33c97951cbb";
+				PROVISIONING_PROFILE = "0c5761ea-df27-497a-95b8-eaab6010b375";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
 			};
