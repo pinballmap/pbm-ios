@@ -62,7 +62,6 @@
 		DB9330BC190D49AB0054C779 /* SeattleLocation.gpx in Resources */ = {isa = PBXBuildFile; fileRef = DB9330BB190D49AB0054C779 /* SeattleLocation.gpx */; };
 		DB99C3AE1906DCD200AFDF0F /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DB99C3AD1906DCD200AFDF0F /* AddressBook.framework */; };
 		DB99C3B11906FA4100AFDF0F /* MachinePickingView.m in Sources */ = {isa = PBXBuildFile; fileRef = DB99C3B01906FA4100AFDF0F /* MachinePickingView.m */; };
-		DB9BEA9219CDB1940075FC04 /* Launch Screen.xib in Resources */ = {isa = PBXBuildFile; fileRef = DB9BEA9119CDB1940075FC04 /* Launch Screen.xib */; };
 		DBA10B431902F244004ED2D4 /* MachineConditionView.m in Sources */ = {isa = PBXBuildFile; fileRef = DBA10B421902F244004ED2D4 /* MachineConditionView.m */; };
 		DBA3B60A190846D900ACBC69 /* InputCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DBA3B609190846D900ACBC69 /* InputCell.m */; };
 		DBB20CA8194F126D00D4B2F1 /* ZonesView.m in Sources */ = {isa = PBXBuildFile; fileRef = DBB20CA7194F126D00D4B2F1 /* ZonesView.m */; };
@@ -110,6 +109,7 @@
 		DBF711EF191E4DD3008656EE /* NewMachineView.m in Sources */ = {isa = PBXBuildFile; fileRef = DBF711EE191E4DD3008656EE /* NewMachineView.m */; };
 		DBF711F2191E59B8008656EE /* Machine.m in Sources */ = {isa = PBXBuildFile; fileRef = DBF711F1191E59B8008656EE /* Machine.m */; };
 		DBFB652319477DB700993697 /* LocationAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = DBFB652219477DB700993697 /* LocationAnnotation.m */; };
+		DBFBED6119CF377700ADC964 /* Start Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DBFBED6019CF377700ADC964 /* Start Screen.storyboard */; };
 		F5C71114D7FB464CA0CB927C /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 767AEE54A0274802B59CA4A5 /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -226,7 +226,6 @@
 		DB99C3AD1906DCD200AFDF0F /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
 		DB99C3AF1906FA4100AFDF0F /* MachinePickingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MachinePickingView.h; sourceTree = "<group>"; };
 		DB99C3B01906FA4100AFDF0F /* MachinePickingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MachinePickingView.m; sourceTree = "<group>"; };
-		DB9BEA9119CDB1940075FC04 /* Launch Screen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "Launch Screen.xib"; sourceTree = "<group>"; };
 		DBA10B411902F244004ED2D4 /* MachineConditionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MachineConditionView.h; sourceTree = "<group>"; };
 		DBA10B421902F244004ED2D4 /* MachineConditionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MachineConditionView.m; sourceTree = "<group>"; };
 		DBA3B608190846D900ACBC69 /* InputCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InputCell.h; sourceTree = "<group>"; };
@@ -307,6 +306,7 @@
 		DBF711F1191E59B8008656EE /* Machine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Machine.m; sourceTree = "<group>"; };
 		DBFB652119477DB700993697 /* LocationAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationAnnotation.h; sourceTree = "<group>"; };
 		DBFB652219477DB700993697 /* LocationAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocationAnnotation.m; sourceTree = "<group>"; };
+		DBFBED6019CF377700ADC964 /* Start Screen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = "Start Screen.storyboard"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -599,7 +599,7 @@
 				DBF06BDE18F96FF500F92912 /* AppDelegate.m */,
 				DBF06BFD18F9700F00F92912 /* Storyboard-iPhone.storyboard */,
 				DBBB4BEC193387AB004E433F /* Storyboard-iPad.storyboard */,
-				DB9BEA9119CDB1940075FC04 /* Launch Screen.xib */,
+				DBFBED6019CF377700ADC964 /* Start Screen.storyboard */,
 				DBB59CCB18FADC3B00F35BFD /* Views */,
 				DBF06C0818F972DD00F92912 /* View Controllers */,
 				DBF06C0718F972D700F92912 /* Data */,
@@ -815,7 +815,6 @@
 				DB070C46193243780018D521 /* HockeySDK.xcconfig in Resources */,
 				DB070C47193243780018D521 /* HockeySDKResources.bundle in Resources */,
 				DBF06BFE18F9700F00F92912 /* Storyboard-iPhone.storyboard in Resources */,
-				DB9BEA9219CDB1940075FC04 /* Launch Screen.xib in Resources */,
 				DB070C44193243780018D521 /* de.bitstadium.HockeySDK-iOS-3.5.4.docset in Resources */,
 				DB070C48193243780018D521 /* LICENSE in Resources */,
 				DBF06BD918F96FF500F92912 /* InfoPlist.strings in Resources */,
@@ -823,6 +822,7 @@
 				DB9330BC190D49AB0054C779 /* SeattleLocation.gpx in Resources */,
 				DB3F807B194B25100089F3D0 /* LocationCell.xib in Resources */,
 				DB070C43193243780018D521 /* CHANGELOG in Resources */,
+				DBFBED6119CF377700ADC964 /* Start Screen.storyboard in Resources */,
 				DBBB4BED193387AB004E433F /* Storyboard-iPad.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

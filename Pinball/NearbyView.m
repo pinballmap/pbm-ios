@@ -12,7 +12,7 @@
 #import "Location+UpdateDistance.h"
 #import "Location+Annotation.h"
 
-@interface NearbyView ()
+@interface NearbyView () <MKMapViewDelegate>
 
 @property (weak) IBOutlet MKMapView *mapView;
 
