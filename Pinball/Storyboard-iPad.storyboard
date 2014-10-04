@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6245" systemVersion="13F34" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" useAutolayout="YES" initialViewController="lfY-k9-Zhd">
     <dependencies>
-        <deployment defaultVersion="1792" identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--Pinball Tab Controller-->
@@ -198,24 +198,26 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="MapCell" rowHeight="122" id="MPR-S7-usv" customClass="LocationMapCell">
-                                <rect key="frame" x="0.0" y="22" width="320" height="122"/>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="MapCell" rowHeight="122" id="nwN-Z5-Dfc" customClass="LocationMapCell">
+                                <rect key="frame" x="0.0" y="22" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="MPR-S7-usv" id="YS4-Y9-qk3">
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="nwN-Z5-Dfc" id="Xtk-Ao-Sqo">
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="121"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="MTo-Dw-4VP">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="121"/>
-                                        </imageView>
-                                        <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="7eN-1h-JFg">
-                                            <rect key="frame" x="150" y="51" width="20" height="20"/>
-                                        </activityIndicatorView>
+                                        <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="0mo-f5-RUu">
+                                            <rect key="frame" x="0.0" y="1" width="320" height="121"/>
+                                        </mapView>
                                     </subviews>
+                                    <constraints>
+                                        <constraint firstItem="0mo-f5-RUu" firstAttribute="top" secondItem="Xtk-Ao-Sqo" secondAttribute="topMargin" constant="-7" id="FaB-rN-C3W"/>
+                                        <constraint firstAttribute="trailing" secondItem="0mo-f5-RUu" secondAttribute="trailing" id="Gss-Se-PGi"/>
+                                        <constraint firstItem="0mo-f5-RUu" firstAttribute="leading" secondItem="Xtk-Ao-Sqo" secondAttribute="leading" id="KjJ-Fx-Q91"/>
+                                        <constraint firstAttribute="bottomMargin" secondItem="0mo-f5-RUu" secondAttribute="bottom" constant="-9" id="zCq-M9-9uN"/>
+                                    </constraints>
                                 </tableViewCellContentView>
                                 <connections>
-                                    <outlet property="loadingView" destination="7eN-1h-JFg" id="2wv-ND-U3B"/>
-                                    <outlet property="mapImage" destination="MTo-Dw-4VP" id="Ebp-iD-aEr"/>
+                                    <outlet property="mapView" destination="0mo-f5-RUu" id="SuQ-uf-sV1"/>
                                 </connections>
                             </tableViewCell>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="detailDisclosureButton" indentationWidth="10" reuseIdentifier="MachineCell" textLabel="oXG-6U-Bix" detailTextLabel="hMF-FO-KFD" rowHeight="44" style="IBUITableViewCellStyleSubtitle" id="fLY-j4-3mS">

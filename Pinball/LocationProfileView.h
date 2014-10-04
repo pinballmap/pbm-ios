@@ -12,6 +12,7 @@
 @interface LocationProfileView : UITableViewController
 
 @property (nonatomic) Location *currentLocation;
+@property (nonatomic) BOOL showMapSnapshot;
 
 - (IBAction)editLocation:(id)sender;
 

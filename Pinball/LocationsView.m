@@ -368,6 +368,7 @@
     }else{
         LocationProfileView *profile = [self.storyboard instantiateViewControllerWithIdentifier:@"LocationProfileView"];
         profile.currentLocation = currentLocation;
+        profile.showMapSnapshot = true;
         [self.navigationController pushViewController:profile animated:YES];
     }
 }

@@ -259,7 +259,7 @@ typedef enum : NSUInteger {
 #pragma mark - Table view data source
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     if (_currentLocation){
-        if ([UIDevice currentModel] == ModelTypeiPhone){
+        if (self.showMapSnapshot){
             return 2;
         }else{
             return 1;
@@ -268,7 +268,7 @@ typedef enum : NSUInteger {
     return 0;
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    if (section == 0 && [UIDevice currentModel] == ModelTypeiPhone){
+    if (section == 0 && self.showMapSnapshot){
         return 1;
     }else{
         if (self.dataSetSeg.selectedSegmentIndex == 0){
@@ -285,13 +285,14 @@ typedef enum : NSUInteger {
     return 0;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
-    if ((section == 1 && [UIDevice currentModel] == ModelTypeiPhone) || ([UIDevice currentModel] == ModelTypeiPad && section == 0)){
+    // Set a height for the seg control if the section is 1, meaning we are showing a map snapshot, or if section is 0
+    if (section == 1 || (section == 0 && !self.showMapSnapshot)){
         return 29;
     }
     return 0;
 }
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
-    if ((section == 1 && [UIDevice currentModel] == ModelTypeiPhone) || ([UIDevice currentModel] == ModelTypeiPad && section == 0)){
+    if (section == 1 || (section == 0 && !self.showMapSnapshot)){
         UIView *dataSegView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.frame.size.width, 29)];
         [dataSegView setBackgroundColor:[UIColor whiteColor]];
         [dataSegView addSubview:self.dataSetSeg];
@@ -304,7 +305,7 @@ typedef enum : NSUInteger {
     return nil;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    if (indexPath.section == 0 && [UIDevice currentModel] == ModelTypeiPhone){
+    if (indexPath.section == 0 && self.showMapSnapshot){
         // Map image.
         return 122;
     }else{
@@ -349,7 +350,7 @@ typedef enum : NSUInteger {
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    if (indexPath.section == 0 && [UIDevice currentModel] == ModelTypeiPhone){
+    if (indexPath.section == 0 && self.showMapSnapshot){
         // Map Cell
         LocationMapCell *cell = (LocationMapCell *)[tableView dequeueReusableCellWithIdentifier:@"MapCell" forIndexPath:indexPath];
         
@@ -419,7 +420,7 @@ typedef enum : NSUInteger {
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
-    if (indexPath.section == 0 && [UIDevice currentModel] == ModelTypeiPhone){
+    if (indexPath.section == 0 && self.showMapSnapshot){
         [self showMap];
     }else{
         
@@ -429,7 +430,7 @@ typedef enum : NSUInteger {
             vc.currentMachine = [self.machinesFetch objectAtIndexPath:[NSIndexPath indexPathForRow:indexPath.row inSection:0]];
             [tableView setEditing:NO];
             if ([UIDevice currentModel] == ModelTypeiPad){
-                [self.parentViewController.navigationController presentViewController:vc.parentViewController animated:YES completion:nil];
+                [self.parentViewController presentViewController:vc.parentViewController animated:YES completion:nil];
             }else{
                 [self.navigationController presentViewController:vc.parentViewController animated:YES completion:nil];
             }

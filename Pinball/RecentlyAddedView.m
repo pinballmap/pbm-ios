@@ -9,6 +9,7 @@
 #import "RecentlyAddedView.h"
 #import "UIAlertView+Application.h"
 #import "RecentMachine.h"
+#import "LocationProfileView.h"
 
 @interface RecentlyAddedView ()
 
@@ -80,6 +81,14 @@
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+    RecentMachine *machine = [self.recentMachines objectAtIndex:indexPath.row];
+    LocationProfileView *profileView = [self.storyboard instantiateViewControllerWithIdentifier:@"LocationProfileView"];
+    profileView.currentLocation = machine.location;
+    profileView.showMapSnapshot = true;
+    
+    [self.navigationController pushViewController:profileView animated:YES];
+    
 }
 
 @end
