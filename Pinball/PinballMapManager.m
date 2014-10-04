@@ -13,6 +13,7 @@
 
 static const NSString *apiRootURL = @"http://pinballmap.com/";
 NSString * const motdKey = @"motd";
+NSString * const motdRegionKey = @"region_id";
 
 typedef NS_ENUM(NSInteger, PBMDataAPI) {
     PBMDataAPIRegions = 0,
@@ -84,10 +85,19 @@ typedef NS_ENUM(NSInteger, PBMDataAPI) {
     if (!lastShownDate){
         return YES;
     }
-    BOOL showStatus = ![[[NSDate date] endOfDay] isEqualToDate:lastShownDate];
-    return showStatus;
+    NSNumber *regionID = [[NSUserDefaults standardUserDefaults] objectForKey:motdRegionKey];
+    BOOL shouldShowForDate = ![[[NSDate date] endOfDay] isEqualToDate:lastShownDate];
+    if (!shouldShowForDate){
+        if (regionID != self.currentRegion.regionId){
+            return YES;
+        }else{
+            return NO;
+        }
+    }
+    return YES;
 }
 - (void)showedMessageOfDay{
+    [[NSUserDefaults standardUserDefaults] setObject:self.currentRegion.regionId forKey:motdRegionKey];
     [[NSUserDefaults standardUserDefaults] setObject:[[NSDate date] endOfDay] forKey:motdKey];
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
