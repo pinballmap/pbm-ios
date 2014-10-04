@@ -1647,6 +1647,21 @@
                                             <segue destination="9Ad-77-Z0X" kind="modal" id="c3h-ql-Q2s"/>
                                         </connections>
                                     </tableViewCell>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" textLabel="gxS-sr-JoY" style="IBUITableViewCellStyleDefault" id="vjH-5O-DT0">
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="vjH-5O-DT0" id="VPh-eP-1Aw">
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Contact Region Admins" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="gxS-sr-JoY">
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
                                 </cells>
                             </tableViewSection>
                         </sections>
@@ -2249,7 +2264,7 @@
     <resources>
         <image name="701-location" width="28" height="28"/>
         <image name="740-gear" width="28" height="28"/>
-        <image name="798-filter.png" width="24" height="24"/>
+        <image name="798-filter.png" width="28" height="24"/>
         <image name="851-calendar" width="28" height="28"/>
         <image name="852-map" width="28" height="24"/>
         <image name="pinball" width="28" height="28"/>

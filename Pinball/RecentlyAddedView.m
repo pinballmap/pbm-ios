@@ -38,7 +38,7 @@
             NSArray *recentMachines = status[@"location_machine_xrefs"];
             [recentMachines enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
                 RecentMachine *machine = [[RecentMachine alloc] initWithData:obj];
-                if (machine.machine){
+                if (machine.location){
                     [self.recentMachines addObject:machine];
                 }
             }];
