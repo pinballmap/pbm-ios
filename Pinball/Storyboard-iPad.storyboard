@@ -1644,7 +1644,7 @@
                                             </subviews>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <segue destination="9Ad-77-Z0X" kind="modal" id="c3h-ql-Q2s"/>
+                                            <segue destination="9Ad-77-Z0X" kind="modal" identifier="RegionSelect" id="c3h-ql-Q2s"/>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" textLabel="gxS-sr-JoY" style="IBUITableViewCellStyleDefault" id="vjH-5O-DT0">

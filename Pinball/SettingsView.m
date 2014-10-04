@@ -9,6 +9,7 @@
 #import "SettingsView.h"
 #import "UIAlertView+Application.h"
 #import "ContactView.h"
+#import "RegionsView.h"
 
 @import MessageUI;
 
@@ -42,6 +43,12 @@
 }
 - (void)updateRegion{
     self.regionLabel.text = [[[PinballMapManager sharedInstance] currentRegion] fullName];
+}
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
+    if ([segue.identifier isEqualToString:@"RegionSelect"]){
+        RegionsView *regionSelect = (RegionsView *)[segue.destinationViewController navigationRootViewController];
+        regionSelect.isSelecting = true;
+    }
 }
 #pragma mark - Class Actions
 - (IBAction)sendFeedback:(id)sender{
