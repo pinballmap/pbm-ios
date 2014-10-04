@@ -38,7 +38,9 @@
             NSArray *recentMachines = status[@"location_machine_xrefs"];
             [recentMachines enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
                 RecentMachine *machine = [[RecentMachine alloc] initWithData:obj];
-                [self.recentMachines addObject:machine];
+                if (machine.machine){
+                    [self.recentMachines addObject:machine];
+                }
             }];
 
             self.recentMachines = [self.recentMachines sortedArrayUsingDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"createdOn" ascending:NO]]];
