@@ -8,7 +8,7 @@
 
 #import "PinballMapManager.h"
 #import "NSFileManager+DocumentsDirectory.h"
-#import <AFNetworking.h>
+#import "AFNetworking.h"
 #import "NSDate+CupertinoYankee.h"
 
 static const NSString *apiRootURL = @"http://pinballmap.com/";

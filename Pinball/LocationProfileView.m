@@ -20,11 +20,11 @@
 #import "InputCell.h"
 #import "MachineProfileView.h"
 #import "TextEditorView.h"
-#import <ReuseWebView.h>
+#import "ReuseWebView.h"
 #import "UIAlertView+Application.h"
 #import "LocationTypesView.h"
 #import "MachineLocationProfileView.h"
-#import <UIDevice+Model.h>
+#import "UIDevice+Model.h"
 
 typedef enum : NSUInteger {
     LocationEditingTypePhone,
