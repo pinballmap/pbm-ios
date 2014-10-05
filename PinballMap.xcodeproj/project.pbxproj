@@ -26,6 +26,8 @@
 		DB1FB5D619BCB95A00E52B01 /* Region+UpdateDistance.m in Sources */ = {isa = PBXBuildFile; fileRef = DB1FB5D519BCB95A00E52B01 /* Region+UpdateDistance.m */; };
 		DB23E871193B5F08000C1E69 /* Event.m in Sources */ = {isa = PBXBuildFile; fileRef = DB23E870193B5F08000C1E69 /* Event.m */; };
 		DB2D132E1942687F0082B8F9 /* Event+CellHelpers.m in Sources */ = {isa = PBXBuildFile; fileRef = DB2D132D1942687F0082B8F9 /* Event+CellHelpers.m */; };
+		DB2E9FC519E15D7000B9D72F /* RegionProfileView.m in Sources */ = {isa = PBXBuildFile; fileRef = DB2E9FC419E15D7000B9D72F /* RegionProfileView.m */; };
+		DB2E9FCC19E179A200B9D72F /* RegionLink.m in Sources */ = {isa = PBXBuildFile; fileRef = DB2E9FCB19E179A200B9D72F /* RegionLink.m */; };
 		DB314278194A10F80097B312 /* LocationCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DB314277194A10F80097B312 /* LocationCell.m */; };
 		DB338F4A19606E8D000D0366 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DB338F4919606E8D000D0366 /* AdSupport.framework */; };
 		DB338F4C19606ED2000D0366 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = DB338F4B19606ED2000D0366 /* libz.dylib */; };
@@ -154,6 +156,10 @@
 		DB23E870193B5F08000C1E69 /* Event.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Event.m; sourceTree = "<group>"; };
 		DB2D132C1942687F0082B8F9 /* Event+CellHelpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Event+CellHelpers.h"; sourceTree = "<group>"; };
 		DB2D132D1942687F0082B8F9 /* Event+CellHelpers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Event+CellHelpers.m"; sourceTree = "<group>"; };
+		DB2E9FC319E15D7000B9D72F /* RegionProfileView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegionProfileView.h; sourceTree = "<group>"; };
+		DB2E9FC419E15D7000B9D72F /* RegionProfileView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegionProfileView.m; sourceTree = "<group>"; };
+		DB2E9FCA19E179A200B9D72F /* RegionLink.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegionLink.h; sourceTree = "<group>"; };
+		DB2E9FCB19E179A200B9D72F /* RegionLink.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegionLink.m; sourceTree = "<group>"; };
 		DB314276194A10F80097B312 /* LocationCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationCell.h; sourceTree = "<group>"; };
 		DB314277194A10F80097B312 /* LocationCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocationCell.m; sourceTree = "<group>"; };
 		DB338F4919606E8D000D0366 /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
@@ -380,6 +386,15 @@
 			path = Resources;
 			sourceTree = "<group>";
 		};
+		DB2E9FC219E15D5D00B9D72F /* Region */ = {
+			isa = PBXGroup;
+			children = (
+				DB2E9FC319E15D7000B9D72F /* RegionProfileView.h */,
+				DB2E9FC419E15D7000B9D72F /* RegionProfileView.m */,
+			);
+			name = Region;
+			sourceTree = "<group>";
+		};
 		DB47C87F19C4655000FE8E4F /* Nearby */ = {
 			isa = PBXGroup;
 			children = (
@@ -475,6 +490,8 @@
 			children = (
 				DB5FFEA819C62271004C424B /* RecentMachine.h */,
 				DB5FFEA919C62271004C424B /* RecentMachine.m */,
+				DB2E9FCA19E179A200B9D72F /* RegionLink.h */,
+				DB2E9FCB19E179A200B9D72F /* RegionLink.m */,
 			);
 			name = "App Models";
 			sourceTree = "<group>";
@@ -675,6 +692,7 @@
 				DB52D2E218FB009400BB56D8 /* Events */,
 				DB636D0A1903EEE000576521 /* About */,
 				DBB71B9918FC482B007907DE /* Settings */,
+				DB2E9FC219E15D5D00B9D72F /* Region */,
 				DBBB4BEE19338A03004E433F /* UIViewController+Helpers.h */,
 				DBBB4BEF19338A03004E433F /* UIViewController+Helpers.m */,
 				DBBB4BF119338FB5004E433F /* UIDevice+ModelCheck.h */,
@@ -908,6 +926,7 @@
 				DB52D2FD18FB0AD300BB56D8 /* EventProfileView.m in Sources */,
 				DBB71B9C18FC4838007907DE /* SettingsView.m in Sources */,
 				DB52D2FA18FB09AF00BB56D8 /* NSDate+DateFormatting.m in Sources */,
+				DB2E9FCC19E179A200B9D72F /* RegionLink.m in Sources */,
 				DB5FFEA519C6209E004C424B /* RecentlyAddedView.m in Sources */,
 				DBEAA200192A9E4A0096F2A9 /* LocationType+Create.m in Sources */,
 				DB338F641960738F000D0366 /* ThirdPartyKeys.m in Sources */,
@@ -927,6 +946,7 @@
 				DBB59CD218FADF6D00F35BFD /* InformationCell.m in Sources */,
 				DB5FFE9C19C5FBAB004C424B /* Location+Annotation.m in Sources */,
 				DBF06C4018F9775600F92912 /* Machine+Create.m in Sources */,
+				DB2E9FC519E15D7000B9D72F /* RegionProfileView.m in Sources */,
 				DBA3B60A190846D900ACBC69 /* InputCell.m in Sources */,
 				DB0DAE7A1987B4A800A3FF0F /* GAAppHelper.m in Sources */,
 				DB52D30418FB0DCF00BB56D8 /* UIAlertView+Application.m in Sources */,
