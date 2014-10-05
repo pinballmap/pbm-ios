@@ -129,7 +129,21 @@
 // Returns the URL to the application's Documents directory.
 - (NSURL *)applicationDocumentsDirectory
 {
-    return [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject];
+
+    NSURL *docDirectory = [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject];
+    docDirectory = [docDirectory URLByAppendingPathComponent:[NSString stringWithFormat:@"%@.sqlite",dataModel]];
+    // Move the existing CoreData SQLite to the new security container, so it can be used for extensions.
+    NSURL *securityContainer = [[NSFileManager defaultManager] containerURLForSecurityApplicationGroupIdentifier:@"group.net.isaacruiz.ppm"];
+    if ([[NSFileManager defaultManager] fileExistsAtPath:docDirectory.path]){
+        BOOL copyStatus = [[NSFileManager defaultManager] copyItemAtURL:docDirectory toURL:[securityContainer URLByAppendingPathComponent:[NSString stringWithFormat:@"%@.sqlite",dataModel]]  error:nil];
+        if (copyStatus){
+            [[NSFileManager defaultManager] removeItemAtURL:docDirectory error:nil];
+        }
+    }
+    
+    
+    return securityContainer;
+    
 }
 
 

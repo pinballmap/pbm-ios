@@ -174,6 +174,7 @@
 		DB43E4871947194C00A641E3 /* MachineLocation+CellHelpers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MachineLocation+CellHelpers.m"; sourceTree = "<group>"; };
 		DB47C88019C4657800FE8E4F /* NearbyView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NearbyView.h; sourceTree = "<group>"; };
 		DB47C88119C4657800FE8E4F /* NearbyView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NearbyView.m; sourceTree = "<group>"; };
+		DB4845BA19E1B4EF008C3E12 /* PinballMap.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = PinballMap.entitlements; sourceTree = "<group>"; };
 		DB4D82BC190D77530048156E /* Machine+CellHelpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Machine+CellHelpers.h"; sourceTree = "<group>"; };
 		DB4D82BD190D77530048156E /* Machine+CellHelpers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Machine+CellHelpers.m"; sourceTree = "<group>"; };
 		DB52D2D818FAE96C00BB56D8 /* MapView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapView.h; sourceTree = "<group>"; };
@@ -564,6 +565,7 @@
 		DBF06BC218F96FF500F92912 = {
 			isa = PBXGroup;
 			children = (
+				DB4845BA19E1B4EF008C3E12 /* PinballMap.entitlements */,
 				DBF06BD418F96FF500F92912 /* Pinball */,
 				DBF06BED18F96FF500F92912 /* PinballTests */,
 				DBF06BCD18F96FF500F92912 /* Frameworks */,
@@ -799,6 +801,11 @@
 				TargetAttributes = {
 					DBF06BCA18F96FF500F92912 = {
 						DevelopmentTeam = ZJN6P495U9;
+						SystemCapabilities = {
+							com.apple.ApplicationGroups.iOS = {
+								enabled = 1;
+							};
+						};
 					};
 					DBF06BE518F96FF500F92912 = {
 						TestTargetID = DBF06BCA18F96FF500F92912;
@@ -1077,8 +1084,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Frank Michael Sanchez (7XM86QLV5C)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Frank Michael Sanchez (7XM86QLV5C)";
+				CODE_SIGN_ENTITLEMENTS = PinballMap.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/HockeySDK-iOS/HockeySDK.embeddedframework",
@@ -1095,7 +1103,7 @@
 					"$(PROJECT_DIR)/Analytics",
 				);
 				PRODUCT_NAME = PinballMap;
-				PROVISIONING_PROFILE = "9f3b5327-4948-47a7-9f56-642881107719";
+				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
 			};
@@ -1107,8 +1115,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Frank Michael Sanchez (ZJN6P495U9)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Frank Michael Sanchez (ZJN6P495U9)";
+				CODE_SIGN_ENTITLEMENTS = PinballMap.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/HockeySDK-iOS/HockeySDK.embeddedframework",
@@ -1125,7 +1134,7 @@
 					"$(PROJECT_DIR)/Analytics",
 				);
 				PRODUCT_NAME = PinballMap;
-				PROVISIONING_PROFILE = "0c5761ea-df27-497a-95b8-eaab6010b375";
+				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
 			};
