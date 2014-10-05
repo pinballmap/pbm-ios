@@ -45,7 +45,6 @@
 		DB38DAC719E1CC2800E1B6D2 /* CHANGELOG in Resources */ = {isa = PBXBuildFile; fileRef = DB38DABE19E1CC2800E1B6D2 /* CHANGELOG */; };
 		DB38DAC819E1CC2800E1B6D2 /* de.bitstadium.HockeySDK-iOS-3.5.4.docset in Resources */ = {isa = PBXBuildFile; fileRef = DB38DABF19E1CC2800E1B6D2 /* de.bitstadium.HockeySDK-iOS-3.5.4.docset */; };
 		DB38DAC919E1CC2800E1B6D2 /* HockeySDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DB38DAC119E1CC2800E1B6D2 /* HockeySDK.framework */; };
-		DB38DACA19E1CC2800E1B6D2 /* HockeySDK.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = DB38DAC319E1CC2800E1B6D2 /* HockeySDK.xcconfig */; };
 		DB38DACB19E1CC2800E1B6D2 /* HockeySDKResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = DB38DAC419E1CC2800E1B6D2 /* HockeySDKResources.bundle */; };
 		DB38DACC19E1CC2800E1B6D2 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = DB38DAC519E1CC2800E1B6D2 /* LICENSE */; };
 		DB38DACD19E1CC2800E1B6D2 /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = DB38DAC619E1CC2800E1B6D2 /* README.md */; };
@@ -896,7 +895,7 @@
 		DBF06BC318F96FF500F92912 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0510;
+				LastUpgradeCheck = 0600;
 				ORGANIZATIONNAME = "Frank Michael Sanchez";
 				TargetAttributes = {
 					DBF06BCA18F96FF500F92912 = {
@@ -939,7 +938,6 @@
 				DBF06BFE18F9700F00F92912 /* Storyboard-iPhone.storyboard in Resources */,
 				DB38DACC19E1CC2800E1B6D2 /* LICENSE in Resources */,
 				DBF06BD918F96FF500F92912 /* InfoPlist.strings in Resources */,
-				DB38DACA19E1CC2800E1B6D2 /* HockeySDK.xcconfig in Resources */,
 				DBF06BE118F96FF500F92912 /* Images.xcassets in Resources */,
 				DB38DACB19E1CC2800E1B6D2 /* HockeySDKResources.bundle in Resources */,
 				DB9330BC190D49AB0054C779 /* SeattleLocation.gpx in Resources */,
@@ -1170,7 +1168,6 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/HockeySDK-iOS/HockeySDK.embeddedframework",
 					"$(PROJECT_DIR)/Pinball/HockeySDK-iOS/HockeySDK.embeddedframework",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -1180,10 +1177,8 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
-					"$(PROJECT_DIR)/Google",
-					Analytics,
-					"$(PROJECT_DIR)/Analytics",
 					"$(PROJECT_DIR)/Pinball/Analytics",
+					"$(PROJECT_DIR)/Pinball/HockeySDK-iOS",
 				);
 				PRODUCT_NAME = PinballMap;
 				PROVISIONING_PROFILE = "ab0d2cba-acaf-434b-9d25-4213b6895c4a";
@@ -1202,7 +1197,6 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Frank Michael Sanchez (ZJN6P495U9)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/HockeySDK-iOS/HockeySDK.embeddedframework",
 					"$(PROJECT_DIR)/Pinball/HockeySDK-iOS/HockeySDK.embeddedframework",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -1212,10 +1206,8 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
-					"$(PROJECT_DIR)/Google",
-					Analytics,
-					"$(PROJECT_DIR)/Analytics",
 					"$(PROJECT_DIR)/Pinball/Analytics",
+					"$(PROJECT_DIR)/Pinball/HockeySDK-iOS",
 				);
 				PRODUCT_NAME = PinballMap;
 				PROVISIONING_PROFILE = "0c5761ea-df27-497a-95b8-eaab6010b375";
