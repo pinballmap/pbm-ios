@@ -11,7 +11,7 @@
 #import "UIAlertView+Application.h"
 #import "MachineScore.h"
 #import "NewMachineScoreView.h"
-#import <FMSKit/TextEditorView.h>
+#import "TextEditorView.h"
 
 @interface MachineLocationProfileView () <ScoreDelegate,TextEditorDelegate>
 
