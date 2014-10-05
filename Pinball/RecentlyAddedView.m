@@ -37,14 +37,15 @@
             [UIAlertView simpleApplicationAlertWithMessage:errors cancelButton:@"Ok"];
         }else{
             NSArray *recentMachines = status[@"location_machine_xrefs"];
+            NSMutableArray *recentMachinesObj = [NSMutableArray new];
             [recentMachines enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
                 RecentMachine *machine = [[RecentMachine alloc] initWithData:obj];
                 if (machine.location){
-                    [self.recentMachines addObject:machine];
+                    [recentMachinesObj addObject:machine];
                 }
             }];
-
-            self.recentMachines = [self.recentMachines sortedArrayUsingDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"createdOn" ascending:NO]]];
+            [self.recentMachines removeAllObjects];
+            [self.recentMachines addObjectsFromArray:[recentMachinesObj sortedArrayUsingDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"createdOn" ascending:NO]]]];
             dispatch_async(dispatch_get_main_queue(), ^{
                 [self.tableView reloadData];
             });
