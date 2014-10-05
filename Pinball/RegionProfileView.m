@@ -35,6 +35,17 @@
     
     self.regionLinks = [NSMutableArray new];
     
+    UIRefreshControl *refreshControl = [[UIRefreshControl alloc] init];
+    [refreshControl addTarget:self action:@selector(refreshRegionData) forControlEvents:UIControlEventValueChanged];
+    self.refreshControl = refreshControl;
+    
+    [self refreshRegionData];
+}
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+- (void)refreshRegionData{
     [[PinballMapManager sharedInstance] refreshBasicRegionData:^(NSDictionary *status) {
         if (status[@"errors"]){
             NSString *errors;
@@ -48,7 +59,7 @@
             self.regionMOTD = status[@"region"][@"motd"];
             NSDictionary *links = status[@"region"][@"filtered_region_links"];
             [self.regionLinks removeAllObjects];
-
+            
             [links enumerateKeysAndObjectsUsingBlock:^(NSString *key, NSArray *links, BOOL *stop) {
                 NSMutableArray *linkCategories = [NSMutableArray new];
                 for (NSDictionary *link in links) {
@@ -58,12 +69,11 @@
                 [self.regionLinks addObject:linkCategories];
             }];
         }
-        [self.tableView reloadData];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.tableView reloadData];
+            [self.refreshControl endRefreshing];
+        });
     }];
-}
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 #pragma mark - Class Actions
 - (IBAction)showAbout:(id)sender{

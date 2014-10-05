@@ -47,10 +47,6 @@
     }
 }
 - (void)updateTabInfo{
-    Region *currentRegion = [[PinballMapManager sharedInstance] currentRegion];
-
-    [[[self.viewControllers lastObject] tabBarItem] setTitle:currentRegion.fullName];
-    
     [self.updatingAlert dismissWithClickedButtonIndex:0 animated:YES];
     [self showMessageOfDay];
 }
