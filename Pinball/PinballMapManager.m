@@ -14,6 +14,7 @@
 static const NSString *apiRootURL = @"http://pinballmap.com/";
 NSString * const motdKey = @"motd";
 NSString * const motdRegionKey = @"region_id";
+NSString * const appGroup = @"group.net.isaacruiz.ppm";
 
 typedef NS_ENUM(NSInteger, PBMDataAPI) {
     PBMDataAPIRegions = 0,
@@ -43,12 +44,31 @@ typedef NS_ENUM(NSInteger, PBMDataAPI) {
     });
     return _sharedObject;
 }
++ (NSUserDefaults *)userDefaultsForApp{
+    return [[NSUserDefaults alloc] initWithSuiteName:appGroup];
+}
+- (void)migrateUserDefaults{
+    NSNumber *shouldMigrate = [[PinballMapManager userDefaultsForApp] objectForKey:@"shouldMigrate"];
+    if (![shouldMigrate isEqualToNumber:@(-1)]){
+        // Pull over current settings
+        id region = [[NSUserDefaults standardUserDefaults] objectForKey:@"CurrentRegion"];
+        [[PinballMapManager userDefaultsForApp] setObject:region forKey:@"CurrentRegion"];
+        NSDate *lastShownDate = [[NSUserDefaults standardUserDefaults] objectForKey:motdKey];
+        [[PinballMapManager userDefaultsForApp] setObject:lastShownDate forKey:motdKey];
+        NSNumber *regionID = [[NSUserDefaults standardUserDefaults] objectForKey:motdRegionKey];
+        [[PinballMapManager userDefaultsForApp] setObject:regionID forKey:motdRegionKey];
+        // No longer need to migrate
+        [[PinballMapManager userDefaultsForApp] setObject:@(-1) forKey:@"shouldMigrate"];
+        [[PinballMapManager userDefaultsForApp] synchronize];
+    }
+}
 - (id)init{
     self = [super init];
     if (self){
         [self getUserLocation];
         self.session = [NSURLSession sharedSession];
-        _regionInfo = [[NSUserDefaults standardUserDefaults] objectForKey:@"CurrentRegion"];
+        [self migrateUserDefaults];
+        _regionInfo = [[PinballMapManager userDefaultsForApp] objectForKey:@"CurrentRegion"];
         if (_regionInfo){
             NSFetchRequest *regionRequest = [NSFetchRequest fetchRequestWithEntityName:@"Region"];
             regionRequest.predicate = [NSPredicate predicateWithFormat:@"name = %@",_regionInfo[@"name"]];
@@ -81,11 +101,11 @@ typedef NS_ENUM(NSInteger, PBMDataAPI) {
     [self.locationManager startUpdatingLocation];
 }
 - (BOOL)shouldShowMessageOfDay{
-    NSDate *lastShownDate = [[NSUserDefaults standardUserDefaults] objectForKey:motdKey];
+    NSDate *lastShownDate = [[PinballMapManager userDefaultsForApp] objectForKey:motdKey];
     if (!lastShownDate){
         return YES;
     }
-    NSNumber *regionID = [[NSUserDefaults standardUserDefaults] objectForKey:motdRegionKey];
+    NSNumber *regionID = [[PinballMapManager userDefaultsForApp] objectForKey:motdRegionKey];
     BOOL shouldShowForDate = ![[[NSDate date] endOfDay] isEqualToDate:lastShownDate];
     if (!shouldShowForDate){
         if (regionID != self.currentRegion.regionId){
@@ -97,9 +117,9 @@ typedef NS_ENUM(NSInteger, PBMDataAPI) {
     return YES;
 }
 - (void)showedMessageOfDay{
-    [[NSUserDefaults standardUserDefaults] setObject:self.currentRegion.regionId forKey:motdRegionKey];
-    [[NSUserDefaults standardUserDefaults] setObject:[[NSDate date] endOfDay] forKey:motdKey];
-    [[NSUserDefaults standardUserDefaults] synchronize];
+    [[PinballMapManager userDefaultsForApp] setObject:self.currentRegion.regionId forKey:motdRegionKey];
+    [[PinballMapManager userDefaultsForApp] setObject:[[NSDate date] endOfDay] forKey:motdKey];
+    [[PinballMapManager userDefaultsForApp] synchronize];
 }
 #pragma mark - Regions listing
 - (void)allRegions:(void (^)(NSArray *regions))regionBlock{
@@ -203,8 +223,8 @@ typedef NS_ENUM(NSInteger, PBMDataAPI) {
 - (void)loadRegionData:(Region *)region{
     [[NSNotificationCenter defaultCenter] postNotificationName:@"UpdatingRegion" object:nil];
 
-    [[NSUserDefaults standardUserDefaults] setObject:@{@"name": region.name} forKey:@"CurrentRegion"];
-    [[NSUserDefaults standardUserDefaults] synchronize];
+    [[PinballMapManager userDefaultsForApp] setObject:@{@"name": region.name} forKey:@"CurrentRegion"];
+    [[PinballMapManager userDefaultsForApp] synchronize];
     
     // Find region.
     _currentRegion = region;
