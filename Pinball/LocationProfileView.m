@@ -311,17 +311,11 @@ typedef enum : NSUInteger {
     }else{
         if (self.dataSetSeg.selectedSegmentIndex == 0){
             MachineLocation *currentMachine = [self.machinesFetch objectAtIndexPath:[NSIndexPath indexPathForRow:indexPath.row inSection:0]];
-            NSString *cellDetail = currentMachine.conditionWithUpdateDate;//[NSString stringWithFormat:@"%@ updated on %@",currentMachine.condition,[currentMachine.conditionUpdate monthDayYearPretty:YES]];
-            
             CGRect titleLabel = [currentMachine.machine.machineTitle boundingRectWithSize:CGSizeMake(238, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin context:nil];
-            CGRect detailLabel = [cellDetail boundingRectWithSize:CGSizeMake(238, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName: [UIFont systemFontOfSize:12]} context:nil];
-            // Add 6 pixel padding present in subtitle style.
-            CGRect stringSize = CGRectMake(0, 0, 290, titleLabel.size.height+detailLabel.size.height+6);
-            
-            if (stringSize.size.height+10 < 44){
+            if (titleLabel.size.height+10 < 44){
                 return 44;
             }else{
-                return stringSize.size.height+10;
+                return titleLabel.size.height+10;
             }
         }else if (self.dataSetSeg.selectedSegmentIndex == 1){
             NSString *detailText;
@@ -370,16 +364,7 @@ typedef enum : NSUInteger {
             MachineLocation *currentMachine = [self.machinesFetch objectAtIndexPath:[NSIndexPath indexPathForRow:indexPath.row inSection:0]];
             cell.textLabel.attributedText = currentMachine.machine.machineTitle;
             cell.detailTextLabel.numberOfLines = 0;
-            // If no condition is available, just don't set the detail text label.
-            if (![currentMachine.condition isEqualToString:@"N/A"]){
-                if (currentMachine.conditionUpdate){
-                    cell.detailTextLabel.text = currentMachine.conditionWithUpdateDate;//[NSString stringWithFormat:@"%@ updated on %@",currentMachine.condition,[currentMachine.conditionUpdate monthDayYearPretty:YES]];
-                }else{
-                    cell.detailTextLabel.text = currentMachine.condition;
-                }
-            }else{
-                cell.detailTextLabel.text = nil;
-            }
+            cell.detailTextLabel.text = nil;
             return cell;
             
         }else if (self.dataSetSeg.selectedSegmentIndex == 1){
