@@ -10,6 +10,7 @@
 #import "UIAlertView+Application.h"
 #import "RegionLink.h"
 #import "RegionsView.h"
+#import "AboutView.h"
 
 @interface RegionProfileView ()
 
@@ -84,7 +85,10 @@
 }
 #pragma mark - Class Actions
 - (IBAction)showAbout:(id)sender{
-    
+    AboutView *about = [self.storyboard instantiateViewControllerWithIdentifier:@"AboutView"];
+    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:about];
+    nav.modalPresentationStyle = UIModalPresentationFormSheet;
+    [self.navigationController presentViewController:nav animated:YES completion:nil];
 }
 - (IBAction)changeRegion:(id)sender{
     RegionsView *regionsView = [self.storyboard instantiateViewControllerWithIdentifier:@"RegionsView"];

@@ -8,6 +8,7 @@
 
 #import "AboutView.h"
 #import "GAAppHelper.h"
+#import "UIAlertView+Application.h"
 
 @interface AboutView ()
 
@@ -29,6 +30,11 @@
     [super viewDidLoad];
     NSString *aboutFile = [[NSBundle mainBundle] pathForResource:@"AboutInfo" ofType:@"plist"];
     self.aboutInfo = [NSArray arrayWithContentsOfFile:aboutFile];
+    
+    UIBarButtonItem *feedback = [[UIBarButtonItem alloc] initWithTitle:@"Feedback" style:UIBarButtonItemStylePlain target:self action:@selector(sendFeedback:)];
+    self.navigationItem.rightBarButtonItem = feedback;
+    UIBarButtonItem *dismiss = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(dismissAbout:)];
+    self.navigationItem.leftBarButtonItem = dismiss;
 }
 - (void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
@@ -40,6 +46,9 @@
 }
 - (IBAction)dismissAbout:(id)sender{
     [self dismissViewControllerAnimated:YES completion:nil];
+}
+- (IBAction)sendFeedback:(id)sender{
+    [UIAlertView simpleApplicationAlertWithMessage:@"Code goes here." cancelButton:@"Ok"];
 }
 #pragma mark - TableView Datasource/Delegate
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{

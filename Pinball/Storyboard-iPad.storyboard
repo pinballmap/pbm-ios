@@ -1697,7 +1697,7 @@
         <!--About-->
         <scene sceneID="3iM-jO-RHy">
             <objects>
-                <tableViewController id="wcp-8P-zWh" customClass="AboutView" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="AboutView" id="wcp-8P-zWh" customClass="AboutView" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="DpF-kL-pY2">
                         <rect key="frame" x="0.0" y="0.0" width="540" height="620"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
