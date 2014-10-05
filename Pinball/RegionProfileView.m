@@ -141,6 +141,14 @@
         }else{
             return titleSize.size.height;
         }
+    }else if (indexPath.section == 0){
+        CGRect titleSize = [self.regionMOTD boundingRectWithSize:CGSizeMake(290, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName: [UIFont systemFontOfSize:18]} context:nil];
+        titleSize.size.height = titleSize.size.height+10;   // Take into account the 10 points of padding within a cell.
+        if (titleSize.size.height < 44){
+            return 44;
+        }else{
+            return titleSize.size.height;
+        }
     }
     return 44;
 }
@@ -159,6 +167,7 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
     
     if (indexPath.section == 0){
+        cell.textLabel.numberOfLines = 0;
         cell.textLabel.text = self.regionMOTD;
     }else if (indexPath.section == 1){
         
