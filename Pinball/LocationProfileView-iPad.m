@@ -165,7 +165,7 @@ typedef NS_ENUM(NSUInteger, LayoutType) {
         self.navigationItem.leftBarButtonItems = @[filterButton,fixedSpace,browseLocations];
         self.navigationItem.rightBarButtonItem = newLocation;
     }else if (type == LayoutTypeProfile){
-        UIBarButtonItem *showListings = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"766-arrow-right.png"] style:UIBarButtonItemStylePlain target:self action:@selector(showListingsView:)];
+        UIBarButtonItem *showListings = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"766-arrow-right"] style:UIBarButtonItemStylePlain target:self action:@selector(showListingsView:)];
         self.navigationItem.leftBarButtonItems = @[showListings];
         self.navigationItem.title = _currentLocation.name;
     }else if (type == LayoutTypeBrowse){
