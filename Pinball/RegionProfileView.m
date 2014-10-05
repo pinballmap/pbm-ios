@@ -9,6 +9,7 @@
 #import "RegionProfileView.h"
 #import "UIAlertView+Application.h"
 #import "RegionLink.h"
+#import "RegionsView.h"
 
 @interface RegionProfileView ()
 
@@ -38,6 +39,8 @@
     UIRefreshControl *refreshControl = [[UIRefreshControl alloc] init];
     [refreshControl addTarget:self action:@selector(refreshRegionData) forControlEvents:UIControlEventValueChanged];
     self.refreshControl = refreshControl;
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateRegion) name:@"RegionUpdate" object:nil];
     
     [self refreshRegionData];
 }
@@ -75,12 +78,20 @@
         });
     }];
 }
+- (void)updateRegion{
+    self.navigationItem.title = [NSString stringWithFormat:@"%@",[[[PinballMapManager sharedInstance] currentRegion] fullName]];
+    [self refreshRegionData];
+}
 #pragma mark - Class Actions
 - (IBAction)showAbout:(id)sender{
     
 }
 - (IBAction)changeRegion:(id)sender{
-    
+    RegionsView *regionsView = [self.storyboard instantiateViewControllerWithIdentifier:@"RegionsView"];
+    regionsView.isSelecting = true;
+    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:regionsView];
+    nav.modalPresentationStyle = UIModalPresentationFormSheet;
+    [self.navigationController presentViewController:nav animated:YES completion:nil];
 }
 #pragma mark - TableView Datasource/Delegate
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
