@@ -19,6 +19,10 @@
 		DB1FB5D619BCB95A00E52B01 /* Region+UpdateDistance.m in Sources */ = {isa = PBXBuildFile; fileRef = DB1FB5D519BCB95A00E52B01 /* Region+UpdateDistance.m */; };
 		DB23E871193B5F08000C1E69 /* Event.m in Sources */ = {isa = PBXBuildFile; fileRef = DB23E870193B5F08000C1E69 /* Event.m */; };
 		DB2D132E1942687F0082B8F9 /* Event+CellHelpers.m in Sources */ = {isa = PBXBuildFile; fileRef = DB2D132D1942687F0082B8F9 /* Event+CellHelpers.m */; };
+		DB2D8A4819E2046D00502A10 /* NotificationCenter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DB2D8A4719E2046D00502A10 /* NotificationCenter.framework */; };
+		DB2D8A4E19E2046D00502A10 /* TodayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DB2D8A4D19E2046D00502A10 /* TodayViewController.m */; };
+		DB2D8A5019E2046D00502A10 /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DB2D8A4F19E2046D00502A10 /* MainInterface.storyboard */; };
+		DB2D8A5319E2046D00502A10 /* Pinball Map Widget.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = DB2D8A4619E2046D00502A10 /* Pinball Map Widget.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		DB2E9FC519E15D7000B9D72F /* RegionProfileView.m in Sources */ = {isa = PBXBuildFile; fileRef = DB2E9FC419E15D7000B9D72F /* RegionProfileView.m */; };
 		DB2E9FCC19E179A200B9D72F /* RegionLink.m in Sources */ = {isa = PBXBuildFile; fileRef = DB2E9FCB19E179A200B9D72F /* RegionLink.m */; };
 		DB314278194A10F80097B312 /* LocationCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DB314277194A10F80097B312 /* LocationCell.m */; };
@@ -129,6 +133,20 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		DB2D8A5119E2046D00502A10 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = DBF06BC318F96FF500F92912 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = DB2D8A4519E2046D00502A10;
+			remoteInfo = "Pinball Map Widget";
+		};
+		DB2D8A5419E2046D00502A10 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = DBF06BC318F96FF500F92912 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = DB2D8A4519E2046D00502A10;
+			remoteInfo = "Pinball Map Widget";
+		};
 		DBF06BEB18F96FF500F92912 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = DBF06BC318F96FF500F92912 /* Project object */;
@@ -137,6 +155,20 @@
 			remoteInfo = Pinball;
 		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		DB2D8A5919E2046D00502A10 /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				DB2D8A5319E2046D00502A10 /* Pinball Map Widget.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		767AEE54A0274802B59CA4A5 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -161,6 +193,12 @@
 		DB23E870193B5F08000C1E69 /* Event.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Event.m; sourceTree = "<group>"; };
 		DB2D132C1942687F0082B8F9 /* Event+CellHelpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Event+CellHelpers.h"; sourceTree = "<group>"; };
 		DB2D132D1942687F0082B8F9 /* Event+CellHelpers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Event+CellHelpers.m"; sourceTree = "<group>"; };
+		DB2D8A4619E2046D00502A10 /* Pinball Map Widget.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "Pinball Map Widget.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
+		DB2D8A4719E2046D00502A10 /* NotificationCenter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NotificationCenter.framework; path = System/Library/Frameworks/NotificationCenter.framework; sourceTree = SDKROOT; };
+		DB2D8A4B19E2046D00502A10 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		DB2D8A4C19E2046D00502A10 /* TodayViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TodayViewController.h; sourceTree = "<group>"; };
+		DB2D8A4D19E2046D00502A10 /* TodayViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TodayViewController.m; sourceTree = "<group>"; };
+		DB2D8A4F19E2046D00502A10 /* MainInterface.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = MainInterface.storyboard; sourceTree = "<group>"; };
 		DB2E9FC319E15D7000B9D72F /* RegionProfileView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegionProfileView.h; sourceTree = "<group>"; };
 		DB2E9FC419E15D7000B9D72F /* RegionProfileView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegionProfileView.m; sourceTree = "<group>"; };
 		DB2E9FCA19E179A200B9D72F /* RegionLink.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegionLink.h; sourceTree = "<group>"; };
@@ -270,6 +308,7 @@
 		DB7B4C13193361AA002AF484 /* MachineScore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MachineScore.m; sourceTree = "<group>"; };
 		DB7B4C1519336717002AF484 /* NewMachineScoreView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewMachineScoreView.h; sourceTree = "<group>"; };
 		DB7B4C1619336717002AF484 /* NewMachineScoreView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewMachineScoreView.m; sourceTree = "<group>"; };
+		DB8BF07719E29DE40092AABE /* Pinball Map Widget.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "Pinball Map Widget.entitlements"; sourceTree = "<group>"; };
 		DB8D1C1519B3A7970065E2C6 /* ContactView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactView.h; sourceTree = "<group>"; };
 		DB8D1C1619B3A7970065E2C6 /* ContactView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactView.m; sourceTree = "<group>"; };
 		DB9330BB190D49AB0054C779 /* SeattleLocation.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = SeattleLocation.gpx; sourceTree = "<group>"; };
@@ -360,6 +399,14 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		DB2D8A4319E2046D00502A10 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DB2D8A4819E2046D00502A10 /* NotificationCenter.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		DBF06BC818F96FF500F92912 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -399,6 +446,26 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		DB2D8A4919E2046D00502A10 /* Pinball Map Widget */ = {
+			isa = PBXGroup;
+			children = (
+				DB8BF07719E29DE40092AABE /* Pinball Map Widget.entitlements */,
+				DB2D8A4C19E2046D00502A10 /* TodayViewController.h */,
+				DB2D8A4D19E2046D00502A10 /* TodayViewController.m */,
+				DB2D8A4F19E2046D00502A10 /* MainInterface.storyboard */,
+				DB2D8A4A19E2046D00502A10 /* Supporting Files */,
+			);
+			path = "Pinball Map Widget";
+			sourceTree = "<group>";
+		};
+		DB2D8A4A19E2046D00502A10 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				DB2D8A4B19E2046D00502A10 /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
 		DB2E9FC219E15D5D00B9D72F /* Region */ = {
 			isa = PBXGroup;
 			children = (
@@ -667,6 +734,7 @@
 				DB38DAD019E1CCC400E1B6D2 /* PinballMap.entitlements */,
 				DBF06BD418F96FF500F92912 /* Pinball */,
 				DBF06BED18F96FF500F92912 /* PinballTests */,
+				DB2D8A4919E2046D00502A10 /* Pinball Map Widget */,
 				DBF06BCD18F96FF500F92912 /* Frameworks */,
 				DBF06BCC18F96FF500F92912 /* Products */,
 			);
@@ -677,6 +745,7 @@
 			children = (
 				DBF06BCB18F96FF500F92912 /* PinballMap.app */,
 				DBF06BE618F96FF500F92912 /* PinballMapTests.xctest */,
+				DB2D8A4619E2046D00502A10 /* Pinball Map Widget.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -708,6 +777,7 @@
 				DBF06BD218F96FF500F92912 /* UIKit.framework */,
 				DBF06BE718F96FF500F92912 /* XCTest.framework */,
 				767AEE54A0274802B59CA4A5 /* libPods.a */,
+				DB2D8A4719E2046D00502A10 /* NotificationCenter.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -854,6 +924,23 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		DB2D8A4519E2046D00502A10 /* Pinball Map Widget */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = DB2D8A5819E2046D00502A10 /* Build configuration list for PBXNativeTarget "Pinball Map Widget" */;
+			buildPhases = (
+				DB2D8A4219E2046D00502A10 /* Sources */,
+				DB2D8A4319E2046D00502A10 /* Frameworks */,
+				DB2D8A4419E2046D00502A10 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Pinball Map Widget";
+			productName = "Pinball Map Widget";
+			productReference = DB2D8A4619E2046D00502A10 /* Pinball Map Widget.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 		DBF06BCA18F96FF500F92912 /* PinballMap */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = DBF06BF718F96FF500F92912 /* Build configuration list for PBXNativeTarget "PinballMap" */;
@@ -861,10 +948,13 @@
 				DBF06BC718F96FF500F92912 /* Sources */,
 				DBF06BC818F96FF500F92912 /* Frameworks */,
 				DBF06BC918F96FF500F92912 /* Resources */,
+				DB2D8A5919E2046D00502A10 /* Embed App Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				DB2D8A5219E2046D00502A10 /* PBXTargetDependency */,
+				DB2D8A5519E2046D00502A10 /* PBXTargetDependency */,
 			);
 			name = PinballMap;
 			productName = Pinball;
@@ -898,6 +988,15 @@
 				LastUpgradeCheck = 0600;
 				ORGANIZATIONNAME = "Frank Michael Sanchez";
 				TargetAttributes = {
+					DB2D8A4519E2046D00502A10 = {
+						CreatedOnToolsVersion = 6.0;
+						DevelopmentTeam = ZJN6P495U9;
+						SystemCapabilities = {
+							com.apple.ApplicationGroups.iOS = {
+								enabled = 1;
+							};
+						};
+					};
 					DBF06BCA18F96FF500F92912 = {
 						DevelopmentTeam = ZJN6P495U9;
 						SystemCapabilities = {
@@ -925,11 +1024,20 @@
 			targets = (
 				DBF06BCA18F96FF500F92912 /* PinballMap */,
 				DBF06BE518F96FF500F92912 /* PinballMapTests */,
+				DB2D8A4519E2046D00502A10 /* Pinball Map Widget */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		DB2D8A4419E2046D00502A10 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DB2D8A5019E2046D00502A10 /* MainInterface.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		DBF06BC918F96FF500F92912 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -960,6 +1068,14 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		DB2D8A4219E2046D00502A10 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DB2D8A4E19E2046D00502A10 /* TodayViewController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		DBF06BC718F96FF500F92912 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1061,6 +1177,16 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		DB2D8A5219E2046D00502A10 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = DB2D8A4519E2046D00502A10 /* Pinball Map Widget */;
+			targetProxy = DB2D8A5119E2046D00502A10 /* PBXContainerItemProxy */;
+		};
+		DB2D8A5519E2046D00502A10 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = DB2D8A4519E2046D00502A10 /* Pinball Map Widget */;
+			targetProxy = DB2D8A5419E2046D00502A10 /* PBXContainerItemProxy */;
+		};
 		DBF06BEC18F96FF500F92912 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = DBF06BCA18F96FF500F92912 /* PinballMap */;
@@ -1088,6 +1214,46 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		DB2D8A5619E2046D00502A10 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CODE_SIGN_ENTITLEMENTS = "Pinball Map Widget/Pinball Map Widget.entitlements";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "Pinball Map Widget/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				MTL_ENABLE_DEBUG_INFO = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		DB2D8A5719E2046D00502A10 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CODE_SIGN_ENTITLEMENTS = "Pinball Map Widget/Pinball Map Widget.entitlements";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				INFOPLIST_FILE = "Pinball Map Widget/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
 		DBF06BF518F96FF500F92912 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1259,6 +1425,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		DB2D8A5819E2046D00502A10 /* Build configuration list for PBXNativeTarget "Pinball Map Widget" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DB2D8A5619E2046D00502A10 /* Debug */,
+				DB2D8A5719E2046D00502A10 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		DBF06BC618F96FF500F92912 /* Build configuration list for PBXProject "PinballMap" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
