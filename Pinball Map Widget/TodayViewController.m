@@ -11,6 +11,7 @@
 
 NSString * const apiRootURL = @"http://pinballmap.com/";
 NSString * const appGroup = @"group.net.isaacruiz.ppm";
+NSString * const etagKey = @"recentsEtag";
 
 @interface TodayViewController () <NCWidgetProviding>
 
@@ -24,11 +25,11 @@ NSString * const appGroup = @"group.net.isaacruiz.ppm";
 @implementation TodayViewController
 
 - (void)viewDidLoad {
-//    [super viewDidLoad];
+    [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     NSDictionary *regionInfo = [[TodayViewController userDefaultsForApp] objectForKey:@"CurrentRegion"];
     self.regionName = regionInfo[@"name"];
-    self.regionName = @"seattle";
+
     self.recentMachines = [NSMutableArray new];
 
     self.preferredContentSize = self.tableView.contentSize;
@@ -47,39 +48,68 @@ NSString * const appGroup = @"group.net.isaacruiz.ppm";
     NSURLSession *session = [NSURLSession sharedSession];
     NSURLSessionDataTask *recentTask = [session dataTaskWithRequest:recentRequest completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
         if (!error){
-            NSDictionary *jsonData = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:nil];
-            NSArray *machines = jsonData[@"location_machine_xrefs"];
+            NSString *recentsEtag = [(NSHTTPURLResponse *)response allHeaderFields][@"Etag"];
+            NSString *pastEtag = [[TodayViewController userDefaultsForApp] objectForKey:etagKey];
             
-            NSMutableArray *recentMachinesObj = [NSMutableArray new];
-            for (NSDictionary *machine in machines) {
-                
-                NSDictionary *locationData = machine[@"location"];
-                NSDictionary *machineData = machine[@"machine"];
-                
-                NSMutableAttributedString *displayText = [[NSMutableAttributedString alloc] initWithString:machineData[@"name"] attributes:@{NSFontAttributeName: [UIFont boldSystemFontOfSize:16]}];
-                [displayText appendAttributedString:[[NSAttributedString alloc] initWithString:@" was added to " attributes:@{NSFontAttributeName: [UIFont systemFontOfSize:16]}]];
-                [displayText appendAttributedString:[[NSAttributedString alloc] initWithString:locationData[@"name"] attributes:@{NSFontAttributeName: [UIFont boldSystemFontOfSize:16]}]];
-                [displayText appendAttributedString:[[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@" (%@)",locationData[@"city"]] attributes:@{NSFontAttributeName: [UIFont systemFontOfSize:16]}]];
-                                                                                                                                             
-                
-                
-                NSString *createdOn = machine[@"created_at"];
-                
-                NSDictionary *recentMachine = @{
-                                                @"displayText": displayText,
-                                                @"craetedOn": createdOn
-                                              };
-                
-                [recentMachinesObj addObject:recentMachine];
+            NSData *recentsData;
+            if (![recentsEtag isEqualToString:pastEtag]){
+                [[TodayViewController userDefaultsForApp] setObject:recentsEtag forKey:etagKey];
+                [[TodayViewController userDefaultsForApp] synchronize];
+                [self saveData:data];
+                recentsData = data;
+            }else{
+                recentsData = [self dataFromCache];
             }
-            [self.recentMachines removeAllObjects];
-            [self.recentMachines addObjectsFromArray:[recentMachinesObj sortedArrayUsingDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"createdOn" ascending:NO]]]];
+            
+            NSDictionary *jsonData = [NSJSONSerialization JSONObjectWithData:recentsData options:NSJSONReadingAllowFragments error:nil];
+            [self proccessRecentsData:jsonData];
+            
             block(true);
         }else{
             block(false);
         }
     }];
     [recentTask resume];
+}
+- (void)saveData:(NSData *)data{
+    [data writeToURL:[self cacheURLPath] atomically:true];
+}
+- (NSData *)dataFromCache{
+    NSData *cacheData = [NSData dataWithContentsOfURL:[self cacheURLPath]];
+    return cacheData;
+}
+- (NSURL *)cacheURLPath{
+    NSURL *securityContainer = [[NSFileManager defaultManager] containerURLForSecurityApplicationGroupIdentifier:appGroup];
+    securityContainer = [securityContainer URLByAppendingPathComponent:@"recents.cache"];
+    return securityContainer;
+}
+- (void)proccessRecentsData:(NSDictionary *)jsonData{
+    NSArray *machines = jsonData[@"location_machine_xrefs"];
+    
+    NSMutableArray *recentMachinesObj = [NSMutableArray new];
+    for (NSDictionary *machine in machines) {
+        
+        NSDictionary *locationData = machine[@"location"];
+        NSDictionary *machineData = machine[@"machine"];
+        
+        NSMutableAttributedString *displayText = [[NSMutableAttributedString alloc] initWithString:machineData[@"name"] attributes:@{NSFontAttributeName: [UIFont boldSystemFontOfSize:16]}];
+        [displayText appendAttributedString:[[NSAttributedString alloc] initWithString:@" was added to " attributes:@{NSFontAttributeName: [UIFont systemFontOfSize:16]}]];
+        [displayText appendAttributedString:[[NSAttributedString alloc] initWithString:locationData[@"name"] attributes:@{NSFontAttributeName: [UIFont boldSystemFontOfSize:16]}]];
+        [displayText appendAttributedString:[[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@" (%@)",locationData[@"city"]] attributes:@{NSFontAttributeName: [UIFont systemFontOfSize:16]}]];
+        
+        
+        
+        NSString *createdOn = machine[@"created_at"];
+        
+        NSDictionary *recentMachine = @{
+                                        @"displayText": displayText,
+                                        @"craetedOn": createdOn
+                                        };
+        
+        [recentMachinesObj addObject:recentMachine];
+    }
+    [self.recentMachines removeAllObjects];
+    [self.recentMachines addObjectsFromArray:[recentMachinesObj sortedArrayUsingDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"createdOn" ascending:NO]]]];
 }
 #pragma mark - NCWidget Delegate
 - (void)widgetPerformUpdateWithCompletionHandler:(void (^)(NCUpdateResult))completionHandler {
@@ -89,16 +119,27 @@ NSString * const appGroup = @"group.net.isaacruiz.ppm";
     // If there's no update required, use NCUpdateResultNoData
     // If there's an update, use NCUpdateResultNewData
     
+    if ([self dataFromCache]){
+        NSDictionary *jsonData = [NSJSONSerialization JSONObjectWithData:[self dataFromCache] options:NSJSONReadingAllowFragments error:nil];
+        [self proccessRecentsData:jsonData];
+    }
+    
+    
     [self refreshRecentlyWithCompletion:^(BOOL shouldReload) {
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [self.tableView reloadData];
-            self.preferredContentSize = self.tableView.contentSize;
-            completionHandler(NCUpdateResultNewData);
-        });
+        if (shouldReload){
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self.tableView reloadData];
+                self.preferredContentSize = self.tableView.contentSize;
+                completionHandler(NCUpdateResultNewData);
+            });
+        }else{
+            dispatch_async(dispatch_get_main_queue(), ^{
+                completionHandler(NCUpdateResultNoData);
+            });
+        }
     }];
     
-    
-    
+    completionHandler(NCUpdateResultNewData);
 }
 #pragma mark - TableView Datasource/Delegate
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
@@ -111,7 +152,6 @@ NSString * const appGroup = @"group.net.isaacruiz.ppm";
     NSDictionary *recentMachine = self.recentMachines[indexPath.row];
     NSAttributedString *cellTitle = recentMachine[@"displayText"];
 
-//    CGRect stringSize = [cellTitle boundingRectWithSize:CGSizeMake(290, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName: [UIFont systemFontOfSize:16]} context:nil];
     CGRect stringSize = [cellTitle boundingRectWithSize:CGSizeMake(290, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin context:nil];
 
     stringSize.size.height = stringSize.size.height+10;   // Take into account the 10 points of padding within a cell.
