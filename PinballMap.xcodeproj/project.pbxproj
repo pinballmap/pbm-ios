@@ -100,6 +100,8 @@
 		DBD4F3E919067D690023D98B /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DBD4F3E819067D690023D98B /* MessageUI.framework */; };
 		DBE50374190D2BBA002BDE0D /* Location+UpdateDistance.m in Sources */ = {isa = PBXBuildFile; fileRef = DBE50373190D2BBA002BDE0D /* Location+UpdateDistance.m */; };
 		DBE712D91929134D0046DFA8 /* MachineLocation.m in Sources */ = {isa = PBXBuildFile; fileRef = DBE712D81929134D0046DFA8 /* MachineLocation.m */; };
+		DBE9F7B919E3FDCC000BD498 /* HighRoller.m in Sources */ = {isa = PBXBuildFile; fileRef = DBE9F7B819E3FDCC000BD498 /* HighRoller.m */; };
+		DBE9F7BC19E3FE0D000BD498 /* HighScore.m in Sources */ = {isa = PBXBuildFile; fileRef = DBE9F7BB19E3FE0D000BD498 /* HighScore.m */; };
 		DBEAA1FD192A9E140096F2A9 /* LocationType.m in Sources */ = {isa = PBXBuildFile; fileRef = DBEAA1FC192A9E140096F2A9 /* LocationType.m */; };
 		DBEAA200192A9E4A0096F2A9 /* LocationType+Create.m in Sources */ = {isa = PBXBuildFile; fileRef = DBEAA1FF192A9E4A0096F2A9 /* LocationType+Create.m */; };
 		DBF04F83192E5C56000716A8 /* LocationTypesView.m in Sources */ = {isa = PBXBuildFile; fileRef = DBF04F82192E5C56000716A8 /* LocationTypesView.m */; };
@@ -347,6 +349,10 @@
 		DBE50373190D2BBA002BDE0D /* Location+UpdateDistance.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Location+UpdateDistance.m"; sourceTree = "<group>"; };
 		DBE712D71929134D0046DFA8 /* MachineLocation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MachineLocation.h; sourceTree = "<group>"; };
 		DBE712D81929134D0046DFA8 /* MachineLocation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MachineLocation.m; sourceTree = "<group>"; };
+		DBE9F7B719E3FDCC000BD498 /* HighRoller.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HighRoller.h; sourceTree = "<group>"; };
+		DBE9F7B819E3FDCC000BD498 /* HighRoller.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HighRoller.m; sourceTree = "<group>"; };
+		DBE9F7BA19E3FE0D000BD498 /* HighScore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HighScore.h; sourceTree = "<group>"; };
+		DBE9F7BB19E3FE0D000BD498 /* HighScore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HighScore.m; sourceTree = "<group>"; };
 		DBEAA1FB192A9E140096F2A9 /* LocationType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationType.h; sourceTree = "<group>"; };
 		DBEAA1FC192A9E140096F2A9 /* LocationType.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocationType.m; sourceTree = "<group>"; };
 		DBEAA1FE192A9E4A0096F2A9 /* LocationType+Create.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "LocationType+Create.h"; sourceTree = "<group>"; };
@@ -677,6 +683,10 @@
 				DB5FFEA919C62271004C424B /* RecentMachine.m */,
 				DB2E9FCA19E179A200B9D72F /* RegionLink.h */,
 				DB2E9FCB19E179A200B9D72F /* RegionLink.m */,
+				DBE9F7B719E3FDCC000BD498 /* HighRoller.h */,
+				DBE9F7B819E3FDCC000BD498 /* HighRoller.m */,
+				DBE9F7BA19E3FE0D000BD498 /* HighScore.h */,
+				DBE9F7BB19E3FE0D000BD498 /* HighScore.m */,
 			);
 			name = "App Models";
 			sourceTree = "<group>";
@@ -1095,6 +1105,7 @@
 				DBF711EF191E4DD3008656EE /* NewMachineView.m in Sources */,
 				DBF06C6418F97C5F00F92912 /* MachineLocation+Create.m in Sources */,
 				DBA10B431902F244004ED2D4 /* MachineConditionView.m in Sources */,
+				DBE9F7B919E3FDCC000BD498 /* HighRoller.m in Sources */,
 				DB66F4181902E414007272D1 /* NewMachineLocationView.m in Sources */,
 				DBB59CCA18FAD9AC00F35BFD /* LocationProfileView.m in Sources */,
 				DB52D2E118FAF94500BB56D8 /* MachineLocationPin.m in Sources */,
@@ -1151,6 +1162,7 @@
 				DBA3B60A190846D900ACBC69 /* InputCell.m in Sources */,
 				DB0DAE7A1987B4A800A3FF0F /* GAAppHelper.m in Sources */,
 				DB52D30418FB0DCF00BB56D8 /* UIAlertView+Application.m in Sources */,
+				DBE9F7BC19E3FE0D000BD498 /* HighScore.m in Sources */,
 				DB38DA9419E1CBC400E1B6D2 /* AFHTTPRequestOperationManager.m in Sources */,
 				DB7B4C1719336717002AF484 /* NewMachineScoreView.m in Sources */,
 				DB8D1C1719B3A7970065E2C6 /* ContactView.m in Sources */,

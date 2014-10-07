@@ -11,11 +11,13 @@
 #import "RegionLink.h"
 #import "RegionsView.h"
 #import "AboutView.h"
+#import "HighRoller.h"
 
 @interface RegionProfileView ()
 
 @property (nonatomic) Region *currentRegion;
 @property (nonatomic) NSMutableArray *regionLinks;
+@property (nonatomic) NSMutableArray *highRollers;
 @property (nonatomic) NSString *regionMOTD;
 
 - (IBAction)showAbout:(id)sender;
@@ -36,6 +38,7 @@
     self.navigationItem.title = self.currentRegion.fullName;
     
     self.regionLinks = [NSMutableArray new];
+    self.highRollers = [NSMutableArray new];
     
     UIRefreshControl *refreshControl = [[UIRefreshControl alloc] init];
     [refreshControl addTarget:self action:@selector(refreshRegionData) forControlEvents:UIControlEventValueChanged];
@@ -62,6 +65,7 @@
         }else{
             self.regionMOTD = status[@"region"][@"motd"];
             NSDictionary *links = status[@"region"][@"filtered_region_links"];
+            NSDictionary *highRollers = status[@"region"][@"n_high_rollers"];
             [self.regionLinks removeAllObjects];
             
             [links enumerateKeysAndObjectsUsingBlock:^(NSString *key, NSArray *links, BOOL *stop) {
@@ -72,6 +76,15 @@
                 }
                 [self.regionLinks addObject:linkCategories];
             }];
+            
+            [self.highRollers removeAllObjects];
+            [highRollers enumerateKeysAndObjectsUsingBlock:^(NSString *key, NSArray *scores, BOOL *stop) {
+                if (key.length > 0){
+                    HighRoller *highRoller = [[HighRoller alloc] initWithInitials:key andScores:scores];
+                    [self.highRollers addObject:highRoller];
+                }
+            }];
+            
         }
         dispatch_async(dispatch_get_main_queue(), ^{
             [self.tableView reloadData];
@@ -108,7 +121,7 @@
     if (section == 0){
         return 1;
     }else if (section == 1){
-        return 0;
+        return self.highRollers.count;
     }else{
         return [self.regionLinks[section-2] count];
     }
@@ -118,7 +131,7 @@
     if (section == 0){
         return @"Message of the Day";
     }else if (section == 1){
-        return @"High Scores";
+        return @"High Rollers";
     }else{
         RegionLink *link = [self.regionLinks[section-2] firstObject];
         return link.category;
@@ -158,8 +171,6 @@
     
     if (indexPath.section == 0){
         cellIdentifier = @"BasicCell";
-    }else if (indexPath.section == 1){
-        cellIdentifier = @"BasicCell";
     }else{
         cellIdentifier = @"DetailCell";
     }
@@ -170,7 +181,9 @@
         cell.textLabel.numberOfLines = 0;
         cell.textLabel.text = self.regionMOTD;
     }else if (indexPath.section == 1){
-        
+        HighRoller *highRoller = self.highRollers[indexPath.row];
+        cell.textLabel.text = highRoller.initials;
+        cell.detailTextLabel.text = [NSString stringWithFormat:@"%lu Scores",(unsigned long)highRoller.highScores.count];
     }else{
         RegionLink *link = [self.regionLinks[indexPath.section-2] objectAtIndex:indexPath.row];
         cell.detailTextLabel.numberOfLines = 0;
