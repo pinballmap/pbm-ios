@@ -75,6 +75,7 @@
 		DB636D131903EF8E00576521 /* AboutInfo.plist in Resources */ = {isa = PBXBuildFile; fileRef = DB636D121903EF8E00576521 /* AboutInfo.plist */; };
 		DB66F4181902E414007272D1 /* NewMachineLocationView.m in Sources */ = {isa = PBXBuildFile; fileRef = DB66F4171902E414007272D1 /* NewMachineLocationView.m */; };
 		DB6A6DC31945E1380097976C /* LocationProfileView-iPad.m in Sources */ = {isa = PBXBuildFile; fileRef = DB6A6DC21945E1380097976C /* LocationProfileView-iPad.m */; };
+		DB6F292F19E5870700AC87FF /* HighRollerProfileView.m in Sources */ = {isa = PBXBuildFile; fileRef = DB6F292E19E5870700AC87FF /* HighRollerProfileView.m */; };
 		DB7B4C1119335B76002AF484 /* MachineLocationProfileView.m in Sources */ = {isa = PBXBuildFile; fileRef = DB7B4C1019335B76002AF484 /* MachineLocationProfileView.m */; };
 		DB7B4C14193361AA002AF484 /* MachineScore.m in Sources */ = {isa = PBXBuildFile; fileRef = DB7B4C13193361AA002AF484 /* MachineScore.m */; };
 		DB7B4C1719336717002AF484 /* NewMachineScoreView.m in Sources */ = {isa = PBXBuildFile; fileRef = DB7B4C1619336717002AF484 /* NewMachineScoreView.m */; };
@@ -304,6 +305,8 @@
 		DB66F4171902E414007272D1 /* NewMachineLocationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewMachineLocationView.m; sourceTree = "<group>"; };
 		DB6A6DC11945E1380097976C /* LocationProfileView-iPad.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "LocationProfileView-iPad.h"; sourceTree = "<group>"; };
 		DB6A6DC21945E1380097976C /* LocationProfileView-iPad.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "LocationProfileView-iPad.m"; sourceTree = "<group>"; };
+		DB6F292D19E5870700AC87FF /* HighRollerProfileView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HighRollerProfileView.h; sourceTree = "<group>"; };
+		DB6F292E19E5870700AC87FF /* HighRollerProfileView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HighRollerProfileView.m; sourceTree = "<group>"; };
 		DB7B4C0F19335B76002AF484 /* MachineLocationProfileView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MachineLocationProfileView.h; sourceTree = "<group>"; };
 		DB7B4C1019335B76002AF484 /* MachineLocationProfileView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MachineLocationProfileView.m; sourceTree = "<group>"; };
 		DB7B4C12193361AA002AF484 /* MachineScore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MachineScore.h; sourceTree = "<group>"; };
@@ -477,6 +480,8 @@
 			children = (
 				DB2E9FC319E15D7000B9D72F /* RegionProfileView.h */,
 				DB2E9FC419E15D7000B9D72F /* RegionProfileView.m */,
+				DB6F292D19E5870700AC87FF /* HighRollerProfileView.h */,
+				DB6F292E19E5870700AC87FF /* HighRollerProfileView.m */,
 			);
 			name = Region;
 			sourceTree = "<group>";
@@ -1132,6 +1137,7 @@
 				DB52D2FA18FB09AF00BB56D8 /* NSDate+DateFormatting.m in Sources */,
 				DB2E9FCC19E179A200B9D72F /* RegionLink.m in Sources */,
 				DB38DAA719E1CBE300E1B6D2 /* ReuseWebView.m in Sources */,
+				DB6F292F19E5870700AC87FF /* HighRollerProfileView.m in Sources */,
 				DB5FFEA519C6209E004C424B /* RecentlyAddedView.m in Sources */,
 				DBEAA200192A9E4A0096F2A9 /* LocationType+Create.m in Sources */,
 				DB38DAA819E1CBE300E1B6D2 /* SafariActivity.m in Sources */,

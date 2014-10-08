@@ -12,6 +12,7 @@
 #import "RegionsView.h"
 #import "AboutView.h"
 #import "HighRoller.h"
+#import "HighRollerProfileView.h"
 
 @interface RegionProfileView ()
 
@@ -96,6 +97,8 @@
     self.navigationItem.title = [NSString stringWithFormat:@"%@",[[[PinballMapManager sharedInstance] currentRegion] fullName]];
     [self refreshRegionData];
 }
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
+}
 #pragma mark - Class Actions
 - (IBAction)showAbout:(id)sender{
     AboutView *about = [self.storyboard instantiateViewControllerWithIdentifier:@"AboutView"];
@@ -165,7 +168,6 @@
     }
     return 44;
 }
-
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     static NSString *cellIdentifier;
     
@@ -196,6 +198,16 @@
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+
+    if (indexPath.section == 1){
+        HighRoller *highRoller = self.highRollers[indexPath.row];
+        
+        HighRollerProfileView *profile = (HighRollerProfileView *)[[self.storyboard instantiateViewControllerWithIdentifier:@"HighRollerProfileView"] navigationRootViewController];
+        profile.highRoller = highRoller;
+        
+        [self.navigationController presentViewController:[profile parentViewController] animated:YES completion:nil];
+    }
+    
 }
 
 @end
