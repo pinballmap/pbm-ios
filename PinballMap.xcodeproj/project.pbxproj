@@ -675,8 +675,6 @@
 				DBEAA1FC192A9E140096F2A9 /* LocationType.m */,
 				DBF711F0191E59B8008656EE /* Machine.h */,
 				DBF711F1191E59B8008656EE /* Machine.m */,
-				DB7B4C12193361AA002AF484 /* MachineScore.h */,
-				DB7B4C13193361AA002AF484 /* MachineScore.m */,
 			);
 			name = "Core Data Models";
 			sourceTree = "<group>";
@@ -684,6 +682,8 @@
 		DB5FFEA719C62255004C424B /* App Models */ = {
 			isa = PBXGroup;
 			children = (
+				DB7B4C12193361AA002AF484 /* MachineScore.h */,
+				DB7B4C13193361AA002AF484 /* MachineScore.m */,
 				DB5FFEA819C62271004C424B /* RecentMachine.h */,
 				DB5FFEA919C62271004C424B /* RecentMachine.m */,
 				DB2E9FCA19E179A200B9D72F /* RegionLink.h */,

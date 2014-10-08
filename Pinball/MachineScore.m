@@ -13,7 +13,7 @@
 - (id)initWithData:(NSDictionary *)data{
     self = [super init];
     if (self){
-        _initials = data[@"initials"];
+        self.initials = data[@"initials"];
         
         switch ([data[@"rank"] integerValue]) {
             case 1:
@@ -35,7 +35,11 @@
                 _rank = ScoreRankNA;
                 break;
         }
-        _score = data[@"score"];
+        self.score = data[@"score"];
+        NSNumberFormatter *numFormat = [[NSNumberFormatter alloc] init];
+        numFormat.numberStyle = NSNumberFormatterDecimalStyle;
+
+        self.scoreString = [numFormat stringFromNumber:self.score];
     }
     return self;
 }

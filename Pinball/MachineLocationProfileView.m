@@ -173,7 +173,7 @@
             cell.textLabel.textAlignment = NSTextAlignmentCenter;
         }else{
             MachineScore *score = self.machineScores[indexPath.row-1];
-            cell.textLabel.text = [NSString stringWithFormat:@"%@ (%@)",score.score,score.initials];
+            cell.textLabel.text = [NSString stringWithFormat:@"%@ (%@)",score.scoreString,score.initials];
             cell.detailTextLabel.text = [NSString stringWithFormat:@"%@",[MachineScore wordingForRank:score.rank]];
         }
     }else if (indexPath.section == 3){
