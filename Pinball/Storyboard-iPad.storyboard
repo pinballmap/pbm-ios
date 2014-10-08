@@ -120,7 +120,7 @@
                                     <rect key="frame" x="0.0" y="0.0" width="287" height="43"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="230" translatesAutoresizingMaskIntoConstraints="NO" id="Rqf-sy-5aW">
+                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="230" translatesAutoresizingMaskIntoConstraints="NO" id="Rqf-sy-5aW">
                                             <rect key="frame" x="15" y="3" width="230" height="24"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="24" id="lYE-Bc-qaZ"/>
@@ -128,7 +128,7 @@
                                             <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JUF-I1-dzx">
+                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JUF-I1-dzx">
                                             <rect key="frame" x="15" y="25" width="230" height="15"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                             <nil key="highlightedColor"/>
@@ -252,13 +252,13 @@
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="66"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KI1-Fq-nja">
+                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KI1-Fq-nja">
                                             <rect key="frame" x="20" y="9" width="280" height="21"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <color key="textColor" red="1" green="0.0" blue="0.57254901960000004" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Label" lineBreakMode="middleTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsLetterSpacingToFitWidth="YES" preferredMaxLayoutWidth="280" translatesAutoresizingMaskIntoConstraints="NO" id="Pmn-gT-YUM">
+                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="middleTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsLetterSpacingToFitWidth="YES" preferredMaxLayoutWidth="280" translatesAutoresizingMaskIntoConstraints="NO" id="Pmn-gT-YUM">
                                             <rect key="frame" x="30" y="38" width="280" height="21"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="21" id="4AF-Ai-PeQ"/>
@@ -1380,13 +1380,13 @@
                                     <rect key="frame" x="0.0" y="0.0" width="703" height="66"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="phk-aA-Szy">
+                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="phk-aA-Szy">
                                             <rect key="frame" x="20" y="9" width="663" height="21"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <color key="textColor" red="1" green="0.0" blue="0.57254901960000004" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="663" translatesAutoresizingMaskIntoConstraints="NO" id="afE-h4-Y1c">
+                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="663" translatesAutoresizingMaskIntoConstraints="NO" id="afE-h4-Y1c">
                                             <rect key="frame" x="30" y="38" width="663" height="21"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="21" id="BU5-jA-xfk"/>
@@ -1524,13 +1524,13 @@
                                     <rect key="frame" x="0.0" y="0.0" width="703" height="66"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dVF-CR-thm">
+                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dVF-CR-thm">
                                             <rect key="frame" x="20" y="9" width="663" height="21"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <color key="textColor" red="1" green="0.0" blue="0.57254901960000004" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="663" translatesAutoresizingMaskIntoConstraints="NO" id="fya-29-MxU">
+                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="663" translatesAutoresizingMaskIntoConstraints="NO" id="fya-29-MxU">
                                             <rect key="frame" x="30" y="38" width="663" height="21"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="21" id="y6F-zQ-887"/>
@@ -2322,7 +2322,7 @@
         <scene sceneID="nAw-Zm-fss">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="lU1-Uv-MxZ" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Region" id="XCo-BR-xDv"/>
+                    <tabBarItem key="tabBarItem" title="Region" image="881-globe" id="XCo-BR-xDv"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="azE-HE-KXu">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -2404,6 +2404,7 @@
         <image name="798-filter.png" width="28" height="24"/>
         <image name="851-calendar" width="28" height="28"/>
         <image name="852-map" width="28" height="24"/>
+        <image name="881-globe" width="28" height="28"/>
         <image name="pinball" width="28" height="28"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
