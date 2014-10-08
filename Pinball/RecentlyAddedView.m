@@ -69,13 +69,27 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     return self.recentMachines.count;
 }
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    RecentMachine *recentMachine = self.recentMachines[indexPath.row];
+    
+    CGRect stringSize = [recentMachine.displayText boundingRectWithSize:CGSizeMake(290, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin context:nil];
+    
+    stringSize.size.height = stringSize.size.height+20;   // Take into account the 10 points of padding within a cell.
+    if (stringSize.size.height < 44){
+        return 44;
+    }else{
+        return stringSize.size.height;
+    }
+}
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     static NSString *cellIdentifier = @"RecentMachineCell";
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
     
     RecentMachine *machine = [self.recentMachines objectAtIndex:indexPath.row];
-    cell.textLabel.text = machine.machine.name;
+    cell.textLabel.numberOfLines = 0;
+    cell.textLabel.attributedText = machine.displayText;
     cell.detailTextLabel.text = [NSString stringWithFormat:@"%@ (%@)",machine.location.name,machine.location.city];
 
     return cell;

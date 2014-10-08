@@ -13,6 +13,7 @@
 @property (nonatomic) NSString *createdOn;
 @property (nonatomic) Location *location;
 @property (nonatomic) Machine *machine;
+@property (nonatomic) NSMutableAttributedString *displayText;
 
 - (instancetype)initWithData:(NSDictionary *)data;
 

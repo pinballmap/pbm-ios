@@ -36,6 +36,11 @@
         }
         self.createdOn = data[@"created_at"];
         
+        self.displayText = [[NSMutableAttributedString alloc] initWithString:self.machine.name attributes:@{NSFontAttributeName: [UIFont boldSystemFontOfSize:16]}];
+        [self.displayText appendAttributedString:[[NSAttributedString alloc] initWithString:@" was added to " attributes:@{NSFontAttributeName: [UIFont systemFontOfSize:16]}]];
+        [self.displayText appendAttributedString:[[NSAttributedString alloc] initWithString:self.location.name attributes:@{NSFontAttributeName: [UIFont boldSystemFontOfSize:16]}]];
+        [self.displayText appendAttributedString:[[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@" (%@)",self.location.city] attributes:@{NSFontAttributeName: [UIFont systemFontOfSize:16]}]];
+        
     }
     return self;
 }
