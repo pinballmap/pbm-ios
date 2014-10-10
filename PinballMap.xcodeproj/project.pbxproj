@@ -1259,15 +1259,15 @@
 			buildSettings = {
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CODE_SIGN_ENTITLEMENTS = "Pinball Map Widget/Pinball Map Widget.entitlements";
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Frank Michael Sanchez (ZJN6P495U9)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				INFOPLIST_FILE = "Pinball Map Widget/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "5c753d4c-6f71-4ba0-a04a-f32ef712cceb";
 				SKIP_INSTALL = YES;
 			};
 			name = Release;
@@ -1394,7 +1394,7 @@
 					"$(PROJECT_DIR)/Pinball/HockeySDK-iOS",
 				);
 				PRODUCT_NAME = PinballMap;
-				PROVISIONING_PROFILE = "0c5761ea-df27-497a-95b8-eaab6010b375";
+				PROVISIONING_PROFILE = "1fc57688-8598-47c6-81e5-d4fe66dcca94";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
 			};
