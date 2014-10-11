@@ -47,6 +47,7 @@
 - (void)updateRegion{
     CLLocation *location = [[PinballMapManager sharedInstance] userLocation];
     if (location){
+        [self.mapView removeAnnotations:self.mapView.annotations];
         [self.mapView setRegion:MKCoordinateRegionMake(location.coordinate, MKCoordinateSpanMake(.04, .04))];
         [Location updateAllForRegion:[[PinballMapManager sharedInstance] currentRegion]];
         NSFetchRequest *stackRequest = [NSFetchRequest fetchRequestWithEntityName:@"Location"];
