@@ -12,6 +12,7 @@
 #import "LocationProfileView-iPad.h"
 #import "GAI.h"
 #import "ThirdPartyKeys.h"
+@import MapKit;
 
 @implementation AppDelegate
 
@@ -25,6 +26,7 @@
     [[UITableViewCell appearance] setTintColor:pinkColor];
     [[UITableView appearance] setTintColor:pinkColor];
     [[UISegmentedControl appearance] setTintColor:pinkColor];
+    [[MKMapView appearance] setTintColor:pinkColor];
 
     [[BITHockeyManager sharedHockeyManager] configureWithIdentifier:[ThirdPartyKeys hockeyID]];
     [[BITHockeyManager sharedHockeyManager].authenticator setAuthenticationSecret:[ThirdPartyKeys hockeySecret]];
