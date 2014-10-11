@@ -123,27 +123,35 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     if (section == 0){
         return 1;
-    }else if (section == 1){
-        return self.highRollers.count;
+    }else if (section > 0 && section <= self.regionLinks.count){
+        return [self.regionLinks[section-1] count];
     }else{
-        return [self.regionLinks[section-2] count];
+        return self.highRollers.count;
     }
     return 0;
 }
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section{
     if (section == 0){
         return @"Message of the Day";
-    }else if (section == 1){
-        return @"High Rollers";
-    }else{
-        RegionLink *link = [self.regionLinks[section-2] firstObject];
+    }else if (section > 0 && section <= self.regionLinks.count){
+        RegionLink *link = [self.regionLinks[section-1] firstObject];
         return link.category;
+    }else{
+        return @"High Rollers";
     }
     return nil;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    if (indexPath.section > 1){
-        RegionLink *link = [self.regionLinks[indexPath.section-2] objectAtIndex:indexPath.row];
+    if (indexPath.section == 0){
+        CGRect titleSize = [self.regionMOTD boundingRectWithSize:CGSizeMake(290, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName: [UIFont systemFontOfSize:18]} context:nil];
+        titleSize.size.height = titleSize.size.height+10;   // Take into account the 10 points of padding within a cell.
+        if (titleSize.size.height < 44){
+            return 44;
+        }else{
+            return titleSize.size.height;
+        }
+    }else if (indexPath.section > 0 && indexPath.section <= self.regionLinks.count){
+        RegionLink *link = [self.regionLinks[indexPath.section-1] objectAtIndex:indexPath.row];
 
         NSString *cellDetail = link.linkDescription;
         NSString *cellTitle = link.name;
@@ -157,15 +165,8 @@
         }else{
             return titleSize.size.height;
         }
-    }else if (indexPath.section == 0){
-        CGRect titleSize = [self.regionMOTD boundingRectWithSize:CGSizeMake(290, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName: [UIFont systemFontOfSize:18]} context:nil];
-        titleSize.size.height = titleSize.size.height+10;   // Take into account the 10 points of padding within a cell.
-        if (titleSize.size.height < 44){
-            return 44;
-        }else{
-            return titleSize.size.height;
-        }
     }
+    
     return 44;
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -182,24 +183,23 @@
     if (indexPath.section == 0){
         cell.textLabel.numberOfLines = 0;
         cell.textLabel.text = self.regionMOTD;
-    }else if (indexPath.section == 1){
-        HighRoller *highRoller = self.highRollers[indexPath.row];
-        cell.textLabel.text = highRoller.initials;
-        cell.detailTextLabel.text = [NSString stringWithFormat:@"%lu Scores",(unsigned long)highRoller.highScores.count];
-    }else{
-        RegionLink *link = [self.regionLinks[indexPath.section-2] objectAtIndex:indexPath.row];
+    }else if (indexPath.section > 0 && indexPath.section <= self.regionLinks.count){
+        RegionLink *link = [self.regionLinks[indexPath.section-1] objectAtIndex:indexPath.row];
         cell.detailTextLabel.numberOfLines = 0;
         cell.textLabel.numberOfLines = 0;
         cell.textLabel.text = link.name;
         cell.detailTextLabel.text = link.linkDescription;
+    }else{
+        HighRoller *highRoller = self.highRollers[indexPath.row];
+        cell.textLabel.text = highRoller.initials;
+        cell.detailTextLabel.text = [NSString stringWithFormat:@"%lu Scores",(unsigned long)highRoller.highScores.count];
     }
-    
     return cell;
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 
-    if (indexPath.section == 1){
+    if (indexPath.section > self.regionLinks.count){
         HighRoller *highRoller = self.highRollers[indexPath.row];
         
         HighRollerProfileView *profile = (HighRollerProfileView *)[[self.storyboard instantiateViewControllerWithIdentifier:@"HighRollerProfileView"] navigationRootViewController];
