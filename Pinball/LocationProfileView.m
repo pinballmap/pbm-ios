@@ -25,6 +25,7 @@
 #import "LocationTypesView.h"
 #import "MachineLocationProfileView.h"
 #import "UIDevice+Model.h"
+#import "Location+Annotation.h"
 
 typedef enum : NSUInteger {
     LocationEditingTypePhone,
@@ -354,7 +355,8 @@ typedef enum : NSUInteger {
         cell.mapView.mapType = MKMapTypeHybrid;
         cell.mapView.userInteractionEnabled = NO;
         cell.mapView.showsUserLocation = YES;
-        [cell addAnnotation];
+        [cell.mapView addAnnotation:_currentLocation.annotation];
+//        [cell addAnnotation];
         return cell;
     }else{
         if (self.dataSetSeg.selectedSegmentIndex == 0){
