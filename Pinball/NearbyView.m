@@ -11,6 +11,8 @@
 #import "UIAlertView+Application.h"
 #import "Location+UpdateDistance.h"
 #import "Location+Annotation.h"
+#import "LocationAnnotation.h"
+#import "LocationProfileView.h"
 
 @interface NearbyView () <MKMapViewDelegate,UIActionSheetDelegate>
 
@@ -57,7 +59,11 @@
         NSArray *locations = [[[CoreDataManager sharedInstance] managedObjectContext] executeFetchRequest:stackRequest error:nil];
         if (locations.count != 0){
             for (Location *location in locations) {
-                [self.mapView addAnnotation:location.annotation];
+                LocationAnnotation *locationPin = [[LocationAnnotation alloc] init];
+                locationPin.title = location.name;
+                locationPin.location = location;
+                locationPin.coordinate = location.annotation.coordinate;
+                [self.mapView addAnnotation:locationPin];
             }
         }else{
             [UIAlertView simpleApplicationAlertWithMessage:@"No locations found nearby" cancelButton:@"Ok"];
@@ -98,12 +104,23 @@
         pinView.pinColor = MKPinAnnotationColorRed;
         pinView.animatesDrop = YES;
         pinView.canShowCallout = YES;
+        UIButton *infoButton = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
+        [infoButton addTarget:nil action:nil forControlEvents:UIControlEventTouchUpInside];
+        pinView.rightCalloutAccessoryView = infoButton;
     }else{
         pinView.annotation = annotation;
     }
     return pinView;
 }
-
-
+- (void)mapView:(MKMapView *)mapView annotationView:(MKAnnotationView *)view calloutAccessoryControlTapped:(UIControl *)control{
+    LocationProfileView *locationProfile = [self.storyboard instantiateViewControllerWithIdentifier:@"LocationProfileView"];
+    Location *pinLocation;
+    if ([view.annotation isKindOfClass:[LocationAnnotation class]]){
+        pinLocation = [(LocationAnnotation *)view.annotation location];
+    }
+    locationProfile.showMapSnapshot = true;
+    locationProfile.currentLocation = pinLocation;
+    [self.navigationController pushViewController:locationProfile animated:YES];
+}
 
 @end
