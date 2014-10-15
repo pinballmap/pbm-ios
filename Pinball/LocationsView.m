@@ -56,6 +56,10 @@
     [super viewDidAppear:animated];
     [GAAppHelper sendAnalyticsDataWithScreen:@"Locations View"];
 }
+- (void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
+    [self.searchDisplayController setActive:false];
+}
 - (void)didReceiveMemoryWarning{
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
