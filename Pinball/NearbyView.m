@@ -35,7 +35,7 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateRegion) name:@"RegionUpdate" object:nil];
     [self updateRegion];
     
-    UIBarButtonItem *filterDistance = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"798-filter"] style:UIBarButtonItemStylePlain target:self action:@selector(updateFilter:)];
+//    UIBarButtonItem *filterDistance = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"798-filter"] style:UIBarButtonItemStylePlain target:self action:@selector(updateFilter:)];
 //    self.navigationItem.leftBarButtonItem = filterDistance;
 }
 - (void)viewDidDisappear:(BOOL)animated{
