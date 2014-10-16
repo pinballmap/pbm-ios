@@ -13,6 +13,8 @@
 #import "AboutView.h"
 #import "HighRoller.h"
 #import "HighRollerProfileView.h"
+#import "ReuseWebView.h"
+#import "ContactView.h"
 
 @interface RegionProfileView ()
 
@@ -116,15 +118,18 @@
 #pragma mark - TableView Datasource/Delegate
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     // 0->MOTD
-    // 1->Local Stuff
-    // 2->High Scores
-    return self.regionLinks.count+2;
+    // 1->Region contact
+    // 2->Local Stuff
+    // 3->High Scores
+    return self.regionLinks.count+3;
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     if (section == 0){
         return 1;
-    }else if (section > 0 && section <= self.regionLinks.count){
-        return [self.regionLinks[section-1] count];
+    }else if (section == 1){
+        return 1;
+    }else if (section > 1 && section-1 <= self.regionLinks.count){
+        return [self.regionLinks[section-2] count];
     }else{
         return self.highRollers.count;
     }
@@ -133,10 +138,12 @@
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section{
     if (section == 0){
         return @"Message of the Day";
-    }else if (section > 0 && section <= self.regionLinks.count){
-        RegionLink *link = [self.regionLinks[section-1] firstObject];
+    }else if (section == 1){
+        return @"Contact";
+    }else if (section > 1 && section-1 <= self.regionLinks.count){
+        RegionLink *link = [self.regionLinks[section-2] firstObject];
         return link.category;
-    }else{
+    }else if (self.highRollers.count > 0){
         return @"High Rollers";
     }
     return nil;
@@ -150,8 +157,8 @@
         }else{
             return titleSize.size.height;
         }
-    }else if (indexPath.section > 0 && indexPath.section <= self.regionLinks.count){
-        RegionLink *link = [self.regionLinks[indexPath.section-1] objectAtIndex:indexPath.row];
+    }else if (indexPath.section > 1 && indexPath.section-1 <= self.regionLinks.count){
+        RegionLink *link = [self.regionLinks[indexPath.section-2] objectAtIndex:indexPath.row];
 
         NSString *cellDetail = link.linkDescription;
         NSString *cellTitle = link.name;
@@ -172,7 +179,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     static NSString *cellIdentifier;
     
-    if (indexPath.section == 0){
+    if (indexPath.section == 0 || indexPath.section == 1){
         cellIdentifier = @"BasicCell";
     }else{
         cellIdentifier = @"DetailCell";
@@ -183,8 +190,10 @@
     if (indexPath.section == 0){
         cell.textLabel.numberOfLines = 0;
         cell.textLabel.text = self.regionMOTD;
-    }else if (indexPath.section > 0 && indexPath.section <= self.regionLinks.count){
-        RegionLink *link = [self.regionLinks[indexPath.section-1] objectAtIndex:indexPath.row];
+    }else if (indexPath.section == 1){
+        cell.textLabel.text = @"Region Contact";
+    }else if (indexPath.section > 1 && indexPath.section-1 <= self.regionLinks.count){
+        RegionLink *link = [self.regionLinks[indexPath.section-2] objectAtIndex:indexPath.row];
         cell.detailTextLabel.numberOfLines = 0;
         cell.textLabel.numberOfLines = 0;
         cell.textLabel.text = link.name;
@@ -199,7 +208,19 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 
-    if (indexPath.section > self.regionLinks.count){
+    if (indexPath.section == 1){
+        // Region Contact
+        ContactView *eventContact = (ContactView *)[[self.storyboard instantiateViewControllerWithIdentifier:@"ContactView"] navigationRootViewController];
+        eventContact.contactType = ContactTypeRegionContact;
+        [self.navigationController presentViewController:eventContact.parentViewController animated:YES completion:nil];
+    }else if (indexPath.section > 1 && indexPath.section-1 <= self.regionLinks.count){
+        RegionLink *link = [self.regionLinks[indexPath.section-2] objectAtIndex:indexPath.row];
+        ReuseWebView *webView = [[ReuseWebView alloc] initWithURL:[NSURL URLWithString:link.url]];
+        webView.webTitle = link.name;
+        UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:webView];
+        navController.modalPresentationStyle = UIModalPresentationFormSheet;
+        [self.navigationController presentViewController:navController animated:YES completion:nil];
+    }else if (indexPath.section != 0){
         HighRoller *highRoller = self.highRollers[indexPath.row];
         
         HighRollerProfileView *profile = (HighRollerProfileView *)[[self.storyboard instantiateViewControllerWithIdentifier:@"HighRollerProfileView"] navigationRootViewController];

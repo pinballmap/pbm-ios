@@ -21,7 +21,7 @@
         machineFetch.predicate = [NSPredicate predicateWithFormat:@"machineLocationId = %@",scoreData[@"location_machine_xref_id"]];
         machineFetch.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"machineLocationId" ascending:YES]];
         NSArray *foundMachines = [[[CoreDataManager sharedInstance] managedObjectContext] executeFetchRequest:machineFetch error:nil];
-        if (foundMachines.count == 1){
+        if (foundMachines.count > 0){
             self.machine = [(MachineLocation *)[foundMachines firstObject] machine];
         }else{
             self.machine = nil;
