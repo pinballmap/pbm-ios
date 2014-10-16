@@ -39,11 +39,11 @@
             </objects>
             <point key="canvasLocation" x="2045" y="549"/>
         </scene>
-        <!--Location-->
+        <!--Locations-->
         <scene sceneID="TKS-b7-fCy">
             <objects>
                 <navigationController id="ZMQ-fq-21d" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Location" image="852-map" id="EdW-eB-b8p"/>
+                    <tabBarItem key="tabBarItem" title="Locations" image="852-map" id="EdW-eB-b8p"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="EzI-XI-Xpj">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -113,7 +113,7 @@
             </objects>
             <point key="canvasLocation" x="689" y="1433"/>
         </scene>
-        <!--Settings-->
+        <!--Region-->
         <scene sceneID="S9a-9u-eDQ">
             <objects>
                 <viewController id="I7L-7S-xXG" sceneMemberID="viewController">
@@ -126,7 +126,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Settings" image="740-gear" id="DvT-d1-X7D"/>
+                    <tabBarItem key="tabBarItem" title="Region" image="881-globe" id="DvT-d1-X7D"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="K75-So-MGj" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -159,9 +159,9 @@
     </scenes>
     <resources>
         <image name="701-location" width="28" height="28"/>
-        <image name="740-gear" width="28" height="28"/>
         <image name="851-calendar" width="28" height="28"/>
         <image name="852-map" width="28" height="24"/>
+        <image name="881-globe" width="28" height="28"/>
         <image name="pinball" width="28" height="28"/>
     </resources>
 </document>
