@@ -48,6 +48,9 @@
             self.navigationItem.title = @"Region Suggest";
             [self.regionNameCell setHidden:NO];
             break;
+        case ContactTypeAppFeedback:
+            self.navigationItem.title = @"App Feedback";
+            break;
         default:
             break;
     }
@@ -85,7 +88,16 @@
     }else{
         if (self.messageContent.length > 0 && ![self.messageContent isEqualToString:@"Message"]){
             if (self.contactType == ContactTypeAppFeedback){
-                
+                messageData = @{
+                                @"os": @"iOS",
+                                @"os_version": [[UIDevice currentDevice] systemVersion],
+                                @"device_type": [[UIDevice currentDevice] model],
+                                @"app_version": [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"],
+                                @"message": self.messageContent,
+                                @"name": self.nameField.text,
+                                @"email": self.emailField.text,
+                                @"region_id": [[[PinballMapManager sharedInstance] currentRegion] regionId]
+                                };
             }else{
                 messageData = @{
                                 @"region_id": currentRegion.regionId,

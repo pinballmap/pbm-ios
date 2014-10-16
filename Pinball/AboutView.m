@@ -9,6 +9,7 @@
 #import "AboutView.h"
 #import "GAAppHelper.h"
 #import "UIAlertView+Application.h"
+#import "ContactView.h"
 
 @interface AboutView ()
 
@@ -48,7 +49,9 @@
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 - (IBAction)sendFeedback:(id)sender{
-    [UIAlertView simpleApplicationAlertWithMessage:@"Code goes here." cancelButton:@"Ok"];
+    ContactView *eventContact = (ContactView *)[[self.storyboard instantiateViewControllerWithIdentifier:@"ContactView"] navigationRootViewController];
+    eventContact.contactType = ContactTypeAppFeedback;
+    [self.navigationController presentViewController:eventContact.parentViewController animated:YES completion:nil];
 }
 #pragma mark - TableView Datasource/Delegate
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
