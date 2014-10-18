@@ -324,6 +324,7 @@
 		DBA10B421902F244004ED2D4 /* MachineConditionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MachineConditionView.m; sourceTree = "<group>"; };
 		DBA3B608190846D900ACBC69 /* InputCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InputCell.h; sourceTree = "<group>"; };
 		DBA3B609190846D900ACBC69 /* InputCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InputCell.m; sourceTree = "<group>"; };
+		DBAE0E6219F288260051D3EC /* Portland Location.gpx */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "Portland Location.gpx"; sourceTree = "<group>"; };
 		DBB20CA6194F126D00D4B2F1 /* ZonesView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZonesView.h; sourceTree = "<group>"; };
 		DBB20CA7194F126D00D4B2F1 /* ZonesView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZonesView.m; sourceTree = "<group>"; };
 		DBB59CC818FAD9AC00F35BFD /* LocationProfileView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationProfileView.h; sourceTree = "<group>"; };
@@ -829,6 +830,7 @@
 				DBF06BDC18F96FF500F92912 /* PinballMap-Prefix.pch */,
 				DB0DAE781987B4A800A3FF0F /* GAAppHelper.h */,
 				DB0DAE791987B4A800A3FF0F /* GAAppHelper.m */,
+				DBAE0E6219F288260051D3EC /* Portland Location.gpx */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -1267,7 +1269,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "5c753d4c-6f71-4ba0-a04a-f32ef712cceb";
+				PROVISIONING_PROFILE = "272c10b5-98a1-4430-b393-51631d15e3ea";
 				SKIP_INSTALL = YES;
 			};
 			name = Release;
@@ -1394,7 +1396,7 @@
 					"$(PROJECT_DIR)/Pinball/HockeySDK-iOS",
 				);
 				PRODUCT_NAME = PinballMap;
-				PROVISIONING_PROFILE = "1fc57688-8598-47c6-81e5-d4fe66dcca94";
+				PROVISIONING_PROFILE = "8e324eef-19f2-4293-ba68-8c3ce48fb26d";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
 			};
