@@ -19,7 +19,7 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     UIColor *pinkColor = [UIColor colorWithRed:1.0f green:0.0f blue:146.0f/255.0f alpha:1.0];
-    [[UINavigationBar appearance] setTranslucent:false];
+//    [[UINavigationBar appearance] setTranslucent:false];
     [[UITabBar appearance] setTintColor:pinkColor];
     [[UISearchBar appearance] setTintColor:pinkColor];
     [[UINavigationBar appearance] setTintColor:pinkColor];
