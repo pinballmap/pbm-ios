@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6245" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="JrY-jg-xc4">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6250" systemVersion="14A389" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="JrY-jg-xc4">
     <dependencies>
-        <deployment defaultVersion="1792" identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
@@ -379,7 +379,7 @@
                             <rect key="frame" x="0.0" y="64" width="320" height="92"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
-                                <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="a2v-8m-Nsk">
+                                <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="a2v-8m-Nsk">
                                     <rect key="frame" x="20" y="55" width="280" height="29"/>
                                     <segments>
                                         <segment title="All"/>
@@ -389,7 +389,7 @@
                                         <action selector="filterMachines:" destination="nqW-43-d13" eventType="valueChanged" id="Gfa-os-IgD"/>
                                     </connections>
                                 </segmentedControl>
-                                <searchBar contentMode="redraw" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="nSx-B9-3bZ">
+                                <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="nSx-B9-3bZ">
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                                     <textInputTraits key="textInputTraits"/>
                                     <connections>
@@ -398,6 +398,14 @@
                                 </searchBar>
                             </subviews>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                            <constraints>
+                                <constraint firstItem="nSx-B9-3bZ" firstAttribute="leading" secondItem="PFd-SU-7Rn" secondAttribute="leading" id="3wC-KC-rvf"/>
+                                <constraint firstItem="a2v-8m-Nsk" firstAttribute="leading" secondItem="PFd-SU-7Rn" secondAttribute="leading" constant="20" id="9cR-G9-jaV"/>
+                                <constraint firstAttribute="trailing" secondItem="a2v-8m-Nsk" secondAttribute="trailing" constant="20" id="QmF-px-iP5"/>
+                                <constraint firstItem="a2v-8m-Nsk" firstAttribute="top" secondItem="nSx-B9-3bZ" secondAttribute="bottom" constant="11" id="WTT-4h-kpe"/>
+                                <constraint firstItem="nSx-B9-3bZ" firstAttribute="top" secondItem="PFd-SU-7Rn" secondAttribute="top" id="cJW-ll-AKU"/>
+                                <constraint firstAttribute="trailing" secondItem="nSx-B9-3bZ" secondAttribute="trailing" id="ee0-wq-7PP"/>
+                            </constraints>
                         </view>
                         <prototypes>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="MachineCell" textLabel="5qY-l7-JYI" style="IBUITableViewCellStyleDefault" id="TMg-3P-GwH">
