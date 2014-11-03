@@ -79,7 +79,7 @@
 }
 #pragma mark - Actions
 - (IBAction)saveMachine:(id)sender{
-    if (_location && self.pickedMachine && ![self.machineName.text isEqualToString:@"Pick Machine"]){
+    if (_location.locationId != nil && self.pickedMachine.machineId != nil && ![self.machineName.text isEqualToString:@"Pick Machine"]){
         NSDictionary *machine = @{@"machine_id": self.pickedMachine.machineId,@"location_id": _location.locationId,@"condition": self.machineCondition.text};
         [[PinballMapManager sharedInstance] createNewMachineWithData:machine andParentMachine:self.pickedMachine forLocation:_location withCompletion:^(NSDictionary *status) {
             if (status[@"errors"]){
