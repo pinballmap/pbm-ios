@@ -98,8 +98,8 @@
     
     RecentMachine *machine = [self.recentMachines objectAtIndex:indexPath.row];
     LocationProfileView *profileView = [self.storyboard instantiateViewControllerWithIdentifier:@"LocationProfileView"];
-    profileView.currentLocation = machine.location;
     profileView.showMapSnapshot = true;
+    profileView.currentLocation = machine.location;
     
     [self.navigationController pushViewController:profileView animated:YES];
     
