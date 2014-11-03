@@ -14,7 +14,11 @@
     self = [super init];
     if (self){
         self.score = scoreData[@"score"];
-        self.rank = [scoreData[@"rank"] stringValue];
+        if (![scoreData[@"rank"] isKindOfClass:[NSNull class]]){
+            self.rank = [scoreData[@"rank"] stringValue];
+        }else{
+            self.rank = @"N/A";
+        }
         
         // Find Machine info
         NSFetchRequest *machineFetch = [NSFetchRequest fetchRequestWithEntityName:@"MachineLocation"];

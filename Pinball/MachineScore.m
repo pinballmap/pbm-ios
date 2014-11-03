@@ -15,25 +15,29 @@
     if (self){
         self.initials = data[@"initials"];
         
-        switch ([data[@"rank"] integerValue]) {
-            case 1:
-                _rank = ScoreRankGC;
-                break;
-            case 2:
-                _rank = ScoreRank1st;
-                break;
-            case 3:
-                _rank = ScoreRank2nd;
-                break;
-            case 4:
-                _rank = ScoreRank3rd;
-                break;
-            case 5:
-                _rank = ScoreRank4th;
-                break;
-            default:
-                _rank = ScoreRankNA;
-                break;
+        if (![data[@"rank"] isKindOfClass:[NSNull class]]){
+            switch ([data[@"rank"] integerValue]) {
+                case 1:
+                    _rank = ScoreRankGC;
+                    break;
+                case 2:
+                    _rank = ScoreRank1st;
+                    break;
+                case 3:
+                    _rank = ScoreRank2nd;
+                    break;
+                case 4:
+                    _rank = ScoreRank3rd;
+                    break;
+                case 5:
+                    _rank = ScoreRank4th;
+                    break;
+                default:
+                    _rank = ScoreRankNA;
+                    break;
+            }
+        }else{
+            _rank = ScoreRankNA;
         }
         self.score = data[@"score"];
         NSNumberFormatter *numFormat = [[NSNumberFormatter alloc] init];
