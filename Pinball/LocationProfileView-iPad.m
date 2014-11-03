@@ -101,7 +101,7 @@ typedef NS_ENUM(NSUInteger, LayoutType) {
         [UIView animateWithDuration:.5 animations:^{
             [self.view layoutIfNeeded];
         }completion:^(BOOL finished) {
-            NSLog(@"%f",_mapView.frame.size.width);
+
         }];
         [self setupNavigationWithType:LayoutTypeProfile];
     
@@ -192,7 +192,7 @@ typedef NS_ENUM(NSUInteger, LayoutType) {
     [UIView animateWithDuration:0.5 animations:^{
         [self.view layoutIfNeeded];
     }completion:^(BOOL finished) {
-        NSLog(@"%f",_mapView.frame.size.width);
+
     }];
     [self setupNavigationWithType:LayoutTypeListing];
     

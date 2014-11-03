@@ -164,7 +164,6 @@ typedef NS_ENUM(NSInteger, PBMDataAPI) {
     AFHTTPRequestOperation *regionAPI = [[AFHTTPRequestOperation alloc] initWithRequest:regionRequest];
     regionAPI.responseSerializer = [AFJSONResponseSerializer serializer];
     [regionAPI setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
-        NSLog(@"Found new regions");
         NSArray *regions = operation.responseObject[@"regions"];
         [regions enumerateObjectsUsingBlock:^(NSDictionary *obj, NSUInteger idx, BOOL *stop) {
             if (![regionIds containsObject:obj[@"id"]]){
