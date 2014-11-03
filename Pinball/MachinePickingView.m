@@ -58,12 +58,12 @@
     // Dispose of any resources that can be recreated.
 }
 #pragma mark - Class
-- (void)setPickedMachines:(NSArray *)pickedMachinesInput{
-    _existingPickedMachines = pickedMachinesInput;
-    if (!self.pickedMachines){
-        self.pickedMachines = [NSMutableArray new];
+- (void)setExistingPickedMachines:(NSArray *)existingPickedMachines{
+    _existingPickedMachines = existingPickedMachines;
+    if (!_pickedMachines){
+        _pickedMachines = [NSMutableArray new];
     }
-    [self.pickedMachines addObjectsFromArray:_existingPickedMachines];
+    [_pickedMachines addObjectsFromArray:_existingPickedMachines];
 }
 #pragma mark - Class Actions
 - (IBAction)savePicked:(id)sender{
