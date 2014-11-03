@@ -40,7 +40,7 @@
             NSMutableArray *recentMachinesObj = [NSMutableArray new];
             [recentMachines enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
                 RecentMachine *machine = [[RecentMachine alloc] initWithData:obj];
-                if (machine.location){
+                if (machine != nil && machine.location){
                     [recentMachinesObj addObject:machine];
                 }
             }];
@@ -49,7 +49,6 @@
             dispatch_async(dispatch_get_main_queue(), ^{
                 [self.tableView reloadData];
             });
-            NSLog(@"%@",recentMachines);
         }
     }];
 

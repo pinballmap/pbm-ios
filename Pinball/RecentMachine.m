@@ -22,7 +22,7 @@
         if (foundMachines.count == 1){
             self.machine = [foundMachines firstObject];
         }else{
-            self.machine = nil;
+            return nil;
         }
         // Find Location info
         NSFetchRequest *locationFetch = [NSFetchRequest fetchRequestWithEntityName:@"Location"];
@@ -32,7 +32,7 @@
         if (foundMachines.count == 1){
             self.location = [foundLocations firstObject];
         }else{
-            self.location = nil;
+            return nil;
         }
         self.createdOn = data[@"created_at"];
         
