@@ -433,7 +433,12 @@ typedef enum : NSUInteger {
             }else if (indexPath.row == 1){
                 // Phone
                 if (_currentLocation.phone.length > 0 && ![_currentLocation.phone isEqualToString:@"Tap to edit"] && !self.tableView.editing){
-                    NSString *contactsPhoneNumber = [@"tel:+" stringByAppendingString:_currentLocation.phone];
+                    NSString *contactsPhoneNumber = [@"tel:" stringByAppendingString:_currentLocation.phone];
+                    contactsPhoneNumber = [contactsPhoneNumber stringByReplacingOccurrencesOfString:@" " withString:@""];
+                    contactsPhoneNumber = [contactsPhoneNumber stringByReplacingOccurrencesOfString:@"-" withString:@""];
+                    contactsPhoneNumber = [contactsPhoneNumber stringByReplacingOccurrencesOfString:@"(" withString:@""];
+                    contactsPhoneNumber = [contactsPhoneNumber stringByReplacingOccurrencesOfString:@")" withString:@""];
+
                     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:contactsPhoneNumber]];
                 }else{
                     TextEditorView *editor = [[[self.storyboard instantiateViewControllerWithIdentifier:@"TextEditorView"] viewControllers] lastObject];
