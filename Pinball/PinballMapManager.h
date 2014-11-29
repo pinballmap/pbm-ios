@@ -10,18 +10,29 @@
 @import CoreLocation;
 #import "PinballModels.h"
 
+typedef enum : NSUInteger {
+    ContactTypeRegionContact,
+    ContactTypeRegionSuggest,
+    ContactTypeEvent,
+    ContactTypeAppFeedback
+} ContactType;
+
+
 typedef void (^APIComplete)(NSDictionary *status);
 @interface PinballMapManager : NSObject
 
 @property (nonatomic) NSDictionary *regionInfo;
 @property (nonatomic) Region *currentRegion;
-@property (nonatomic,readonly) CLLocation *userLocation;
+@property (nonatomic) CLLocation *userLocation;
 
 + (id)sharedInstance;
 - (void)allRegions:(void (^)(NSArray *regions))regionBlock;
 - (void)refreshAllRegions;
 - (void)loadRegionData:(Region *)region;
 - (void)refreshRegion;
+- (BOOL)shouldShowMessageOfDay;
+- (void)showedMessageOfDay;
+- (void)recentlyAddedMachinesWithCompletion:(APIComplete)completionBlock;
 // Machine Routes
 - (void)createNewMachine:(NSDictionary *)machineData withCompletion:(APIComplete)completionBlock;
 - (void)createNewMachineWithData:(NSDictionary *)machineData andParentMachine:(Machine *)machine forLocation:(Location *)location withCompletion:(APIComplete)completionBlock;
@@ -32,4 +43,7 @@ typedef void (^APIComplete)(NSDictionary *status);
 // Location Routes
 - (void)updateLocation:(Location *)location withData:(NSDictionary *)locationData andCompletion:(APIComplete)completionBlock;
 - (void)suggestLocation:(NSDictionary *)locationData andCompletion:(APIComplete)completionBlock;
+// General Routes
+- (void)sendMessage:(NSDictionary *)messageData withType:(ContactType)contactType andCompletion:(APIComplete)completionBlock;
+- (void)refreshBasicRegionData:(APIComplete)completionBlock;
 @end

@@ -12,12 +12,14 @@
 #import "LocationProfileView-iPad.h"
 #import "GAI.h"
 #import "ThirdPartyKeys.h"
+@import MapKit;
 
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     UIColor *pinkColor = [UIColor colorWithRed:1.0f green:0.0f blue:146.0f/255.0f alpha:1.0];
+//    [[UINavigationBar appearance] setTranslucent:false];
     [[UITabBar appearance] setTintColor:pinkColor];
     [[UISearchBar appearance] setTintColor:pinkColor];
     [[UINavigationBar appearance] setTintColor:pinkColor];
@@ -25,6 +27,7 @@
     [[UITableViewCell appearance] setTintColor:pinkColor];
     [[UITableView appearance] setTintColor:pinkColor];
     [[UISegmentedControl appearance] setTintColor:pinkColor];
+    [[MKMapView appearance] setTintColor:pinkColor];
 
     [[BITHockeyManager sharedHockeyManager] configureWithIdentifier:[ThirdPartyKeys hockeyID]];
     [[BITHockeyManager sharedHockeyManager].authenticator setAuthenticationSecret:[ThirdPartyKeys hockeySecret]];
@@ -40,7 +43,7 @@
     [GAI sharedInstance].dispatchInterval = 20;
     
     // Optional: set Logger to VERBOSE for debug information.
-    [[[GAI sharedInstance] logger] setLogLevel:kGAILogLevelVerbose];
+    [[[GAI sharedInstance] logger] setLogLevel:kGAILogLevelError];
     
     // Initialize tracker. Replace with your tracking ID.
     [[GAI sharedInstance] trackerWithTrackingId:[ThirdPartyKeys googleID]];

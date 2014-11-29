@@ -18,16 +18,15 @@
 #import "ZonesView.h"
 #import "LocationTypesView.h"
 #import "GAAppHelper.h"
+#import "RecentlyAddedView.h"
 
-@interface LocationsView () <NSFetchedResultsControllerDelegate,UIActionSheetDelegate,UISearchBarDelegate,UISearchDisplayDelegate,ZoneSelectDelegate,LocationTypeSelectDelegate> {
-    UIActionSheet *filterSheet;
-    
-    NSFetchedResultsController *fetchedResults;
-    NSManagedObjectContext *managedContext;
+@interface LocationsView () <NSFetchedResultsControllerDelegate,UIActionSheetDelegate,UISearchBarDelegate,UISearchDisplayDelegate,ZoneSelectDelegate,LocationTypeSelectDelegate>
 
-    NSMutableArray *searchResults;
-    BOOL isClosets;
-}
+@property (nonatomic) UIActionSheet *filterSheet;
+@property (nonatomic) NSFetchedResultsController *fetchedResults;
+@property (nonatomic) NSManagedObjectContext *managedContext;
+@property (nonatomic) NSMutableArray *searchResults;
+@property (nonatomic) BOOL isClosets;
 
 @end
 
@@ -57,6 +56,10 @@
     [super viewDidAppear:animated];
     [GAAppHelper sendAnalyticsDataWithScreen:@"Locations View"];
 }
+- (void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
+    [self.searchDisplayController setActive:false];
+}
 - (void)didReceiveMemoryWarning{
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -71,9 +74,9 @@
 #pragma mark - Region Update
 - (void)updateRegion{
     [self.refreshControl endRefreshing];
-    isClosets = NO;
+    self.isClosets = NO;
     self.navigationItem.title = [NSString stringWithFormat:@"%@",[[[PinballMapManager sharedInstance] currentRegion] fullName]];
-    managedContext = [[CoreDataManager sharedInstance] managedObjectContext];
+    self.managedContext = [[CoreDataManager sharedInstance] managedObjectContext];
     NSFetchRequest *stackRequest;
     if ([[PinballMapManager sharedInstance] userLocation]){
         
@@ -96,12 +99,12 @@
     }
     
     
-    fetchedResults = [[NSFetchedResultsController alloc] initWithFetchRequest:stackRequest
-                                                         managedObjectContext:managedContext
+    self.fetchedResults = [[NSFetchedResultsController alloc] initWithFetchRequest:stackRequest
+                                                         managedObjectContext:self.managedContext
                                                            sectionNameKeyPath:nil
                                                                     cacheName:nil];
-    fetchedResults.delegate = self;
-    [fetchedResults performFetch:nil];
+    self.fetchedResults.delegate = self;
+    [self.fetchedResults performFetch:nil];
     [self.tableView reloadData];
 }
 #pragma mark - Searchbar Delegate
@@ -123,28 +126,28 @@
     
     
     
-    [searchResults removeAllObjects];
-    searchResults = nil;
-    searchResults = [NSMutableArray new];
+    [self.searchResults removeAllObjects];
+    self.searchResults = nil;
+    self.searchResults = [NSMutableArray new];
     NSError *error = nil;
-    [searchResults addObjectsFromArray:[managedContext executeFetchRequest:searchrequest error:&error]];
+    [self.searchResults addObjectsFromArray:[self.managedContext executeFetchRequest:searchrequest error:&error]];
 
     return YES;
 }
 #pragma mark - Class Actions
 - (IBAction)filterResults:(id)sender{
-    filterSheet = [[UIActionSheet alloc] initWithTitle:@"Location Sort" delegate:self cancelButtonTitle:nil destructiveButtonTitle:nil otherButtonTitles:@"Location Name",@"Distance",@"Number of Machines",@"Location Type",nil];
+    self.filterSheet = [[UIActionSheet alloc] initWithTitle:@"Location Sort" delegate:self cancelButtonTitle:nil destructiveButtonTitle:nil otherButtonTitles:@"Location Name",@"Distance",@"Number of Machines",@"Location Type",@"Recently Added",nil];
     Region *currentRegion = [[PinballMapManager sharedInstance] currentRegion];
     if (currentRegion.zones.count > 0){
-        [filterSheet addButtonWithTitle:@"Zone"];
+        [self.filterSheet addButtonWithTitle:@"Zone"];
     }
     
     if ([UIDevice iPad]){
-        [filterSheet showFromTabBar:self.tabBarController.tabBar];
+        [self.filterSheet showFromTabBar:self.tabBarController.tabBar];
     }else{
-        [filterSheet addButtonWithTitle:@"Browse on Map"];
-        [filterSheet setCancelButtonIndex:[filterSheet addButtonWithTitle:@"Cancel"]];
-        [filterSheet showFromTabBar:self.tabBarController.tabBar];
+        [self.filterSheet addButtonWithTitle:@"Browse on Map"];
+        [self.filterSheet setCancelButtonIndex:[self.filterSheet addButtonWithTitle:@"Cancel"]];
+        [self.filterSheet showFromTabBar:self.tabBarController.tabBar];
     }
 }
 - (IBAction)browseLocations:(id)sender{
@@ -173,13 +176,13 @@
     fetchRequest.predicate = [NSPredicate predicateWithFormat:@"region.name = %@ AND parentZone.zoneId = %@",[[[PinballMapManager sharedInstance] currentRegion] name],zone.zoneId];
     fetchRequest.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES]];
     
-    fetchedResults = nil;
-    fetchedResults = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest
-                                                         managedObjectContext:managedContext
+    self.fetchedResults = nil;
+    self.fetchedResults = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest
+                                                         managedObjectContext:self.managedContext
                                                            sectionNameKeyPath:nil
                                                                     cacheName:nil];
-    fetchedResults.delegate = self;
-    [fetchedResults performFetch:nil];
+    self.fetchedResults.delegate = self;
+    [self.fetchedResults performFetch:nil];
     [self.tableView reloadData];
 }
 #pragma mark - Location Type Delegate
@@ -191,24 +194,24 @@
         fetchRequest.predicate = [NSPredicate predicateWithFormat:@"region.name = %@ AND locationType.name = %@",[[[PinballMapManager sharedInstance] currentRegion] name],type.name];
         fetchRequest.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES]];
         
-        fetchedResults = nil;
-        fetchedResults = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest
-                                                             managedObjectContext:managedContext
+        self.fetchedResults = nil;
+        self.fetchedResults = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest
+                                                             managedObjectContext:self.managedContext
                                                                sectionNameKeyPath:nil
                                                                         cacheName:nil];
-        fetchedResults.delegate = self;
-        [fetchedResults performFetch:nil];
+        self.fetchedResults.delegate = self;
+        [self.fetchedResults performFetch:nil];
         [self.tableView reloadData];
     }
 }
 #pragma mark - UIActionSheetDelegate
 - (void)actionSheet:(UIActionSheet *)actionSheet didDismissWithButtonIndex:(NSInteger)buttonIndex{
     if (buttonIndex != actionSheet.cancelButtonIndex){
-        if (actionSheet == filterSheet){
+        if (actionSheet == self.filterSheet){
             self.navigationItem.title = [NSString stringWithFormat:@"%@",[[[PinballMapManager sharedInstance] currentRegion] fullName]];
             NSFetchRequest *stackRequest = [NSFetchRequest fetchRequestWithEntityName:@"Location"];
             stackRequest.predicate = nil;
-            isClosets = NO;
+            self.isClosets = NO;
             NSString *sectionName;
             
             
@@ -247,8 +250,10 @@
                 types.type = SelectionTypeRegion;
                 [self.navigationController presentViewController:types.parentViewController animated:YES completion:nil];
                 return;
-                
-
+            }else if ([buttonTitle isEqualToString:@"Recently Added"]){
+                RecentlyAddedView *recentView = (RecentlyAddedView *)[[self.storyboard instantiateViewControllerWithIdentifier:@"RecentlyAddedView"] navigationRootViewController];
+                [self.navigationController presentViewController:recentView.parentViewController animated:YES completion:nil];
+                return;
             }else if ([buttonTitle isEqualToString:@"Zone"]){
                 ZonesView *zoneSelect = (ZonesView *)[[self.storyboard instantiateViewControllerWithIdentifier:@"ZonesView"] navigationRootViewController];
                 zoneSelect.delegate = self;
@@ -261,13 +266,13 @@
                 [self browseLocations:nil];
                 return;
             }
-            fetchedResults = nil;
-            fetchedResults = [[NSFetchedResultsController alloc] initWithFetchRequest:stackRequest
-                                                                 managedObjectContext:managedContext
+            self.fetchedResults = nil;
+            self.fetchedResults = [[NSFetchedResultsController alloc] initWithFetchRequest:stackRequest
+                                                                 managedObjectContext:self.managedContext
                                                                    sectionNameKeyPath:sectionName
                                                                             cacheName:nil];
-            fetchedResults.delegate = self;
-            [fetchedResults performFetch:nil];
+            self.fetchedResults.delegate = self;
+            [self.fetchedResults performFetch:nil];
             [self.tableView reloadData];
         }
     }
@@ -275,7 +280,7 @@
 #pragma mark - Table view data source
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     if (tableView == self.tableView){
-        return [[fetchedResults sections] count];
+        return [[self.fetchedResults sections] count];
     }else{
         return 1;
     }
@@ -283,18 +288,18 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     NSInteger rows = 0;
     if (tableView == self.tableView){
-        if ([[fetchedResults sections] count] > 0) {
-            id <NSFetchedResultsSectionInfo> sectionInfo = [[fetchedResults sections] objectAtIndex:section];
+        if ([[self.fetchedResults sections] count] > 0) {
+            id <NSFetchedResultsSectionInfo> sectionInfo = [[self.fetchedResults sections] objectAtIndex:section];
             rows = [sectionInfo numberOfObjects];
         }
     }else{
-        rows = searchResults.count;
+        rows = self.searchResults.count;
     }
     return rows;
 }
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section{
-    if ([[fetchedResults sections] count] > 1){
-        NSString *sectionName = [[[fetchedResults sections] objectAtIndex:section] name];
+    if ([[self.fetchedResults sections] count] > 1){
+        NSString *sectionName = [[[self.fetchedResults sections] objectAtIndex:section] name];
         return sectionName;
     }
     return @"";
@@ -302,9 +307,9 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     Location *currentLocation;
     if (tableView == self.tableView){
-        currentLocation = [fetchedResults objectAtIndexPath:indexPath];
+        currentLocation = [self.fetchedResults objectAtIndexPath:indexPath];
     }else{
-        currentLocation = [searchResults objectAtIndex:indexPath.row];
+        currentLocation = [self.searchResults objectAtIndex:indexPath.row];
     }
     NSString *cellTitle = currentLocation.name;
     
@@ -329,9 +334,9 @@
     
     Location *currentLocation;
     if (tableView == self.tableView){
-        currentLocation = [fetchedResults objectAtIndexPath:indexPath];
+        currentLocation = [self.fetchedResults objectAtIndexPath:indexPath];
     }else{
-        currentLocation = [searchResults objectAtIndex:indexPath.row];
+        currentLocation = [self.searchResults objectAtIndex:indexPath.row];
     }
     cell.locationName.text = currentLocation.name;
 
@@ -349,9 +354,9 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     Location *currentLocation;
     if (tableView == self.tableView){
-        currentLocation = [fetchedResults objectAtIndexPath:indexPath];
+        currentLocation = [self.fetchedResults objectAtIndexPath:indexPath];
     }else{
-        currentLocation = [searchResults objectAtIndex:indexPath.row];
+        currentLocation = [self.searchResults objectAtIndex:indexPath.row];
         [self.searchDisplayController.searchBar resignFirstResponder];
     }
     if (_isSelecting){
@@ -366,6 +371,7 @@
         [profileView setCurrentLocation:currentLocation];
     }else{
         LocationProfileView *profile = [self.storyboard instantiateViewControllerWithIdentifier:@"LocationProfileView"];
+        profile.showMapSnapshot = true;
         profile.currentLocation = currentLocation;
         [self.navigationController pushViewController:profile animated:YES];
     }
@@ -383,9 +389,12 @@
         case NSFetchedResultsChangeInsert:
             [self.tableView insertSections:[NSIndexSet indexSetWithIndex:sectionIndex] withRowAnimation:UITableViewRowAnimationFade];
             break;
-            
         case NSFetchedResultsChangeDelete:
             [self.tableView deleteSections:[NSIndexSet indexSetWithIndex:sectionIndex] withRowAnimation:UITableViewRowAnimationFade];
+            break;
+        case NSFetchedResultsChangeMove:
+            break;
+        case NSFetchedResultsChangeUpdate:
             break;
     }
 }

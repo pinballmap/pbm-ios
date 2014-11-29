@@ -8,9 +8,10 @@
 
 #import "LocationTypesView.h"
 
-@interface LocationTypesView () <NSFetchedResultsControllerDelegate> {
-    NSFetchedResultsController *locationTypesFetch;
-}
+@interface LocationTypesView () <NSFetchedResultsControllerDelegate>
+
+@property (nonatomic) NSFetchedResultsController *locationTypesFetch;
+
 - (IBAction)dismissTypes:(id)sender;
 
 @end
@@ -37,12 +38,12 @@
         typeFetch.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES]];
     }
     
-    locationTypesFetch = [[NSFetchedResultsController alloc] initWithFetchRequest:typeFetch
+    self.locationTypesFetch = [[NSFetchedResultsController alloc] initWithFetchRequest:typeFetch
                                                              managedObjectContext:[[CoreDataManager sharedInstance] managedObjectContext]
                                                                sectionNameKeyPath:nil
                                                                         cacheName:nil];
-    locationTypesFetch.delegate = self;
-    [locationTypesFetch performFetch:nil];
+    self.locationTypesFetch.delegate = self;
+    [self.locationTypesFetch performFetch:nil];
     [self.tableView reloadData];
 }
 - (void)didReceiveMemoryWarning{
@@ -62,8 +63,8 @@
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     NSInteger rows = 0;
-    if ([[locationTypesFetch sections] count] > 0) {
-        id <NSFetchedResultsSectionInfo> sectionInfo = [[locationTypesFetch sections] objectAtIndex:section];
+    if ([[self.locationTypesFetch sections] count] > 0) {
+        id <NSFetchedResultsSectionInfo> sectionInfo = [[self.locationTypesFetch sections] objectAtIndex:section];
         rows = [sectionInfo numberOfObjects];
     }
 
@@ -73,13 +74,13 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"LocationTypeCell" forIndexPath:indexPath];
     
     // Configure the cell...
-    LocationType *type = [locationTypesFetch objectAtIndexPath:indexPath];
+    LocationType *type = [self.locationTypesFetch objectAtIndexPath:indexPath];
     cell.textLabel.text = type.name;
     return cell;
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    LocationType *type = [locationTypesFetch objectAtIndexPath:indexPath];
+    LocationType *type = [self.locationTypesFetch objectAtIndexPath:indexPath];
     if (_delegate && [_delegate respondsToSelector:@selector(selectedLocationType:)]){
         [_delegate selectedLocationType:type];
         [self dismissViewControllerAnimated:YES completion:nil];
@@ -98,9 +99,12 @@
         case NSFetchedResultsChangeInsert:
             [self.tableView insertSections:[NSIndexSet indexSetWithIndex:sectionIndex] withRowAnimation:UITableViewRowAnimationFade];
             break;
-            
         case NSFetchedResultsChangeDelete:
             [self.tableView deleteSections:[NSIndexSet indexSetWithIndex:sectionIndex] withRowAnimation:UITableViewRowAnimationFade];
+            break;
+        case NSFetchedResultsChangeMove:
+            break;
+        case NSFetchedResultsChangeUpdate:
             break;
     }
 }

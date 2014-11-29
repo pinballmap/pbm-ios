@@ -8,9 +8,13 @@
 
 #import "PinballMapManager.h"
 #import "NSFileManager+DocumentsDirectory.h"
-#import <AFNetworking.h>
+#import "AFNetworking.h"
+#import "NSDate+CupertinoYankee.h"
 
 static const NSString *apiRootURL = @"http://pinballmap.com/";
+NSString * const motdKey = @"motd";
+NSString * const motdRegionKey = @"region_id";
+NSString * const appGroup = @"group.net.isaacruiz.ppm";
 
 typedef NS_ENUM(NSInteger, PBMDataAPI) {
     PBMDataAPIRegions = 0,
@@ -22,10 +26,10 @@ typedef NS_ENUM(NSInteger, PBMDataAPI) {
 };
 
 
-@interface PinballMapManager () <CLLocationManagerDelegate>{
-    NSURLSession *session;
-    CLLocationManager *locationManager;
-}
+@interface PinballMapManager () <CLLocationManagerDelegate>
+
+@property (nonatomic) NSURLSession *session;
+@property (nonatomic) CLLocationManager *locationManager;
 
 @end
 
@@ -40,12 +44,31 @@ typedef NS_ENUM(NSInteger, PBMDataAPI) {
     });
     return _sharedObject;
 }
++ (NSUserDefaults *)userDefaultsForApp{
+    return [[NSUserDefaults alloc] initWithSuiteName:appGroup];
+}
+- (void)migrateUserDefaults{
+    NSNumber *shouldMigrate = [[PinballMapManager userDefaultsForApp] objectForKey:@"shouldMigrate"];
+    if (![shouldMigrate isEqualToNumber:@(-1)]){
+        // Pull over current settings
+        id region = [[NSUserDefaults standardUserDefaults] objectForKey:@"CurrentRegion"];
+        [[PinballMapManager userDefaultsForApp] setObject:region forKey:@"CurrentRegion"];
+        NSDate *lastShownDate = [[NSUserDefaults standardUserDefaults] objectForKey:motdKey];
+        [[PinballMapManager userDefaultsForApp] setObject:lastShownDate forKey:motdKey];
+        NSNumber *regionID = [[NSUserDefaults standardUserDefaults] objectForKey:motdRegionKey];
+        [[PinballMapManager userDefaultsForApp] setObject:regionID forKey:motdRegionKey];
+        // No longer need to migrate
+        [[PinballMapManager userDefaultsForApp] setObject:@(-1) forKey:@"shouldMigrate"];
+        [[PinballMapManager userDefaultsForApp] synchronize];
+    }
+}
 - (id)init{
     self = [super init];
     if (self){
         [self getUserLocation];
-        session = [NSURLSession sharedSession];
-        _regionInfo = [[NSUserDefaults standardUserDefaults] objectForKey:@"CurrentRegion"];
+        self.session = [NSURLSession sharedSession];
+        [self migrateUserDefaults];
+        _regionInfo = [[PinballMapManager userDefaultsForApp] objectForKey:@"CurrentRegion"];
         if (_regionInfo){
             NSFetchRequest *regionRequest = [NSFetchRequest fetchRequestWithEntityName:@"Region"];
             regionRequest.predicate = [NSPredicate predicateWithFormat:@"name = %@",_regionInfo[@"name"]];
@@ -60,20 +83,43 @@ typedef NS_ENUM(NSInteger, PBMDataAPI) {
             }
         }else{
             _currentRegion = nil;
-//            _currentRegion = [self regionWithData:@{@"full_name":@"Seattle",@"id":@3,@"lat":@48,@"lon":@(-122),@"name":@"seattle",@"primary_email_contact":@"morganshilling@gmail.com"} shouldCreate:YES];
-//            [self loadRegionData:_currentRegion];
         }
     }
     return self;
 }
 - (void)getUserLocation{
-    if (!locationManager){
-        locationManager = [CLLocationManager new];
+    if (!self.locationManager){
+        self.locationManager = [CLLocationManager new];
     }
-    locationManager.delegate = self;
-    locationManager.desiredAccuracy = kCLLocationAccuracyBest;
-    locationManager.distanceFilter = 5;
-    [locationManager startUpdatingLocation];
+    #pragma message ("iOS 8 Support for location updating")
+    if ([self.locationManager respondsToSelector:@selector(requestWhenInUseAuthorization)]){
+        [self.locationManager requestWhenInUseAuthorization];
+    }
+    self.locationManager.delegate = self;
+    self.locationManager.desiredAccuracy = kCLLocationAccuracyBest;
+    self.locationManager.distanceFilter = 5;
+    [self.locationManager startUpdatingLocation];
+}
+- (BOOL)shouldShowMessageOfDay{
+    NSDate *lastShownDate = [[PinballMapManager userDefaultsForApp] objectForKey:motdKey];
+    if (!lastShownDate){
+        return YES;
+    }
+    NSNumber *regionID = [[PinballMapManager userDefaultsForApp] objectForKey:motdRegionKey];
+    BOOL shouldShowForDate = ![[[NSDate date] endOfDay] isEqualToDate:lastShownDate];
+    if (!shouldShowForDate){
+        if (regionID != self.currentRegion.regionId){
+            return YES;
+        }else{
+            return NO;
+        }
+    }
+    return YES;
+}
+- (void)showedMessageOfDay{
+    [[PinballMapManager userDefaultsForApp] setObject:self.currentRegion.regionId forKey:motdRegionKey];
+    [[PinballMapManager userDefaultsForApp] setObject:[[NSDate date] endOfDay] forKey:motdKey];
+    [[PinballMapManager userDefaultsForApp] synchronize];
 }
 #pragma mark - Regions listing
 - (void)allRegions:(void (^)(NSArray *regions))regionBlock{
@@ -118,7 +164,6 @@ typedef NS_ENUM(NSInteger, PBMDataAPI) {
     AFHTTPRequestOperation *regionAPI = [[AFHTTPRequestOperation alloc] initWithRequest:regionRequest];
     regionAPI.responseSerializer = [AFJSONResponseSerializer serializer];
     [regionAPI setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
-        NSLog(@"Found new regions");
         NSArray *regions = operation.responseObject[@"regions"];
         [regions enumerateObjectsUsingBlock:^(NSDictionary *obj, NSUInteger idx, BOOL *stop) {
             if (![regionIds containsObject:obj[@"id"]]){
@@ -165,11 +210,20 @@ typedef NS_ENUM(NSInteger, PBMDataAPI) {
     }];
     [[NSOperationQueue mainQueue] addOperations:api waitUntilFinished:NO];
 }
+- (void)refreshBasicRegionData:(APIComplete)completionBlock{
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    manager.requestSerializer = [AFJSONRequestSerializer serializer];
+    [manager GET:[NSString stringWithFormat:@"%@api/v1/regions/%@.json",apiRootURL,self.currentRegion.regionId] parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        completionBlock(responseObject);
+     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+         completionBlock(@{@"errors": error.localizedDescription});
+     }];
+}
 - (void)loadRegionData:(Region *)region{
     [[NSNotificationCenter defaultCenter] postNotificationName:@"UpdatingRegion" object:nil];
 
-    [[NSUserDefaults standardUserDefaults] setObject:@{@"name": region.name} forKey:@"CurrentRegion"];
-    [[NSUserDefaults standardUserDefaults] synchronize];
+    [[PinballMapManager userDefaultsForApp] setObject:@{@"name": region.name} forKey:@"CurrentRegion"];
+    [[PinballMapManager userDefaultsForApp] synchronize];
     
     // Find region.
     _currentRegion = region;
@@ -204,6 +258,15 @@ typedef NS_ENUM(NSInteger, PBMDataAPI) {
         [[NSNotificationCenter defaultCenter] postNotificationName:@"RegionUpdate" object:nil];
     }];
     [[NSOperationQueue mainQueue] addOperations:api waitUntilFinished:NO];
+}
+- (void)recentlyAddedMachinesWithCompletion:(APIComplete)completionBlock{
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    manager.requestSerializer = [AFJSONRequestSerializer serializer];
+    [manager GET:[NSString stringWithFormat:@"%@api/v1/region/%@/location_machine_xrefs.json?limit=10",apiRootURL,self.currentRegion.name] parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        completionBlock(responseObject);
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        completionBlock(@{@"errors": error.localizedDescription});
+    }];
 }
 - (AFHTTPRequestOperation *)requestForData:(PBMDataAPI)apiType{
     NSURL *apiURL;
@@ -309,20 +372,32 @@ typedef NS_ENUM(NSInteger, PBMDataAPI) {
 
 }
 - (NSMutableSet *)importZonesWithRequest:(AFHTTPRequestOperation *)request{
-    CoreDataManager *cdManager = [CoreDataManager sharedInstance];
-    // Clear existing
-    [self clearData:PBMDataAPIZones forRegion:_currentRegion];
-    NSMutableSet *allZones = [NSMutableSet new];
-    Zone *emptyZone = [Zone createZoneWithData:@{@"id": @(-1),@"name": @"Unclassified"} andContext:cdManager.managedObjectContext];
-    [allZones addObject:emptyZone];
-    // Create all zones
-    [request.responseObject[@"zones"] enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-        Zone *newZone = [Zone createZoneWithData:obj andContext:cdManager.managedObjectContext];
-        newZone.region = _currentRegion;
-        [allZones addObject:newZone];
-    }];
-    [cdManager saveContext];
-    return allZones;
+    if (![_currentRegion.zonesEtag isEqualToString:request.response.allHeaderFields[@"Etag"]]){
+        CoreDataManager *cdManager = [CoreDataManager sharedInstance];
+        // Clear existing
+        [self clearData:PBMDataAPIZones forRegion:_currentRegion];
+        NSMutableSet *allZones = [NSMutableSet new];
+        Zone *emptyZone = [Zone createZoneWithData:@{@"id": @(-1),@"name": @"Unclassified"} andContext:cdManager.managedObjectContext];
+        [allZones addObject:emptyZone];
+        // Create all zones
+        [request.responseObject[@"zones"] enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+            Zone *newZone = [Zone createZoneWithData:obj andContext:cdManager.managedObjectContext];
+            newZone.region = _currentRegion;
+            [allZones addObject:newZone];
+        }];
+        _currentRegion.zonesEtag = request.response.allHeaderFields[@"Etag"];
+        [cdManager saveContext];
+        
+        return allZones;
+    }else{
+        NSLog(@"Zones same Etag");
+        NSFetchRequest *zonesFetch = [NSFetchRequest fetchRequestWithEntityName:@"Zone"];
+        zonesFetch.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES]];
+        
+        NSMutableSet *zones = [[NSMutableSet alloc] initWithArray:[[[CoreDataManager sharedInstance] managedObjectContext] executeFetchRequest:zonesFetch error:nil]];
+        return zones;
+    }
+
 }
 - (NSMutableSet *)importLocationTypesWithRequest:(AFHTTPRequestOperation *)request{
     CoreDataManager *cdManager = [CoreDataManager sharedInstance];
@@ -524,7 +599,40 @@ typedef NS_ENUM(NSInteger, PBMDataAPI) {
 - (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations{
     NSLog(@"Location updated.");
     CLLocation *foundLocation = [locations lastObject];
-    _userLocation = foundLocation;
+    self.userLocation = foundLocation;
+    if (self.currentRegion){
+        [Location updateAllForRegion:self.currentRegion];
+    }
 }
-
+#pragma mark - Contact
+- (void)sendMessage:(NSDictionary *)messageData withType:(ContactType)contactType andCompletion:(APIComplete)completionBlock{
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    manager.requestSerializer = [AFJSONRequestSerializer serializer];
+    
+    NSString *contactRoute;
+    
+    switch (contactType) {
+        case ContactTypeRegionContact:
+            contactRoute = [NSString stringWithFormat:@"%@api/v1/regions/contact.json",apiRootURL];
+            break;
+        case ContactTypeRegionSuggest:
+            contactRoute = [NSString stringWithFormat:@"%@api/v1/regions/suggest.json",apiRootURL];
+            break;
+        case ContactTypeEvent:
+            contactRoute = [NSString stringWithFormat:@"%@api/v1/regions/contact.json",apiRootURL];
+            break;
+        case ContactTypeAppFeedback:
+            contactRoute = [NSString stringWithFormat:@"%@api/v1/regions/app_comment.json",apiRootURL];
+            break;
+        default:
+            break;
+    }
+    
+    
+    [manager POST:contactRoute parameters:messageData success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        completionBlock(responseObject);
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        completionBlock(@{@"errors": error.localizedDescription});
+    }];
+}
 @end

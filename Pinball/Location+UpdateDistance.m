@@ -21,5 +21,14 @@
     CLLocation *location = [[CLLocation alloc] initWithLatitude:[self.latitude doubleValue] longitude:[self.longitude doubleValue]];
     return [NSNumber numberWithDouble:([currentLocation distanceFromLocation:location] * 0.00062137)];
 }
-
++ (void)updateAllForRegion:(Region *)currentRegion{
+    NSFetchRequest *locationRequest = [NSFetchRequest fetchRequestWithEntityName:@"Location"];
+    locationRequest.predicate = [NSPredicate predicateWithFormat:@"region.name = %@",currentRegion.name];
+    locationRequest.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES]];
+    NSArray *locations = [[[CoreDataManager sharedInstance] managedObjectContext] executeFetchRequest:locationRequest error:nil];
+    for (Location *location in locations) {
+        [location updateDistance];
+    }
+    locations = nil;
+}
 @end

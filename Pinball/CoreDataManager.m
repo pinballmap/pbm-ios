@@ -84,6 +84,7 @@
     if (coordinator != nil) {
         _managedObjectContext = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSMainQueueConcurrencyType];
         [_managedObjectContext setPersistentStoreCoordinator:coordinator];
+        _managedObjectContext.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy;
     }
     return _managedObjectContext;
 }
@@ -95,7 +96,7 @@
     if (managedObjectModel != nil) {
         return managedObjectModel;
     }
-    NSURL *modelURL = [[NSBundle mainBundle] URLForResource:dataModel withExtension:@"momd"];
+    NSURL *modelURL = [[NSBundle bundleWithIdentifier:@"net.isaacruiz.ppm"] URLForResource:dataModel withExtension:@"momd"];
     managedObjectModel = [[NSManagedObjectModel alloc] initWithContentsOfURL:modelURL];
     return managedObjectModel;
 }
@@ -110,23 +111,17 @@
     
     NSURL *storeURL = [[self applicationDocumentsDirectory] URLByAppendingPathComponent:[NSString stringWithFormat:@"%@.sqlite",dataModel]];
     
+    NSDictionary *options = [NSDictionary dictionaryWithObjectsAndKeys:
+                             [NSNumber numberWithBool:YES], NSMigratePersistentStoresAutomaticallyOption,
+                             [NSNumber numberWithBool:YES], NSInferMappingModelAutomaticallyOption, nil];
+
+    
     NSError *error = nil;
     persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:[self managedObjectModel]];
-    [persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:storeURL options:nil error:&error];
+    [persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:storeURL options:options error:&error];
     
     
-    if (error.code == 134100){
-        // Scheme versions are different.
-        // If in Debug mode just clear the store and re-create it.
-#ifdef DEBUG
-        [[NSFileManager defaultManager] removeItemAtURL:storeURL error:nil];
-        [self persistentStoreCoordinator];
-#else
-        // In production try a lightweight migration.
-        [persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:storeURL options:@{NSMigratePersistentStoresAutomaticallyOption:@YES, NSInferMappingModelAutomaticallyOption:@YES} error:&error];
-#endif
-    }
-    
+
     return persistentStoreCoordinator;
 }
 
@@ -135,7 +130,21 @@
 // Returns the URL to the application's Documents directory.
 - (NSURL *)applicationDocumentsDirectory
 {
-    return [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject];
+
+    NSURL *docDirectory = [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject];
+    docDirectory = [docDirectory URLByAppendingPathComponent:[NSString stringWithFormat:@"%@.sqlite",dataModel]];
+    // Move the existing CoreData SQLite to the new security container, so it can be used for extensions.
+    NSURL *securityContainer = [[NSFileManager defaultManager] containerURLForSecurityApplicationGroupIdentifier:@"group.net.isaacruiz.ppm"];
+    if ([[NSFileManager defaultManager] fileExistsAtPath:docDirectory.path]){
+        BOOL copyStatus = [[NSFileManager defaultManager] copyItemAtURL:docDirectory toURL:[securityContainer URLByAppendingPathComponent:[NSString stringWithFormat:@"%@.sqlite",dataModel]]  error:nil];
+        if (copyStatus){
+            [[NSFileManager defaultManager] removeItemAtURL:docDirectory error:nil];
+        }
+    }
+    
+    
+    return securityContainer;
+    
 }
 
 

@@ -9,14 +9,14 @@
 #import "NewMachineScoreView.h"
 #import "UIAlertView+Application.h"
 
-@interface NewMachineScoreView () <UIPickerViewDataSource,UIPickerViewDelegate> {
-    NSArray *ranks;
-    NSDictionary *pickedRank;
-}
-@property (nonatomic) IBOutlet UITextField *score;
-@property (nonatomic) IBOutlet UITextField *initials;
-@property (nonatomic) IBOutlet UITextField *rank;
+@interface NewMachineScoreView () <UIPickerViewDataSource,UIPickerViewDelegate>
+
+@property (nonatomic) NSArray *ranks;
+@property (nonatomic) NSDictionary *pickedRank;
 @property (nonatomic) UIPickerView *rankPicker;
+@property (weak) IBOutlet UITextField *score;
+@property (weak) IBOutlet UITextField *initials;
+@property (weak) IBOutlet UITextField *rank;
 
 - (IBAction)saveScore:(id)sender;
 - (IBAction)cancelScore:(id)sender;
@@ -37,7 +37,7 @@
     _rankPicker = [[UIPickerView alloc] init];
     _rankPicker.dataSource = self;
     _rankPicker.delegate = self;
-    ranks = @[@{@"id": @1,@"name": @"GC"},
+    self.ranks = @[@{@"id": @1,@"name": @"GC"},
               @{@"id": @2,@"name": @"1st"},
               @{@"id": @3,@"name": @"2nd"},
               @{@"id": @4,@"name": @"3rd"},
@@ -50,7 +50,7 @@
 }
 #pragma mark - Class Actions
 - (IBAction)saveScore:(id)sender{
-    NSDictionary *scoreData = @{@"location_machine_xref_id": _currentMachine.machineLocationId,@"score":_score.text,@"rank":pickedRank[@"id"],@"initials":_initials.text};
+    NSDictionary *scoreData = @{@"location_machine_xref_id": _currentMachine.machineLocationId,@"score":_score.text,@"rank":self.pickedRank[@"id"],@"initials":_initials.text};
     [[PinballMapManager sharedInstance] addScore:scoreData forMachine:_currentMachine withCompletion:^(NSDictionary *status) {
         if (status[@"errors"]){
             NSString *errors;
@@ -77,14 +77,14 @@
     return 1;
 }
 - (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component{
-    return ranks.count;
+    return self.ranks.count;
 }
 - (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component{
-    return ranks[row][@"name"];
+    return self.ranks[row][@"name"];
 }
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component{
-    pickedRank = ranks[row];
-    _rank.text = pickedRank[@"name"];
+    self.pickedRank = self.ranks[row];
+    _rank.text = self.pickedRank[@"name"];
 }
 
 @end

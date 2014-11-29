@@ -10,7 +10,7 @@
 
 @interface InformationCell : UITableViewCell
 
-@property (nonatomic) IBOutlet UILabel *infoLabel;
-@property (nonatomic) IBOutlet UILabel *dataLabel;
+@property (weak) IBOutlet UILabel *infoLabel;
+@property (weak) IBOutlet UILabel *dataLabel;
 
 @end

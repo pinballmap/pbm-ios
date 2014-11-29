@@ -11,12 +11,13 @@
 #import "UIAlertView+Application.h"
 #import "MachinePickingView.h"
 
-@interface NewMachineLocationView () <PickingDelegate,UITextViewDelegate>{
-    IBOutlet UILabel *machineName;
-    IBOutlet UILabel *locationName;
-    IBOutlet UITextView *machineCondition;
-    Machine *pickedMachine;
-}
+@interface NewMachineLocationView () <PickingDelegate,UITextViewDelegate>
+
+@property (nonatomic) Machine *pickedMachine;
+@property (weak) IBOutlet UILabel *machineName;
+@property (weak) IBOutlet UILabel *locationName;
+@property (weak) IBOutlet UITextView *machineCondition;
+
 - (IBAction)saveMachine:(id)sender;
 - (IBAction)cancelMachine:(id)sender;
 @end
@@ -32,7 +33,7 @@
 }
 - (void)viewDidLoad{
     [super viewDidLoad];
-    locationName.text = _location.name;
+    self.locationName.text = _location.name;
 }
 - (void)didReceiveMemoryWarning{
     [super didReceiveMemoryWarning];
@@ -51,13 +52,13 @@
 }
 - (void)setLocation:(Location *)location{
     _location = location;
-    locationName.text = _location.name;
+    self.locationName.text = _location.name;
 }
 #pragma mark - Machine Picking View Delegate
 - (void)pickedMachines:(NSArray *)machines{
     if (machines.count > 0){
-        pickedMachine = [machines lastObject];
-        machineName.text = pickedMachine.name;
+        self.pickedMachine = [machines lastObject];
+        self.machineName.text = self.pickedMachine.name;
     }
 }
 #pragma mark - TableView Delegate
@@ -78,9 +79,9 @@
 }
 #pragma mark - Actions
 - (IBAction)saveMachine:(id)sender{
-    if (_location && pickedMachine && ![machineName.text isEqualToString:@"Pick Machine"]){
-        NSDictionary *machine = @{@"machine_id": pickedMachine.machineId,@"location_id": _location.locationId,@"condition": machineCondition.text};
-        [[PinballMapManager sharedInstance] createNewMachineWithData:machine andParentMachine:pickedMachine forLocation:_location withCompletion:^(NSDictionary *status) {
+    if (_location.locationId != nil && self.pickedMachine.machineId != nil && ![self.machineName.text isEqualToString:@"Pick Machine"]){
+        NSDictionary *machine = @{@"machine_id": self.pickedMachine.machineId,@"location_id": _location.locationId,@"condition": self.machineCondition.text};
+        [[PinballMapManager sharedInstance] createNewMachineWithData:machine andParentMachine:self.pickedMachine forLocation:_location withCompletion:^(NSDictionary *status) {
             if (status[@"errors"]){
                 NSString *errors;
                 if ([status[@"errors"] isKindOfClass:[NSArray class]]){
@@ -95,7 +96,7 @@
             }
         }];
     }else{
-        if ([machineName.text isEqualToString:@"Pick Machine"]){
+        if ([self.machineName.text isEqualToString:@"Pick Machine"]){
             [UIAlertView simpleApplicationAlertWithMessage:@"You must enter a machine name." cancelButton:@"Ok"];
         }else if (!_location){
             [UIAlertView simpleApplicationAlertWithMessage:@"You must select a location for this machine." cancelButton:@"Ok"];

@@ -10,6 +10,6 @@
 
 @interface InputCell : UITableViewCell
 
-@property (nonatomic) IBOutlet UITextField *inputField;
+@property (weak) IBOutlet UITextField *inputField;
 
 @end

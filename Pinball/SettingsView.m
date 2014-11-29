@@ -8,12 +8,15 @@
 
 #import "SettingsView.h"
 #import "UIAlertView+Application.h"
+#import "ContactView.h"
+#import "RegionsView.h"
 
 @import MessageUI;
 
-@interface SettingsView () <MFMailComposeViewControllerDelegate> {
-    IBOutlet UILabel *regionLabel;
-}
+@interface SettingsView () <MFMailComposeViewControllerDelegate>
+
+@property (weak) IBOutlet UILabel *regionLabel;
+
 - (void)updateRegion;
 - (IBAction)sendFeedback:(id)sender;
 
@@ -39,7 +42,13 @@
     // Dispose of any resources that can be recreated.
 }
 - (void)updateRegion{
-    regionLabel.text = [[[PinballMapManager sharedInstance] currentRegion] fullName];
+    self.regionLabel.text = [[[PinballMapManager sharedInstance] currentRegion] fullName];
+}
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
+    if ([segue.identifier isEqualToString:@"RegionSelect"]){
+        RegionsView *regionSelect = (RegionsView *)[segue.destinationViewController navigationRootViewController];
+        regionSelect.isSelecting = true;
+    }
 }
 #pragma mark - Class Actions
 - (IBAction)sendFeedback:(id)sender{
@@ -64,6 +73,12 @@
 #pragma mark - Table view data source
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    if (indexPath.row == 1){
+        // Region Contact
+        ContactView *eventContact = (ContactView *)[[self.storyboard instantiateViewControllerWithIdentifier:@"ContactView"] navigationRootViewController];
+        eventContact.contactType = ContactTypeRegionContact;
+        [self.navigationController presentViewController:eventContact.parentViewController animated:YES completion:nil];
+    }
 
 }
 

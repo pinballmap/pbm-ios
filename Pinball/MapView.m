@@ -15,9 +15,10 @@
 #import "LocationAnnotation.h"
 
 
-@interface MapView () <MKMapViewDelegate> {
-    IBOutlet MKMapView *mainMapView;
-}
+@interface MapView () <MKMapViewDelegate>
+
+@property (weak) IBOutlet MKMapView *mainMapView;
+
 - (IBAction)showInMaps:(id)sender;
 - (IBAction)dismissMap:(id)sender;
 @end
@@ -34,7 +35,7 @@
 - (void)viewDidLoad{
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    mainMapView.delegate = self;
+    self.mainMapView.delegate = self;
     if (self.presentingViewController){
         UIBarButtonItem *doneMap = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(dismissMap:)];
         self.navigationItem.leftBarButtonItem = doneMap;
@@ -49,12 +50,12 @@
         self.navigationItem.title = [NSString stringWithFormat:@"%@",_currentLocation.name];
         
         CLLocationCoordinate2D coord = CLLocationCoordinate2DMake([_currentLocation.latitude doubleValue],[_currentLocation.longitude doubleValue]);
-        mainMapView.region = MKCoordinateRegionMake(coord, MKCoordinateSpanMake(0.002, 0.002));
+        self.mainMapView.region = MKCoordinateRegionMake(coord, MKCoordinateSpanMake(0.002, 0.002));
         
         MKPointAnnotation *locationPin = [[MKPointAnnotation alloc] init];
         locationPin.title = _currentLocation.name;
         locationPin.coordinate = CLLocationCoordinate2DMake([_currentLocation.latitude doubleValue], [_currentLocation.longitude doubleValue]);
-        [mainMapView addAnnotation:locationPin];
+        [self.mainMapView addAnnotation:locationPin];
     }else if (_currentMachine) {
         [_currentMachine.machineLocations enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
             MachineLocation *loc = obj;
@@ -63,13 +64,13 @@
             annotation.title = loc.location.name;
             annotation.subtitle = loc.location.street;
             annotation.currentMachine = loc;
-            [mainMapView addAnnotation:annotation];
-            mainMapView.region = MKCoordinateRegionMake(annotation.coordinate, MKCoordinateSpanMake(1.0, 1.0));
+            [self.mainMapView addAnnotation:annotation];
+            self.mainMapView.region = MKCoordinateRegionMake(annotation.coordinate, MKCoordinateSpanMake(1.0, 1.0));
         }];
     }else if (_locations){
         Region *currentRegion = [[PinballMapManager sharedInstance] currentRegion];
         CLLocationCoordinate2D regionCoord = CLLocationCoordinate2DMake(currentRegion.latitude.doubleValue, currentRegion.longitude.doubleValue);
-        mainMapView.region = MKCoordinateRegionMake(regionCoord, MKCoordinateSpanMake(1.0, 1.0));
+        self.mainMapView.region = MKCoordinateRegionMake(regionCoord, MKCoordinateSpanMake(1.0, 1.0));
         
         
         [_locations enumerateObjectsUsingBlock:^(Location *location, NSUInteger idx, BOOL *stop) {
@@ -83,7 +84,7 @@
                 locationPin.subtitle = [NSString stringWithFormat:@"%.02f miles",[location.currentDistance floatValue]];
             }
             locationPin.coordinate = locationCoord;
-            [mainMapView addAnnotation:locationPin];
+            [self.mainMapView addAnnotation:locationPin];
         }];
     }
 }
@@ -92,6 +93,9 @@
     // Dispose of any resources that can be recreated.
 }
 - (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id<MKAnnotation>)annotation{
+    if ([annotation isKindOfClass:[MKUserLocation class]]){
+        return nil;
+    }
     MKPinAnnotationView *pinView = (MKPinAnnotationView *)[mapView dequeueReusableAnnotationViewWithIdentifier:@"locpin"];
     if (!pinView){
         pinView = [[MKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:@"locpin"];

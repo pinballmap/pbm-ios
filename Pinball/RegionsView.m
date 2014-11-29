@@ -10,12 +10,15 @@
 @import MessageUI;
 #import "UIAlertView+Application.h"
 #import "GAAppHelper.h"
-#import <ReuseWebView.h>
+#import "ReuseWebView.h"
+#import "Region+UpdateDistance.h"
+#import "ContactView.h"
 
-@interface RegionsView () <NSFetchedResultsControllerDelegate,UISearchDisplayDelegate,MFMailComposeViewControllerDelegate,UIAlertViewDelegate> {
-    NSFetchedResultsController *fetchedResults;
-    NSMutableArray *searchResults;
-}
+@interface RegionsView () <NSFetchedResultsControllerDelegate,UISearchDisplayDelegate,MFMailComposeViewControllerDelegate,UIAlertViewDelegate>
+
+@property (nonatomic) NSFetchedResultsController *fetchedResults;
+@property (nonatomic) NSMutableArray *searchResults;
+
 - (IBAction)cancelRegion:(id)sender;    // iPad only.
 - (IBAction)requestRegion:(id)sender;
 
@@ -34,26 +37,58 @@
     [super viewDidLoad];
     self.navigationItem.title = @"Regions";
 
-    searchResults = [NSMutableArray new];
+    self.searchResults = [NSMutableArray new];
     [[PinballMapManager sharedInstance] refreshAllRegions];
-    NSFetchRequest *regionsFetch = [NSFetchRequest fetchRequestWithEntityName:@"Region"];
-    regionsFetch.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"fullName" ascending:YES]];
+
+    [self updateForUserLocation];
     
-    fetchedResults = [[NSFetchedResultsController alloc] initWithFetchRequest:regionsFetch
-                                                         managedObjectContext:[[CoreDataManager sharedInstance] managedObjectContext]
-                                                           sectionNameKeyPath:nil
-                                                                    cacheName:nil];
-    fetchedResults.delegate = self;
-    [fetchedResults performFetch:nil];
-    [self.tableView reloadData];
 }
 - (void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
     [GAAppHelper sendAnalyticsDataWithScreen:@"Region Select View"];
+    [[PinballMapManager sharedInstance] addObserver:self forKeyPath:@"userLocation" options:0 context:nil];
+}
+- (void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
+    [[PinballMapManager sharedInstance] removeObserver:self forKeyPath:@"userLocation"];
 }
 - (void)didReceiveMemoryWarning{
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+- (void)updateForUserLocation{
+    
+    NSFetchRequest *regionsFetch = [NSFetchRequest fetchRequestWithEntityName:@"Region"];
+    
+    if ([[PinballMapManager sharedInstance] userLocation]){
+        
+        NSFetchRequest *locationRequest = [NSFetchRequest fetchRequestWithEntityName:@"Region"];
+        locationRequest.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"fullName" ascending:YES]];
+        
+        NSArray *locations = [[[CoreDataManager sharedInstance] managedObjectContext] executeFetchRequest:locationRequest error:nil];
+        for (Region *location in locations) {
+            [location updateDistance];
+        }
+        locations = nil;
+        regionsFetch.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"locationDistance" ascending:YES]];
+    }else{
+        regionsFetch.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"fullName" ascending:YES]];
+    }
+    self.fetchedResults = nil;
+    self.fetchedResults = [[NSFetchedResultsController alloc] initWithFetchRequest:regionsFetch
+                                                         managedObjectContext:[[CoreDataManager sharedInstance] managedObjectContext]
+                                                           sectionNameKeyPath:nil
+                                                                    cacheName:nil];
+    self.fetchedResults.delegate = self;
+    [self.fetchedResults performFetch:nil];
+    [self.tableView reloadData];
+    
+    
+}
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context{
+    if ([keyPath isEqualToString:@"userLocation"]){
+        [self updateForUserLocation];
+    }
 }
 #pragma mark - Class actions
 - (IBAction)requestRegion:(id)sender{
@@ -70,10 +105,10 @@
     NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Region"];
     request.predicate = [NSPredicate predicateWithFormat:@"fullName CONTAINS[cd] %@",searchString];
     
-    [searchResults removeAllObjects];
+    [self.searchResults removeAllObjects];
     NSManagedObjectContext *context = [[CoreDataManager sharedInstance] managedObjectContext];
     
-    [searchResults addObjectsFromArray:[context executeFetchRequest:request error:nil]];
+    [self.searchResults addObjectsFromArray:[context executeFetchRequest:request error:nil]];
     return YES;
 }
 #pragma mark - MFMailComposeDelegate
@@ -95,13 +130,9 @@
             navController.modalPresentationStyle = UIModalPresentationFormSheet;
             [self.navigationController presentViewController:navController animated:YES completion:nil];
         }else if (buttonIndex == 2){
-            if ([MFMailComposeViewController canSendMail]){
-                MFMailComposeViewController *requestMessage = [[MFMailComposeViewController alloc] init];
-                requestMessage.mailComposeDelegate = self;
-                [requestMessage setSubject:@"Adding my region to PinballMap.com"];
-                [requestMessage setToRecipients:@[@"pinballmap@outlook.com"]];
-                [self presentViewController:requestMessage animated:YES completion:nil];
-            }
+            ContactView *eventContact = (ContactView *)[[self.storyboard instantiateViewControllerWithIdentifier:@"ContactView"] navigationRootViewController];
+            eventContact.contactType = ContactTypeRegionSuggest;
+            [self.navigationController presentViewController:eventContact.parentViewController animated:YES completion:nil];
         }
     }
 }
@@ -112,12 +143,12 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     NSInteger rows = 0;
     if (tableView == self.tableView){
-        if ([[fetchedResults sections] count] > 0) {
-            id <NSFetchedResultsSectionInfo> sectionInfo = [[fetchedResults sections] objectAtIndex:section];
+        if ([[self.fetchedResults sections] count] > 0) {
+            id <NSFetchedResultsSectionInfo> sectionInfo = [[self.fetchedResults sections] objectAtIndex:section];
             rows = [sectionInfo numberOfObjects];
         }
     }else{
-        rows = searchResults.count;
+        rows = self.searchResults.count;
     }
     return rows;
 }
@@ -135,16 +166,15 @@
     
     Region *region;
     if (self.tableView == tableView){
-        region = [fetchedResults objectAtIndexPath:indexPath];
+        region = [self.fetchedResults objectAtIndexPath:indexPath];
     }else{
-        region = searchResults[indexPath.row];
+        region = self.searchResults[indexPath.row];
     }
     cell.accessoryType = UITableViewCellAccessoryNone;
     
     Region *selectedRegion = [[PinballMapManager sharedInstance] currentRegion];
     if ([region.name isEqualToString:selectedRegion.name]){
         cell.accessoryType = UITableViewCellAccessoryCheckmark;
-        
     }
     
     cell.textLabel.text = region.fullName;
@@ -155,9 +185,9 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     Region *region;
     if (self.tableView == tableView){
-        region = [fetchedResults objectAtIndexPath:indexPath];
+        region = [self.fetchedResults objectAtIndexPath:indexPath];
     }else{
-        region = searchResults[indexPath.row];
+        region = self.searchResults[indexPath.row];
     }
     
     [[PinballMapManager sharedInstance] loadRegionData:region];
@@ -184,9 +214,12 @@
         case NSFetchedResultsChangeInsert:
             [self.tableView insertSections:[NSIndexSet indexSetWithIndex:sectionIndex] withRowAnimation:UITableViewRowAnimationFade];
             break;
-            
         case NSFetchedResultsChangeDelete:
             [self.tableView deleteSections:[NSIndexSet indexSetWithIndex:sectionIndex] withRowAnimation:UITableViewRowAnimationFade];
+            break;
+        case NSFetchedResultsChangeMove:
+            break;
+        case NSFetchedResultsChangeUpdate:
             break;
     }
 }

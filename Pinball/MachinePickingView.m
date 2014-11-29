@@ -8,16 +8,19 @@
 
 #import "MachinePickingView.h"
 
-@interface MachinePickingView () <NSFetchedResultsControllerDelegate,UISearchBarDelegate> {
-    IBOutlet UISegmentedControl *machineFilter;
-    IBOutlet UISearchBar *mainSearchbar;
-    NSFetchedResultsController *fetchedResults;
-    NSManagedObjectContext *managedContext;
-    BOOL isSearching;
-    BOOL onlyPicked;
-    NSMutableArray *searchResults;
-    NSMutableArray *pickedMachines;
-}
+@interface MachinePickingView () <NSFetchedResultsControllerDelegate,UISearchBarDelegate>
+
+@property (nonatomic) NSFetchedResultsController *fetchedResults;
+@property (nonatomic) NSManagedObjectContext *managedContext;
+@property (nonatomic) BOOL isSearching;
+@property (nonatomic) BOOL onlyPicked;
+@property (nonatomic) NSMutableArray *searchResults;
+@property (nonatomic) NSMutableArray *pickedMachines;
+
+@property (weak) IBOutlet UISegmentedControl *machineFilter;
+@property (weak) IBOutlet UISearchBar *mainSearchbar;
+
+
 - (IBAction)filterMachines:(id)sender;
 - (IBAction)savePicked:(id)sender;
 - (IBAction)cancelPicking:(id)sender;
@@ -35,19 +38,19 @@
 - (void)viewDidLoad{
     [super viewDidLoad];
     
-    managedContext = [[CoreDataManager sharedInstance] managedObjectContext];
-    if (!pickedMachines){
-        pickedMachines = [NSMutableArray new];
+    self.managedContext = [[CoreDataManager sharedInstance] managedObjectContext];
+    if (!self.pickedMachines){
+        self.pickedMachines = [NSMutableArray new];
     }
     NSFetchRequest *stackRequest = [NSFetchRequest fetchRequestWithEntityName:@"Machine"];
     stackRequest.predicate = nil;
     stackRequest.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES]];
-    fetchedResults = [[NSFetchedResultsController alloc] initWithFetchRequest:stackRequest
-                                                         managedObjectContext:managedContext
+    self.fetchedResults = [[NSFetchedResultsController alloc] initWithFetchRequest:stackRequest
+                                                         managedObjectContext:self.managedContext
                                                            sectionNameKeyPath:nil
                                                                     cacheName:nil];
-    fetchedResults.delegate = self;
-    [fetchedResults performFetch:nil];
+    self.fetchedResults.delegate = self;
+    [self.fetchedResults performFetch:nil];
     [self.tableView reloadData];
 }
 - (void)didReceiveMemoryWarning{
@@ -55,17 +58,17 @@
     // Dispose of any resources that can be recreated.
 }
 #pragma mark - Class
-- (void)setPickedMachines:(NSArray *)pickedMachinesInput{
-    _existingPickedMachines = pickedMachinesInput;
-    if (!pickedMachines){
-        pickedMachines = [NSMutableArray new];
+- (void)setExistingPickedMachines:(NSArray *)existingPickedMachines{
+    _existingPickedMachines = existingPickedMachines;
+    if (!_pickedMachines){
+        _pickedMachines = [NSMutableArray new];
     }
-    [pickedMachines addObjectsFromArray:_existingPickedMachines];
+    [_pickedMachines addObjectsFromArray:_existingPickedMachines];
 }
 #pragma mark - Class Actions
 - (IBAction)savePicked:(id)sender{
     if (_delegate && [_delegate respondsToSelector:@selector(pickedMachines:)]){
-        [_delegate pickedMachines:pickedMachines];
+        [_delegate pickedMachines:self.pickedMachines];
     }
     [self dismissViewControllerAnimated:YES completion:nil];
 }
@@ -74,33 +77,33 @@
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 - (IBAction)filterMachines:(id)sender{
-    isSearching = NO;
-    [mainSearchbar resignFirstResponder];
-    mainSearchbar.text = @"";
-    if (machineFilter.selectedSegmentIndex == 0){
-        onlyPicked = NO;
+    self.isSearching = NO;
+    [self.mainSearchbar resignFirstResponder];
+    self.mainSearchbar.text = @"";
+    if (self.machineFilter.selectedSegmentIndex == 0){
+        self.onlyPicked = NO;
     }else{
-        onlyPicked = YES;
+        self.onlyPicked = YES;
     }
     [self.tableView reloadData];
 }
 #pragma mark - Searchbar Delegate
 - (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar{
-    isSearching = YES;
+    self.isSearching = YES;
     searchBar.showsCancelButton = YES;
 }
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText{
     NSFetchRequest *searchrequest = [NSFetchRequest fetchRequestWithEntityName:@"Machine"];
     searchrequest.predicate = [NSPredicate predicateWithFormat:@"name CONTAINS[cd] %@",searchText];
-    [searchResults removeAllObjects];
-    searchResults = nil;
-    searchResults = [NSMutableArray new];
+    [self.searchResults removeAllObjects];
+    self.searchResults = nil;
+    self.searchResults = [NSMutableArray new];
     NSError *error = nil;
-    [searchResults addObjectsFromArray:[managedContext executeFetchRequest:searchrequest error:&error]];
+    [self.searchResults addObjectsFromArray:[self.managedContext executeFetchRequest:searchrequest error:&error]];
     [self.tableView reloadData];
 }
 - (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar{
-    isSearching = NO;
+    self.isSearching = NO;
     searchBar.text = @"";
     [searchBar resignFirstResponder];
     searchBar.showsCancelButton = NO;
@@ -108,21 +111,21 @@
 }
 #pragma mark - Table view data source
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    if (!isSearching){
-        return [[fetchedResults sections] count];
+    if (!self.isSearching){
+        return [[self.fetchedResults sections] count];
     }else{
         return 1;
     }
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     NSInteger rows = 0;
-    if (isSearching){
-        rows = searchResults.count;
-    }else if (onlyPicked){
-        rows = pickedMachines.count;
+    if (self.isSearching){
+        rows = self.searchResults.count;
+    }else if (self.onlyPicked){
+        rows = self.pickedMachines.count;
     }else{
-        if ([[fetchedResults sections] count] > 0) {
-            id <NSFetchedResultsSectionInfo> sectionInfo = [[fetchedResults sections] objectAtIndex:section];
+        if ([[self.fetchedResults sections] count] > 0) {
+            id <NSFetchedResultsSectionInfo> sectionInfo = [[self.fetchedResults sections] objectAtIndex:section];
             rows = [sectionInfo numberOfObjects];
         }
     }
@@ -132,12 +135,12 @@
     float defaultWidth = 290;
     
     Machine *currentMachine;
-    if (isSearching){
-        currentMachine = searchResults[indexPath.row];
-    }else if (onlyPicked){
-        currentMachine = pickedMachines[indexPath.row];
+    if (self.isSearching){
+        currentMachine = self.searchResults[indexPath.row];
+    }else if (self.onlyPicked){
+        currentMachine = self.pickedMachines[indexPath.row];
     }else{
-        currentMachine = [fetchedResults objectAtIndexPath:indexPath];
+        currentMachine = [self.fetchedResults objectAtIndexPath:indexPath];
     }
     
     CGRect stringSize = [currentMachine.machineTitle boundingRectWithSize:CGSizeMake(defaultWidth, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin context:nil];
@@ -151,15 +154,15 @@
     cell.textLabel.numberOfLines = 0;
     cell.detailTextLabel.numberOfLines = 0;
     Machine *currentMachine;
-    if (isSearching){
-        currentMachine = searchResults[indexPath.row];
-    }else if (onlyPicked){
-        currentMachine = pickedMachines[indexPath.row];
+    if (self.isSearching){
+        currentMachine = self.searchResults[indexPath.row];
+    }else if (self.onlyPicked){
+        currentMachine = self.pickedMachines[indexPath.row];
     }else{
-        currentMachine = [fetchedResults objectAtIndexPath:indexPath];
+        currentMachine = [self.fetchedResults objectAtIndexPath:indexPath];
     }
     
-    if ([pickedMachines containsObject:currentMachine]){
+    if ([self.pickedMachines containsObject:currentMachine]){
         cell.accessoryType = UITableViewCellAccessoryCheckmark;
     }else{
         cell.accessoryType = UITableViewCellAccessoryNone;
@@ -170,17 +173,17 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     Machine *currentMachine;
-    if (isSearching){
-        currentMachine = searchResults[indexPath.row];
-    }else if (onlyPicked){
-        currentMachine = pickedMachines[indexPath.row];
+    if (self.isSearching){
+        currentMachine = self.searchResults[indexPath.row];
+    }else if (self.onlyPicked){
+        currentMachine = self.pickedMachines[indexPath.row];
     }else{
-        currentMachine = [fetchedResults objectAtIndexPath:indexPath];
+        currentMachine = [self.fetchedResults objectAtIndexPath:indexPath];
     }
-    if ([pickedMachines containsObject:currentMachine]){
-        [pickedMachines removeObject:currentMachine];
+    if ([self.pickedMachines containsObject:currentMachine]){
+        [self.pickedMachines removeObject:currentMachine];
     }else{
-        [pickedMachines addObject:currentMachine];
+        [self.pickedMachines addObject:currentMachine];
     }
     if (!_canPickMultiple){
         [self savePicked:nil];

@@ -19,19 +19,21 @@ typedef NS_ENUM(NSUInteger, LayoutType) {
     LayoutTypeBrowse,
 };
 
-@interface LocationProfileView_iPad () <MKMapViewDelegate>{
-    LocationProfileView *profileViewController;
-    LocationsView *locationsViewController;
-    Region *currentRegion;
-    BOOL isBrowsing;
-}
-@property (nonatomic) IBOutlet UIView *locationsListingView;
-@property (nonatomic) IBOutlet UIView *locationProfile;
-@property (nonatomic) IBOutlet MKMapView *mapView;
+@interface LocationProfileView_iPad () <MKMapViewDelegate>
+
+@property (nonatomic) LocationProfileView *profileViewController;
+@property (nonatomic) LocationsView *locationsViewController;
+@property (nonatomic) Region *currentRegion;
+@property (nonatomic) BOOL isBrowsing;
 
 
-@property (nonatomic) IBOutlet NSLayoutConstraint *listingLeft;
-@property (nonatomic) IBOutlet NSLayoutConstraint *profileLeft;
+@property (weak) IBOutlet UIView *locationsListingView;
+@property (weak) IBOutlet UIView *locationProfile;
+@property (weak) IBOutlet MKMapView *mapView;
+
+
+@property (weak) IBOutlet NSLayoutConstraint *listingLeft;
+@property (weak) IBOutlet NSLayoutConstraint *profileLeft;
 
 @end
 
@@ -49,8 +51,8 @@ typedef NS_ENUM(NSUInteger, LayoutType) {
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateRegion) name:@"RegionUpdate" object:nil];
     // Do any additional setup after loading the view.
     if ([[PinballMapManager sharedInstance] currentRegion]){
-        currentRegion = [[PinballMapManager sharedInstance] currentRegion];
-        CLLocationCoordinate2D regionCoord = CLLocationCoordinate2DMake(currentRegion.latitude.doubleValue, currentRegion.longitude.doubleValue);
+        self.currentRegion = [[PinballMapManager sharedInstance] currentRegion];
+        CLLocationCoordinate2D regionCoord = CLLocationCoordinate2DMake(self.currentRegion.latitude.doubleValue, self.currentRegion.longitude.doubleValue);
         _mapView.region = MKCoordinateRegionMake(regionCoord, MKCoordinateSpanMake(1.0, 1.0));
         _mapView.delegate = self;
     }
@@ -59,9 +61,9 @@ typedef NS_ENUM(NSUInteger, LayoutType) {
 }
 - (void)updateRegion{
     [_mapView removeAnnotations:_mapView.annotations];
-    currentRegion = [[PinballMapManager sharedInstance] currentRegion];
-    if (currentRegion){
-        CLLocationCoordinate2D regionCoord = CLLocationCoordinate2DMake(currentRegion.latitude.doubleValue, currentRegion.longitude.doubleValue);
+    self.currentRegion = [[PinballMapManager sharedInstance] currentRegion];
+    if (self.currentRegion){
+        CLLocationCoordinate2D regionCoord = CLLocationCoordinate2DMake(self.currentRegion.latitude.doubleValue, self.currentRegion.longitude.doubleValue);
         _mapView.region = MKCoordinateRegionMake(regionCoord, MKCoordinateSpanMake(1.0, 1.0));
         _mapView.delegate = self;
 
@@ -74,9 +76,9 @@ typedef NS_ENUM(NSUInteger, LayoutType) {
 }
 - (void)setCurrentLocation:(Location *)currentLocation{
     _currentLocation = currentLocation;
-    profileViewController.currentLocation = _currentLocation;
+    self.profileViewController.currentLocation = _currentLocation;
 
-    if (!isBrowsing){
+    if (!self.isBrowsing){
         [_mapView removeAnnotations:_mapView.annotations];
         
         CLLocationCoordinate2D locationCoord = CLLocationCoordinate2DMake(_currentLocation.latitude.doubleValue, _currentLocation.longitude.doubleValue);
@@ -99,7 +101,7 @@ typedef NS_ENUM(NSUInteger, LayoutType) {
         [UIView animateWithDuration:.5 animations:^{
             [self.view layoutIfNeeded];
         }completion:^(BOOL finished) {
-            NSLog(@"%f",_mapView.frame.size.width);
+
         }];
         [self setupNavigationWithType:LayoutTypeProfile];
     
@@ -112,9 +114,9 @@ typedef NS_ENUM(NSUInteger, LayoutType) {
     }
 }
 - (void)browseLocations{
-    if (!isBrowsing){
+    if (!self.isBrowsing){
         [_mapView removeAnnotations:_mapView.annotations];
-        isBrowsing = YES;
+        self.isBrowsing = YES;
         NSFetchRequest *stackRequest = [NSFetchRequest fetchRequestWithEntityName:@"Location"];
         stackRequest.predicate = [NSPredicate predicateWithFormat:@"region.name = %@",[[[PinballMapManager sharedInstance] currentRegion] name]];
         stackRequest.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES]];
@@ -142,7 +144,7 @@ typedef NS_ENUM(NSUInteger, LayoutType) {
         
         [self setupNavigationWithType:LayoutTypeBrowse];
     }else{
-        isBrowsing = NO;
+        self.isBrowsing = NO;
         [_mapView removeAnnotations:_mapView.annotations];
         [self showListingsView:nil];
     }
@@ -154,8 +156,8 @@ typedef NS_ENUM(NSUInteger, LayoutType) {
     if (type == LayoutTypeListing){
         self.navigationItem.rightBarButtonItem = nil;
         self.navigationItem.leftBarButtonItem = nil;
-        self.navigationItem.title = currentRegion.fullName;
-        UIBarButtonItem *filterButton = [[UIBarButtonItem alloc] initWithTitle:@"Sort" style:UIBarButtonItemStylePlain target:locationsViewController action:@selector(filterResults:)];
+        self.navigationItem.title = self.currentRegion.fullName;
+        UIBarButtonItem *filterButton = [[UIBarButtonItem alloc] initWithTitle:@"Sort" style:UIBarButtonItemStylePlain target:self.locationsViewController action:@selector(filterResults:)];
         UIBarButtonItem *browseLocations = [[UIBarButtonItem alloc] initWithTitle:@"Browse on Map" style:UIBarButtonItemStylePlain target:self action:@selector(browseLocations)];
         UIBarButtonItem *fixedSpace = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace target:nil action:nil];
         fixedSpace.width = 140.0;
@@ -163,7 +165,7 @@ typedef NS_ENUM(NSUInteger, LayoutType) {
         self.navigationItem.leftBarButtonItems = @[filterButton,fixedSpace,browseLocations];
         self.navigationItem.rightBarButtonItem = newLocation;
     }else if (type == LayoutTypeProfile){
-        UIBarButtonItem *showListings = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"766-arrow-right.png"] style:UIBarButtonItemStylePlain target:self action:@selector(showListingsView:)];
+        UIBarButtonItem *showListings = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"766-arrow-right"] style:UIBarButtonItemStylePlain target:self action:@selector(showListingsView:)];
         self.navigationItem.leftBarButtonItems = @[showListings];
         self.navigationItem.title = _currentLocation.name;
     }else if (type == LayoutTypeBrowse){
@@ -174,15 +176,15 @@ typedef NS_ENUM(NSUInteger, LayoutType) {
 }
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
     if ([segue.destinationViewController isKindOfClass:[LocationProfileView class]]){
-        profileViewController = segue.destinationViewController;
+        self.profileViewController = segue.destinationViewController;
     }else if ([segue.destinationViewController isKindOfClass:[LocationsView class]]){
-        locationsViewController = segue.destinationViewController;
+        self.locationsViewController = segue.destinationViewController;
     }
 }
 #pragma mark - Class Actions
 - (IBAction)showListingsView:(id)sender{
     _currentLocation = nil;
-    profileViewController.currentLocation = nil;
+    self.profileViewController.currentLocation = nil;
 
     _profileLeft.constant = -320;
     _listingLeft.constant = 0;
@@ -190,7 +192,7 @@ typedef NS_ENUM(NSUInteger, LayoutType) {
     [UIView animateWithDuration:0.5 animations:^{
         [self.view layoutIfNeeded];
     }completion:^(BOOL finished) {
-        NSLog(@"%f",_mapView.frame.size.width);
+
     }];
     [self setupNavigationWithType:LayoutTypeListing];
     
@@ -209,7 +211,7 @@ typedef NS_ENUM(NSUInteger, LayoutType) {
     if (!pinView){
         pinView = [[MKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:@"locpin"];
         pinView.pinColor = MKPinAnnotationColorRed;
-        if (!isBrowsing){
+        if (!self.isBrowsing){
             pinView.animatesDrop = YES;
         }else{
             pinView.animatesDrop = NO;

@@ -22,6 +22,7 @@ typedef NS_ENUM(NSUInteger, ScoreRank) {
 @property (nonatomic) NSString *initials;
 @property (nonatomic) ScoreRank rank;
 @property (nonatomic) NSNumber *score;
+@property (nonatomic) NSString *scoreString;
 
 - (id)initWithData:(NSDictionary *)data;
 
