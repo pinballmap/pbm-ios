@@ -7,7 +7,6 @@
 //
 
 #import "AppDelegate.h"
-#import "PinballMapManager.h"
 #import <HockeySDK/HockeySDK.h>
 #import "LocationProfileView-iPad.h"
 #import "GAI.h"
