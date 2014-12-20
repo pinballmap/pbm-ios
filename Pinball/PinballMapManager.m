@@ -182,11 +182,12 @@ typedef NS_ENUM(NSInteger, PBMDataAPI) {
     NSArray *apiOperations = @[[self requestForData:PBMDataAPILocationTypes],[self requestForData:PBMDataAPIZones],[self requestForData:PBMDataAPILocations],[self requestForData:PBMDataAPIEvents]];
     
     NSArray *api = [AFURLConnectionOperation batchOfRequestOperations:apiOperations progressBlock:^(NSUInteger numberOfFinishedOperations, NSUInteger totalNumberOfOperations) {
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [[NSNotificationCenter defaultCenter] postNotificationName:@"UpdatingProgress" object:@{@"completed": [NSNumber numberWithLong:numberOfFinishedOperations],@"total": [NSNumber numberWithLong:totalNumberOfOperations]}];
-        });
         NSLog(@"Completed %lu of %lu",(unsigned long)numberOfFinishedOperations,(unsigned long)totalNumberOfOperations);
     } completionBlock:^(NSArray *operations) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"UpdatingProgress" object:nil];
+        });
+        NSLog(@"Started proccessing");
         NSFetchRequest *stackRequest = [NSFetchRequest fetchRequestWithEntityName:@"Machine"];
         stackRequest.predicate = nil;
         stackRequest.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES]];
@@ -207,6 +208,7 @@ typedef NS_ENUM(NSInteger, PBMDataAPI) {
             [[CoreDataManager sharedInstance] saveContext];
         }];
         [[NSNotificationCenter defaultCenter] postNotificationName:@"RegionUpdate" object:nil];
+        NSLog(@"Ended proccessing");
     }];
     [[NSOperationQueue mainQueue] addOperations:api waitUntilFinished:NO];
 }
@@ -232,11 +234,12 @@ typedef NS_ENUM(NSInteger, PBMDataAPI) {
     
     
     NSArray *api = [AFURLConnectionOperation batchOfRequestOperations:apiOperations progressBlock:^(NSUInteger numberOfFinishedOperations, NSUInteger totalNumberOfOperations) {
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [[NSNotificationCenter defaultCenter] postNotificationName:@"UpdatingProgress" object:@{@"completed": [NSNumber numberWithLong:numberOfFinishedOperations],@"total": [NSNumber numberWithLong:totalNumberOfOperations]}];
-        });
         NSLog(@"Completed %lu of %lu",(unsigned long)numberOfFinishedOperations,(unsigned long)totalNumberOfOperations);
     } completionBlock:^(NSArray *operations) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"UpdatingProgress" object:nil];
+        });
+        NSLog(@"Started proccessing");
         __block NSMutableSet *createdMachines;
         __block NSMutableSet *createdLocationTypes;
         __block NSMutableSet *createdZones;
@@ -256,6 +259,7 @@ typedef NS_ENUM(NSInteger, PBMDataAPI) {
             [[CoreDataManager sharedInstance] saveContext];
         }];
         [[NSNotificationCenter defaultCenter] postNotificationName:@"RegionUpdate" object:nil];
+        NSLog(@"Finished proccessing");
     }];
     [[NSOperationQueue mainQueue] addOperations:api waitUntilFinished:NO];
 }

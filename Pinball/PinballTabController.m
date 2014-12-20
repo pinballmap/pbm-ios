@@ -34,6 +34,7 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updatingRegion) name:@"UpdatingRegion" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updatingProgress:) name:@"UpdatingProgress" object:nil];
     [self updateTabInfo];
+    [[PinballMapManager sharedInstance] refreshRegion];
 }
 - (void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
@@ -118,7 +119,7 @@
 }
 - (void)updatingProgress:(NSNotification *)note{
     NSDictionary *progress = note.object;
-    self.updatingAlert.message = [NSString stringWithFormat:@"%@ of %@ completed",progress[@"completed"],progress[@"total"]];
+    self.updatingAlert.message = @"Updating local data";//[NSString stringWithFormat:@"%@ of %@ completed",progress[@"completed"],progress[@"total"]];
 }
 - (IBAction)viewMessageOfDay:(id)sender{
     [self.motdAlert removeFromSuperview];
