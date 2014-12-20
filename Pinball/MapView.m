@@ -13,6 +13,7 @@
 #import "MachineLocationPin.h"
 #import "LocationProfileView.h"
 #import "LocationAnnotation.h"
+#import "Location+Annotation.h"
 
 
 @interface MapView () <MKMapViewDelegate>
@@ -49,13 +50,9 @@
     if (_currentLocation){
         self.navigationItem.title = [NSString stringWithFormat:@"%@",_currentLocation.name];
         
-        CLLocationCoordinate2D coord = CLLocationCoordinate2DMake([_currentLocation.latitude doubleValue],[_currentLocation.longitude doubleValue]);
-        self.mainMapView.region = MKCoordinateRegionMake(coord, MKCoordinateSpanMake(0.002, 0.002));
+        self.mainMapView.region = MKCoordinateRegionMake(_currentLocation.clCoordinate, MKCoordinateSpanMake(0.002, 0.002));
         
-        MKPointAnnotation *locationPin = [[MKPointAnnotation alloc] init];
-        locationPin.title = _currentLocation.name;
-        locationPin.coordinate = CLLocationCoordinate2DMake([_currentLocation.latitude doubleValue], [_currentLocation.longitude doubleValue]);
-        [self.mainMapView addAnnotation:locationPin];
+        [self.mainMapView addAnnotation:_currentLocation.annotation];
     }else if (_currentMachine) {
         [_currentMachine.machineLocations enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
             MachineLocation *loc = obj;
