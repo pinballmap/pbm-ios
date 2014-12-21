@@ -96,7 +96,7 @@
     if (managedObjectModel != nil) {
         return managedObjectModel;
     }
-    NSURL *modelURL = [[NSBundle bundleWithIdentifier:@"net.isaacruiz.ppm"] URLForResource:dataModel withExtension:@"momd"];
+    NSURL *modelURL = [[NSBundle mainBundle] URLForResource:dataModel withExtension:@"momd"];
     managedObjectModel = [[NSManagedObjectModel alloc] initWithContentsOfURL:modelURL];
     return managedObjectModel;
 }
