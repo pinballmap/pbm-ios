@@ -85,6 +85,17 @@
 		DB99C3B11906FA4100AFDF0F /* MachinePickingView.m in Sources */ = {isa = PBXBuildFile; fileRef = DB99C3B01906FA4100AFDF0F /* MachinePickingView.m */; };
 		DBA10B431902F244004ED2D4 /* MachineConditionView.m in Sources */ = {isa = PBXBuildFile; fileRef = DBA10B421902F244004ED2D4 /* MachineConditionView.m */; };
 		DBA3B60A190846D900ACBC69 /* InputCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DBA3B609190846D900ACBC69 /* InputCell.m */; };
+		DBB0EFE81A4700360090E9DC /* Pinball.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = DBF06C0418F9707400F92912 /* Pinball.xcdatamodeld */; };
+		DBB0EFE91A4700560090E9DC /* CoreDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = DBF06C0018F9703E00F92912 /* CoreDataManager.m */; };
+		DBB0EFEA1A4700C90090E9DC /* NSDate+CupertinoYankee.m in Sources */ = {isa = PBXBuildFile; fileRef = DB38DAAE19E1CBFA00E1B6D2 /* NSDate+CupertinoYankee.m */; };
+		DBB0EFEB1A47017B0090E9DC /* MachineLocation.m in Sources */ = {isa = PBXBuildFile; fileRef = DBE712D81929134D0046DFA8 /* MachineLocation.m */; };
+		DBB0EFEC1A47017B0090E9DC /* Region.m in Sources */ = {isa = PBXBuildFile; fileRef = DB5FFE9E19C618CA004C424B /* Region.m */; };
+		DBB0EFED1A47017B0090E9DC /* Event.m in Sources */ = {isa = PBXBuildFile; fileRef = DB23E870193B5F08000C1E69 /* Event.m */; };
+		DBB0EFEE1A47017B0090E9DC /* Zone.m in Sources */ = {isa = PBXBuildFile; fileRef = DB070BF0193202ED0018D521 /* Zone.m */; };
+		DBB0EFEF1A47017B0090E9DC /* Location.m in Sources */ = {isa = PBXBuildFile; fileRef = DB070BEA193202ED0018D521 /* Location.m */; };
+		DBB0EFF01A47017B0090E9DC /* LocationType.m in Sources */ = {isa = PBXBuildFile; fileRef = DBEAA1FC192A9E140096F2A9 /* LocationType.m */; };
+		DBB0EFF11A47017B0090E9DC /* Machine.m in Sources */ = {isa = PBXBuildFile; fileRef = DBF711F1191E59B8008656EE /* Machine.m */; };
+		DBB0EFF21A4703970090E9DC /* Event+CellHelpers.m in Sources */ = {isa = PBXBuildFile; fileRef = DB2D132D1942687F0082B8F9 /* Event+CellHelpers.m */; };
 		DBB20CA8194F126D00D4B2F1 /* ZonesView.m in Sources */ = {isa = PBXBuildFile; fileRef = DBB20CA7194F126D00D4B2F1 /* ZonesView.m */; };
 		DBB59CCA18FAD9AC00F35BFD /* LocationProfileView.m in Sources */ = {isa = PBXBuildFile; fileRef = DBB59CC918FAD9AC00F35BFD /* LocationProfileView.m */; };
 		DBB59CD218FADF6D00F35BFD /* InformationCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DBB59CD118FADF6D00F35BFD /* InformationCell.m */; };
@@ -1089,7 +1100,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DBB0EFF11A47017B0090E9DC /* Machine.m in Sources */,
+				DBB0EFE91A4700560090E9DC /* CoreDataManager.m in Sources */,
+				DBB0EFE81A4700360090E9DC /* Pinball.xcdatamodeld in Sources */,
+				DBB0EFF01A47017B0090E9DC /* LocationType.m in Sources */,
 				DB2D8A4E19E2046D00502A10 /* TodayViewController.m in Sources */,
+				DBB0EFEC1A47017B0090E9DC /* Region.m in Sources */,
+				DBB0EFEF1A47017B0090E9DC /* Location.m in Sources */,
+				DBB0EFEA1A4700C90090E9DC /* NSDate+CupertinoYankee.m in Sources */,
+				DBB0EFEE1A47017B0090E9DC /* Zone.m in Sources */,
+				DBB0EFEB1A47017B0090E9DC /* MachineLocation.m in Sources */,
+				DBB0EFF21A4703970090E9DC /* Event+CellHelpers.m in Sources */,
+				DBB0EFED1A47017B0090E9DC /* Event.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
