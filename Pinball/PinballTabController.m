@@ -114,12 +114,11 @@
     }
 }
 - (void)updatingRegion{
-    self.updatingAlert = [UIAlertView applicationAlertWithMessage:@"Updating Region" delegate:nil cancelButton:nil otherButtons:nil, nil];
-    [self.updatingAlert show];
 }
 - (void)updatingProgress:(NSNotification *)note{
-    NSDictionary *progress = note.object;
+    self.updatingAlert = [UIAlertView applicationAlertWithMessage:@"Updating Region" delegate:nil cancelButton:nil otherButtons:nil, nil];
     self.updatingAlert.message = @"Updating local data";//[NSString stringWithFormat:@"%@ of %@ completed",progress[@"completed"],progress[@"total"]];
+    [self.updatingAlert show];
 }
 - (IBAction)viewMessageOfDay:(id)sender{
     [self.motdAlert removeFromSuperview];

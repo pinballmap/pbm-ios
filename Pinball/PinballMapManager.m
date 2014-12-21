@@ -207,7 +207,9 @@ typedef NS_ENUM(NSInteger, PBMDataAPI) {
             }
             [[CoreDataManager sharedInstance] saveContext];
         }];
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"RegionUpdate" object:nil];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"RegionUpdate" object:nil];
+        });
         NSLog(@"Ended proccessing");
     }];
     [[NSOperationQueue mainQueue] addOperations:api waitUntilFinished:NO];
@@ -258,7 +260,9 @@ typedef NS_ENUM(NSInteger, PBMDataAPI) {
             }
             [[CoreDataManager sharedInstance] saveContext];
         }];
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"RegionUpdate" object:nil];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"RegionUpdate" object:nil];
+        });
         NSLog(@"Finished proccessing");
     }];
     [[NSOperationQueue mainQueue] addOperations:api waitUntilFinished:NO];
