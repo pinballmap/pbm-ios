@@ -85,6 +85,7 @@
 		DB99C3B11906FA4100AFDF0F /* MachinePickingView.m in Sources */ = {isa = PBXBuildFile; fileRef = DB99C3B01906FA4100AFDF0F /* MachinePickingView.m */; };
 		DBA10B431902F244004ED2D4 /* MachineConditionView.m in Sources */ = {isa = PBXBuildFile; fileRef = DBA10B421902F244004ED2D4 /* MachineConditionView.m */; };
 		DBA3B60A190846D900ACBC69 /* InputCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DBA3B609190846D900ACBC69 /* InputCell.m */; };
+		DBA96E4E1A5040BA007C73CD /* Region+Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = DBA96E4D1A5040BA007C73CD /* Region+Extensions.m */; };
 		DBB0EFE81A4700360090E9DC /* Pinball.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = DBF06C0418F9707400F92912 /* Pinball.xcdatamodeld */; };
 		DBB0EFE91A4700560090E9DC /* CoreDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = DBF06C0018F9703E00F92912 /* CoreDataManager.m */; };
 		DBB0EFEA1A4700C90090E9DC /* NSDate+CupertinoYankee.m in Sources */ = {isa = PBXBuildFile; fileRef = DB38DAAE19E1CBFA00E1B6D2 /* NSDate+CupertinoYankee.m */; };
@@ -335,6 +336,8 @@
 		DBA10B421902F244004ED2D4 /* MachineConditionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MachineConditionView.m; sourceTree = "<group>"; };
 		DBA3B608190846D900ACBC69 /* InputCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InputCell.h; sourceTree = "<group>"; };
 		DBA3B609190846D900ACBC69 /* InputCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InputCell.m; sourceTree = "<group>"; };
+		DBA96E4C1A5040BA007C73CD /* Region+Extensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Region+Extensions.h"; sourceTree = "<group>"; };
+		DBA96E4D1A5040BA007C73CD /* Region+Extensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Region+Extensions.m"; sourceTree = "<group>"; };
 		DBAE0E6219F288260051D3EC /* Portland Location.gpx */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "Portland Location.gpx"; sourceTree = "<group>"; };
 		DBB20CA6194F126D00D4B2F1 /* ZonesView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZonesView.h; sourceTree = "<group>"; };
 		DBB20CA7194F126D00D4B2F1 /* ZonesView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZonesView.m; sourceTree = "<group>"; };
@@ -945,6 +948,8 @@
 				DB2D132D1942687F0082B8F9 /* Event+CellHelpers.m */,
 				DB43E4861947194C00A641E3 /* MachineLocation+CellHelpers.h */,
 				DB43E4871947194C00A641E3 /* MachineLocation+CellHelpers.m */,
+				DBA96E4C1A5040BA007C73CD /* Region+Extensions.h */,
+				DBA96E4D1A5040BA007C73CD /* Region+Extensions.m */,
 			);
 			name = "Model Helpers";
 			sourceTree = "<group>";
@@ -1153,6 +1158,7 @@
 				DB070BF4193203200018D521 /* Zone+Create.m in Sources */,
 				DB1FB5D619BCB95A00E52B01 /* Region+UpdateDistance.m in Sources */,
 				DB2D132E1942687F0082B8F9 /* Event+CellHelpers.m in Sources */,
+				DBA96E4E1A5040BA007C73CD /* Region+Extensions.m in Sources */,
 				DBF06C1918F9749F00F92912 /* PinballMapManager.m in Sources */,
 				DBF06C0118F9703E00F92912 /* CoreDataManager.m in Sources */,
 				DB52D2FD18FB0AD300BB56D8 /* EventProfileView.m in Sources */,

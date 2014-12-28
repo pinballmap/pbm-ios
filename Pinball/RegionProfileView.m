@@ -15,6 +15,7 @@
 #import "HighRollerProfileView.h"
 #import "ReuseWebView.h"
 #import "ContactView.h"
+#import "Region+Extensions.h"
 
 @interface RegionProfileView ()
 
@@ -39,6 +40,7 @@
     
     self.currentRegion = [[PinballMapManager sharedInstance] currentRegion];
     self.navigationItem.title = self.currentRegion.fullName;
+    self.navigationItem.prompt = [NSString stringWithFormat:@"%lu Locations & %lu Machines",(unsigned long)self.currentRegion.numberOfLocations,(unsigned long)self.currentRegion.numberOfLocalMachines];
     
     self.regionLinks = [NSMutableArray new];
     self.highRollers = [NSMutableArray new];
@@ -96,7 +98,9 @@
     }];
 }
 - (void)updateRegion{
+    self.currentRegion = [[PinballMapManager sharedInstance] currentRegion];
     self.navigationItem.title = [NSString stringWithFormat:@"%@",[[[PinballMapManager sharedInstance] currentRegion] fullName]];
+    self.navigationItem.prompt = [NSString stringWithFormat:@"%lu Locations & %lu Machines",(unsigned long)self.currentRegion.numberOfLocations,(unsigned long)self.currentRegion.numberOfLocalMachines];
     [self refreshRegionData];
 }
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
