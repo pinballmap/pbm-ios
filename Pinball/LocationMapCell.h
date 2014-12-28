@@ -13,6 +13,4 @@
 
 @property (weak) IBOutlet MKMapView *mapView;
 
-- (void)addAnnotation;
-
 @end
