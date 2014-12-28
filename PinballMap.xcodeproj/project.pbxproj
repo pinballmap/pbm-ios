@@ -86,6 +86,7 @@
 		DBA10B431902F244004ED2D4 /* MachineConditionView.m in Sources */ = {isa = PBXBuildFile; fileRef = DBA10B421902F244004ED2D4 /* MachineConditionView.m */; };
 		DBA3B60A190846D900ACBC69 /* InputCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DBA3B609190846D900ACBC69 /* InputCell.m */; };
 		DBA96E4E1A5040BA007C73CD /* Region+Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = DBA96E4D1A5040BA007C73CD /* Region+Extensions.m */; };
+		DBA96E541A50435A007C73CD /* MachineManufacturerView.m in Sources */ = {isa = PBXBuildFile; fileRef = DBA96E531A50435A007C73CD /* MachineManufacturerView.m */; };
 		DBB0EFE81A4700360090E9DC /* Pinball.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = DBF06C0418F9707400F92912 /* Pinball.xcdatamodeld */; };
 		DBB0EFE91A4700560090E9DC /* CoreDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = DBF06C0018F9703E00F92912 /* CoreDataManager.m */; };
 		DBB0EFEA1A4700C90090E9DC /* NSDate+CupertinoYankee.m in Sources */ = {isa = PBXBuildFile; fileRef = DB38DAAE19E1CBFA00E1B6D2 /* NSDate+CupertinoYankee.m */; };
@@ -338,6 +339,8 @@
 		DBA3B609190846D900ACBC69 /* InputCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InputCell.m; sourceTree = "<group>"; };
 		DBA96E4C1A5040BA007C73CD /* Region+Extensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Region+Extensions.h"; sourceTree = "<group>"; };
 		DBA96E4D1A5040BA007C73CD /* Region+Extensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Region+Extensions.m"; sourceTree = "<group>"; };
+		DBA96E521A50435A007C73CD /* MachineManufacturerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MachineManufacturerView.h; sourceTree = "<group>"; };
+		DBA96E531A50435A007C73CD /* MachineManufacturerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MachineManufacturerView.m; sourceTree = "<group>"; };
 		DBAE0E6219F288260051D3EC /* Portland Location.gpx */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "Portland Location.gpx"; sourceTree = "<group>"; };
 		DBB20CA6194F126D00D4B2F1 /* ZonesView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZonesView.h; sourceTree = "<group>"; };
 		DBB20CA7194F126D00D4B2F1 /* ZonesView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZonesView.m; sourceTree = "<group>"; };
@@ -645,6 +648,8 @@
 				DBF06C8618F984AF00F92912 /* MachinesView.m */,
 				DB52D2DC18FAEFC500BB56D8 /* MachineProfileView.h */,
 				DB52D2DD18FAEFC500BB56D8 /* MachineProfileView.m */,
+				DBA96E521A50435A007C73CD /* MachineManufacturerView.h */,
+				DBA96E531A50435A007C73CD /* MachineManufacturerView.m */,
 				DB66F4161902E414007272D1 /* NewMachineLocationView.h */,
 				DB66F4171902E414007272D1 /* NewMachineLocationView.m */,
 				DB7B4C0F19335B76002AF484 /* MachineLocationProfileView.h */,
@@ -1165,6 +1170,7 @@
 				DB38DA9619E1CBC400E1B6D2 /* AFNetworkReachabilityManager.m in Sources */,
 				DBB71B9C18FC4838007907DE /* SettingsView.m in Sources */,
 				DB52D2FA18FB09AF00BB56D8 /* NSDate+DateFormatting.m in Sources */,
+				DBA96E541A50435A007C73CD /* MachineManufacturerView.m in Sources */,
 				DB2E9FCC19E179A200B9D72F /* RegionLink.m in Sources */,
 				DB38DAA719E1CBE300E1B6D2 /* ReuseWebView.m in Sources */,
 				DB6F292F19E5870700AC87FF /* HighRollerProfileView.m in Sources */,

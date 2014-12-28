@@ -10,8 +10,10 @@
 #import "MachineLocation.h"
 #import "MachineProfileView.h"
 #import "GAAppHelper.h"
+#import "MachineManufacturerView.h"
+#import "UIViewController+Helpers.h"
 
-@interface MachinesView () <NSFetchedResultsControllerDelegate,UISearchBarDelegate>
+@interface MachinesView () <NSFetchedResultsControllerDelegate,UISearchBarDelegate,UIActionSheetDelegate>
 
 @property (nonatomic) NSFetchedResultsController *fetchedResults;
 @property (nonatomic) NSManagedObjectContext *managedContext;
@@ -19,6 +21,7 @@
 @property (nonatomic) NSMutableArray *searchResults;
 
 - (IBAction)addMachine:(id)sender;
+- (IBAction)sortOptions:(id)sender;
 
 @end
 
@@ -34,6 +37,10 @@
 - (void)viewDidLoad{
     [super viewDidLoad];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateRegion) name:@"RegionUpdate" object:nil];
+    
+    UIBarButtonItem *sort = [[UIBarButtonItem alloc] initWithTitle:@"Sort" style:UIBarButtonItemStylePlain target:self action:@selector(sortOptions:)];
+    self.navigationItem.leftBarButtonItem = sort;
+    
     [self updateRegion];
 }
 - (void)viewDidAppear:(BOOL)animated{
@@ -65,6 +72,10 @@
     }
     [self.navigationController presentViewController:newMachine animated:YES completion:nil];
 }
+- (IBAction)sortOptions:(id)sender{
+    UIActionSheet *sortOptions = [[UIActionSheet alloc] initWithTitle:@"Machine Sort" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Manufacture", nil];
+    [sortOptions showInView:self.view];
+}
 #pragma mark - Region Update
 - (void)updateRegion{
     self.navigationItem.title = [NSString stringWithFormat:@"%@ Machines",[[[PinballMapManager sharedInstance] currentRegion] fullName]];
@@ -79,6 +90,16 @@
     self.fetchedResults.delegate = self;
     [self.fetchedResults performFetch:nil];
     [self.tableView reloadData];
+}
+#pragma mark - UIActionSheet Delegate
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex{
+    if (buttonIndex != actionSheet.cancelButtonIndex){
+        if (buttonIndex == 0){
+            // Manufacture Sort
+            MachineManufacturerView *manView = (MachineManufacturerView*)[[self.storyboard instantiateViewControllerWithIdentifier:@"MachineManufacturerView"] navigationRootViewController];
+            [self presentViewController:manView.parentViewController animated:true completion:nil];
+        }
+    }
 }
 #pragma mark - Searchbar Delegate
 - (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar{
