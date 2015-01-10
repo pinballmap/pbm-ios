@@ -75,14 +75,17 @@
         manName = @"Unknown";
     }
     cell.textLabel.text = manName;
-    cell.detailTextLabel.text = [NSString stringWithFormat:@"Number of Machines: %i",(int)manDic[@"count"]];
+//    cell.detailTextLabel.text = [NSString stringWithFormat:@"Number of Machines: %i",(int)manDic[@"count"]];
     
     return cell;
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:true];
     NSDictionary *manDic = [self.fetchedResults objectAtIndexPath:indexPath];
-
+    if (self.delegate){
+        [self.delegate selectedManufacturer:manDic[@"manufacturer"]];
+        [self dismissViewControllerAnimated:true completion:nil];
+    }
 }
 
 @end

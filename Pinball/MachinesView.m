@@ -13,7 +13,7 @@
 #import "MachineManufacturerView.h"
 #import "UIViewController+Helpers.h"
 
-@interface MachinesView () <NSFetchedResultsControllerDelegate,UISearchBarDelegate,UIActionSheetDelegate>
+@interface MachinesView () <NSFetchedResultsControllerDelegate,UISearchBarDelegate,UIActionSheetDelegate,ManufacturerSelectionDelegate>
 
 @property (nonatomic) NSFetchedResultsController *fetchedResults;
 @property (nonatomic) NSManagedObjectContext *managedContext;
@@ -97,8 +97,25 @@
         if (buttonIndex == 0){
             // Manufacture Sort
             MachineManufacturerView *manView = (MachineManufacturerView*)[[self.storyboard instantiateViewControllerWithIdentifier:@"MachineManufacturerView"] navigationRootViewController];
+            manView.delegate = self;
             [self presentViewController:manView.parentViewController animated:true completion:nil];
         }
+    }
+}
+#pragma mark - Manufacturer Delegate
+- (void)selectedManufacturer:(NSString *)manufacturer{
+    if (manufacturer.length > 0){
+        self.managedContext = [[CoreDataManager sharedInstance] managedObjectContext];
+        NSFetchRequest *stackRequest = [NSFetchRequest fetchRequestWithEntityName:@"Machine"];
+        stackRequest.predicate = [NSPredicate predicateWithFormat:@"machineLocations.location.region CONTAINS %@ AND manufacturer = %@" argumentArray:@[[[PinballMapManager sharedInstance] currentRegion],manufacturer]];
+        stackRequest.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES]];
+        self.fetchedResults = [[NSFetchedResultsController alloc] initWithFetchRequest:stackRequest
+                                                                  managedObjectContext:self.managedContext
+                                                                    sectionNameKeyPath:@"name"
+                                                                             cacheName:nil];
+        self.fetchedResults.delegate = self;
+        [self.fetchedResults performFetch:nil];
+        [self.tableView reloadData];
     }
 }
 #pragma mark - Searchbar Delegate

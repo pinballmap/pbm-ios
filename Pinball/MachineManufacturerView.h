@@ -8,6 +8,16 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol ManufacturerSelectionDelegate;
+
 @interface MachineManufacturerView : UITableViewController
+
+@property (nonatomic) id<ManufacturerSelectionDelegate> delegate;
+
+@end
+
+@protocol ManufacturerSelectionDelegate <NSObject>
+
+- (void)selectedManufacturer:(NSString *)manufacturer;
 
 @end
