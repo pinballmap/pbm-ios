@@ -2249,7 +2249,8 @@
         <!--Navigation Controller-->
         <scene sceneID="Dqy-Om-lxx">
             <objects>
-                <navigationController storyboardIdentifier="MachineManufacturerView" automaticallyAdjustsScrollViewInsets="NO" id="j15-rd-5bk" sceneMemberID="viewController">
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ggk-ec-R1q" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <navigationController storyboardIdentifier="MachineManufacturerView" automaticallyAdjustsScrollViewInsets="NO" modalPresentationStyle="formSheet" id="j15-rd-5bk" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="iml-ft-gHE">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -2260,7 +2261,6 @@
                         <segue destination="2OP-Ix-FFS" kind="relationship" relationship="rootViewController" id="GHg-dd-e3D"/>
                     </connections>
                 </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="ggk-ec-R1q" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2648" y="2156"/>
         </scene>

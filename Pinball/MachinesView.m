@@ -73,8 +73,8 @@
     [self.navigationController presentViewController:newMachine animated:YES completion:nil];
 }
 - (IBAction)sortOptions:(id)sender{
-    UIActionSheet *sortOptions = [[UIActionSheet alloc] initWithTitle:@"Machine Sort" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Manufacture", nil];
-    [sortOptions showInView:self.view];
+    UIActionSheet *sortOptions = [[UIActionSheet alloc] initWithTitle:@"Machine Sort" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Manufacture",@"All", nil];
+    [sortOptions showFromTabBar:self.tabBarController.tabBar];
 }
 #pragma mark - Region Update
 - (void)updateRegion{
@@ -92,13 +92,16 @@
     [self.tableView reloadData];
 }
 #pragma mark - UIActionSheet Delegate
-- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex{
+- (void)actionSheet:(UIActionSheet *)actionSheet didDismissWithButtonIndex:(NSInteger)buttonIndex{
     if (buttonIndex != actionSheet.cancelButtonIndex){
         if (buttonIndex == 0){
             // Manufacture Sort
             MachineManufacturerView *manView = (MachineManufacturerView*)[[self.storyboard instantiateViewControllerWithIdentifier:@"MachineManufacturerView"] navigationRootViewController];
             manView.delegate = self;
             [self presentViewController:manView.parentViewController animated:true completion:nil];
+        }else if (buttonIndex == 1){
+            // All Set
+            [self updateRegion];
         }
     }
 }

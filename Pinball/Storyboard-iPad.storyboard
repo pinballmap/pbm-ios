@@ -1465,6 +1465,28 @@
                         <rect key="frame" x="0.0" y="64" width="320" height="655"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <view key="tableHeaderView" contentMode="scaleToFill" id="Fj0-w7-4Yq">
+                            <rect key="frame" x="0.0" y="64" width="320" height="44"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <subviews>
+                                <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="h0E-ZN-sja">
+                                    <rect key="frame" x="20" y="8" width="280" height="29"/>
+                                    <segments>
+                                        <segment title="Today"/>
+                                        <segment title="Upcoming"/>
+                                    </segments>
+                                    <connections>
+                                        <action selector="changeEventSort:" destination="aD3-tM-Xxo" eventType="valueChanged" id="EfD-q3-cSI"/>
+                                    </connections>
+                                </segmentedControl>
+                            </subviews>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                            <constraints>
+                                <constraint firstItem="h0E-ZN-sja" firstAttribute="leading" secondItem="Fj0-w7-4Yq" secondAttribute="leading" constant="20" id="gsK-S4-bLd"/>
+                                <constraint firstAttribute="trailing" secondItem="h0E-ZN-sja" secondAttribute="trailing" constant="20" id="mDm-lH-Ote"/>
+                                <constraint firstItem="h0E-ZN-sja" firstAttribute="top" secondItem="Fj0-w7-4Yq" secondAttribute="topMargin" id="mKg-pa-WpP"/>
+                            </constraints>
+                        </view>
                         <prototypes>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="EventCell" textLabel="xzO-gM-GYg" detailTextLabel="tEu-es-ZbG" style="IBUITableViewCellStyleSubtitle" id="nSd-uf-LEV">
                                 <rect key="frame" x="0.0" y="22" width="320" height="44"/>
@@ -1503,6 +1525,9 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="eventSorter" destination="h0E-ZN-sja" id="f6N-Yp-62V"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Rmq-x8-q2t" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -2436,7 +2461,8 @@
         <!--Navigation Controller-->
         <scene sceneID="aSe-ed-4N8">
             <objects>
-                <navigationController storyboardIdentifier="MachineManufacturerView" automaticallyAdjustsScrollViewInsets="NO" id="69C-ho-43S" sceneMemberID="viewController">
+                <placeholder placeholderIdentifier="IBFirstResponder" id="emh-Qf-EyJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <navigationController storyboardIdentifier="MachineManufacturerView" automaticallyAdjustsScrollViewInsets="NO" modalPresentationStyle="formSheet" id="69C-ho-43S" sceneMemberID="viewController">
                     <toolbarItems/>
                     <modalFormSheetSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="3gY-HI-rMO">
@@ -2448,7 +2474,22 @@
                         <segue destination="UuU-Uu-78e" kind="relationship" relationship="rootViewController" id="RDD-Qp-pcy"/>
                     </connections>
                 </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="emh-Qf-EyJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" id="UK0-Ay-rdh">
+                    <rect key="frame" x="0.0" y="0.0" width="280" height="29"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <segments>
+                        <segment title="Today"/>
+                        <segment title="Upcoming"/>
+                    </segments>
+                </segmentedControl>
+                <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" id="m86-Uv-hV7">
+                    <rect key="frame" x="0.0" y="0.0" width="280" height="29"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <segments>
+                        <segment title="Today"/>
+                        <segment title="Upcoming"/>
+                    </segments>
+                </segmentedControl>
             </objects>
             <point key="canvasLocation" x="4840" y="387"/>
         </scene>
