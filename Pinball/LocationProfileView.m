@@ -513,15 +513,19 @@ typedef enum : NSUInteger {
 - (void)tableView:(UITableView *)tableView accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *)indexPath{
     if ((indexPath.section == 1 && [UIDevice currentModel] == ModelTypeiPhone) || (indexPath.section == 0 && [UIDevice currentModel] == ModelTypeiPad)){
         MachineLocation *currentMachine = [self.machinesFetch objectAtIndexPath:[NSIndexPath indexPathForRow:indexPath.row inSection:0]];
-        MachineProfileView *machineProfile = [self.storyboard instantiateViewControllerWithIdentifier:@"MachineProfile"];
-        machineProfile.currentMachine = currentMachine.machine;
-        if ([UIDevice currentModel] == ModelTypeiPad){
-            machineProfile.isModal = YES;
-            UINavigationController *machineNav = [[UINavigationController alloc] initWithRootViewController:machineProfile];
-            machineNav.modalPresentationStyle = UIModalPresentationFormSheet;
-            [self.parentViewController.navigationController presentViewController:machineNav animated:YES completion:nil];
+        if (currentMachine.machine != nil){
+            MachineProfileView *machineProfile = [self.storyboard instantiateViewControllerWithIdentifier:@"MachineProfile"];
+            machineProfile.currentMachine = currentMachine.machine;
+            if ([UIDevice currentModel] == ModelTypeiPad){
+                machineProfile.isModal = YES;
+                UINavigationController *machineNav = [[UINavigationController alloc] initWithRootViewController:machineProfile];
+                machineNav.modalPresentationStyle = UIModalPresentationFormSheet;
+                [self.parentViewController.navigationController presentViewController:machineNav animated:YES completion:nil];
+            }else{
+                [self.navigationController pushViewController:machineProfile animated:YES];
+            }
         }else{
-            [self.navigationController pushViewController:machineProfile animated:YES];
+            [UIAlertView simpleApplicationAlertWithMessage:@"Invalid Machine Data. Try reloading your region data by going to the locations listing and pulling the list all the way down." cancelButton:@"Ok"];
         }
     }
 }
