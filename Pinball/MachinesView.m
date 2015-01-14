@@ -13,11 +13,11 @@
 #import "MachineManufacturerView.h"
 #import "UIViewController+Helpers.h"
 
-@interface MachinesView () <NSFetchedResultsControllerDelegate,UISearchBarDelegate,UIActionSheetDelegate,ManufacturerSelectionDelegate>
+@interface MachinesView () <NSFetchedResultsControllerDelegate,UISearchDisplayDelegate,UISearchBarDelegate,UIActionSheetDelegate,ManufacturerSelectionDelegate>
 
 @property (nonatomic) NSFetchedResultsController *fetchedResults;
 @property (nonatomic) NSManagedObjectContext *managedContext;
-@property (nonatomic) BOOL isSearching;
+
 @property (nonatomic) NSMutableArray *searchResults;
 
 - (IBAction)addMachine:(id)sender;
@@ -41,6 +41,9 @@
     UIBarButtonItem *sort = [[UIBarButtonItem alloc] initWithTitle:@"Sort" style:UIBarButtonItemStylePlain target:self action:@selector(sortOptions:)];
     self.navigationItem.leftBarButtonItem = sort;
     
+    [self.tableView registerNib:[UINib nibWithNibName:@"MachineCell" bundle:nil] forCellReuseIdentifier:@"MachineCell"];
+    [self.searchDisplayController.searchResultsTableView registerNib:[UINib nibWithNibName:@"MachineCell" bundle:nil] forCellReuseIdentifier:@"MachineCell"];
+    
     [self updateRegion];
 }
 - (void)viewDidAppear:(BOOL)animated{
@@ -50,19 +53,6 @@
 - (void)didReceiveMemoryWarning{
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
-}
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
-    if ([segue.identifier isEqualToString:@"ProfileView"]){
-        Machine *currentMachine;
-        NSIndexPath *indexPath = [self.tableView indexPathForCell:sender];
-        if (!self.isSearching){
-            currentMachine = [self.fetchedResults objectAtIndexPath:indexPath];
-        }else{
-            currentMachine = self.searchResults[indexPath.row];
-        }
-        MachineProfileView *profileView = segue.destinationViewController;
-        profileView.currentMachine = currentMachine;
-    }
 }
 #pragma mark - Class Actions
 - (IBAction)addMachine:(id)sender{
@@ -123,36 +113,39 @@
 }
 #pragma mark - Searchbar Delegate
 - (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar{
-    self.isSearching = YES;
     searchBar.showsCancelButton = YES;
 }
-- (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText{
-    NSFetchRequest *searchrequest = [NSFetchRequest fetchRequestWithEntityName:@"Machine"];
-    searchrequest.predicate = [NSPredicate predicateWithFormat:@"name CONTAINS[cd] %@",searchText];
-    [self.searchResults removeAllObjects];
-    self.searchResults = nil;
-    self.searchResults = [NSMutableArray new];
-    NSError *error = nil;
-    [self.searchResults addObjectsFromArray:[self.managedContext executeFetchRequest:searchrequest error:&error]];
-    [self.tableView reloadData];
-}
 - (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar{
-    self.isSearching = NO;
     searchBar.text = @"";
     [searchBar resignFirstResponder];
     searchBar.showsCancelButton = NO;
     [self.tableView reloadData];
 }
+#pragma mark - UISearchDisplayController Delegate Methods
+- (BOOL)searchDisplayController:(UISearchDisplayController *)controller shouldReloadTableForSearchString:(NSString *)searchString{
+    NSFetchRequest *searchrequest = [NSFetchRequest fetchRequestWithEntityName:@"Machine"];
+    searchrequest.predicate = [NSPredicate predicateWithFormat:@"name CONTAINS[cd] %@",searchString];
+    [self.searchResults removeAllObjects];
+    self.searchResults = nil;
+    self.searchResults = [NSMutableArray new];
+    NSError *error = nil;
+    [self.searchResults addObjectsFromArray:[self.managedContext executeFetchRequest:searchrequest error:&error]];
+    
+    return true;
+}
+- (void)searchDisplayControllerDidEndSearch:(UISearchDisplayController *)controller{
+    [self.tableView reloadData];
+}
 #pragma mark - Table view data source
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    if (!self.isSearching){
+    if (tableView == self.tableView){
         return [[self.fetchedResults sections] count];
     }else{
         return 1;
     }
 }
 - (NSArray *)sectionIndexTitlesForTableView:(UITableView *)tableView{
-    if (!self.isSearching){
+    if (tableView == self.tableView){
         return [self.fetchedResults sectionIndexTitles];
     }
     return @[];
@@ -162,7 +155,7 @@
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     NSInteger rows = 0;
-    if (!self.isSearching){
+    if (tableView == self.tableView){
         if ([[self.fetchedResults sections] count] > 0) {
             id <NSFetchedResultsSectionInfo> sectionInfo = [[self.fetchedResults sections] objectAtIndex:section];
             rows = [sectionInfo numberOfObjects];
@@ -176,7 +169,7 @@
     float defaultWidth = 255;
     
     Machine *currentMachine;
-    if (!self.isSearching){
+    if (tableView == self.tableView){
         currentMachine = [self.fetchedResults objectAtIndexPath:indexPath];
     }else{
         currentMachine = self.searchResults[indexPath.row];
@@ -196,7 +189,7 @@
     cell.textLabel.numberOfLines = 0;
     cell.detailTextLabel.numberOfLines = 0;
     Machine *currentMachine;
-    if (!self.isSearching){
+    if (tableView == self.tableView){
         currentMachine = [self.fetchedResults objectAtIndexPath:indexPath];
     }else{
         currentMachine = self.searchResults[indexPath.row];
@@ -209,7 +202,7 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     Machine *currentMachine;
-    if (!self.isSearching){
+    if (tableView == self.tableView){
         currentMachine = [self.fetchedResults objectAtIndexPath:indexPath];
     }else{
         currentMachine = self.searchResults[indexPath.row];
@@ -217,6 +210,10 @@
     if ([UIDevice iPad]){
         MachineProfileView *profileView = (MachineProfileView *)[[self.splitViewController detailViewForSplitView] navigationRootViewController];
         [profileView setCurrentMachine:currentMachine];
+    }else{
+        MachineProfileView *profileView = [self.storyboard instantiateViewControllerWithIdentifier:@"MachineProfile"];
+        profileView.currentMachine = currentMachine;
+        [self.navigationController pushViewController:profileView animated:true];
     }
 }
 #pragma mark - NSFetchedResultsControllerDelegate
