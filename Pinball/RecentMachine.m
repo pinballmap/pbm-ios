@@ -22,25 +22,37 @@
         if (foundMachines.count == 1){
             self.machine = [foundMachines firstObject];
         }else{
-            return nil;
+            self.machine = nil;
         }
         // Find Location info
         NSFetchRequest *locationFetch = [NSFetchRequest fetchRequestWithEntityName:@"Location"];
         locationFetch.predicate = [NSPredicate predicateWithFormat:@"locationId = %@",data[@"location_id"]];
         locationFetch.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES]];
         NSArray *foundLocations = [[[CoreDataManager sharedInstance] managedObjectContext] executeFetchRequest:locationFetch error:nil];
+        
+        NSString *locationName = @"N/A";
+        NSString *locationCity = @"N/A";
         if (foundMachines.count == 1){
             self.location = [foundLocations firstObject];
+            if (self.location.name != nil){
+                locationName = self.location.name;
+            }
+            if (self.location.city != nil){
+                locationCity = self.location.city;
+            }
         }else{
-            return nil;
+            self.location = nil;
         }
         self.createdOn = data[@"created_at"];
-        
-        self.displayText = [[NSMutableAttributedString alloc] initWithString:self.machine.name attributes:@{NSFontAttributeName: [UIFont boldSystemFontOfSize:16]}];
-        [self.displayText appendAttributedString:[[NSAttributedString alloc] initWithString:@" was added to " attributes:@{NSFontAttributeName: [UIFont systemFontOfSize:16]}]];
-        [self.displayText appendAttributedString:[[NSAttributedString alloc] initWithString:self.location.name attributes:@{NSFontAttributeName: [UIFont boldSystemFontOfSize:16]}]];
-        [self.displayText appendAttributedString:[[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@" (%@)",self.location.city] attributes:@{NSFontAttributeName: [UIFont systemFontOfSize:16]}]];
-        
+
+        if (self.machine != nil && self.location != nil){
+            self.displayText = [[NSMutableAttributedString alloc] initWithString:self.machine.name attributes:@{NSFontAttributeName: [UIFont boldSystemFontOfSize:16]}];
+            [self.displayText appendAttributedString:[[NSAttributedString alloc] initWithString:@" was added to " attributes:@{NSFontAttributeName: [UIFont systemFontOfSize:16]}]];
+            [self.displayText appendAttributedString:[[NSAttributedString alloc] initWithString:locationName attributes:@{NSFontAttributeName: [UIFont boldSystemFontOfSize:16]}]];
+            [self.displayText appendAttributedString:[[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@" (%@)",locationCity] attributes:@{NSFontAttributeName: [UIFont systemFontOfSize:16]}]];
+        }else{
+            self.displayText = [[NSMutableAttributedString alloc] initWithString:@"N/A" attributes:@{NSFontAttributeName: [UIFont boldSystemFontOfSize:16]}];
+        }
     }
     return self;
 }

@@ -40,7 +40,7 @@
             NSMutableArray *recentMachinesObj = [NSMutableArray new];
             [recentMachines enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
                 RecentMachine *machine = [[RecentMachine alloc] initWithData:obj];
-                if (machine != nil && machine.location){
+                if (machine != nil && machine.location != nil){
                     [recentMachinesObj addObject:machine];
                 }
             }];
