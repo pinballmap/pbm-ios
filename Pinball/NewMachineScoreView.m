@@ -50,7 +50,21 @@
 }
 #pragma mark - Class Actions
 - (IBAction)saveScore:(id)sender{
-    NSDictionary *scoreData = @{@"location_machine_xref_id": _currentMachine.machineLocationId,@"score":_score.text,@"rank":self.pickedRank[@"id"],@"initials":_initials.text};
+    NSString *rank;
+    if (self.pickedRank[@"id"] == nil){
+        rank = @"GC";
+    }else{
+        rank = self.pickedRank[@"id"];
+    }
+    if (self.score.text.length == 0){
+        [UIAlertView simpleApplicationAlertWithMessage:@"You must enter a valid score" cancelButton:@"Ok"];
+        return;
+    }
+    if (self.initials.text.length == 0){
+        [UIAlertView simpleApplicationAlertWithMessage:@"You must enter valid initials" cancelButton:@"Ok"];
+        return;
+    }
+    NSDictionary *scoreData = @{@"location_machine_xref_id": _currentMachine.machineLocationId,@"score":_score.text,@"rank":rank,@"initials":_initials.text};
     [[PinballMapManager sharedInstance] addScore:scoreData forMachine:_currentMachine withCompletion:^(NSDictionary *status) {
         if (status[@"errors"]){
             NSString *errors;
