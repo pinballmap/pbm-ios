@@ -98,7 +98,11 @@
     
 }
 - (IBAction)cancelRegion:(id)sender{
-    [self dismissViewControllerAnimated:YES completion:nil];
+    if ([[PinballMapManager sharedInstance] currentRegion] != nil){
+        [self dismissViewControllerAnimated:YES completion:nil];
+    }else{
+        [UIAlertView simpleApplicationAlertWithMessage:@"You must select a region to continue" cancelButton:@"Ok"];
+    }
 }
 #pragma mark - SearchDisplayController
 - (BOOL)searchDisplayController:(UISearchDisplayController *)controller shouldReloadTableForSearchString:(NSString *)searchString{
