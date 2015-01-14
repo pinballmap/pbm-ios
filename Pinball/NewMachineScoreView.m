@@ -52,7 +52,7 @@
 - (IBAction)saveScore:(id)sender{
     NSString *rank;
     if (self.pickedRank[@"id"] == nil){
-        rank = @"GC";
+        rank = @"N/A";
     }else{
         rank = self.pickedRank[@"id"];
     }
