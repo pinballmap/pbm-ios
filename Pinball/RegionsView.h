@@ -8,8 +8,17 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol RegionSelectionDelegate;
 @interface RegionsView : UITableViewController
 
+@property (nonatomic) id <RegionSelectionDelegate> delegate;
 @property (nonatomic) BOOL isSelecting;
+
+@end
+
+
+@protocol RegionSelectionDelegate <NSObject>
+
+- (void)didSelectNewRegion:(Region *)region;
 
 @end

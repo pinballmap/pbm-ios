@@ -17,7 +17,7 @@
 #import "ContactView.h"
 #import "Region+Extensions.h"
 
-@interface RegionProfileView ()
+@interface RegionProfileView () <RegionSelectionDelegate>
 
 @property (nonatomic) Region *currentRegion;
 @property (nonatomic) NSMutableArray *regionLinks;
@@ -115,9 +115,14 @@
 - (IBAction)changeRegion:(id)sender{
     RegionsView *regionsView = [self.storyboard instantiateViewControllerWithIdentifier:@"RegionsView"];
     regionsView.isSelecting = true;
+    regionsView.delegate = self;
     UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:regionsView];
     nav.modalPresentationStyle = UIModalPresentationFormSheet;
     [self.navigationController presentViewController:nav animated:YES completion:nil];
+}
+#pragma mark - Region Selection Delegate
+- (void)didSelectNewRegion:(Region *)region{
+    [self updateRegion];
 }
 #pragma mark - TableView Datasource/Delegate
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{

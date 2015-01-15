@@ -199,6 +199,10 @@
     [self.searchDisplayController setActive:NO animated:YES];
     if (_isSelecting){
         [self dismissViewControllerAnimated:YES completion:nil];
+        
+        if (self.delegate){
+            [self.delegate didSelectNewRegion:region];
+        }
         return;
     }
     if ([self.parentViewController isKindOfClass:[UINavigationController class]]){
