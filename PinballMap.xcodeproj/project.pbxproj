@@ -1313,7 +1313,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "0d62de25-541d-4c62-a314-2b7b49468eed";
+				PROVISIONING_PROFILE = "0500f254-691c-4360-ae65-7a2783af4718";
 				SKIP_INSTALL = YES;
 			};
 			name = Release;
@@ -1440,7 +1440,7 @@
 					"$(PROJECT_DIR)/Pinball/HockeySDK-iOS",
 				);
 				PRODUCT_NAME = PinballMap;
-				PROVISIONING_PROFILE = "ab8a856f-c7cb-4a30-a03a-747ad3ace50b";
+				PROVISIONING_PROFILE = "2e3dc772-dd91-4e5d-9ec7-8ea55ce6dae1";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
 			};
