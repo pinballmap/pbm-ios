@@ -207,6 +207,10 @@ NSString * const etagKey = @"recentsEtag";
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    if (self.dataType.selectedSegmentIndex == 1){
+        NSURL *appSchema = [[NSURL alloc] initWithScheme:@"pbmapp" host:nil path:@"/events"];
+        [self.extensionContext openURL:appSchema completionHandler:nil];
+    }
 }
 
 @end
