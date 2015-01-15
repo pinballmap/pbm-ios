@@ -16,7 +16,7 @@
                             <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
-                                <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="tVP-DH-PVr">
+                                <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="tVP-DH-PVr">
                                     <rect key="frame" x="8" y="8" width="304" height="29"/>
                                     <segments>
                                         <segment title="Recent Machines"/>
@@ -28,6 +28,12 @@
                                     </connections>
                                 </segmentedControl>
                             </subviews>
+                            <constraints>
+                                <constraint firstItem="tVP-DH-PVr" firstAttribute="top" secondItem="eJn-zw-6BS" secondAttribute="top" constant="8" id="2ze-iq-CPU"/>
+                                <constraint firstItem="tVP-DH-PVr" firstAttribute="leading" secondItem="eJn-zw-6BS" secondAttribute="leading" constant="8" id="5Xg-qg-Sh1"/>
+                                <constraint firstAttribute="trailing" secondItem="tVP-DH-PVr" secondAttribute="trailing" constant="8" id="U9e-Wu-qgD"/>
+                                <constraint firstAttribute="bottom" secondItem="tVP-DH-PVr" secondAttribute="bottom" constant="8" id="viu-VC-vKx"/>
+                            </constraints>
                         </view>
                         <prototypes>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="BasicCell" textLabel="dTH-6O-3BG" style="IBUITableViewCellStyleDefault" id="5Wh-jU-rcy">
