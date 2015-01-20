@@ -37,6 +37,9 @@
     [super viewDidLoad];
     self.navigationItem.title = @"Regions";
 
+    UIBarButtonItem *cancelButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancelSelection:)];
+    self.navigationItem.leftBarButtonItem = cancelButton;
+    
     self.searchResults = [NSMutableArray new];
     [[PinballMapManager sharedInstance] refreshAllRegions];
 
@@ -97,9 +100,12 @@
     [regionAlert show];
     
 }
-- (IBAction)cancelRegion:(id)sender{
+- (IBAction)cancelSelection:(id)sender{
     if ([[PinballMapManager sharedInstance] currentRegion] != nil){
-        [self dismissViewControllerAnimated:YES completion:nil];
+        if (self.delegate && [self.delegate respondsToSelector:@selector(canceledRegionSelection)]){
+            [self.delegate canceledRegionSelection];
+        }
+        [self dismissViewControllerAnimated:true completion:nil];
     }else{
         [UIAlertView simpleApplicationAlertWithMessage:@"You must select a region to continue" cancelButton:@"Ok"];
     }

@@ -20,5 +20,7 @@
 @protocol RegionSelectionDelegate <NSObject>
 
 - (void)didSelectNewRegion:(Region *)region;
+@optional
+- (void)canceledRegionSelection;
 
 @end
