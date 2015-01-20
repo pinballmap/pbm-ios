@@ -104,7 +104,6 @@
 		DBB59CD518FADF7A00F35BFD /* LocationMapCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DBB59CD418FADF7A00F35BFD /* LocationMapCell.m */; };
 		DBB59CD718FAE0A800F35BFD /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DBB59CD618FAE0A800F35BFD /* CoreLocation.framework */; };
 		DBB59CD918FAE0E100F35BFD /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DBB59CD818FAE0E100F35BFD /* MapKit.framework */; };
-		DBB71B9C18FC4838007907DE /* SettingsView.m in Sources */ = {isa = PBXBuildFile; fileRef = DBB71B9B18FC4838007907DE /* SettingsView.m */; };
 		DBB71B9F18FC4846007907DE /* RegionsView.m in Sources */ = {isa = PBXBuildFile; fileRef = DBB71B9E18FC4846007907DE /* RegionsView.m */; };
 		DBB71BB118FC5E77007907DE /* NSFileManager+DocumentsDirectory.m in Sources */ = {isa = PBXBuildFile; fileRef = DBB71BB018FC5E77007907DE /* NSFileManager+DocumentsDirectory.m */; };
 		DBB71BB418FC6B04007907DE /* PinballTabController.m in Sources */ = {isa = PBXBuildFile; fileRef = DBB71BB318FC6B04007907DE /* PinballTabController.m */; };
@@ -354,8 +353,6 @@
 		DBB59CD418FADF7A00F35BFD /* LocationMapCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocationMapCell.m; sourceTree = "<group>"; };
 		DBB59CD618FAE0A800F35BFD /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		DBB59CD818FAE0E100F35BFD /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
-		DBB71B9A18FC4838007907DE /* SettingsView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsView.h; sourceTree = "<group>"; };
-		DBB71B9B18FC4838007907DE /* SettingsView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsView.m; sourceTree = "<group>"; };
 		DBB71B9D18FC4846007907DE /* RegionsView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegionsView.h; sourceTree = "<group>"; };
 		DBB71B9E18FC4846007907DE /* RegionsView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegionsView.m; sourceTree = "<group>"; };
 		DBB71BAF18FC5E77007907DE /* NSFileManager+DocumentsDirectory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSFileManager+DocumentsDirectory.h"; sourceTree = "<group>"; };
@@ -505,6 +502,10 @@
 				DB2E9FC419E15D7000B9D72F /* RegionProfileView.m */,
 				DB6F292D19E5870700AC87FF /* HighRollerProfileView.h */,
 				DB6F292E19E5870700AC87FF /* HighRollerProfileView.m */,
+				DB8D1C1519B3A7970065E2C6 /* ContactView.h */,
+				DB8D1C1619B3A7970065E2C6 /* ContactView.m */,
+				DBB71B9D18FC4846007907DE /* RegionsView.h */,
+				DBB71B9E18FC4846007907DE /* RegionsView.m */,
 			);
 			name = Region;
 			sourceTree = "<group>";
@@ -758,19 +759,6 @@
 			name = Cells;
 			sourceTree = "<group>";
 		};
-		DBB71B9918FC482B007907DE /* Settings */ = {
-			isa = PBXGroup;
-			children = (
-				DBB71B9A18FC4838007907DE /* SettingsView.h */,
-				DBB71B9B18FC4838007907DE /* SettingsView.m */,
-				DB8D1C1519B3A7970065E2C6 /* ContactView.h */,
-				DB8D1C1619B3A7970065E2C6 /* ContactView.m */,
-				DBB71B9D18FC4846007907DE /* RegionsView.h */,
-				DBB71B9E18FC4846007907DE /* RegionsView.m */,
-			);
-			name = Settings;
-			sourceTree = "<group>";
-		};
 		DBF06BC218F96FF500F92912 = {
 			isa = PBXGroup;
 			children = (
@@ -908,7 +896,6 @@
 				DB47C87F19C4655000FE8E4F /* Nearby */,
 				DB52D2E218FB009400BB56D8 /* Events */,
 				DB636D0A1903EEE000576521 /* About */,
-				DBB71B9918FC482B007907DE /* Settings */,
 				DB2E9FC219E15D5D00B9D72F /* Region */,
 				DBBB4BEE19338A03004E433F /* UIViewController+Helpers.h */,
 				DBBB4BEF19338A03004E433F /* UIViewController+Helpers.m */,
@@ -1177,7 +1164,6 @@
 				DBF06C0118F9703E00F92912 /* CoreDataManager.m in Sources */,
 				DB52D2FD18FB0AD300BB56D8 /* EventProfileView.m in Sources */,
 				DB38DA9619E1CBC400E1B6D2 /* AFNetworkReachabilityManager.m in Sources */,
-				DBB71B9C18FC4838007907DE /* SettingsView.m in Sources */,
 				DB52D2FA18FB09AF00BB56D8 /* NSDate+DateFormatting.m in Sources */,
 				DBA96E541A50435A007C73CD /* MachineManufacturerView.m in Sources */,
 				DB2E9FCC19E179A200B9D72F /* RegionLink.m in Sources */,

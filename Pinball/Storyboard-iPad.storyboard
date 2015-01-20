@@ -1637,101 +1637,6 @@
             </objects>
             <point key="canvasLocation" x="2433.5" y="5159"/>
         </scene>
-        <!--Settings-->
-        <scene sceneID="Nfs-bP-0yY">
-            <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="OgP-Eq-tYx" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Settings" image="740-gear" id="H6q-bq-AGx"/>
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Jwe-TB-dCM">
-                        <rect key="frame" x="0.0" y="0.0" width="768" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="6Dd-gN-KUB" kind="relationship" relationship="rootViewController" id="ieH-HY-RRQ"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="5M1-32-1Kj" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1127" y="6488"/>
-        </scene>
-        <!--Settings View-->
-        <scene sceneID="zGi-K6-q9p">
-            <objects>
-                <tableViewController id="6Dd-gN-KUB" customClass="SettingsView" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="hdR-hb-pKe">
-                        <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
-                        <sections>
-                            <tableViewSection headerTitle="Region" id="XE9-9P-9z9">
-                                <cells>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="iil-MN-UMX" style="IBUITableViewCellStyleDefault" id="RBw-rg-pZq">
-                                        <rect key="frame" x="0.0" y="119" width="1024" height="44"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="RBw-rg-pZq" id="afm-Op-Ea2">
-                                            <rect key="frame" x="0.0" y="0.0" width="991" height="43"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="iil-MN-UMX">
-                                                    <rect key="frame" x="15" y="0.0" width="974" height="43"/>
-                                                    <autoresizingMask key="autoresizingMask"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                            </subviews>
-                                        </tableViewCellContentView>
-                                        <connections>
-                                            <segue destination="9Ad-77-Z0X" kind="modal" identifier="RegionSelect" id="c3h-ql-Q2s"/>
-                                        </connections>
-                                    </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" textLabel="gxS-sr-JoY" style="IBUITableViewCellStyleDefault" id="vjH-5O-DT0">
-                                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="vjH-5O-DT0" id="VPh-eP-1Aw">
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Contact Region Admins" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="gxS-sr-JoY">
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                            </subviews>
-                                        </tableViewCellContentView>
-                                    </tableViewCell>
-                                </cells>
-                            </tableViewSection>
-                        </sections>
-                        <connections>
-                            <outlet property="dataSource" destination="6Dd-gN-KUB" id="sYi-9Z-rfE"/>
-                            <outlet property="delegate" destination="6Dd-gN-KUB" id="9Jr-ep-DnF"/>
-                        </connections>
-                    </tableView>
-                    <toolbarItems/>
-                    <navigationItem key="navigationItem" id="hQe-6H-32Z">
-                        <barButtonItem key="leftBarButtonItem" title="About" id="3VG-Vc-pNM">
-                            <connections>
-                                <segue destination="AMj-A1-qvi" kind="modal" id="BpL-eo-i4F"/>
-                            </connections>
-                        </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" title="Feedback" id="8iR-mH-OWC">
-                            <connections>
-                                <action selector="sendFeedback:" destination="6Dd-gN-KUB" id="X5v-vs-yhp"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
-                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
-                    <connections>
-                        <outlet property="regionLabel" destination="iil-MN-UMX" id="tkK-pO-RqQ"/>
-                    </connections>
-                </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="o9X-19-h9A" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2287" y="6806"/>
-        </scene>
         <!--About-->
         <scene sceneID="3iM-jO-RHy">
             <objects>
@@ -2503,7 +2408,6 @@
     </scenes>
     <resources>
         <image name="701-location" width="28" height="28"/>
-        <image name="740-gear" width="28" height="28"/>
         <image name="798-filter.png" width="28" height="24"/>
         <image name="851-calendar" width="28" height="28"/>
         <image name="852-map" width="28" height="24"/>
