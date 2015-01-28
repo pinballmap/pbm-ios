@@ -135,7 +135,7 @@
     if (indexPath.section == 0){
         cellText = _currentMachine.location.name;
     }else if (indexPath.section == 1){
-        cellText = _currentMachine.condition;
+        cellText = _currentMachine.conditionWithUpdateDate;
     }
     
     CGRect conditionHeight = [cellText boundingRectWithSize:CGSizeMake(290, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName: [UIFont systemFontOfSize:18]} context:nil];
@@ -165,7 +165,7 @@
         if ([_currentMachine.condition isEqualToString:@"N/A"]){
             cell.textLabel.text = @"Tap to edit";
         }else{
-            cell.textLabel.text = _currentMachine.condition;
+            cell.textLabel.text = _currentMachine.conditionWithUpdateDate;
         }
     }else if (indexPath.section == 2){
         if (indexPath.row == 0){
