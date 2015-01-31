@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6724" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="JrY-jg-xc4">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6724" systemVersion="14C109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="JrY-jg-xc4">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6711"/>
@@ -1528,44 +1528,38 @@
             </objects>
             <point key="canvasLocation" x="2194" y="4227"/>
         </scene>
-        <!--About-->
-        <scene sceneID="Wrc-e4-lul">
+        <!--About View-->
+        <scene sceneID="Zoz-Y8-uNs">
             <objects>
-                <tableViewController storyboardIdentifier="AboutView" id="sob-yA-k2w" customClass="AboutView" sceneMemberID="viewController">
-                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="fmn-cf-OvM">
+                <viewController storyboardIdentifier="AboutView" id="OU7-Hq-tVJ" customClass="AboutView" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="INc-fk-jC0"/>
+                        <viewControllerLayoutGuide type="bottom" id="PtY-vi-DWM"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="qOO-ey-zg5">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
-                        <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="BasicCell" textLabel="YqX-nh-sua" style="IBUITableViewCellStyleDefault" id="xFQ-kl-IYf">
-                                <rect key="frame" x="0.0" y="119" width="320" height="44"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="xFQ-kl-IYf" id="zsI-Db-98Y">
-                                    <rect key="frame" x="0.0" y="0.0" width="287" height="43"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                    <subviews>
-                                        <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Scott Wainstock" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="YqX-nh-sua">
-                                            <rect key="frame" x="15" y="0.0" width="270" height="43"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                    </subviews>
-                                </tableViewCellContentView>
-                            </tableViewCell>
-                        </prototypes>
-                        <sections/>
-                        <connections>
-                            <outlet property="dataSource" destination="sob-yA-k2w" id="DGZ-CY-Njh"/>
-                            <outlet property="delegate" destination="sob-yA-k2w" id="dia-J7-22D"/>
-                        </connections>
-                    </tableView>
-                    <navigationItem key="navigationItem" title="About" id="qCP-tE-EQs"/>
-                </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="pk3-Lt-OHW" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                        <subviews>
+                            <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pBc-x9-Ax2">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </webView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailingMargin" secondItem="pBc-x9-Ax2" secondAttribute="trailing" constant="-16" id="1iw-I3-lcB"/>
+                            <constraint firstItem="pBc-x9-Ax2" firstAttribute="top" secondItem="qOO-ey-zg5" secondAttribute="topMargin" id="CqQ-5n-u7Q"/>
+                            <constraint firstItem="pBc-x9-Ax2" firstAttribute="leading" secondItem="qOO-ey-zg5" secondAttribute="leadingMargin" constant="-16" id="ZDR-JG-fof"/>
+                            <constraint firstItem="PtY-vi-DWM" firstAttribute="top" secondItem="pBc-x9-Ax2" secondAttribute="bottom" id="qlW-qw-XXz"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="mainWebView" destination="pBc-x9-Ax2" id="CY9-On-4K8"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dxb-5V-afY" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1924" y="2863"/>
+            <point key="canvasLocation" x="1924" y="2849"/>
         </scene>
         <!--Regions View-->
         <scene sceneID="6hD-Xm-Uer">
