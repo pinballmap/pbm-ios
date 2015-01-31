@@ -48,6 +48,7 @@
     }else{
         if (!self.alreadyRefreshed){
             LoadingViewController *loadingView = [self.storyboard instantiateViewControllerWithIdentifier:@"LoadingViewController"];
+            loadingView.modalPresentationStyle = UIModalPresentationFormSheet;
             [self presentViewController:loadingView animated:true completion:^{
                 self.alreadyRefreshed = true;
             }];

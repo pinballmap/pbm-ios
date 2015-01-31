@@ -2394,6 +2394,83 @@
             </objects>
             <point key="canvasLocation" x="4050" y="6888"/>
         </scene>
+        <!--Loading View Controller-->
+        <scene sceneID="cHd-wu-URM">
+            <objects>
+                <viewController storyboardIdentifier="LoadingViewController" id="zbV-QF-Isu" customClass="LoadingViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="sym-3p-yHX"/>
+                        <viewControllerLayoutGuide type="bottom" id="aYs-Jk-1Rk"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="UKH-C3-A9l">
+                        <rect key="frame" x="0.0" y="0.0" width="540" height="620"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bk3-vA-fOu">
+                                <rect key="frame" x="106" y="157" width="328" height="307"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5hO-P6-mb8">
+                                        <rect key="frame" x="130" y="257" width="68" height="30"/>
+                                        <state key="normal" title="Cancel">
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="cancelRefresh:" destination="zbV-QF-Isu" eventType="touchUpInside" id="CaQ-BU-g7D"/>
+                                        </connections>
+                                    </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Refreshing Region Data" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dgh-In-91N">
+                                        <rect key="frame" x="20" y="20" width="288" height="21"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Completed 1 of 4" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MNP-lQ-iWl">
+                                        <rect key="frame" x="20" y="182" width="288" height="21"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="Ybe-7b-pgN">
+                                        <rect key="frame" x="154" y="103" width="20" height="20"/>
+                                        <color key="color" red="0.97212550949999998" green="0.0" blue="0.87446945249999997" alpha="1" colorSpace="calibratedRGB"/>
+                                    </activityIndicatorView>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="5hO-P6-mb8" secondAttribute="trailing" constant="130" id="4gW-9I-oog"/>
+                                    <constraint firstItem="Dgh-In-91N" firstAttribute="top" secondItem="bk3-vA-fOu" secondAttribute="top" constant="20" id="5Bb-Mo-Gw3"/>
+                                    <constraint firstItem="MNP-lQ-iWl" firstAttribute="top" secondItem="Ybe-7b-pgN" secondAttribute="bottom" constant="59" id="CxL-Fv-UNb"/>
+                                    <constraint firstAttribute="height" constant="307" id="IIK-HC-HbR"/>
+                                    <constraint firstItem="Dgh-In-91N" firstAttribute="leading" secondItem="bk3-vA-fOu" secondAttribute="leading" constant="20" id="JxM-Jc-aGX"/>
+                                    <constraint firstAttribute="trailing" secondItem="Dgh-In-91N" secondAttribute="trailing" constant="20" id="Lih-XT-zaV"/>
+                                    <constraint firstAttribute="trailing" secondItem="Ybe-7b-pgN" secondAttribute="trailing" constant="154" id="NZP-mI-QB0"/>
+                                    <constraint firstItem="5hO-P6-mb8" firstAttribute="leading" secondItem="bk3-vA-fOu" secondAttribute="leading" constant="130" id="OPh-cG-bq0"/>
+                                    <constraint firstItem="Ybe-7b-pgN" firstAttribute="top" secondItem="Dgh-In-91N" secondAttribute="bottom" constant="62" id="OuG-fY-Sr9"/>
+                                    <constraint firstItem="Ybe-7b-pgN" firstAttribute="leading" secondItem="bk3-vA-fOu" secondAttribute="leading" constant="154" id="Zca-Bx-uKJ"/>
+                                    <constraint firstItem="MNP-lQ-iWl" firstAttribute="leading" secondItem="bk3-vA-fOu" secondAttribute="leading" constant="20" id="egu-Ba-4Xk"/>
+                                    <constraint firstItem="5hO-P6-mb8" firstAttribute="top" secondItem="MNP-lQ-iWl" secondAttribute="bottom" constant="54" id="hur-C1-SSd"/>
+                                    <constraint firstAttribute="trailing" secondItem="MNP-lQ-iWl" secondAttribute="trailing" constant="20" id="pvY-bB-TFB"/>
+                                    <constraint firstAttribute="width" constant="328" id="qtB-Jq-Hzg"/>
+                                    <constraint firstAttribute="bottom" secondItem="5hO-P6-mb8" secondAttribute="bottom" constant="20" id="xlH-je-ak9"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="centerY" secondItem="bk3-vA-fOu" secondAttribute="centerY" id="Jhl-CO-ezw"/>
+                            <constraint firstAttribute="centerX" secondItem="bk3-vA-fOu" secondAttribute="centerX" id="OEN-jZ-eh9"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="PKQ-by-wt0"/>
+                    <modalFormSheetSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <connections>
+                        <outlet property="loadingProgressLabel" destination="MNP-lQ-iWl" id="NAA-6S-L8i"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dNN-43-8r0" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="6365" y="190"/>
+        </scene>
     </scenes>
     <resources>
         <image name="701-location" width="28" height="28"/>
