@@ -313,10 +313,17 @@ typedef enum : NSUInteger {
         if (self.dataSetSeg.selectedSegmentIndex == 0){
             MachineLocation *currentMachine = [self.machinesFetch objectAtIndexPath:[NSIndexPath indexPathForRow:indexPath.row inSection:0]];
             CGRect titleLabel = [currentMachine.machine.machineTitle boundingRectWithSize:CGSizeMake(238, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin context:nil];
-            if (titleLabel.size.height+10 < 44){
+            CGRect detailLabel = [currentMachine.conditionWithUpdateDate boundingRectWithSize:CGSizeMake(238, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName: [UIFont systemFontOfSize:12]} context:nil];
+            if ([currentMachine.condition rangeOfString:@"N/A" options:NSCaseInsensitiveSearch].location != NSNotFound){
+                detailLabel = CGRectMake(0, 0, 0, 0);
+            }
+            // Add 6 pixel padding present in subtitle style.
+            CGRect stringSize = CGRectMake(0, 0, 238, titleLabel.size.height+detailLabel.size.height+6);
+
+            if (stringSize.size.height+10 < 44){
                 return 44;
             }else{
-                return titleLabel.size.height+10;
+                return stringSize.size.height+10;
             }
         }else if (self.dataSetSeg.selectedSegmentIndex == 1){
             NSString *detailText;
@@ -356,7 +363,6 @@ typedef enum : NSUInteger {
         cell.mapView.userInteractionEnabled = NO;
         cell.mapView.showsUserLocation = YES;
         [cell.mapView addAnnotation:_currentLocation.annotation];
-//        [cell addAnnotation];
         return cell;
     }else{
         if (self.dataSetSeg.selectedSegmentIndex == 0){
@@ -366,7 +372,11 @@ typedef enum : NSUInteger {
             MachineLocation *currentMachine = [self.machinesFetch objectAtIndexPath:[NSIndexPath indexPathForRow:indexPath.row inSection:0]];
             cell.textLabel.attributedText = currentMachine.machine.machineTitle;
             cell.detailTextLabel.numberOfLines = 0;
-            cell.detailTextLabel.text = nil;
+            if (currentMachine.condition != nil && [currentMachine.condition rangeOfString:@"N/A" options:NSCaseInsensitiveSearch].location == NSNotFound){
+                cell.detailTextLabel.text = currentMachine.conditionWithUpdateDate;
+            }else{
+                cell.detailTextLabel.text = nil;
+            }
             return cell;
             
         }else if (self.dataSetSeg.selectedSegmentIndex == 1){
