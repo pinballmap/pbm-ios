@@ -30,6 +30,7 @@ typedef NS_ENUM(NSInteger, PBMDataAPI) {
 
 @property (nonatomic) NSURLSession *session;
 @property (nonatomic) CLLocationManager *locationManager;
+@property (nonatomic) NSMutableArray *apiOperations;
 
 @end
 
@@ -65,6 +66,7 @@ typedef NS_ENUM(NSInteger, PBMDataAPI) {
 - (id)init{
     self = [super init];
     if (self){
+        self.apiOperations = [[NSMutableArray alloc] init];
         [self getUserLocation];
         self.session = [NSURLSession sharedSession];
         [self migrateUserDefaults];
@@ -176,41 +178,62 @@ typedef NS_ENUM(NSInteger, PBMDataAPI) {
     }];
     [[NSOperationQueue mainQueue] addOperation:regionAPI];
 }
+- (void)cancelAllLoadingOperations{
+    if (self.apiOperations.count > 0){
+        for (AFHTTPRequestOperation *operation in self.apiOperations) {
+            [operation cancel];
+        }
+    }
+}
 #pragma mark - Region Data Load
 - (void)refreshRegion{
     [[NSNotificationCenter defaultCenter] postNotificationName:@"UpdatingRegion" object:nil];
-    NSArray *apiOperations = @[[self requestForData:PBMDataAPILocationTypes],[self requestForData:PBMDataAPIZones],[self requestForData:PBMDataAPILocations],[self requestForData:PBMDataAPIEvents]];
-    
-    NSArray *api = [AFURLConnectionOperation batchOfRequestOperations:apiOperations progressBlock:^(NSUInteger numberOfFinishedOperations, NSUInteger totalNumberOfOperations) {
+    [self.apiOperations addObjectsFromArray:@[[self requestForData:PBMDataAPILocationTypes],[self requestForData:PBMDataAPIZones],[self requestForData:PBMDataAPILocations],[self requestForData:PBMDataAPIEvents]]];
+
+    NSArray *api = [AFURLConnectionOperation batchOfRequestOperations:self.apiOperations progressBlock:^(NSUInteger numberOfFinishedOperations, NSUInteger totalNumberOfOperations) {
         NSLog(@"Completed %lu of %lu",(unsigned long)numberOfFinishedOperations,(unsigned long)totalNumberOfOperations);
+        NSDictionary *progress = @{
+                                   @"completed": [NSNumber numberWithLongLong:numberOfFinishedOperations],
+                                   @"total": [NSNumber numberWithLongLong:totalNumberOfOperations]
+                                   };
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"UpdatingProgress" object:progress];
     } completionBlock:^(NSArray *operations) {
         dispatch_async(dispatch_get_main_queue(), ^{
             [[NSNotificationCenter defaultCenter] postNotificationName:@"UpdatingProgress" object:nil];
         });
-        NSLog(@"Started proccessing");
-        NSFetchRequest *stackRequest = [NSFetchRequest fetchRequestWithEntityName:@"Machine"];
-        stackRequest.predicate = nil;
-        stackRequest.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES]];
-        __block NSMutableSet *machines = [NSMutableSet setWithArray:[[[CoreDataManager sharedInstance] managedObjectContext] executeFetchRequest:stackRequest error:nil]];
-        __block NSMutableSet *locationTypes;
-        __block NSMutableSet *locationZones;
-        __block NSMutableSet *createdLocations;
-        [operations enumerateObjectsUsingBlock:^(AFHTTPRequestOperation *obj, NSUInteger idx, BOOL *stop) {
-            if (idx == 0){
-                locationTypes = [self importLocationTypesWithRequest:obj];
-            }else if (idx == 1){
-                locationZones = [self importZonesWithRequest:obj];
-            }else if (idx == 2){
-                createdLocations = [self importLocationsWithRequest:obj andMachines:machines andLocationTypes:locationTypes andZones:locationZones];
-            }else if (idx == 3){
-                [self importEventsWithRequest:obj andLocations:createdLocations];
+        BOOL canceledRequests = false;
+        for (AFHTTPRequestOperation *operation in operations) {
+            if (operation.isCancelled){
+                canceledRequests = true;
             }
-            [[CoreDataManager sharedInstance] saveContext];
-        }];
+        }
+        NSLog(@"Did cancel: %i",canceledRequests);
+        if (!canceledRequests){
+            NSLog(@"Started proccessing");
+            NSFetchRequest *stackRequest = [NSFetchRequest fetchRequestWithEntityName:@"Machine"];
+            stackRequest.predicate = nil;
+            stackRequest.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES]];
+            __block NSMutableSet *machines = [NSMutableSet setWithArray:[[[CoreDataManager sharedInstance] managedObjectContext] executeFetchRequest:stackRequest error:nil]];
+            __block NSMutableSet *locationTypes;
+            __block NSMutableSet *locationZones;
+            __block NSMutableSet *createdLocations;
+            [operations enumerateObjectsUsingBlock:^(AFHTTPRequestOperation *obj, NSUInteger idx, BOOL *stop) {
+                if (idx == 0){
+                    locationTypes = [self importLocationTypesWithRequest:obj];
+                }else if (idx == 1){
+                    locationZones = [self importZonesWithRequest:obj];
+                }else if (idx == 2){
+                    createdLocations = [self importLocationsWithRequest:obj andMachines:machines andLocationTypes:locationTypes andZones:locationZones];
+                }else if (idx == 3){
+                    [self importEventsWithRequest:obj andLocations:createdLocations];
+                }
+                [[CoreDataManager sharedInstance] saveContext];
+            }];
+        }
         dispatch_async(dispatch_get_main_queue(), ^{
             [[NSNotificationCenter defaultCenter] postNotificationName:@"RegionUpdate" object:nil];
+            NSLog(@"Ended proccessing");
         });
-        NSLog(@"Ended proccessing");
     }];
     [[NSOperationQueue mainQueue] addOperations:api waitUntilFinished:NO];
 }

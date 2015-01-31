@@ -9,12 +9,14 @@
 #import "PinballTabController.h"
 #import "UIAlertView+Application.h"
 #import "RegionsView.h"
+#import "LoadingViewController.h"
 
 @interface PinballTabController ()
 
 @property (nonatomic) UIAlertView *updatingAlert;
 @property (nonatomic) UIView *motdAlert;
 @property (nonatomic) BOOL isShowingMOTD;
+@property (nonatomic) BOOL alreadyRefreshed;
 
 - (void)updatingRegion;
 @end
@@ -31,10 +33,9 @@
 - (void)viewDidLoad{
     [super viewDidLoad];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateTabInfo) name:@"RegionUpdate" object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updatingRegion) name:@"UpdatingRegion" object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updatingProgress:) name:@"UpdatingProgress" object:nil];
-    [self updateTabInfo];
-    [[PinballMapManager sharedInstance] refreshRegion];
+//    [self updateTabInfo];
+    self.alreadyRefreshed = false;
+    
 }
 - (void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
@@ -45,11 +46,16 @@
         nav.modalPresentationStyle = UIModalPresentationFormSheet;
         [self presentViewController:nav animated:YES completion:nil];
     }else{
+        if (!self.alreadyRefreshed){
+            LoadingViewController *loadingView = [self.storyboard instantiateViewControllerWithIdentifier:@"LoadingViewController"];
+            [self presentViewController:loadingView animated:true completion:^{
+                self.alreadyRefreshed = true;
+            }];
+        }
         [self showMessageOfDay];
     }
 }
 - (void)updateTabInfo{
-    [self.updatingAlert dismissWithClickedButtonIndex:0 animated:YES];
     [self showMessageOfDay];
 }
 - (void)showMessageOfDay{
