@@ -314,7 +314,7 @@ typedef enum : NSUInteger {
             MachineLocation *currentMachine = [self.machinesFetch objectAtIndexPath:[NSIndexPath indexPathForRow:indexPath.row inSection:0]];
             CGRect titleLabel = [currentMachine.machine.machineTitle boundingRectWithSize:CGSizeMake(238, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin context:nil];
             CGRect detailLabel = [currentMachine.conditionWithUpdateDate boundingRectWithSize:CGSizeMake(238, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName: [UIFont systemFontOfSize:12]} context:nil];
-            if ([currentMachine.condition rangeOfString:@"N/A" options:NSCaseInsensitiveSearch].location != NSNotFound || currentMachine.condition != nil || currentMachine.condition.length > 0){
+            if ([currentMachine.condition rangeOfString:@"N/A" options:NSCaseInsensitiveSearch].location != NSNotFound || currentMachine.condition == nil || currentMachine.condition.length == 0){
                 detailLabel = CGRectMake(0, 0, 0, 0);
             }
             // Add 6 pixel padding present in subtitle style.
