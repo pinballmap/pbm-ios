@@ -355,14 +355,7 @@ typedef enum : NSUInteger {
     if (indexPath.section == 0 && self.showMapSnapshot){
         // Map Cell
         LocationMapCell *cell = (LocationMapCell *)[tableView dequeueReusableCellWithIdentifier:@"MapCell" forIndexPath:indexPath];
-        
-        
-        CLLocationCoordinate2D coord = CLLocationCoordinate2DMake([_currentLocation.latitude doubleValue],[_currentLocation.longitude doubleValue]);
-        cell.mapView.region = MKCoordinateRegionMake(coord, MKCoordinateSpanMake(0.002, 0.002));
-        cell.mapView.mapType = MKMapTypeHybrid;
-        cell.mapView.userInteractionEnabled = NO;
-        cell.mapView.showsUserLocation = YES;
-        [cell.mapView addAnnotation:_currentLocation.annotation];
+        [cell setCurrentLocation:self.currentLocation];
         return cell;
     }else{
         if (self.dataSetSeg.selectedSegmentIndex == 0){

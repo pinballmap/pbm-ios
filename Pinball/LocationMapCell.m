@@ -7,6 +7,13 @@
 //
 
 #import "LocationMapCell.h"
+#import "Location+Annotation.h"
+
+@interface LocationMapCell ()
+
+@property (nonatomic) MKPointAnnotation *annotation;
+
+@end
 
 @implementation LocationMapCell
 
@@ -31,14 +38,17 @@
     // Configure the view for the selected state
 }
 
-- (void)addAnnotation{
-    UIView *anno = [[UIView alloc] initWithFrame:CGRectMake(CGRectGetWidth(self.frame)/2, CGRectGetHeight(self.frame)/2, 10, 10)];
-    anno.backgroundColor = [UIColor redColor];
-    anno.layer.cornerRadius = 5;
-    UIImage *image = [UIImage imageNamed:@"pin"];
-    UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(CGRectGetWidth(self.frame)/2, CGRectGetHeight(self.frame)/2-image.size.height, image.size.width, image.size.height)];
-    imageView.image = image;
-    [self addSubview:imageView];    
+- (void)setCurrentLocation:(Location *)currentLocation{
+    _currentLocation = currentLocation;
+    CLLocationCoordinate2D coord = CLLocationCoordinate2DMake([_currentLocation.latitude doubleValue],[_currentLocation.longitude doubleValue]);
+    self.mapView.region = MKCoordinateRegionMake(coord, MKCoordinateSpanMake(0.002, 0.002));
+    self.mapView.mapType = MKMapTypeHybrid;
+    self.mapView.userInteractionEnabled = NO;
+    self.mapView.showsUserLocation = YES;
+    if (self.annotation.coordinate.latitude != _currentLocation.annotation.coordinate.latitude && self.annotation.coordinate.longitude != _currentLocation.annotation.coordinate.longitude){
+        self.annotation = _currentLocation.annotation;
+        [self.mapView addAnnotation:_currentLocation.annotation];
+    }
 }
 
 @end
