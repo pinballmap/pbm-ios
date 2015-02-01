@@ -367,7 +367,7 @@ typedef enum : NSUInteger {
     }else{
         if (self.dataSetSeg.selectedSegmentIndex == 0){
             
-            UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MachineCell" forIndexPath:indexPath];
+            UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MachineCell"];
             // Machine cell.
             MachineLocation *currentMachine = [self.machinesFetch objectAtIndexPath:[NSIndexPath indexPathForRow:indexPath.row inSection:0]];
             cell.textLabel.attributedText = currentMachine.machine.machineTitle;
@@ -375,7 +375,7 @@ typedef enum : NSUInteger {
             if (currentMachine.condition != nil && currentMachine.condition.length > 0 && [currentMachine.condition rangeOfString:@"N/A" options:NSCaseInsensitiveSearch].location == NSNotFound){
                 cell.detailTextLabel.text = currentMachine.conditionWithUpdateDate;
             }else{
-                cell.detailTextLabel.text = nil;
+                cell.detailTextLabel.text = @"";
             }
             return cell;
             
