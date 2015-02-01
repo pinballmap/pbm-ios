@@ -66,6 +66,8 @@
 		DB52D30018FB0D7400BB56D8 /* EventKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DB52D2FE18FB0D7400BB56D8 /* EventKit.framework */; };
 		DB52D30118FB0D7400BB56D8 /* EventKitUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DB52D2FF18FB0D7400BB56D8 /* EventKitUI.framework */; };
 		DB52D30418FB0DCF00BB56D8 /* UIAlertView+Application.m in Sources */ = {isa = PBXBuildFile; fileRef = DB52D30318FB0DCF00BB56D8 /* UIAlertView+Application.m */; };
+		DB56E3FE1A7E607A007F22A7 /* NSDate+CupertinoYankee.m in Sources */ = {isa = PBXBuildFile; fileRef = DB56E3FD1A7E607A007F22A7 /* NSDate+CupertinoYankee.m */; };
+		DB56E3FF1A7E607A007F22A7 /* NSDate+CupertinoYankee.m in Sources */ = {isa = PBXBuildFile; fileRef = DB56E3FD1A7E607A007F22A7 /* NSDate+CupertinoYankee.m */; };
 		DB5FFE9C19C5FBAB004C424B /* Location+Annotation.m in Sources */ = {isa = PBXBuildFile; fileRef = DB5FFE9B19C5FBAB004C424B /* Location+Annotation.m */; };
 		DB5FFE9F19C618CA004C424B /* Region.m in Sources */ = {isa = PBXBuildFile; fileRef = DB5FFE9E19C618CA004C424B /* Region.m */; };
 		DB5FFEA519C6209E004C424B /* RecentlyAddedView.m in Sources */ = {isa = PBXBuildFile; fileRef = DB5FFEA419C6209E004C424B /* RecentlyAddedView.m */; };
@@ -301,6 +303,8 @@
 		DB52D2FF18FB0D7400BB56D8 /* EventKitUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = EventKitUI.framework; path = System/Library/Frameworks/EventKitUI.framework; sourceTree = SDKROOT; };
 		DB52D30218FB0DCF00BB56D8 /* UIAlertView+Application.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIAlertView+Application.h"; sourceTree = "<group>"; };
 		DB52D30318FB0DCF00BB56D8 /* UIAlertView+Application.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIAlertView+Application.m"; sourceTree = "<group>"; };
+		DB56E3FC1A7E607A007F22A7 /* NSDate+CupertinoYankee.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSDate+CupertinoYankee.h"; path = "Pinball/NSDate+CupertinoYankee.h"; sourceTree = SOURCE_ROOT; };
+		DB56E3FD1A7E607A007F22A7 /* NSDate+CupertinoYankee.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSDate+CupertinoYankee.m"; path = "Pinball/NSDate+CupertinoYankee.m"; sourceTree = SOURCE_ROOT; };
 		DB5FFE9A19C5FBAB004C424B /* Location+Annotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Location+Annotation.h"; sourceTree = "<group>"; };
 		DB5FFE9B19C5FBAB004C424B /* Location+Annotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Location+Annotation.m"; sourceTree = "<group>"; };
 		DB5FFE9D19C618CA004C424B /* Region.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Region.h; sourceTree = "<group>"; };
@@ -557,6 +561,8 @@
 		DB38DAAC19E1CBFA00E1B6D2 /* CupertinoYankee */ = {
 			isa = PBXGroup;
 			children = (
+				DB56E3FC1A7E607A007F22A7 /* NSDate+CupertinoYankee.h */,
+				DB56E3FD1A7E607A007F22A7 /* NSDate+CupertinoYankee.m */,
 			);
 			name = CupertinoYankee;
 			path = Pinball/CupertinoYankee;
@@ -1112,6 +1118,7 @@
 				DB2D8A4E19E2046D00502A10 /* TodayViewController.m in Sources */,
 				DBB0EFEC1A47017B0090E9DC /* Region.m in Sources */,
 				DBB0EFEF1A47017B0090E9DC /* Location.m in Sources */,
+				DB56E3FF1A7E607A007F22A7 /* NSDate+CupertinoYankee.m in Sources */,
 				DBB0EFEE1A47017B0090E9DC /* Zone.m in Sources */,
 				DBB0EFEB1A47017B0090E9DC /* MachineLocation.m in Sources */,
 				DBB0EFF21A4703970090E9DC /* Event+CellHelpers.m in Sources */,
@@ -1168,6 +1175,7 @@
 				DB38DAA719E1CBE300E1B6D2 /* ReuseWebView.m in Sources */,
 				DB6F292F19E5870700AC87FF /* HighRollerProfileView.m in Sources */,
 				DB5FFEA519C6209E004C424B /* RecentlyAddedView.m in Sources */,
+				DB56E3FE1A7E607A007F22A7 /* NSDate+CupertinoYankee.m in Sources */,
 				DBEAA200192A9E4A0096F2A9 /* LocationType+Create.m in Sources */,
 				DB38DAA819E1CBE300E1B6D2 /* SafariActivity.m in Sources */,
 				DB338F641960738F000D0366 /* ThirdPartyKeys.m in Sources */,
