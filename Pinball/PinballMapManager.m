@@ -553,7 +553,7 @@ typedef NS_ENUM(NSInteger, PBMDataAPI) {
         completionBlock(@{@"errors": error.localizedDescription});
     }];
 }
-- (void)createNewMachineWithData:(NSDictionary *)machineData andParentMachine:(Machine *)machine forLocation:(Location *)location withCompletion:(APIComplete)completionBlock{
+- (void)createNewMachineWithData:(NSDictionary *)machineData andParentMachine:(Machine *)machine forLocation:(Location *)location withCompletion:(APICompleteWithStatusCode)completionBlock{
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     manager.requestSerializer = [AFJSONRequestSerializer serializer];
     [manager POST:[NSString stringWithFormat:@"%@api/v1/location_machine_xrefs.json",apiRootURL] parameters:machineData success:^(AFHTTPRequestOperation *operation, id responseObject) {
@@ -567,9 +567,9 @@ typedef NS_ENUM(NSInteger, PBMDataAPI) {
             [[CoreDataManager sharedInstance] saveContext];
         }
         
-        completionBlock(responseObject);
+        completionBlock(responseObject,statusCode);
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        completionBlock(@{@"errors": error.localizedDescription});
+        completionBlock(@{@"errors": error.localizedDescription},500);
     }];
 }
 - (void)updateMachineCondition:(MachineLocation *)machine withCondition:(NSString *)newCondition withCompletion:(APIComplete)completionBlock{

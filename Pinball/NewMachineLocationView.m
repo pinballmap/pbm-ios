@@ -81,19 +81,25 @@
 - (IBAction)saveMachine:(id)sender{
     if (_location.locationId != nil && self.pickedMachine.machineId != nil && ![self.machineName.text isEqualToString:@"Pick Machine"]){
         NSDictionary *machine = @{@"machine_id": self.pickedMachine.machineId,@"location_id": _location.locationId,@"condition": self.machineCondition.text};
-        [[PinballMapManager sharedInstance] createNewMachineWithData:machine andParentMachine:self.pickedMachine forLocation:_location withCompletion:^(NSDictionary *status) {
-            if (status[@"errors"]){
+        
+        [[PinballMapManager sharedInstance] createNewMachineWithData:machine andParentMachine:self.pickedMachine forLocation:_location withCompletion:^(NSDictionary *response, NSUInteger statusCode) {
+            if (response[@"errors"]){
                 NSString *errors;
-                if ([status[@"errors"] isKindOfClass:[NSArray class]]){
-                    errors = [status[@"errors"] componentsJoinedByString:@","];
+                if ([response[@"errors"] isKindOfClass:[NSArray class]]){
+                    errors = [response[@"errors"] componentsJoinedByString:@","];
                 }else{
-                    errors = status[@"errors"];
+                    errors = response[@"errors"];
                 }
                 [UIAlertView simpleApplicationAlertWithMessage:errors cancelButton:@"Ok"];
             }else{
-                [UIAlertView simpleApplicationAlertWithMessage:@"Added Machine" cancelButton:@"Ok"];
+                if (statusCode == 201){
+                    [UIAlertView simpleApplicationAlertWithMessage:@"Added Machine" cancelButton:@"Ok"];
+                }else{
+                    [UIAlertView simpleApplicationAlertWithMessage:@"Updated Machine data" cancelButton:@"Ok"];
+                }
                 [self dismissViewControllerAnimated:YES completion:nil];
             }
+ 
         }];
     }else{
         if ([self.machineName.text isEqualToString:@"Pick Machine"]){

@@ -19,6 +19,8 @@ typedef enum : NSUInteger {
 
 
 typedef void (^APIComplete)(NSDictionary *status);
+typedef void (^APICompleteWithStatusCode)(NSDictionary *response,NSUInteger statusCode);
+
 @interface PinballMapManager : NSObject
 
 @property (nonatomic) NSDictionary *regionInfo;
@@ -35,7 +37,7 @@ typedef void (^APIComplete)(NSDictionary *status);
 - (void)recentlyAddedMachinesWithCompletion:(APIComplete)completionBlock;
 // Machine Routes
 - (void)createNewMachine:(NSDictionary *)machineData withCompletion:(APIComplete)completionBlock;
-- (void)createNewMachineWithData:(NSDictionary *)machineData andParentMachine:(Machine *)machine forLocation:(Location *)location withCompletion:(APIComplete)completionBlock;
+- (void)createNewMachineWithData:(NSDictionary *)machineData andParentMachine:(Machine *)machine forLocation:(Location *)location withCompletion:(APICompleteWithStatusCode)completionBlock;
 - (void)updateMachineCondition:(MachineLocation *)machine withCondition:(NSString *)newCondition withCompletion:(APIComplete)completionBlock;
 - (void)allScoresForMachine:(MachineLocation *)machine withCompletion:(APIComplete)completionBlock;
 - (void)addScore:(NSDictionary *)scoreData forMachine:(MachineLocation *)machine withCompletion:(APIComplete)completionBlock;
