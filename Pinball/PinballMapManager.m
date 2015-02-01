@@ -11,7 +11,7 @@
 #import "AFNetworking.h"
 #import "NSDate+CupertinoYankee.h"
 
-static const NSString *apiRootURL = @"http://pinballmap.com/";
+static const NSString *apiRootURL = @"http://localhost:3000/";//@"http://pinballmap.com/";
 NSString * const motdKey = @"motd";
 NSString * const motdRegionKey = @"region_id";
 NSString * const appGroup = @"group.net.isaacruiz.ppm";
@@ -557,14 +557,15 @@ typedef NS_ENUM(NSInteger, PBMDataAPI) {
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     manager.requestSerializer = [AFJSONRequestSerializer serializer];
     [manager POST:[NSString stringWithFormat:@"%@api/v1/location_machine_xrefs.json",apiRootURL] parameters:machineData success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        
-        NSDictionary *machineLocation = responseObject[@"location_machine"];
-        
-        MachineLocation *newMachine = [MachineLocation createMachineLocationWithData:machineLocation andContext:[[CoreDataManager sharedInstance] managedObjectContext]];
-        newMachine.location = location;
-        newMachine.machine = machine;
-        [location addMachinesObject:newMachine];
-        [[CoreDataManager sharedInstance] saveContext];
+        NSUInteger statusCode = operation.response.statusCode;
+        if (statusCode == 201){
+            NSDictionary *machineLocation = responseObject[@"location_machine"];
+            MachineLocation *newMachine = [MachineLocation createMachineLocationWithData:machineLocation andContext:[[CoreDataManager sharedInstance] managedObjectContext]];
+            newMachine.location = location;
+            newMachine.machine = machine;
+            [location addMachinesObject:newMachine];
+            [[CoreDataManager sharedInstance] saveContext];
+        }
         
         completionBlock(responseObject);
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
