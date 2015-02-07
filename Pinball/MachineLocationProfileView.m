@@ -189,7 +189,6 @@
     if (indexPath.section == 1){
         NSString *string = [NSString stringWithFormat:@"%@ at %@",_currentMachine.machine.name,_currentMachine.location.name];
         TextEditorView *textEditor = [[TextEditorView alloc] initWithTitle:@"Machine Condition" andDelegate:self];
-        textEditor.textContent = _currentMachine.condition;
         textEditor.editorPrompt = string;
         UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:textEditor];
         if ([UIDevice iPad]){
