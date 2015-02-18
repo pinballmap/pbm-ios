@@ -183,11 +183,13 @@ typedef NS_ENUM(NSInteger, PBMDataAPI) {
         for (AFHTTPRequestOperation *operation in self.apiOperations) {
             [operation cancel];
         }
+        [self.apiOperations removeAllObjects];
     }
 }
 #pragma mark - Region Data Load
 - (void)refreshRegion{
     [[NSNotificationCenter defaultCenter] postNotificationName:@"UpdatingRegion" object:nil];
+    [self.apiOperations removeAllObjects];
     [self.apiOperations addObjectsFromArray:@[[self requestForData:PBMDataAPILocationTypes],[self requestForData:PBMDataAPIZones],[self requestForData:PBMDataAPILocations],[self requestForData:PBMDataAPIEvents]]];
 
     NSArray *api = [AFURLConnectionOperation batchOfRequestOperations:self.apiOperations progressBlock:^(NSUInteger numberOfFinishedOperations, NSUInteger totalNumberOfOperations) {
@@ -231,6 +233,7 @@ typedef NS_ENUM(NSInteger, PBMDataAPI) {
             }];
         }
         dispatch_async(dispatch_get_main_queue(), ^{
+            [self.apiOperations removeAllObjects];
             [[NSNotificationCenter defaultCenter] postNotificationName:@"RegionUpdate" object:nil];
             NSLog(@"Ended proccessing");
         });
