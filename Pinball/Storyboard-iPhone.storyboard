@@ -447,82 +447,6 @@
             </objects>
             <point key="canvasLocation" x="3821" y="2156"/>
         </scene>
-        <!--New Machine-->
-        <scene sceneID="8NH-bt-Frt">
-            <objects>
-                <tableViewController id="dou-en-4gS" customClass="NewMachineView" sceneMemberID="viewController">
-                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" dataMode="static" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="Qc4-cU-GCC">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
-                        <sections>
-                            <tableViewSection headerTitle="Machine" id="Wbf-n0-GMJ">
-                                <cells>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="YGG-f0-nz7">
-                                        <rect key="frame" x="0.0" y="119" width="320" height="44"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="YGG-f0-nz7" id="bPS-u8-D6Y">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Name" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="gQp-b9-ORN">
-                                                    <rect key="frame" x="20" y="0.0" width="280" height="43"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <textInputTraits key="textInputTraits" autocapitalizationType="words"/>
-                                                </textField>
-                                            </subviews>
-                                        </tableViewCellContentView>
-                                    </tableViewCell>
-                                </cells>
-                            </tableViewSection>
-                            <tableViewSection headerTitle="Location" id="c4V-7S-aoK">
-                                <cells>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="DkH-xh-B5M" style="IBUITableViewCellStyleDefault" id="Z8R-mi-bAk">
-                                        <rect key="frame" x="0.0" y="211" width="320" height="44"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Z8R-mi-bAk" id="d9h-3A-iow">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Select Location" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="DkH-xh-B5M">
-                                                    <rect key="frame" x="15" y="0.0" width="290" height="43"/>
-                                                    <autoresizingMask key="autoresizingMask"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                            </subviews>
-                                        </tableViewCellContentView>
-                                    </tableViewCell>
-                                </cells>
-                            </tableViewSection>
-                        </sections>
-                        <connections>
-                            <outlet property="dataSource" destination="dou-en-4gS" id="ZOb-we-urF"/>
-                            <outlet property="delegate" destination="dou-en-4gS" id="IAo-aU-ExD"/>
-                        </connections>
-                    </tableView>
-                    <navigationItem key="navigationItem" title="New Machine" id="bqR-vd-Yno">
-                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="h7Z-iB-zcr">
-                            <connections>
-                                <action selector="cancelMachine:" destination="dou-en-4gS" id="fCi-f2-Y83"/>
-                            </connections>
-                        </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="PmE-bd-go6">
-                            <connections>
-                                <action selector="saveMachine:" destination="dou-en-4gS" id="n7x-YY-FcF"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
-                    <connections>
-                        <outlet property="locationTitle" destination="DkH-xh-B5M" id="Lxb-dp-Vv7"/>
-                        <outlet property="machineName" destination="gQp-b9-ORN" id="oth-Ic-3mI"/>
-                    </connections>
-                </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="zjo-t0-XbH" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="4601" y="166"/>
-        </scene>
         <!--New Score-->
         <scene sceneID="ftS-w8-B7j">
             <objects>
@@ -977,24 +901,6 @@
                 </searchDisplayController>
             </objects>
             <point key="canvasLocation" x="1924" y="3541"/>
-        </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="4UI-Nb-zi6">
-            <objects>
-                <navigationController storyboardIdentifier="NewMachineView" automaticallyAdjustsScrollViewInsets="NO" id="YtA-gp-4SC" sceneMemberID="viewController">
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="S1j-DG-aij">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="dou-en-4gS" kind="relationship" relationship="rootViewController" id="Ki2-y5-KRx"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="pZm-3n-GdO" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="4208" y="166"/>
         </scene>
         <!--New Location-->
         <scene sceneID="Jwm-QA-GpT">

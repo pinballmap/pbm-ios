@@ -56,7 +56,7 @@
 }
 #pragma mark - Class Actions
 - (IBAction)addMachine:(id)sender{
-    UINavigationController *newMachine = [self.storyboard instantiateViewControllerWithIdentifier:@"NewMachineView"];
+    UINavigationController *newMachine = [[UIStoryboard storyboardWithName:@"SecondaryControllers" bundle:nil] instantiateViewControllerWithIdentifier:@"NewMachineView"];
     if ([UIDevice iPad]){
         newMachine.modalPresentationStyle = UIModalPresentationFormSheet;
     }
