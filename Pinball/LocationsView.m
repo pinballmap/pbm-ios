@@ -164,6 +164,11 @@
     map.locations = locations;
     [self.navigationController presentViewController:map.parentViewController animated:YES completion:nil];
 }
+- (IBAction)submitNewLocation:(id)sender{
+    UINavigationController *navController = [[UIStoryboard storyboardWithName:@"SecondaryControllers" bundle:nil] instantiateViewControllerWithIdentifier:@"NewLocationView"];
+    navController.modalPresentationStyle = UIModalPresentationFormSheet;
+    [self.navigationController presentViewController:navController animated:YES completion:nil];
+}
 #pragma mark - Class
 - (BOOL)shouldPerformSegueWithIdentifier:(NSString *)identifier sender:(id)sender{
     if ([identifier isEqualToString:@"LocationProfileView"] && _isSelecting){

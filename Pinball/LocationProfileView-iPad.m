@@ -198,7 +198,7 @@ typedef NS_ENUM(NSUInteger, LayoutType) {
     
 }
 - (IBAction)showNewLocationView:(id)sender{
-    UINavigationController *navController = [self.storyboard instantiateViewControllerWithIdentifier:@"NewLocationView"];
+    UINavigationController *navController = [[UIStoryboard storyboardWithName:@"SecondaryControllers" bundle:nil] instantiateViewControllerWithIdentifier:@"NewLocationView"];
     navController.modalPresentationStyle = UIModalPresentationFormSheet;
     [self.navigationController presentViewController:navController animated:YES completion:nil];
 }
