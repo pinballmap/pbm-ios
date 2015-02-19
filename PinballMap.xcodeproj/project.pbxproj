@@ -53,6 +53,7 @@
 		DB38DACD19E1CC2800E1B6D2 /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = DB38DAC619E1CC2800E1B6D2 /* README.md */; };
 		DB3B4EF91912BBEE0015407B /* Location+CellHelpers.m in Sources */ = {isa = PBXBuildFile; fileRef = DB3B4EF81912BBEE0015407B /* Location+CellHelpers.m */; };
 		DB3F807B194B25100089F3D0 /* LocationCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DB3F807A194B25100089F3D0 /* LocationCell.xib */; };
+		DB403E931A961AD200E39A93 /* SecondaryControllers.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DB403E921A961AD200E39A93 /* SecondaryControllers.storyboard */; };
 		DB43E4881947194C00A641E3 /* MachineLocation+CellHelpers.m in Sources */ = {isa = PBXBuildFile; fileRef = DB43E4871947194C00A641E3 /* MachineLocation+CellHelpers.m */; };
 		DB47C88219C4657800FE8E4F /* NearbyView.m in Sources */ = {isa = PBXBuildFile; fileRef = DB47C88119C4657800FE8E4F /* NearbyView.m */; };
 		DB4D82BE190D77530048156E /* Machine+CellHelpers.m in Sources */ = {isa = PBXBuildFile; fileRef = DB4D82BD190D77530048156E /* Machine+CellHelpers.m */; };
@@ -279,6 +280,7 @@
 		DB3B4EF71912BBEE0015407B /* Location+CellHelpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Location+CellHelpers.h"; sourceTree = "<group>"; };
 		DB3B4EF81912BBEE0015407B /* Location+CellHelpers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Location+CellHelpers.m"; sourceTree = "<group>"; };
 		DB3F807A194B25100089F3D0 /* LocationCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LocationCell.xib; sourceTree = "<group>"; };
+		DB403E921A961AD200E39A93 /* SecondaryControllers.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = SecondaryControllers.storyboard; sourceTree = "<group>"; };
 		DB43E4861947194C00A641E3 /* MachineLocation+CellHelpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MachineLocation+CellHelpers.h"; sourceTree = "<group>"; };
 		DB43E4871947194C00A641E3 /* MachineLocation+CellHelpers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MachineLocation+CellHelpers.m"; sourceTree = "<group>"; };
 		DB47C88019C4657800FE8E4F /* NearbyView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NearbyView.h; sourceTree = "<group>"; };
@@ -824,6 +826,7 @@
 				DBF06BFD18F9700F00F92912 /* Storyboard-iPhone.storyboard */,
 				DBBB4BEC193387AB004E433F /* Storyboard-iPad.storyboard */,
 				DBFBED6019CF377700ADC964 /* Start Screen.storyboard */,
+				DB403E921A961AD200E39A93 /* SecondaryControllers.storyboard */,
 				DBB59CCB18FADC3B00F35BFD /* Views */,
 				DBF06C0818F972DD00F92912 /* View Controllers */,
 				DBF06C0718F972D700F92912 /* Data */,
@@ -1083,6 +1086,7 @@
 				DBF06BFE18F9700F00F92912 /* Storyboard-iPhone.storyboard in Resources */,
 				DB38DACC19E1CC2800E1B6D2 /* LICENSE in Resources */,
 				DBC751711A670E5500D88975 /* MachineCell.xib in Resources */,
+				DB403E931A961AD200E39A93 /* SecondaryControllers.storyboard in Resources */,
 				DBF06BD918F96FF500F92912 /* InfoPlist.strings in Resources */,
 				DB9A15F41A7D107C00819A1E /* about_page in Resources */,
 				DBF06BE118F96FF500F92912 /* Images.xcassets in Resources */,

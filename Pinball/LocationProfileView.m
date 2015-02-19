@@ -478,7 +478,7 @@ typedef enum : NSUInteger {
             }
             else if (indexPath.row == 3){
                 // Type
-                LocationTypesView *typesView = [[[self.storyboard instantiateViewControllerWithIdentifier:@"LocationTypesView"] viewControllers] lastObject];
+                LocationTypesView *typesView = (LocationTypesView *)[[[UIStoryboard storyboardWithName:@"SecondaryControllers" bundle:nil] instantiateViewControllerWithIdentifier:@"LocationTypesView"] navigationRootViewController];
                 typesView.delegate = self;
                 if ([UIDevice currentModel] == ModelTypeiPad){
                     [self.parentViewController.navigationController presentViewController:typesView.parentViewController animated:YES completion:nil];

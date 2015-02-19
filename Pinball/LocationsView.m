@@ -248,7 +248,7 @@
                 stackRequest.predicate = [NSPredicate predicateWithFormat:@"region.name = %@",[[[PinballMapManager sharedInstance] currentRegion] name]];
                 stackRequest.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"machineCount" ascending:NO]];
             }else if ([buttonTitle isEqualToString:@"Location Type"]){
-                LocationTypesView *types = (LocationTypesView *)[[self.storyboard instantiateViewControllerWithIdentifier:@"LocationTypesView"] navigationRootViewController];
+                LocationTypesView *types = (LocationTypesView *)[[[UIStoryboard storyboardWithName:@"SecondaryControllers" bundle:nil] instantiateViewControllerWithIdentifier:@"LocationTypesView"] navigationRootViewController];
                 types.delegate = self;
                 types.type = SelectionTypeRegion;
                 [self.navigationController presentViewController:types.parentViewController animated:YES completion:nil];
