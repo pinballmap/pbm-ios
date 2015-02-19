@@ -445,7 +445,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hiz-Kw-Phg" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3821" y="2156"/>
+            <point key="canvasLocation" x="2141" y="2124"/>
         </scene>
         <!--Events-->
         <scene sceneID="caA-Ft-Sam">
@@ -718,39 +718,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fUb-FZ-7z3" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2194" y="4227"/>
-        </scene>
-        <!--About View-->
-        <scene sceneID="Zoz-Y8-uNs">
-            <objects>
-                <viewController storyboardIdentifier="AboutView" id="OU7-Hq-tVJ" customClass="AboutView" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="INc-fk-jC0"/>
-                        <viewControllerLayoutGuide type="bottom" id="PtY-vi-DWM"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="qOO-ey-zg5">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pBc-x9-Ax2">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            </webView>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstAttribute="trailingMargin" secondItem="pBc-x9-Ax2" secondAttribute="trailing" constant="-16" id="1iw-I3-lcB"/>
-                            <constraint firstItem="pBc-x9-Ax2" firstAttribute="top" secondItem="qOO-ey-zg5" secondAttribute="topMargin" id="CqQ-5n-u7Q"/>
-                            <constraint firstItem="pBc-x9-Ax2" firstAttribute="leading" secondItem="qOO-ey-zg5" secondAttribute="leadingMargin" constant="-16" id="ZDR-JG-fof"/>
-                            <constraint firstItem="PtY-vi-DWM" firstAttribute="top" secondItem="pBc-x9-Ax2" secondAttribute="bottom" id="qlW-qw-XXz"/>
-                        </constraints>
-                    </view>
-                    <connections>
-                        <outlet property="mainWebView" destination="pBc-x9-Ax2" id="CY9-On-4K8"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="dxb-5V-afY" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1924" y="2849"/>
         </scene>
         <!--Regions View-->
         <scene sceneID="6hD-Xm-Uer">

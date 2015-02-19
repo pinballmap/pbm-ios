@@ -113,7 +113,7 @@
 }
 #pragma mark - Class Actions
 - (IBAction)showAbout:(id)sender{
-    AboutView *about = [self.storyboard instantiateViewControllerWithIdentifier:@"AboutView"];
+    AboutView *about = [[UIStoryboard storyboardWithName:@"SecondaryControllers" bundle:nil] instantiateViewControllerWithIdentifier:@"AboutView"];
     UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:about];
     nav.modalPresentationStyle = UIModalPresentationFormSheet;
     [self.navigationController presentViewController:nav animated:YES completion:nil];

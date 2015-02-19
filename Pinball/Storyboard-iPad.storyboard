@@ -997,25 +997,6 @@
             </objects>
             <point key="canvasLocation" x="4000" y="5684"/>
         </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="S4J-TO-SZt">
-            <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" modalPresentationStyle="formSheet" id="AMj-A1-qvi" sceneMemberID="viewController">
-                    <toolbarItems/>
-                    <modalFormSheetSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="J8G-ri-jtT">
-                        <rect key="frame" x="0.0" y="0.0" width="768" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="VIN-Gp-Cn1" kind="relationship" relationship="rootViewController" id="GVt-PG-Rt1"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="FfW-GD-hpm" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="3438" y="6880"/>
-        </scene>
         <!--Locations-->
         <scene sceneID="JAH-s7-TcA">
             <objects>
@@ -1244,40 +1225,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lKr-np-GUf" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="4763" y="6971"/>
-        </scene>
-        <!--About View-->
-        <scene sceneID="jl3-5L-Opb">
-            <objects>
-                <viewController storyboardIdentifier="AboutView" id="VIN-Gp-Cn1" customClass="AboutView" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="dPe-u5-PG3"/>
-                        <viewControllerLayoutGuide type="bottom" id="iRY-Pn-xPX"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="P1D-cZ-BGu">
-                        <rect key="frame" x="0.0" y="0.0" width="540" height="620"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xTC-Kl-pXz">
-                                <rect key="frame" x="0.0" y="0.0" width="540" height="620"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            </webView>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstItem="xTC-Kl-pXz" firstAttribute="top" secondItem="P1D-cZ-BGu" secondAttribute="topMargin" id="10e-kx-ExG"/>
-                            <constraint firstItem="iRY-Pn-xPX" firstAttribute="top" secondItem="xTC-Kl-pXz" secondAttribute="bottom" id="2Ax-R0-4E0"/>
-                            <constraint firstItem="xTC-Kl-pXz" firstAttribute="leading" secondItem="P1D-cZ-BGu" secondAttribute="leading" id="4Y0-Ub-JD5"/>
-                            <constraint firstAttribute="trailing" secondItem="xTC-Kl-pXz" secondAttribute="trailing" id="JrR-Bm-mUM"/>
-                        </constraints>
-                    </view>
-                    <navigationItem key="navigationItem" id="8YT-xC-bes"/>
-                    <connections>
-                        <outlet property="mainWebView" destination="xTC-Kl-pXz" id="kCU-Re-0fW"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="QvG-ij-yAc" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="4050" y="6888"/>
         </scene>
         <!--Loading View Controller-->
         <scene sceneID="cHd-wu-URM">

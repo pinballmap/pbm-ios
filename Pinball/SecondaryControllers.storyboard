@@ -1110,5 +1110,38 @@
             </objects>
             <point key="canvasLocation" x="1040" y="2250"/>
         </scene>
+        <!--About View-->
+        <scene sceneID="adI-R0-ckW">
+            <objects>
+                <viewController storyboardIdentifier="AboutView" id="Cz6-4n-ysC" customClass="AboutView" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="4vL-00-FjP"/>
+                        <viewControllerLayoutGuide type="bottom" id="GIy-1L-pwF"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="S8H-6k-dBs">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Itr-vW-B0P">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </webView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="Itr-vW-B0P" firstAttribute="top" secondItem="S8H-6k-dBs" secondAttribute="topMargin" id="0nX-tv-BpA"/>
+                            <constraint firstItem="GIy-1L-pwF" firstAttribute="top" secondItem="Itr-vW-B0P" secondAttribute="bottom" id="Aej-1N-UEj"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="Itr-vW-B0P" secondAttribute="trailing" constant="-16" id="e0M-yg-Yg8"/>
+                            <constraint firstItem="Itr-vW-B0P" firstAttribute="leading" secondItem="S8H-6k-dBs" secondAttribute="leadingMargin" constant="-16" id="efC-PF-8SM"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="mainWebView" destination="Itr-vW-B0P" id="MEv-em-lKA"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="O9e-p1-wde" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2380" y="2250"/>
+        </scene>
     </scenes>
 </document>
