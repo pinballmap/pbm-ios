@@ -329,58 +329,6 @@
             </objects>
             <point key="canvasLocation" x="1021" y="359"/>
         </scene>
-        <!--Map View-->
-        <scene sceneID="35P-AD-wLS">
-            <objects>
-                <viewController id="UCW-AO-HnB" customClass="MapView" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="DHg-3F-Q3m"/>
-                        <viewControllerLayoutGuide type="bottom" id="7Py-bL-Mzi"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="9v7-wL-9mt">
-                        <rect key="frame" x="0.0" y="0.0" width="540" height="620"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <subviews>
-                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="wlg-IF-yeh">
-                                <rect key="frame" x="0.0" y="0.0" width="540" height="620"/>
-                            </mapView>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                    </view>
-                    <navigationItem key="navigationItem" id="kQf-A0-Qrs">
-                        <barButtonItem key="rightBarButtonItem" systemItem="action" id="jPU-cO-rql">
-                            <connections>
-                                <action selector="showInMaps:" destination="UCW-AO-HnB" id="Vb1-My-BgN"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
-                    <connections>
-                        <outlet property="mainMapView" destination="wlg-IF-yeh" id="gI1-Du-NZa"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="99l-ia-liH" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="6701" y="-1826"/>
-        </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="mn8-S5-54R">
-            <objects>
-                <navigationController storyboardIdentifier="MapView" automaticallyAdjustsScrollViewInsets="NO" modalPresentationStyle="formSheet" id="3a7-uY-Kjz" sceneMemberID="viewController">
-                    <toolbarItems/>
-                    <modalFormSheetSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="b1D-lY-5d4">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="UCW-AO-HnB" kind="relationship" relationship="rootViewController" id="Wsc-9j-GSE"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="SNn-RE-Sc4" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="6070" y="-1826"/>
-        </scene>
         <!--Text Editor View-->
         <scene sceneID="q0R-Av-Svp">
             <objects>

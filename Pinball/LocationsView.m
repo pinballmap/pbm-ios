@@ -160,7 +160,7 @@
     
     NSArray *locations = [[[CoreDataManager sharedInstance] managedObjectContext] executeFetchRequest:stackRequest error:nil];
 
-    MapView *map = (MapView *)[(UINavigationController *)[self.storyboard instantiateViewControllerWithIdentifier:@"MapView"] navigationRootViewController];
+    MapView *map = (MapView *)[(UINavigationController *)[[UIStoryboard storyboardWithName:@"SecondaryControllers" bundle:nil] instantiateViewControllerWithIdentifier:@"MapView"] navigationRootViewController];
     map.locations = locations;
     [self.navigationController presentViewController:map.parentViewController animated:YES completion:nil];
 }

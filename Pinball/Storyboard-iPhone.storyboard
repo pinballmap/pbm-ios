@@ -960,39 +960,6 @@
             </objects>
             <point key="canvasLocation" x="3035" y="2156"/>
         </scene>
-        <!--Map View-->
-        <scene sceneID="5JO-g6-gzS">
-            <objects>
-                <viewController id="vmD-ty-UrL" customClass="MapView" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="RmD-wB-7bl"/>
-                        <viewControllerLayoutGuide type="bottom" id="m3z-db-GcI"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="D4C-XQ-Xe5">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <subviews>
-                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" showsUserLocation="YES" translatesAutoresizingMaskIntoConstraints="NO" id="EfV-l3-7Iz">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                            </mapView>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstItem="EfV-l3-7Iz" firstAttribute="leading" secondItem="D4C-XQ-Xe5" secondAttribute="leading" id="4h1-bs-j3a"/>
-                            <constraint firstAttribute="trailing" secondItem="EfV-l3-7Iz" secondAttribute="trailing" id="8he-ef-dkX"/>
-                            <constraint firstItem="EfV-l3-7Iz" firstAttribute="top" secondItem="D4C-XQ-Xe5" secondAttribute="top" id="ZsA-UA-Bdc"/>
-                            <constraint firstItem="EfV-l3-7Iz" firstAttribute="bottom" secondItem="m3z-db-GcI" secondAttribute="top" id="pHo-CR-aRg"/>
-                        </constraints>
-                    </view>
-                    <navigationItem key="navigationItem" id="UxV-ya-2X9"/>
-                    <connections>
-                        <outlet property="mainMapView" destination="EfV-l3-7Iz" id="IWQ-Jm-yWq"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="LJj-ce-AK9" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="3041" y="166"/>
-        </scene>
         <!--Machine Condition-->
         <scene sceneID="ma8-fR-Ss3">
             <objects>
@@ -1716,24 +1683,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Zua-gs-Ikx" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3428" y="166"/>
-        </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="wlI-4b-Ier">
-            <objects>
-                <navigationController storyboardIdentifier="MapView" automaticallyAdjustsScrollViewInsets="NO" id="5tk-Zk-dEC" sceneMemberID="viewController">
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="GQT-oG-6QX">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="vmD-ty-UrL" kind="relationship" relationship="rootViewController" id="gL8-W8-695"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Wh7-az-XAk" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2648" y="166"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="4UI-Nb-zi6">

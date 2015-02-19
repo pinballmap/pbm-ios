@@ -155,7 +155,7 @@
         }
     }else if (indexPath.section == 1){
         if (indexPath.row == 0){
-            MapView *map = [[[self.storyboard instantiateViewControllerWithIdentifier:@"MapView"] viewControllers] lastObject];
+            MapView *map = [[[[UIStoryboard storyboardWithName:@"SecondaryControllers" bundle:nil] instantiateViewControllerWithIdentifier:@"MapView"] viewControllers] lastObject];
             map.currentMachine = _currentMachine;
             [self.navigationController presentViewController:map.parentViewController animated:YES completion:nil];
         }else{

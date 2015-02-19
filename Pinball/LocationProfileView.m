@@ -132,7 +132,7 @@ typedef enum : NSUInteger {
     }
 }
 - (void)showMap{
-    MapView *map = [[[self.storyboard instantiateViewControllerWithIdentifier:@"MapView"] viewControllers] lastObject];
+    MapView *map = [[[[UIStoryboard storyboardWithName:@"SecondaryControllers" bundle:nil] instantiateViewControllerWithIdentifier:@"MapView"] viewControllers] lastObject];
     map.currentLocation = _currentLocation;
     [self.navigationController pushViewController:map animated:YES];
 }

@@ -67,5 +67,56 @@
             </objects>
             <point key="canvasLocation" x="2380" y="844"/>
         </scene>
+        <!--Map View-->
+        <scene sceneID="rYJ-Wo-sgt">
+            <objects>
+                <viewController id="hrX-G9-Z2e" customClass="MapView" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="92G-4P-AzQ"/>
+                        <viewControllerLayoutGuide type="bottom" id="fIt-V5-q8U"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="yC9-Ro-1zC">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" showsUserLocation="YES" translatesAutoresizingMaskIntoConstraints="NO" id="uTG-MB-QlK">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                            </mapView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="uTG-MB-QlK" firstAttribute="top" secondItem="yC9-Ro-1zC" secondAttribute="top" id="1wb-hG-BK3"/>
+                            <constraint firstItem="uTG-MB-QlK" firstAttribute="bottom" secondItem="fIt-V5-q8U" secondAttribute="top" id="FTQ-fn-xfq"/>
+                            <constraint firstAttribute="trailing" secondItem="uTG-MB-QlK" secondAttribute="trailing" id="aAx-81-tKo"/>
+                            <constraint firstItem="uTG-MB-QlK" firstAttribute="leading" secondItem="yC9-Ro-1zC" secondAttribute="leading" id="kuE-aq-Qse"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="GmB-el-W3o"/>
+                    <connections>
+                        <outlet property="mainMapView" destination="uTG-MB-QlK" id="QSb-wM-nir"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="nvM-n1-emM" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3035" y="158"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="LlC-oa-hX4">
+            <objects>
+                <navigationController storyboardIdentifier="MapView" automaticallyAdjustsScrollViewInsets="NO" modalPresentationStyle="formSheet" id="Uro-3q-V8v" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="R4c-FU-CHr">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="hrX-G9-Z2e" kind="relationship" relationship="rootViewController" id="FbG-oZ-xO0"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="by7-xc-7Mx" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2380" y="158"/>
+        </scene>
     </scenes>
 </document>
