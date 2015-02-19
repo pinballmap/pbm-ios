@@ -444,7 +444,7 @@ typedef enum : NSUInteger {
 
                     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:contactsPhoneNumber]];
                 }else{
-                    TextEditorView *editor = [[[self.storyboard instantiateViewControllerWithIdentifier:@"TextEditorView"] viewControllers] lastObject];
+                    TextEditorView *editor = [[[[UIStoryboard storyboardWithName:@"SecondaryControllers" bundle:nil] instantiateViewControllerWithIdentifier:@"TextEditorView"] viewControllers] lastObject];
                     editor.delegate = self;
                     editor.editorTitle = @"Location Phone";
                     if (![_currentLocation.phone isEqualToString:@"Tap to edit"]){
@@ -487,7 +487,7 @@ typedef enum : NSUInteger {
                 }
             }else if (indexPath.row == 4){
                 // Description
-                TextEditorView *editor = [[[self.storyboard instantiateViewControllerWithIdentifier:@"TextEditorView"] viewControllers] lastObject];
+                TextEditorView *editor = [[[[UIStoryboard storyboardWithName:@"SecondaryControllers" bundle:nil] instantiateViewControllerWithIdentifier:@"TextEditorView"] viewControllers] lastObject];
                 editor.delegate = self;
                 editor.editorTitle = @"Location Description";
                 self.editingType = LocationEditingTypeDescription;

@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6711"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--Location Type-->
@@ -47,7 +48,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KQR-Uk-OqV" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3035" y="844"/>
+            <point key="canvasLocation" x="3035" y="868"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="gAQ-UC-xKl">
@@ -65,7 +66,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2eR-4H-gbI" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2380" y="844"/>
+            <point key="canvasLocation" x="2380" y="868"/>
         </scene>
         <!--Map View-->
         <scene sceneID="rYJ-Wo-sgt">
@@ -201,7 +202,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="B2m-Yo-ezU" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3035" y="-530"/>
+            <point key="canvasLocation" x="1695" y="868"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="asV-w9-L2D">
@@ -219,7 +220,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rTA-cq-xC0" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2380" y="-530"/>
+            <point key="canvasLocation" x="1040" y="868"/>
         </scene>
         <!--New Machine-->
         <scene sceneID="wzX-XQ-y18">
@@ -317,7 +318,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DWs-u9-k97" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3035" y="-1240"/>
+            <point key="canvasLocation" x="1695" y="158"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="wn0-NK-2Vh">
@@ -335,7 +336,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Zaf-Hb-ueR" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2380" y="-1240"/>
+            <point key="canvasLocation" x="1040" y="158"/>
         </scene>
         <!--Machine Condition-->
         <scene sceneID="D4h-30-PNP">
@@ -415,7 +416,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Gbs-N0-MTd" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3035" y="-1922"/>
+            <point key="canvasLocation" x="1695" y="-602"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="tW6-RP-O9l">
@@ -433,7 +434,76 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WHY-lf-6fK" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2380" y="-1922"/>
+            <point key="canvasLocation" x="1040" y="-602"/>
+        </scene>
+        <!--Text Editor View-->
+        <scene sceneID="q7v-0Z-jF4">
+            <objects>
+                <viewController id="Z6A-mS-oIK" customClass="TextEditorView" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="pYr-SF-Hae"/>
+                        <viewControllerLayoutGuide type="bottom" id="zZM-Gm-kOd"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="I4Z-ZF-6kd">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sOY-Pf-gLr">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                <connections>
+                                    <outlet property="delegate" destination="Z6A-mS-oIK" id="68z-yn-0vJ"/>
+                                </connections>
+                            </textView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="zZM-Gm-kOd" firstAttribute="top" secondItem="sOY-Pf-gLr" secondAttribute="bottom" id="0Ou-WW-C6T"/>
+                            <constraint firstItem="sOY-Pf-gLr" firstAttribute="leading" secondItem="I4Z-ZF-6kd" secondAttribute="leadingMargin" constant="-16" id="8Qz-B7-ygk"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="sOY-Pf-gLr" secondAttribute="trailing" constant="-16" id="8b1-Qg-1PD"/>
+                            <constraint firstItem="sOY-Pf-gLr" firstAttribute="top" secondItem="I4Z-ZF-6kd" secondAttribute="topMargin" id="BFa-AS-gZm"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="RlA-g4-ofe">
+                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="cI6-n2-Z8L">
+                            <connections>
+                                <action selector="cancelEditor:" destination="Z6A-mS-oIK" id="3Tx-86-zFb"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="yo1-wo-PJh">
+                            <connections>
+                                <action selector="saveEditor:" destination="Z6A-mS-oIK" id="kdw-ht-kur"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="textView" destination="sOY-Pf-gLr" id="rWK-AM-IG0"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="jxW-Jl-Ak4" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3035" y="-602"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="TXI-Ey-q85">
+            <objects>
+                <navigationController storyboardIdentifier="TextEditorView" automaticallyAdjustsScrollViewInsets="NO" modalPresentationStyle="formSheet" id="16U-bf-d0e" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="WXj-gU-P3W">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="Z6A-mS-oIK" kind="relationship" relationship="rootViewController" id="h8b-qn-AwF"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="l5h-qA-Rvt" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2380" y="-602"/>
         </scene>
     </scenes>
 </document>
