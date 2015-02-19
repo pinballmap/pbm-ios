@@ -197,7 +197,7 @@
         [self presentViewController:nav animated:YES completion:nil];
         return;
         
-        MachineConditionView *vc = (MachineConditionView *)[[[self.storyboard instantiateViewControllerWithIdentifier:@"MachineCondition"] viewControllers] lastObject];
+        MachineConditionView *vc = (MachineConditionView *)[[[[UIStoryboard storyboardWithName:@"SecondaryControllers" bundle:nil] instantiateViewControllerWithIdentifier:@"MachineCondition"] viewControllers] lastObject];
         vc.currentMachine = _currentMachine;
         [tableView setEditing:NO];
         [self.navigationController presentViewController:vc.parentViewController animated:YES completion:nil];
