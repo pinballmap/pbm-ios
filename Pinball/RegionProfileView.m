@@ -226,7 +226,7 @@
 
     if (indexPath.section == 1){
         // Region Contact
-        ContactView *eventContact = (ContactView *)[[self.storyboard instantiateViewControllerWithIdentifier:@"ContactView"] navigationRootViewController];
+        ContactView *eventContact = (ContactView *)[[[UIStoryboard storyboardWithName:@"SecondaryControllers" bundle:nil] instantiateViewControllerWithIdentifier:@"ContactView"] navigationRootViewController];
         eventContact.contactType = ContactTypeRegionContact;
         [self.navigationController presentViewController:eventContact.parentViewController animated:YES completion:nil];
     }else if (indexPath.section > 1 && indexPath.section-1 <= self.regionLinks.count){

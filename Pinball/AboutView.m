@@ -48,7 +48,7 @@
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 - (IBAction)sendFeedback:(id)sender{
-    ContactView *eventContact = (ContactView *)[[self.storyboard instantiateViewControllerWithIdentifier:@"ContactView"] navigationRootViewController];
+    ContactView *eventContact = (ContactView *)[[[UIStoryboard storyboardWithName:@"SecondaryControllers" bundle:nil] instantiateViewControllerWithIdentifier:@"ContactView"] navigationRootViewController];
     eventContact.contactType = ContactTypeAppFeedback;
     [self.navigationController presentViewController:eventContact.parentViewController animated:YES completion:nil];
 }
