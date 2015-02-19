@@ -130,8 +130,8 @@
                             <rect key="frame" x="0.0" y="64" width="600" height="92"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
-                                <segmentedControl opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="Cex-0O-nfX">
-                                    <rect key="frame" x="20" y="55" width="280" height="29"/>
+                                <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="Cex-0O-nfX">
+                                    <rect key="frame" x="20" y="55" width="560" height="29"/>
                                     <segments>
                                         <segment title="All"/>
                                         <segment title="Picked"/>
@@ -140,8 +140,8 @@
                                         <action selector="filterMachines:" destination="bFs-La-7Un" eventType="valueChanged" id="jkm-tL-3tQ"/>
                                     </connections>
                                 </segmentedControl>
-                                <searchBar contentMode="redraw" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="MAB-8r-cmh">
-                                    <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                                <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="MAB-8r-cmh">
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
                                     <textInputTraits key="textInputTraits"/>
                                     <connections>
                                         <outlet property="delegate" destination="bFs-La-7Un" id="r2C-12-I69"/>
