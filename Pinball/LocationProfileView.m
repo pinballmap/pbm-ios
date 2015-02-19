@@ -148,7 +148,7 @@ typedef enum : NSUInteger {
     [self.tableView reloadData];
 }
 - (IBAction)addNewMachine:(id)sender{
-    NewMachineLocationView *vc = (NewMachineLocationView *)[[[self.storyboard instantiateViewControllerWithIdentifier:@"NewMachineLocationView"] viewControllers] lastObject];
+    NewMachineLocationView *vc = (NewMachineLocationView *)[[[[UIStoryboard storyboardWithName:@"SecondaryControllers" bundle:nil] instantiateViewControllerWithIdentifier:@"NewMachineLocationView"] viewControllers] lastObject];
     vc.location = _currentLocation;
     [self.navigationController presentViewController:vc.parentViewController animated:YES completion:nil];
 }

@@ -221,5 +221,121 @@
             </objects>
             <point key="canvasLocation" x="2380" y="-530"/>
         </scene>
+        <!--New Machine-->
+        <scene sceneID="wzX-XQ-y18">
+            <objects>
+                <tableViewController id="ZHd-yL-vEr" customClass="NewMachineLocationView" sceneMemberID="viewController">
+                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="eoi-Gk-VSI">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <sections>
+                            <tableViewSection headerTitle="Machine" id="yYb-sI-Tij">
+                                <cells>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="00R-4X-0xZ" style="IBUITableViewCellStyleDefault" id="2Hr-gl-SSn">
+                                        <rect key="frame" x="0.0" y="119" width="320" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="2Hr-gl-SSn" id="Cab-zk-cCa">
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Pick Machine" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="00R-4X-0xZ">
+                                                    <rect key="frame" x="15" y="0.0" width="290" height="43"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="yuL-Zl-7vo" style="IBUITableViewCellStyleDefault" id="otH-pU-ZUr">
+                                        <rect key="frame" x="0.0" y="163" width="320" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="otH-pU-ZUr" id="Qsv-bS-CZ6">
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Location Name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="yuL-Zl-7vo">
+                                                    <rect key="frame" x="15" y="0.0" width="290" height="43"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
+                            <tableViewSection headerTitle="Condition" id="bXf-uz-4n0">
+                                <cells>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="106" id="CLY-ll-EQt">
+                                        <rect key="frame" x="0.0" y="255" width="320" height="106"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="CLY-ll-EQt" id="u4f-A4-1Sl">
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="105"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" scrollEnabled="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oga-Sf-TXt">
+                                                    <rect key="frame" x="11" y="5" width="299" height="95"/>
+                                                    <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                                    <connections>
+                                                        <outlet property="delegate" destination="ZHd-yL-vEr" id="tUv-Bt-SQU"/>
+                                                    </connections>
+                                                </textView>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
+                        </sections>
+                        <connections>
+                            <outlet property="dataSource" destination="ZHd-yL-vEr" id="YJ1-kR-C03"/>
+                            <outlet property="delegate" destination="ZHd-yL-vEr" id="eia-t6-Xrb"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="New Machine" id="GDs-VZ-eat">
+                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="CaV-0Y-ylC">
+                            <connections>
+                                <action selector="cancelMachine:" destination="ZHd-yL-vEr" id="L7D-IM-RwS"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="mSa-1d-JCM">
+                            <connections>
+                                <action selector="saveMachine:" destination="ZHd-yL-vEr" id="GoI-lh-5Oy"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="locationName" destination="yuL-Zl-7vo" id="yxh-6h-jp0"/>
+                        <outlet property="machineCondition" destination="oga-Sf-TXt" id="tkp-Hq-Bkd"/>
+                        <outlet property="machineName" destination="00R-4X-0xZ" id="JX5-1t-0mQ"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="DWs-u9-k97" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3035" y="-1240"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="wn0-NK-2Vh">
+            <objects>
+                <navigationController storyboardIdentifier="NewMachineLocationView" automaticallyAdjustsScrollViewInsets="NO" modalPresentationStyle="formSheet" id="0J3-Fr-ia4" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="zgw-Yf-1Eh">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="ZHd-yL-vEr" kind="relationship" relationship="rootViewController" id="qTI-Hu-5ow"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Zaf-Hb-ueR" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2380" y="-1240"/>
+        </scene>
     </scenes>
 </document>

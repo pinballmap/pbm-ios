@@ -208,104 +208,6 @@
             </objects>
             <point key="canvasLocation" x="1841" y="1328"/>
         </scene>
-        <!--New Machine-->
-        <scene sceneID="FGW-om-8HA">
-            <objects>
-                <tableViewController id="emT-5L-4bB" customClass="NewMachineLocationView" sceneMemberID="viewController">
-                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="yaW-0M-zlr">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
-                        <sections>
-                            <tableViewSection headerTitle="Machine" id="Ncm-oi-KXz">
-                                <cells>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="qMS-Kk-gXk" style="IBUITableViewCellStyleDefault" id="0eS-Ce-8ua">
-                                        <rect key="frame" x="0.0" y="119" width="320" height="44"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="0eS-Ce-8ua" id="uxE-kE-Qr6">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Pick Machine" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="qMS-Kk-gXk">
-                                                    <rect key="frame" x="15" y="0.0" width="290" height="43"/>
-                                                    <autoresizingMask key="autoresizingMask"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                            </subviews>
-                                        </tableViewCellContentView>
-                                    </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="SLI-IT-8ek" style="IBUITableViewCellStyleDefault" id="Lrb-L1-LyR">
-                                        <rect key="frame" x="0.0" y="163" width="320" height="44"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Lrb-L1-LyR" id="cvZ-ky-bns">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Location Name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="SLI-IT-8ek">
-                                                    <rect key="frame" x="15" y="0.0" width="290" height="43"/>
-                                                    <autoresizingMask key="autoresizingMask"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                            </subviews>
-                                        </tableViewCellContentView>
-                                    </tableViewCell>
-                                </cells>
-                            </tableViewSection>
-                            <tableViewSection headerTitle="Condition" id="tzB-MI-lCm">
-                                <cells>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="106" id="hTg-XM-aB9">
-                                        <rect key="frame" x="0.0" y="255" width="320" height="106"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="hTg-XM-aB9" id="xaX-54-rnN">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="105"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" scrollEnabled="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bcm-Yy-hjD">
-                                                    <rect key="frame" x="11" y="5" width="299" height="95"/>
-                                                    <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                                                    <connections>
-                                                        <outlet property="delegate" destination="emT-5L-4bB" id="aJn-vS-jbS"/>
-                                                    </connections>
-                                                </textView>
-                                            </subviews>
-                                        </tableViewCellContentView>
-                                    </tableViewCell>
-                                </cells>
-                            </tableViewSection>
-                        </sections>
-                        <connections>
-                            <outlet property="dataSource" destination="emT-5L-4bB" id="pKc-F4-6xb"/>
-                            <outlet property="delegate" destination="emT-5L-4bB" id="iGG-XV-ccZ"/>
-                        </connections>
-                    </tableView>
-                    <navigationItem key="navigationItem" title="New Machine" id="ATd-4h-eTN">
-                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="xhC-ee-lRP">
-                            <connections>
-                                <action selector="cancelMachine:" destination="emT-5L-4bB" id="qBI-Bk-fRw"/>
-                            </connections>
-                        </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="cNM-hp-2Lo">
-                            <connections>
-                                <action selector="saveMachine:" destination="emT-5L-4bB" id="8gq-I5-DOA"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
-                    <connections>
-                        <outlet property="locationName" destination="SLI-IT-8ek" id="sBf-rc-uUG"/>
-                        <outlet property="machineCondition" destination="bcm-Yy-hjD" id="KQt-Ir-OxG"/>
-                        <outlet property="machineName" destination="qMS-Kk-gXk" id="Rkh-rL-WuU"/>
-                    </connections>
-                </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="KQ3-nK-uub" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="3821" y="-530"/>
-        </scene>
         <!--Locations-->
         <scene sceneID="dj9-7k-iLh">
             <objects>
@@ -1526,24 +1428,6 @@
                 </searchDisplayController>
             </objects>
             <point key="canvasLocation" x="1924" y="3541"/>
-        </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="L34-CY-u2Z">
-            <objects>
-                <navigationController storyboardIdentifier="NewMachineLocationView" automaticallyAdjustsScrollViewInsets="NO" id="s1Q-xY-Q0v" sceneMemberID="viewController">
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="IBZ-ln-63x">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="emT-5L-4bB" kind="relationship" relationship="rootViewController" id="eX6-N7-AZ6"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Ruh-FE-hSq" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="3428" y="-530"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Rpz-Fo-ZVg">
