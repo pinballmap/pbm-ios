@@ -65,7 +65,7 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     if (indexPath.section == 0){
-        MachinePickingView *pickingView = [[[self.storyboard instantiateViewControllerWithIdentifier:@"MachinePickingView"] viewControllers] lastObject];
+        MachinePickingView *pickingView = [[[[UIStoryboard storyboardWithName:@"SecondaryControllers" bundle:nil] instantiateViewControllerWithIdentifier:@"MachinePickingView"] viewControllers] lastObject];
         pickingView.delegate = self;
         pickingView.canPickMultiple = NO;
         [self.navigationController presentViewController:pickingView.parentViewController animated:YES completion:nil];

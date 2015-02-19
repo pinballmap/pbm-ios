@@ -118,5 +118,108 @@
             </objects>
             <point key="canvasLocation" x="2380" y="158"/>
         </scene>
+        <!--Machines-->
+        <scene sceneID="Oou-Sp-ciD">
+            <objects>
+                <tableViewController id="bFs-La-7Un" customClass="MachinePickingView" sceneMemberID="viewController">
+                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="tz7-Yt-Jw1">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <view key="tableHeaderView" contentMode="scaleToFill" id="INf-SC-X28">
+                            <rect key="frame" x="0.0" y="64" width="600" height="92"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <subviews>
+                                <segmentedControl opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="Cex-0O-nfX">
+                                    <rect key="frame" x="20" y="55" width="280" height="29"/>
+                                    <segments>
+                                        <segment title="All"/>
+                                        <segment title="Picked"/>
+                                    </segments>
+                                    <connections>
+                                        <action selector="filterMachines:" destination="bFs-La-7Un" eventType="valueChanged" id="jkm-tL-3tQ"/>
+                                    </connections>
+                                </segmentedControl>
+                                <searchBar contentMode="redraw" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="MAB-8r-cmh">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                                    <textInputTraits key="textInputTraits"/>
+                                    <connections>
+                                        <outlet property="delegate" destination="bFs-La-7Un" id="r2C-12-I69"/>
+                                    </connections>
+                                </searchBar>
+                            </subviews>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                            <constraints>
+                                <constraint firstItem="Cex-0O-nfX" firstAttribute="leading" secondItem="INf-SC-X28" secondAttribute="leading" constant="20" id="9ue-dm-glj"/>
+                                <constraint firstItem="MAB-8r-cmh" firstAttribute="top" secondItem="INf-SC-X28" secondAttribute="top" id="Ezw-dB-uuc"/>
+                                <constraint firstItem="Cex-0O-nfX" firstAttribute="top" secondItem="MAB-8r-cmh" secondAttribute="bottom" constant="11" id="WLK-Uy-orW"/>
+                                <constraint firstItem="MAB-8r-cmh" firstAttribute="leading" secondItem="INf-SC-X28" secondAttribute="leading" id="shE-hQ-5TV"/>
+                                <constraint firstAttribute="trailing" secondItem="Cex-0O-nfX" secondAttribute="trailing" constant="20" id="tL0-Y4-2bQ"/>
+                                <constraint firstAttribute="trailing" secondItem="MAB-8r-cmh" secondAttribute="trailing" id="yvO-GT-ZBU"/>
+                            </constraints>
+                        </view>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="MachineCell" textLabel="9dZ-U5-Btz" style="IBUITableViewCellStyleDefault" id="jiL-zz-vGB">
+                                <rect key="frame" x="0.0" y="178" width="320" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="jiL-zz-vGB" id="qFI-XY-ele">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="9dZ-U5-Btz">
+                                            <rect key="frame" x="15" y="0.0" width="290" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="bFs-La-7Un" id="Bul-gs-tl3"/>
+                            <outlet property="delegate" destination="bFs-La-7Un" id="Msa-xh-kdL"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Machines" id="IJV-pc-rUA">
+                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="3nV-Yx-ji3">
+                            <connections>
+                                <action selector="cancelPicking:" destination="bFs-La-7Un" id="OqL-Ph-DQP"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="gyb-7Z-d4g">
+                            <connections>
+                                <action selector="savePicked:" destination="bFs-La-7Un" id="jvU-0g-Y7X"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="machineFilter" destination="Cex-0O-nfX" id="qUs-bJ-Hii"/>
+                        <outlet property="mainSearchbar" destination="MAB-8r-cmh" id="rLB-gZ-kKa"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="B2m-Yo-ezU" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3035" y="-530"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="asV-w9-L2D">
+            <objects>
+                <navigationController storyboardIdentifier="MachinePickingView" automaticallyAdjustsScrollViewInsets="NO" modalPresentationStyle="formSheet" id="zI9-S4-5Cr" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="hLI-IG-r05">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="bFs-La-7Un" kind="relationship" relationship="rootViewController" id="RyM-Ow-2TU"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="rTA-cq-xC0" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2380" y="-530"/>
+        </scene>
     </scenes>
 </document>
