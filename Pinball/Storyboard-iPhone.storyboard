@@ -447,92 +447,6 @@
             </objects>
             <point key="canvasLocation" x="3821" y="2156"/>
         </scene>
-        <!--New Score-->
-        <scene sceneID="ftS-w8-B7j">
-            <objects>
-                <tableViewController id="qBe-Nc-goh" customClass="NewMachineScoreView" sceneMemberID="viewController">
-                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="tbr-me-9lr">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
-                        <sections>
-                            <tableViewSection id="NNB-Bo-SFQ">
-                                <cells>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="wnw-9w-u5i">
-                                        <rect key="frame" x="0.0" y="99" width="320" height="44"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="wnw-9w-u5i" id="2Ug-BH-RhR">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Score" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="8AB-GV-8L6">
-                                                    <rect key="frame" x="20" y="0.0" width="280" height="43"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <textInputTraits key="textInputTraits" autocapitalizationType="words" keyboardType="numberPad"/>
-                                                </textField>
-                                            </subviews>
-                                        </tableViewCellContentView>
-                                    </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="BBf-Ve-ULI">
-                                        <rect key="frame" x="0.0" y="143" width="320" height="44"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="BBf-Ve-ULI" id="mLd-fJ-CuD">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Initials" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="sQP-Th-NMc">
-                                                    <rect key="frame" x="20" y="0.0" width="280" height="43"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <textInputTraits key="textInputTraits" autocapitalizationType="allCharacters" autocorrectionType="no"/>
-                                                </textField>
-                                            </subviews>
-                                        </tableViewCellContentView>
-                                    </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="iAX-8b-7ug">
-                                        <rect key="frame" x="0.0" y="187" width="320" height="44"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="iAX-8b-7ug" id="riE-XY-0Up">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Rank" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="4XN-Dw-aQi">
-                                                    <rect key="frame" x="20" y="0.0" width="280" height="43"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <textInputTraits key="textInputTraits" autocapitalizationType="allCharacters" autocorrectionType="no"/>
-                                                </textField>
-                                            </subviews>
-                                        </tableViewCellContentView>
-                                    </tableViewCell>
-                                </cells>
-                            </tableViewSection>
-                        </sections>
-                        <connections>
-                            <outlet property="dataSource" destination="qBe-Nc-goh" id="R62-OU-Lre"/>
-                            <outlet property="delegate" destination="qBe-Nc-goh" id="jgF-0s-wcD"/>
-                        </connections>
-                    </tableView>
-                    <navigationItem key="navigationItem" title="New Score" id="zIT-4F-PEe">
-                        <barButtonItem key="leftBarButtonItem" systemItem="done" id="1u3-au-g9g">
-                            <connections>
-                                <action selector="cancelScore:" destination="qBe-Nc-goh" id="XmX-GW-Nf2"/>
-                            </connections>
-                        </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="8YI-6I-Mm2">
-                            <connections>
-                                <action selector="saveScore:" destination="qBe-Nc-goh" id="822-Ga-Oem"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
-                    <connections>
-                        <outlet property="initials" destination="sQP-Th-NMc" id="QMq-Bb-ADH"/>
-                        <outlet property="rank" destination="4XN-Dw-aQi" id="m9K-g7-9A2"/>
-                        <outlet property="score" destination="8AB-GV-8L6" id="gV1-Po-tKV"/>
-                    </connections>
-                </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="dZD-qC-3eC" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="4601" y="844"/>
-        </scene>
         <!--Events-->
         <scene sceneID="caA-Ft-Sam">
             <objects>
@@ -1160,24 +1074,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="H5B-R0-F2K" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1833" y="-800"/>
-        </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="euw-OM-pZ0">
-            <objects>
-                <navigationController storyboardIdentifier="NewMachineScoreView" automaticallyAdjustsScrollViewInsets="NO" id="ywB-kh-3S6" sceneMemberID="viewController">
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Ue3-ZY-19B">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="qBe-Nc-goh" kind="relationship" relationship="rootViewController" id="x9z-ZB-XHS"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="ewO-lp-dxW" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="4208" y="844"/>
         </scene>
         <!--Nearby-->
         <scene sceneID="oSL-Kr-yec">

@@ -202,7 +202,7 @@
         [tableView setEditing:NO];
         [self.navigationController presentViewController:vc.parentViewController animated:YES completion:nil];
     }else if (indexPath.section == 2 && indexPath.row == 0){
-        NewMachineScoreView *scoreView = [[[self.storyboard instantiateViewControllerWithIdentifier:@"NewMachineScoreView"] viewControllers] lastObject];
+        NewMachineScoreView *scoreView = [[[[UIStoryboard storyboardWithName:@"SecondaryControllers" bundle:nil] instantiateViewControllerWithIdentifier:@"NewMachineScoreView"] viewControllers] lastObject];
         scoreView.currentMachine = _currentMachine;
         scoreView.delegate = self;
         [self.navigationController presentViewController:scoreView.parentViewController animated:YES completion:nil];
