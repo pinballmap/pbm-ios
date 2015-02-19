@@ -1094,66 +1094,6 @@
             </objects>
             <point key="canvasLocation" x="-1623" y="1506"/>
         </scene>
-        <!--High Roller Profile View-->
-        <scene sceneID="V1n-Sf-g6D">
-            <objects>
-                <tableViewController id="I4T-Hm-Zs5" customClass="HighRollerProfileView" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="p8r-GZ-6fp">
-                        <rect key="frame" x="0.0" y="0.0" width="540" height="620"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="BasicCell" textLabel="gpn-RY-Ycl" detailTextLabel="Z6L-4S-hd3" style="IBUITableViewCellStyleSubtitle" id="Ry4-eb-qP2">
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Ry4-eb-qP2" id="Z5S-57-yxW">
-                                    <autoresizingMask key="autoresizingMask"/>
-                                    <subviews>
-                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="gpn-RY-Ycl">
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Subtitle" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Z6L-4S-hd3">
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="11"/>
-                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                    </subviews>
-                                </tableViewCellContentView>
-                            </tableViewCell>
-                        </prototypes>
-                        <connections>
-                            <outlet property="dataSource" destination="I4T-Hm-Zs5" id="2Mp-Jl-IQ9"/>
-                            <outlet property="delegate" destination="I4T-Hm-Zs5" id="l62-ou-vsL"/>
-                        </connections>
-                    </tableView>
-                    <navigationItem key="navigationItem" id="j4g-CL-0hS"/>
-                </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="wL5-It-ss9" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="5372" y="6971"/>
-        </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="C46-Sc-e85">
-            <objects>
-                <navigationController storyboardIdentifier="HighRollerProfileView" automaticallyAdjustsScrollViewInsets="NO" modalPresentationStyle="formSheet" id="X6K-n7-6y2" sceneMemberID="viewController">
-                    <toolbarItems/>
-                    <modalFormSheetSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="lxp-nc-LkU">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="I4T-Hm-Zs5" kind="relationship" relationship="rootViewController" id="AHN-wc-JsU"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="lKr-np-GUf" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="4763" y="6971"/>
-        </scene>
         <!--Loading View Controller-->
         <scene sceneID="cHd-wu-URM">
             <objects>

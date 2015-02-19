@@ -239,7 +239,7 @@
     }else if (indexPath.section != 0){
         HighRoller *highRoller = self.highRollers[indexPath.row];
         
-        HighRollerProfileView *profile = (HighRollerProfileView *)[[self.storyboard instantiateViewControllerWithIdentifier:@"HighRollerProfileView"] navigationRootViewController];
+        HighRollerProfileView *profile = (HighRollerProfileView *)[[[UIStoryboard storyboardWithName:@"SecondaryControllers" bundle:nil] instantiateViewControllerWithIdentifier:@"HighRollerProfileView"] navigationRootViewController];
         profile.highRoller = highRoller;
         
         [self.navigationController presentViewController:[profile parentViewController] animated:YES completion:nil];

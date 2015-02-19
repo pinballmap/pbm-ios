@@ -226,7 +226,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dh3-hh-hsn" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="833" y="-85"/>
+            <point key="canvasLocation" x="833" y="-145"/>
         </scene>
         <!--Locations View-->
         <scene sceneID="QW6-m6-yp8">
@@ -276,7 +276,7 @@
                     </connections>
                 </searchDisplayController>
             </objects>
-            <point key="canvasLocation" x="1359" y="-85"/>
+            <point key="canvasLocation" x="1359" y="-145"/>
         </scene>
         <!--Location Profile View-->
         <scene sceneID="txd-5B-KBH">
@@ -381,7 +381,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6N8-QB-uXO" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1833" y="-86"/>
+            <point key="canvasLocation" x="1833" y="-146"/>
         </scene>
         <!--Loading View Controller-->
         <scene sceneID="ePm-jf-UR4">
@@ -676,48 +676,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wFd-YI-U7c" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1373" y="4232"/>
-        </scene>
-        <!--High Roller Profile View-->
-        <scene sceneID="DeI-Vg-ADi">
-            <objects>
-                <tableViewController id="cPa-WN-Lkq" customClass="HighRollerProfileView" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="fHc-5q-vGn">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="BasicCell" textLabel="Sxj-ri-exm" detailTextLabel="KwW-ie-ySg" style="IBUITableViewCellStyleSubtitle" id="pMP-KW-QJj">
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="pMP-KW-QJj" id="AmO-c7-5HA">
-                                    <autoresizingMask key="autoresizingMask"/>
-                                    <subviews>
-                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Sxj-ri-exm">
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Subtitle" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="KwW-ie-ySg">
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="11"/>
-                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                    </subviews>
-                                </tableViewCellContentView>
-                            </tableViewCell>
-                        </prototypes>
-                        <connections>
-                            <outlet property="dataSource" destination="cPa-WN-Lkq" id="uKi-xq-lFJ"/>
-                            <outlet property="delegate" destination="cPa-WN-Lkq" id="d2T-6p-sEw"/>
-                        </connections>
-                    </tableView>
-                    <navigationItem key="navigationItem" id="SMi-Vz-Tyu"/>
-                </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="fUb-FZ-7z3" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2194" y="4227"/>
+            <point key="canvasLocation" x="3366" y="2116"/>
         </scene>
         <!--New Location-->
         <scene sceneID="Jwm-QA-GpT">
@@ -958,7 +917,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="30a-CI-aff" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2226" y="-800"/>
+            <point key="canvasLocation" x="2226" y="-860"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="L2y-xM-vHp">
@@ -976,7 +935,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="H5B-R0-F2K" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1833" y="-800"/>
+            <point key="canvasLocation" x="1833" y="-860"/>
         </scene>
         <!--Nearby-->
         <scene sceneID="oSL-Kr-yec">
@@ -1014,25 +973,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UCe-Hi-p2z" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="841" y="4232"/>
-        </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="jhH-k3-uAz">
-            <objects>
-                <navigationController storyboardIdentifier="HighRollerProfileView" automaticallyAdjustsScrollViewInsets="NO" modalPresentationStyle="formSheet" id="Bum-2H-7Zo" sceneMemberID="viewController">
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="OBB-ER-WYF">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="cPa-WN-Lkq" kind="relationship" relationship="rootViewController" id="7me-Rc-guY"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="rbM-fo-i2G" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1771" y="4227"/>
+            <point key="canvasLocation" x="2834" y="2116"/>
         </scene>
     </scenes>
     <resources>
