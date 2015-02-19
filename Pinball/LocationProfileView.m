@@ -416,7 +416,7 @@ typedef enum : NSUInteger {
         
         
         if (self.dataSetSeg.selectedSegmentIndex == 0){
-            MachineLocationProfileView *vc = [[[self.storyboard instantiateViewControllerWithIdentifier:@"MachineLocationProfileView"] viewControllers] lastObject];
+            MachineLocationProfileView *vc = [[[[UIStoryboard storyboardWithName:@"SecondaryControllers" bundle:nil] instantiateViewControllerWithIdentifier:@"MachineLocationProfileView"] viewControllers] lastObject];
             vc.currentMachine = [self.machinesFetch objectAtIndexPath:[NSIndexPath indexPathForRow:indexPath.row inSection:0]];
             [tableView setEditing:NO];
             if ([UIDevice currentModel] == ModelTypeiPad){
