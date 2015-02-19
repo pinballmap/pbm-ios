@@ -8,15 +8,21 @@
 
 #import "TodayViewController.h"
 #import <NotificationCenter/NotificationCenter.h>
+#import "CoreDataManager.h"
+#import "NSDate+CupertinoYankee.h"
+#import "Event.h"
+#import "Event+CellHelpers.h"
 
 NSString * const apiRootURL = @"http://pinballmap.com/";
 NSString * const appGroup = @"group.net.isaacruiz.ppm";
 NSString * const etagKey = @"recentsEtag";
 
 @interface TodayViewController () <NCWidgetProviding>
+@property (weak, nonatomic) IBOutlet UISegmentedControl *dataType;
 
 @property (nonatomic) NSString *regionName;
 @property (nonatomic) NSMutableArray *recentMachines;
+@property (nonatomic) NSMutableArray *events;
 
 + (NSUserDefaults *)userDefaultsForApp;
 
@@ -29,6 +35,15 @@ NSString * const etagKey = @"recentsEtag";
     // Do any additional setup after loading the view from its nib.
     NSDictionary *regionInfo = [[TodayViewController userDefaultsForApp] objectForKey:@"CurrentRegion"];
     self.regionName = regionInfo[@"name"];
+    self.events = [NSMutableArray new];
+
+    NSLog(@"%@",[[CoreDataManager sharedInstance] managedObjectContext]);
+    
+    NSFetchRequest *eventsFetch = [NSFetchRequest fetchRequestWithEntityName:@"Event"];
+    eventsFetch.predicate = [NSPredicate predicateWithFormat:@"region.name = %@ AND startDate >= %@",self.regionName,[[NSDate date] endOfDay]];
+    eventsFetch.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"startDate" ascending:true]];
+    eventsFetch.fetchLimit = 5;
+    [self.events addObjectsFromArray:[[[CoreDataManager sharedInstance] managedObjectContext] executeFetchRequest:eventsFetch error:nil]];
 
     self.recentMachines = [NSMutableArray new];
 
@@ -111,6 +126,9 @@ NSString * const etagKey = @"recentsEtag";
     [self.recentMachines removeAllObjects];
     [self.recentMachines addObjectsFromArray:[recentMachinesObj sortedArrayUsingDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"createdOn" ascending:NO]]]];
 }
+- (IBAction)changeData:(id)sender {
+    [self.tableView reloadData];
+}
 #pragma mark - NCWidget Delegate
 - (void)widgetPerformUpdateWithCompletionHandler:(void (^)(NCUpdateResult))completionHandler {
     // Perform any setup necessary in order to update the view.
@@ -146,11 +164,21 @@ NSString * const etagKey = @"recentsEtag";
     return 1;
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return self.recentMachines.count;
+    if (self.dataType.selectedSegmentIndex == 0){
+        return self.recentMachines.count;
+    }else{
+        return self.events.count;
+    }
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    NSDictionary *recentMachine = self.recentMachines[indexPath.row];
-    NSAttributedString *cellTitle = recentMachine[@"displayText"];
+    NSAttributedString *cellTitle;
+    if (self.dataType.selectedSegmentIndex == 0){
+        NSDictionary *recentMachine = self.recentMachines[indexPath.row];
+        cellTitle = recentMachine[@"displayText"];
+    }else{
+        Event *currentEvent = self.events[indexPath.row];
+        cellTitle = currentEvent.eventTitle;
+    }
 
     CGRect stringSize = [cellTitle boundingRectWithSize:CGSizeMake(290, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin context:nil];
 
@@ -161,18 +189,28 @@ NSString * const etagKey = @"recentsEtag";
         return stringSize.size.height;
     }
 }
-
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     static NSString *cellIdentifier = @"BasicCell";
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
-    NSDictionary *recentMachine = self.recentMachines[indexPath.row];
+    NSAttributedString *cellTitle;
+    if (self.dataType.selectedSegmentIndex == 0){
+        NSDictionary *recentMachine = self.recentMachines[indexPath.row];
+        cellTitle = recentMachine[@"displayText"];
+    }else{
+        Event *currentEvent = self.events[indexPath.row];
+        cellTitle = currentEvent.eventTitle;
+    }
     cell.textLabel.numberOfLines = 0;
-    cell.textLabel.attributedText = recentMachine[@"displayText"];
+    cell.textLabel.attributedText = cellTitle;
     return cell;
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    if (self.dataType.selectedSegmentIndex == 1){
+        NSURL *appSchema = [[NSURL alloc] initWithScheme:@"pbmapp" host:nil path:@"/events"];
+        [self.extensionContext openURL:appSchema completionHandler:nil];
+    }
 }
 
 @end

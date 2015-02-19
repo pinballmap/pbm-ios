@@ -1,7 +1,7 @@
 // NSDate+CupertinoYankee.m
 //
-// Copyright (c) 2012 Mattt Thompson (http://mattt.me)
-// 
+// Copyright (c) 2012–2014 Mattt Thompson (http://mattt.me)
+//
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
 // in the Software without restriction, including without limitation the rights
@@ -22,12 +22,34 @@
 
 #import "NSDate+CupertinoYankee.h"
 
+#if (defined(__IPHONE_OS_VERSION_MAX_ALLOWED) && __IPHONE_OS_VERSION_MAX_ALLOWED >= 70000) || (defined(__MAC_OS_X_VERSION_MAX_ALLOWED) && __MAC_OS_X_VERSION_MAX_ALLOWED >= 1090)
+#define CYCalendarUnitYear NSCalendarUnitYear
+#define CYCalendarUnitMonth NSCalendarUnitMonth
+#define CYCalendarUnitWeek NSCalendarUnitWeekOfYear
+#define CYCalendarUnitDay NSCalendarUnitDay
+#define CYCalendarUnitHour NSCalendarUnitHour
+#define CYCalendarUnitMinute NSCalendarUnitMinute
+#define CYCalendarUnitSecond NSCalendarUnitSecond
+#define CYCalendarUnitWeekday NSCalendarUnitWeekday
+#define CYDateComponentUndefined NSDateComponentUndefined
+#else
+#define CYCalendarUnitYear NSYearCalendarUnit
+#define CYCalendarUnitMonth NSMonthCalendarUnit
+#define CYCalendarUnitWeek NSWeekOfYearCalendarUnit
+#define CYCalendarUnitDay NSDayCalendarUnit
+#define CYCalendarUnitHour NSHourCalendarUnit
+#define CYCalendarUnitMinute NSMinuteCalendarUnit
+#define CYCalendarUnitSecond NSSecondCalendarUnit
+#define CYCalendarUnitWeekday NSWeekdayCalendarUnit
+#define CYDateComponentUndefined NSUndefinedDateComponent
+#endif
+
 @implementation NSDate (CupertinoYankee)
 
 - (NSDate *)beginningOfDay {
     NSCalendar *calendar = [NSCalendar currentCalendar];
 
-    NSDateComponents *components = [calendar components:NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit fromDate:self];
+    NSDateComponents *components = [calendar components:CYCalendarUnitYear | CYCalendarUnitMonth | CYCalendarUnitDay fromDate:self];
     
     return [calendar dateFromComponents:components];
 }
@@ -36,7 +58,7 @@
     NSCalendar *calendar = [NSCalendar currentCalendar];
     
     NSDateComponents *components = [[NSDateComponents alloc] init];
-    [components setDay:1];
+    components.day = 1;
     
     return [[calendar dateByAddingComponents:components toDate:[self beginningOfDay] options:0] dateByAddingTimeInterval:-1];
 }
@@ -46,10 +68,10 @@
 - (NSDate *)beginningOfWeek {
     NSCalendar *calendar = [NSCalendar currentCalendar];
 
-    NSDateComponents *components = [calendar components:NSYearCalendarUnit | NSMonthCalendarUnit | NSWeekdayCalendarUnit | NSDayCalendarUnit fromDate:self];
+    NSDateComponents *components = [calendar components:CYCalendarUnitYear | CYCalendarUnitMonth | CYCalendarUnitWeekday | CYCalendarUnitDay fromDate:self];
 
-    NSInteger offset = [components weekday] - (NSInteger)[calendar firstWeekday];
-    [components setDay:[components day] - offset];
+    NSInteger offset = components.weekday - (NSInteger)calendar.firstWeekday;
+    components.day = components.day - offset;
 
     return [calendar dateFromComponents:components];
 }
@@ -58,8 +80,8 @@
     NSCalendar *calendar = [NSCalendar currentCalendar];
     
     NSDateComponents *components = [[NSDateComponents alloc] init];
-    [components setWeek:1];
-    
+    components.weekOfMonth = 1;
+
     return [[calendar dateByAddingComponents:components toDate:[self beginningOfWeek] options:0] dateByAddingTimeInterval:-1];
 }
 
@@ -68,7 +90,7 @@
 - (NSDate *)beginningOfMonth {
     NSCalendar *calendar = [NSCalendar currentCalendar];
 
-    NSDateComponents *components = [calendar components:NSYearCalendarUnit | NSMonthCalendarUnit fromDate:self];
+    NSDateComponents *components = [calendar components:CYCalendarUnitYear | CYCalendarUnitMonth fromDate:self];
         
     return [calendar dateFromComponents:components];
 }
@@ -77,7 +99,7 @@
     NSCalendar *calendar = [NSCalendar currentCalendar];
     
     NSDateComponents *components = [[NSDateComponents alloc] init];
-    [components setMonth:1];
+    components.month = 1;
     
     return [[calendar dateByAddingComponents:components toDate:[self beginningOfMonth] options:0] dateByAddingTimeInterval:-1];
 }
@@ -87,7 +109,7 @@
 - (NSDate *)beginningOfYear {
     NSCalendar *calendar = [NSCalendar currentCalendar];
 
-    NSDateComponents *components = [calendar components:NSYearCalendarUnit fromDate:self];
+    NSDateComponents *components = [calendar components:CYCalendarUnitYear fromDate:self];
     
     return [calendar dateFromComponents:components];
 }
@@ -96,8 +118,8 @@
     NSCalendar *calendar = [NSCalendar currentCalendar];
     
     NSDateComponents *components = [[NSDateComponents alloc] init];
-    [components setYear:1];
-    
+    components.year = 1;
+
     return [[calendar dateByAddingComponents:components toDate:[self beginningOfYear] options:0] dateByAddingTimeInterval:-1];
 }
 

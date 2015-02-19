@@ -12,7 +12,7 @@
 @implementation MachineLocation (CellHelpers)
 
 - (NSString *)conditionWithUpdateDate{
-    return [NSString stringWithFormat:@"%@-updated on %@",self.condition,[self.conditionUpdate monthDayYearPretty:YES]];
+    return [NSString stringWithFormat:@"%@ (updated on %@)",self.condition,[self.conditionUpdate monthDayYearPretty:YES]];
 }
 
 @end

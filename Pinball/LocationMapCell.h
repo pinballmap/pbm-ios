@@ -12,7 +12,6 @@
 @interface LocationMapCell : UITableViewCell
 
 @property (weak) IBOutlet MKMapView *mapView;
-
-- (void)addAnnotation;
+@property (nonatomic) Location *currentLocation;
 
 @end

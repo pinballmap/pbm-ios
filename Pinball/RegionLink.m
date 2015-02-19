@@ -16,7 +16,7 @@
     if (self){
         self.linkDescription = link[@"description"];
         if ([link[@"description"] isKindOfClass:[NSNull class]]){
-            self.linkDescription = @"N/A";
+            self.linkDescription = @"";
         }
         self.name = link[@"name"];
         self.url = link[@"url"];

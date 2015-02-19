@@ -7,11 +7,11 @@
 //
 
 #import "AppDelegate.h"
-#import "PinballMapManager.h"
 #import <HockeySDK/HockeySDK.h>
 #import "LocationProfileView-iPad.h"
 #import "GAI.h"
 #import "ThirdPartyKeys.h"
+#import "PinballTabController.h"
 @import MapKit;
 
 @implementation AppDelegate
@@ -49,6 +49,15 @@
     [[GAI sharedInstance] trackerWithTrackingId:[ThirdPartyKeys googleID]];
 
     return YES;
+}
+
+- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation{
+    
+    if (self.window.rootViewController && [self.window.rootViewController isKindOfClass:[PinballTabController class]]){
+        [(PinballTabController *)self.window.rootViewController setSelectedIndex:3];
+    }
+    
+    return true;
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application

@@ -15,13 +15,15 @@
 #import "HighRollerProfileView.h"
 #import "ReuseWebView.h"
 #import "ContactView.h"
+#import "Region+Extensions.h"
 
-@interface RegionProfileView ()
+@interface RegionProfileView () <RegionSelectionDelegate>
 
 @property (nonatomic) Region *currentRegion;
 @property (nonatomic) NSMutableArray *regionLinks;
 @property (nonatomic) NSMutableArray *highRollers;
 @property (nonatomic) NSString *regionMOTD;
+@property (nonatomic) UIAlertView *loadingAlert;
 
 - (IBAction)showAbout:(id)sender;
 
@@ -32,6 +34,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    self.loadingAlert = [[UIAlertView alloc] initWithTitle:@"Loading" message:@"Loading new region data" delegate:nil cancelButtonTitle:nil otherButtonTitles:nil, nil];
     UIBarButtonItem *aboutButton = [[UIBarButtonItem alloc] initWithTitle:@"About" style:UIBarButtonItemStylePlain target:self action:@selector(showAbout:)];
     self.navigationItem.leftBarButtonItem = aboutButton;
     UIBarButtonItem *changeRegionButton = [[UIBarButtonItem alloc] initWithTitle:@"Change" style:UIBarButtonItemStylePlain target:self action:@selector(changeRegion:)];
@@ -39,6 +42,7 @@
     
     self.currentRegion = [[PinballMapManager sharedInstance] currentRegion];
     self.navigationItem.title = self.currentRegion.fullName;
+    self.navigationItem.prompt = [NSString stringWithFormat:@"%lu Locations & %lu Machines",(unsigned long)self.currentRegion.numberOfLocations,(unsigned long)self.currentRegion.numberOfLocalMachines];
     
     self.regionLinks = [NSMutableArray new];
     self.highRollers = [NSMutableArray new];
@@ -48,6 +52,7 @@
     self.refreshControl = refreshControl;
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateRegion) name:@"RegionUpdate" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didBeginProccessing) name:@"UpdatingProgress" object:nil];
     
     [self refreshRegionData];
 }
@@ -96,8 +101,13 @@
     }];
 }
 - (void)updateRegion{
+    self.currentRegion = [[PinballMapManager sharedInstance] currentRegion];
     self.navigationItem.title = [NSString stringWithFormat:@"%@",[[[PinballMapManager sharedInstance] currentRegion] fullName]];
+    self.navigationItem.prompt = [NSString stringWithFormat:@"%lu Locations & %lu Machines",(unsigned long)self.currentRegion.numberOfLocations,(unsigned long)self.currentRegion.numberOfLocalMachines];
     [self refreshRegionData];
+    [self.loadingAlert dismissWithClickedButtonIndex:0 animated:true];
+}
+- (void)didBeginProccessing{
 }
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
 }
@@ -111,9 +121,15 @@
 - (IBAction)changeRegion:(id)sender{
     RegionsView *regionsView = [self.storyboard instantiateViewControllerWithIdentifier:@"RegionsView"];
     regionsView.isSelecting = true;
+    regionsView.delegate = self;
     UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:regionsView];
     nav.modalPresentationStyle = UIModalPresentationFormSheet;
     [self.navigationController presentViewController:nav animated:YES completion:nil];
+}
+#pragma mark - Region Selection Delegate
+- (void)didSelectNewRegion:(Region *)region{
+    [self.loadingAlert show];
+//    [self updateRegion];
 }
 #pragma mark - TableView Datasource/Delegate
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{

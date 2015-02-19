@@ -7,6 +7,7 @@
 //
 
 #import "Event.h"
+#import <UIKit/UIKit.h>
 
 @interface Event (CellHelpers)
 

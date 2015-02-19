@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6245" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="Kju-h7-aNM">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="Kju-h7-aNM">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
     </dependencies>
     <scenes>
         <!--Today View Controller-->
@@ -12,6 +12,29 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <view key="tableHeaderView" contentMode="scaleToFill" id="eJn-zw-6BS">
+                            <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <subviews>
+                                <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="tVP-DH-PVr">
+                                    <rect key="frame" x="8" y="8" width="304" height="29"/>
+                                    <segments>
+                                        <segment title="Recent Machines"/>
+                                        <segment title="Events"/>
+                                    </segments>
+                                    <color key="tintColor" red="0.97212550949999998" green="0.0" blue="0.87446945249999997" alpha="1" colorSpace="calibratedRGB"/>
+                                    <connections>
+                                        <action selector="changeData:" destination="Kju-h7-aNM" eventType="valueChanged" id="oGF-jn-IRJ"/>
+                                    </connections>
+                                </segmentedControl>
+                            </subviews>
+                            <constraints>
+                                <constraint firstItem="tVP-DH-PVr" firstAttribute="top" secondItem="eJn-zw-6BS" secondAttribute="top" constant="8" id="2ze-iq-CPU"/>
+                                <constraint firstItem="tVP-DH-PVr" firstAttribute="leading" secondItem="eJn-zw-6BS" secondAttribute="leading" constant="8" id="5Xg-qg-Sh1"/>
+                                <constraint firstAttribute="trailing" secondItem="tVP-DH-PVr" secondAttribute="trailing" constant="8" id="U9e-Wu-qgD"/>
+                                <constraint firstAttribute="bottom" secondItem="tVP-DH-PVr" secondAttribute="bottom" constant="8" id="viu-VC-vKx"/>
+                            </constraints>
+                        </view>
                         <prototypes>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="BasicCell" textLabel="dTH-6O-3BG" style="IBUITableViewCellStyleDefault" id="5Wh-jU-rcy">
                                 <autoresizingMask key="autoresizingMask"/>
@@ -33,6 +56,9 @@
                             <outlet property="delegate" destination="Kju-h7-aNM" id="cPu-By-6NQ"/>
                         </connections>
                     </tableView>
+                    <connections>
+                        <outlet property="dataType" destination="tVP-DH-PVr" id="K26-US-4cn"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2xW-1O-mJj" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

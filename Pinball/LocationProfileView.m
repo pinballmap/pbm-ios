@@ -313,10 +313,17 @@ typedef enum : NSUInteger {
         if (self.dataSetSeg.selectedSegmentIndex == 0){
             MachineLocation *currentMachine = [self.machinesFetch objectAtIndexPath:[NSIndexPath indexPathForRow:indexPath.row inSection:0]];
             CGRect titleLabel = [currentMachine.machine.machineTitle boundingRectWithSize:CGSizeMake(238, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin context:nil];
-            if (titleLabel.size.height+10 < 44){
+            CGRect detailLabel = [currentMachine.conditionWithUpdateDate boundingRectWithSize:CGSizeMake(238, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName: [UIFont systemFontOfSize:12]} context:nil];
+            if ([currentMachine.condition rangeOfString:@"N/A" options:NSCaseInsensitiveSearch].location != NSNotFound || currentMachine.condition == nil || currentMachine.condition.length == 0){
+                detailLabel = CGRectMake(0, 0, 0, 0);
+            }
+            // Add 6 pixel padding present in subtitle style.
+            CGRect stringSize = CGRectMake(0, 0, 238, titleLabel.size.height+detailLabel.size.height+6);
+
+            if (stringSize.size.height+10 < 44){
                 return 44;
             }else{
-                return titleLabel.size.height+10;
+                return stringSize.size.height+10;
             }
         }else if (self.dataSetSeg.selectedSegmentIndex == 1){
             NSString *detailText;
@@ -348,25 +355,21 @@ typedef enum : NSUInteger {
     if (indexPath.section == 0 && self.showMapSnapshot){
         // Map Cell
         LocationMapCell *cell = (LocationMapCell *)[tableView dequeueReusableCellWithIdentifier:@"MapCell" forIndexPath:indexPath];
-        
-        
-        CLLocationCoordinate2D coord = CLLocationCoordinate2DMake([_currentLocation.latitude doubleValue],[_currentLocation.longitude doubleValue]);
-        cell.mapView.region = MKCoordinateRegionMake(coord, MKCoordinateSpanMake(0.002, 0.002));
-        cell.mapView.mapType = MKMapTypeHybrid;
-        cell.mapView.userInteractionEnabled = NO;
-        cell.mapView.showsUserLocation = YES;
-        [cell.mapView addAnnotation:_currentLocation.annotation];
-//        [cell addAnnotation];
+        [cell setCurrentLocation:self.currentLocation];
         return cell;
     }else{
         if (self.dataSetSeg.selectedSegmentIndex == 0){
             
-            UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MachineCell" forIndexPath:indexPath];
+            UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MachineCell"];
             // Machine cell.
             MachineLocation *currentMachine = [self.machinesFetch objectAtIndexPath:[NSIndexPath indexPathForRow:indexPath.row inSection:0]];
             cell.textLabel.attributedText = currentMachine.machine.machineTitle;
             cell.detailTextLabel.numberOfLines = 0;
-            cell.detailTextLabel.text = nil;
+            if (currentMachine.condition != nil && currentMachine.condition.length > 0 && [currentMachine.condition rangeOfString:@"N/A" options:NSCaseInsensitiveSearch].location == NSNotFound){
+                cell.detailTextLabel.text = currentMachine.conditionWithUpdateDate;
+            }else{
+                cell.detailTextLabel.text = @"";
+            }
             return cell;
             
         }else if (self.dataSetSeg.selectedSegmentIndex == 1){
@@ -513,15 +516,19 @@ typedef enum : NSUInteger {
 - (void)tableView:(UITableView *)tableView accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *)indexPath{
     if ((indexPath.section == 1 && [UIDevice currentModel] == ModelTypeiPhone) || (indexPath.section == 0 && [UIDevice currentModel] == ModelTypeiPad)){
         MachineLocation *currentMachine = [self.machinesFetch objectAtIndexPath:[NSIndexPath indexPathForRow:indexPath.row inSection:0]];
-        MachineProfileView *machineProfile = [self.storyboard instantiateViewControllerWithIdentifier:@"MachineProfile"];
-        machineProfile.currentMachine = currentMachine.machine;
-        if ([UIDevice currentModel] == ModelTypeiPad){
-            machineProfile.isModal = YES;
-            UINavigationController *machineNav = [[UINavigationController alloc] initWithRootViewController:machineProfile];
-            machineNav.modalPresentationStyle = UIModalPresentationFormSheet;
-            [self.parentViewController.navigationController presentViewController:machineNav animated:YES completion:nil];
+        if (currentMachine.machine != nil){
+            MachineProfileView *machineProfile = [self.storyboard instantiateViewControllerWithIdentifier:@"MachineProfile"];
+            machineProfile.currentMachine = currentMachine.machine;
+            if ([UIDevice currentModel] == ModelTypeiPad){
+                machineProfile.isModal = YES;
+                UINavigationController *machineNav = [[UINavigationController alloc] initWithRootViewController:machineProfile];
+                machineNav.modalPresentationStyle = UIModalPresentationFormSheet;
+                [self.parentViewController.navigationController presentViewController:machineNav animated:YES completion:nil];
+            }else{
+                [self.navigationController pushViewController:machineProfile animated:YES];
+            }
         }else{
-            [self.navigationController pushViewController:machineProfile animated:YES];
+            [UIAlertView simpleApplicationAlertWithMessage:@"Invalid Machine Data. Try reloading your region data by going to the locations listing and pulling the list all the way down." cancelButton:@"Ok"];
         }
     }
 }

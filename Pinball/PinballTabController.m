@@ -9,12 +9,14 @@
 #import "PinballTabController.h"
 #import "UIAlertView+Application.h"
 #import "RegionsView.h"
+#import "LoadingViewController.h"
 
 @interface PinballTabController ()
 
 @property (nonatomic) UIAlertView *updatingAlert;
 @property (nonatomic) UIView *motdAlert;
 @property (nonatomic) BOOL isShowingMOTD;
+@property (nonatomic) BOOL alreadyRefreshed;
 
 - (void)updatingRegion;
 @end
@@ -31,9 +33,9 @@
 - (void)viewDidLoad{
     [super viewDidLoad];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateTabInfo) name:@"RegionUpdate" object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updatingRegion) name:@"UpdatingRegion" object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updatingProgress:) name:@"UpdatingProgress" object:nil];
-    [self updateTabInfo];
+//    [self updateTabInfo];
+    self.alreadyRefreshed = false;
+    
 }
 - (void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
@@ -44,11 +46,17 @@
         nav.modalPresentationStyle = UIModalPresentationFormSheet;
         [self presentViewController:nav animated:YES completion:nil];
     }else{
+        if (!self.alreadyRefreshed){
+            LoadingViewController *loadingView = [self.storyboard instantiateViewControllerWithIdentifier:@"LoadingViewController"];
+            loadingView.modalPresentationStyle = UIModalPresentationFormSheet;
+            [self presentViewController:loadingView animated:true completion:^{
+                self.alreadyRefreshed = true;
+            }];
+        }
         [self showMessageOfDay];
     }
 }
 - (void)updateTabInfo{
-    [self.updatingAlert dismissWithClickedButtonIndex:0 animated:YES];
     [self showMessageOfDay];
 }
 - (void)showMessageOfDay{
@@ -113,12 +121,11 @@
     }
 }
 - (void)updatingRegion{
-    self.updatingAlert = [UIAlertView applicationAlertWithMessage:@"Updating Region" delegate:nil cancelButton:nil otherButtons:nil, nil];
-    [self.updatingAlert show];
 }
 - (void)updatingProgress:(NSNotification *)note{
-    NSDictionary *progress = note.object;
-    self.updatingAlert.message = [NSString stringWithFormat:@"%@ of %@ completed",progress[@"completed"],progress[@"total"]];
+    self.updatingAlert = [UIAlertView applicationAlertWithMessage:@"Updating Region" delegate:nil cancelButton:nil otherButtons:nil, nil];
+    self.updatingAlert.message = @"Updating local data";//[NSString stringWithFormat:@"%@ of %@ completed",progress[@"completed"],progress[@"total"]];
+    [self.updatingAlert show];
 }
 - (IBAction)viewMessageOfDay:(id)sender{
     [self.motdAlert removeFromSuperview];

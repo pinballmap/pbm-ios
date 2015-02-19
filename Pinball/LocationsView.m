@@ -42,6 +42,7 @@
 - (void)viewDidLoad{
     [super viewDidLoad];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateRegion) name:@"RegionUpdate" object:nil];
+    self.navigationItem.title = @"Pinball Map";
     if ([[PinballMapManager sharedInstance] currentRegion]){
         [self updateRegion];
     }
@@ -74,38 +75,40 @@
 #pragma mark - Region Update
 - (void)updateRegion{
     [self.refreshControl endRefreshing];
-    self.isClosets = NO;
-    self.navigationItem.title = [NSString stringWithFormat:@"%@",[[[PinballMapManager sharedInstance] currentRegion] fullName]];
-    self.managedContext = [[CoreDataManager sharedInstance] managedObjectContext];
-    NSFetchRequest *stackRequest;
-    if ([[PinballMapManager sharedInstance] userLocation]){
-        
-        NSFetchRequest *locationRequest = [NSFetchRequest fetchRequestWithEntityName:@"Location"];
-        locationRequest.predicate = [NSPredicate predicateWithFormat:@"region.name = %@",[[[PinballMapManager sharedInstance] currentRegion] name]];
-        locationRequest.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES]];
-        
-        NSArray *locations = [[[CoreDataManager sharedInstance] managedObjectContext] executeFetchRequest:locationRequest error:nil];
-        for (Location *location in locations) {
-            [location updateDistance];
+    if ([[PinballMapManager sharedInstance] currentRegion]){
+        self.isClosets = NO;
+        self.navigationItem.title = [NSString stringWithFormat:@"%@",[[[PinballMapManager sharedInstance] currentRegion] fullName]];
+        self.managedContext = [[CoreDataManager sharedInstance] managedObjectContext];
+        NSFetchRequest *stackRequest;
+        if ([[PinballMapManager sharedInstance] userLocation]){
+            
+            NSFetchRequest *locationRequest = [NSFetchRequest fetchRequestWithEntityName:@"Location"];
+            locationRequest.predicate = [NSPredicate predicateWithFormat:@"region.name = %@",[[[PinballMapManager sharedInstance] currentRegion] name]];
+            locationRequest.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES]];
+            
+            NSArray *locations = [[[CoreDataManager sharedInstance] managedObjectContext] executeFetchRequest:locationRequest error:nil];
+            for (Location *location in locations) {
+                [location updateDistance];
+            }
+            locations = nil;
+            stackRequest = [NSFetchRequest fetchRequestWithEntityName:@"Location"];
+            stackRequest.predicate = [NSPredicate predicateWithFormat:@"region.name = %@",[[[PinballMapManager sharedInstance] currentRegion] name]];
+            stackRequest.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"locationDistance" ascending:YES]];
+        }else{
+            stackRequest = [NSFetchRequest fetchRequestWithEntityName:@"Location"];
+            stackRequest.predicate = [NSPredicate predicateWithFormat:@"region.name = %@",[[[PinballMapManager sharedInstance] currentRegion] name]];
+            stackRequest.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES]];
         }
-        locations = nil;
-        stackRequest = [NSFetchRequest fetchRequestWithEntityName:@"Location"];
-        stackRequest.predicate = [NSPredicate predicateWithFormat:@"region.name = %@",[[[PinballMapManager sharedInstance] currentRegion] name]];
-        stackRequest.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"locationDistance" ascending:YES]];
-    }else{
-        stackRequest = [NSFetchRequest fetchRequestWithEntityName:@"Location"];
-        stackRequest.predicate = [NSPredicate predicateWithFormat:@"region.name = %@",[[[PinballMapManager sharedInstance] currentRegion] name]];
-        stackRequest.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES]];
+        
+        
+        self.fetchedResults = [[NSFetchedResultsController alloc] initWithFetchRequest:stackRequest
+                                                             managedObjectContext:self.managedContext
+                                                               sectionNameKeyPath:nil
+                                                                        cacheName:nil];
+        self.fetchedResults.delegate = self;
+        [self.fetchedResults performFetch:nil];
+        [self.tableView reloadData];
     }
-    
-    
-    self.fetchedResults = [[NSFetchedResultsController alloc] initWithFetchRequest:stackRequest
-                                                         managedObjectContext:self.managedContext
-                                                           sectionNameKeyPath:nil
-                                                                    cacheName:nil];
-    self.fetchedResults.delegate = self;
-    [self.fetchedResults performFetch:nil];
-    [self.tableView reloadData];
 }
 #pragma mark - Searchbar Delegate
 - (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar{

@@ -10,27 +10,22 @@
 #import "GAAppHelper.h"
 #import "UIAlertView+Application.h"
 #import "ContactView.h"
+#import "ReuseWebView.h"
 
-@interface AboutView ()
+@interface AboutView () <UIWebViewDelegate>
 
-@property (nonatomic) NSArray *aboutInfo;
+@property (weak) IBOutlet UIWebView *mainWebView;
 
 - (IBAction)dismissAbout:(id)sender;
 @end
 
 @implementation AboutView
 
-- (id)initWithStyle:(UITableViewStyle)style{
-    self = [super initWithStyle:style];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
-}
 - (void)viewDidLoad{
     [super viewDidLoad];
-    NSString *aboutFile = [[NSBundle mainBundle] pathForResource:@"AboutInfo" ofType:@"plist"];
-    self.aboutInfo = [NSArray arrayWithContentsOfFile:aboutFile];
+    self.mainWebView.delegate = self;
+    NSURL *url = [NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"about" ofType:@"html" inDirectory:@"about_page"]];
+    [self.mainWebView loadRequest:[NSURLRequest requestWithURL:url]];
     
     UIBarButtonItem *feedback = [[UIBarButtonItem alloc] initWithTitle:@"Feedback" style:UIBarButtonItemStylePlain target:self action:@selector(sendFeedback:)];
     self.navigationItem.rightBarButtonItem = feedback;
@@ -39,7 +34,6 @@
 }
 - (void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
-    [GAAppHelper sendAnalyticsDataWithScreen:@"About View"];
 }
 - (void)didReceiveMemoryWarning{
     [super didReceiveMemoryWarning];
@@ -53,36 +47,13 @@
     eventContact.contactType = ContactTypeAppFeedback;
     [self.navigationController presentViewController:eventContact.parentViewController animated:YES completion:nil];
 }
-#pragma mark - TableView Datasource/Delegate
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    return self.aboutInfo.count;
-}
-- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section{
-    return self.aboutInfo[section][@"sectionTitle"];
-}
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return [self.aboutInfo[section][@"people"] count];
-}
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    static NSString *cellIdentifier = @"BasicCell";
-    
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
-    NSDictionary *person = self.aboutInfo[indexPath.section][@"people"][indexPath.row];
-    cell.textLabel.text = person[@"name"];
-    if (!person[@"url"] || [person[@"url"] length] == 0){
-        cell.accessoryType = UITableViewCellAccessoryNone;
-    }else{
-        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+#pragma mark - UIWebView Delegate
+- (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType{
+    if ([request.URL.absoluteString rangeOfString:@"about.html"].location != NSNotFound){
+        return true;
     }
-    
-    return cell;
-}
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    NSDictionary *person = self.aboutInfo[indexPath.section][@"people"][indexPath.row];
-    if (person[@"url"] || [person[@"url"] length] > 0){
-        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:person[@"url"]]];
-    }
+    [[UIApplication sharedApplication] openURL:request.URL];
+    return false;
 }
 
 @end

@@ -30,6 +30,7 @@ typedef NS_ENUM(NSInteger, PBMDataAPI) {
 
 @property (nonatomic) NSURLSession *session;
 @property (nonatomic) CLLocationManager *locationManager;
+@property (nonatomic) NSMutableArray *apiOperations;
 
 @end
 
@@ -65,6 +66,7 @@ typedef NS_ENUM(NSInteger, PBMDataAPI) {
 - (id)init{
     self = [super init];
     if (self){
+        self.apiOperations = [[NSMutableArray alloc] init];
         [self getUserLocation];
         self.session = [NSURLSession sharedSession];
         [self migrateUserDefaults];
@@ -176,37 +178,65 @@ typedef NS_ENUM(NSInteger, PBMDataAPI) {
     }];
     [[NSOperationQueue mainQueue] addOperation:regionAPI];
 }
+- (void)cancelAllLoadingOperations{
+    if (self.apiOperations.count > 0){
+        for (AFHTTPRequestOperation *operation in self.apiOperations) {
+            [operation cancel];
+        }
+        [self.apiOperations removeAllObjects];
+    }
+}
 #pragma mark - Region Data Load
 - (void)refreshRegion{
     [[NSNotificationCenter defaultCenter] postNotificationName:@"UpdatingRegion" object:nil];
-    NSArray *apiOperations = @[[self requestForData:PBMDataAPILocationTypes],[self requestForData:PBMDataAPIZones],[self requestForData:PBMDataAPILocations],[self requestForData:PBMDataAPIEvents]];
-    
-    NSArray *api = [AFURLConnectionOperation batchOfRequestOperations:apiOperations progressBlock:^(NSUInteger numberOfFinishedOperations, NSUInteger totalNumberOfOperations) {
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [[NSNotificationCenter defaultCenter] postNotificationName:@"UpdatingProgress" object:@{@"completed": [NSNumber numberWithLong:numberOfFinishedOperations],@"total": [NSNumber numberWithLong:totalNumberOfOperations]}];
-        });
+    [self.apiOperations removeAllObjects];
+    [self.apiOperations addObjectsFromArray:@[[self requestForData:PBMDataAPILocationTypes],[self requestForData:PBMDataAPIZones],[self requestForData:PBMDataAPILocations],[self requestForData:PBMDataAPIEvents]]];
+
+    NSArray *api = [AFURLConnectionOperation batchOfRequestOperations:self.apiOperations progressBlock:^(NSUInteger numberOfFinishedOperations, NSUInteger totalNumberOfOperations) {
         NSLog(@"Completed %lu of %lu",(unsigned long)numberOfFinishedOperations,(unsigned long)totalNumberOfOperations);
+        NSDictionary *progress = @{
+                                   @"completed": [NSNumber numberWithLongLong:numberOfFinishedOperations],
+                                   @"total": [NSNumber numberWithLongLong:totalNumberOfOperations]
+                                   };
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"UpdatingProgress" object:progress];
     } completionBlock:^(NSArray *operations) {
-        NSFetchRequest *stackRequest = [NSFetchRequest fetchRequestWithEntityName:@"Machine"];
-        stackRequest.predicate = nil;
-        stackRequest.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES]];
-        __block NSMutableSet *machines = [NSMutableSet setWithArray:[[[CoreDataManager sharedInstance] managedObjectContext] executeFetchRequest:stackRequest error:nil]];
-        __block NSMutableSet *locationTypes;
-        __block NSMutableSet *locationZones;
-        __block NSMutableSet *createdLocations;
-        [operations enumerateObjectsUsingBlock:^(AFHTTPRequestOperation *obj, NSUInteger idx, BOOL *stop) {
-            if (idx == 0){
-                locationTypes = [self importLocationTypesWithRequest:obj];
-            }else if (idx == 1){
-                locationZones = [self importZonesWithRequest:obj];
-            }else if (idx == 2){
-                createdLocations = [self importLocationsWithRequest:obj andMachines:machines andLocationTypes:locationTypes andZones:locationZones];
-            }else if (idx == 3){
-                [self importEventsWithRequest:obj andLocations:createdLocations];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"UpdatingProgress" object:nil];
+        });
+        BOOL canceledRequests = false;
+        for (AFHTTPRequestOperation *operation in operations) {
+            if (operation.isCancelled){
+                canceledRequests = true;
             }
-            [[CoreDataManager sharedInstance] saveContext];
-        }];
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"RegionUpdate" object:nil];
+        }
+        NSLog(@"Did cancel: %i",canceledRequests);
+        if (!canceledRequests){
+            NSLog(@"Started proccessing");
+            NSFetchRequest *stackRequest = [NSFetchRequest fetchRequestWithEntityName:@"Machine"];
+            stackRequest.predicate = nil;
+            stackRequest.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES]];
+            __block NSMutableSet *machines = [NSMutableSet setWithArray:[[[CoreDataManager sharedInstance] managedObjectContext] executeFetchRequest:stackRequest error:nil]];
+            __block NSMutableSet *locationTypes;
+            __block NSMutableSet *locationZones;
+            __block NSMutableSet *createdLocations;
+            [operations enumerateObjectsUsingBlock:^(AFHTTPRequestOperation *obj, NSUInteger idx, BOOL *stop) {
+                if (idx == 0){
+                    locationTypes = [self importLocationTypesWithRequest:obj];
+                }else if (idx == 1){
+                    locationZones = [self importZonesWithRequest:obj];
+                }else if (idx == 2){
+                    createdLocations = [self importLocationsWithRequest:obj andMachines:machines andLocationTypes:locationTypes andZones:locationZones];
+                }else if (idx == 3){
+                    [self importEventsWithRequest:obj andLocations:createdLocations];
+                }
+                [[CoreDataManager sharedInstance] saveContext];
+            }];
+        }
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.apiOperations removeAllObjects];
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"RegionUpdate" object:nil];
+            NSLog(@"Ended proccessing");
+        });
     }];
     [[NSOperationQueue mainQueue] addOperations:api waitUntilFinished:NO];
 }
@@ -232,11 +262,12 @@ typedef NS_ENUM(NSInteger, PBMDataAPI) {
     
     
     NSArray *api = [AFURLConnectionOperation batchOfRequestOperations:apiOperations progressBlock:^(NSUInteger numberOfFinishedOperations, NSUInteger totalNumberOfOperations) {
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [[NSNotificationCenter defaultCenter] postNotificationName:@"UpdatingProgress" object:@{@"completed": [NSNumber numberWithLong:numberOfFinishedOperations],@"total": [NSNumber numberWithLong:totalNumberOfOperations]}];
-        });
         NSLog(@"Completed %lu of %lu",(unsigned long)numberOfFinishedOperations,(unsigned long)totalNumberOfOperations);
     } completionBlock:^(NSArray *operations) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"UpdatingProgress" object:nil];
+        });
+        NSLog(@"Started proccessing");
         __block NSMutableSet *createdMachines;
         __block NSMutableSet *createdLocationTypes;
         __block NSMutableSet *createdZones;
@@ -255,7 +286,10 @@ typedef NS_ENUM(NSInteger, PBMDataAPI) {
             }
             [[CoreDataManager sharedInstance] saveContext];
         }];
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"RegionUpdate" object:nil];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"RegionUpdate" object:nil];
+        });
+        NSLog(@"Finished proccessing");
     }];
     [[NSOperationQueue mainQueue] addOperations:api waitUntilFinished:NO];
 }
@@ -522,22 +556,23 @@ typedef NS_ENUM(NSInteger, PBMDataAPI) {
         completionBlock(@{@"errors": error.localizedDescription});
     }];
 }
-- (void)createNewMachineWithData:(NSDictionary *)machineData andParentMachine:(Machine *)machine forLocation:(Location *)location withCompletion:(APIComplete)completionBlock{
+- (void)createNewMachineWithData:(NSDictionary *)machineData andParentMachine:(Machine *)machine forLocation:(Location *)location withCompletion:(APICompleteWithStatusCode)completionBlock{
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     manager.requestSerializer = [AFJSONRequestSerializer serializer];
     [manager POST:[NSString stringWithFormat:@"%@api/v1/location_machine_xrefs.json",apiRootURL] parameters:machineData success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSUInteger statusCode = operation.response.statusCode;
+        if (statusCode == 201){
+            NSDictionary *machineLocation = responseObject[@"location_machine"];
+            MachineLocation *newMachine = [MachineLocation createMachineLocationWithData:machineLocation andContext:[[CoreDataManager sharedInstance] managedObjectContext]];
+            newMachine.location = location;
+            newMachine.machine = machine;
+            [location addMachinesObject:newMachine];
+            [[CoreDataManager sharedInstance] saveContext];
+        }
         
-        NSDictionary *machineLocation = responseObject[@"location_machine"];
-        
-        MachineLocation *newMachine = [MachineLocation createMachineLocationWithData:machineLocation andContext:[[CoreDataManager sharedInstance] managedObjectContext]];
-        newMachine.location = location;
-        newMachine.machine = machine;
-        [location addMachinesObject:newMachine];
-        [[CoreDataManager sharedInstance] saveContext];
-        
-        completionBlock(responseObject);
+        completionBlock(responseObject,statusCode);
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        completionBlock(@{@"errors": error.localizedDescription});
+        completionBlock(@{@"errors": error.localizedDescription},500);
     }];
 }
 - (void)updateMachineCondition:(MachineLocation *)machine withCondition:(NSString *)newCondition withCompletion:(APIComplete)completionBlock{
