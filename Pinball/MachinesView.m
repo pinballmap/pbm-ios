@@ -86,7 +86,7 @@
     if (buttonIndex != actionSheet.cancelButtonIndex){
         if (buttonIndex == 0){
             // Manufacture Sort
-            MachineManufacturerView *manView = (MachineManufacturerView*)[[self.storyboard instantiateViewControllerWithIdentifier:@"MachineManufacturerView"] navigationRootViewController];
+            MachineManufacturerView *manView = (MachineManufacturerView*)[[[UIStoryboard storyboardWithName:@"SecondaryControllers" bundle:nil] instantiateViewControllerWithIdentifier:@"MachineManufacturerView"] navigationRootViewController];
             manView.delegate = self;
             [self presentViewController:manView.parentViewController animated:true completion:nil];
         }else if (buttonIndex == 1){
