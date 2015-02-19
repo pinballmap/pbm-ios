@@ -254,7 +254,7 @@
                 [self.navigationController presentViewController:types.parentViewController animated:YES completion:nil];
                 return;
             }else if ([buttonTitle isEqualToString:@"Recently Added"]){
-                RecentlyAddedView *recentView = (RecentlyAddedView *)[[self.storyboard instantiateViewControllerWithIdentifier:@"RecentlyAddedView"] navigationRootViewController];
+                RecentlyAddedView *recentView = (RecentlyAddedView *)[[[UIStoryboard storyboardWithName:@"SecondaryControllers" bundle:nil] instantiateViewControllerWithIdentifier:@"RecentlyAddedView"] navigationRootViewController];
                 [self.navigationController presentViewController:recentView.parentViewController animated:YES completion:nil];
                 return;
             }else if ([buttonTitle isEqualToString:@"Zone"]){
