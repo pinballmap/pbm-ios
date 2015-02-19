@@ -24,8 +24,13 @@
 - (void)viewDidLoad{
     [super viewDidLoad];
     self.mainWebView.delegate = self;
-    NSURL *url = [NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"about" ofType:@"html" inDirectory:@"about_page"]];
-    [self.mainWebView loadRequest:[NSURLRequest requestWithURL:url]];
+    NSString *currentVersion = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"];
+    NSString *currentBuild = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"];
+
+    NSString *aboutHTML = [NSString stringWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"about" ofType:@"html" inDirectory:@"about_page"] encoding:NSUTF8StringEncoding error:nil];
+    aboutHTML = [aboutHTML stringByReplacingOccurrencesOfString:@"{% version_num %}" withString:[NSString stringWithFormat:@"%@ (%@)",currentVersion,currentBuild]];
+    
+    [self.mainWebView loadHTMLString:aboutHTML baseURL:[NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"about" ofType:@"html" inDirectory:@"about_page"]]];
     
     UIBarButtonItem *feedback = [[UIBarButtonItem alloc] initWithTitle:@"Feedback" style:UIBarButtonItemStylePlain target:self action:@selector(sendFeedback:)];
     self.navigationItem.rightBarButtonItem = feedback;
