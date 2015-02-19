@@ -823,9 +823,9 @@
 			children = (
 				DBF06BDD18F96FF500F92912 /* AppDelegate.h */,
 				DBF06BDE18F96FF500F92912 /* AppDelegate.m */,
+				DBFBED6019CF377700ADC964 /* Start Screen.storyboard */,
 				DBF06BFD18F9700F00F92912 /* Storyboard-iPhone.storyboard */,
 				DBBB4BEC193387AB004E433F /* Storyboard-iPad.storyboard */,
-				DBFBED6019CF377700ADC964 /* Start Screen.storyboard */,
 				DB403E921A961AD200E39A93 /* SecondaryControllers.storyboard */,
 				DBB59CCB18FADC3B00F35BFD /* Views */,
 				DBF06C0818F972DD00F92912 /* View Controllers */,

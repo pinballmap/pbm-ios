@@ -258,7 +258,7 @@
                 [self.navigationController presentViewController:recentView.parentViewController animated:YES completion:nil];
                 return;
             }else if ([buttonTitle isEqualToString:@"Zone"]){
-                ZonesView *zoneSelect = (ZonesView *)[[self.storyboard instantiateViewControllerWithIdentifier:@"ZonesView"] navigationRootViewController];
+                ZonesView *zoneSelect = (ZonesView *)[[[UIStoryboard storyboardWithName:@"SecondaryControllers" bundle:nil] instantiateViewControllerWithIdentifier:@"ZonesView"] navigationRootViewController];
                 zoneSelect.delegate = self;
                 if ([UIDevice iPad]){
                     [zoneSelect.parentViewController setModalPresentationStyle:UIModalPresentationFormSheet];
