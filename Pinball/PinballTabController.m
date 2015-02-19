@@ -40,7 +40,7 @@
 - (void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
     if (![[PinballMapManager sharedInstance] currentRegion]){
-        RegionsView *regions = [self.storyboard instantiateViewControllerWithIdentifier:@"RegionsView"];
+        RegionsView *regions = [[UIStoryboard storyboardWithName:@"SecondaryControllers" bundle:nil] instantiateViewControllerWithIdentifier:@"RegionsView"];
         regions.isSelecting = YES;
         UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:regions];
         nav.modalPresentationStyle = UIModalPresentationFormSheet;

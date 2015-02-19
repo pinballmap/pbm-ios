@@ -1143,5 +1143,69 @@
             </objects>
             <point key="canvasLocation" x="2380" y="2250"/>
         </scene>
+        <!--Regions View-->
+        <scene sceneID="wP0-DS-KEo">
+            <objects>
+                <tableViewController storyboardIdentifier="RegionsView" id="gJb-1I-JER" customClass="RegionsView" sceneMemberID="viewController">
+                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="6P4-ie-sTb">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <searchBar key="tableHeaderView" contentMode="redraw" id="98g-uV-gxN">
+                            <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                            <textInputTraits key="textInputTraits"/>
+                            <connections>
+                                <outlet property="delegate" destination="gJb-1I-JER" id="6tn-GR-z3q"/>
+                            </connections>
+                        </searchBar>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="RegionCell" textLabel="nan-W5-8RR" style="IBUITableViewCellStyleDefault" id="bgo-za-yV3">
+                                <rect key="frame" x="0.0" y="130" width="320" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="bgo-za-yV3" id="BrM-x6-BNw">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="nan-W5-8RR">
+                                            <rect key="frame" x="15" y="0.0" width="290" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="gJb-1I-JER" id="ER5-7b-bhh"/>
+                            <outlet property="delegate" destination="gJb-1I-JER" id="Vfp-Fn-Clo"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" id="6EF-px-BXQ">
+                        <barButtonItem key="rightBarButtonItem" title="Request" id="14b-e2-iHL">
+                            <connections>
+                                <action selector="requestRegion:" destination="gJb-1I-JER" id="geh-nR-NX5"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="searchDisplayController" destination="ECH-am-2rE" id="8Ia-M2-euo"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="x8O-tS-g1v" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <searchDisplayController id="ECH-am-2rE">
+                    <connections>
+                        <outlet property="delegate" destination="gJb-1I-JER" id="Dou-MF-zAM"/>
+                        <outlet property="searchBar" destination="98g-uV-gxN" id="107-JW-8NL"/>
+                        <outlet property="searchContentsController" destination="gJb-1I-JER" id="WWR-0a-YTU"/>
+                        <outlet property="searchResultsDataSource" destination="gJb-1I-JER" id="ZXN-rX-lqD"/>
+                        <outlet property="searchResultsDelegate" destination="gJb-1I-JER" id="lla-ng-mA5"/>
+                    </connections>
+                </searchDisplayController>
+            </objects>
+            <point key="canvasLocation" x="3035" y="2250"/>
+        </scene>
     </scenes>
 </document>

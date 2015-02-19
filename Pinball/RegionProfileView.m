@@ -119,7 +119,7 @@
     [self.navigationController presentViewController:nav animated:YES completion:nil];
 }
 - (IBAction)changeRegion:(id)sender{
-    RegionsView *regionsView = [self.storyboard instantiateViewControllerWithIdentifier:@"RegionsView"];
+    RegionsView *regionsView = [[UIStoryboard storyboardWithName:@"SecondaryControllers" bundle:nil] instantiateViewControllerWithIdentifier:@"RegionsView"];
     regionsView.isSelecting = true;
     regionsView.delegate = self;
     UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:regionsView];
