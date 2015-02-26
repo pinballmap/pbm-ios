@@ -12,3 +12,11 @@
 @interface InterfaceController : WKInterfaceController
 
 @end
+
+
+@interface MainMenuRow : NSObject
+
+@property (weak) IBOutlet WKInterfaceImage *menuItemImage;
+@property (weak) IBOutlet WKInterfaceLabel *menuItemTitle;
+
+@end

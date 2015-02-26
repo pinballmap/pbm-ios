@@ -59,6 +59,52 @@
     
     return true;
 }
+/**
+ * User info dic should contain: {"action": #actionname,"data": #anydata}
+ * Reply dictionary contains: {"status": #responsestatus,"Body": #data}
+ */
+- (void)application:(UIApplication *)application handleWatchKitExtensionRequest:(NSDictionary *)userInfo reply:(void (^)(NSDictionary *))reply{
+    
+    NSString *action = userInfo[@"action"];
+    if ([action isEqualToString:@"recent_machines"]){
+        NSDictionary *responseDic = @{@"status":@"fail",@"body":@"Ok"};
+        reply(responseDic);
+
+        [[PinballMapManager sharedInstance] recentlyAddedMachinesWithCompletion:^(NSDictionary *status) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                if (status[@"errors"]){
+                    NSString *errors;
+                    if ([status[@"errors"] isKindOfClass:[NSArray class]]){
+                        errors = [status[@"errors"] componentsJoinedByString:@","];
+                    }else{
+                        errors = status[@"errors"];
+                    }
+                    NSDictionary *responseDic = @{@"status":@"fail",@"body":errors};
+                    reply(responseDic);
+                }else{
+                    NSArray *recentMachines = status[@"location_machine_xrefs"];
+                    NSMutableArray *recentMachinesObj = [NSMutableArray new];
+                    [recentMachines enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+                        NSDictionary *machine = @{
+                                                  @"machine_name":obj[@"machine"][@"name"],
+                                                  @"location_city":obj[@"location"][@"name"],
+                                                  @"location_name":obj[@"location"][@"city"],
+                                                  @"created_on":obj[@"machine"][@"createdOn"]
+                                                  };
+                        [recentMachinesObj addObject:machine];
+                    }];
+                    NSArray *foundMachines = [recentMachinesObj sortedArrayUsingDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"createdOn" ascending:NO]]];
+                    NSDictionary *responseDic = @{@"status":@"Ok",@"body":foundMachines};
+                    reply(responseDic);
+                }
+            });
+        }];
+    }else if ([action isEqualToString:@"nearby_location"]){
+        
+    }
+    
+    
+}
 
 - (void)applicationWillResignActive:(UIApplication *)application
 {
