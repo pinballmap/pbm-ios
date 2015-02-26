@@ -23,8 +23,8 @@
 
     // Configure interface objects here.
     NSArray *menuItems = @[
-                           @{@"name":@"Nearest Location",@"icon":@"849-radar"},
-                           @{@"name":@"Recently Added",@"icon":@"728-clock"},
+                           @{@"name":@"Nearest",@"icon":@"849-radar"},
+                           @{@"name":@"Recent",@"icon":@"728-clock"},
                            @{@"name":@"Events",@"icon":@"851-calendar"}
                            ];
     [self.menuTable setNumberOfRows:menuItems.count withRowType:@"MainMenuRow"];

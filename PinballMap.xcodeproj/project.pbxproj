@@ -135,6 +135,7 @@
 		DBC751701A670E5500D88975 /* MachineCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DBC7516E1A670E5500D88975 /* MachineCell.m */; };
 		DBC751711A670E5500D88975 /* MachineCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DBC7516F1A670E5500D88975 /* MachineCell.xib */; };
 		DBD4F3E919067D690023D98B /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DBD4F3E819067D690023D98B /* MessageUI.framework */; };
+		DBDDD8D01A9FC93E00A10572 /* EventInterfaceController.m in Sources */ = {isa = PBXBuildFile; fileRef = DBDDD8CF1A9FC93E00A10572 /* EventInterfaceController.m */; };
 		DBE50374190D2BBA002BDE0D /* Location+UpdateDistance.m in Sources */ = {isa = PBXBuildFile; fileRef = DBE50373190D2BBA002BDE0D /* Location+UpdateDistance.m */; };
 		DBE712D91929134D0046DFA8 /* MachineLocation.m in Sources */ = {isa = PBXBuildFile; fileRef = DBE712D81929134D0046DFA8 /* MachineLocation.m */; };
 		DBE9F7B919E3FDCC000BD498 /* HighRoller.m in Sources */ = {isa = PBXBuildFile; fileRef = DBE9F7B819E3FDCC000BD498 /* HighRoller.m */; };
@@ -422,6 +423,8 @@
 		DBC7516E1A670E5500D88975 /* MachineCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MachineCell.m; sourceTree = "<group>"; };
 		DBC7516F1A670E5500D88975 /* MachineCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MachineCell.xib; sourceTree = "<group>"; };
 		DBD4F3E819067D690023D98B /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
+		DBDDD8CE1A9FC93E00A10572 /* EventInterfaceController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EventInterfaceController.h; sourceTree = "<group>"; };
+		DBDDD8CF1A9FC93E00A10572 /* EventInterfaceController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EventInterfaceController.m; sourceTree = "<group>"; };
 		DBE50372190D2BBA002BDE0D /* Location+UpdateDistance.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Location+UpdateDistance.h"; sourceTree = "<group>"; };
 		DBE50373190D2BBA002BDE0D /* Location+UpdateDistance.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Location+UpdateDistance.m"; sourceTree = "<group>"; };
 		DBE712D71929134D0046DFA8 /* MachineLocation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MachineLocation.h; sourceTree = "<group>"; };
@@ -803,6 +806,8 @@
 				DB890C6D1A9FC15F00AAB741 /* RecentsInterfaceController.m */,
 				DB7F0E4D1A9FBD1200AB47AB /* EventsInterfaceController.h */,
 				DB7F0E4E1A9FBD1200AB47AB /* EventsInterfaceController.m */,
+				DBDDD8CE1A9FC93E00A10572 /* EventInterfaceController.h */,
+				DBDDD8CF1A9FC93E00A10572 /* EventInterfaceController.m */,
 				DB8A31521A9FB8DA00364903 /* Images.xcassets */,
 				DB8A314D1A9FB8DA00364903 /* Supporting Files */,
 			);
@@ -1192,6 +1197,9 @@
 							com.apple.ApplicationGroups.iOS = {
 								enabled = 1;
 							};
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
 						};
 					};
 					DBF06BE518F96FF500F92912 = {
@@ -1315,6 +1323,7 @@
 				DB7F0E491A9FBCDD00AB47AB /* MachineLocation.m in Sources */,
 				DB7F0E4A1A9FBCEC00AB47AB /* Event+CellHelpers.m in Sources */,
 				DB890C6E1A9FC15F00AAB741 /* RecentsInterfaceController.m in Sources */,
+				DBDDD8D01A9FC93E00A10572 /* EventInterfaceController.m in Sources */,
 				DB7F0E481A9FBCD900AB47AB /* Zone.m in Sources */,
 				DB8A31511A9FB8DA00364903 /* InterfaceController.m in Sources */,
 				DB7F0E471A9FBCD400AB47AB /* NSDate+CupertinoYankee.m in Sources */,

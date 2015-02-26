@@ -39,9 +39,33 @@
         <!--RecentsController-->
         <scene sceneID="B6P-zF-dQI">
             <objects>
-                <controller identifier="RecentsController" id="gos-gH-Xby" customClass="RecentsInterfaceController"/>
+                <controller identifier="RecentsController" id="gos-gH-Xby" customClass="RecentsInterfaceController">
+                    <items>
+                        <table alignment="left" id="gQ2-uj-x0F">
+                            <items>
+                                <tableRow identifier="MachineRow" id="Oep-QE-kqy" customClass="MachineRow">
+                                    <group key="rootItem" width="1" height="0.0" alignment="left" layout="vertical" id="a2r-YY-Sq7">
+                                        <items>
+                                            <label width="136" alignment="left" text="Label" numberOfLines="2" id="98C-jK-by2"/>
+                                            <label width="136" alignment="left" text="Label" numberOfLines="2" id="ZQ5-S7-k8k">
+                                                <color key="textColor" red="0.97212550949999998" green="0.0" blue="0.87446945249999997" alpha="1" colorSpace="calibratedRGB"/>
+                                            </label>
+                                        </items>
+                                    </group>
+                                    <connections>
+                                        <outlet property="locationLabel" destination="98C-jK-by2" id="xc5-Lb-Tgs"/>
+                                        <outlet property="machineLabel" destination="ZQ5-S7-k8k" id="as3-hY-bXA"/>
+                                    </connections>
+                                </tableRow>
+                            </items>
+                        </table>
+                    </items>
+                    <connections>
+                        <outlet property="recentsTable" destination="gQ2-uj-x0F" id="Ly8-gl-3GU"/>
+                    </connections>
+                </controller>
             </objects>
-            <point key="canvasLocation" x="212" y="190"/>
+            <point key="canvasLocation" x="210" y="181"/>
         </scene>
         <!--EventsController-->
         <scene sceneID="RoW-Oe-tEZ">
@@ -73,6 +97,40 @@
                 </controller>
             </objects>
             <point key="canvasLocation" x="210" y="-41"/>
+        </scene>
+        <!--EventController-->
+        <scene sceneID="PZ0-Cn-rZ4">
+            <objects>
+                <controller identifier="EventController" id="uOu-zz-2Gt" customClass="EventInterfaceController">
+                    <items>
+                        <group width="1" alignment="left" layout="vertical" id="CmW-3U-9pI">
+                            <items>
+                                <label width="136" alignment="left" text="Label" numberOfLines="0" id="uHw-LP-bvq">
+                                    <fontDescription key="font" style="UICTFontTextStyleHeadline"/>
+                                </label>
+                                <label width="136" alignment="left" text="Label" numberOfLines="0" id="BTd-aW-aJ1">
+                                    <color key="textColor" red="0.97212550949999998" green="0.0" blue="0.87446945249999997" alpha="1" colorSpace="calibratedRGB"/>
+                                    <fontDescription key="font" style="UICTFontTextStyleSubhead"/>
+                                </label>
+                            </items>
+                        </group>
+                        <group width="1" alignment="left" layout="vertical" id="4vG-Bd-jiD">
+                            <items>
+                                <separator alignment="left" id="Ucl-TV-KRh">
+                                    <color key="color" red="0.97212550949999998" green="0.0" blue="0.87446945249999997" alpha="1" colorSpace="calibratedRGB"/>
+                                </separator>
+                                <label width="136" alignment="left" text="Label" numberOfLines="0" id="BKt-ie-NNz"/>
+                            </items>
+                        </group>
+                    </items>
+                    <connections>
+                        <outlet property="eventDate" destination="BTd-aW-aJ1" id="Xxa-zH-f0I"/>
+                        <outlet property="eventDesc" destination="BKt-ie-NNz" id="lOs-Y1-iAn"/>
+                        <outlet property="eventTitle" destination="uHw-LP-bvq" id="oPZ-61-8bn"/>
+                    </connections>
+                </controller>
+            </objects>
+            <point key="canvasLocation" x="388" y="-42"/>
         </scene>
     </scenes>
 </document>

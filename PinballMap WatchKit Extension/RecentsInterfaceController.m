@@ -1,4 +1,4 @@
-//
+
 //  RecentsInterfaceController.m
 //  PinballMap
 //
@@ -10,6 +10,8 @@
 
 
 @interface RecentsInterfaceController()
+
+@property (weak) IBOutlet WKInterfaceTable *recentsTable;
 
 @end
 
@@ -26,10 +28,19 @@
                 NSString *status = replyInfo[@"status"];
                 if ([status isEqualToString:@"ok"]){
                     NSArray *machines = replyInfo[@"body"];
-                    NSLog(@"%@",machines);
+                    
+                    [self.recentsTable setNumberOfRows:machines.count withRowType:@"MachineRow"];
+                    for (int idx=0; idx <= machines.count-1; idx++) {
+                        NSDictionary *recentMachine = machines[idx];
+                        MachineRow *row = [self.recentsTable rowControllerAtIndex:idx];
+                        [row.locationLabel setText:recentMachine[@"location_name"]];
+                        [row.machineLabel setText:recentMachine[@"machine_name"]];
+                    }
                 }else{
                     // Failed response from parent app.
                 }
+            }else{
+                NSLog(@"%@",error);
             }
         });
     }];
@@ -47,5 +58,10 @@
 
 @end
 
+
+@implementation MachineRow
+
+
+@end
 
 

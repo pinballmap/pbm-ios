@@ -12,3 +12,11 @@
 @interface RecentsInterfaceController : WKInterfaceController
 
 @end
+
+
+@interface MachineRow : NSObject
+
+@property (nonatomic) IBOutlet WKInterfaceLabel *locationLabel;
+@property (nonatomic) IBOutlet WKInterfaceLabel *machineLabel;
+
+@end

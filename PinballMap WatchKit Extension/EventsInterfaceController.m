@@ -67,6 +67,11 @@ NSString * const appGroup = @"group.net.isaacruiz.ppm";
     [super didDeactivate];
 }
 
+- (void)table:(WKInterfaceTable *)table didSelectRowAtIndex:(NSInteger)rowIndex{
+    Event *event = self.events[rowIndex];
+    [self pushControllerWithName:@"EventController" context:event];
+}
+
 @end
 
 @implementation EventRow
