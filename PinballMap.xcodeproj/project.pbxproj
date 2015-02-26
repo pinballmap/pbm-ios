@@ -802,12 +802,8 @@
 				DB890C671A9FBF8400AAB741 /* PinballMap WatchKit Extension.entitlements */,
 				DB8A314F1A9FB8DA00364903 /* InterfaceController.h */,
 				DB8A31501A9FB8DA00364903 /* InterfaceController.m */,
-				DB890C6C1A9FC15F00AAB741 /* RecentsInterfaceController.h */,
-				DB890C6D1A9FC15F00AAB741 /* RecentsInterfaceController.m */,
-				DB7F0E4D1A9FBD1200AB47AB /* EventsInterfaceController.h */,
-				DB7F0E4E1A9FBD1200AB47AB /* EventsInterfaceController.m */,
-				DBDDD8CE1A9FC93E00A10572 /* EventInterfaceController.h */,
-				DBDDD8CF1A9FC93E00A10572 /* EventInterfaceController.m */,
+				DBDDD8D21A9FCD5500A10572 /* Recent Machines */,
+				DBDDD8D11A9FCD5000A10572 /* Events */,
 				DB8A31521A9FB8DA00364903 /* Images.xcassets */,
 				DB8A314D1A9FB8DA00364903 /* Supporting Files */,
 			);
@@ -865,6 +861,26 @@
 				DBC7516F1A670E5500D88975 /* MachineCell.xib */,
 			);
 			name = Cells;
+			sourceTree = "<group>";
+		};
+		DBDDD8D11A9FCD5000A10572 /* Events */ = {
+			isa = PBXGroup;
+			children = (
+				DB7F0E4D1A9FBD1200AB47AB /* EventsInterfaceController.h */,
+				DB7F0E4E1A9FBD1200AB47AB /* EventsInterfaceController.m */,
+				DBDDD8CE1A9FC93E00A10572 /* EventInterfaceController.h */,
+				DBDDD8CF1A9FC93E00A10572 /* EventInterfaceController.m */,
+			);
+			name = Events;
+			sourceTree = "<group>";
+		};
+		DBDDD8D21A9FCD5500A10572 /* Recent Machines */ = {
+			isa = PBXGroup;
+			children = (
+				DB890C6C1A9FC15F00AAB741 /* RecentsInterfaceController.h */,
+				DB890C6D1A9FC15F00AAB741 /* RecentsInterfaceController.m */,
+			);
+			name = "Recent Machines";
 			sourceTree = "<group>";
 		};
 		DBF06BC218F96FF500F92912 = {
