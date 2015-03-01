@@ -5,6 +5,25 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBWatchKitPlugin" version="3737"/>
     </dependencies>
     <scenes>
+        <!--Done-->
+        <scene sceneID="LjC-cB-bFK">
+            <objects>
+                <controller identifier="AlertController" title="Done" id="36X-CY-NJG" customClass="AlertInterfaceController">
+                    <items>
+                        <group width="1" alignment="left" id="2f7-CS-A61">
+                            <items>
+                                <label width="136" alignment="left" text="Label" numberOfLines="0" id="nDS-Dg-dVH"/>
+                            </items>
+                            <edgeInsets key="margins" left="5" right="0.0" top="0.0" bottom="0.0"/>
+                        </group>
+                    </items>
+                    <connections>
+                        <outlet property="alertLabel" destination="nDS-Dg-dVH" id="DIm-8n-L3E"/>
+                    </connections>
+                </controller>
+            </objects>
+            <point key="canvasLocation" x="-30" y="-170"/>
+        </scene>
         <!--Interface Controller-->
         <scene sceneID="gZm-ta-fXc">
             <objects>
@@ -16,9 +35,7 @@
                                     <group key="rootItem" width="1" alignment="left" id="Eqs-dX-1T7">
                                         <items>
                                             <imageView width="45" alignment="left" verticalAlignment="center" contentMode="center" id="hEl-uV-yJq"/>
-                                            <label width="80.5" height="39.5" alignment="left" text="Nearest Location" numberOfLines="2" id="Gdw-qa-Y7D">
-                                                <color key="textColor" red="0.97212550949999998" green="0.0" blue="0.87446945249999997" alpha="1" colorSpace="calibratedRGB"/>
-                                            </label>
+                                            <label width="80.5" height="39.5" alignment="left" text="Nearest Location" numberOfLines="2" id="Gdw-qa-Y7D"/>
                                         </items>
                                     </group>
                                     <connections>
@@ -46,7 +63,7 @@
                                 <tableRow identifier="MachineRow" id="Oep-QE-kqy" customClass="MachineRow">
                                     <group key="rootItem" width="1" height="0.0" alignment="left" layout="vertical" id="a2r-YY-Sq7">
                                         <items>
-                                            <label width="136" alignment="left" text="Label" numberOfLines="2" id="98C-jK-by2"/>
+                                            <label width="136" alignment="left" text="Label" numberOfLines="0" id="98C-jK-by2"/>
                                             <label width="136" alignment="left" text="Label" numberOfLines="2" id="ZQ5-S7-k8k">
                                                 <color key="textColor" red="0.97212550949999998" green="0.0" blue="0.87446945249999997" alpha="1" colorSpace="calibratedRGB"/>
                                             </label>
@@ -67,6 +84,41 @@
             </objects>
             <point key="canvasLocation" x="210" y="181"/>
         </scene>
+        <!--MachineController-->
+        <scene sceneID="A26-ZV-3q8">
+            <objects>
+                <controller identifier="MachineController" id="5JD-eT-2WK" customClass="MachineInterfaceController">
+                    <items>
+                        <group width="1" alignment="left" layout="vertical" id="0uZ-IF-rj2">
+                            <items>
+                                <label width="136" alignment="left" text="Machine Name" textAlignment="center" numberOfLines="0" id="hb6-ph-94C">
+                                    <color key="textColor" red="0.97212550949999998" green="0.0" blue="0.87446945249999997" alpha="1" colorSpace="calibratedRGB"/>
+                                    <fontDescription key="font" type="boldSystem" pointSize="16"/>
+                                </label>
+                                <label width="136" alignment="left" text="Location Name" numberOfLines="0" id="NY5-f3-pol">
+                                    <color key="textColor" red="0.97212550949999998" green="0.0" blue="0.87446945249999997" alpha="1" colorSpace="calibratedRGB"/>
+                                    <fontDescription key="font" style="UICTFontTextStyleBody"/>
+                                </label>
+                            </items>
+                        </group>
+                        <separator alignment="left" id="hHT-M7-UFh">
+                            <color key="color" red="0.97212550949999998" green="0.0" blue="0.87446945249999997" alpha="1" colorSpace="calibratedRGB"/>
+                        </separator>
+                        <group width="1" alignment="left" layout="vertical" id="NOc-ZZ-T1L">
+                            <items>
+                                <map height="100" alignment="left" id="7vs-tB-Jjc"/>
+                            </items>
+                        </group>
+                    </items>
+                    <connections>
+                        <outlet property="locationLabel" destination="NY5-f3-pol" id="WYt-QE-vEv"/>
+                        <outlet property="locationMap" destination="7vs-tB-Jjc" id="jXx-fW-1DL"/>
+                        <outlet property="machineLabel" destination="hb6-ph-94C" id="4p0-9y-pSX"/>
+                    </connections>
+                </controller>
+            </objects>
+            <point key="canvasLocation" x="388" y="213.25"/>
+        </scene>
         <!--EventsController-->
         <scene sceneID="RoW-Oe-tEZ">
             <objects>
@@ -77,7 +129,7 @@
                                 <tableRow identifier="EventRow" id="gH5-ti-BYr" customClass="EventRow">
                                     <group key="rootItem" width="1" height="0.0" alignment="left" layout="vertical" id="Pka-aa-Rax">
                                         <items>
-                                            <label width="128.5" alignment="left" text="Label" numberOfLines="2" id="05n-da-ETG"/>
+                                            <label width="128.5" alignment="left" text="Label" numberOfLines="0" id="05n-da-ETG"/>
                                             <label width="136" alignment="left" text="Label" numberOfLines="2" id="gag-ks-M1d">
                                                 <color key="textColor" red="0.97212550949999998" green="0.0" blue="0.87446945249999997" alpha="1" colorSpace="calibratedRGB"/>
                                             </label>
@@ -113,6 +165,7 @@
                                     <fontDescription key="font" style="UICTFontTextStyleSubhead"/>
                                 </label>
                             </items>
+                            <edgeInsets key="margins" left="5" right="0.0" top="0.0" bottom="0.0"/>
                         </group>
                         <group width="1" alignment="left" layout="vertical" id="4vG-Bd-jiD">
                             <items>
@@ -121,6 +174,7 @@
                                 </separator>
                                 <label width="136" alignment="left" text="Label" numberOfLines="0" id="BKt-ie-NNz"/>
                             </items>
+                            <edgeInsets key="margins" left="5" right="0.0" top="0.0" bottom="0.0"/>
                         </group>
                     </items>
                     <connections>

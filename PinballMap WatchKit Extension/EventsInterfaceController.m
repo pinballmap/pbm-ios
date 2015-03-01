@@ -12,9 +12,9 @@
 #import "Event.h"
 #import "Event+CellHelpers.h"
 #import "NSDate+DateFormatting.h"
+#import "AppSettings.h"
 
 NSString * const apiRootURL = @"http://pinballmap.com/";
-NSString * const appGroup = @"group.net.isaacruiz.ppm";
 
 @interface EventsInterfaceController()
 
@@ -31,7 +31,8 @@ NSString * const appGroup = @"group.net.isaacruiz.ppm";
     [super awakeWithContext:context];
     
     // Configure interface objects here.
-    NSDictionary *regionInfo = [[EventsInterfaceController userDefaultsForApp] objectForKey:@"CurrentRegion"];
+    
+    NSDictionary *regionInfo = [AppSettings valueForSetting:AppSettingCurrentRegion];
     self.regionName = regionInfo[@"name"];
 
     self.events = [[NSMutableArray alloc] init];
@@ -52,9 +53,6 @@ NSString * const appGroup = @"group.net.isaacruiz.ppm";
     }
     
 
-}
-+ (NSUserDefaults *)userDefaultsForApp{
-    return [[NSUserDefaults alloc] initWithSuiteName:appGroup];
 }
 
 - (void)willActivate {

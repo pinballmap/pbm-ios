@@ -8,7 +8,6 @@
 
 #import "InterfaceController.h"
 
-
 @interface InterfaceController()
 
 @property (weak) IBOutlet WKInterfaceTable *menuTable;

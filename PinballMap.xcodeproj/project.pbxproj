@@ -15,6 +15,9 @@
 		DB070C4D193243990018D521 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DB070C4C193243990018D521 /* QuartzCore.framework */; };
 		DB070C4F193243A00018D521 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DB070C4E193243A00018D521 /* Security.framework */; };
 		DB070C51193243A70018D521 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DB070C50193243A70018D521 /* SystemConfiguration.framework */; };
+		DB09D3F51AA35777008D74B9 /* AppSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = DB09D3F41AA35777008D74B9 /* AppSettings.m */; };
+		DB09D3F61AA35777008D74B9 /* AppSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = DB09D3F41AA35777008D74B9 /* AppSettings.m */; };
+		DB09D3F81AA35BAD008D74B9 /* AppSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = DB09D3F41AA35777008D74B9 /* AppSettings.m */; };
 		DB0DAE7A1987B4A800A3FF0F /* GAAppHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = DB0DAE791987B4A800A3FF0F /* GAAppHelper.m */; };
 		DB1FB5D619BCB95A00E52B01 /* Region+UpdateDistance.m in Sources */ = {isa = PBXBuildFile; fileRef = DB1FB5D519BCB95A00E52B01 /* Region+UpdateDistance.m */; };
 		DB23E871193B5F08000C1E69 /* Event.m in Sources */ = {isa = PBXBuildFile; fileRef = DB23E870193B5F08000C1E69 /* Event.m */; };
@@ -132,6 +135,8 @@
 		DBBB4BED193387AB004E433F /* Storyboard-iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DBBB4BEC193387AB004E433F /* Storyboard-iPad.storyboard */; };
 		DBBB4BF019338A03004E433F /* UIViewController+Helpers.m in Sources */ = {isa = PBXBuildFile; fileRef = DBBB4BEF19338A03004E433F /* UIViewController+Helpers.m */; };
 		DBBB4BF319338FB5004E433F /* UIDevice+ModelCheck.m in Sources */ = {isa = PBXBuildFile; fileRef = DBBB4BF219338FB5004E433F /* UIDevice+ModelCheck.m */; };
+		DBBDABB51AA08A2C00E6EC6F /* AlertInterfaceController.m in Sources */ = {isa = PBXBuildFile; fileRef = DBBDABB41AA08A2C00E6EC6F /* AlertInterfaceController.m */; };
+		DBBDABB81AA08D2100E6EC6F /* MachineInterfaceController.m in Sources */ = {isa = PBXBuildFile; fileRef = DBBDABB71AA08D2100E6EC6F /* MachineInterfaceController.m */; };
 		DBC751701A670E5500D88975 /* MachineCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DBC7516E1A670E5500D88975 /* MachineCell.m */; };
 		DBC751711A670E5500D88975 /* MachineCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DBC7516F1A670E5500D88975 /* MachineCell.xib */; };
 		DBD4F3E919067D690023D98B /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DBD4F3E819067D690023D98B /* MessageUI.framework */; };
@@ -239,6 +244,8 @@
 		DB070C4C193243990018D521 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		DB070C4E193243A00018D521 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		DB070C50193243A70018D521 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		DB09D3F31AA35777008D74B9 /* AppSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppSettings.h; sourceTree = "<group>"; };
+		DB09D3F41AA35777008D74B9 /* AppSettings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppSettings.m; sourceTree = "<group>"; };
 		DB0DAE781987B4A800A3FF0F /* GAAppHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAAppHelper.h; sourceTree = "<group>"; };
 		DB0DAE791987B4A800A3FF0F /* GAAppHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GAAppHelper.m; sourceTree = "<group>"; };
 		DB1FB5D019BCB8C900E52B01 /* Pinball v3.1.0.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Pinball v3.1.0.xcdatamodel"; sourceTree = "<group>"; };
@@ -419,6 +426,10 @@
 		DBBB4BEF19338A03004E433F /* UIViewController+Helpers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+Helpers.m"; sourceTree = "<group>"; };
 		DBBB4BF119338FB5004E433F /* UIDevice+ModelCheck.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIDevice+ModelCheck.h"; sourceTree = "<group>"; };
 		DBBB4BF219338FB5004E433F /* UIDevice+ModelCheck.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIDevice+ModelCheck.m"; sourceTree = "<group>"; };
+		DBBDABB31AA08A2C00E6EC6F /* AlertInterfaceController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlertInterfaceController.h; sourceTree = "<group>"; };
+		DBBDABB41AA08A2C00E6EC6F /* AlertInterfaceController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlertInterfaceController.m; sourceTree = "<group>"; };
+		DBBDABB61AA08D2100E6EC6F /* MachineInterfaceController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MachineInterfaceController.h; sourceTree = "<group>"; };
+		DBBDABB71AA08D2100E6EC6F /* MachineInterfaceController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MachineInterfaceController.m; sourceTree = "<group>"; };
 		DBC7516D1A670E5500D88975 /* MachineCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MachineCell.h; sourceTree = "<group>"; };
 		DBC7516E1A670E5500D88975 /* MachineCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MachineCell.m; sourceTree = "<group>"; };
 		DBC7516F1A670E5500D88975 /* MachineCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MachineCell.xib; sourceTree = "<group>"; };
@@ -802,6 +813,8 @@
 				DB890C671A9FBF8400AAB741 /* PinballMap WatchKit Extension.entitlements */,
 				DB8A314F1A9FB8DA00364903 /* InterfaceController.h */,
 				DB8A31501A9FB8DA00364903 /* InterfaceController.m */,
+				DBBDABB31AA08A2C00E6EC6F /* AlertInterfaceController.h */,
+				DBBDABB41AA08A2C00E6EC6F /* AlertInterfaceController.m */,
 				DBDDD8D21A9FCD5500A10572 /* Recent Machines */,
 				DBDDD8D11A9FCD5000A10572 /* Events */,
 				DB8A31521A9FB8DA00364903 /* Images.xcassets */,
@@ -879,6 +892,8 @@
 			children = (
 				DB890C6C1A9FC15F00AAB741 /* RecentsInterfaceController.h */,
 				DB890C6D1A9FC15F00AAB741 /* RecentsInterfaceController.m */,
+				DBBDABB61AA08D2100E6EC6F /* MachineInterfaceController.h */,
+				DBBDABB71AA08D2100E6EC6F /* MachineInterfaceController.m */,
 			);
 			name = "Recent Machines";
 			sourceTree = "<group>";
@@ -1007,6 +1022,8 @@
 				DBF06C0018F9703E00F92912 /* CoreDataManager.m */,
 				DB338F621960738F000D0366 /* ThirdPartyKeys.h */,
 				DB338F631960738F000D0366 /* ThirdPartyKeys.m */,
+				DB09D3F31AA35777008D74B9 /* AppSettings.h */,
+				DB09D3F41AA35777008D74B9 /* AppSettings.m */,
 			);
 			name = Data;
 			sourceTree = "<group>";
@@ -1319,6 +1336,7 @@
 				DBB0EFEE1A47017B0090E9DC /* Zone.m in Sources */,
 				DBB0EFEB1A47017B0090E9DC /* MachineLocation.m in Sources */,
 				DBB0EFF21A4703970090E9DC /* Event+CellHelpers.m in Sources */,
+				DB09D3F61AA35777008D74B9 /* AppSettings.m in Sources */,
 				DBB0EFED1A47017B0090E9DC /* Event.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1327,6 +1345,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DB09D3F81AA35BAD008D74B9 /* AppSettings.m in Sources */,
 				DB7F0E4B1A9FBCF300AB47AB /* Event.m in Sources */,
 				DB7F0E441A9FBCB900AB47AB /* LocationType.m in Sources */,
 				DB7F0E4C1A9FBCF700AB47AB /* Pinball.xcdatamodeld in Sources */,
@@ -1337,8 +1356,10 @@
 				DB7F0E4F1A9FBD1200AB47AB /* EventsInterfaceController.m in Sources */,
 				DB7F0E461A9FBCC500AB47AB /* Location.m in Sources */,
 				DB7F0E491A9FBCDD00AB47AB /* MachineLocation.m in Sources */,
+				DBBDABB51AA08A2C00E6EC6F /* AlertInterfaceController.m in Sources */,
 				DB7F0E4A1A9FBCEC00AB47AB /* Event+CellHelpers.m in Sources */,
 				DB890C6E1A9FC15F00AAB741 /* RecentsInterfaceController.m in Sources */,
+				DBBDABB81AA08D2100E6EC6F /* MachineInterfaceController.m in Sources */,
 				DBDDD8D01A9FC93E00A10572 /* EventInterfaceController.m in Sources */,
 				DB7F0E481A9FBCD900AB47AB /* Zone.m in Sources */,
 				DB8A31511A9FB8DA00364903 /* InterfaceController.m in Sources */,
@@ -1388,6 +1409,7 @@
 				DBF06C0118F9703E00F92912 /* CoreDataManager.m in Sources */,
 				DB52D2FD18FB0AD300BB56D8 /* EventProfileView.m in Sources */,
 				DB38DA9619E1CBC400E1B6D2 /* AFNetworkReachabilityManager.m in Sources */,
+				DB09D3F51AA35777008D74B9 /* AppSettings.m in Sources */,
 				DB9A15F71A7D17C400819A1E /* LoadingViewController.m in Sources */,
 				DB52D2FA18FB09AF00BB56D8 /* NSDate+DateFormatting.m in Sources */,
 				DBA96E541A50435A007C73CD /* MachineManufacturerView.m in Sources */,

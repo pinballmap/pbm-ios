@@ -64,12 +64,20 @@
  * Reply dictionary contains: {"status": #responsestatus,"Body": #data}
  */
 - (void)application:(UIApplication *)application handleWatchKitExtensionRequest:(NSDictionary *)userInfo reply:(void (^)(NSDictionary *))reply{
-    
+    // Create a background task with an ID
+    UIBackgroundTaskIdentifier backgroundTaskID = [application beginBackgroundTaskWithName:@"WatchKitBackgroundPBM" expirationHandler:^{
+        NSDictionary *responseDic = @{@"status":@"fail",@"body":@"Unable to load requested data in background"};
+        reply(responseDic);
+        [application endBackgroundTask:backgroundTaskID];
+    }];
     NSString *action = userInfo[@"action"];
+    // Actions for Watch app
     if ([action isEqualToString:@"recent_machines"]){
+        // Find recently added machines
         [[PinballMapManager sharedInstance] recentlyAddedMachinesWithCompletion:^(NSDictionary *status) {
             dispatch_async(dispatch_get_main_queue(), ^{
                 if (status[@"errors"]){
+                    // Errors
                     NSString *errors;
                     if ([status[@"errors"] isKindOfClass:[NSArray class]]){
                         errors = [status[@"errors"] componentsJoinedByString:@","];
@@ -78,26 +86,30 @@
                     }
                     NSDictionary *responseDic = @{@"status":@"fail",@"body":errors};
                     reply(responseDic);
+                    [application endBackgroundTask:backgroundTaskID];
                 }else{
+                    // Create Recent Machine payload to send back to the Watch
                     NSArray *recentMachines = status[@"location_machine_xrefs"];
                     NSMutableArray *recentMachinesObj = [NSMutableArray new];
                     [recentMachines enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
                         NSDictionary *machine = @{
                                                   @"machine_name":obj[@"machine"][@"name"],
                                                   @"location_city":obj[@"location"][@"city"],
-                                                  @"location_name":obj[@"location"][@"name"]
+                                                  @"location_name":obj[@"location"][@"name"],
+                                                  @"location_machine_xref":obj
                                                   };
                         [recentMachinesObj addObject:machine];
                     }];
                     NSArray *foundMachines = [recentMachinesObj sortedArrayUsingDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"createdOn" ascending:NO]]];
                     NSDictionary *responseDic = @{@"status":@"ok",@"body":foundMachines};
-                reply(responseDic);
+                    reply(responseDic);
+                    [application endBackgroundTask:backgroundTaskID];
                 }
             });
         }];
     }else if ([action isEqualToString:@"nearby_location"]){
         [[PinballMapManager sharedInstance] nearestLocationWithCompletion:^(NSDictionary *status) {
-            
+            [application endBackgroundTask:backgroundTaskID];
         }];
     }
     
