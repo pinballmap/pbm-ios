@@ -15,7 +15,7 @@
 
 @interface Alert : NSObject
 
-@property (nonatomic) NSString *alertTitle;
-@property (nonatomic) NSString *alertBody;
+@property (nonatomic) NSString *title;
+@property (nonatomic) NSString *body;
 
 @end

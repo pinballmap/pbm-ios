@@ -12,22 +12,34 @@
                     <items>
                         <group width="1" alignment="left" id="2f7-CS-A61">
                             <items>
-                                <label width="136" alignment="left" text="Label" numberOfLines="0" id="nDS-Dg-dVH"/>
+                                <label width="136" alignment="center" verticalAlignment="center" text="Label" textAlignment="center" numberOfLines="0" id="nDS-Dg-dVH">
+                                    <color key="textColor" red="0.97212550949999998" green="0.0" blue="0.87446945249999997" alpha="1" colorSpace="calibratedRGB"/>
+                                </label>
                             </items>
-                            <edgeInsets key="margins" left="5" right="0.0" top="0.0" bottom="0.0"/>
+                            <edgeInsets key="margins" left="5" right="5" top="0.0" bottom="0.0"/>
+                        </group>
+                        <separator alignment="left" id="0NI-pD-h9d">
+                            <color key="color" red="0.97212550949999998" green="0.0" blue="0.87446945249999997" alpha="1" colorSpace="calibratedRGB"/>
+                        </separator>
+                        <group width="1" alignment="left" layout="vertical" id="52P-bt-Ang">
+                            <items>
+                                <label width="136" alignment="left" text="Label" numberOfLines="0" id="p3J-3v-0na"/>
+                            </items>
+                            <edgeInsets key="margins" left="5" right="5" top="0.0" bottom="0.0"/>
                         </group>
                     </items>
                     <connections>
-                        <outlet property="alertLabel" destination="nDS-Dg-dVH" id="DIm-8n-L3E"/>
+                        <outlet property="alertBody" destination="p3J-3v-0na" id="frS-p2-4nT"/>
+                        <outlet property="alertTitle" destination="nDS-Dg-dVH" id="lc4-ye-1Jl"/>
                     </connections>
                 </controller>
             </objects>
             <point key="canvasLocation" x="-30" y="-170"/>
         </scene>
-        <!--Interface Controller-->
+        <!--PBM-->
         <scene sceneID="gZm-ta-fXc">
             <objects>
-                <controller id="bRt-yJ-mng" customClass="InterfaceController">
+                <controller title="PBM" id="bRt-yJ-mng" customClass="InterfaceController">
                     <items>
                         <table alignment="left" id="dU8-h4-Ln3">
                             <items>
@@ -53,10 +65,10 @@
             </objects>
             <point key="canvasLocation" x="8" y="181"/>
         </scene>
-        <!--RecentsController-->
+        <!--Recent-->
         <scene sceneID="B6P-zF-dQI">
             <objects>
-                <controller identifier="RecentsController" id="gos-gH-Xby" customClass="RecentsInterfaceController">
+                <controller identifier="RecentsController" title="Recent" id="gos-gH-Xby" customClass="RecentsInterfaceController">
                     <items>
                         <table alignment="left" id="gQ2-uj-x0F">
                             <items>
@@ -84,10 +96,10 @@
             </objects>
             <point key="canvasLocation" x="210" y="181"/>
         </scene>
-        <!--MachineController-->
+        <!--Machine-->
         <scene sceneID="A26-ZV-3q8">
             <objects>
-                <controller identifier="MachineController" id="5JD-eT-2WK" customClass="MachineInterfaceController">
+                <controller identifier="MachineController" title="Machine" id="5JD-eT-2WK" customClass="MachineInterfaceController">
                     <items>
                         <group width="1" alignment="left" layout="vertical" id="0uZ-IF-rj2">
                             <items>
@@ -119,10 +131,10 @@
             </objects>
             <point key="canvasLocation" x="388" y="213.25"/>
         </scene>
-        <!--EventsController-->
+        <!--Events-->
         <scene sceneID="RoW-Oe-tEZ">
             <objects>
-                <controller identifier="EventsController" id="0GL-Gr-jWd" customClass="EventsInterfaceController">
+                <controller identifier="EventsController" title="Events" id="0GL-Gr-jWd" customClass="EventsInterfaceController">
                     <items>
                         <table alignment="left" id="N5U-YA-FlJ">
                             <items>
@@ -150,10 +162,10 @@
             </objects>
             <point key="canvasLocation" x="210" y="-41"/>
         </scene>
-        <!--EventController-->
+        <!--Event-->
         <scene sceneID="PZ0-Cn-rZ4">
             <objects>
-                <controller identifier="EventController" id="uOu-zz-2Gt" customClass="EventInterfaceController">
+                <controller identifier="EventController" title="Event" id="uOu-zz-2Gt" customClass="EventInterfaceController">
                     <items>
                         <group width="1" alignment="left" layout="vertical" id="CmW-3U-9pI">
                             <items>

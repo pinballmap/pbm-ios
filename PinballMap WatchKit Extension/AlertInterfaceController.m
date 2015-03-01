@@ -11,7 +11,8 @@
 
 @interface AlertInterfaceController()
 
-@property (weak) IBOutlet WKInterfaceLabel *alertLabel;
+@property (weak) IBOutlet WKInterfaceLabel *alertTitle;
+@property (weak) IBOutlet WKInterfaceLabel *alertBody;
 
 @end
 
@@ -22,7 +23,9 @@
     [super awakeWithContext:context];
     
     // Configure interface objects here.
-    [self.alertLabel setText:context];
+    Alert *currentAlert = context;
+    [self.alertTitle setText:currentAlert.title];
+    [self.alertBody setText:currentAlert.body];
 }
 
 - (void)willActivate {
@@ -38,4 +41,8 @@
 @end
 
 
+@implementation Alert
+
+
+@end
 
