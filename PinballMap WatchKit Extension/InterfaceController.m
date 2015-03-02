@@ -7,6 +7,8 @@
 //
 
 #import "InterfaceController.h"
+#import "AppSettings.h"
+#import "AlertInterfaceController.h"
 
 @interface InterfaceController()
 
@@ -19,7 +21,15 @@
 
 - (void)awakeWithContext:(id)context {
     [super awakeWithContext:context];
-
+    NSDictionary *regionInfo = [AppSettings valueForSetting:AppSettingCurrentRegion];
+    if (!regionInfo){
+        Alert *noRegionAlert = [[Alert alloc] init];
+        noRegionAlert.title = @"No Region";
+        noRegionAlert.body = @"No Region is set. Please open the Pinball Map App on your iPhone and select a region.";
+        [self presentControllerWithName:@"AlertController" context:noRegionAlert];
+    }
+    
+    
     // Configure interface objects here.
     NSArray *menuItems = @[
                            @{@"name":@"Nearest",@"icon":@"849-radar"},
@@ -45,14 +55,22 @@
     [super didDeactivate];
 }
 - (void)table:(WKInterfaceTable *)table didSelectRowAtIndex:(NSInteger)rowIndex{
-    if (rowIndex == 0){
-        // Nearest Location
-    }else if (rowIndex == 1){
-        // Recent Machines
-        [self pushControllerWithName:@"RecentsController" context:@"Recents"];
-    }else if (rowIndex == 2){
-        // Upcoming Events
-        [self pushControllerWithName:@"EventsController" context:@"Events"];
+    NSDictionary *regionInfo = [AppSettings valueForSetting:AppSettingCurrentRegion];
+    if (!regionInfo){
+        Alert *noRegionAlert = [[Alert alloc] init];
+        noRegionAlert.title = @"No Region";
+        noRegionAlert.body = @"No Region is set. Please open the Pinball Map App on your iPhone and select a region";
+        [self presentControllerWithName:@"AlertController" context:noRegionAlert];
+    }else{
+        if (rowIndex == 0){
+            // Nearest Location
+        }else if (rowIndex == 1){
+            // Recent Machines
+            [self pushControllerWithName:@"RecentsController" context:@"Recents"];
+        }else if (rowIndex == 2){
+            // Upcoming Events
+            [self pushControllerWithName:@"EventsController" context:@"Events"];
+        }
     }
 }
 

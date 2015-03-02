@@ -23,6 +23,7 @@
     [super awakeWithContext:context];
     
     // Configure interface objects here.
+    [self setTitle:@"Done"];
     Alert *currentAlert = context;
     [self.alertTitle setText:currentAlert.title];
     [self.alertBody setText:currentAlert.body];
