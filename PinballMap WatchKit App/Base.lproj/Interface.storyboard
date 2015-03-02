@@ -34,7 +34,7 @@
                     </connections>
                 </controller>
             </objects>
-            <point key="canvasLocation" x="-30" y="-170"/>
+            <point key="canvasLocation" x="8" y="-42"/>
         </scene>
         <!--PBM-->
         <scene sceneID="gZm-ta-fXc">
@@ -129,7 +129,7 @@
                     </connections>
                 </controller>
             </objects>
-            <point key="canvasLocation" x="388" y="213.25"/>
+            <point key="canvasLocation" x="388" y="192"/>
         </scene>
         <!--Events-->
         <scene sceneID="RoW-Oe-tEZ">
