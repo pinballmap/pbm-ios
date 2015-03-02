@@ -7,7 +7,7 @@
 //
 
 #import "RecentsInterfaceController.h"
-
+#import "AlertInterfaceController.h"
 
 @interface RecentsInterfaceController()
 
@@ -39,13 +39,19 @@
                         [row.machineLabel setText:recentMachine[@"machine_name"]];
                     }
                 }else{
-                    // Failed response from parent app.
+                    // Failed API response from parent app.
                     self.hadError = true;
-                    [self presentControllerWithName:@"AlertController" context:replyInfo[@"body"]];
+                    Alert *apiError = [[Alert alloc] init];
+                    apiError.title = @"Error";
+                    apiError.body = replyInfo[@"body"];
+                    [self presentControllerWithName:@"AlertController" context:apiError];
                 }
             }else{
                 self.hadError = true;
-                [self presentControllerWithName:@"AlertController" context:error.localizedDescription];
+                Alert *parentError = [[Alert alloc] init];
+                parentError.title = @"Error";
+                parentError.body = error.localizedDescription;
+                [self presentControllerWithName:@"AlertController" context:parentError];
             }
         });
     }];
