@@ -34,7 +34,8 @@
     NSArray *menuItems = @[
                            @{@"name":@"Nearest",@"icon":@"849-radar"},
                            @{@"name":@"Recent",@"icon":@"728-clock"},
-                           @{@"name":@"Events",@"icon":@"851-calendar"}
+                           @{@"name":@"Events",@"icon":@"851-calendar"},
+                           @{@"name":@"About",@"icon":@"724-info"}
                            ];
     [self.menuTable setNumberOfRows:menuItems.count withRowType:@"MainMenuRow"];
     for (int idx=0; idx <= menuItems.count-1; idx++) {
@@ -71,6 +72,9 @@
         }else if (rowIndex == 2){
             // Upcoming Events
             [self pushControllerWithName:@"EventsController" context:@"Events"];
+        }else if (rowIndex == 3){
+            // About
+            [self pushControllerWithName:@"AboutController" context:@"About"];
         }
     }
 }

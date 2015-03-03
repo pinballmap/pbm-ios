@@ -36,10 +36,10 @@
             </objects>
             <point key="canvasLocation" x="8" y="-42"/>
         </scene>
-        <!--PBM-->
+        <!--Interface Controller-->
         <scene sceneID="gZm-ta-fXc">
             <objects>
-                <controller title="PBM" id="bRt-yJ-mng" customClass="InterfaceController">
+                <controller id="bRt-yJ-mng" customClass="InterfaceController">
                     <items>
                         <table alignment="left" id="dU8-h4-Ln3">
                             <items>
@@ -95,6 +95,47 @@
                 </controller>
             </objects>
             <point key="canvasLocation" x="210" y="181"/>
+        </scene>
+        <!--AboutController-->
+        <scene sceneID="1Nj-oE-MPL">
+            <objects>
+                <controller identifier="AboutController" id="YRu-AB-0lB" customClass="AboutInterfaceController">
+                    <items>
+                        <group width="1" alignment="left" layout="vertical" id="Zfu-iG-jJC">
+                            <items>
+                                <label width="1" alignment="left" text="Pinball Map for Watch" textAlignment="center" numberOfLines="2" id="p96-Q7-UeH">
+                                    <color key="textColor" red="0.97212550949999998" green="0.0" blue="0.87446945249999997" alpha="1" colorSpace="calibratedRGB"/>
+                                </label>
+                                <separator alignment="left" id="n7J-Oo-5Nh">
+                                    <color key="color" red="0.97212550949999998" green="0.0" blue="0.87446945249999997" alpha="1" colorSpace="calibratedRGB"/>
+                                </separator>
+                                <label width="1" alignment="left" text="Created by: Frank Michael Sanchez" numberOfLines="0" id="pmv-Lb-f6E"/>
+                                <separator alignment="left" id="vFN-Jo-WrZ">
+                                    <color key="color" red="0.97212550949999998" green="0.0" blue="0.87446945249999997" alpha="1" colorSpace="calibratedRGB"/>
+                                </separator>
+                            </items>
+                            <edgeInsets key="margins" left="5" right="5" top="0.0" bottom="0.0"/>
+                        </group>
+                        <group width="1" alignment="left" layout="vertical" id="plu-oe-vfB">
+                            <items>
+                                <label width="1" alignment="left" text="Pinball Map Site" textAlignment="center" numberOfLines="2" id="qkX-Zm-SdU">
+                                    <color key="textColor" red="0.97212550949999998" green="0.0" blue="0.87446945249999997" alpha="1" colorSpace="calibratedRGB"/>
+                                </label>
+                                <separator alignment="left" id="4hS-Bi-9ue">
+                                    <color key="color" red="0.97212550949999998" green="0.0" blue="0.87446945249999997" alpha="1" colorSpace="calibratedRGB"/>
+                                </separator>
+                                <label width="1" alignment="left" numberOfLines="0" id="67j-Vh-LrV">
+                                    <string key="text">Created by: 
+Ryan Gratzer
+Scott Wainstock</string>
+                                </label>
+                            </items>
+                            <edgeInsets key="margins" left="5" right="5" top="0.0" bottom="0.0"/>
+                        </group>
+                    </items>
+                </controller>
+            </objects>
+            <point key="canvasLocation" x="8" y="415"/>
         </scene>
         <!--NearestController-->
         <scene sceneID="UoL-Cu-Ojr">
@@ -160,6 +201,7 @@
                                     <fontDescription key="font" style="UICTFontTextStyleBody"/>
                                 </label>
                             </items>
+                            <edgeInsets key="margins" left="5" right="5" top="0.0" bottom="0.0"/>
                         </group>
                         <separator alignment="left" id="hHT-M7-UFh">
                             <color key="color" red="0.97212550949999998" green="0.0" blue="0.87446945249999997" alpha="1" colorSpace="calibratedRGB"/>
