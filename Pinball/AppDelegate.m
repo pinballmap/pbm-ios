@@ -36,6 +36,7 @@
     [[UITableView appearance] setTintColor:pinkColor];
     [[UISegmentedControl appearance] setTintColor:pinkColor];
     [[MKMapView appearance] setTintColor:pinkColor];
+    [[UIActivityIndicatorView appearance] setTintColor:pinkColor];
 
     [[BITHockeyManager sharedHockeyManager] configureWithIdentifier:[ThirdPartyKeys hockeyID]];
     [[BITHockeyManager sharedHockeyManager].authenticator setAuthenticationSecret:[ThirdPartyKeys hockeySecret]];
