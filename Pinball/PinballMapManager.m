@@ -647,6 +647,7 @@ typedef NS_ENUM(NSInteger, PBMDataAPI) {
     if (self.currentRegion){
         [Location updateAllForRegion:self.currentRegion];
     }
+    [manager stopUpdatingLocation];
 }
 #pragma mark - Contact
 - (void)sendMessage:(NSDictionary *)messageData withType:(ContactType)contactType andCompletion:(APIComplete)completionBlock{
