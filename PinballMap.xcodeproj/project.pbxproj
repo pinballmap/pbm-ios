@@ -109,6 +109,7 @@
 		DB8D1C1719B3A7970065E2C6 /* ContactView.m in Sources */ = {isa = PBXBuildFile; fileRef = DB8D1C1619B3A7970065E2C6 /* ContactView.m */; };
 		DB8ECCC31AA62BC30013AFBB /* NearestInterfaceController.m in Sources */ = {isa = PBXBuildFile; fileRef = DB8ECCC21AA62BC30013AFBB /* NearestInterfaceController.m */; };
 		DB8ECCC71AA633740013AFBB /* AboutInterfaceController.m in Sources */ = {isa = PBXBuildFile; fileRef = DB8ECCC61AA633740013AFBB /* AboutInterfaceController.m */; };
+		DB8ECCCB1AA635260013AFBB /* GlanceInterfaceController.m in Sources */ = {isa = PBXBuildFile; fileRef = DB8ECCCA1AA635260013AFBB /* GlanceInterfaceController.m */; };
 		DB9330BC190D49AB0054C779 /* SeattleLocation.gpx in Resources */ = {isa = PBXBuildFile; fileRef = DB9330BB190D49AB0054C779 /* SeattleLocation.gpx */; };
 		DB99C3AE1906DCD200AFDF0F /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DB99C3AD1906DCD200AFDF0F /* AddressBook.framework */; };
 		DB99C3B11906FA4100AFDF0F /* MachinePickingView.m in Sources */ = {isa = PBXBuildFile; fileRef = DB99C3B01906FA4100AFDF0F /* MachinePickingView.m */; };
@@ -400,6 +401,8 @@
 		DB8ECCC21AA62BC30013AFBB /* NearestInterfaceController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NearestInterfaceController.m; sourceTree = "<group>"; };
 		DB8ECCC51AA633740013AFBB /* AboutInterfaceController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AboutInterfaceController.h; sourceTree = "<group>"; };
 		DB8ECCC61AA633740013AFBB /* AboutInterfaceController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AboutInterfaceController.m; sourceTree = "<group>"; };
+		DB8ECCC91AA635260013AFBB /* GlanceInterfaceController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GlanceInterfaceController.h; sourceTree = "<group>"; };
+		DB8ECCCA1AA635260013AFBB /* GlanceInterfaceController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GlanceInterfaceController.m; sourceTree = "<group>"; };
 		DB9330BB190D49AB0054C779 /* SeattleLocation.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = SeattleLocation.gpx; sourceTree = "<group>"; };
 		DB99C3AD1906DCD200AFDF0F /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
 		DB99C3AF1906FA4100AFDF0F /* MachinePickingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MachinePickingView.h; sourceTree = "<group>"; };
@@ -826,6 +829,7 @@
 				DB8A31501A9FB8DA00364903 /* InterfaceController.m */,
 				DBBDABB31AA08A2C00E6EC6F /* AlertInterfaceController.h */,
 				DBBDABB41AA08A2C00E6EC6F /* AlertInterfaceController.m */,
+				DB8ECCC81AA6351B0013AFBB /* Glance */,
 				DB8ECCC41AA633670013AFBB /* About */,
 				DB8ECCC01AA62BAC0013AFBB /* Nearest Location */,
 				DBDDD8D21A9FCD5500A10572 /* Recent Machines */,
@@ -878,6 +882,15 @@
 				DB8ECCC61AA633740013AFBB /* AboutInterfaceController.m */,
 			);
 			name = About;
+			sourceTree = "<group>";
+		};
+		DB8ECCC81AA6351B0013AFBB /* Glance */ = {
+			isa = PBXGroup;
+			children = (
+				DB8ECCC91AA635260013AFBB /* GlanceInterfaceController.h */,
+				DB8ECCCA1AA635260013AFBB /* GlanceInterfaceController.m */,
+			);
+			name = Glance;
 			sourceTree = "<group>";
 		};
 		DBB59CCB18FADC3B00F35BFD /* Views */ = {
@@ -1395,6 +1408,7 @@
 				DB8ECCC71AA633740013AFBB /* AboutInterfaceController.m in Sources */,
 				DBBDABB51AA08A2C00E6EC6F /* AlertInterfaceController.m in Sources */,
 				DB7F0E4A1A9FBCEC00AB47AB /* Event+CellHelpers.m in Sources */,
+				DB8ECCCB1AA635260013AFBB /* GlanceInterfaceController.m in Sources */,
 				DB890C6E1A9FC15F00AAB741 /* RecentsInterfaceController.m in Sources */,
 				DBBDABB81AA08D2100E6EC6F /* MachineInterfaceController.m in Sources */,
 				DBDDD8D01A9FC93E00A10572 /* EventInterfaceController.m in Sources */,
