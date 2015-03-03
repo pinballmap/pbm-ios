@@ -119,15 +119,29 @@
         self.locationHelper = [[UserLocationHelper alloc] init];
         [self.locationHelper getUserLocationWithCompletion:^(CLLocation *location) {
             dispatch_async(dispatch_get_main_queue(), ^{
-                NSDictionary *responseDic = @{@"status":@"ok",@"body":[NSString stringWithFormat:@"%f,%f",location.coordinate.latitude,location.coordinate.longitude]}
-                ;
-                reply(responseDic);
-                [application endBackgroundTask:backgroundTaskID];
+                [[PinballMapManager sharedInstance] nearestLocationWithLocation:location andCompletion:^(NSDictionary *status) {
+                    if (status[@"errors"]){
+                        // Errors
+                        NSString *errors;
+                        if ([status[@"errors"] isKindOfClass:[NSArray class]]){
+                            errors = [status[@"errors"] componentsJoinedByString:@","];
+                        }else{
+                            errors = status[@"errors"];
+                        }
+                        NSDictionary *responseDic = @{@"status":@"fail",@"body":errors};
+                        reply(responseDic);
+                        [application endBackgroundTask:backgroundTaskID];
+                    }else{
+                        // Create Recent Machine payload to send back to the Watch
+                        NSArray *location = status[@"location"];
+                        NSDictionary *responseDic = @{@"status":@"ok",@"body":location};
+                        reply(responseDic);
+                        [application endBackgroundTask:backgroundTaskID];
+                    }
+                }];
+                
             });
         }];
-
-//        [[PinballMapManager sharedInstance] nearestLocationWithCompletion:^(NSDictionary *status) {
-//        }];
     }
     
     

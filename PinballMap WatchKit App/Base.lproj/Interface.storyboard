@@ -96,6 +96,54 @@
             </objects>
             <point key="canvasLocation" x="210" y="181"/>
         </scene>
+        <!--NearestController-->
+        <scene sceneID="UoL-Cu-Ojr">
+            <objects>
+                <controller identifier="NearestController" id="lnQ-1s-YgX" customClass="NearestInterfaceController">
+                    <items>
+                        <group width="1" alignment="left" layout="vertical" id="fHo-78-9NP">
+                            <items>
+                                <label width="1" alignment="left" text="Label" textAlignment="center" numberOfLines="0" id="Bk1-CA-YGw"/>
+                                <label width="1" alignment="left" text="Label" id="PEv-eF-STN">
+                                    <color key="textColor" red="0.97212550949999998" green="0.0" blue="0.87446945249999997" alpha="1" colorSpace="calibratedRGB"/>
+                                </label>
+                            </items>
+                            <edgeInsets key="margins" left="5" right="5" top="0.0" bottom="0.0"/>
+                        </group>
+                        <separator alignment="left" id="EGz-bb-ryY">
+                            <color key="color" red="0.97212550949999998" green="0.0" blue="0.87446945249999997" alpha="1" colorSpace="calibratedRGB"/>
+                        </separator>
+                        <group width="1" alignment="left" layout="vertical" id="gPN-MC-7MH">
+                            <items>
+                                <label width="1" alignment="left" text="Label" numberOfLines="0" id="t4w-Hf-qey"/>
+                                <map height="100" alignment="left" id="C38-O1-Nqe"/>
+                            </items>
+                            <edgeInsets key="margins" left="5" right="5" top="0.0" bottom="0.0"/>
+                        </group>
+                        <separator alignment="left" id="HLT-9N-26O">
+                            <color key="color" red="0.97212550949999998" green="0.0" blue="0.87446945249999997" alpha="1" colorSpace="calibratedRGB"/>
+                        </separator>
+                        <group width="1" alignment="left" layout="vertical" id="Irg-BZ-97M">
+                            <items>
+                                <label width="1" alignment="left" text="Label" numberOfLines="0" id="uum-pB-Szq"/>
+                                <button width="1" alignment="left" title="Call" id="Wwv-z7-IDo"/>
+                            </items>
+                            <edgeInsets key="margins" left="5" right="5" top="0.0" bottom="0.0"/>
+                        </group>
+                    </items>
+                    <connections>
+                        <outlet property="addressLabel" destination="t4w-Hf-qey" id="bxy-dk-lUi"/>
+                        <outlet property="callButton" destination="Wwv-z7-IDo" id="C4f-Wk-pHD"/>
+                        <outlet property="locationDistance" destination="PEv-eF-STN" id="VIb-JV-N7C"/>
+                        <outlet property="locationLabel" destination="Bk1-CA-YGw" id="4O9-yg-dId"/>
+                        <outlet property="locationMap" destination="C38-O1-Nqe" id="7JZ-tY-2J9"/>
+                        <outlet property="machineCount" destination="uum-pB-Szq" id="9JE-ig-zhx"/>
+                        <outlet property="separtorTwo" destination="HLT-9N-26O" id="OwM-l1-VT7"/>
+                    </connections>
+                </controller>
+            </objects>
+            <point key="canvasLocation" x="203" y="464"/>
+        </scene>
         <!--Machine-->
         <scene sceneID="A26-ZV-3q8">
             <objects>

@@ -64,12 +64,7 @@
     }else{
         if (rowIndex == 0){
             // Nearest Location
-            [WKInterfaceController openParentApplication:@{@"action":@"nearby_location"} reply:^(NSDictionary *replyInfo, NSError *error) {
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    NSLog(@"%@",replyInfo);
-                });
-            }];
-
+            [self pushControllerWithName:@"NearestController" context:@"Nearest"];
         }else if (rowIndex == 1){
             // Recent Machines
             [self pushControllerWithName:@"RecentsController" context:@"Recents"];

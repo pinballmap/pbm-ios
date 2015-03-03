@@ -302,10 +302,16 @@ typedef NS_ENUM(NSInteger, PBMDataAPI) {
         completionBlock(@{@"errors": error.localizedDescription});
     }];
 }
-- (void)nearestLocationWithCompletion:(APIComplete)completionBlock{
+- (void)nearestLocationWithLocation:(CLLocation *)location andCompletion:(APIComplete)completionBlock{
+    CLLocation *userLocation;
+    if (location == nil){
+        userLocation = self.userLocation;
+    }else{
+        userLocation = location;
+    }
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     manager.requestSerializer = [AFJSONRequestSerializer serializer];
-    [manager GET:[NSString stringWithFormat:@"%@api/v1/locations/closest_by_lat_lon.json?lat=%@&lon=%@",apiRootURL,[@(self.userLocation.coordinate.latitude) stringValue],[@(self.userLocation.coordinate.longitude) stringValue]] parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [manager GET:[NSString stringWithFormat:@"%@api/v1/locations/closest_by_lat_lon.json?lat=%@&lon=%@",apiRootURL,[@(userLocation.coordinate.latitude) stringValue],[@(userLocation.coordinate.longitude) stringValue]] parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
         completionBlock(responseObject);
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         completionBlock(@{@"errors": error.localizedDescription});

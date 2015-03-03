@@ -107,6 +107,7 @@
 		DB8A31611A9FB8DA00364903 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DB8A31601A9FB8DA00364903 /* Images.xcassets */; };
 		DB8A31641A9FB8DA00364903 /* PinballMap WatchKit Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = DB8A314B1A9FB8DA00364903 /* PinballMap WatchKit Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		DB8D1C1719B3A7970065E2C6 /* ContactView.m in Sources */ = {isa = PBXBuildFile; fileRef = DB8D1C1619B3A7970065E2C6 /* ContactView.m */; };
+		DB8ECCC31AA62BC30013AFBB /* NearestInterfaceController.m in Sources */ = {isa = PBXBuildFile; fileRef = DB8ECCC21AA62BC30013AFBB /* NearestInterfaceController.m */; };
 		DB9330BC190D49AB0054C779 /* SeattleLocation.gpx in Resources */ = {isa = PBXBuildFile; fileRef = DB9330BB190D49AB0054C779 /* SeattleLocation.gpx */; };
 		DB99C3AE1906DCD200AFDF0F /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DB99C3AD1906DCD200AFDF0F /* AddressBook.framework */; };
 		DB99C3B11906FA4100AFDF0F /* MachinePickingView.m in Sources */ = {isa = PBXBuildFile; fileRef = DB99C3B01906FA4100AFDF0F /* MachinePickingView.m */; };
@@ -394,6 +395,8 @@
 		DB8BF07719E29DE40092AABE /* Pinball Map Widget.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "Pinball Map Widget.entitlements"; sourceTree = "<group>"; };
 		DB8D1C1519B3A7970065E2C6 /* ContactView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactView.h; sourceTree = "<group>"; };
 		DB8D1C1619B3A7970065E2C6 /* ContactView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactView.m; sourceTree = "<group>"; };
+		DB8ECCC11AA62BC30013AFBB /* NearestInterfaceController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NearestInterfaceController.h; sourceTree = "<group>"; };
+		DB8ECCC21AA62BC30013AFBB /* NearestInterfaceController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NearestInterfaceController.m; sourceTree = "<group>"; };
 		DB9330BB190D49AB0054C779 /* SeattleLocation.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = SeattleLocation.gpx; sourceTree = "<group>"; };
 		DB99C3AD1906DCD200AFDF0F /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
 		DB99C3AF1906FA4100AFDF0F /* MachinePickingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MachinePickingView.h; sourceTree = "<group>"; };
@@ -820,6 +823,7 @@
 				DB8A31501A9FB8DA00364903 /* InterfaceController.m */,
 				DBBDABB31AA08A2C00E6EC6F /* AlertInterfaceController.h */,
 				DBBDABB41AA08A2C00E6EC6F /* AlertInterfaceController.m */,
+				DB8ECCC01AA62BAC0013AFBB /* Nearest Location */,
 				DBDDD8D21A9FCD5500A10572 /* Recent Machines */,
 				DBDDD8D11A9FCD5000A10572 /* Events */,
 				DB8A31521A9FB8DA00364903 /* Images.xcassets */,
@@ -852,6 +856,15 @@
 				DB8A315C1A9FB8DA00364903 /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		DB8ECCC01AA62BAC0013AFBB /* Nearest Location */ = {
+			isa = PBXGroup;
+			children = (
+				DB8ECCC11AA62BC30013AFBB /* NearestInterfaceController.h */,
+				DB8ECCC21AA62BC30013AFBB /* NearestInterfaceController.m */,
+			);
+			name = "Nearest Location";
 			sourceTree = "<group>";
 		};
 		DBB59CCB18FADC3B00F35BFD /* Views */ = {
@@ -1365,6 +1378,7 @@
 				DB7F0E461A9FBCC500AB47AB /* Location.m in Sources */,
 				DB7F0E491A9FBCDD00AB47AB /* MachineLocation.m in Sources */,
 				DB09D4341AA4C0B9008D74B9 /* UserLocationHelper.m in Sources */,
+				DB8ECCC31AA62BC30013AFBB /* NearestInterfaceController.m in Sources */,
 				DBBDABB51AA08A2C00E6EC6F /* AlertInterfaceController.m in Sources */,
 				DB7F0E4A1A9FBCEC00AB47AB /* Event+CellHelpers.m in Sources */,
 				DB890C6E1A9FC15F00AAB741 /* RecentsInterfaceController.m in Sources */,
