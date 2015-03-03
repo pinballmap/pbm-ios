@@ -94,8 +94,8 @@ typedef NS_ENUM(NSInteger, PBMDataAPI) {
         self.locationManager = [CLLocationManager new];
     }
     #pragma message ("iOS 8 Support for location updating")
-    if ([self.locationManager respondsToSelector:@selector(requestWhenInUseAuthorization)]){
-        [self.locationManager requestWhenInUseAuthorization];
+    if ([self.locationManager respondsToSelector:@selector(requestAlwaysAuthorization)] && [CLLocationManager authorizationStatus] != kCLAuthorizationStatusAuthorizedAlways){
+        [self.locationManager requestAlwaysAuthorization];
     }
     self.locationManager.delegate = self;
     self.locationManager.desiredAccuracy = kCLLocationAccuracyBest;

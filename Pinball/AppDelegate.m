@@ -12,7 +12,15 @@
 #import "GAI.h"
 #import "ThirdPartyKeys.h"
 #import "PinballTabController.h"
+#import "UserLocationHelper.h"
+
 @import MapKit;
+
+@interface AppDelegate ()
+
+@property (nonatomic, strong) UserLocationHelper *locationHelper;
+
+@end
 
 @implementation AppDelegate
 
@@ -108,9 +116,18 @@
             });
         }];
     }else if ([action isEqualToString:@"nearby_location"]){
-        [[PinballMapManager sharedInstance] nearestLocationWithCompletion:^(NSDictionary *status) {
-            [application endBackgroundTask:backgroundTaskID];
+        self.locationHelper = [[UserLocationHelper alloc] init];
+        [self.locationHelper getUserLocationWithCompletion:^(CLLocation *location) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                NSDictionary *responseDic = @{@"status":@"ok",@"body":[NSString stringWithFormat:@"%f,%f",location.coordinate.latitude,location.coordinate.longitude]}
+                ;
+                reply(responseDic);
+                [application endBackgroundTask:backgroundTaskID];
+            });
         }];
+
+//        [[PinballMapManager sharedInstance] nearestLocationWithCompletion:^(NSDictionary *status) {
+//        }];
     }
     
     
