@@ -13,13 +13,13 @@
                         <group width="1" alignment="left" id="2f7-CS-A61">
                             <items>
                                 <label width="136" alignment="center" verticalAlignment="center" text="Label" textAlignment="center" numberOfLines="0" id="nDS-Dg-dVH">
-                                    <color key="textColor" red="0.97212550949999998" green="0.0" blue="0.87446945249999997" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="textColor" red="1" green="0.0" blue="0.57254901960000004" alpha="1" colorSpace="calibratedRGB"/>
                                 </label>
                             </items>
                             <edgeInsets key="margins" left="5" right="5" top="0.0" bottom="0.0"/>
                         </group>
                         <separator alignment="left" id="0NI-pD-h9d">
-                            <color key="color" red="0.97212550949999998" green="0.0" blue="0.87446945249999997" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="color" red="1" green="0.0" blue="0.57254901960000004" alpha="1" colorSpace="calibratedRGB"/>
                         </separator>
                         <group width="1" alignment="left" layout="vertical" id="52P-bt-Ang">
                             <items>
@@ -77,7 +77,7 @@
                                         <items>
                                             <label width="136" alignment="left" text="Label" numberOfLines="0" id="98C-jK-by2"/>
                                             <label width="136" alignment="left" text="Label" numberOfLines="2" id="ZQ5-S7-k8k">
-                                                <color key="textColor" red="0.97212550949999998" green="0.0" blue="0.87446945249999997" alpha="1" colorSpace="calibratedRGB"/>
+                                                <color key="textColor" red="1" green="0.0" blue="0.57254901960000004" alpha="1" colorSpace="calibratedRGB"/>
                                             </label>
                                         </items>
                                     </group>
@@ -104,14 +104,14 @@
                         <group width="1" alignment="left" layout="vertical" id="Zfu-iG-jJC">
                             <items>
                                 <label width="1" alignment="left" text="Pinball Map for Watch" textAlignment="center" numberOfLines="2" id="p96-Q7-UeH">
-                                    <color key="textColor" red="1" green="0.0" blue="0.87450980392156863" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="textColor" red="1" green="0.0" blue="0.57254901960000004" alpha="1" colorSpace="calibratedRGB"/>
                                 </label>
                                 <separator alignment="left" id="n7J-Oo-5Nh">
-                                    <color key="color" red="0.97212550949999998" green="0.0" blue="0.87446945249999997" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="color" red="1" green="0.0" blue="0.57254901960000004" alpha="1" colorSpace="calibratedRGB"/>
                                 </separator>
                                 <label width="1" alignment="left" text="Created by: Frank Michael Sanchez" numberOfLines="0" id="pmv-Lb-f6E"/>
                                 <separator alignment="left" id="vFN-Jo-WrZ">
-                                    <color key="color" red="0.97212550949999998" green="0.0" blue="0.87446945249999997" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="color" red="1" green="0.0" blue="0.57254901960000004" alpha="1" colorSpace="calibratedRGB"/>
                                 </separator>
                             </items>
                             <edgeInsets key="margins" left="5" right="5" top="0.0" bottom="0.0"/>
@@ -119,10 +119,10 @@
                         <group width="1" alignment="left" layout="vertical" id="plu-oe-vfB">
                             <items>
                                 <label width="1" alignment="left" text="Pinball Map Site" textAlignment="center" numberOfLines="2" id="qkX-Zm-SdU">
-                                    <color key="textColor" red="0.97212550949999998" green="0.0" blue="0.87446945249999997" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="textColor" red="1" green="0.0" blue="0.57254901960000004" alpha="1" colorSpace="calibratedRGB"/>
                                 </label>
                                 <separator alignment="left" id="4hS-Bi-9ue">
-                                    <color key="color" red="0.97212550949999998" green="0.0" blue="0.87446945249999997" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="color" red="1" green="0.0" blue="0.57254901960000004" alpha="1" colorSpace="calibratedRGB"/>
                                 </separator>
                                 <label width="1" alignment="left" numberOfLines="0" id="67j-Vh-LrV">
                                     <string key="text">Created by: 
@@ -143,7 +143,7 @@ Scott Wainstock</string>
                 <glanceController topTemplateType="body3" bottomTemplateType="groupBody2Footer" id="Dmf-wO-dCE" customClass="GlanceInterfaceController">
                     <items>
                         <label alignment="left" text="Label∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙" minimumScaleFactor="0.50000000000000011" id="oSb-Zv-0wM">
-                            <color key="textColor" red="0.97212550949999998" green="0.0" blue="0.87446945249999997" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="textColor" red="1" green="0.0" blue="0.57254901960000004" alpha="1" colorSpace="calibratedRGB"/>
                         </label>
                         <group alignment="left" id="7UT-ee-QcC">
                             <items>
@@ -172,13 +172,13 @@ Scott Wainstock</string>
                             <items>
                                 <label width="1" alignment="left" text="Label" textAlignment="center" numberOfLines="0" id="Bk1-CA-YGw"/>
                                 <label width="1" alignment="left" text="Label" id="PEv-eF-STN">
-                                    <color key="textColor" red="0.97212550949999998" green="0.0" blue="0.87446945249999997" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="textColor" red="1" green="0.0" blue="0.57254901960000004" alpha="1" colorSpace="calibratedRGB"/>
                                 </label>
                             </items>
                             <edgeInsets key="margins" left="5" right="5" top="0.0" bottom="0.0"/>
                         </group>
                         <separator alignment="left" id="EGz-bb-ryY">
-                            <color key="color" red="0.97212550949999998" green="0.0" blue="0.87446945249999997" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="color" red="1" green="0.0" blue="0.57254901960000004" alpha="1" colorSpace="calibratedRGB"/>
                         </separator>
                         <group width="1" alignment="left" layout="vertical" id="gPN-MC-7MH">
                             <items>
@@ -188,7 +188,7 @@ Scott Wainstock</string>
                             <edgeInsets key="margins" left="5" right="5" top="0.0" bottom="0.0"/>
                         </group>
                         <separator alignment="left" id="HLT-9N-26O">
-                            <color key="color" red="0.97212550949999998" green="0.0" blue="0.87446945249999997" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="color" red="1" green="0.0" blue="0.57254901960000004" alpha="1" colorSpace="calibratedRGB"/>
                         </separator>
                         <group width="1" alignment="left" layout="vertical" id="Irg-BZ-97M">
                             <items>
@@ -219,18 +219,18 @@ Scott Wainstock</string>
                         <group width="1" alignment="left" layout="vertical" id="0uZ-IF-rj2">
                             <items>
                                 <label width="136" alignment="left" text="Machine Name" textAlignment="center" numberOfLines="0" id="hb6-ph-94C">
-                                    <color key="textColor" red="0.97212550949999998" green="0.0" blue="0.87446945249999997" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="textColor" red="1" green="0.0" blue="0.57254901960000004" alpha="1" colorSpace="calibratedRGB"/>
                                     <fontDescription key="font" type="boldSystem" pointSize="16"/>
                                 </label>
                                 <label width="136" alignment="left" text="Location Name" numberOfLines="0" id="NY5-f3-pol">
-                                    <color key="textColor" red="0.97212550949999998" green="0.0" blue="0.87446945249999997" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="textColor" red="1" green="0.0" blue="0.57254901960000004" alpha="1" colorSpace="calibratedRGB"/>
                                     <fontDescription key="font" style="UICTFontTextStyleBody"/>
                                 </label>
                             </items>
                             <edgeInsets key="margins" left="5" right="5" top="0.0" bottom="0.0"/>
                         </group>
                         <separator alignment="left" id="hHT-M7-UFh">
-                            <color key="color" red="0.97212550949999998" green="0.0" blue="0.87446945249999997" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="color" red="1" green="0.0" blue="0.57254901960000004" alpha="1" colorSpace="calibratedRGB"/>
                         </separator>
                         <group width="1" alignment="left" layout="vertical" id="NOc-ZZ-T1L">
                             <items>
@@ -259,7 +259,7 @@ Scott Wainstock</string>
                                         <items>
                                             <label width="128.5" alignment="left" text="Label" numberOfLines="0" id="05n-da-ETG"/>
                                             <label width="136" alignment="left" text="Label" numberOfLines="2" id="gag-ks-M1d">
-                                                <color key="textColor" red="0.97212550949999998" green="0.0" blue="0.87446945249999997" alpha="1" colorSpace="calibratedRGB"/>
+                                                <color key="textColor" red="1" green="0.0" blue="0.57254901960000004" alpha="1" colorSpace="calibratedRGB"/>
                                             </label>
                                         </items>
                                     </group>
@@ -289,7 +289,7 @@ Scott Wainstock</string>
                                     <fontDescription key="font" style="UICTFontTextStyleHeadline"/>
                                 </label>
                                 <label width="136" alignment="left" text="Label" numberOfLines="0" id="BTd-aW-aJ1">
-                                    <color key="textColor" red="0.97212550949999998" green="0.0" blue="0.87446945249999997" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="textColor" red="1" green="0.0" blue="0.57254901960000004" alpha="1" colorSpace="calibratedRGB"/>
                                     <fontDescription key="font" style="UICTFontTextStyleSubhead"/>
                                 </label>
                             </items>
@@ -298,7 +298,7 @@ Scott Wainstock</string>
                         <group width="1" alignment="left" layout="vertical" id="4vG-Bd-jiD">
                             <items>
                                 <separator alignment="left" id="Ucl-TV-KRh">
-                                    <color key="color" red="0.97212550949999998" green="0.0" blue="0.87446945249999997" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="color" red="1" green="0.0" blue="0.57254901960000004" alpha="1" colorSpace="calibratedRGB"/>
                                 </separator>
                                 <label width="136" alignment="left" text="Label" numberOfLines="0" id="BKt-ie-NNz"/>
                             </items>
@@ -315,5 +315,5 @@ Scott Wainstock</string>
             <point key="canvasLocation" x="388" y="-42"/>
         </scene>
     </scenes>
-    <color key="tintColor" red="0.97212550949999998" green="0.0" blue="0.87446945249999997" alpha="1" colorSpace="calibratedRGB"/>
+    <color key="tintColor" red="1" green="0.0" blue="0.57254901960000004" alpha="1" colorSpace="calibratedRGB"/>
 </document>

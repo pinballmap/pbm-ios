@@ -32,6 +32,7 @@
                     NSDictionary *location = replyInfo[@"body"];
                     
                     [self.locationLabel setText:@"Back in your head by Tegan and Sara"];//location[@"name"]];
+                    [self.locationLabel setTextColor:[UIColor colorWithRed:1.0f green:0.0f blue:146.0f/255.0f alpha:1.0]];
                     [self.addressLabel setText:[NSString stringWithFormat:@"%@, %@",location[@"street"],location[@"city"]]];
                     
                     if (location[@"distance"]){
