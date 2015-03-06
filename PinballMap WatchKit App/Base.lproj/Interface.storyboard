@@ -109,7 +109,10 @@
                                 <separator alignment="left" id="n7J-Oo-5Nh">
                                     <color key="color" red="1" green="0.0" blue="0.57254901960000004" alpha="1" colorSpace="calibratedRGB"/>
                                 </separator>
-                                <label width="1" alignment="left" text="Created by: Frank Michael Sanchez" numberOfLines="0" id="pmv-Lb-f6E"/>
+                                <label width="1" alignment="left" numberOfLines="0" id="pmv-Lb-f6E">
+                                    <string key="text">Created by: 
+Frank Michael Sanchez</string>
+                                </label>
                                 <separator alignment="left" id="vFN-Jo-WrZ">
                                     <color key="color" red="1" green="0.0" blue="0.57254901960000004" alpha="1" colorSpace="calibratedRGB"/>
                                 </separator>
@@ -140,23 +143,18 @@ Scott Wainstock</string>
         <!--Glance Interface Controller-->
         <scene sceneID="DR4-jV-JxY">
             <objects>
-                <glanceController topTemplateType="body3" bottomTemplateType="groupBody2Footer" id="Dmf-wO-dCE" customClass="GlanceInterfaceController">
+                <glanceController topTemplateType="body3" id="Dmf-wO-dCE" customClass="GlanceInterfaceController">
                     <items>
-                        <label alignment="left" text="Label∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙" minimumScaleFactor="0.50000000000000011" id="oSb-Zv-0wM">
-                            <color key="textColor" red="1" green="0.0" blue="0.57254901960000004" alpha="1" colorSpace="calibratedRGB"/>
-                        </label>
+                        <label alignment="left" text="Label∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙" id="I5Q-Rn-1qG"/>
                         <group alignment="left" id="7UT-ee-QcC">
                             <items>
                                 <map height="1" alignment="left" id="oX0-SC-7hL"/>
                             </items>
                             <edgeInsets key="margins" left="5" right="5" top="0.0" bottom="0.0"/>
                         </group>
-                        <label alignment="left" text="Label∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙" id="lC6-dR-OhK"/>
-                        <label alignment="left" hidden="YES" text="Footer" id="YXk-Yb-ML2"/>
                     </items>
                     <connections>
-                        <outlet property="locationDistance" destination="lC6-dR-OhK" id="1Y4-7T-xi2"/>
-                        <outlet property="locationLabel" destination="oSb-Zv-0wM" id="ILM-tg-1K0"/>
+                        <outlet property="locationLabel" destination="I5Q-Rn-1qG" id="UWf-ii-LUG"/>
                         <outlet property="locationMap" destination="oX0-SC-7hL" id="QPI-m8-cQ6"/>
                     </connections>
                 </glanceController>
