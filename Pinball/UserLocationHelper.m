@@ -22,7 +22,7 @@
     if (!self.locationManager){
         self.locationManager = [CLLocationManager new];
     }
-#pragma message ("iOS 8 Support for location updating")
+    // iOS 8 Support for location updating
     if ([self.locationManager respondsToSelector:@selector(requestAlwaysAuthorization)]){
         [self.locationManager requestAlwaysAuthorization];
     }

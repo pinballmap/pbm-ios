@@ -19,7 +19,6 @@
 @property (nonatomic) NSFetchedResultsController *fetchedResults;
 @property (nonatomic) NSMutableArray *searchResults;
 
-- (IBAction)cancelRegion:(id)sender;    // iPad only.
 - (IBAction)requestRegion:(id)sender;
 
 @end
