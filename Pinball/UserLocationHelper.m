@@ -23,7 +23,8 @@
         self.locationManager = [CLLocationManager new];
     }
     // iOS 8 Support for location updating
-    if ([self.locationManager respondsToSelector:@selector(requestAlwaysAuthorization)]){
+    NSLog(@"%i",[CLLocationManager authorizationStatus]);
+    if ([self.locationManager respondsToSelector:@selector(requestAlwaysAuthorization)] && [CLLocationManager authorizationStatus] != kCLAuthorizationStatusAuthorizedAlways){
         [self.locationManager requestAlwaysAuthorization];
     }
     self.locationManager.delegate = self;
@@ -38,6 +39,7 @@
     if (self.completionBlock){
         self.completionBlock(foundLocation);
     }
+    [manager stopUpdatingLocation];
 }
 
 @end
