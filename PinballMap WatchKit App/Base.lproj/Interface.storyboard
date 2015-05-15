@@ -140,27 +140,6 @@ Scott Wainstock</string>
             </objects>
             <point key="canvasLocation" x="8" y="415"/>
         </scene>
-        <!--Glance Interface Controller-->
-        <scene sceneID="DR4-jV-JxY">
-            <objects>
-                <glanceController topTemplateType="body3" id="Dmf-wO-dCE" customClass="GlanceInterfaceController">
-                    <items>
-                        <label alignment="left" text="Label∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙" id="I5Q-Rn-1qG"/>
-                        <group alignment="left" id="7UT-ee-QcC">
-                            <items>
-                                <map height="1" alignment="left" id="oX0-SC-7hL"/>
-                            </items>
-                            <edgeInsets key="margins" left="5" right="5" top="0.0" bottom="0.0"/>
-                        </group>
-                    </items>
-                    <connections>
-                        <outlet property="locationLabel" destination="I5Q-Rn-1qG" id="UWf-ii-LUG"/>
-                        <outlet property="locationMap" destination="oX0-SC-7hL" id="QPI-m8-cQ6"/>
-                    </connections>
-                </glanceController>
-            </objects>
-            <point key="canvasLocation" x="3" y="833"/>
-        </scene>
         <!--NearestController-->
         <scene sceneID="UoL-Cu-Ojr">
             <objects>

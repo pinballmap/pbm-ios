@@ -1,16 +1,6 @@
 {
   "images" : [
     {
-      "idiom" : "ipad",
-      "size" : "40x40",
-      "scale" : "1x"
-    },
-    {
-      "idiom" : "ipad",
-      "size" : "40x40",
-      "scale" : "2x"
-    },
-    {
       "size" : "24x24",
       "idiom" : "watch",
       "scale" : "2x",
@@ -29,7 +19,7 @@
     {
       "size" : "29x29",
       "idiom" : "watch",
-      "filename" : "29.png",
+      "filename" : "58.png",
       "role" : "companionSettings",
       "scale" : "2x"
     },
@@ -52,7 +42,7 @@
       "size" : "44x44",
       "idiom" : "watch",
       "scale" : "2x",
-      "filename" : "44.png",
+      "filename" : "88.png",
       "role" : "longLook",
       "subtype" : "42mm"
     },
