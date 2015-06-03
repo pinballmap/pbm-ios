@@ -97,7 +97,7 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
     RecentMachine *machine = [self.recentMachines objectAtIndex:indexPath.row];
-    LocationProfileView *profileView = [self.storyboard instantiateViewControllerWithIdentifier:@"LocationProfileView"];
+    LocationProfileView *profileView = [[UIStoryboard storyboardWithName:@"SecondaryControllers" bundle:nil] instantiateViewControllerWithIdentifier:@"LocationProfileView"];
     profileView.showMapSnapshot = true;
     profileView.currentLocation = machine.location;
     
