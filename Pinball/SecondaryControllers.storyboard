@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6724" systemVersion="14C109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6711"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
@@ -451,7 +451,7 @@
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sOY-Pf-gLr">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                <mutableString key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</mutableString>
+                                <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                 <connections>
@@ -1269,7 +1269,6 @@
         <!--New Location-->
         <scene sceneID="Xxl-Ee-l3S">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="tBF-2k-eNe" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <tableViewController id="IXm-gW-Fu1" customClass="NewLocationsView" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="d25-K1-AZ2">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
@@ -1504,13 +1503,13 @@
                         <outlet property="userName" destination="QIJ-R7-S0w" id="K7S-6O-lxw"/>
                     </connections>
                 </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="tBF-2k-eNe" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1695" y="-1322"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Fe2-tQ-5x5">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="hd1-at-rVd" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <navigationController storyboardIdentifier="NewLocationView" automaticallyAdjustsScrollViewInsets="NO" modalPresentationStyle="formSheet" id="OCe-j6-yNu" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="URc-zN-H8B">
@@ -1522,8 +1521,77 @@
                         <segue destination="IXm-gW-Fu1" kind="relationship" relationship="rootViewController" id="HDh-iR-kNU"/>
                     </connections>
                 </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="hd1-at-rVd" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1040" y="-1322"/>
+        </scene>
+        <!--Locations View-->
+        <scene sceneID="MWB-W4-4ce">
+            <objects>
+                <tableViewController storyboardIdentifier="LocationsView" id="hBF-Rd-RAu" customClass="LocationsView" sceneMemberID="viewController">
+                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="J4p-a3-VsO">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <searchBar key="tableHeaderView" contentMode="redraw" id="qf9-Ep-xlR">
+                            <rect key="frame" x="0.0" y="64" width="600" height="44"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                            <textInputTraits key="textInputTraits"/>
+                            <connections>
+                                <outlet property="delegate" destination="hBF-Rd-RAu" id="HDJ-dU-oMr"/>
+                            </connections>
+                        </searchBar>
+                        <connections>
+                            <outlet property="dataSource" destination="hBF-Rd-RAu" id="Cre-fh-Nnp"/>
+                            <outlet property="delegate" destination="hBF-Rd-RAu" id="Vr0-Kf-WdV"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" id="5Jz-H5-Wfm">
+                        <barButtonItem key="leftBarButtonItem" title="Sort" id="ODM-b3-VOY">
+                            <connections>
+                                <action selector="filterResults:" destination="hBF-Rd-RAu" id="bQA-Rm-Z8E"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="Jzw-49-Wve">
+                            <connections>
+                                <action selector="submitNewLocation:" destination="hBF-Rd-RAu" id="AMu-0a-7Lj"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="searchDisplayController" destination="cFT-2S-MPu" id="mAG-yy-ndj"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="EWr-nS-t49" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <searchDisplayController id="cFT-2S-MPu">
+                    <connections>
+                        <outlet property="delegate" destination="hBF-Rd-RAu" id="7Qx-w7-7CW"/>
+                        <outlet property="searchBar" destination="qf9-Ep-xlR" id="KcD-Mv-QoF"/>
+                        <outlet property="searchContentsController" destination="hBF-Rd-RAu" id="N3e-35-RnF"/>
+                        <outlet property="searchResultsDataSource" destination="hBF-Rd-RAu" id="PRE-9g-ffL"/>
+                        <outlet property="searchResultsDelegate" destination="hBF-Rd-RAu" id="jwB-e8-0iH"/>
+                    </connections>
+                </searchDisplayController>
+            </objects>
+            <point key="canvasLocation" x="3075" y="-1322"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="dAP-L1-xu1">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="2hL-l8-98B" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="3Kv-Af-5rl">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="hBF-Rd-RAu" kind="relationship" relationship="rootViewController" id="DJu-KH-fau"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="hCp-Gb-Xel" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2369" y="-1322"/>
         </scene>
     </scenes>
 </document>

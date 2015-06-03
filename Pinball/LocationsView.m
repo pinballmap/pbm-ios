@@ -71,6 +71,7 @@
 - (void)setIsSelecting:(BOOL)isSelecting{
     _isSelecting = isSelecting;
     self.navigationItem.leftBarButtonItem = nil;
+    self.navigationItem.rightBarButtonItem = nil;
 }
 #pragma mark - Region Update
 - (void)updateRegion{
