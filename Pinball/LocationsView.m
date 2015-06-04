@@ -71,6 +71,7 @@
 - (void)setIsSelecting:(BOOL)isSelecting{
     _isSelecting = isSelecting;
     self.navigationItem.leftBarButtonItem = nil;
+    self.navigationItem.rightBarButtonItem = nil;
 }
 #pragma mark - Region Update
 - (void)updateRegion{
@@ -160,9 +161,14 @@
     
     NSArray *locations = [[[CoreDataManager sharedInstance] managedObjectContext] executeFetchRequest:stackRequest error:nil];
 
-    MapView *map = (MapView *)[(UINavigationController *)[self.storyboard instantiateViewControllerWithIdentifier:@"MapView"] navigationRootViewController];
+    MapView *map = (MapView *)[(UINavigationController *)[[UIStoryboard storyboardWithName:@"SecondaryControllers" bundle:nil] instantiateViewControllerWithIdentifier:@"MapView"] navigationRootViewController];
     map.locations = locations;
     [self.navigationController presentViewController:map.parentViewController animated:YES completion:nil];
+}
+- (IBAction)submitNewLocation:(id)sender{
+    UINavigationController *navController = [[UIStoryboard storyboardWithName:@"SecondaryControllers" bundle:nil] instantiateViewControllerWithIdentifier:@"NewLocationView"];
+    navController.modalPresentationStyle = UIModalPresentationFormSheet;
+    [self.navigationController presentViewController:navController animated:YES completion:nil];
 }
 #pragma mark - Class
 - (BOOL)shouldPerformSegueWithIdentifier:(NSString *)identifier sender:(id)sender{
@@ -248,17 +254,17 @@
                 stackRequest.predicate = [NSPredicate predicateWithFormat:@"region.name = %@",[[[PinballMapManager sharedInstance] currentRegion] name]];
                 stackRequest.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"machineCount" ascending:NO]];
             }else if ([buttonTitle isEqualToString:@"Location Type"]){
-                LocationTypesView *types = (LocationTypesView *)[[self.storyboard instantiateViewControllerWithIdentifier:@"LocationTypesView"] navigationRootViewController];
+                LocationTypesView *types = (LocationTypesView *)[[[UIStoryboard storyboardWithName:@"SecondaryControllers" bundle:nil] instantiateViewControllerWithIdentifier:@"LocationTypesView"] navigationRootViewController];
                 types.delegate = self;
                 types.type = SelectionTypeRegion;
                 [self.navigationController presentViewController:types.parentViewController animated:YES completion:nil];
                 return;
             }else if ([buttonTitle isEqualToString:@"Recently Added"]){
-                RecentlyAddedView *recentView = (RecentlyAddedView *)[[self.storyboard instantiateViewControllerWithIdentifier:@"RecentlyAddedView"] navigationRootViewController];
+                RecentlyAddedView *recentView = (RecentlyAddedView *)[[[UIStoryboard storyboardWithName:@"SecondaryControllers" bundle:nil] instantiateViewControllerWithIdentifier:@"RecentlyAddedView"] navigationRootViewController];
                 [self.navigationController presentViewController:recentView.parentViewController animated:YES completion:nil];
                 return;
             }else if ([buttonTitle isEqualToString:@"Zone"]){
-                ZonesView *zoneSelect = (ZonesView *)[[self.storyboard instantiateViewControllerWithIdentifier:@"ZonesView"] navigationRootViewController];
+                ZonesView *zoneSelect = (ZonesView *)[[[UIStoryboard storyboardWithName:@"SecondaryControllers" bundle:nil] instantiateViewControllerWithIdentifier:@"ZonesView"] navigationRootViewController];
                 zoneSelect.delegate = self;
                 if ([UIDevice iPad]){
                     [zoneSelect.parentViewController setModalPresentationStyle:UIModalPresentationFormSheet];

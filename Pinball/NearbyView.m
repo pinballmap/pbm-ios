@@ -113,7 +113,7 @@
     return pinView;
 }
 - (void)mapView:(MKMapView *)mapView annotationView:(MKAnnotationView *)view calloutAccessoryControlTapped:(UIControl *)control{
-    LocationProfileView *locationProfile = [self.storyboard instantiateViewControllerWithIdentifier:@"LocationProfileView"];
+    LocationProfileView *locationProfile = [[UIStoryboard storyboardWithName:@"SecondaryControllers" bundle:nil] instantiateViewControllerWithIdentifier:@"LocationProfileView"];
     Location *pinLocation;
     if ([view.annotation isKindOfClass:[LocationAnnotation class]]){
         pinLocation = [(LocationAnnotation *)view.annotation location];

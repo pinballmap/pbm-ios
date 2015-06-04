@@ -12,7 +12,15 @@
 #import "GAI.h"
 #import "ThirdPartyKeys.h"
 #import "PinballTabController.h"
+#import "UserLocationHelper.h"
+
 @import MapKit;
+
+@interface AppDelegate ()
+
+@property (nonatomic, strong) UserLocationHelper *locationHelper;
+
+@end
 
 @implementation AppDelegate
 
@@ -28,6 +36,7 @@
     [[UITableView appearance] setTintColor:pinkColor];
     [[UISegmentedControl appearance] setTintColor:pinkColor];
     [[MKMapView appearance] setTintColor:pinkColor];
+    [[UIActivityIndicatorView appearance] setTintColor:pinkColor];
 
     [[BITHockeyManager sharedHockeyManager] configureWithIdentifier:[ThirdPartyKeys hockeyID]];
     [[BITHockeyManager sharedHockeyManager].authenticator setAuthenticationSecret:[ThirdPartyKeys hockeySecret]];
@@ -47,7 +56,7 @@
     
     // Initialize tracker. Replace with your tracking ID.
     [[GAI sharedInstance] trackerWithTrackingId:[ThirdPartyKeys googleID]];
-
+    
     return YES;
 }
 
@@ -58,6 +67,85 @@
     }
     
     return true;
+}
+/**
+ * User info dic should contain: {"action": #actionname,"data": #anydata}
+ * Reply dictionary contains: {"status": #responsestatus,"Body": #data}
+ */
+- (void)application:(UIApplication *)application handleWatchKitExtensionRequest:(NSDictionary *)userInfo reply:(void (^)(NSDictionary *))reply{
+    // Create a background task with an ID
+    UIBackgroundTaskIdentifier backgroundTaskID = [application beginBackgroundTaskWithName:@"WatchKitBackgroundPBM" expirationHandler:^{
+        NSDictionary *responseDic = @{@"status":@"fail",@"body":@"Unable to load requested data in background"};
+        reply(responseDic);
+        [application endBackgroundTask:backgroundTaskID];
+    }];
+    NSString *action = userInfo[@"action"];
+    // Actions for Watch app
+    if ([action isEqualToString:@"recent_machines"]){
+        // Find recently added machines
+        [[PinballMapManager sharedInstance] recentlyAddedMachinesWithCompletion:^(NSDictionary *status) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                if (status[@"errors"]){
+                    // Errors
+                    NSString *errors;
+                    if ([status[@"errors"] isKindOfClass:[NSArray class]]){
+                        errors = [status[@"errors"] componentsJoinedByString:@","];
+                    }else{
+                        errors = status[@"errors"];
+                    }
+                    NSDictionary *responseDic = @{@"status":@"fail",@"body":errors};
+                    reply(responseDic);
+                    [application endBackgroundTask:backgroundTaskID];
+                }else{
+                    // Create Recent Machine payload to send back to the Watch
+                    NSArray *recentMachines = status[@"location_machine_xrefs"];
+                    NSMutableArray *recentMachinesObj = [NSMutableArray new];
+                    [recentMachines enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+                        NSDictionary *machine = @{
+                                                  @"machine_name":obj[@"machine"][@"name"],
+                                                  @"location_city":obj[@"location"][@"city"],
+                                                  @"location_name":obj[@"location"][@"name"],
+                                                  @"location_machine_xref":obj
+                                                  };
+                        [recentMachinesObj addObject:machine];
+                    }];
+                    NSArray *foundMachines = [recentMachinesObj sortedArrayUsingDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"createdOn" ascending:NO]]];
+                    NSDictionary *responseDic = @{@"status":@"ok",@"body":foundMachines};
+                    reply(responseDic);
+                    [application endBackgroundTask:backgroundTaskID];
+                }
+            });
+        }];
+    }else if ([action isEqualToString:@"nearby_location"]){
+        self.locationHelper = [[UserLocationHelper alloc] init];
+        [self.locationHelper getUserLocationWithCompletion:^(CLLocation *location) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [[PinballMapManager sharedInstance] nearestLocationWithLocation:location andCompletion:^(NSDictionary *status) {
+                    if (status[@"errors"]){
+                        // Errors
+                        NSString *errors;
+                        if ([status[@"errors"] isKindOfClass:[NSArray class]]){
+                            errors = [status[@"errors"] componentsJoinedByString:@","];
+                        }else{
+                            errors = status[@"errors"];
+                        }
+                        NSDictionary *responseDic = @{@"status":@"fail",@"body":errors};
+                        reply(responseDic);
+                        [application endBackgroundTask:backgroundTaskID];
+                    }else{
+                        // Create Recent Machine payload to send back to the Watch
+                        NSArray *location = status[@"location"];
+                        NSDictionary *responseDic = @{@"status":@"ok",@"body":location};
+                        reply(responseDic);
+                        [application endBackgroundTask:backgroundTaskID];
+                    }
+                }];
+                
+            });
+        }];
+    }
+    
+    
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application

@@ -113,13 +113,13 @@
 }
 #pragma mark - Class Actions
 - (IBAction)showAbout:(id)sender{
-    AboutView *about = [self.storyboard instantiateViewControllerWithIdentifier:@"AboutView"];
+    AboutView *about = [[UIStoryboard storyboardWithName:@"SecondaryControllers" bundle:nil] instantiateViewControllerWithIdentifier:@"AboutView"];
     UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:about];
     nav.modalPresentationStyle = UIModalPresentationFormSheet;
     [self.navigationController presentViewController:nav animated:YES completion:nil];
 }
 - (IBAction)changeRegion:(id)sender{
-    RegionsView *regionsView = [self.storyboard instantiateViewControllerWithIdentifier:@"RegionsView"];
+    RegionsView *regionsView = [[UIStoryboard storyboardWithName:@"SecondaryControllers" bundle:nil] instantiateViewControllerWithIdentifier:@"RegionsView"];
     regionsView.isSelecting = true;
     regionsView.delegate = self;
     UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:regionsView];
@@ -226,7 +226,7 @@
 
     if (indexPath.section == 1){
         // Region Contact
-        ContactView *eventContact = (ContactView *)[[self.storyboard instantiateViewControllerWithIdentifier:@"ContactView"] navigationRootViewController];
+        ContactView *eventContact = (ContactView *)[[[UIStoryboard storyboardWithName:@"SecondaryControllers" bundle:nil] instantiateViewControllerWithIdentifier:@"ContactView"] navigationRootViewController];
         eventContact.contactType = ContactTypeRegionContact;
         [self.navigationController presentViewController:eventContact.parentViewController animated:YES completion:nil];
     }else if (indexPath.section > 1 && indexPath.section-1 <= self.regionLinks.count){
@@ -239,7 +239,7 @@
     }else if (indexPath.section != 0){
         HighRoller *highRoller = self.highRollers[indexPath.row];
         
-        HighRollerProfileView *profile = (HighRollerProfileView *)[[self.storyboard instantiateViewControllerWithIdentifier:@"HighRollerProfileView"] navigationRootViewController];
+        HighRollerProfileView *profile = (HighRollerProfileView *)[[[UIStoryboard storyboardWithName:@"SecondaryControllers" bundle:nil] instantiateViewControllerWithIdentifier:@"HighRollerProfileView"] navigationRootViewController];
         profile.highRoller = highRoller;
         
         [self.navigationController presentViewController:[profile parentViewController] animated:YES completion:nil];

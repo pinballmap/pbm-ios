@@ -19,7 +19,6 @@
 @property (nonatomic) NSFetchedResultsController *fetchedResults;
 @property (nonatomic) NSMutableArray *searchResults;
 
-- (IBAction)cancelRegion:(id)sender;    // iPad only.
 - (IBAction)requestRegion:(id)sender;
 
 @end
@@ -140,7 +139,7 @@
             navController.modalPresentationStyle = UIModalPresentationFormSheet;
             [self.navigationController presentViewController:navController animated:YES completion:nil];
         }else if (buttonIndex == 2){
-            ContactView *eventContact = (ContactView *)[[self.storyboard instantiateViewControllerWithIdentifier:@"ContactView"] navigationRootViewController];
+            ContactView *eventContact = (ContactView *)[[[UIStoryboard storyboardWithName:@"SecondaryControllers" bundle:nil] instantiateViewControllerWithIdentifier:@"ContactView"] navigationRootViewController];
             eventContact.contactType = ContactTypeRegionSuggest;
             [self.navigationController presentViewController:eventContact.parentViewController animated:YES completion:nil];
         }

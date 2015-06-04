@@ -115,7 +115,7 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     if (indexPath.section == 0){
         if (indexPath.row == 4){
-            MachinePickingView *pickingView = [[(UINavigationController *)[self.storyboard instantiateViewControllerWithIdentifier:@"MachinePickingView"] viewControllers] lastObject];
+            MachinePickingView *pickingView = [[(UINavigationController *)[[UIStoryboard storyboardWithName:@"SecondaryControllers" bundle:nil] instantiateViewControllerWithIdentifier:@"MachinePickingView"] viewControllers] lastObject];
             pickingView.delegate = self;
             pickingView.canPickMultiple = YES;
             if (self.pickedMachines.count > 0){

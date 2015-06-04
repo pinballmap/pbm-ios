@@ -132,7 +132,7 @@ typedef enum : NSUInteger {
     }
 }
 - (void)showMap{
-    MapView *map = [[[self.storyboard instantiateViewControllerWithIdentifier:@"MapView"] viewControllers] lastObject];
+    MapView *map = [[[[UIStoryboard storyboardWithName:@"SecondaryControllers" bundle:nil] instantiateViewControllerWithIdentifier:@"MapView"] viewControllers] lastObject];
     map.currentLocation = _currentLocation;
     [self.navigationController pushViewController:map animated:YES];
 }
@@ -148,7 +148,7 @@ typedef enum : NSUInteger {
     [self.tableView reloadData];
 }
 - (IBAction)addNewMachine:(id)sender{
-    NewMachineLocationView *vc = (NewMachineLocationView *)[[[self.storyboard instantiateViewControllerWithIdentifier:@"NewMachineLocationView"] viewControllers] lastObject];
+    NewMachineLocationView *vc = (NewMachineLocationView *)[[[[UIStoryboard storyboardWithName:@"SecondaryControllers" bundle:nil] instantiateViewControllerWithIdentifier:@"NewMachineLocationView"] viewControllers] lastObject];
     vc.location = _currentLocation;
     [self.navigationController presentViewController:vc.parentViewController animated:YES completion:nil];
 }
@@ -416,7 +416,7 @@ typedef enum : NSUInteger {
         
         
         if (self.dataSetSeg.selectedSegmentIndex == 0){
-            MachineLocationProfileView *vc = [[[self.storyboard instantiateViewControllerWithIdentifier:@"MachineLocationProfileView"] viewControllers] lastObject];
+            MachineLocationProfileView *vc = [[[[UIStoryboard storyboardWithName:@"SecondaryControllers" bundle:nil] instantiateViewControllerWithIdentifier:@"MachineLocationProfileView"] viewControllers] lastObject];
             vc.currentMachine = [self.machinesFetch objectAtIndexPath:[NSIndexPath indexPathForRow:indexPath.row inSection:0]];
             [tableView setEditing:NO];
             if ([UIDevice currentModel] == ModelTypeiPad){
@@ -444,7 +444,7 @@ typedef enum : NSUInteger {
 
                     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:contactsPhoneNumber]];
                 }else{
-                    TextEditorView *editor = [[[self.storyboard instantiateViewControllerWithIdentifier:@"TextEditorView"] viewControllers] lastObject];
+                    TextEditorView *editor = [[[[UIStoryboard storyboardWithName:@"SecondaryControllers" bundle:nil] instantiateViewControllerWithIdentifier:@"TextEditorView"] viewControllers] lastObject];
                     editor.delegate = self;
                     editor.editorTitle = @"Location Phone";
                     if (![_currentLocation.phone isEqualToString:@"Tap to edit"]){
@@ -478,7 +478,7 @@ typedef enum : NSUInteger {
             }
             else if (indexPath.row == 3){
                 // Type
-                LocationTypesView *typesView = [[[self.storyboard instantiateViewControllerWithIdentifier:@"LocationTypesView"] viewControllers] lastObject];
+                LocationTypesView *typesView = (LocationTypesView *)[[[UIStoryboard storyboardWithName:@"SecondaryControllers" bundle:nil] instantiateViewControllerWithIdentifier:@"LocationTypesView"] navigationRootViewController];
                 typesView.delegate = self;
                 if ([UIDevice currentModel] == ModelTypeiPad){
                     [self.parentViewController.navigationController presentViewController:typesView.parentViewController animated:YES completion:nil];
@@ -487,7 +487,7 @@ typedef enum : NSUInteger {
                 }
             }else if (indexPath.row == 4){
                 // Description
-                TextEditorView *editor = [[[self.storyboard instantiateViewControllerWithIdentifier:@"TextEditorView"] viewControllers] lastObject];
+                TextEditorView *editor = [[[[UIStoryboard storyboardWithName:@"SecondaryControllers" bundle:nil] instantiateViewControllerWithIdentifier:@"TextEditorView"] viewControllers] lastObject];
                 editor.delegate = self;
                 editor.editorTitle = @"Location Description";
                 self.editingType = LocationEditingTypeDescription;

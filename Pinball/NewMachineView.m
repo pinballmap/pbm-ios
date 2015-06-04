@@ -74,7 +74,7 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     if (indexPath.section == 1){
-        LocationsView *locations = [self.storyboard instantiateViewControllerWithIdentifier:@"LocationsView"];
+        LocationsView *locations = [[UIStoryboard storyboardWithName:@"SecondaryControllers" bundle:nil] instantiateViewControllerWithIdentifier:@"LocationsView"];
         locations.isSelecting = YES;
         locations.selectingViewController = self;
         [self.navigationController pushViewController:locations animated:YES];

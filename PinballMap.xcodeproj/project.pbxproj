@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CCB75A881AAF23F2003ED05C /* PinballMap_Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = CCB75A871AAF23F2003ED05C /* PinballMap_Tests.m */; };
+		CCCF3BE61AAF2115002871A4 /* ThirdPartyKeys.m in Sources */ = {isa = PBXBuildFile; fileRef = CCCF3BE51AAF2115002871A4 /* ThirdPartyKeys.m */; };
 		DB070BEB193202ED0018D521 /* Location.m in Sources */ = {isa = PBXBuildFile; fileRef = DB070BEA193202ED0018D521 /* Location.m */; };
 		DB070BF1193202ED0018D521 /* Zone.m in Sources */ = {isa = PBXBuildFile; fileRef = DB070BF0193202ED0018D521 /* Zone.m */; };
 		DB070BF4193203200018D521 /* Zone+Create.m in Sources */ = {isa = PBXBuildFile; fileRef = DB070BF3193203200018D521 /* Zone+Create.m */; };
@@ -15,6 +17,12 @@
 		DB070C4D193243990018D521 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DB070C4C193243990018D521 /* QuartzCore.framework */; };
 		DB070C4F193243A00018D521 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DB070C4E193243A00018D521 /* Security.framework */; };
 		DB070C51193243A70018D521 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DB070C50193243A70018D521 /* SystemConfiguration.framework */; };
+		DB09D3F51AA35777008D74B9 /* AppSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = DB09D3F41AA35777008D74B9 /* AppSettings.m */; };
+		DB09D3F61AA35777008D74B9 /* AppSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = DB09D3F41AA35777008D74B9 /* AppSettings.m */; };
+		DB09D3F81AA35BAD008D74B9 /* AppSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = DB09D3F41AA35777008D74B9 /* AppSettings.m */; };
+		DB09D4321AA4C0B9008D74B9 /* UserLocationHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = DB09D4311AA4C0B9008D74B9 /* UserLocationHelper.m */; };
+		DB09D4331AA4C0B9008D74B9 /* UserLocationHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = DB09D4311AA4C0B9008D74B9 /* UserLocationHelper.m */; };
+		DB09D4341AA4C0B9008D74B9 /* UserLocationHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = DB09D4311AA4C0B9008D74B9 /* UserLocationHelper.m */; };
 		DB0DAE7A1987B4A800A3FF0F /* GAAppHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = DB0DAE791987B4A800A3FF0F /* GAAppHelper.m */; };
 		DB1FB5D619BCB95A00E52B01 /* Region+UpdateDistance.m in Sources */ = {isa = PBXBuildFile; fileRef = DB1FB5D519BCB95A00E52B01 /* Region+UpdateDistance.m */; };
 		DB23E871193B5F08000C1E69 /* Event.m in Sources */ = {isa = PBXBuildFile; fileRef = DB23E870193B5F08000C1E69 /* Event.m */; };
@@ -29,7 +37,6 @@
 		DB338F4A19606E8D000D0366 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DB338F4919606E8D000D0366 /* AdSupport.framework */; };
 		DB338F4C19606ED2000D0366 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = DB338F4B19606ED2000D0366 /* libz.dylib */; };
 		DB338F5E19606FB8000D0366 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = DB338F5D19606FB8000D0366 /* libsqlite3.dylib */; };
-		DB338F641960738F000D0366 /* ThirdPartyKeys.m in Sources */ = {isa = PBXBuildFile; fileRef = DB338F631960738F000D0366 /* ThirdPartyKeys.m */; };
 		DB38DA9319E1CBC400E1B6D2 /* AFHTTPRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = DB38DA8119E1CBC400E1B6D2 /* AFHTTPRequestOperation.m */; };
 		DB38DA9419E1CBC400E1B6D2 /* AFHTTPRequestOperationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = DB38DA8319E1CBC400E1B6D2 /* AFHTTPRequestOperationManager.m */; };
 		DB38DA9519E1CBC400E1B6D2 /* AFHTTPSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = DB38DA8519E1CBC400E1B6D2 /* AFHTTPSessionManager.m */; };
@@ -53,6 +60,7 @@
 		DB38DACD19E1CC2800E1B6D2 /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = DB38DAC619E1CC2800E1B6D2 /* README.md */; };
 		DB3B4EF91912BBEE0015407B /* Location+CellHelpers.m in Sources */ = {isa = PBXBuildFile; fileRef = DB3B4EF81912BBEE0015407B /* Location+CellHelpers.m */; };
 		DB3F807B194B25100089F3D0 /* LocationCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DB3F807A194B25100089F3D0 /* LocationCell.xib */; };
+		DB403E931A961AD200E39A93 /* SecondaryControllers.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DB403E921A961AD200E39A93 /* SecondaryControllers.storyboard */; };
 		DB43E4881947194C00A641E3 /* MachineLocation+CellHelpers.m in Sources */ = {isa = PBXBuildFile; fileRef = DB43E4871947194C00A641E3 /* MachineLocation+CellHelpers.m */; };
 		DB47C88219C4657800FE8E4F /* NearbyView.m in Sources */ = {isa = PBXBuildFile; fileRef = DB47C88119C4657800FE8E4F /* NearbyView.m */; };
 		DB4D82BE190D77530048156E /* Machine+CellHelpers.m in Sources */ = {isa = PBXBuildFile; fileRef = DB4D82BD190D77530048156E /* Machine+CellHelpers.m */; };
@@ -79,7 +87,30 @@
 		DB7B4C1119335B76002AF484 /* MachineLocationProfileView.m in Sources */ = {isa = PBXBuildFile; fileRef = DB7B4C1019335B76002AF484 /* MachineLocationProfileView.m */; };
 		DB7B4C14193361AA002AF484 /* MachineScore.m in Sources */ = {isa = PBXBuildFile; fileRef = DB7B4C13193361AA002AF484 /* MachineScore.m */; };
 		DB7B4C1719336717002AF484 /* NewMachineScoreView.m in Sources */ = {isa = PBXBuildFile; fileRef = DB7B4C1619336717002AF484 /* NewMachineScoreView.m */; };
+		DB7F0E421A9FBCA800AB47AB /* CoreDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = DBF06C0018F9703E00F92912 /* CoreDataManager.m */; };
+		DB7F0E431A9FBCB400AB47AB /* Machine.m in Sources */ = {isa = PBXBuildFile; fileRef = DBF711F1191E59B8008656EE /* Machine.m */; };
+		DB7F0E441A9FBCB900AB47AB /* LocationType.m in Sources */ = {isa = PBXBuildFile; fileRef = DBEAA1FC192A9E140096F2A9 /* LocationType.m */; };
+		DB7F0E451A9FBCBF00AB47AB /* Region.m in Sources */ = {isa = PBXBuildFile; fileRef = DB5FFE9E19C618CA004C424B /* Region.m */; };
+		DB7F0E461A9FBCC500AB47AB /* Location.m in Sources */ = {isa = PBXBuildFile; fileRef = DB070BEA193202ED0018D521 /* Location.m */; };
+		DB7F0E471A9FBCD400AB47AB /* NSDate+CupertinoYankee.m in Sources */ = {isa = PBXBuildFile; fileRef = DB56E3FD1A7E607A007F22A7 /* NSDate+CupertinoYankee.m */; };
+		DB7F0E481A9FBCD900AB47AB /* Zone.m in Sources */ = {isa = PBXBuildFile; fileRef = DB070BF0193202ED0018D521 /* Zone.m */; };
+		DB7F0E491A9FBCDD00AB47AB /* MachineLocation.m in Sources */ = {isa = PBXBuildFile; fileRef = DBE712D81929134D0046DFA8 /* MachineLocation.m */; };
+		DB7F0E4A1A9FBCEC00AB47AB /* Event+CellHelpers.m in Sources */ = {isa = PBXBuildFile; fileRef = DB2D132D1942687F0082B8F9 /* Event+CellHelpers.m */; };
+		DB7F0E4B1A9FBCF300AB47AB /* Event.m in Sources */ = {isa = PBXBuildFile; fileRef = DB23E870193B5F08000C1E69 /* Event.m */; };
+		DB7F0E4C1A9FBCF700AB47AB /* Pinball.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = DBF06C0418F9707400F92912 /* Pinball.xcdatamodeld */; };
+		DB7F0E4F1A9FBD1200AB47AB /* EventsInterfaceController.m in Sources */ = {isa = PBXBuildFile; fileRef = DB7F0E4E1A9FBD1200AB47AB /* EventsInterfaceController.m */; };
+		DB890C681A9FC00800AAB741 /* NSDate+DateFormatting.m in Sources */ = {isa = PBXBuildFile; fileRef = DB52D2F918FB09AF00BB56D8 /* NSDate+DateFormatting.m */; };
+		DB890C6E1A9FC15F00AAB741 /* RecentsInterfaceController.m in Sources */ = {isa = PBXBuildFile; fileRef = DB890C6D1A9FC15F00AAB741 /* RecentsInterfaceController.m */; };
+		DB8A31511A9FB8DA00364903 /* InterfaceController.m in Sources */ = {isa = PBXBuildFile; fileRef = DB8A31501A9FB8DA00364903 /* InterfaceController.m */; };
+		DB8A31531A9FB8DA00364903 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DB8A31521A9FB8DA00364903 /* Images.xcassets */; };
+		DB8A31571A9FB8DA00364903 /* PinballMap WatchKit App.app in Resources */ = {isa = PBXBuildFile; fileRef = DB8A31561A9FB8DA00364903 /* PinballMap WatchKit App.app */; };
+		DB8A315F1A9FB8DA00364903 /* Interface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DB8A315D1A9FB8DA00364903 /* Interface.storyboard */; };
+		DB8A31611A9FB8DA00364903 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DB8A31601A9FB8DA00364903 /* Images.xcassets */; };
+		DB8A31641A9FB8DA00364903 /* PinballMap WatchKit Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = DB8A314B1A9FB8DA00364903 /* PinballMap WatchKit Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		DB8D1C1719B3A7970065E2C6 /* ContactView.m in Sources */ = {isa = PBXBuildFile; fileRef = DB8D1C1619B3A7970065E2C6 /* ContactView.m */; };
+		DB8ECCC31AA62BC30013AFBB /* NearestInterfaceController.m in Sources */ = {isa = PBXBuildFile; fileRef = DB8ECCC21AA62BC30013AFBB /* NearestInterfaceController.m */; };
+		DB8ECCC71AA633740013AFBB /* AboutInterfaceController.m in Sources */ = {isa = PBXBuildFile; fileRef = DB8ECCC61AA633740013AFBB /* AboutInterfaceController.m */; };
+		DB8ECCCB1AA635260013AFBB /* GlanceInterfaceController.m in Sources */ = {isa = PBXBuildFile; fileRef = DB8ECCCA1AA635260013AFBB /* GlanceInterfaceController.m */; };
 		DB9330BC190D49AB0054C779 /* SeattleLocation.gpx in Resources */ = {isa = PBXBuildFile; fileRef = DB9330BB190D49AB0054C779 /* SeattleLocation.gpx */; };
 		DB99C3AE1906DCD200AFDF0F /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DB99C3AD1906DCD200AFDF0F /* AddressBook.framework */; };
 		DB99C3B11906FA4100AFDF0F /* MachinePickingView.m in Sources */ = {isa = PBXBuildFile; fileRef = DB99C3B01906FA4100AFDF0F /* MachinePickingView.m */; };
@@ -111,9 +142,12 @@
 		DBBB4BED193387AB004E433F /* Storyboard-iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DBBB4BEC193387AB004E433F /* Storyboard-iPad.storyboard */; };
 		DBBB4BF019338A03004E433F /* UIViewController+Helpers.m in Sources */ = {isa = PBXBuildFile; fileRef = DBBB4BEF19338A03004E433F /* UIViewController+Helpers.m */; };
 		DBBB4BF319338FB5004E433F /* UIDevice+ModelCheck.m in Sources */ = {isa = PBXBuildFile; fileRef = DBBB4BF219338FB5004E433F /* UIDevice+ModelCheck.m */; };
+		DBBDABB51AA08A2C00E6EC6F /* AlertInterfaceController.m in Sources */ = {isa = PBXBuildFile; fileRef = DBBDABB41AA08A2C00E6EC6F /* AlertInterfaceController.m */; };
+		DBBDABB81AA08D2100E6EC6F /* MachineInterfaceController.m in Sources */ = {isa = PBXBuildFile; fileRef = DBBDABB71AA08D2100E6EC6F /* MachineInterfaceController.m */; };
 		DBC751701A670E5500D88975 /* MachineCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DBC7516E1A670E5500D88975 /* MachineCell.m */; };
 		DBC751711A670E5500D88975 /* MachineCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DBC7516F1A670E5500D88975 /* MachineCell.xib */; };
 		DBD4F3E919067D690023D98B /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DBD4F3E819067D690023D98B /* MessageUI.framework */; };
+		DBDDD8D01A9FC93E00A10572 /* EventInterfaceController.m in Sources */ = {isa = PBXBuildFile; fileRef = DBDDD8CF1A9FC93E00A10572 /* EventInterfaceController.m */; };
 		DBE50374190D2BBA002BDE0D /* Location+UpdateDistance.m in Sources */ = {isa = PBXBuildFile; fileRef = DBE50373190D2BBA002BDE0D /* Location+UpdateDistance.m */; };
 		DBE712D91929134D0046DFA8 /* MachineLocation.m in Sources */ = {isa = PBXBuildFile; fileRef = DBE712D81929134D0046DFA8 /* MachineLocation.m */; };
 		DBE9F7B919E3FDCC000BD498 /* HighRoller.m in Sources */ = {isa = PBXBuildFile; fileRef = DBE9F7B819E3FDCC000BD498 /* HighRoller.m */; };
@@ -128,11 +162,6 @@
 		DBF06BDB18F96FF500F92912 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = DBF06BDA18F96FF500F92912 /* main.m */; };
 		DBF06BDF18F96FF500F92912 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = DBF06BDE18F96FF500F92912 /* AppDelegate.m */; };
 		DBF06BE118F96FF500F92912 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DBF06BE018F96FF500F92912 /* Images.xcassets */; };
-		DBF06BE818F96FF500F92912 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DBF06BE718F96FF500F92912 /* XCTest.framework */; };
-		DBF06BE918F96FF500F92912 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DBF06BCE18F96FF500F92912 /* Foundation.framework */; };
-		DBF06BEA18F96FF500F92912 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DBF06BD218F96FF500F92912 /* UIKit.framework */; };
-		DBF06BF218F96FF500F92912 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = DBF06BF018F96FF500F92912 /* InfoPlist.strings */; };
-		DBF06BF418F96FF500F92912 /* PinballTests.m in Sources */ = {isa = PBXBuildFile; fileRef = DBF06BF318F96FF500F92912 /* PinballTests.m */; };
 		DBF06BFE18F9700F00F92912 /* Storyboard-iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DBF06BFD18F9700F00F92912 /* Storyboard-iPhone.storyboard */; };
 		DBF06C0118F9703E00F92912 /* CoreDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = DBF06C0018F9703E00F92912 /* CoreDataManager.m */; };
 		DBF06C0318F9704F00F92912 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DBF06C0218F9704F00F92912 /* CoreData.framework */; };
@@ -151,6 +180,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		CCB75A891AAF23F2003ED05C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = DBF06BC318F96FF500F92912 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = DBF06BCA18F96FF500F92912;
+			remoteInfo = PinballMap;
+		};
 		DB2D8A5119E2046D00502A10 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = DBF06BC318F96FF500F92912 /* Project object */;
@@ -165,12 +201,19 @@
 			remoteGlobalIDString = DB2D8A4519E2046D00502A10;
 			remoteInfo = "Pinball Map Widget";
 		};
-		DBF06BEB18F96FF500F92912 /* PBXContainerItemProxy */ = {
+		DB8A31581A9FB8DA00364903 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = DBF06BC318F96FF500F92912 /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = DBF06BCA18F96FF500F92912;
-			remoteInfo = Pinball;
+			remoteGlobalIDString = DB8A31551A9FB8DA00364903;
+			remoteInfo = "PinballMap WatchKit App";
+		};
+		DB8A31621A9FB8DA00364903 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = DBF06BC318F96FF500F92912 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = DB8A314A1A9FB8DA00364903;
+			remoteInfo = "PinballMap WatchKit Extension";
 		};
 /* End PBXContainerItemProxy section */
 
@@ -182,6 +225,7 @@
 			dstSubfolderSpec = 13;
 			files = (
 				DB2D8A5319E2046D00502A10 /* Pinball Map Widget.appex in Embed App Extensions */,
+				DB8A31641A9FB8DA00364903 /* PinballMap WatchKit Extension.appex in Embed App Extensions */,
 			);
 			name = "Embed App Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -190,6 +234,12 @@
 
 /* Begin PBXFileReference section */
 		767AEE54A0274802B59CA4A5 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		CCA2F2B21AAF22CE00C6C4F5 /* PinballMap-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "PinballMap-Prefix.pch"; sourceTree = "<group>"; };
+		CCB75A831AAF23F2003ED05C /* PinballMap Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "PinballMap Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		CCB75A861AAF23F2003ED05C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CCB75A871AAF23F2003ED05C /* PinballMap_Tests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PinballMap_Tests.m; sourceTree = "<group>"; };
+		CCCF3BE41AAF2115002871A4 /* ThirdPartyKeys.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ThirdPartyKeys.h; sourceTree = "<group>"; };
+		CCCF3BE51AAF2115002871A4 /* ThirdPartyKeys.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ThirdPartyKeys.m; sourceTree = "<group>"; };
 		DB070BE9193202ED0018D521 /* Location.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Location.h; sourceTree = "<group>"; };
 		DB070BEA193202ED0018D521 /* Location.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Location.m; sourceTree = "<group>"; };
 		DB070BEF193202ED0018D521 /* Zone.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Zone.h; sourceTree = "<group>"; };
@@ -202,6 +252,10 @@
 		DB070C4C193243990018D521 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		DB070C4E193243A00018D521 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		DB070C50193243A70018D521 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		DB09D3F31AA35777008D74B9 /* AppSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppSettings.h; sourceTree = "<group>"; };
+		DB09D3F41AA35777008D74B9 /* AppSettings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppSettings.m; sourceTree = "<group>"; };
+		DB09D4301AA4C0B9008D74B9 /* UserLocationHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserLocationHelper.h; sourceTree = "<group>"; };
+		DB09D4311AA4C0B9008D74B9 /* UserLocationHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserLocationHelper.m; sourceTree = "<group>"; };
 		DB0DAE781987B4A800A3FF0F /* GAAppHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAAppHelper.h; sourceTree = "<group>"; };
 		DB0DAE791987B4A800A3FF0F /* GAAppHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GAAppHelper.m; sourceTree = "<group>"; };
 		DB1FB5D019BCB8C900E52B01 /* Pinball v3.1.0.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Pinball v3.1.0.xcdatamodel"; sourceTree = "<group>"; };
@@ -279,6 +333,7 @@
 		DB3B4EF71912BBEE0015407B /* Location+CellHelpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Location+CellHelpers.h"; sourceTree = "<group>"; };
 		DB3B4EF81912BBEE0015407B /* Location+CellHelpers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Location+CellHelpers.m"; sourceTree = "<group>"; };
 		DB3F807A194B25100089F3D0 /* LocationCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LocationCell.xib; sourceTree = "<group>"; };
+		DB403E921A961AD200E39A93 /* SecondaryControllers.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = SecondaryControllers.storyboard; sourceTree = "<group>"; };
 		DB43E4861947194C00A641E3 /* MachineLocation+CellHelpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MachineLocation+CellHelpers.h"; sourceTree = "<group>"; };
 		DB43E4871947194C00A641E3 /* MachineLocation+CellHelpers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MachineLocation+CellHelpers.m"; sourceTree = "<group>"; };
 		DB47C88019C4657800FE8E4F /* NearbyView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NearbyView.h; sourceTree = "<group>"; };
@@ -327,9 +382,29 @@
 		DB7B4C13193361AA002AF484 /* MachineScore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MachineScore.m; sourceTree = "<group>"; };
 		DB7B4C1519336717002AF484 /* NewMachineScoreView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewMachineScoreView.h; sourceTree = "<group>"; };
 		DB7B4C1619336717002AF484 /* NewMachineScoreView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewMachineScoreView.m; sourceTree = "<group>"; };
+		DB7F0E4D1A9FBD1200AB47AB /* EventsInterfaceController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EventsInterfaceController.h; sourceTree = "<group>"; };
+		DB7F0E4E1A9FBD1200AB47AB /* EventsInterfaceController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EventsInterfaceController.m; sourceTree = "<group>"; };
+		DB890C671A9FBF8400AAB741 /* PinballMap WatchKit Extension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "PinballMap WatchKit Extension.entitlements"; sourceTree = "<group>"; };
+		DB890C6C1A9FC15F00AAB741 /* RecentsInterfaceController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecentsInterfaceController.h; sourceTree = "<group>"; };
+		DB890C6D1A9FC15F00AAB741 /* RecentsInterfaceController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecentsInterfaceController.m; sourceTree = "<group>"; };
+		DB8A314B1A9FB8DA00364903 /* PinballMap WatchKit Extension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "PinballMap WatchKit Extension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
+		DB8A314E1A9FB8DA00364903 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		DB8A314F1A9FB8DA00364903 /* InterfaceController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = InterfaceController.h; sourceTree = "<group>"; };
+		DB8A31501A9FB8DA00364903 /* InterfaceController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = InterfaceController.m; sourceTree = "<group>"; };
+		DB8A31521A9FB8DA00364903 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		DB8A31561A9FB8DA00364903 /* PinballMap WatchKit App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "PinballMap WatchKit App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		DB8A315C1A9FB8DA00364903 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		DB8A315E1A9FB8DA00364903 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Interface.storyboard; sourceTree = "<group>"; };
+		DB8A31601A9FB8DA00364903 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		DB8BF07719E29DE40092AABE /* Pinball Map Widget.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "Pinball Map Widget.entitlements"; sourceTree = "<group>"; };
 		DB8D1C1519B3A7970065E2C6 /* ContactView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactView.h; sourceTree = "<group>"; };
 		DB8D1C1619B3A7970065E2C6 /* ContactView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactView.m; sourceTree = "<group>"; };
+		DB8ECCC11AA62BC30013AFBB /* NearestInterfaceController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NearestInterfaceController.h; sourceTree = "<group>"; };
+		DB8ECCC21AA62BC30013AFBB /* NearestInterfaceController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NearestInterfaceController.m; sourceTree = "<group>"; };
+		DB8ECCC51AA633740013AFBB /* AboutInterfaceController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AboutInterfaceController.h; sourceTree = "<group>"; };
+		DB8ECCC61AA633740013AFBB /* AboutInterfaceController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AboutInterfaceController.m; sourceTree = "<group>"; };
+		DB8ECCC91AA635260013AFBB /* GlanceInterfaceController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GlanceInterfaceController.h; sourceTree = "<group>"; };
+		DB8ECCCA1AA635260013AFBB /* GlanceInterfaceController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GlanceInterfaceController.m; sourceTree = "<group>"; };
 		DB9330BB190D49AB0054C779 /* SeattleLocation.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = SeattleLocation.gpx; sourceTree = "<group>"; };
 		DB99C3AD1906DCD200AFDF0F /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
 		DB99C3AF1906FA4100AFDF0F /* MachinePickingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MachinePickingView.h; sourceTree = "<group>"; };
@@ -367,10 +442,16 @@
 		DBBB4BEF19338A03004E433F /* UIViewController+Helpers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+Helpers.m"; sourceTree = "<group>"; };
 		DBBB4BF119338FB5004E433F /* UIDevice+ModelCheck.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIDevice+ModelCheck.h"; sourceTree = "<group>"; };
 		DBBB4BF219338FB5004E433F /* UIDevice+ModelCheck.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIDevice+ModelCheck.m"; sourceTree = "<group>"; };
+		DBBDABB31AA08A2C00E6EC6F /* AlertInterfaceController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlertInterfaceController.h; sourceTree = "<group>"; };
+		DBBDABB41AA08A2C00E6EC6F /* AlertInterfaceController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlertInterfaceController.m; sourceTree = "<group>"; };
+		DBBDABB61AA08D2100E6EC6F /* MachineInterfaceController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MachineInterfaceController.h; sourceTree = "<group>"; };
+		DBBDABB71AA08D2100E6EC6F /* MachineInterfaceController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MachineInterfaceController.m; sourceTree = "<group>"; };
 		DBC7516D1A670E5500D88975 /* MachineCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MachineCell.h; sourceTree = "<group>"; };
 		DBC7516E1A670E5500D88975 /* MachineCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MachineCell.m; sourceTree = "<group>"; };
 		DBC7516F1A670E5500D88975 /* MachineCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MachineCell.xib; sourceTree = "<group>"; };
 		DBD4F3E819067D690023D98B /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
+		DBDDD8CE1A9FC93E00A10572 /* EventInterfaceController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EventInterfaceController.h; sourceTree = "<group>"; };
+		DBDDD8CF1A9FC93E00A10572 /* EventInterfaceController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EventInterfaceController.m; sourceTree = "<group>"; };
 		DBE50372190D2BBA002BDE0D /* Location+UpdateDistance.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Location+UpdateDistance.h"; sourceTree = "<group>"; };
 		DBE50373190D2BBA002BDE0D /* Location+UpdateDistance.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Location+UpdateDistance.m"; sourceTree = "<group>"; };
 		DBE712D71929134D0046DFA8 /* MachineLocation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MachineLocation.h; sourceTree = "<group>"; };
@@ -392,11 +473,9 @@
 		DBF06BD618F96FF500F92912 /* PinballMap-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "PinballMap-Info.plist"; sourceTree = "<group>"; };
 		DBF06BD818F96FF500F92912 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		DBF06BDA18F96FF500F92912 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		DBF06BDC18F96FF500F92912 /* PinballMap-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "PinballMap-Prefix.pch"; sourceTree = "<group>"; };
 		DBF06BDD18F96FF500F92912 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		DBF06BDE18F96FF500F92912 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		DBF06BE018F96FF500F92912 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		DBF06BE618F96FF500F92912 /* PinballMapTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PinballMapTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		DBF06BE718F96FF500F92912 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		DBF06BEF18F96FF500F92912 /* PinballMapTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "PinballMapTests-Info.plist"; sourceTree = "<group>"; };
 		DBF06BF118F96FF500F92912 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -431,11 +510,25 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		CCB75A801AAF23F2003ED05C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		DB2D8A4319E2046D00502A10 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				DB2D8A4819E2046D00502A10 /* NotificationCenter.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DB8A31481A9FB8DA00364903 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -465,19 +558,26 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		DBF06BE318F96FF500F92912 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				DBF06BE818F96FF500F92912 /* XCTest.framework in Frameworks */,
-				DBF06BEA18F96FF500F92912 /* UIKit.framework in Frameworks */,
-				DBF06BE918F96FF500F92912 /* Foundation.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		CCB75A841AAF23F2003ED05C /* PinballMap Tests */ = {
+			isa = PBXGroup;
+			children = (
+				CCB75A871AAF23F2003ED05C /* PinballMap_Tests.m */,
+				CCB75A851AAF23F2003ED05C /* Supporting Files */,
+			);
+			path = "PinballMap Tests";
+			sourceTree = "<group>";
+		};
+		CCB75A851AAF23F2003ED05C /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				CCB75A861AAF23F2003ED05C /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
 		DB2D8A4919E2046D00502A10 /* Pinball Map Widget */ = {
 			isa = PBXGroup;
 			children = (
@@ -735,6 +835,78 @@
 			name = About;
 			sourceTree = "<group>";
 		};
+		DB8A314C1A9FB8DA00364903 /* PinballMap WatchKit Extension */ = {
+			isa = PBXGroup;
+			children = (
+				DB890C671A9FBF8400AAB741 /* PinballMap WatchKit Extension.entitlements */,
+				DB8A314F1A9FB8DA00364903 /* InterfaceController.h */,
+				DB8A31501A9FB8DA00364903 /* InterfaceController.m */,
+				DBBDABB31AA08A2C00E6EC6F /* AlertInterfaceController.h */,
+				DBBDABB41AA08A2C00E6EC6F /* AlertInterfaceController.m */,
+				DB8ECCC81AA6351B0013AFBB /* Glance */,
+				DB8ECCC41AA633670013AFBB /* About */,
+				DB8ECCC01AA62BAC0013AFBB /* Nearest Location */,
+				DBDDD8D21A9FCD5500A10572 /* Recent Machines */,
+				DBDDD8D11A9FCD5000A10572 /* Events */,
+				DB8A31521A9FB8DA00364903 /* Images.xcassets */,
+				DB8A314D1A9FB8DA00364903 /* Supporting Files */,
+			);
+			path = "PinballMap WatchKit Extension";
+			sourceTree = "<group>";
+		};
+		DB8A314D1A9FB8DA00364903 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				DB8A314E1A9FB8DA00364903 /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		DB8A315A1A9FB8DA00364903 /* PinballMap WatchKit App */ = {
+			isa = PBXGroup;
+			children = (
+				DB8A315D1A9FB8DA00364903 /* Interface.storyboard */,
+				DB8A31601A9FB8DA00364903 /* Images.xcassets */,
+				DB8A315B1A9FB8DA00364903 /* Supporting Files */,
+			);
+			path = "PinballMap WatchKit App";
+			sourceTree = "<group>";
+		};
+		DB8A315B1A9FB8DA00364903 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				DB8A315C1A9FB8DA00364903 /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		DB8ECCC01AA62BAC0013AFBB /* Nearest Location */ = {
+			isa = PBXGroup;
+			children = (
+				DB8ECCC11AA62BC30013AFBB /* NearestInterfaceController.h */,
+				DB8ECCC21AA62BC30013AFBB /* NearestInterfaceController.m */,
+			);
+			name = "Nearest Location";
+			sourceTree = "<group>";
+		};
+		DB8ECCC41AA633670013AFBB /* About */ = {
+			isa = PBXGroup;
+			children = (
+				DB8ECCC51AA633740013AFBB /* AboutInterfaceController.h */,
+				DB8ECCC61AA633740013AFBB /* AboutInterfaceController.m */,
+			);
+			name = About;
+			sourceTree = "<group>";
+		};
+		DB8ECCC81AA6351B0013AFBB /* Glance */ = {
+			isa = PBXGroup;
+			children = (
+				DB8ECCC91AA635260013AFBB /* GlanceInterfaceController.h */,
+				DB8ECCCA1AA635260013AFBB /* GlanceInterfaceController.m */,
+			);
+			name = Glance;
+			sourceTree = "<group>";
+		};
 		DBB59CCB18FADC3B00F35BFD /* Views */ = {
 			isa = PBXGroup;
 			children = (
@@ -762,6 +934,28 @@
 			name = Cells;
 			sourceTree = "<group>";
 		};
+		DBDDD8D11A9FCD5000A10572 /* Events */ = {
+			isa = PBXGroup;
+			children = (
+				DB7F0E4D1A9FBD1200AB47AB /* EventsInterfaceController.h */,
+				DB7F0E4E1A9FBD1200AB47AB /* EventsInterfaceController.m */,
+				DBDDD8CE1A9FC93E00A10572 /* EventInterfaceController.h */,
+				DBDDD8CF1A9FC93E00A10572 /* EventInterfaceController.m */,
+			);
+			name = Events;
+			sourceTree = "<group>";
+		};
+		DBDDD8D21A9FCD5500A10572 /* Recent Machines */ = {
+			isa = PBXGroup;
+			children = (
+				DB890C6C1A9FC15F00AAB741 /* RecentsInterfaceController.h */,
+				DB890C6D1A9FC15F00AAB741 /* RecentsInterfaceController.m */,
+				DBBDABB61AA08D2100E6EC6F /* MachineInterfaceController.h */,
+				DBBDABB71AA08D2100E6EC6F /* MachineInterfaceController.m */,
+			);
+			name = "Recent Machines";
+			sourceTree = "<group>";
+		};
 		DBF06BC218F96FF500F92912 = {
 			isa = PBXGroup;
 			children = (
@@ -769,6 +963,9 @@
 				DBF06BD418F96FF500F92912 /* Pinball */,
 				DBF06BED18F96FF500F92912 /* PinballTests */,
 				DB2D8A4919E2046D00502A10 /* Pinball Map Widget */,
+				DB8A314C1A9FB8DA00364903 /* PinballMap WatchKit Extension */,
+				DB8A315A1A9FB8DA00364903 /* PinballMap WatchKit App */,
+				CCB75A841AAF23F2003ED05C /* PinballMap Tests */,
 				DBF06BCD18F96FF500F92912 /* Frameworks */,
 				DBF06BCC18F96FF500F92912 /* Products */,
 			);
@@ -778,8 +975,10 @@
 			isa = PBXGroup;
 			children = (
 				DBF06BCB18F96FF500F92912 /* PinballMap.app */,
-				DBF06BE618F96FF500F92912 /* PinballMapTests.xctest */,
 				DB2D8A4619E2046D00502A10 /* Pinball Map Widget.appex */,
+				DB8A314B1A9FB8DA00364903 /* PinballMap WatchKit Extension.appex */,
+				DB8A31561A9FB8DA00364903 /* PinballMap WatchKit App.app */,
+				CCB75A831AAF23F2003ED05C /* PinballMap Tests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -821,9 +1020,10 @@
 			children = (
 				DBF06BDD18F96FF500F92912 /* AppDelegate.h */,
 				DBF06BDE18F96FF500F92912 /* AppDelegate.m */,
+				DBFBED6019CF377700ADC964 /* Start Screen.storyboard */,
 				DBF06BFD18F9700F00F92912 /* Storyboard-iPhone.storyboard */,
 				DBBB4BEC193387AB004E433F /* Storyboard-iPad.storyboard */,
-				DBFBED6019CF377700ADC964 /* Start Screen.storyboard */,
+				DB403E921A961AD200E39A93 /* SecondaryControllers.storyboard */,
 				DBB59CCB18FADC3B00F35BFD /* Views */,
 				DBF06C0818F972DD00F92912 /* View Controllers */,
 				DBF06C0718F972D700F92912 /* Data */,
@@ -836,16 +1036,18 @@
 		DBF06BD518F96FF500F92912 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				CCCF3BE41AAF2115002871A4 /* ThirdPartyKeys.h */,
+				CCCF3BE51AAF2115002871A4 /* ThirdPartyKeys.m */,
 				DBB71BAF18FC5E77007907DE /* NSFileManager+DocumentsDirectory.h */,
 				DBB71BB018FC5E77007907DE /* NSFileManager+DocumentsDirectory.m */,
 				DB52D30218FB0DCF00BB56D8 /* UIAlertView+Application.h */,
 				DB52D30318FB0DCF00BB56D8 /* UIAlertView+Application.m */,
 				DB52D2F818FB09AF00BB56D8 /* NSDate+DateFormatting.h */,
+				CCA2F2B21AAF22CE00C6C4F5 /* PinballMap-Prefix.pch */,
 				DB52D2F918FB09AF00BB56D8 /* NSDate+DateFormatting.m */,
 				DBF06BD618F96FF500F92912 /* PinballMap-Info.plist */,
 				DBF06BD718F96FF500F92912 /* InfoPlist.strings */,
 				DBF06BDA18F96FF500F92912 /* main.m */,
-				DBF06BDC18F96FF500F92912 /* PinballMap-Prefix.pch */,
 				DB0DAE781987B4A800A3FF0F /* GAAppHelper.h */,
 				DB0DAE791987B4A800A3FF0F /* GAAppHelper.m */,
 				DBAE0E6219F288260051D3EC /* Portland Location.gpx */,
@@ -881,6 +1083,10 @@
 				DBF06C0018F9703E00F92912 /* CoreDataManager.m */,
 				DB338F621960738F000D0366 /* ThirdPartyKeys.h */,
 				DB338F631960738F000D0366 /* ThirdPartyKeys.m */,
+				DB09D3F31AA35777008D74B9 /* AppSettings.h */,
+				DB09D3F41AA35777008D74B9 /* AppSettings.m */,
+				DB09D4301AA4C0B9008D74B9 /* UserLocationHelper.h */,
+				DB09D4311AA4C0B9008D74B9 /* UserLocationHelper.m */,
 			);
 			name = Data;
 			sourceTree = "<group>";
@@ -962,6 +1168,24 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		CCB75A821AAF23F2003ED05C /* PinballMap Tests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = CCB75A8B1AAF23F2003ED05C /* Build configuration list for PBXNativeTarget "PinballMap Tests" */;
+			buildPhases = (
+				CCB75A7F1AAF23F2003ED05C /* Sources */,
+				CCB75A801AAF23F2003ED05C /* Frameworks */,
+				CCB75A811AAF23F2003ED05C /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				CCB75A8A1AAF23F2003ED05C /* PBXTargetDependency */,
+			);
+			name = "PinballMap Tests";
+			productName = "PinballMap Tests";
+			productReference = CCB75A831AAF23F2003ED05C /* PinballMap Tests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		DB2D8A4519E2046D00502A10 /* Pinball Map Widget */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = DB2D8A5819E2046D00502A10 /* Build configuration list for PBXNativeTarget "Pinball Map Widget" */;
@@ -979,6 +1203,39 @@
 			productReference = DB2D8A4619E2046D00502A10 /* Pinball Map Widget.appex */;
 			productType = "com.apple.product-type.app-extension";
 		};
+		DB8A314A1A9FB8DA00364903 /* PinballMap WatchKit Extension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = DB8A316A1A9FB8DA00364903 /* Build configuration list for PBXNativeTarget "PinballMap WatchKit Extension" */;
+			buildPhases = (
+				DB8A31471A9FB8DA00364903 /* Sources */,
+				DB8A31481A9FB8DA00364903 /* Frameworks */,
+				DB8A31491A9FB8DA00364903 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				DB8A31591A9FB8DA00364903 /* PBXTargetDependency */,
+			);
+			name = "PinballMap WatchKit Extension";
+			productName = "PinballMap WatchKit Extension";
+			productReference = DB8A314B1A9FB8DA00364903 /* PinballMap WatchKit Extension.appex */;
+			productType = "com.apple.product-type.watchkit-extension";
+		};
+		DB8A31551A9FB8DA00364903 /* PinballMap WatchKit App */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = DB8A31691A9FB8DA00364903 /* Build configuration list for PBXNativeTarget "PinballMap WatchKit App" */;
+			buildPhases = (
+				DB8A31541A9FB8DA00364903 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "PinballMap WatchKit App";
+			productName = "PinballMap WatchKit App";
+			productReference = DB8A31561A9FB8DA00364903 /* PinballMap WatchKit App.app */;
+			productType = "com.apple.product-type.application.watchapp";
+		};
 		DBF06BCA18F96FF500F92912 /* PinballMap */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = DBF06BF718F96FF500F92912 /* Build configuration list for PBXNativeTarget "PinballMap" */;
@@ -993,29 +1250,12 @@
 			dependencies = (
 				DB2D8A5219E2046D00502A10 /* PBXTargetDependency */,
 				DB2D8A5519E2046D00502A10 /* PBXTargetDependency */,
+				DB8A31631A9FB8DA00364903 /* PBXTargetDependency */,
 			);
 			name = PinballMap;
 			productName = Pinball;
 			productReference = DBF06BCB18F96FF500F92912 /* PinballMap.app */;
 			productType = "com.apple.product-type.application";
-		};
-		DBF06BE518F96FF500F92912 /* PinballMapTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = DBF06BFA18F96FF500F92912 /* Build configuration list for PBXNativeTarget "PinballMapTests" */;
-			buildPhases = (
-				DBF06BE218F96FF500F92912 /* Sources */,
-				DBF06BE318F96FF500F92912 /* Frameworks */,
-				DBF06BE418F96FF500F92912 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				DBF06BEC18F96FF500F92912 /* PBXTargetDependency */,
-			);
-			name = PinballMapTests;
-			productName = PinballTests;
-			productReference = DBF06BE618F96FF500F92912 /* PinballMapTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
 
@@ -1026,6 +1266,10 @@
 				LastUpgradeCheck = 0600;
 				ORGANIZATIONNAME = "Frank Michael Sanchez";
 				TargetAttributes = {
+					CCB75A821AAF23F2003ED05C = {
+						CreatedOnToolsVersion = 6.2;
+						TestTargetID = DBF06BCA18F96FF500F92912;
+					};
 					DB2D8A4519E2046D00502A10 = {
 						CreatedOnToolsVersion = 6.0;
 						DevelopmentTeam = ZJN6P495U9;
@@ -1035,7 +1279,8 @@
 							};
 						};
 					};
-					DBF06BCA18F96FF500F92912 = {
+					DB8A314A1A9FB8DA00364903 = {
+						CreatedOnToolsVersion = 6.2;
 						DevelopmentTeam = ZJN6P495U9;
 						SystemCapabilities = {
 							com.apple.ApplicationGroups.iOS = {
@@ -1043,8 +1288,20 @@
 							};
 						};
 					};
-					DBF06BE518F96FF500F92912 = {
-						TestTargetID = DBF06BCA18F96FF500F92912;
+					DB8A31551A9FB8DA00364903 = {
+						CreatedOnToolsVersion = 6.2;
+						DevelopmentTeam = ZJN6P495U9;
+					};
+					DBF06BCA18F96FF500F92912 = {
+						DevelopmentTeam = ZJN6P495U9;
+						SystemCapabilities = {
+							com.apple.ApplicationGroups.iOS = {
+								enabled = 1;
+							};
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -1054,6 +1311,7 @@
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
+				Base,
 			);
 			mainGroup = DBF06BC218F96FF500F92912;
 			productRefGroup = DBF06BCC18F96FF500F92912 /* Products */;
@@ -1061,18 +1319,45 @@
 			projectRoot = "";
 			targets = (
 				DBF06BCA18F96FF500F92912 /* PinballMap */,
-				DBF06BE518F96FF500F92912 /* PinballMapTests */,
 				DB2D8A4519E2046D00502A10 /* Pinball Map Widget */,
+				DB8A314A1A9FB8DA00364903 /* PinballMap WatchKit Extension */,
+				DB8A31551A9FB8DA00364903 /* PinballMap WatchKit App */,
+				CCB75A821AAF23F2003ED05C /* PinballMap Tests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		CCB75A811AAF23F2003ED05C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		DB2D8A4419E2046D00502A10 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				DB2D8A5019E2046D00502A10 /* MainInterface.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DB8A31491A9FB8DA00364903 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DB8A31571A9FB8DA00364903 /* PinballMap WatchKit App.app in Resources */,
+				DB8A31531A9FB8DA00364903 /* Images.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DB8A31541A9FB8DA00364903 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DB8A315F1A9FB8DA00364903 /* Interface.storyboard in Resources */,
+				DB8A31611A9FB8DA00364903 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1083,6 +1368,7 @@
 				DBF06BFE18F9700F00F92912 /* Storyboard-iPhone.storyboard in Resources */,
 				DB38DACC19E1CC2800E1B6D2 /* LICENSE in Resources */,
 				DBC751711A670E5500D88975 /* MachineCell.xib in Resources */,
+				DB403E931A961AD200E39A93 /* SecondaryControllers.storyboard in Resources */,
 				DBF06BD918F96FF500F92912 /* InfoPlist.strings in Resources */,
 				DB9A15F41A7D107C00819A1E /* about_page in Resources */,
 				DBF06BE118F96FF500F92912 /* Images.xcassets in Resources */,
@@ -1096,17 +1382,17 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		DBF06BE418F96FF500F92912 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				DBF06BF218F96FF500F92912 /* InfoPlist.strings in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		CCB75A7F1AAF23F2003ED05C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CCB75A881AAF23F2003ED05C /* PinballMap_Tests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		DB2D8A4219E2046D00502A10 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1122,7 +1408,39 @@
 				DBB0EFEE1A47017B0090E9DC /* Zone.m in Sources */,
 				DBB0EFEB1A47017B0090E9DC /* MachineLocation.m in Sources */,
 				DBB0EFF21A4703970090E9DC /* Event+CellHelpers.m in Sources */,
+				DB09D3F61AA35777008D74B9 /* AppSettings.m in Sources */,
 				DBB0EFED1A47017B0090E9DC /* Event.m in Sources */,
+				DB09D4331AA4C0B9008D74B9 /* UserLocationHelper.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DB8A31471A9FB8DA00364903 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DB09D3F81AA35BAD008D74B9 /* AppSettings.m in Sources */,
+				DB7F0E4B1A9FBCF300AB47AB /* Event.m in Sources */,
+				DB7F0E441A9FBCB900AB47AB /* LocationType.m in Sources */,
+				DB7F0E4C1A9FBCF700AB47AB /* Pinball.xcdatamodeld in Sources */,
+				DB890C681A9FC00800AAB741 /* NSDate+DateFormatting.m in Sources */,
+				DB7F0E421A9FBCA800AB47AB /* CoreDataManager.m in Sources */,
+				DB7F0E451A9FBCBF00AB47AB /* Region.m in Sources */,
+				DB7F0E431A9FBCB400AB47AB /* Machine.m in Sources */,
+				DB7F0E4F1A9FBD1200AB47AB /* EventsInterfaceController.m in Sources */,
+				DB7F0E461A9FBCC500AB47AB /* Location.m in Sources */,
+				DB7F0E491A9FBCDD00AB47AB /* MachineLocation.m in Sources */,
+				DB09D4341AA4C0B9008D74B9 /* UserLocationHelper.m in Sources */,
+				DB8ECCC31AA62BC30013AFBB /* NearestInterfaceController.m in Sources */,
+				DB8ECCC71AA633740013AFBB /* AboutInterfaceController.m in Sources */,
+				DBBDABB51AA08A2C00E6EC6F /* AlertInterfaceController.m in Sources */,
+				DB7F0E4A1A9FBCEC00AB47AB /* Event+CellHelpers.m in Sources */,
+				DB8ECCCB1AA635260013AFBB /* GlanceInterfaceController.m in Sources */,
+				DB890C6E1A9FC15F00AAB741 /* RecentsInterfaceController.m in Sources */,
+				DBBDABB81AA08D2100E6EC6F /* MachineInterfaceController.m in Sources */,
+				DBDDD8D01A9FC93E00A10572 /* EventInterfaceController.m in Sources */,
+				DB7F0E481A9FBCD900AB47AB /* Zone.m in Sources */,
+				DB8A31511A9FB8DA00364903 /* InterfaceController.m in Sources */,
+				DB7F0E471A9FBCD400AB47AB /* NSDate+CupertinoYankee.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1150,6 +1468,7 @@
 				DB52D2E118FAF94500BB56D8 /* MachineLocationPin.m in Sources */,
 				DB070BF7193226120018D521 /* NewLocationsView.m in Sources */,
 				DB38DAA919E1CBE300E1B6D2 /* TextEditorView.m in Sources */,
+				DB09D4321AA4C0B9008D74B9 /* UserLocationHelper.m in Sources */,
 				DBFB652319477DB700993697 /* LocationAnnotation.m in Sources */,
 				DB38DA9A19E1CBC400E1B6D2 /* AFURLResponseSerialization.m in Sources */,
 				DBBB4BF019338A03004E433F /* UIViewController+Helpers.m in Sources */,
@@ -1168,17 +1487,18 @@
 				DBF06C0118F9703E00F92912 /* CoreDataManager.m in Sources */,
 				DB52D2FD18FB0AD300BB56D8 /* EventProfileView.m in Sources */,
 				DB38DA9619E1CBC400E1B6D2 /* AFNetworkReachabilityManager.m in Sources */,
+				DB09D3F51AA35777008D74B9 /* AppSettings.m in Sources */,
 				DB9A15F71A7D17C400819A1E /* LoadingViewController.m in Sources */,
 				DB52D2FA18FB09AF00BB56D8 /* NSDate+DateFormatting.m in Sources */,
 				DBA96E541A50435A007C73CD /* MachineManufacturerView.m in Sources */,
 				DB2E9FCC19E179A200B9D72F /* RegionLink.m in Sources */,
 				DB38DAA719E1CBE300E1B6D2 /* ReuseWebView.m in Sources */,
 				DB6F292F19E5870700AC87FF /* HighRollerProfileView.m in Sources */,
+				CCCF3BE61AAF2115002871A4 /* ThirdPartyKeys.m in Sources */,
 				DB5FFEA519C6209E004C424B /* RecentlyAddedView.m in Sources */,
 				DB56E3FE1A7E607A007F22A7 /* NSDate+CupertinoYankee.m in Sources */,
 				DBEAA200192A9E4A0096F2A9 /* LocationType+Create.m in Sources */,
 				DB38DAA819E1CBE300E1B6D2 /* SafariActivity.m in Sources */,
-				DB338F641960738F000D0366 /* ThirdPartyKeys.m in Sources */,
 				DB38DA9519E1CBC400E1B6D2 /* AFHTTPSessionManager.m in Sources */,
 				DB99C3B11906FA4100AFDF0F /* MachinePickingView.m in Sources */,
 				DBE712D91929134D0046DFA8 /* MachineLocation.m in Sources */,
@@ -1222,17 +1542,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		DBF06BE218F96FF500F92912 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				DBF06BF418F96FF500F92912 /* PinballTests.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		CCB75A8A1AAF23F2003ED05C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = DBF06BCA18F96FF500F92912 /* PinballMap */;
+			targetProxy = CCB75A891AAF23F2003ED05C /* PBXContainerItemProxy */;
+		};
 		DB2D8A5219E2046D00502A10 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = DB2D8A4519E2046D00502A10 /* Pinball Map Widget */;
@@ -1243,14 +1560,27 @@
 			target = DB2D8A4519E2046D00502A10 /* Pinball Map Widget */;
 			targetProxy = DB2D8A5419E2046D00502A10 /* PBXContainerItemProxy */;
 		};
-		DBF06BEC18F96FF500F92912 /* PBXTargetDependency */ = {
+		DB8A31591A9FB8DA00364903 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = DBF06BCA18F96FF500F92912 /* PinballMap */;
-			targetProxy = DBF06BEB18F96FF500F92912 /* PBXContainerItemProxy */;
+			target = DB8A31551A9FB8DA00364903 /* PinballMap WatchKit App */;
+			targetProxy = DB8A31581A9FB8DA00364903 /* PBXContainerItemProxy */;
+		};
+		DB8A31631A9FB8DA00364903 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = DB8A314A1A9FB8DA00364903 /* PinballMap WatchKit Extension */;
+			targetProxy = DB8A31621A9FB8DA00364903 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		DB8A315D1A9FB8DA00364903 /* Interface.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				DB8A315E1A9FB8DA00364903 /* Base */,
+			);
+			name = Interface.storyboard;
+			sourceTree = "<group>";
+		};
 		DBF06BD718F96FF500F92912 /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -1270,12 +1600,55 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		CCB75A8C1AAF23F2003ED05C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "PinballMap Tests/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MTL_ENABLE_DEBUG_INFO = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/PinballMap.app/PinballMap";
+			};
+			name = Debug;
+		};
+		CCB75A8D1AAF23F2003ED05C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				COPY_PHASE_STRIP = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "PinballMap Tests/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/PinballMap.app/PinballMap";
+			};
+			name = Release;
+		};
 		DB2D8A5619E2046D00502A10 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CODE_SIGN_ENTITLEMENTS = "Pinball Map Widget/Pinball Map Widget.entitlements";
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Frank Michael Sanchez (7XM86QLV5C)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -1307,6 +1680,92 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "0d62de25-541d-4c62-a314-2b7b49468eed";
 				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+		DB8A31651A9FB8DA00364903 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CODE_SIGN_ENTITLEMENTS = "PinballMap WatchKit Extension/PinballMap WatchKit Extension.entitlements";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Frank Michael Sanchez (7XM86QLV5C)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "PinballMap WatchKit Extension/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				MTL_ENABLE_DEBUG_INFO = YES;
+				PRODUCT_NAME = "${TARGET_NAME}";
+				PROVISIONING_PROFILE = "8339c70c-29c2-4e7a-9b7e-d1ce11841c0c";
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		DB8A31661A9FB8DA00364903 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CODE_SIGN_ENTITLEMENTS = "PinballMap WatchKit Extension/PinballMap WatchKit Extension.entitlements";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Frank Michael Sanchez";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Frank Michael Sanchez";
+				COPY_PHASE_STRIP = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				INFOPLIST_FILE = "PinballMap WatchKit Extension/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_NAME = "${TARGET_NAME}";
+				PROVISIONING_PROFILE = "9455ee90-52f6-41f2-a4eb-e7619a6abe36";
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+		DB8A31671A9FB8DA00364903 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				IBSC_MODULE = PinballMap_WatchKit_Extension;
+				INFOPLIST_FILE = "PinballMap WatchKit App/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = 4;
+				"TARGETED_DEVICE_FAMILY[sdk=iphonesimulator*]" = "1,4";
+			};
+			name = Debug;
+		};
+		DB8A31681A9FB8DA00364903 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Frank Michael Sanchez";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Frank Michael Sanchez";
+				COPY_PHASE_STRIP = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				IBSC_MODULE = PinballMap_WatchKit_Extension;
+				INFOPLIST_FILE = "PinballMap WatchKit App/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "36f6cd7e-1798-489d-9819-d5b22ebce74d";
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = 4;
+				"TARGETED_DEVICE_FAMILY[sdk=iphonesimulator*]" = "1,4";
 			};
 			name = Release;
 		};
@@ -1342,7 +1801,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 			};
@@ -1374,7 +1833,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -1403,7 +1862,7 @@
 					"$(PROJECT_DIR)/Pinball/HockeySDK-iOS",
 				);
 				PRODUCT_NAME = PinballMap;
-				PROVISIONING_PROFILE = "ab0d2cba-acaf-434b-9d25-4213b6895c4a";
+				PROVISIONING_PROFILE = "6f8c019e-1caf-4044-92ab-3e94ed245813";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
 			};
@@ -1438,54 +1897,41 @@
 			};
 			name = Release;
 		};
-		DBF06BFB18F96FF500F92912 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/Pinball.app/Pinball";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-					"$(DEVELOPER_FRAMEWORKS_DIR)",
-				);
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "Pinball/Pinball-Prefix.pch";
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = "PinballTests/PinballMapTests-Info.plist";
-				PRODUCT_NAME = PinballMapTests;
-				TEST_HOST = "$(BUNDLE_LOADER)";
-				WRAPPER_EXTENSION = xctest;
-			};
-			name = Debug;
-		};
-		DBF06BFC18F96FF500F92912 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/Pinball.app/Pinball";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-					"$(DEVELOPER_FRAMEWORKS_DIR)",
-				);
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "Pinball/Pinball-Prefix.pch";
-				INFOPLIST_FILE = "PinballTests/PinballMapTests-Info.plist";
-				PRODUCT_NAME = PinballMapTests;
-				TEST_HOST = "$(BUNDLE_LOADER)";
-				WRAPPER_EXTENSION = xctest;
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		CCB75A8B1AAF23F2003ED05C /* Build configuration list for PBXNativeTarget "PinballMap Tests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CCB75A8C1AAF23F2003ED05C /* Debug */,
+				CCB75A8D1AAF23F2003ED05C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		DB2D8A5819E2046D00502A10 /* Build configuration list for PBXNativeTarget "Pinball Map Widget" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				DB2D8A5619E2046D00502A10 /* Debug */,
 				DB2D8A5719E2046D00502A10 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		DB8A31691A9FB8DA00364903 /* Build configuration list for PBXNativeTarget "PinballMap WatchKit App" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DB8A31671A9FB8DA00364903 /* Debug */,
+				DB8A31681A9FB8DA00364903 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		DB8A316A1A9FB8DA00364903 /* Build configuration list for PBXNativeTarget "PinballMap WatchKit Extension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DB8A31651A9FB8DA00364903 /* Debug */,
+				DB8A31661A9FB8DA00364903 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -1504,15 +1950,6 @@
 			buildConfigurations = (
 				DBF06BF818F96FF500F92912 /* Debug */,
 				DBF06BF918F96FF500F92912 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		DBF06BFA18F96FF500F92912 /* Build configuration list for PBXNativeTarget "PinballMapTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				DBF06BFB18F96FF500F92912 /* Debug */,
-				DBF06BFC18F96FF500F92912 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

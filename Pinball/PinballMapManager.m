@@ -93,9 +93,9 @@ typedef NS_ENUM(NSInteger, PBMDataAPI) {
     if (!self.locationManager){
         self.locationManager = [CLLocationManager new];
     }
-    #pragma message ("iOS 8 Support for location updating")
-    if ([self.locationManager respondsToSelector:@selector(requestWhenInUseAuthorization)]){
-        [self.locationManager requestWhenInUseAuthorization];
+    // iOS 8 Support for location updating
+    if ([self.locationManager respondsToSelector:@selector(requestAlwaysAuthorization)] && [CLLocationManager authorizationStatus] != kCLAuthorizationStatusAuthorizedAlways){
+        [self.locationManager requestAlwaysAuthorization];
     }
     self.locationManager.delegate = self;
     self.locationManager.desiredAccuracy = kCLLocationAccuracyBest;
@@ -297,6 +297,21 @@ typedef NS_ENUM(NSInteger, PBMDataAPI) {
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     manager.requestSerializer = [AFJSONRequestSerializer serializer];
     [manager GET:[NSString stringWithFormat:@"%@api/v1/region/%@/location_machine_xrefs.json?limit=10",apiRootURL,self.currentRegion.name] parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        completionBlock(responseObject);
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        completionBlock(@{@"errors": error.localizedDescription});
+    }];
+}
+- (void)nearestLocationWithLocation:(CLLocation *)location andCompletion:(APIComplete)completionBlock{
+    CLLocation *userLocation;
+    if (location == nil){
+        userLocation = self.userLocation;
+    }else{
+        userLocation = location;
+    }
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    manager.requestSerializer = [AFJSONRequestSerializer serializer];
+    [manager GET:[NSString stringWithFormat:@"%@api/v1/locations/closest_by_lat_lon.json?lat=%@&lon=%@",apiRootURL,[@(userLocation.coordinate.latitude) stringValue],[@(userLocation.coordinate.longitude) stringValue]] parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
         completionBlock(responseObject);
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         completionBlock(@{@"errors": error.localizedDescription});
@@ -638,6 +653,7 @@ typedef NS_ENUM(NSInteger, PBMDataAPI) {
     if (self.currentRegion){
         [Location updateAllForRegion:self.currentRegion];
     }
+    [manager stopUpdatingLocation];
 }
 #pragma mark - Contact
 - (void)sendMessage:(NSDictionary *)messageData withType:(ContactType)contactType andCompletion:(APIComplete)completionBlock{
