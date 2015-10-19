@@ -14,6 +14,7 @@
 @interface Location : NSManagedObject
 
 @property (nonatomic, retain) NSString * city;
+@property (nonatomic, retain) NSDate * lastUpdated;
 @property (nonatomic, retain) NSNumber * latitude;
 @property (nonatomic, retain) NSString * locationDescription;
 @property (nonatomic, retain) NSNumber * locationDistance;

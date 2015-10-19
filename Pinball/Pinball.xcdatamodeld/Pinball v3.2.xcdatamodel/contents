@@ -15,6 +15,7 @@
     </entity>
     <entity name="Location" representedClassName="Location" syncable="YES">
         <attribute name="city" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="lastUpdated" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="latitude" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
         <attribute name="locationDescription" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="locationDistance" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
@@ -80,11 +81,11 @@
     </entity>
     <elements>
         <element name="Event" positionX="-2529" positionY="-720" width="128" height="208"/>
-        <element name="Location" positionX="-2250" positionY="-702" width="128" height="358"/>
+        <element name="Location" positionX="-2250" positionY="-702" width="128" height="373"/>
         <element name="LocationType" positionX="-2063" positionY="-619" width="128" height="88"/>
         <element name="Machine" positionX="-2808" positionY="-603" width="128" height="150"/>
         <element name="MachineLocation" positionX="-2504" positionY="-490" width="128" height="118"/>
         <element name="Region" positionX="-2520" positionY="-949" width="128" height="223"/>
-        <element name="Zone" positionX="-2252" positionY="-877" width="128" height="118"/>
+        <element name="Zone" positionX="-2198" positionY="-877" width="128" height="118"/>
     </elements>
 </model>
