@@ -234,6 +234,7 @@
 
 /* Begin PBXFileReference section */
 		767AEE54A0274802B59CA4A5 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		CC6F8A9A1BD53A75004F0C06 /* Pinball v3.2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Pinball v3.2.xcdatamodel"; sourceTree = "<group>"; };
 		CCA2F2B21AAF22CE00C6C4F5 /* PinballMap-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "PinballMap-Prefix.pch"; sourceTree = "<group>"; };
 		CCB75A831AAF23F2003ED05C /* PinballMap Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "PinballMap Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		CCB75A861AAF23F2003ED05C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -1960,10 +1961,11 @@
 		DBF06C0418F9707400F92912 /* Pinball.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				CC6F8A9A1BD53A75004F0C06 /* Pinball v3.2.xcdatamodel */,
 				DB1FB5D019BCB8C900E52B01 /* Pinball v3.1.0.xcdatamodel */,
 				DBF06C0518F9707400F92912 /* Pinball.xcdatamodel */,
 			);
-			currentVersion = DB1FB5D019BCB8C900E52B01 /* Pinball v3.1.0.xcdatamodel */;
+			currentVersion = CC6F8A9A1BD53A75004F0C06 /* Pinball v3.2.xcdatamodel */;
 			path = Pinball.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

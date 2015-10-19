@@ -69,15 +69,22 @@
 #pragma mark - Table view data source
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     if (_currentMachine){
-        return 2;
+        return 3;
     }else{
         return 0;
     }
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     if (section == 0){
-        return 3;
+        return 2;
     }else if (section == 1){
+        if ([_currentMachine.ipdbLink isEqualToString:@"N/A"]){
+            return 1;
+        }else{
+            return 2;
+        }
+        return 0;
+    }else if (section == 2){
         return self.machineLocations.count+1;
     }
     return 0;
@@ -86,6 +93,8 @@
     if (section == 0){
         return @"Machine";
     }else if (section == 1){
+        return @"Links";
+    }else if (section == 2){
         return @"Locations";
     }
     return nil;
@@ -93,8 +102,10 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.section == 0){
         return 67;
+    }else if (indexPath.section == 1){
+        return 44;
     }else{
-        if (indexPath.section == 1 && indexPath.row > 0){
+        if (indexPath.section == 2 && indexPath.row > 0){
             MachineLocation *machine = self.machineLocations[indexPath.row-1];
             CGRect stringSize = [machine.location.name boundingRectWithSize:CGSizeMake(290, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName: [UIFont systemFontOfSize:18]} context:nil];
             
@@ -118,17 +129,19 @@
         }else if (indexPath.row == 1){
             cell.infoLabel.text = @"Year";
             cell.dataLabel.text = [NSString stringWithFormat:@"%@",_currentMachine.year];
-        }else if (indexPath.row == 2){
-            cell.infoLabel.text = @"Internet Pinball Database";
-            if (![_currentMachine.ipdbLink isEqualToString:@"N/A"]){
-                cell.dataLabel.text = @"View";
-            }else{
-                cell.dataLabel.text = @"N/A";
-            }
         }
         [cell.dataLabel updateConstraints];
         return cell;
     }else if (indexPath.section == 1){
+        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"LocationCell" forIndexPath:indexPath];
+        cell.detailTextLabel.text = nil;
+        if (indexPath.row == 0 && ![_currentMachine.ipdbLink isEqualToString:@"N/A"]){
+            cell.textLabel.text = @"Internet Pinball Database";
+        }else{
+            cell.textLabel.text = @"PinTips";
+        }
+        return cell;
+    }else if (indexPath.section == 2){
         UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"LocationCell" forIndexPath:indexPath];
         if (indexPath.row == 0){
             cell.textLabel.text = @"View on Map";
@@ -146,14 +159,28 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     if (indexPath.section == 0){
-        if (indexPath.row == 2){
+
+    }else if (indexPath.section == 1){
+        if (indexPath.row == 0 && ![_currentMachine.ipdbLink isEqualToString:@"N/A"]){
             ReuseWebView *webView = [[ReuseWebView alloc] initWithURL:[NSURL URLWithString:_currentMachine.ipdbLink]];
             webView.webTitle = @"IPDB";
             UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:webView];
             navController.modalPresentationStyle = UIModalPresentationFormSheet;
             [self.navigationController presentViewController:navController animated:YES completion:nil];
+        }else{
+            NSString *pinTipsURL = @"";
+            if (![_currentMachine.machineGroupID isEqualToValue:@-1]){
+                pinTipsURL = [NSString stringWithFormat:@"http://pintips.net/pinmap/group/%@",_currentMachine.machineGroupID];
+            }else{
+                pinTipsURL = [NSString stringWithFormat:@"http://pintips.net/pinmap/machine/%@",_currentMachine.machineId];
+            }
+            ReuseWebView *webView = [[ReuseWebView alloc] initWithURL:[NSURL URLWithString:pinTipsURL]];
+            webView.webTitle = @"PinTips";
+            UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:webView];
+            navController.modalPresentationStyle = UIModalPresentationFormSheet;
+            [self.navigationController presentViewController:navController animated:YES completion:nil];
         }
-    }else if (indexPath.section == 1){
+    }else if (indexPath.section == 2){
         if (indexPath.row == 0){
             MapView *map = [[[[UIStoryboard storyboardWithName:@"SecondaryControllers" bundle:nil] instantiateViewControllerWithIdentifier:@"MapView"] viewControllers] lastObject];
             map.currentMachine = _currentMachine;
