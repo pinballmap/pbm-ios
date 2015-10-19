@@ -13,7 +13,7 @@
 #import "Event.h"
 #import "Event+CellHelpers.h"
 
-NSString * const apiRootURL = @"http://pinballmap.com/";
+NSString * const apiRootURL = @"https://pinballmap.com/";
 NSString * const appGroup = @"group.net.isaacruiz.ppm";
 NSString * const etagKey = @"recentsEtag";
 
