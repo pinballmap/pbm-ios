@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CCA1EA9C1BD7D63C006CF91B /* MachineCondition.m in Sources */ = {isa = PBXBuildFile; fileRef = CCA1EA9B1BD7D63C006CF91B /* MachineCondition.m */; settings = {ASSET_TAGS = (); }; };
+		CCA1EA9F1BD7D81F006CF91B /* MachineCondition+Create.m in Sources */ = {isa = PBXBuildFile; fileRef = CCA1EA9E1BD7D81F006CF91B /* MachineCondition+Create.m */; settings = {ASSET_TAGS = (); }; };
 		CCB75A881AAF23F2003ED05C /* PinballMap_Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = CCB75A871AAF23F2003ED05C /* PinballMap_Tests.m */; };
 		CCCF3BE61AAF2115002871A4 /* ThirdPartyKeys.m in Sources */ = {isa = PBXBuildFile; fileRef = CCCF3BE51AAF2115002871A4 /* ThirdPartyKeys.m */; };
 		DB070BEB193202ED0018D521 /* Location.m in Sources */ = {isa = PBXBuildFile; fileRef = DB070BEA193202ED0018D521 /* Location.m */; };
@@ -235,6 +237,10 @@
 /* Begin PBXFileReference section */
 		767AEE54A0274802B59CA4A5 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		CC6F8A9A1BD53A75004F0C06 /* Pinball v3.2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Pinball v3.2.xcdatamodel"; sourceTree = "<group>"; };
+		CCA1EA9A1BD7D63C006CF91B /* MachineCondition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MachineCondition.h; sourceTree = "<group>"; };
+		CCA1EA9B1BD7D63C006CF91B /* MachineCondition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MachineCondition.m; sourceTree = "<group>"; };
+		CCA1EA9D1BD7D7A7006CF91B /* MachineCondition+Create.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MachineCondition+Create.h"; sourceTree = "<group>"; };
+		CCA1EA9E1BD7D81F006CF91B /* MachineCondition+Create.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MachineCondition+Create.m"; sourceTree = "<group>"; };
 		CCA2F2B21AAF22CE00C6C4F5 /* PinballMap-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "PinballMap-Prefix.pch"; sourceTree = "<group>"; };
 		CCB75A831AAF23F2003ED05C /* PinballMap Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "PinballMap Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		CCB75A861AAF23F2003ED05C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -791,6 +797,8 @@
 			isa = PBXGroup;
 			children = (
 				DBF06C3918F975B600F92912 /* Model Helpers */,
+				CCA1EA9A1BD7D63C006CF91B /* MachineCondition.h */,
+				CCA1EA9B1BD7D63C006CF91B /* MachineCondition.m */,
 				DBE712D71929134D0046DFA8 /* MachineLocation.h */,
 				DBE712D81929134D0046DFA8 /* MachineLocation.m */,
 				DB5FFE9D19C618CA004C424B /* Region.h */,
@@ -1162,6 +1170,8 @@
 				DB43E4871947194C00A641E3 /* MachineLocation+CellHelpers.m */,
 				DBA96E4C1A5040BA007C73CD /* Region+Extensions.h */,
 				DBA96E4D1A5040BA007C73CD /* Region+Extensions.m */,
+				CCA1EA9D1BD7D7A7006CF91B /* MachineCondition+Create.h */,
+				CCA1EA9E1BD7D81F006CF91B /* MachineCondition+Create.m */,
 			);
 			name = "Model Helpers";
 			sourceTree = "<group>";
@@ -1518,6 +1528,7 @@
 				DB7B4C14193361AA002AF484 /* MachineScore.m in Sources */,
 				DB4D82BE190D77530048156E /* Machine+CellHelpers.m in Sources */,
 				DBF06C8718F984AF00F92912 /* MachinesView.m in Sources */,
+				CCA1EA9C1BD7D63C006CF91B /* MachineCondition.m in Sources */,
 				DBB71BB418FC6B04007907DE /* PinballTabController.m in Sources */,
 				DBB59CD218FADF6D00F35BFD /* InformationCell.m in Sources */,
 				DB5FFE9C19C5FBAB004C424B /* Location+Annotation.m in Sources */,
@@ -1538,6 +1549,7 @@
 				DBE50374190D2BBA002BDE0D /* Location+UpdateDistance.m in Sources */,
 				DBC751701A670E5500D88975 /* MachineCell.m in Sources */,
 				DB5FFEAA19C62271004C424B /* RecentMachine.m in Sources */,
+				CCA1EA9F1BD7D81F006CF91B /* MachineCondition+Create.m in Sources */,
 				DBB59CD518FADF7A00F35BFD /* LocationMapCell.m in Sources */,
 				DBB71BB118FC5E77007907DE /* NSFileManager+DocumentsDirectory.m in Sources */,
 			);

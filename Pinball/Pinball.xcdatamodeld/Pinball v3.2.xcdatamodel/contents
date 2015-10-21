@@ -51,10 +51,17 @@
         <attribute name="year" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
         <relationship name="machineLocations" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="MachineLocation" inverseName="machine" inverseEntity="MachineLocation" syncable="YES"/>
     </entity>
+    <entity name="MachineCondition" representedClassName="MachineCondition" syncable="YES">
+        <attribute name="comment" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="conditionCreated" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="conditionId" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <relationship name="machineLocation" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="MachineLocation" inverseName="conditions" inverseEntity="MachineLocation" syncable="YES"/>
+    </entity>
     <entity name="MachineLocation" representedClassName="MachineLocation" syncable="YES">
         <attribute name="condition" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="conditionUpdate" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="machineLocationId" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <relationship name="conditions" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="MachineCondition" inverseName="machineLocation" inverseEntity="MachineCondition" syncable="YES"/>
         <relationship name="location" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Location" inverseName="machines" inverseEntity="Location" syncable="YES"/>
         <relationship name="machine" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Machine" inverseName="machineLocations" inverseEntity="Machine" syncable="YES"/>
     </entity>
@@ -83,9 +90,10 @@
         <element name="Event" positionX="-2529" positionY="-720" width="128" height="208"/>
         <element name="Location" positionX="-2250" positionY="-702" width="128" height="373"/>
         <element name="LocationType" positionX="-2063" positionY="-619" width="128" height="88"/>
-        <element name="Machine" positionX="-2808" positionY="-603" width="128" height="150"/>
-        <element name="MachineLocation" positionX="-2504" positionY="-490" width="128" height="118"/>
+        <element name="Machine" positionX="-2531" positionY="-328" width="128" height="148"/>
+        <element name="MachineLocation" positionX="-2504" positionY="-490" width="128" height="133"/>
         <element name="Region" positionX="-2520" positionY="-949" width="128" height="223"/>
         <element name="Zone" positionX="-2198" positionY="-877" width="128" height="118"/>
+        <element name="MachineCondition" positionX="-2691" positionY="-475" width="128" height="103"/>
     </elements>
 </model>

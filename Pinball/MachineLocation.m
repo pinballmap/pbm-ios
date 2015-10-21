@@ -18,5 +18,6 @@
 @dynamic machineLocationId;
 @dynamic location;
 @dynamic machine;
+@dynamic conditions;
 
 @end
