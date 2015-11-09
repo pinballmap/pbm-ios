@@ -33,6 +33,8 @@ typedef enum : NSUInteger {
     LocationEditingTypeWebsite,
 } LocationEditingType;
 
+int const headerHeight = 50;
+
 @interface LocationProfileView () <TextEditorDelegate,NSFetchedResultsControllerDelegate,UIAlertViewDelegate,LocationTypeSelectDelegate>
 
 @property (nonatomic) NSFetchedResultsController *machinesFetch;
@@ -41,6 +43,7 @@ typedef enum : NSUInteger {
 @property (nonatomic) UIAlertView *deleteConfirm;
 @property (nonatomic) NSIndexPath *deletePath;
 @property (nonatomic) UISegmentedControl *dataSetSeg;
+@property (nonatomic) UILabel *lastUpdateLabel;
 @property (nonatomic) UIAlertView *openInMapsConfirm;
 
 @end
@@ -65,6 +68,13 @@ typedef enum : NSUInteger {
     [self.dataSetSeg insertSegmentWithTitle:@"Info" atIndex:1 animated:YES];
     [self.dataSetSeg addTarget:self action:@selector(changeData:) forControlEvents:UIControlEventValueChanged];
     [self.dataSetSeg setSelectedSegmentIndex:0];
+    
+    self.lastUpdateLabel = [[UILabel alloc] init];
+    self.lastUpdateLabel.translatesAutoresizingMaskIntoConstraints = NO;
+    self.lastUpdateLabel.frame = CGRectMake(0, 30, self.view.frame.size.width, 20);
+    self.lastUpdateLabel.font = [UIFont systemFontOfSize:15];
+    self.lastUpdateLabel.textColor = [UIColor lightGrayColor];
+    self.lastUpdateLabel.textAlignment = NSTextAlignmentCenter;
 
     if (_currentLocation){
         [self setupUI];
@@ -87,6 +97,13 @@ typedef enum : NSUInteger {
     [self.machinesFetch performFetch:nil];
     self.dataSetSeg.selectedSegmentIndex = 0;
     self.tableView.allowsSelectionDuringEditing = YES;
+    NSString *lastUpdateString;
+    if (_currentLocation.lastUpdated == NULL){
+        lastUpdateString = @"Last Update: Unknown";
+    }else{
+        lastUpdateString = [NSString stringWithFormat:@"Last Update: %@",[_currentLocation.lastUpdated monthDayYearPretty:YES]];
+    }
+    self.lastUpdateLabel.text = lastUpdateString;
     [self setupRightBarButton];
     [self.tableView reloadData];
 }
@@ -288,18 +305,25 @@ typedef enum : NSUInteger {
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
     // Set a height for the seg control if the section is 1, meaning we are showing a map snapshot, or if section is 0
     if (section == 1 || (section == 0 && !self.showMapSnapshot)){
-        return 29;
+        return headerHeight;
     }
     return 0;
 }
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
     if (section == 1 || (section == 0 && !self.showMapSnapshot)){
-        UIView *dataSegView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.frame.size.width, 29)];
+        UIView *dataSegView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.frame.size.width, headerHeight)];
         [dataSegView setBackgroundColor:[UIColor whiteColor]];
         [dataSegView addSubview:self.dataSetSeg];
+        [dataSegView addSubview:self.lastUpdateLabel];
         if (self.dataSetSeg){
             NSArray *verticalConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-(-5)-[seg]-(-5)-|" options:NSLayoutFormatAlignmentMask metrics:nil views:@{@"seg": self.dataSetSeg}];
             [dataSegView addConstraints:verticalConstraints];
+        }
+        if (self.lastUpdateLabel){
+            NSArray *horzCon = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-(0)-[lastup]-(0)-|" options:NSLayoutFormatAlignmentMask metrics:nil views:@{@"lastup": self.lastUpdateLabel}];
+            NSArray *vertCon = [NSLayoutConstraint constraintsWithVisualFormat:@"V:[lastup]-(0)-|" options:NSLayoutFormatAlignmentMask metrics:nil views:@{@"lastup": self.lastUpdateLabel}];
+            [dataSegView addConstraints:horzCon];
+            [dataSegView addConstraints:vertCon];
         }
         return dataSegView;
     }
