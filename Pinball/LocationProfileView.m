@@ -33,7 +33,7 @@ typedef enum : NSUInteger {
     LocationEditingTypeWebsite,
 } LocationEditingType;
 
-int const headerHeight = 50;
+int const headerHeight = 90;
 
 @interface LocationProfileView () <TextEditorDelegate,NSFetchedResultsControllerDelegate,UIAlertViewDelegate,LocationTypeSelectDelegate>
 
@@ -44,6 +44,7 @@ int const headerHeight = 50;
 @property (nonatomic) NSIndexPath *deletePath;
 @property (nonatomic) UISegmentedControl *dataSetSeg;
 @property (nonatomic) UILabel *lastUpdateLabel;
+@property (nonatomic) UIButton *infoUpToDateButton;
 @property (nonatomic) UIAlertView *openInMapsConfirm;
 
 @end
@@ -76,6 +77,14 @@ int const headerHeight = 50;
     self.lastUpdateLabel.textColor = [UIColor lightGrayColor];
     self.lastUpdateLabel.textAlignment = NSTextAlignmentCenter;
 
+    self.infoUpToDateButton = [[UIButton alloc] init];
+    self.infoUpToDateButton.translatesAutoresizingMaskIntoConstraints = NO;
+    self.infoUpToDateButton.frame = CGRectMake(0, 50, self.view.frame.size.width, 20);
+    [self.infoUpToDateButton addTarget:self action:@selector(informationUpToDate:) forControlEvents:UIControlEventTouchUpInside];
+    [self.infoUpToDateButton setTitle:@"Tap to confirm this machine list is up to date!" forState:UIControlStateNormal];
+    [self.infoUpToDateButton setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
+    
+    
     if (_currentLocation){
         [self setupUI];
     }
@@ -178,6 +187,10 @@ int const headerHeight = 50;
     [self.tableView setEditing:editing];
     [self setupRightBarButton];
     [self.tableView reloadData];
+}
+- (IBAction)informationUpToDate:(id)sender{
+    // Code to update that information for the location
+    // is up to date.
 }
 #pragma mark - TextEditor Delegate
 - (void)editorDidComplete:(NSString *)text{
@@ -315,16 +328,24 @@ int const headerHeight = 50;
         [dataSegView setBackgroundColor:[UIColor whiteColor]];
         [dataSegView addSubview:self.dataSetSeg];
         [dataSegView addSubview:self.lastUpdateLabel];
+        [dataSegView addSubview:self.infoUpToDateButton];
         if (self.dataSetSeg){
-            NSArray *verticalConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-(-5)-[seg]-(-5)-|" options:NSLayoutFormatAlignmentMask metrics:nil views:@{@"seg": self.dataSetSeg}];
-            [dataSegView addConstraints:verticalConstraints];
+            NSArray *horzCon = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-(-5)-[seg]-(-5)-|" options:NSLayoutFormatAlignmentMask metrics:nil views:@{@"seg": self.dataSetSeg}];
+            [dataSegView addConstraints:horzCon];
+        }
+        if (self.infoUpToDateButton){
+            NSArray *horzCon = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-(0)-[upbutton]-(0)-|" options:NSLayoutFormatAlignmentMask metrics:nil views:@{@"upbutton": self.infoUpToDateButton}];
+            NSArray *verCon = [NSLayoutConstraint constraintsWithVisualFormat:@"V:[upbutton]-(0)-|" options:NSLayoutFormatAlignmentMask metrics:nil views:@{@"upbutton": self.infoUpToDateButton}];
+            [dataSegView addConstraints:horzCon];
+            [dataSegView addConstraints:verCon];
         }
         if (self.lastUpdateLabel){
             NSArray *horzCon = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-(0)-[lastup]-(0)-|" options:NSLayoutFormatAlignmentMask metrics:nil views:@{@"lastup": self.lastUpdateLabel}];
-            NSArray *vertCon = [NSLayoutConstraint constraintsWithVisualFormat:@"V:[lastup]-(0)-|" options:NSLayoutFormatAlignmentMask metrics:nil views:@{@"lastup": self.lastUpdateLabel}];
+            NSArray *vertCon = [NSLayoutConstraint constraintsWithVisualFormat:@"V:[lastup]-(0)-[upbutton]" options:NSLayoutFormatAlignAllLeft metrics:nil views:@{@"lastup": self.lastUpdateLabel,@"upbutton": self.infoUpToDateButton}];
             [dataSegView addConstraints:horzCon];
             [dataSegView addConstraints:vertCon];
         }
+
         return dataSegView;
     }
     return nil;
