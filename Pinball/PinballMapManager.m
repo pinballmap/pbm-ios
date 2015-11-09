@@ -170,8 +170,17 @@ typedef NS_ENUM(NSInteger, PBMDataAPI) {
         [regions enumerateObjectsUsingBlock:^(NSDictionary *obj, NSUInteger idx, BOOL *stop) {
             if (![regionIds containsObject:obj[@"id"]]){
                 [Region createRegionWithData:obj andContext:[[CoreDataManager sharedInstance] managedObjectContext]];
+            }else{
+                // Remove any existing IDs the server responded with
+                // so that once we are done we can remove any local regions that
+                // no longer exist on the server
+                [regionIds removeObject:obj[@"id"]];
             }
         }];
+        #pragma warning
+        // Insert code to remove regions that still exist after
+        // proccessing.
+
         [[CoreDataManager sharedInstance] saveContext];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"%@",error);
