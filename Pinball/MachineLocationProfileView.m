@@ -214,12 +214,12 @@
         vc.currentMachine = _currentMachine;
         [tableView setEditing:NO];
         [self.navigationController presentViewController:vc.parentViewController animated:YES completion:nil];
-    }else if (indexPath.section == 2 && indexPath.row == 0){
+    }else if (indexPath.section == 3 && indexPath.row == 0){
         NewMachineScoreView *scoreView = [[[[UIStoryboard storyboardWithName:@"SecondaryControllers" bundle:nil] instantiateViewControllerWithIdentifier:@"NewMachineScoreView"] viewControllers] lastObject];
         scoreView.currentMachine = _currentMachine;
         scoreView.delegate = self;
         [self.navigationController presentViewController:scoreView.parentViewController animated:YES completion:nil];
-    }else if (indexPath.section == 3){
+    }else if (indexPath.section == 4){
         self.deletePath = indexPath;
         self.deleteConfirm = [UIAlertView applicationAlertWithMessage:@"Are you sure you want to remove this machine." delegate:self cancelButton:@"No" otherButtons:@"Yes", nil];
         [self.deleteConfirm show];
