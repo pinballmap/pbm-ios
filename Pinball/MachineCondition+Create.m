@@ -28,7 +28,9 @@
     if (![data[@"created_at"] isKindOfClass:[NSNull class]]){
         NSDateFormatter *df = [[NSDateFormatter alloc] init];
         [df setDateFormat:@"YYYY-MM-dd"];
-        newCondition.conditionCreated = [df dateFromString:data[@"created_at"]];
+        NSString *createdString = data[@"created_at"];
+        createdString = [createdString substringToIndex:[createdString rangeOfString:@"T"].location];
+        newCondition.conditionCreated = [df dateFromString:createdString];
     }
     newCondition.conditionId = data[@"id"];
     

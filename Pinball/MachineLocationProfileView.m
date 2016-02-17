@@ -41,6 +41,7 @@
     self.machineScores = [NSMutableArray new];
     self.navigationItem.title = _currentMachine.machine.name;
     self.machineConditionsArray = _currentMachine.conditions.allObjects;
+    NSLog(@"%@",self.machineConditionsArray);
     [self reloadScores];
 }
 - (void)didReceiveMemoryWarning{
@@ -179,7 +180,8 @@
         }
     }else if (indexPath.section == 2){
         MachineCondition *condition = self.machineConditionsArray[indexPath.row];
-        cell.textLabel.text = condition.comment;
+        
+        cell.textLabel.text = [_currentMachine pastConditionWithUpdateDate:condition];
     }else if (indexPath.section == 3){
         if (indexPath.row == 0){
             cell.textLabel.text = @"Add your score";
