@@ -81,7 +81,7 @@ int const headerHeight = 90;
     self.infoUpToDateButton.translatesAutoresizingMaskIntoConstraints = NO;
     self.infoUpToDateButton.frame = CGRectMake(0, 50, self.view.frame.size.width, 20);
     [self.infoUpToDateButton addTarget:self action:@selector(informationUpToDate:) forControlEvents:UIControlEventTouchUpInside];
-    [self.infoUpToDateButton setTitle:@"Tap to confirm this machine list is up to date!" forState:UIControlStateNormal];
+    [self.infoUpToDateButton setTitle:@"Tap to confirm machine line-up!" forState:UIControlStateNormal];
     [self.infoUpToDateButton setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
     
     
