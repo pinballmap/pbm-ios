@@ -199,7 +199,7 @@ typedef NS_ENUM(NSInteger, PBMDataAPI) {
 - (void)refreshRegion{
     [[NSNotificationCenter defaultCenter] postNotificationName:@"UpdatingRegion" object:nil];
     [self.apiOperations removeAllObjects];
-    [self.apiOperations addObjectsFromArray:@[[self requestForData:PBMDataAPILocationTypes],[self requestForData:PBMDataAPIZones],[self requestForData:PBMDataAPILocations],[self requestForData:PBMDataAPIEvents]]];
+    [self.apiOperations addObjectsFromArray:@[[self requestForData:PBMDataAPIMachines],[self requestForData:PBMDataAPILocationTypes],[self requestForData:PBMDataAPIZones],[self requestForData:PBMDataAPILocations],[self requestForData:PBMDataAPIEvents]]];
 
     NSArray *api = [AFURLConnectionOperation batchOfRequestOperations:self.apiOperations progressBlock:^(NSUInteger numberOfFinishedOperations, NSUInteger totalNumberOfOperations) {
         NSLog(@"Completed %lu of %lu",(unsigned long)numberOfFinishedOperations,(unsigned long)totalNumberOfOperations);
@@ -221,21 +221,20 @@ typedef NS_ENUM(NSInteger, PBMDataAPI) {
         NSLog(@"Did cancel: %i",canceledRequests);
         if (!canceledRequests){
             NSLog(@"Started proccessing");
-            NSFetchRequest *stackRequest = [NSFetchRequest fetchRequestWithEntityName:@"Machine"];
-            stackRequest.predicate = nil;
-            stackRequest.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES]];
-            __block NSMutableSet *machines = [NSMutableSet setWithArray:[[[CoreDataManager sharedInstance] managedObjectContext] executeFetchRequest:stackRequest error:nil]];
-            __block NSMutableSet *locationTypes;
-            __block NSMutableSet *locationZones;
+            __block NSMutableSet *createdMachines;
+            __block NSMutableSet *createdLocationTypes;
+            __block NSMutableSet *createdZones;
             __block NSMutableSet *createdLocations;
             [operations enumerateObjectsUsingBlock:^(AFHTTPRequestOperation *obj, NSUInteger idx, BOOL *stop) {
                 if (idx == 0){
-                    locationTypes = [self importLocationTypesWithRequest:obj];
+                    createdMachines = [self importMachinesWithRequest:obj];
                 }else if (idx == 1){
-                    locationZones = [self importZonesWithRequest:obj];
+                    createdLocationTypes = [self importLocationTypesWithRequest:obj];
                 }else if (idx == 2){
-                    createdLocations = [self importLocationsWithRequest:obj andMachines:machines andLocationTypes:locationTypes andZones:locationZones];
+                    createdZones = [self importZonesWithRequest:obj];
                 }else if (idx == 3){
+                    createdLocations = [self importLocationsWithRequest:obj andMachines:createdMachines andLocationTypes:createdLocationTypes andZones:createdZones];
+                }else if (idx == 4){
                     [self importEventsWithRequest:obj andLocations:createdLocations];
                 }
                 [[CoreDataManager sharedInstance] saveContext];
