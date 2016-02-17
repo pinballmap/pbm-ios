@@ -9,7 +9,6 @@
 #import "MachinesView.h"
 #import "MachineLocation.h"
 #import "MachineProfileView.h"
-#import "GAAppHelper.h"
 #import "MachineManufacturerView.h"
 #import "UIViewController+Helpers.h"
 
@@ -48,7 +47,6 @@
 }
 - (void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
-    [GAAppHelper sendAnalyticsDataWithScreen:@"Machines View"];
 }
 - (void)didReceiveMemoryWarning{
     [super didReceiveMemoryWarning];

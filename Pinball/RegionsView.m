@@ -9,7 +9,6 @@
 #import "RegionsView.h"
 @import MessageUI;
 #import "UIAlertView+Application.h"
-#import "GAAppHelper.h"
 #import "ReuseWebView.h"
 #import "Region+UpdateDistance.h"
 #import "ContactView.h"
@@ -47,7 +46,6 @@
 }
 - (void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
-    [GAAppHelper sendAnalyticsDataWithScreen:@"Region Select View"];
     [[PinballMapManager sharedInstance] addObserver:self forKeyPath:@"userLocation" options:0 context:nil];
 }
 - (void)viewWillDisappear:(BOOL)animated{

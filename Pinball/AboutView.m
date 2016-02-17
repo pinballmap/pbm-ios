@@ -7,7 +7,6 @@
 //
 
 #import "AboutView.h"
-#import "GAAppHelper.h"
 #import "UIAlertView+Application.h"
 #import "ContactView.h"
 #import "ReuseWebView.h"

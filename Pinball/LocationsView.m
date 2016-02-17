@@ -17,7 +17,6 @@
 #import "UIAlertView+Application.h"
 #import "ZonesView.h"
 #import "LocationTypesView.h"
-#import "GAAppHelper.h"
 #import "RecentlyAddedView.h"
 
 @interface LocationsView () <NSFetchedResultsControllerDelegate,UIActionSheetDelegate,UISearchBarDelegate,UISearchDisplayDelegate,ZoneSelectDelegate,LocationTypeSelectDelegate>
@@ -55,7 +54,6 @@
 }
 - (void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
-    [GAAppHelper sendAnalyticsDataWithScreen:@"Locations View"];
 }
 - (void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
