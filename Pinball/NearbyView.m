@@ -27,6 +27,10 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.navigationItem.title = @"Nearby";
+    
+    
+    UIBarButtonItem *filterDistance = [[UIBarButtonItem alloc] initWithTitle:@"Radius" style:UIBarButtonItemStylePlain target:self action:@selector(updateFilter:)];
+    self.navigationItem.rightBarButtonItem = filterDistance;
 }
 - (void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
