@@ -167,20 +167,29 @@ typedef NS_ENUM(NSInteger, PBMDataAPI) {
     regionAPI.responseSerializer = [AFJSONResponseSerializer serializer];
     [regionAPI setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSArray *regions = operation.responseObject[@"regions"];
-        [regions enumerateObjectsUsingBlock:^(NSDictionary *obj, NSUInteger idx, BOOL *stop) {
-            if (![regionIds containsObject:obj[@"id"]]){
-                [Region createRegionWithData:obj andContext:[[CoreDataManager sharedInstance] managedObjectContext]];
+        
+        for (NSDictionary *region in regions) {
+            if (![regionIds containsObject:region[@"id"]]){
+                [Region createRegionWithData:region andContext:[[CoreDataManager sharedInstance] managedObjectContext]];
             }else{
                 // Remove any existing IDs the server responded with
                 // so that once we are done we can remove any local regions that
                 // no longer exist on the server
-                [regionIds removeObject:obj[@"id"]];
+                [regionIds removeObject:region[@"id"]];
             }
-        }];
-        #pragma warning
-        // Insert code to remove regions that still exist after
+        }
+        // Code to remove regions that still exist after
         // proccessing.
-
+        NSArray *currentRegions = [self coreDataRegions];
+        for (NSNumber *regionID in regionIds) {
+            for (Region *existingRegion in currentRegions) {
+                if ([regionID isEqual:existingRegion.regionId]){
+                    // Region we shuold remove
+                    [[[CoreDataManager sharedInstance] managedObjectContext] deleteObject:existingRegion];
+                }
+            }
+        }
+        
         [[CoreDataManager sharedInstance] saveContext];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"%@",error);
