@@ -20,18 +20,12 @@
 		DB070C4F193243A00018D521 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DB070C4E193243A00018D521 /* Security.framework */; };
 		DB070C51193243A70018D521 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DB070C50193243A70018D521 /* SystemConfiguration.framework */; };
 		DB09D3F51AA35777008D74B9 /* AppSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = DB09D3F41AA35777008D74B9 /* AppSettings.m */; };
-		DB09D3F61AA35777008D74B9 /* AppSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = DB09D3F41AA35777008D74B9 /* AppSettings.m */; };
 		DB09D3F81AA35BAD008D74B9 /* AppSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = DB09D3F41AA35777008D74B9 /* AppSettings.m */; };
 		DB09D4321AA4C0B9008D74B9 /* UserLocationHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = DB09D4311AA4C0B9008D74B9 /* UserLocationHelper.m */; };
-		DB09D4331AA4C0B9008D74B9 /* UserLocationHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = DB09D4311AA4C0B9008D74B9 /* UserLocationHelper.m */; };
 		DB09D4341AA4C0B9008D74B9 /* UserLocationHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = DB09D4311AA4C0B9008D74B9 /* UserLocationHelper.m */; };
 		DB1FB5D619BCB95A00E52B01 /* Region+UpdateDistance.m in Sources */ = {isa = PBXBuildFile; fileRef = DB1FB5D519BCB95A00E52B01 /* Region+UpdateDistance.m */; };
 		DB23E871193B5F08000C1E69 /* Event.m in Sources */ = {isa = PBXBuildFile; fileRef = DB23E870193B5F08000C1E69 /* Event.m */; };
 		DB2D132E1942687F0082B8F9 /* Event+CellHelpers.m in Sources */ = {isa = PBXBuildFile; fileRef = DB2D132D1942687F0082B8F9 /* Event+CellHelpers.m */; };
-		DB2D8A4819E2046D00502A10 /* NotificationCenter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DB2D8A4719E2046D00502A10 /* NotificationCenter.framework */; };
-		DB2D8A4E19E2046D00502A10 /* TodayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DB2D8A4D19E2046D00502A10 /* TodayViewController.m */; };
-		DB2D8A5019E2046D00502A10 /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DB2D8A4F19E2046D00502A10 /* MainInterface.storyboard */; };
-		DB2D8A5319E2046D00502A10 /* Pinball Map Widget.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = DB2D8A4619E2046D00502A10 /* Pinball Map Widget.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		DB2E9FC519E15D7000B9D72F /* RegionProfileView.m in Sources */ = {isa = PBXBuildFile; fileRef = DB2E9FC419E15D7000B9D72F /* RegionProfileView.m */; };
 		DB2E9FCC19E179A200B9D72F /* RegionLink.m in Sources */ = {isa = PBXBuildFile; fileRef = DB2E9FCB19E179A200B9D72F /* RegionLink.m */; };
 		DB314278194A10F80097B312 /* LocationCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DB314277194A10F80097B312 /* LocationCell.m */; };
@@ -75,7 +69,6 @@
 		DB52D30118FB0D7400BB56D8 /* EventKitUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DB52D2FF18FB0D7400BB56D8 /* EventKitUI.framework */; };
 		DB52D30418FB0DCF00BB56D8 /* UIAlertView+Application.m in Sources */ = {isa = PBXBuildFile; fileRef = DB52D30318FB0DCF00BB56D8 /* UIAlertView+Application.m */; };
 		DB56E3FE1A7E607A007F22A7 /* NSDate+CupertinoYankee.m in Sources */ = {isa = PBXBuildFile; fileRef = DB56E3FD1A7E607A007F22A7 /* NSDate+CupertinoYankee.m */; };
-		DB56E3FF1A7E607A007F22A7 /* NSDate+CupertinoYankee.m in Sources */ = {isa = PBXBuildFile; fileRef = DB56E3FD1A7E607A007F22A7 /* NSDate+CupertinoYankee.m */; };
 		DB5FFE9C19C5FBAB004C424B /* Location+Annotation.m in Sources */ = {isa = PBXBuildFile; fileRef = DB5FFE9B19C5FBAB004C424B /* Location+Annotation.m */; };
 		DB5FFE9F19C618CA004C424B /* Region.m in Sources */ = {isa = PBXBuildFile; fileRef = DB5FFE9E19C618CA004C424B /* Region.m */; };
 		DB5FFEA519C6209E004C424B /* RecentlyAddedView.m in Sources */ = {isa = PBXBuildFile; fileRef = DB5FFEA419C6209E004C424B /* RecentlyAddedView.m */; };
@@ -120,16 +113,6 @@
 		DBA3B60A190846D900ACBC69 /* InputCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DBA3B609190846D900ACBC69 /* InputCell.m */; };
 		DBA96E4E1A5040BA007C73CD /* Region+Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = DBA96E4D1A5040BA007C73CD /* Region+Extensions.m */; };
 		DBA96E541A50435A007C73CD /* MachineManufacturerView.m in Sources */ = {isa = PBXBuildFile; fileRef = DBA96E531A50435A007C73CD /* MachineManufacturerView.m */; };
-		DBB0EFE81A4700360090E9DC /* Pinball.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = DBF06C0418F9707400F92912 /* Pinball.xcdatamodeld */; };
-		DBB0EFE91A4700560090E9DC /* CoreDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = DBF06C0018F9703E00F92912 /* CoreDataManager.m */; };
-		DBB0EFEB1A47017B0090E9DC /* MachineLocation.m in Sources */ = {isa = PBXBuildFile; fileRef = DBE712D81929134D0046DFA8 /* MachineLocation.m */; };
-		DBB0EFEC1A47017B0090E9DC /* Region.m in Sources */ = {isa = PBXBuildFile; fileRef = DB5FFE9E19C618CA004C424B /* Region.m */; };
-		DBB0EFED1A47017B0090E9DC /* Event.m in Sources */ = {isa = PBXBuildFile; fileRef = DB23E870193B5F08000C1E69 /* Event.m */; };
-		DBB0EFEE1A47017B0090E9DC /* Zone.m in Sources */ = {isa = PBXBuildFile; fileRef = DB070BF0193202ED0018D521 /* Zone.m */; };
-		DBB0EFEF1A47017B0090E9DC /* Location.m in Sources */ = {isa = PBXBuildFile; fileRef = DB070BEA193202ED0018D521 /* Location.m */; };
-		DBB0EFF01A47017B0090E9DC /* LocationType.m in Sources */ = {isa = PBXBuildFile; fileRef = DBEAA1FC192A9E140096F2A9 /* LocationType.m */; };
-		DBB0EFF11A47017B0090E9DC /* Machine.m in Sources */ = {isa = PBXBuildFile; fileRef = DBF711F1191E59B8008656EE /* Machine.m */; };
-		DBB0EFF21A4703970090E9DC /* Event+CellHelpers.m in Sources */ = {isa = PBXBuildFile; fileRef = DB2D132D1942687F0082B8F9 /* Event+CellHelpers.m */; };
 		DBB20CA8194F126D00D4B2F1 /* ZonesView.m in Sources */ = {isa = PBXBuildFile; fileRef = DBB20CA7194F126D00D4B2F1 /* ZonesView.m */; };
 		DBB59CCA18FAD9AC00F35BFD /* LocationProfileView.m in Sources */ = {isa = PBXBuildFile; fileRef = DBB59CC918FAD9AC00F35BFD /* LocationProfileView.m */; };
 		DBB59CD218FADF6D00F35BFD /* InformationCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DBB59CD118FADF6D00F35BFD /* InformationCell.m */; };
@@ -187,20 +170,6 @@
 			remoteGlobalIDString = DBF06BCA18F96FF500F92912;
 			remoteInfo = PinballMap;
 		};
-		DB2D8A5119E2046D00502A10 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = DBF06BC318F96FF500F92912 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = DB2D8A4519E2046D00502A10;
-			remoteInfo = "Pinball Map Widget";
-		};
-		DB2D8A5419E2046D00502A10 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = DBF06BC318F96FF500F92912 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = DB2D8A4519E2046D00502A10;
-			remoteInfo = "Pinball Map Widget";
-		};
 		DB8A31581A9FB8DA00364903 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = DBF06BC318F96FF500F92912 /* Project object */;
@@ -224,7 +193,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
-				DB2D8A5319E2046D00502A10 /* Pinball Map Widget.appex in Embed App Extensions */,
 				DB8A31641A9FB8DA00364903 /* PinballMap WatchKit Extension.appex in Embed App Extensions */,
 			);
 			name = "Embed App Extensions";
@@ -268,7 +236,6 @@
 		DB23E870193B5F08000C1E69 /* Event.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Event.m; sourceTree = "<group>"; };
 		DB2D132C1942687F0082B8F9 /* Event+CellHelpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Event+CellHelpers.h"; sourceTree = "<group>"; };
 		DB2D132D1942687F0082B8F9 /* Event+CellHelpers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Event+CellHelpers.m"; sourceTree = "<group>"; };
-		DB2D8A4619E2046D00502A10 /* Pinball Map Widget.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "Pinball Map Widget.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DB2D8A4719E2046D00502A10 /* NotificationCenter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NotificationCenter.framework; path = System/Library/Frameworks/NotificationCenter.framework; sourceTree = SDKROOT; };
 		DB2D8A4B19E2046D00502A10 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DB2D8A4C19E2046D00502A10 /* TodayViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TodayViewController.h; sourceTree = "<group>"; };
@@ -506,14 +473,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		DB2D8A4319E2046D00502A10 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				DB2D8A4819E2046D00502A10 /* NotificationCenter.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -949,7 +908,6 @@
 			isa = PBXGroup;
 			children = (
 				DBF06BCB18F96FF500F92912 /* PinballMap.app */,
-				DB2D8A4619E2046D00502A10 /* Pinball Map Widget.appex */,
 				DB8A314B1A9FB8DA00364903 /* PinballMap WatchKit Extension.appex */,
 				DB8A31561A9FB8DA00364903 /* PinballMap WatchKit App.app */,
 				CCB75A831AAF23F2003ED05C /* PinballMap Tests.xctest */,
@@ -1159,23 +1117,6 @@
 			productReference = CCB75A831AAF23F2003ED05C /* PinballMap Tests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		DB2D8A4519E2046D00502A10 /* Pinball Map Widget */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = DB2D8A5819E2046D00502A10 /* Build configuration list for PBXNativeTarget "Pinball Map Widget" */;
-			buildPhases = (
-				DB2D8A4219E2046D00502A10 /* Sources */,
-				DB2D8A4319E2046D00502A10 /* Frameworks */,
-				DB2D8A4419E2046D00502A10 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = "Pinball Map Widget";
-			productName = "Pinball Map Widget";
-			productReference = DB2D8A4619E2046D00502A10 /* Pinball Map Widget.appex */;
-			productType = "com.apple.product-type.app-extension";
-		};
 		DB8A314A1A9FB8DA00364903 /* PinballMap WatchKit Extension */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = DB8A316A1A9FB8DA00364903 /* Build configuration list for PBXNativeTarget "PinballMap WatchKit Extension" */;
@@ -1221,8 +1162,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				DB2D8A5219E2046D00502A10 /* PBXTargetDependency */,
-				DB2D8A5519E2046D00502A10 /* PBXTargetDependency */,
 				DB8A31631A9FB8DA00364903 /* PBXTargetDependency */,
 			);
 			name = PinballMap;
@@ -1242,15 +1181,6 @@
 					CCB75A821AAF23F2003ED05C = {
 						CreatedOnToolsVersion = 6.2;
 						TestTargetID = DBF06BCA18F96FF500F92912;
-					};
-					DB2D8A4519E2046D00502A10 = {
-						CreatedOnToolsVersion = 6.0;
-						DevelopmentTeam = ZJN6P495U9;
-						SystemCapabilities = {
-							com.apple.ApplicationGroups.iOS = {
-								enabled = 1;
-							};
-						};
 					};
 					DB8A314A1A9FB8DA00364903 = {
 						CreatedOnToolsVersion = 6.2;
@@ -1292,7 +1222,6 @@
 			projectRoot = "";
 			targets = (
 				DBF06BCA18F96FF500F92912 /* PinballMap */,
-				DB2D8A4519E2046D00502A10 /* Pinball Map Widget */,
 				DB8A314A1A9FB8DA00364903 /* PinballMap WatchKit Extension */,
 				DB8A31551A9FB8DA00364903 /* PinballMap WatchKit App */,
 				CCB75A821AAF23F2003ED05C /* PinballMap Tests */,
@@ -1305,14 +1234,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		DB2D8A4419E2046D00502A10 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				DB2D8A5019E2046D00502A10 /* MainInterface.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1363,27 +1284,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				CCB75A881AAF23F2003ED05C /* PinballMap_Tests.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		DB2D8A4219E2046D00502A10 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				DBB0EFF11A47017B0090E9DC /* Machine.m in Sources */,
-				DBB0EFE91A4700560090E9DC /* CoreDataManager.m in Sources */,
-				DBB0EFE81A4700360090E9DC /* Pinball.xcdatamodeld in Sources */,
-				DBB0EFF01A47017B0090E9DC /* LocationType.m in Sources */,
-				DB2D8A4E19E2046D00502A10 /* TodayViewController.m in Sources */,
-				DBB0EFEC1A47017B0090E9DC /* Region.m in Sources */,
-				DBB0EFEF1A47017B0090E9DC /* Location.m in Sources */,
-				DB56E3FF1A7E607A007F22A7 /* NSDate+CupertinoYankee.m in Sources */,
-				DBB0EFEE1A47017B0090E9DC /* Zone.m in Sources */,
-				DBB0EFEB1A47017B0090E9DC /* MachineLocation.m in Sources */,
-				DBB0EFF21A4703970090E9DC /* Event+CellHelpers.m in Sources */,
-				DB09D3F61AA35777008D74B9 /* AppSettings.m in Sources */,
-				DBB0EFED1A47017B0090E9DC /* Event.m in Sources */,
-				DB09D4331AA4C0B9008D74B9 /* UserLocationHelper.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1524,16 +1424,6 @@
 			target = DBF06BCA18F96FF500F92912 /* PinballMap */;
 			targetProxy = CCB75A891AAF23F2003ED05C /* PBXContainerItemProxy */;
 		};
-		DB2D8A5219E2046D00502A10 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = DB2D8A4519E2046D00502A10 /* Pinball Map Widget */;
-			targetProxy = DB2D8A5119E2046D00502A10 /* PBXContainerItemProxy */;
-		};
-		DB2D8A5519E2046D00502A10 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = DB2D8A4519E2046D00502A10 /* Pinball Map Widget */;
-			targetProxy = DB2D8A5419E2046D00502A10 /* PBXContainerItemProxy */;
-		};
 		DB8A31591A9FB8DA00364903 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = DB8A31551A9FB8DA00364903 /* PinballMap WatchKit App */;
@@ -1614,48 +1504,6 @@
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/PinballMap.app/PinballMap";
-			};
-			name = Release;
-		};
-		DB2D8A5619E2046D00502A10 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CLANG_WARN_UNREACHABLE_CODE = YES;
-				CODE_SIGN_ENTITLEMENTS = "Pinball Map Widget/Pinball Map Widget.entitlements";
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				ENABLE_BITCODE = YES;
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = "Pinball Map Widget/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				MTL_ENABLE_DEBUG_INFO = YES;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
-				SKIP_INSTALL = YES;
-			};
-			name = Debug;
-		};
-		DB2D8A5719E2046D00502A10 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CLANG_WARN_UNREACHABLE_CODE = YES;
-				CODE_SIGN_ENTITLEMENTS = "Pinball Map Widget/Pinball Map Widget.entitlements";
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
-				ENABLE_BITCODE = YES;
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				INFOPLIST_FILE = "Pinball Map Widget/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				MTL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
-				SKIP_INSTALL = YES;
 			};
 			name = Release;
 		};
@@ -1887,15 +1735,6 @@
 			buildConfigurations = (
 				CCB75A8C1AAF23F2003ED05C /* Debug */,
 				CCB75A8D1AAF23F2003ED05C /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		DB2D8A5819E2046D00502A10 /* Build configuration list for PBXNativeTarget "Pinball Map Widget" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				DB2D8A5619E2046D00502A10 /* Debug */,
-				DB2D8A5719E2046D00502A10 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
