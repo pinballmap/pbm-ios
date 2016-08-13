@@ -169,7 +169,7 @@
             [self.navigationController presentViewController:navController animated:YES completion:nil];
         }else{
             NSString *pinTipsURL = @"";
-            if (![_currentMachine.machineGroupID isEqualToValue:@-1]){
+            if ([_currentMachine.machineGroupID isEqualToValue:@(1)]){
                 pinTipsURL = [NSString stringWithFormat:@"http://pintips.net/pinmap/group/%@",_currentMachine.machineGroupID];
             }else{
                 pinTipsURL = [NSString stringWithFormat:@"http://pintips.net/pinmap/machine/%@",_currentMachine.machineId];

@@ -15,7 +15,7 @@
 #import "AppSettings.h"
 #import "AlertInterfaceController.h"
 
-NSString * const apiRootURL = @"https://pinballmap.com/";
+NSString * const apiRootURL = @"http://pinballmap.com/";
 
 @interface EventsInterfaceController()
 

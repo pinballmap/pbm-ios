@@ -13,7 +13,7 @@
 #import "Event.h"
 #import "Event+CellHelpers.h"
 
-NSString * const apiRootURL = @"https://pinballmap.com/";
+NSString * const apiRootURL = @"http://pinballmap.com/";
 NSString * const appGroup = @"group.net.isaacruiz.ppm";
 NSString * const etagKey = @"recentsEtag";
 
@@ -62,6 +62,7 @@ NSString * const etagKey = @"recentsEtag";
     NSURLRequest *recentRequest = [NSURLRequest requestWithURL:recentURL];
     NSURLSession *session = [NSURLSession sharedSession];
     NSURLSessionDataTask *recentTask = [session dataTaskWithRequest:recentRequest completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+        NSLog(@"%@",error);
         if (!error){
             NSString *recentsEtag = [(NSHTTPURLResponse *)response allHeaderFields][@"Etag"];
             NSString *pastEtag = [[TodayViewController userDefaultsForApp] objectForKey:etagKey];
