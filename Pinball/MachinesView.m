@@ -210,7 +210,7 @@
         MachineProfileView *profileView = (MachineProfileView *)[[self.splitViewController detailViewForSplitView] navigationRootViewController];
         [profileView setCurrentMachine:currentMachine];
     }else{
-        MachineProfileView *profileView = [self.storyboard instantiateViewControllerWithIdentifier:@"MachineProfile"];
+        MachineProfileView *profileView = [[UIStoryboard storyboardWithName:@"SecondaryControllers" bundle:nil] instantiateViewControllerWithIdentifier:@"MachineProfile"];
         profileView.currentMachine = currentMachine;
         [self.navigationController pushViewController:profileView animated:true];
     }

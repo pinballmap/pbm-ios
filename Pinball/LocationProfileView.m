@@ -578,10 +578,11 @@ int const headerHeight = 90;
     return UITableViewCellEditingStyleDelete;
 }
 - (void)tableView:(UITableView *)tableView accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *)indexPath{
+    MachineLocation *currentMachine = [self.machinesFetch objectAtIndexPath:[NSIndexPath indexPathForRow:indexPath.row inSection:0]];
+
     if ((indexPath.section == 1 && [UIDevice currentModel] == ModelTypeiPhone) || (indexPath.section == 0 && [UIDevice currentModel] == ModelTypeiPad)){
-        MachineLocation *currentMachine = [self.machinesFetch objectAtIndexPath:[NSIndexPath indexPathForRow:indexPath.row inSection:0]];
         if (currentMachine.machine != nil){
-            MachineProfileView *machineProfile = [self.storyboard instantiateViewControllerWithIdentifier:@"MachineProfile"];
+            MachineProfileView *machineProfile = [[UIStoryboard storyboardWithName:@"SecondaryControllers" bundle:nil] instantiateViewControllerWithIdentifier:@"MachineProfile"];
             machineProfile.currentMachine = currentMachine.machine;
             if ([UIDevice currentModel] == ModelTypeiPad){
                 machineProfile.isModal = YES;
@@ -594,9 +595,18 @@ int const headerHeight = 90;
         }else{
             [UIAlertView simpleApplicationAlertWithMessage:@"Invalid Machine Data. Try reloading your region data by going to the locations listing and pulling the list all the way down." cancelButton:@"Ok"];
         }
+    }else{
+        MachineProfileView *machineProfile = [[UIStoryboard storyboardWithName:@"SecondaryControllers" bundle:nil] instantiateViewControllerWithIdentifier:@"MachineProfile"];
+        machineProfile.currentMachine = currentMachine.machine;
+        if ([UIDevice currentModel] == ModelTypeiPad){
+            machineProfile.isModal = YES;
+            UINavigationController *machineNav = [[UINavigationController alloc] initWithRootViewController:machineProfile];
+            machineNav.modalPresentationStyle = UIModalPresentationFormSheet;
+            [self.navigationController presentViewController:machineNav animated:YES completion:nil];
+        }
     }
 }
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath{    
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath{
     if ((indexPath.section == 1 && [UIDevice currentModel] == ModelTypeiPhone) || (indexPath.section == 0 && [UIDevice currentModel] == ModelTypeiPad)){
         if (self.dataSetSeg.selectedSegmentIndex == 0){
             return YES;
