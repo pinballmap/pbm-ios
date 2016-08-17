@@ -191,6 +191,7 @@ int const headerHeight = 90;
 - (IBAction)informationUpToDate:(id)sender{
     // Code to update that information for the location
     // is up to date.
+    
 }
 #pragma mark - TextEditor Delegate
 - (void)editorDidComplete:(NSString *)text{
@@ -324,8 +325,24 @@ int const headerHeight = 90;
 }
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
     if (section == 1 || (section == 0 && !self.showMapSnapshot)){
+        
+        /* Code to hide the update location data button. Delete and replace with code below */
+        UIView *dataSegView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.frame.size.width, 50)];
+        [dataSegView addSubview:self.dataSetSeg];
+        [dataSegView addSubview:self.lastUpdateLabel];
+        if (self.dataSetSeg){
+            NSArray *verticalConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-(-5)-[seg]-(-5)-|" options:NSLayoutFormatAlignmentMask metrics:nil views:@{@"seg": self.dataSetSeg}];
+            [dataSegView addConstraints:verticalConstraints];
+        }
+        if (self.lastUpdateLabel){
+            NSArray *horzCon = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-(0)-[lastup]-(0)-|" options:NSLayoutFormatAlignmentMask metrics:nil views:@{@"lastup": self.lastUpdateLabel}];
+            NSArray *vertCon = [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-(30)-[lastup]-(0)-|" options:NSLayoutFormatAlignmentMask metrics:nil views:@{@"lastup": self.lastUpdateLabel}];
+            [dataSegView addConstraints:horzCon];
+            [dataSegView addConstraints:vertCon];
+        }
+        
+        /* Code to show an update button for confirming the location data is up to date
         UIView *dataSegView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.frame.size.width, headerHeight)];
-        [dataSegView setBackgroundColor:[UIColor whiteColor]];
         [dataSegView addSubview:self.dataSetSeg];
         [dataSegView addSubview:self.lastUpdateLabel];
         [dataSegView addSubview:self.infoUpToDateButton];
@@ -345,6 +362,8 @@ int const headerHeight = 90;
             [dataSegView addConstraints:horzCon];
             [dataSegView addConstraints:vertCon];
         }
+         */
+        [dataSegView setBackgroundColor:[UIColor whiteColor]];
 
         return dataSegView;
     }
