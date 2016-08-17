@@ -46,12 +46,6 @@
 		DB38DAA919E1CBE300E1B6D2 /* TextEditorView.m in Sources */ = {isa = PBXBuildFile; fileRef = DB38DAA219E1CBE300E1B6D2 /* TextEditorView.m */; };
 		DB38DAAA19E1CBE300E1B6D2 /* UIAlertView+Application.m in Sources */ = {isa = PBXBuildFile; fileRef = DB38DAA419E1CBE300E1B6D2 /* UIAlertView+Application.m */; };
 		DB38DAAB19E1CBE300E1B6D2 /* UIDevice+Model.m in Sources */ = {isa = PBXBuildFile; fileRef = DB38DAA619E1CBE300E1B6D2 /* UIDevice+Model.m */; };
-		DB38DAC719E1CC2800E1B6D2 /* CHANGELOG in Resources */ = {isa = PBXBuildFile; fileRef = DB38DABE19E1CC2800E1B6D2 /* CHANGELOG */; };
-		DB38DAC819E1CC2800E1B6D2 /* de.bitstadium.HockeySDK-iOS-3.5.4.docset in Resources */ = {isa = PBXBuildFile; fileRef = DB38DABF19E1CC2800E1B6D2 /* de.bitstadium.HockeySDK-iOS-3.5.4.docset */; };
-		DB38DAC919E1CC2800E1B6D2 /* HockeySDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DB38DAC119E1CC2800E1B6D2 /* HockeySDK.framework */; };
-		DB38DACB19E1CC2800E1B6D2 /* HockeySDKResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = DB38DAC419E1CC2800E1B6D2 /* HockeySDKResources.bundle */; };
-		DB38DACC19E1CC2800E1B6D2 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = DB38DAC519E1CC2800E1B6D2 /* LICENSE */; };
-		DB38DACD19E1CC2800E1B6D2 /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = DB38DAC619E1CC2800E1B6D2 /* README.md */; };
 		DB3B4EF91912BBEE0015407B /* Location+CellHelpers.m in Sources */ = {isa = PBXBuildFile; fileRef = DB3B4EF81912BBEE0015407B /* Location+CellHelpers.m */; };
 		DB3F807B194B25100089F3D0 /* LocationCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DB3F807A194B25100089F3D0 /* LocationCell.xib */; };
 		DB403E931A961AD200E39A93 /* SecondaryControllers.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DB403E921A961AD200E39A93 /* SecondaryControllers.storyboard */; };
@@ -281,13 +275,6 @@
 		DB38DAA419E1CBE300E1B6D2 /* UIAlertView+Application.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIAlertView+Application.m"; sourceTree = "<group>"; };
 		DB38DAA519E1CBE300E1B6D2 /* UIDevice+Model.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIDevice+Model.h"; sourceTree = "<group>"; };
 		DB38DAA619E1CBE300E1B6D2 /* UIDevice+Model.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIDevice+Model.m"; sourceTree = "<group>"; };
-		DB38DABE19E1CC2800E1B6D2 /* CHANGELOG */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = CHANGELOG; sourceTree = "<group>"; };
-		DB38DABF19E1CC2800E1B6D2 /* de.bitstadium.HockeySDK-iOS-3.5.4.docset */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = "de.bitstadium.HockeySDK-iOS-3.5.4.docset"; sourceTree = "<group>"; };
-		DB38DAC119E1CC2800E1B6D2 /* HockeySDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = HockeySDK.framework; sourceTree = "<group>"; };
-		DB38DAC319E1CC2800E1B6D2 /* HockeySDK.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = HockeySDK.xcconfig; sourceTree = "<group>"; };
-		DB38DAC419E1CC2800E1B6D2 /* HockeySDKResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = HockeySDKResources.bundle; sourceTree = "<group>"; };
-		DB38DAC519E1CC2800E1B6D2 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
-		DB38DAC619E1CC2800E1B6D2 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		DB38DAD019E1CCC400E1B6D2 /* PinballMap.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = PinballMap.entitlements; sourceTree = "<group>"; };
 		DB3B4EF71912BBEE0015407B /* Location+CellHelpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Location+CellHelpers.h"; sourceTree = "<group>"; };
 		DB3B4EF81912BBEE0015407B /* Location+CellHelpers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Location+CellHelpers.m"; sourceTree = "<group>"; };
@@ -498,7 +485,6 @@
 				DBD4F3E919067D690023D98B /* MessageUI.framework in Frameworks */,
 				DB52D30018FB0D7400BB56D8 /* EventKit.framework in Frameworks */,
 				DB52D30118FB0D7400BB56D8 /* EventKitUI.framework in Frameworks */,
-				DB38DAC919E1CC2800E1B6D2 /* HockeySDK.framework in Frameworks */,
 				DBB59CD918FAE0E100F35BFD /* MapKit.framework in Frameworks */,
 				DBB59CD718FAE0A800F35BFD /* CoreLocation.framework in Frameworks */,
 				DBF06C0318F9704F00F92912 /* CoreData.framework in Frameworks */,
@@ -616,37 +602,6 @@
 			);
 			name = CupertinoYankee;
 			path = Pinball/CupertinoYankee;
-			sourceTree = "<group>";
-		};
-		DB38DABD19E1CC2800E1B6D2 /* HockeySDK-iOS */ = {
-			isa = PBXGroup;
-			children = (
-				DB38DABE19E1CC2800E1B6D2 /* CHANGELOG */,
-				DB38DABF19E1CC2800E1B6D2 /* de.bitstadium.HockeySDK-iOS-3.5.4.docset */,
-				DB38DAC019E1CC2800E1B6D2 /* HockeySDK.embeddedframework */,
-				DB38DAC519E1CC2800E1B6D2 /* LICENSE */,
-				DB38DAC619E1CC2800E1B6D2 /* README.md */,
-			);
-			name = "HockeySDK-iOS";
-			path = "Pinball/HockeySDK-iOS";
-			sourceTree = "<group>";
-		};
-		DB38DAC019E1CC2800E1B6D2 /* HockeySDK.embeddedframework */ = {
-			isa = PBXGroup;
-			children = (
-				DB38DAC119E1CC2800E1B6D2 /* HockeySDK.framework */,
-				DB38DAC219E1CC2800E1B6D2 /* Resources */,
-			);
-			path = HockeySDK.embeddedframework;
-			sourceTree = "<group>";
-		};
-		DB38DAC219E1CC2800E1B6D2 /* Resources */ = {
-			isa = PBXGroup;
-			children = (
-				DB38DAC319E1CC2800E1B6D2 /* HockeySDK.xcconfig */,
-				DB38DAC419E1CC2800E1B6D2 /* HockeySDKResources.bundle */,
-			);
-			path = Resources;
 			sourceTree = "<group>";
 		};
 		DB47C87F19C4655000FE8E4F /* Nearby */ = {
@@ -921,7 +876,6 @@
 				DB38DA9C19E1CBE300E1B6D2 /* FMSKit */,
 				DB38DA7F19E1CBC400E1B6D2 /* AFNetworking */,
 				DB38DAAC19E1CBFA00E1B6D2 /* CupertinoYankee */,
-				DB38DABD19E1CC2800E1B6D2 /* HockeySDK-iOS */,
 				DB338F5D19606FB8000D0366 /* libsqlite3.dylib */,
 				DB338F4B19606ED2000D0366 /* libz.dylib */,
 				DB338F4919606E8D000D0366 /* AdSupport.framework */,
@@ -1260,19 +1214,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				DBF06BFE18F9700F00F92912 /* Storyboard-iPhone.storyboard in Resources */,
-				DB38DACC19E1CC2800E1B6D2 /* LICENSE in Resources */,
 				DBC751711A670E5500D88975 /* MachineCell.xib in Resources */,
 				DB403E931A961AD200E39A93 /* SecondaryControllers.storyboard in Resources */,
 				DBF06BD918F96FF500F92912 /* InfoPlist.strings in Resources */,
 				DB9A15F41A7D107C00819A1E /* about_page in Resources */,
 				DBF06BE118F96FF500F92912 /* Images.xcassets in Resources */,
-				DB38DACB19E1CC2800E1B6D2 /* HockeySDKResources.bundle in Resources */,
 				DB9330BC190D49AB0054C779 /* SeattleLocation.gpx in Resources */,
-				DB38DAC719E1CC2800E1B6D2 /* CHANGELOG in Resources */,
 				DB3F807B194B25100089F3D0 /* LocationCell.xib in Resources */,
 				DBFBED6119CF377700ADC964 /* Start Screen.storyboard in Resources */,
 				DBBB4BED193387AB004E433F /* Storyboard-iPad.storyboard in Resources */,
-				DB38DAC819E1CC2800E1B6D2 /* de.bitstadium.HockeySDK-iOS-3.5.4.docset in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1380,7 +1330,6 @@
 				DBF06BDF18F96FF500F92912 /* AppDelegate.m in Sources */,
 				DB38DAAA19E1CBE300E1B6D2 /* UIAlertView+Application.m in Sources */,
 				DBF06C0618F9707400F92912 /* Pinball.xcdatamodeld in Sources */,
-				DB38DACD19E1CC2800E1B6D2 /* README.md in Sources */,
 				DB38DA9319E1CBC400E1B6D2 /* AFHTTPRequestOperation.m in Sources */,
 				DB38DA9819E1CBC400E1B6D2 /* AFURLConnectionOperation.m in Sources */,
 				DB52D2DE18FAEFC500BB56D8 /* MachineProfileView.m in Sources */,
@@ -1535,8 +1484,8 @@
 			buildSettings = {
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CODE_SIGN_ENTITLEMENTS = "PinballMap WatchKit Extension/PinballMap WatchKit Extension.entitlements";
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Frank Michael Sanchez (ZJN6P495U9)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Frank Michael Sanchez (ZJN6P495U9)";
 				COPY_PHASE_STRIP = NO;
 				ENABLE_BITCODE = YES;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -1580,8 +1529,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Frank Michael Sanchez (ZJN6P495U9)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Frank Michael Sanchez (ZJN6P495U9)";
 				COPY_PHASE_STRIP = NO;
 				ENABLE_BITCODE = YES;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -1675,7 +1624,7 @@
 				CODE_SIGN_ENTITLEMENTS = PinballMap.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				ENABLE_BITCODE = NO;
+				ENABLE_BITCODE = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Pinball/HockeySDK-iOS/HockeySDK.embeddedframework",
@@ -1703,9 +1652,9 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_ENTITLEMENTS = PinballMap.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
-				ENABLE_BITCODE = NO;
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Frank Michael Sanchez (ZJN6P495U9)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Frank Michael Sanchez (ZJN6P495U9)";
+				ENABLE_BITCODE = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Pinball/HockeySDK-iOS/HockeySDK.embeddedframework",

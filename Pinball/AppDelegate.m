@@ -7,7 +7,6 @@
 //
 
 #import "AppDelegate.h"
-#import <HockeySDK/HockeySDK.h>
 #import "LocationProfileView-iPad.h"
 #import "ThirdPartyKeys.h"
 #import "PinballTabController.h"
@@ -36,11 +35,6 @@
     [[UISegmentedControl appearance] setTintColor:pinkColor];
     [[MKMapView appearance] setTintColor:pinkColor];
     [[UIActivityIndicatorView appearance] setTintColor:pinkColor];
-
-    [[BITHockeyManager sharedHockeyManager] configureWithIdentifier:[ThirdPartyKeys hockeyID]];
-    [[BITHockeyManager sharedHockeyManager].authenticator setAuthenticationSecret:[ThirdPartyKeys hockeySecret]];
-    [[BITHockeyManager sharedHockeyManager] startManager];
-    [[BITHockeyManager sharedHockeyManager].authenticator authenticateInstallation];
 
     return YES;
 }

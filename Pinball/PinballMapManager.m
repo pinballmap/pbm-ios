@@ -662,6 +662,15 @@ typedef NS_ENUM(NSInteger, PBMDataAPI) {
         completionBlock(@{@"errors": error.localizedDescription});
     }];
 }
+- (void)confirmLocationInformation:(Location *)location andCompletion:(APIComplete)completionBlock{
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    manager.requestSerializer = [AFJSONRequestSerializer serializer];
+    [manager GET:[NSString stringWithFormat:@"%@api/v1/locations/%@.json",apiRootURL,location.locationId] parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        completionBlock(responseObject);
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        completionBlock(@{@"errors": error.localizedDescription});
+    }];
+}
 #pragma mark - CLLocationManager Delegate
 - (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations{
     NSLog(@"Location updated.");
