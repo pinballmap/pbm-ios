@@ -10,7 +10,6 @@
 #import "NSDate+DateFormatting.h"
 #import "EventProfileView.h"
 #import "UIViewController+Helpers.h"
-#import "GAAppHelper.h"
 #import "ContactView.h"
 #import "NSDate+CupertinoYankee.h"
 
@@ -48,7 +47,6 @@
 }
 - (void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
-    [GAAppHelper sendAnalyticsDataWithScreen:@"Events View"];
 }
 - (void)didReceiveMemoryWarning{
     [super didReceiveMemoryWarning];

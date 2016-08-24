@@ -1,4 +1,4 @@
-//
+
 //  PinballMapManager.m
 //  PinballMap
 //
@@ -167,11 +167,29 @@ typedef NS_ENUM(NSInteger, PBMDataAPI) {
     regionAPI.responseSerializer = [AFJSONResponseSerializer serializer];
     [regionAPI setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSArray *regions = operation.responseObject[@"regions"];
-        [regions enumerateObjectsUsingBlock:^(NSDictionary *obj, NSUInteger idx, BOOL *stop) {
-            if (![regionIds containsObject:obj[@"id"]]){
-                [Region createRegionWithData:obj andContext:[[CoreDataManager sharedInstance] managedObjectContext]];
+        
+        for (NSDictionary *region in regions) {
+            if (![regionIds containsObject:region[@"id"]]){
+                [Region createRegionWithData:region andContext:[[CoreDataManager sharedInstance] managedObjectContext]];
+            }else{
+                // Remove any existing IDs the server responded with
+                // so that once we are done we can remove any local regions that
+                // no longer exist on the server
+                [regionIds removeObject:region[@"id"]];
             }
-        }];
+        }
+        // Code to remove regions that still exist after
+        // proccessing.
+        NSArray *currentRegions = [self coreDataRegions];
+        for (NSNumber *regionID in regionIds) {
+            for (Region *existingRegion in currentRegions) {
+                if ([regionID isEqual:existingRegion.regionId]){
+                    // Region we shuold remove
+                    [[[CoreDataManager sharedInstance] managedObjectContext] deleteObject:existingRegion];
+                }
+            }
+        }
+        
         [[CoreDataManager sharedInstance] saveContext];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"%@",error);
@@ -190,7 +208,7 @@ typedef NS_ENUM(NSInteger, PBMDataAPI) {
 - (void)refreshRegion{
     [[NSNotificationCenter defaultCenter] postNotificationName:@"UpdatingRegion" object:nil];
     [self.apiOperations removeAllObjects];
-    [self.apiOperations addObjectsFromArray:@[[self requestForData:PBMDataAPILocationTypes],[self requestForData:PBMDataAPIZones],[self requestForData:PBMDataAPILocations],[self requestForData:PBMDataAPIEvents]]];
+    [self.apiOperations addObjectsFromArray:@[[self requestForData:PBMDataAPIMachines],[self requestForData:PBMDataAPILocationTypes],[self requestForData:PBMDataAPIZones],[self requestForData:PBMDataAPILocations],[self requestForData:PBMDataAPIEvents]]];
 
     NSArray *api = [AFURLConnectionOperation batchOfRequestOperations:self.apiOperations progressBlock:^(NSUInteger numberOfFinishedOperations, NSUInteger totalNumberOfOperations) {
         NSLog(@"Completed %lu of %lu",(unsigned long)numberOfFinishedOperations,(unsigned long)totalNumberOfOperations);
@@ -212,21 +230,20 @@ typedef NS_ENUM(NSInteger, PBMDataAPI) {
         NSLog(@"Did cancel: %i",canceledRequests);
         if (!canceledRequests){
             NSLog(@"Started proccessing");
-            NSFetchRequest *stackRequest = [NSFetchRequest fetchRequestWithEntityName:@"Machine"];
-            stackRequest.predicate = nil;
-            stackRequest.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES]];
-            __block NSMutableSet *machines = [NSMutableSet setWithArray:[[[CoreDataManager sharedInstance] managedObjectContext] executeFetchRequest:stackRequest error:nil]];
-            __block NSMutableSet *locationTypes;
-            __block NSMutableSet *locationZones;
+            __block NSMutableSet *createdMachines;
+            __block NSMutableSet *createdLocationTypes;
+            __block NSMutableSet *createdZones;
             __block NSMutableSet *createdLocations;
             [operations enumerateObjectsUsingBlock:^(AFHTTPRequestOperation *obj, NSUInteger idx, BOOL *stop) {
                 if (idx == 0){
-                    locationTypes = [self importLocationTypesWithRequest:obj];
+                    createdMachines = [self importMachinesWithRequest:obj];
                 }else if (idx == 1){
-                    locationZones = [self importZonesWithRequest:obj];
+                    createdLocationTypes = [self importLocationTypesWithRequest:obj];
                 }else if (idx == 2){
-                    createdLocations = [self importLocationsWithRequest:obj andMachines:machines andLocationTypes:locationTypes andZones:locationZones];
+                    createdZones = [self importZonesWithRequest:obj];
                 }else if (idx == 3){
+                    createdLocations = [self importLocationsWithRequest:obj andMachines:createdMachines andLocationTypes:createdLocationTypes andZones:createdZones];
+                }else if (idx == 4){
                     [self importEventsWithRequest:obj andLocations:createdLocations];
                 }
                 [[CoreDataManager sharedInstance] saveContext];
@@ -640,6 +657,15 @@ typedef NS_ENUM(NSInteger, PBMDataAPI) {
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     manager.requestSerializer = [AFJSONRequestSerializer serializer];
     [manager POST:[NSString stringWithFormat:@"%@api/v1/locations/suggest.json",apiRootURL] parameters:locationData success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        completionBlock(responseObject);
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        completionBlock(@{@"errors": error.localizedDescription});
+    }];
+}
+- (void)confirmLocationInformation:(Location *)location andCompletion:(APIComplete)completionBlock{
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    manager.requestSerializer = [AFJSONRequestSerializer serializer];
+    [manager GET:[NSString stringWithFormat:@"%@api/v1/locations/%@.json",apiRootURL,location.locationId] parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
         completionBlock(responseObject);
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         completionBlock(@{@"errors": error.localizedDescription});

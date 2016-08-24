@@ -11,5 +11,6 @@
 @interface MachineLocation (CellHelpers)
 
 - (NSString *)conditionWithUpdateDate;
+- (NSString *)pastConditionWithUpdateDate:(MachineCondition *)pastCondition;
 
 @end

@@ -7,6 +7,7 @@
 //
 
 #import "MachineLocation+Create.h"
+#import "MachineCondition+Create.h"
 
 @implementation MachineLocation (Create)
 
@@ -21,6 +22,20 @@
     }else{
         newMachine.condition = @"N/A";
     }
+    
+    NSArray *conditions = [data[@"machine_conditions"] isKindOfClass:[NSNull class]] ? @[] : data[@"machine_conditions"];
+    
+    if (conditions.count > 0){
+        for (NSDictionary *condition in conditions) {
+            MachineCondition *machineCondition = [MachineCondition createMachineConditionWithData:condition andContext:context];
+            if (machineCondition != nil){
+                machineCondition.machineLocation = newMachine;
+                [newMachine addConditionsObject:machineCondition];
+            }
+            machineCondition = nil;
+        }
+    }
+    
     if (![data[@"condition_date"] isKindOfClass:[NSNull class]]){
         NSDateFormatter *df = [[NSDateFormatter alloc] init];
         [df setDateFormat:@"YYYY-MM-dd"];

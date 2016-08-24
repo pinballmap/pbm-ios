@@ -8,7 +8,7 @@
 
 #import "MachinePickingView.h"
 
-@interface MachinePickingView () <NSFetchedResultsControllerDelegate,UISearchBarDelegate>
+@interface MachinePickingView () <NSFetchedResultsControllerDelegate,UISearchBarDelegate,UIAlertViewDelegate>
 
 @property (nonatomic) NSFetchedResultsController *fetchedResults;
 @property (nonatomic) NSManagedObjectContext *managedContext;
@@ -82,10 +82,27 @@
     self.mainSearchbar.text = @"";
     if (self.machineFilter.selectedSegmentIndex == 0){
         self.onlyPicked = NO;
-    }else{
+    }else if (self.machineFilter.selectedSegmentIndex == 1){
         self.onlyPicked = YES;
+    }else{
+        // New Machine is trying to be added
+        UIAlertView *newMachineNameAlert = [[UIAlertView alloc] initWithTitle:@"New Machine" message:@"Enter the machine name:" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Save", nil];
+        newMachineNameAlert.alertViewStyle = UIAlertViewStylePlainTextInput;
+        [[newMachineNameAlert textFieldAtIndex:0] setAutocapitalizationType:UITextAutocapitalizationTypeWords];
+        [newMachineNameAlert show];
+        self.machineFilter.selectedSegmentIndex = 0;
     }
     [self.tableView reloadData];
+}
+#pragma mark - UIAlertView Delegate
+- (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex{
+    if (buttonIndex != alertView.cancelButtonIndex){
+        // Create newly typed in machine
+        NSString *machineName = [[alertView textFieldAtIndex:0] text];
+        
+    
+    
+    }
 }
 #pragma mark - Searchbar Delegate
 - (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar{

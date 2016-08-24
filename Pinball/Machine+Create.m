@@ -32,6 +32,11 @@
     }else{
         newMachine.ipdbLink = @"N/A";
     }
+    if ([data[@"machine_group_id"] isKindOfClass:[NSNumber class]]){
+        newMachine.machineGroupID = data[@"machine_group_id"];
+    }else{
+        newMachine.machineGroupID = [NSNumber numberWithInt:-1];
+    }
     
     return newMachine;
 }

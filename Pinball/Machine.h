@@ -17,6 +17,7 @@
 @property (nonatomic, retain) NSString * manufacturer;
 @property (nonatomic, retain) NSString * name;
 @property (nonatomic, retain) NSNumber * year;
+@property (nonatomic, retain) NSNumber * machineGroupID;
 @property (nonatomic, retain) NSString * ipdbLink;
 @property (nonatomic, retain) NSOrderedSet *machineLocations;
 @end

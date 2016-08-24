@@ -16,6 +16,7 @@
 @dynamic manufacturer;
 @dynamic name;
 @dynamic year;
+@dynamic machineGroupID;
 @dynamic ipdbLink;
 @dynamic machineLocations;
 

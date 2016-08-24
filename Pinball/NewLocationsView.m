@@ -50,6 +50,7 @@
 }
 - (void)viewDidLoad{
     [super viewDidLoad];
+    self.navigationItem.prompt = [[[PinballMapManager sharedInstance] currentRegion] fullName];
 }
 - (void)didReceiveMemoryWarning{
     [super didReceiveMemoryWarning];

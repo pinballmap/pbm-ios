@@ -9,7 +9,6 @@
 #import "MachinesView.h"
 #import "MachineLocation.h"
 #import "MachineProfileView.h"
-#import "GAAppHelper.h"
 #import "MachineManufacturerView.h"
 #import "UIViewController+Helpers.h"
 
@@ -48,7 +47,6 @@
 }
 - (void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
-    [GAAppHelper sendAnalyticsDataWithScreen:@"Machines View"];
 }
 - (void)didReceiveMemoryWarning{
     [super didReceiveMemoryWarning];
@@ -177,11 +175,11 @@
     
     NSString *detailString = [NSString stringWithFormat:@"%@, %@",currentMachine.manufacturer,currentMachine.year];
     
-    CGRect titleLabel = [currentMachine.name boundingRectWithSize:CGSizeMake(defaultWidth, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName: [UIFont boldSystemFontOfSize:18]} context:nil];//boundingRectWithSize:CGSizeMake(defaultWidth, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin context:nil];
+    CGRect titleLabel = [currentMachine.name boundingRectWithSize:CGSizeMake(defaultWidth, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName: [UIFont systemFontOfSize:18]} context:nil];
     
     CGRect detailLabel = [detailString boundingRectWithSize:CGSizeMake(defaultWidth, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName: [UIFont systemFontOfSize:12]} context:nil];
     // Add 6 pixel padding present in subtitle style.
-    CGRect stringSize = CGRectMake(0, 0, defaultWidth, titleLabel.size.height+detailLabel.size.height+6);
+    CGRect stringSize = CGRectMake(0, 0, defaultWidth, titleLabel.size.height+detailLabel.size.height+10);
     return stringSize.size.height;
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -197,6 +195,7 @@
 
     cell.textLabel.text = currentMachine.name;
     cell.detailTextLabel.text = [NSString stringWithFormat:@"%@, %@",currentMachine.manufacturer,currentMachine.year];
+    cell.accessoryType = UITableViewCellAccessoryNone;
     return cell;
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -211,7 +210,7 @@
         MachineProfileView *profileView = (MachineProfileView *)[[self.splitViewController detailViewForSplitView] navigationRootViewController];
         [profileView setCurrentMachine:currentMachine];
     }else{
-        MachineProfileView *profileView = [self.storyboard instantiateViewControllerWithIdentifier:@"MachineProfile"];
+        MachineProfileView *profileView = [[UIStoryboard storyboardWithName:@"SecondaryControllers" bundle:nil] instantiateViewControllerWithIdentifier:@"MachineProfile"];
         profileView.currentMachine = currentMachine;
         [self.navigationController pushViewController:profileView animated:true];
     }

@@ -45,6 +45,7 @@ typedef void (^APICompleteWithStatusCode)(NSDictionary *response,NSUInteger stat
 // Location Routes
 - (void)updateLocation:(Location *)location withData:(NSDictionary *)locationData andCompletion:(APIComplete)completionBlock;
 - (void)suggestLocation:(NSDictionary *)locationData andCompletion:(APIComplete)completionBlock;
+- (void)confirmLocationInformation:(Location *)location andCompletion:(APIComplete)completionBlock;
 /**
     If location is nil the class will assume you want to use the userLocation
  */

@@ -11,11 +11,13 @@
 #import "UIAlertView+Application.h"
 #import "MachineScore.h"
 #import "NewMachineScoreView.h"
+#import "MachineCondition.h"
 #import "TextEditorView.h"
 
 @interface MachineLocationProfileView () <ScoreDelegate,TextEditorDelegate>
 
 @property (nonatomic) NSMutableArray *machineScores;
+@property (nonatomic) NSArray *machineConditionsArray;
 @property (nonatomic) UIAlertView *deleteConfirm;
 @property (nonatomic) NSIndexPath *deletePath;
 
@@ -38,6 +40,8 @@
     [super viewDidLoad];
     self.machineScores = [NSMutableArray new];
     self.navigationItem.title = _currentMachine.machine.name;
+    self.machineConditionsArray = _currentMachine.conditions.allObjects;
+    NSLog(@"%@",self.machineConditionsArray);
     [self reloadScores];
 }
 - (void)didReceiveMemoryWarning{
@@ -103,12 +107,14 @@
 }
 #pragma mark - Table view data source
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    return 4;
+    return 5;
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     if (section == 0 || section == 1){
         return 1;
     }else if (section == 2){
+        return _currentMachine.conditions.count;
+    }else if (section == 3){
         return self.machineScores.count+1;
     }else{
         return 1;
@@ -119,7 +125,9 @@
         return @"Location";
     }else if (section == 1){
         return @"Machine Condition (tap to edit)";
-    }else if (section == 2){
+    }else if (section == 2 && _currentMachine.conditions.count > 0){
+        return @"Past Conditions";
+    }else if (section == 3){
         return @"Scores";
     }else{
         return nil;
@@ -127,7 +135,7 @@
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    if (indexPath.section == 2 || indexPath.section == 3){
+    if (indexPath.section == 3 || indexPath.section == 4){
         return 44;
     }
     
@@ -136,6 +144,9 @@
         cellText = _currentMachine.location.name;
     }else if (indexPath.section == 1){
         cellText = _currentMachine.conditionWithUpdateDate;
+    }else if (indexPath.section == 2){
+        MachineCondition *condition = self.machineConditionsArray[indexPath.row];
+        cellText = condition.comment;
     }
     
     CGRect conditionHeight = [cellText boundingRectWithSize:CGSizeMake(290, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName: [UIFont systemFontOfSize:18]} context:nil];
@@ -147,7 +158,7 @@
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     UITableViewCell *cell;
-    if (indexPath.section == 0 || indexPath.section == 1 || indexPath.section == 2){
+    if (indexPath.section == 0 || indexPath.section == 1 || indexPath.section == 2 || indexPath.section == 3){
         cell = [tableView dequeueReusableCellWithIdentifier:@"BasicCell"];
     }else{
         if (indexPath.row == 0){
@@ -168,6 +179,10 @@
             cell.textLabel.text = _currentMachine.conditionWithUpdateDate;
         }
     }else if (indexPath.section == 2){
+        MachineCondition *condition = self.machineConditionsArray[indexPath.row];
+        
+        cell.textLabel.text = [_currentMachine pastConditionWithUpdateDate:condition];
+    }else if (indexPath.section == 3){
         if (indexPath.row == 0){
             cell.textLabel.text = @"Add your score";
             cell.textLabel.textAlignment = NSTextAlignmentCenter;
@@ -176,7 +191,7 @@
             cell.textLabel.text = [NSString stringWithFormat:@"%@ (%@)",score.scoreString,score.initials];
             cell.detailTextLabel.text = [NSString stringWithFormat:@"%@",[MachineScore wordingForRank:score.rank]];
         }
-    }else if (indexPath.section == 3){
+    }else if (indexPath.section == 4){
         cell.textLabel.text = @"Remove Machine";
         cell.textLabel.textAlignment = NSTextAlignmentCenter;
         cell.textLabel.textColor = [UIColor redColor];
@@ -201,12 +216,12 @@
         vc.currentMachine = _currentMachine;
         [tableView setEditing:NO];
         [self.navigationController presentViewController:vc.parentViewController animated:YES completion:nil];
-    }else if (indexPath.section == 2 && indexPath.row == 0){
+    }else if (indexPath.section == 3 && indexPath.row == 0){
         NewMachineScoreView *scoreView = [[[[UIStoryboard storyboardWithName:@"SecondaryControllers" bundle:nil] instantiateViewControllerWithIdentifier:@"NewMachineScoreView"] viewControllers] lastObject];
         scoreView.currentMachine = _currentMachine;
         scoreView.delegate = self;
         [self.navigationController presentViewController:scoreView.parentViewController animated:YES completion:nil];
-    }else if (indexPath.section == 3){
+    }else if (indexPath.section == 4){
         self.deletePath = indexPath;
         self.deleteConfirm = [UIAlertView applicationAlertWithMessage:@"Are you sure you want to remove this machine." delegate:self cancelButton:@"No" otherButtons:@"Yes", nil];
         [self.deleteConfirm show];

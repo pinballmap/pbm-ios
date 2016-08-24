@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="8195" systemVersion="15A284" minimumToolsVersion="Xcode 4.3">
+    <entity name="Event" representedClassName="Event" syncable="YES">
+        <attribute name="categoryNo" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="categoryTitle" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="endDate" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="eventDescription" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="eventId" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="externalLocationName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="link" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="startDate" optional="YES" attributeType="Date" syncable="YES"/>
+        <relationship name="location" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Location" inverseName="events" inverseEntity="Location" syncable="YES"/>
+        <relationship name="region" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Region" inverseName="events" inverseEntity="Region" syncable="YES"/>
+    </entity>
+    <entity name="Location" representedClassName="Location" syncable="YES">
+        <attribute name="city" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="lastUpdated" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="latitude" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="locationDescription" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="locationDistance" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="locationId" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="locationZone" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="longitude" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="machineCount" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="neighborhood" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="phone" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="state" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="street" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="website" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="zip" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="zoneNo" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <relationship name="events" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="Event" inverseName="location" inverseEntity="Event" syncable="YES"/>
+        <relationship name="locationType" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="LocationType" inverseName="locations" inverseEntity="LocationType" syncable="YES"/>
+        <relationship name="machines" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="MachineLocation" inverseName="location" inverseEntity="MachineLocation" syncable="YES"/>
+        <relationship name="parentZone" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Zone" inverseName="locations" inverseEntity="Zone" syncable="YES"/>
+        <relationship name="region" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Region" inverseName="locations" inverseEntity="Region" syncable="YES"/>
+    </entity>
+    <entity name="LocationType" representedClassName="LocationType" syncable="YES">
+        <attribute name="locationTypeId" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="locations" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Location" inverseName="locationType" inverseEntity="Location" syncable="YES"/>
+    </entity>
+    <entity name="Machine" representedClassName="Machine" syncable="YES">
+        <attribute name="ipdbLink" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="machineGroupID" optional="YES" attributeType="Integer 64" syncable="YES"/>
+        <attribute name="machineId" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="manufacturer" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="year" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <relationship name="machineLocations" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="MachineLocation" inverseName="machine" inverseEntity="MachineLocation" syncable="YES"/>
+    </entity>
+    <entity name="MachineCondition" representedClassName="MachineCondition" syncable="YES">
+        <attribute name="comment" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="conditionCreated" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="conditionId" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <relationship name="machineLocation" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="MachineLocation" inverseName="conditions" inverseEntity="MachineLocation" syncable="YES"/>
+    </entity>
+    <entity name="MachineLocation" representedClassName="MachineLocation" syncable="YES">
+        <attribute name="condition" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="conditionUpdate" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="machineLocationId" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <relationship name="conditions" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="MachineCondition" inverseName="machineLocation" inverseEntity="MachineCondition" syncable="YES"/>
+        <relationship name="location" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Location" inverseName="machines" inverseEntity="Location" syncable="YES"/>
+        <relationship name="machine" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Machine" inverseName="machineLocations" inverseEntity="Machine" syncable="YES"/>
+    </entity>
+    <entity name="Region" representedClassName="Region" syncable="YES">
+        <attribute name="eventsEtag" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="fullName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="latitude" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="locationDistance" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="locationsEtag" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="longitude" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="regionId" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="zonesEtag" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="events" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Event" inverseName="region" inverseEntity="Event" syncable="YES"/>
+        <relationship name="locations" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Location" inverseName="region" inverseEntity="Location" syncable="YES"/>
+        <relationship name="zones" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Zone" inverseName="region" inverseEntity="Zone" syncable="YES"/>
+    </entity>
+    <entity name="Zone" representedClassName="Zone" syncable="YES">
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="shortName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="zoneId" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <relationship name="locations" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Location" inverseName="parentZone" inverseEntity="Location" syncable="YES"/>
+        <relationship name="region" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Region" inverseName="zones" inverseEntity="Region" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="Event" positionX="-2529" positionY="-720" width="128" height="208"/>
+        <element name="Location" positionX="-2250" positionY="-702" width="128" height="373"/>
+        <element name="LocationType" positionX="-2063" positionY="-619" width="128" height="88"/>
+        <element name="Machine" positionX="-2531" positionY="-328" width="128" height="148"/>
+        <element name="MachineLocation" positionX="-2504" positionY="-490" width="128" height="133"/>
+        <element name="Region" positionX="-2520" positionY="-949" width="128" height="223"/>
+        <element name="Zone" positionX="-2198" positionY="-877" width="128" height="118"/>
+        <element name="MachineCondition" positionX="-2691" positionY="-475" width="128" height="103"/>
+    </elements>
+</model>

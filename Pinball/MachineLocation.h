@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 
-@class Location, Machine;
+@class Location, Machine, MachineCondition;
 
 @interface MachineLocation : NSManagedObject
 
@@ -18,5 +18,12 @@
 @property (nonatomic, retain) NSNumber * machineLocationId;
 @property (nonatomic, retain) Location *location;
 @property (nonatomic, retain) Machine *machine;
+@property (nonatomic, retain) NSSet * conditions;
+
+@end
+
+@interface MachineLocation (CoreDataGeneratedAccessors)
+
+- (void)addConditionsObject:(MachineCondition *)value;
 
 @end
