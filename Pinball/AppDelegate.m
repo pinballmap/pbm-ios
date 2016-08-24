@@ -7,9 +7,7 @@
 //
 
 #import "AppDelegate.h"
-#import <HockeySDK/HockeySDK.h>
 #import "LocationProfileView-iPad.h"
-#import "GAI.h"
 #import "ThirdPartyKeys.h"
 #import "PinballTabController.h"
 #import "UserLocationHelper.h"
@@ -38,25 +36,6 @@
     [[MKMapView appearance] setTintColor:pinkColor];
     [[UIActivityIndicatorView appearance] setTintColor:pinkColor];
 
-    [[BITHockeyManager sharedHockeyManager] configureWithIdentifier:[ThirdPartyKeys hockeyID]];
-    [[BITHockeyManager sharedHockeyManager].authenticator setAuthenticationSecret:[ThirdPartyKeys hockeySecret]];
-    [[BITHockeyManager sharedHockeyManager] startManager];
-    [[BITHockeyManager sharedHockeyManager].authenticator authenticateInstallation];
-
-    
-    // Google Analytics
-    // Optional: automatically send uncaught exceptions to Google Analytics.
-    [GAI sharedInstance].trackUncaughtExceptions = YES;
-    
-    // Optional: set Google Analytics dispatch interval to e.g. 20 seconds.
-    [GAI sharedInstance].dispatchInterval = 20;
-    
-    // Optional: set Logger to VERBOSE for debug information.
-    [[[GAI sharedInstance] logger] setLogLevel:kGAILogLevelError];
-    
-    // Initialize tracker. Replace with your tracking ID.
-    [[GAI sharedInstance] trackerWithTrackingId:[ThirdPartyKeys googleID]];
-    
     return YES;
 }
 

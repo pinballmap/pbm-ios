@@ -63,6 +63,14 @@
         newLocation.website = @"N/A";
     }
     
+    if (![data[@"date_last_updated"] isKindOfClass:[NSNull class]]){
+        NSDateFormatter *df = [[NSDateFormatter alloc] init];
+        [df setDateFormat:@"YYYY-MM-dd"];
+        newLocation.lastUpdated = [df dateFromString:data[@"date_last_updated"]];
+    }else{
+        newLocation.lastUpdated = NULL;
+    }
+
     
     return newLocation;
 }

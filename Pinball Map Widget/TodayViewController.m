@@ -62,6 +62,7 @@ NSString * const etagKey = @"recentsEtag";
     NSURLRequest *recentRequest = [NSURLRequest requestWithURL:recentURL];
     NSURLSession *session = [NSURLSession sharedSession];
     NSURLSessionDataTask *recentTask = [session dataTaskWithRequest:recentRequest completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+        NSLog(@"%@",error);
         if (!error){
             NSString *recentsEtag = [(NSHTTPURLResponse *)response allHeaderFields][@"Etag"];
             NSString *pastEtag = [[TodayViewController userDefaultsForApp] objectForKey:etagKey];

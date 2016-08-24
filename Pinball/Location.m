@@ -17,6 +17,7 @@
 @implementation Location
 
 @dynamic city;
+@dynamic lastUpdated;
 @dynamic latitude;
 @dynamic locationDescription;
 @dynamic locationDistance;

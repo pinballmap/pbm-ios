@@ -17,7 +17,6 @@
 #import "UIAlertView+Application.h"
 #import "ZonesView.h"
 #import "LocationTypesView.h"
-#import "GAAppHelper.h"
 #import "RecentlyAddedView.h"
 
 @interface LocationsView () <NSFetchedResultsControllerDelegate,UIActionSheetDelegate,UISearchBarDelegate,UISearchDisplayDelegate,ZoneSelectDelegate,LocationTypeSelectDelegate>
@@ -55,7 +54,6 @@
 }
 - (void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
-    [GAAppHelper sendAnalyticsDataWithScreen:@"Locations View"];
 }
 - (void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
@@ -357,6 +355,7 @@
     
     cell.machineCount.text = [NSString stringWithFormat:@"%lu",(unsigned long)currentLocation.machines.count];
 
+    cell.accessoryType = UITableViewCellAccessoryNone;
     return cell;
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{

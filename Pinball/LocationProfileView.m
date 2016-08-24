@@ -33,6 +33,8 @@ typedef enum : NSUInteger {
     LocationEditingTypeWebsite,
 } LocationEditingType;
 
+int const headerHeight = 90;
+
 @interface LocationProfileView () <TextEditorDelegate,NSFetchedResultsControllerDelegate,UIAlertViewDelegate,LocationTypeSelectDelegate>
 
 @property (nonatomic) NSFetchedResultsController *machinesFetch;
@@ -41,6 +43,8 @@ typedef enum : NSUInteger {
 @property (nonatomic) UIAlertView *deleteConfirm;
 @property (nonatomic) NSIndexPath *deletePath;
 @property (nonatomic) UISegmentedControl *dataSetSeg;
+@property (nonatomic) UILabel *lastUpdateLabel;
+@property (nonatomic) UIButton *infoUpToDateButton;
 @property (nonatomic) UIAlertView *openInMapsConfirm;
 
 @end
@@ -65,7 +69,22 @@ typedef enum : NSUInteger {
     [self.dataSetSeg insertSegmentWithTitle:@"Info" atIndex:1 animated:YES];
     [self.dataSetSeg addTarget:self action:@selector(changeData:) forControlEvents:UIControlEventValueChanged];
     [self.dataSetSeg setSelectedSegmentIndex:0];
+    
+    self.lastUpdateLabel = [[UILabel alloc] init];
+    self.lastUpdateLabel.translatesAutoresizingMaskIntoConstraints = NO;
+    self.lastUpdateLabel.frame = CGRectMake(0, 30, self.view.frame.size.width, 20);
+    self.lastUpdateLabel.font = [UIFont systemFontOfSize:15];
+    self.lastUpdateLabel.textColor = [UIColor lightGrayColor];
+    self.lastUpdateLabel.textAlignment = NSTextAlignmentCenter;
 
+    self.infoUpToDateButton = [[UIButton alloc] init];
+    self.infoUpToDateButton.translatesAutoresizingMaskIntoConstraints = NO;
+    self.infoUpToDateButton.frame = CGRectMake(0, 50, self.view.frame.size.width, 20);
+    [self.infoUpToDateButton addTarget:self action:@selector(informationUpToDate:) forControlEvents:UIControlEventTouchUpInside];
+    [self.infoUpToDateButton setTitle:@"Tap to confirm machine line-up!" forState:UIControlStateNormal];
+    [self.infoUpToDateButton setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
+    
+    
     if (_currentLocation){
         [self setupUI];
     }
@@ -87,6 +106,13 @@ typedef enum : NSUInteger {
     [self.machinesFetch performFetch:nil];
     self.dataSetSeg.selectedSegmentIndex = 0;
     self.tableView.allowsSelectionDuringEditing = YES;
+    NSString *lastUpdateString;
+    if (_currentLocation.lastUpdated == NULL){
+        lastUpdateString = @"Last Update: Unknown";
+    }else{
+        lastUpdateString = [NSString stringWithFormat:@"Last Update: %@",[_currentLocation.lastUpdated monthDayYearPretty:YES]];
+    }
+    self.lastUpdateLabel.text = lastUpdateString;
     [self setupRightBarButton];
     [self.tableView reloadData];
 }
@@ -161,6 +187,11 @@ typedef enum : NSUInteger {
     [self.tableView setEditing:editing];
     [self setupRightBarButton];
     [self.tableView reloadData];
+}
+- (IBAction)informationUpToDate:(id)sender{
+    // Code to update that information for the location
+    // is up to date.
+    
 }
 #pragma mark - TextEditor Delegate
 - (void)editorDidComplete:(NSString *)text{
@@ -288,19 +319,52 @@ typedef enum : NSUInteger {
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
     // Set a height for the seg control if the section is 1, meaning we are showing a map snapshot, or if section is 0
     if (section == 1 || (section == 0 && !self.showMapSnapshot)){
-        return 29;
+        return headerHeight;
     }
     return 0;
 }
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
     if (section == 1 || (section == 0 && !self.showMapSnapshot)){
-        UIView *dataSegView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.frame.size.width, 29)];
-        [dataSegView setBackgroundColor:[UIColor whiteColor]];
+        
+        /* Code to hide the update location data button. Delete and replace with code below */
+        UIView *dataSegView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.frame.size.width, 50)];
         [dataSegView addSubview:self.dataSetSeg];
+        [dataSegView addSubview:self.lastUpdateLabel];
         if (self.dataSetSeg){
             NSArray *verticalConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-(-5)-[seg]-(-5)-|" options:NSLayoutFormatAlignmentMask metrics:nil views:@{@"seg": self.dataSetSeg}];
             [dataSegView addConstraints:verticalConstraints];
         }
+        if (self.lastUpdateLabel){
+            NSArray *horzCon = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-(0)-[lastup]-(0)-|" options:NSLayoutFormatAlignmentMask metrics:nil views:@{@"lastup": self.lastUpdateLabel}];
+            NSArray *vertCon = [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-(30)-[lastup]-(0)-|" options:NSLayoutFormatAlignmentMask metrics:nil views:@{@"lastup": self.lastUpdateLabel}];
+            [dataSegView addConstraints:horzCon];
+            [dataSegView addConstraints:vertCon];
+        }
+        
+        /* Code to show an update button for confirming the location data is up to date
+        UIView *dataSegView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.frame.size.width, headerHeight)];
+        [dataSegView addSubview:self.dataSetSeg];
+        [dataSegView addSubview:self.lastUpdateLabel];
+        [dataSegView addSubview:self.infoUpToDateButton];
+        if (self.dataSetSeg){
+            NSArray *horzCon = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-(-5)-[seg]-(-5)-|" options:NSLayoutFormatAlignmentMask metrics:nil views:@{@"seg": self.dataSetSeg}];
+            [dataSegView addConstraints:horzCon];
+        }
+        if (self.infoUpToDateButton){
+            NSArray *horzCon = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-(0)-[upbutton]-(0)-|" options:NSLayoutFormatAlignmentMask metrics:nil views:@{@"upbutton": self.infoUpToDateButton}];
+            NSArray *verCon = [NSLayoutConstraint constraintsWithVisualFormat:@"V:[upbutton]-(0)-|" options:NSLayoutFormatAlignmentMask metrics:nil views:@{@"upbutton": self.infoUpToDateButton}];
+            [dataSegView addConstraints:horzCon];
+            [dataSegView addConstraints:verCon];
+        }
+        if (self.lastUpdateLabel){
+            NSArray *horzCon = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-(0)-[lastup]-(0)-|" options:NSLayoutFormatAlignmentMask metrics:nil views:@{@"lastup": self.lastUpdateLabel}];
+            NSArray *vertCon = [NSLayoutConstraint constraintsWithVisualFormat:@"V:[lastup]-(0)-[upbutton]" options:NSLayoutFormatAlignAllLeft metrics:nil views:@{@"lastup": self.lastUpdateLabel,@"upbutton": self.infoUpToDateButton}];
+            [dataSegView addConstraints:horzCon];
+            [dataSegView addConstraints:vertCon];
+        }
+         */
+        [dataSegView setBackgroundColor:[UIColor whiteColor]];
+
         return dataSegView;
     }
     return nil;
@@ -514,10 +578,11 @@ typedef enum : NSUInteger {
     return UITableViewCellEditingStyleDelete;
 }
 - (void)tableView:(UITableView *)tableView accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *)indexPath{
+    MachineLocation *currentMachine = [self.machinesFetch objectAtIndexPath:[NSIndexPath indexPathForRow:indexPath.row inSection:0]];
+
     if ((indexPath.section == 1 && [UIDevice currentModel] == ModelTypeiPhone) || (indexPath.section == 0 && [UIDevice currentModel] == ModelTypeiPad)){
-        MachineLocation *currentMachine = [self.machinesFetch objectAtIndexPath:[NSIndexPath indexPathForRow:indexPath.row inSection:0]];
         if (currentMachine.machine != nil){
-            MachineProfileView *machineProfile = [self.storyboard instantiateViewControllerWithIdentifier:@"MachineProfile"];
+            MachineProfileView *machineProfile = [[UIStoryboard storyboardWithName:@"SecondaryControllers" bundle:nil] instantiateViewControllerWithIdentifier:@"MachineProfile"];
             machineProfile.currentMachine = currentMachine.machine;
             if ([UIDevice currentModel] == ModelTypeiPad){
                 machineProfile.isModal = YES;
@@ -530,9 +595,18 @@ typedef enum : NSUInteger {
         }else{
             [UIAlertView simpleApplicationAlertWithMessage:@"Invalid Machine Data. Try reloading your region data by going to the locations listing and pulling the list all the way down." cancelButton:@"Ok"];
         }
+    }else{
+        MachineProfileView *machineProfile = [[UIStoryboard storyboardWithName:@"SecondaryControllers" bundle:nil] instantiateViewControllerWithIdentifier:@"MachineProfile"];
+        machineProfile.currentMachine = currentMachine.machine;
+        if ([UIDevice currentModel] == ModelTypeiPad){
+            machineProfile.isModal = YES;
+            UINavigationController *machineNav = [[UINavigationController alloc] initWithRootViewController:machineProfile];
+            machineNav.modalPresentationStyle = UIModalPresentationFormSheet;
+            [self.navigationController presentViewController:machineNav animated:YES completion:nil];
+        }
     }
 }
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath{    
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath{
     if ((indexPath.section == 1 && [UIDevice currentModel] == ModelTypeiPhone) || (indexPath.section == 0 && [UIDevice currentModel] == ModelTypeiPad)){
         if (self.dataSetSeg.selectedSegmentIndex == 0){
             return YES;
