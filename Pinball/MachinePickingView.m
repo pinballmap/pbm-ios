@@ -98,10 +98,7 @@
 - (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex{
     if (buttonIndex != alertView.cancelButtonIndex){
         // Create newly typed in machine
-        NSString *machineName = [[alertView textFieldAtIndex:0] text];
-        
-    
-    
+        [[alertView textFieldAtIndex:0] text];
     }
 }
 #pragma mark - Searchbar Delegate
