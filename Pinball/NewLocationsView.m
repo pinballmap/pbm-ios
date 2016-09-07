@@ -148,7 +148,7 @@
     CLLocation *foundLocation = [locations lastObject];
     NSDate* eventDate = foundLocation.timestamp;
     NSTimeInterval howRecent = [eventDate timeIntervalSinceNow];
-    if (abs(howRecent) < 15.0) {
+    if (fabs(howRecent) < 15.0) {
         [self reverseGeocode:foundLocation];
         [manager stopUpdatingLocation];
     }
