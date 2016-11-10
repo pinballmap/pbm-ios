@@ -47,9 +47,16 @@
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 - (IBAction)sendFeedback:(id)sender{
-    ContactView *eventContact = (ContactView *)[[[UIStoryboard storyboardWithName:@"SecondaryControllers" bundle:nil] instantiateViewControllerWithIdentifier:@"ContactView"] navigationRootViewController];
-    eventContact.contactType = ContactTypeAppFeedback;
-    [self.navigationController presentViewController:eventContact.parentViewController animated:YES completion:nil];
+    if ([[PinballMapManager sharedInstance] isLoggedInAsGuest]){
+        UINavigationController *navController = [[UIStoryboard storyboardWithName:@"SecondaryControllers" bundle:nil] instantiateViewControllerWithIdentifier:@"LoginViewController"];
+        
+        navController.modalPresentationStyle = UIModalPresentationFormSheet;
+        [self.navigationController presentViewController:navController animated:YES completion:nil];
+    } else {
+        ContactView *eventContact = (ContactView *)[[[UIStoryboard storyboardWithName:@"SecondaryControllers" bundle:nil] instantiateViewControllerWithIdentifier:@"ContactView"] navigationRootViewController];
+        eventContact.contactType = ContactTypeAppFeedback;
+        [self.navigationController presentViewController:eventContact.parentViewController animated:YES completion:nil];
+    }
 }
 #pragma mark - UIWebView Delegate
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType{

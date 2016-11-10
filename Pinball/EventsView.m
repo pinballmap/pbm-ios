@@ -57,9 +57,16 @@
 }
 #pragma mark - Class Actions
 - (IBAction)suggestEvent:(id)sender{
-    ContactView *eventContact = (ContactView *)[[[UIStoryboard storyboardWithName:@"SecondaryControllers" bundle:nil] instantiateViewControllerWithIdentifier:@"ContactView"] navigationRootViewController];
-    eventContact.contactType = ContactTypeEvent;
-    [self.navigationController presentViewController:eventContact.parentViewController animated:YES completion:nil];
+    if ([[PinballMapManager sharedInstance] isLoggedInAsGuest]){
+        UINavigationController *navController = [[UIStoryboard storyboardWithName:@"SecondaryControllers" bundle:nil] instantiateViewControllerWithIdentifier:@"LoginViewController"];
+        
+        navController.modalPresentationStyle = UIModalPresentationFormSheet;
+        [self.navigationController presentViewController:navController animated:YES completion:nil];
+    } else {
+        ContactView *eventContact = (ContactView *)[[[UIStoryboard storyboardWithName:@"SecondaryControllers" bundle:nil] instantiateViewControllerWithIdentifier:@"ContactView"] navigationRootViewController];
+        eventContact.contactType = ContactTypeEvent;
+        [self.navigationController presentViewController:eventContact.parentViewController animated:YES completion:nil];
+    }
 }
 - (IBAction)changeEventSort:(id)sender{
     [self updateRegion];

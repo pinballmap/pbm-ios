@@ -11,6 +11,7 @@
 #import "ThirdPartyKeys.h"
 #import "PinballTabController.h"
 #import "UserLocationHelper.h"
+#import "User.h"
 
 @import MapKit;
 
@@ -25,7 +26,6 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     UIColor *pinkColor = [UIColor colorWithRed:1.0f green:0.0f blue:146.0f/255.0f alpha:1.0];
-//    [[UINavigationBar appearance] setTranslucent:false];
     [[UITabBar appearance] setTintColor:pinkColor];
     [[UISearchBar appearance] setTintColor:pinkColor];
     [[UINavigationBar appearance] setTintColor:pinkColor];
@@ -43,6 +43,7 @@
     
     if (self.window.rootViewController && [self.window.rootViewController isKindOfClass:[PinballTabController class]]){
         [(PinballTabController *)self.window.rootViewController setSelectedIndex:3];
+        
     }
     
     return true;
@@ -123,8 +124,6 @@
             });
         }];
     }
-    
-    
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application

@@ -126,8 +126,6 @@
     NSFetchRequest *searchrequest = [NSFetchRequest fetchRequestWithEntityName:@"Location"];
     searchrequest.predicate = [NSPredicate predicateWithFormat:@"name CONTAINS[cd] %@ AND region.name = %@",searchString,[[[PinballMapManager sharedInstance] currentRegion] name]];
     
-    
-    
     [self.searchResults removeAllObjects];
     self.searchResults = nil;
     self.searchResults = [NSMutableArray new];
@@ -164,7 +162,14 @@
     [self.navigationController presentViewController:map.parentViewController animated:YES completion:nil];
 }
 - (IBAction)submitNewLocation:(id)sender{
-    UINavigationController *navController = [[UIStoryboard storyboardWithName:@"SecondaryControllers" bundle:nil] instantiateViewControllerWithIdentifier:@"NewLocationView"];
+    UINavigationController *navController;
+
+    if ([[PinballMapManager sharedInstance] isLoggedInAsGuest]){
+        navController = [[UIStoryboard storyboardWithName:@"SecondaryControllers" bundle:nil] instantiateViewControllerWithIdentifier:@"LoginViewController"];
+    } else {
+        navController = [[UIStoryboard storyboardWithName:@"SecondaryControllers" bundle:nil] instantiateViewControllerWithIdentifier:@"NewLocationView"];    
+    }
+    
     navController.modalPresentationStyle = UIModalPresentationFormSheet;
     [self.navigationController presentViewController:navController animated:YES completion:nil];
 }
@@ -221,10 +226,8 @@
             self.isClosets = NO;
             NSString *sectionName;
             
-            
             NSString *buttonTitle = [actionSheet buttonTitleAtIndex:buttonIndex];
 
-            
             if ([buttonTitle isEqualToString:@"Location Name"]){
                 // Name
                 stackRequest.predicate = [NSPredicate predicateWithFormat:@"region.name = %@",[[[PinballMapManager sharedInstance] currentRegion] name]];

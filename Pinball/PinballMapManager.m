@@ -11,7 +11,9 @@
 #import "AFNetworking.h"
 #import "NSDate+CupertinoYankee.h"
 
-static const NSString *apiRootURL = @"http://pinballmap.com/";
+//static const NSString *apiRootURL = @"http://pinballmap.com/";
+static const NSString *apiRootURL = @"http://pinballmapstaging.herokuapp.com/";
+
 NSString * const motdKey = @"motd";
 NSString * const motdRegionKey = @"region_id";
 NSString * const appGroup = @"group.net.isaacruiz.ppm";
@@ -58,6 +60,8 @@ typedef NS_ENUM(NSInteger, PBMDataAPI) {
         [[PinballMapManager userDefaultsForApp] setObject:lastShownDate forKey:motdKey];
         NSNumber *regionID = [[NSUserDefaults standardUserDefaults] objectForKey:motdRegionKey];
         [[PinballMapManager userDefaultsForApp] setObject:regionID forKey:motdRegionKey];
+        id user = [[NSUserDefaults standardUserDefaults] objectForKey:@"CurrentUser"];
+        [[PinballMapManager userDefaultsForApp] setObject:user forKey:@"CurrentUser"];
         // No longer need to migrate
         [[PinballMapManager userDefaultsForApp] setObject:@(-1) forKey:@"shouldMigrate"];
         [[PinballMapManager userDefaultsForApp] synchronize];
@@ -204,6 +208,7 @@ typedef NS_ENUM(NSInteger, PBMDataAPI) {
         [self.apiOperations removeAllObjects];
     }
 }
+
 #pragma mark - Region Data Load
 - (void)refreshRegion{
     [[NSNotificationCenter defaultCenter] postNotificationName:@"UpdatingRegion" object:nil];
@@ -277,7 +282,6 @@ typedef NS_ENUM(NSInteger, PBMDataAPI) {
 
     NSArray *apiOperations = @[[self requestForData:PBMDataAPIMachines],[self requestForData:PBMDataAPILocationTypes],[self requestForData:PBMDataAPIZones],[self requestForData:PBMDataAPILocations],[self requestForData:PBMDataAPIEvents]];
     
-    
     NSArray *api = [AFURLConnectionOperation batchOfRequestOperations:apiOperations progressBlock:^(NSUInteger numberOfFinishedOperations, NSUInteger totalNumberOfOperations) {
         NSLog(@"Completed %lu of %lu",(unsigned long)numberOfFinishedOperations,(unsigned long)totalNumberOfOperations);
     } completionBlock:^(NSArray *operations) {
@@ -310,6 +314,17 @@ typedef NS_ENUM(NSInteger, PBMDataAPI) {
     }];
     [[NSOperationQueue mainQueue] addOperations:api waitUntilFinished:NO];
 }
+- (void)loadUserData:(User *)user{
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"UpdatingUser" object:nil];
+    
+    [[PinballMapManager userDefaultsForApp] setObject:@{@"username": user.username} forKey:@"CurrentUser"];
+    [[PinballMapManager userDefaultsForApp] synchronize];
+    
+     _currentUser = user;
+    
+    [[CoreDataManager sharedInstance] saveContext];
+}
+
 - (void)recentlyAddedMachinesWithCompletion:(APIComplete)completionBlock{
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     manager.requestSerializer = [AFJSONRequestSerializer serializer];
@@ -712,4 +727,32 @@ typedef NS_ENUM(NSInteger, PBMDataAPI) {
         completionBlock(@{@"errors": error.localizedDescription});
     }];
 }
+
+#pragma mark - Login
+- (void)login:(NSDictionary *)loginData andCompletion:(APIComplete)completionBlock{
+    NSLog(@"ATTEMPTING TO LOGIN");
+    
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    manager.requestSerializer = [AFJSONRequestSerializer serializer];
+    NSString *loginRoute = [NSString stringWithFormat:@"%@api/v1/users/auth_details.json",apiRootURL];
+    
+    NSLog(@"%@",loginRoute);
+    
+    [manager GET:loginRoute parameters:loginData success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        completionBlock(responseObject);
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        completionBlock(@{@"errors": error.localizedDescription});
+    }];
+}
+
+- (BOOL)isLoggedInAsGuest {
+    User *user = self.currentUser;
+    
+    if ([user.username isEqualToString:[User guestUsername]]) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
 @end

@@ -226,9 +226,16 @@
 
     if (indexPath.section == 1){
         // Region Contact
-        ContactView *eventContact = (ContactView *)[[[UIStoryboard storyboardWithName:@"SecondaryControllers" bundle:nil] instantiateViewControllerWithIdentifier:@"ContactView"] navigationRootViewController];
-        eventContact.contactType = ContactTypeRegionContact;
-        [self.navigationController presentViewController:eventContact.parentViewController animated:YES completion:nil];
+        if ([[PinballMapManager sharedInstance] isLoggedInAsGuest]){
+            UINavigationController *navController = [[UIStoryboard storyboardWithName:@"SecondaryControllers" bundle:nil] instantiateViewControllerWithIdentifier:@"LoginViewController"];
+            
+            navController.modalPresentationStyle = UIModalPresentationFormSheet;
+            [self.navigationController presentViewController:navController animated:YES completion:nil];
+        } else {
+            ContactView *eventContact = (ContactView *)[[[UIStoryboard storyboardWithName:@"SecondaryControllers" bundle:nil] instantiateViewControllerWithIdentifier:@"ContactView"] navigationRootViewController];
+            eventContact.contactType = ContactTypeRegionContact;
+            [self.navigationController presentViewController:eventContact.parentViewController animated:YES completion:nil];
+        }
     }else if (indexPath.section > 1 && indexPath.section-1 <= self.regionLinks.count){
         RegionLink *link = [self.regionLinks[indexPath.section-2] objectAtIndex:indexPath.row];
         ReuseWebView *webView = [[ReuseWebView alloc] initWithURL:[NSURL URLWithString:link.url]];
