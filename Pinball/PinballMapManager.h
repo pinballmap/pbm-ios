@@ -25,13 +25,16 @@ typedef void (^APICompleteWithStatusCode)(NSDictionary *response,NSUInteger stat
 
 @property (nonatomic) NSDictionary *regionInfo;
 @property (nonatomic) Region *currentRegion;
+@property (nonatomic) User *currentUser;
 @property (nonatomic) CLLocation *userLocation;
 
 + (id)sharedInstance;
 - (void)allRegions:(void (^)(NSArray *regions))regionBlock;
 - (void)refreshAllRegions;
 - (void)loadRegionData:(Region *)region;
+- (void)loadUserData:(User *)user;
 - (void)refreshRegion;
+- (BOOL)isLoggedInAsGuest;
 - (BOOL)shouldShowMessageOfDay;
 - (void)showedMessageOfDay;
 - (void)recentlyAddedMachinesWithCompletion:(APIComplete)completionBlock;
@@ -54,4 +57,6 @@ typedef void (^APICompleteWithStatusCode)(NSDictionary *response,NSUInteger stat
 - (void)sendMessage:(NSDictionary *)messageData withType:(ContactType)contactType andCompletion:(APIComplete)completionBlock;
 - (void)refreshBasicRegionData:(APIComplete)completionBlock;
 - (void)cancelAllLoadingOperations;
+- (void)login:(NSDictionary *)loginData andCompletion:(APIComplete)completionBlock;
+
 @end

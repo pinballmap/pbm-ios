@@ -10,6 +10,7 @@
 #import "UIAlertView+Application.h"
 #import "RegionsView.h"
 #import "LoadingViewController.h"
+#import "LoginViewController.h"
 
 @interface PinballTabController ()
 
@@ -33,28 +34,39 @@
 - (void)viewDidLoad{
     [super viewDidLoad];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateTabInfo) name:@"RegionUpdate" object:nil];
-//    [self updateTabInfo];
     self.alreadyRefreshed = false;
     
 }
 - (void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
-    if (![[PinballMapManager sharedInstance] currentRegion]){
-        RegionsView *regions = [[UIStoryboard storyboardWithName:@"SecondaryControllers" bundle:nil] instantiateViewControllerWithIdentifier:@"RegionsView"];
-        regions.isSelecting = YES;
-        UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:regions];
+    NSLog(@"IN TAB CONTROLLER VIEW DID APPEAR");
+    if (![[PinballMapManager sharedInstance] currentUser]){
+        LoginViewController *loginViewController = [[UIStoryboard storyboardWithName:@"SecondaryControllers" bundle:nil] instantiateViewControllerWithIdentifier:@"LoginViewController"];
+        UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:loginViewController];
         nav.modalPresentationStyle = UIModalPresentationFormSheet;
         [self presentViewController:nav animated:YES completion:nil];
+    }else if (![[PinballMapManager sharedInstance] currentRegion]){
+        [self showSelectRegionView];
     }else{
-        if (!self.alreadyRefreshed){
-            LoadingViewController *loadingView = [self.storyboard instantiateViewControllerWithIdentifier:@"LoadingViewController"];
-            loadingView.modalPresentationStyle = UIModalPresentationFormSheet;
-            [self presentViewController:loadingView animated:true completion:^{
-                self.alreadyRefreshed = true;
-            }];
-        }
-        [self showMessageOfDay];
+        [self showMainMenuView];
     }
+}
+- (void)showSelectRegionView{
+    RegionsView *regions = [[UIStoryboard storyboardWithName:@"SecondaryControllers" bundle:nil] instantiateViewControllerWithIdentifier:@"RegionsView"];
+    regions.isSelecting = YES;
+    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:regions];
+    nav.modalPresentationStyle = UIModalPresentationFormSheet;
+    [self presentViewController:nav animated:YES completion:nil];
+}
+- (void)showMainMenuView{
+    if (!self.alreadyRefreshed){
+        LoadingViewController *loadingView = [self.storyboard instantiateViewControllerWithIdentifier:@"LoadingViewController"];
+        loadingView.modalPresentationStyle = UIModalPresentationFormSheet;
+        [self presentViewController:loadingView animated:true completion:^{
+            self.alreadyRefreshed = true;
+        }];
+    }
+    [self showMessageOfDay];
 }
 - (void)updateTabInfo{
     [self showMessageOfDay];

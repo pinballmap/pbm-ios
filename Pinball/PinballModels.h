@@ -23,5 +23,7 @@
 #import "MachineLocation+CellHelpers.h"
 #import "Machine+CellHelpers.h"
 #import "Location+CellHelpers.h"
+#import "User.h"
+#import "User+Create.h"
 #import "Zone.h"
 #import "Zone+Create.h"

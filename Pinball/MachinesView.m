@@ -54,11 +54,18 @@
 }
 #pragma mark - Class Actions
 - (IBAction)addMachine:(id)sender{
-    UINavigationController *newMachine = [[UIStoryboard storyboardWithName:@"SecondaryControllers" bundle:nil] instantiateViewControllerWithIdentifier:@"NewMachineView"];
-    if ([UIDevice iPad]){
-        newMachine.modalPresentationStyle = UIModalPresentationFormSheet;
+    if ([[PinballMapManager sharedInstance] isLoggedInAsGuest]){
+        UINavigationController *navController = [[UIStoryboard storyboardWithName:@"SecondaryControllers" bundle:nil] instantiateViewControllerWithIdentifier:@"LoginViewController"];
+        
+        navController.modalPresentationStyle = UIModalPresentationFormSheet;
+        [self.navigationController presentViewController:navController animated:YES completion:nil];
+    } else {
+        UINavigationController *newMachine = [[UIStoryboard storyboardWithName:@"SecondaryControllers" bundle:nil] instantiateViewControllerWithIdentifier:@"NewMachineView"];
+        if ([UIDevice iPad]){
+            newMachine.modalPresentationStyle = UIModalPresentationFormSheet;
+        }
+        [self.navigationController presentViewController:newMachine animated:YES completion:nil];
     }
-    [self.navigationController presentViewController:newMachine animated:YES completion:nil];
 }
 - (IBAction)sortOptions:(id)sender{
     UIActionSheet *sortOptions = [[UIActionSheet alloc] initWithTitle:@"Machine Sort" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Manufacture",@"All", nil];
