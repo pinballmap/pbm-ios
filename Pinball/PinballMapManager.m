@@ -11,7 +11,6 @@
 #import "AFNetworking.h"
 #import "NSDate+CupertinoYankee.h"
 
-//static const NSString *apiRootURL = @"http://pinballmap.com/";
 static const NSString *apiRootURL = @"http://pinballmapstaging.herokuapp.com/";
 
 NSString * const motdKey = @"motd";
@@ -38,6 +37,10 @@ typedef NS_ENUM(NSInteger, PBMDataAPI) {
 
 
 @implementation PinballMapManager
+
++ (NSString *)getApiRootURL {
+    return apiRootURL;
+}
 
 + (id)sharedInstance{
     static dispatch_once_t p = 0;

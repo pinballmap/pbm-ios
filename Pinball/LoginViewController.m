@@ -32,6 +32,10 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (IBAction)signUp:(id)sender {
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@users/join",[PinballMapManager getApiRootURL]]]];
+}
+
 - (IBAction)continueAsGuest:(id)sender{
     NSDictionary *guestLoginData = @{
         @"id": [NSNumber numberWithInt:-1],

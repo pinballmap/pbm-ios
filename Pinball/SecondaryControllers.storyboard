@@ -1850,6 +1850,14 @@
                                         <action selector="continueAsGuest:" destination="ySm-pN-SOZ" eventType="touchDown" id="1Kd-3p-uwu"/>
                                     </connections>
                                 </button>
+                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GDy-1o-g6H">
+                                    <frame key="frameInset" minX="164" minY="100" width="46" height="30"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <state key="normal" title="Sign Up"/>
+                                    <connections>
+                                        <action selector="signUp:" destination="ySm-pN-SOZ" eventType="touchDown" id="SaX-AM-N1I"/>
+                                    </connections>
+                                </button>
                             </subviews>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         </view>
