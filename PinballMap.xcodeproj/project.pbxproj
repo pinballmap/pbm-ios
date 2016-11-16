@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		8E36953D1DC6746900BB7219 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E36953C1DC6746900BB7219 /* User.m */; };
 		8E3695401DC677A000BB7219 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E36953F1DC677A000BB7219 /* LoginViewController.m */; };
+		8E8D60AF1DDAD746000F828E /* ProfileView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E8D60AE1DDAD746000F828E /* ProfileView.m */; };
 		8EFDEC9A1DCE793F00AEB1BE /* User+Create.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EFDEC991DCE793F00AEB1BE /* User+Create.m */; };
 		8EFDECA01DCE80FD00AEB1BE /* Pinball.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 8EFDEC9B1DCE80FD00AEB1BE /* Pinball.xcdatamodeld */; };
 		CCA1EA9C1BD7D63C006CF91B /* MachineCondition.m in Sources */ = {isa = PBXBuildFile; fileRef = CCA1EA9B1BD7D63C006CF91B /* MachineCondition.m */; };
@@ -202,6 +203,8 @@
 		8E36953C1DC6746900BB7219 /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
 		8E36953E1DC6775D00BB7219 /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
 		8E36953F1DC677A000BB7219 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
+		8E8D60AD1DDAD731000F828E /* ProfileView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfileView.h; sourceTree = "<group>"; };
+		8E8D60AE1DDAD746000F828E /* ProfileView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfileView.m; sourceTree = "<group>"; };
 		8EFDEC981DCE78F500AEB1BE /* User+Create.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "User+Create.h"; sourceTree = "<group>"; };
 		8EFDEC991DCE793F00AEB1BE /* User+Create.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "User+Create.m"; sourceTree = "<group>"; };
 		8EFDEC9C1DCE80FD00AEB1BE /* Pinball v3.1.0.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Pinball v3.1.0.xcdatamodel"; sourceTree = "<group>"; };
@@ -506,6 +509,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		8E8D60AC1DDAD710000F828E /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				8E8D60AD1DDAD731000F828E /* ProfileView.h */,
+				8E8D60AE1DDAD746000F828E /* ProfileView.m */,
+			);
+			name = Profile;
+			sourceTree = "<group>";
+		};
 		CCB75A841AAF23F2003ED05C /* PinballMap Tests */ = {
 			isa = PBXGroup;
 			children = (
@@ -996,6 +1008,7 @@
 				DBB71BB318FC6B04007907DE /* PinballTabController.m */,
 				DB9A15F51A7D17C400819A1E /* LoadingViewController.h */,
 				DB9A15F61A7D17C400819A1E /* LoadingViewController.m */,
+				8E8D60AC1DDAD710000F828E /* Profile */,
 				DB52D2D718FAE95E00BB56D8 /* Locations */,
 				DB52D2DB18FAEFB100BB56D8 /* Machines */,
 				DB47C87F19C4655000FE8E4F /* Nearby */,
@@ -1349,6 +1362,7 @@
 				DB52D2DE18FAEFC500BB56D8 /* MachineProfileView.m in Sources */,
 				DBF06BDB18F96FF500F92912 /* main.m in Sources */,
 				DB5FFE9F19C618CA004C424B /* Region.m in Sources */,
+				8E8D60AF1DDAD746000F828E /* ProfileView.m in Sources */,
 				DB070BEB193202ED0018D521 /* Location.m in Sources */,
 				DB7B4C14193361AA002AF484 /* MachineScore.m in Sources */,
 				DB4D82BE190D77530048156E /* Machine+CellHelpers.m in Sources */,

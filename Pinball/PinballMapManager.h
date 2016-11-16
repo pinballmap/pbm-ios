@@ -28,6 +28,8 @@ typedef void (^APICompleteWithStatusCode)(NSDictionary *response,NSUInteger stat
 @property (nonatomic) User *currentUser;
 @property (nonatomic) CLLocation *userLocation;
 
++ (NSString *)apiQueryWithLoginCredentials:(NSString *)query;
++ (NSString *)getApiRootURL;
 + (id)sharedInstance;
 - (void)allRegions:(void (^)(NSArray *regions))regionBlock;
 - (void)refreshAllRegions;
