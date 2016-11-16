@@ -42,6 +42,12 @@ typedef NS_ENUM(NSInteger, PBMDataAPI) {
     return apiRootURL;
 }
 
++ (NSString *)apiQueryWithLoginCredentials:(NSString *)query {
+    User *currentUser = [[PinballMapManager sharedInstance] currentUser];
+    
+    return [NSString stringWithFormat:@"%@?user_token=%@;user_email=%@", query, currentUser.token, currentUser.email];
+}
+
 + (id)sharedInstance{
     static dispatch_once_t p = 0;
     __strong static id _sharedObject = nil;
@@ -143,7 +149,7 @@ typedef NS_ENUM(NSInteger, PBMDataAPI) {
         [regionIds addObject:obj.regionId];
     }];
     currentRegions = nil;
-    NSURLRequest *regionRequest = [NSURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@api/v1/regions.json",apiRootURL]]];
+    NSURLRequest *regionRequest = [NSURLRequest requestWithURL:[NSURL URLWithString:[PinballMapManager apiQueryWithLoginCredentials:[PinballMapManager apiQueryWithLoginCredentials:[NSString stringWithFormat:@"%@api/v1/regions.json",apiRootURL]]]]];
     AFHTTPRequestOperation *regionAPI = [[AFHTTPRequestOperation alloc] initWithRequest:regionRequest];
     regionAPI.responseSerializer = [AFJSONResponseSerializer serializer];
     [regionAPI setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
@@ -169,7 +175,7 @@ typedef NS_ENUM(NSInteger, PBMDataAPI) {
         [regionIds addObject:obj.regionId];
     }];
     currentRegions = nil;
-    NSURLRequest *regionRequest = [NSURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@api/v1/regions.json",apiRootURL]]];
+    NSURLRequest *regionRequest = [NSURLRequest requestWithURL:[NSURL URLWithString:[PinballMapManager apiQueryWithLoginCredentials:[PinballMapManager apiQueryWithLoginCredentials:[NSString stringWithFormat:@"%@api/v1/regions.json",apiRootURL]]]]];
     AFHTTPRequestOperation *regionAPI = [[AFHTTPRequestOperation alloc] initWithRequest:regionRequest];
     regionAPI.responseSerializer = [AFJSONResponseSerializer serializer];
     [regionAPI setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
@@ -268,7 +274,7 @@ typedef NS_ENUM(NSInteger, PBMDataAPI) {
 - (void)refreshBasicRegionData:(APIComplete)completionBlock{
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     manager.requestSerializer = [AFJSONRequestSerializer serializer];
-    [manager GET:[NSString stringWithFormat:@"%@api/v1/regions/%@.json",apiRootURL,self.currentRegion.regionId] parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [manager GET:[PinballMapManager apiQueryWithLoginCredentials:[PinballMapManager apiQueryWithLoginCredentials:[NSString stringWithFormat:@"%@api/v1/regions/%@.json",apiRootURL,self.currentRegion.regionId]]] parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
         completionBlock(responseObject);
      } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
          completionBlock(@{@"errors": error.localizedDescription});
@@ -331,7 +337,7 @@ typedef NS_ENUM(NSInteger, PBMDataAPI) {
 - (void)recentlyAddedMachinesWithCompletion:(APIComplete)completionBlock{
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     manager.requestSerializer = [AFJSONRequestSerializer serializer];
-    [manager GET:[NSString stringWithFormat:@"%@api/v1/region/%@/location_machine_xrefs.json?limit=10",apiRootURL,self.currentRegion.name] parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [manager GET:[PinballMapManager apiQueryWithLoginCredentials:[PinballMapManager apiQueryWithLoginCredentials:[NSString stringWithFormat:@"%@api/v1/region/%@/location_machine_xrefs.json?limit=10",apiRootURL,self.currentRegion.name]]]parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
         completionBlock(responseObject);
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         completionBlock(@{@"errors": error.localizedDescription});
@@ -346,7 +352,7 @@ typedef NS_ENUM(NSInteger, PBMDataAPI) {
     }
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     manager.requestSerializer = [AFJSONRequestSerializer serializer];
-    [manager GET:[NSString stringWithFormat:@"%@api/v1/locations/closest_by_lat_lon.json?lat=%@&lon=%@",apiRootURL,[@(userLocation.coordinate.latitude) stringValue],[@(userLocation.coordinate.longitude) stringValue]] parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [manager GET:[PinballMapManager apiQueryWithLoginCredentials:[PinballMapManager apiQueryWithLoginCredentials:[NSString stringWithFormat:@"%@api/v1/locations/closest_by_lat_lon.json?lat=%@&lon=%@",apiRootURL,[@(userLocation.coordinate.latitude) stringValue],[@(userLocation.coordinate.longitude) stringValue]]]] parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
         completionBlock(responseObject);
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         completionBlock(@{@"errors": error.localizedDescription});
@@ -356,22 +362,22 @@ typedef NS_ENUM(NSInteger, PBMDataAPI) {
     NSURL *apiURL;
     switch (apiType) {
         case PBMDataAPIRegions:
-            apiURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@api/v1/regions.json",apiRootURL]];
+            apiURL = [NSURL URLWithString:[PinballMapManager apiQueryWithLoginCredentials:[NSString stringWithFormat:@"%@api/v1/regions.json",apiRootURL]]];
             break;
         case PBMDataAPIMachines:
-            apiURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@api/v1/machines.json",apiRootURL]];
+            apiURL = [NSURL URLWithString:[PinballMapManager apiQueryWithLoginCredentials:[NSString stringWithFormat:@"%@api/v1/machines.json",apiRootURL]]];
             break;
         case PBMDataAPILocationTypes:
-            apiURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@api/v1/location_types.json",apiRootURL]];
+            apiURL = [NSURL URLWithString:[PinballMapManager apiQueryWithLoginCredentials:[NSString stringWithFormat:@"%@api/v1/location_types.json",apiRootURL]]];
             break;
         case PBMDataAPILocations:
-            apiURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@api/v1/region/%@/locations.json",apiRootURL,_currentRegion.name]];
+            apiURL = [NSURL URLWithString:[PinballMapManager apiQueryWithLoginCredentials:[NSString stringWithFormat:@"%@api/v1/region/%@/locations.json",apiRootURL,_currentRegion.name]]];
             break;
         case PBMDataAPIEvents:
-            apiURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@api/v1/region/%@/events.json",apiRootURL,_currentRegion.name]];
+            apiURL = [NSURL URLWithString:[PinballMapManager apiQueryWithLoginCredentials:[NSString stringWithFormat:@"%@api/v1/region/%@/events.json",apiRootURL,_currentRegion.name]]];
             break;
         case PBMDataAPIZones:
-            apiURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@api/v1/region/%@/zones.json",apiRootURL,_currentRegion.name]];
+            apiURL = [NSURL URLWithString:[PinballMapManager apiQueryWithLoginCredentials:[NSString stringWithFormat:@"%@api/v1/region/%@/zones.json",apiRootURL,_currentRegion.name]]];
             break;
         default:
             break;
@@ -600,7 +606,7 @@ typedef NS_ENUM(NSInteger, PBMDataAPI) {
 - (void)createNewMachine:(NSDictionary *)machineData withCompletion:(APIComplete)completionBlock{
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     manager.requestSerializer = [AFJSONRequestSerializer serializer];
-    [manager POST:[NSString stringWithFormat:@"%@api/v1/machines.json",apiRootURL] parameters:machineData success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [manager POST:[PinballMapManager apiQueryWithLoginCredentials:[NSString stringWithFormat:@"%@api/v1/machines.json",apiRootURL]] parameters:machineData success:^(AFHTTPRequestOperation *operation, id responseObject) {
         completionBlock(responseObject);
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         completionBlock(@{@"errors": error.localizedDescription});
@@ -609,7 +615,7 @@ typedef NS_ENUM(NSInteger, PBMDataAPI) {
 - (void)createNewMachineWithData:(NSDictionary *)machineData andParentMachine:(Machine *)machine forLocation:(Location *)location withCompletion:(APICompleteWithStatusCode)completionBlock{
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     manager.requestSerializer = [AFJSONRequestSerializer serializer];
-    [manager POST:[NSString stringWithFormat:@"%@api/v1/location_machine_xrefs.json",apiRootURL] parameters:machineData success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [manager POST:[PinballMapManager apiQueryWithLoginCredentials:[NSString stringWithFormat:@"%@api/v1/location_machine_xrefs.json",apiRootURL]] parameters:machineData success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSUInteger statusCode = operation.response.statusCode;
         if (statusCode == 201){
             NSDictionary *machineLocation = responseObject[@"location_machine"];
@@ -628,7 +634,7 @@ typedef NS_ENUM(NSInteger, PBMDataAPI) {
 - (void)updateMachineCondition:(MachineLocation *)machine withCondition:(NSString *)newCondition withCompletion:(APIComplete)completionBlock{
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     manager.requestSerializer = [AFJSONRequestSerializer serializer];
-    [manager PUT:[NSString stringWithFormat:@"%@api/v1/location_machine_xrefs/%@.json",apiRootURL,machine.machineLocationId] parameters:@{@"condition": newCondition} success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [manager PUT:[PinballMapManager apiQueryWithLoginCredentials:[NSString stringWithFormat:@"%@api/v1/location_machine_xrefs/%@.json",apiRootURL,machine.machineLocationId]] parameters:@{@"condition": newCondition} success:^(AFHTTPRequestOperation *operation, id responseObject) {
         completionBlock(responseObject);
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         completionBlock(@{@"errors": error.localizedDescription});
@@ -637,7 +643,7 @@ typedef NS_ENUM(NSInteger, PBMDataAPI) {
 - (void)allScoresForMachine:(MachineLocation *)machine withCompletion:(APIComplete)completionBlock{
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     manager.requestSerializer = [AFJSONRequestSerializer serializer];
-    [manager GET:[NSString stringWithFormat:@"%@api/v1/machine_score_xrefs/%@.json",apiRootURL,machine.machineLocationId] parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [manager GET:[PinballMapManager apiQueryWithLoginCredentials:[NSString stringWithFormat:@"%@api/v1/machine_score_xrefs/%@.json",apiRootURL,machine.machineLocationId]] parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
         completionBlock(responseObject);
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         completionBlock(@{@"errors": error.localizedDescription});
@@ -646,7 +652,7 @@ typedef NS_ENUM(NSInteger, PBMDataAPI) {
 - (void)addScore:(NSDictionary *)scoreData forMachine:(MachineLocation *)machine withCompletion:(APIComplete)completionBlock{
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     manager.requestSerializer = [AFJSONRequestSerializer serializer];
-    [manager POST:[NSString stringWithFormat:@"%@api/v1/machine_score_xrefs.json",apiRootURL] parameters:scoreData success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [manager POST:[PinballMapManager apiQueryWithLoginCredentials:[NSString stringWithFormat:@"%@api/v1/machine_score_xrefs.json",apiRootURL]] parameters:scoreData success:^(AFHTTPRequestOperation *operation, id responseObject) {
         completionBlock(responseObject);
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         completionBlock(@{@"errors": error.localizedDescription});
@@ -655,7 +661,7 @@ typedef NS_ENUM(NSInteger, PBMDataAPI) {
 - (void)removeMachine:(MachineLocation *)machine withCompletion:(APIComplete)completionBlock{
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     manager.requestSerializer = [AFJSONRequestSerializer serializer];
-    [manager DELETE:[NSString stringWithFormat:@"%@api/v1/location_machine_xrefs/%@.json",apiRootURL,machine.machineLocationId] parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [manager DELETE:[PinballMapManager apiQueryWithLoginCredentials:[NSString stringWithFormat:@"%@api/v1/location_machine_xrefs/%@.json",apiRootURL,machine.machineLocationId]] parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
         completionBlock(responseObject);
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         completionBlock(@{@"errors": error.localizedDescription});
@@ -665,7 +671,7 @@ typedef NS_ENUM(NSInteger, PBMDataAPI) {
 - (void)updateLocation:(Location *)location withData:(NSDictionary *)locationData andCompletion:(APIComplete)completionBlock{
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     manager.requestSerializer = [AFJSONRequestSerializer serializer];
-    [manager PUT:[NSString stringWithFormat:@"%@api/v1/locations/%@.json",apiRootURL,location.locationId] parameters:locationData success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [manager PUT:[PinballMapManager apiQueryWithLoginCredentials:[NSString stringWithFormat:@"%@api/v1/locations/%@.json",apiRootURL,location.locationId]] parameters:locationData success:^(AFHTTPRequestOperation *operation, id responseObject) {
         completionBlock(responseObject);
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         completionBlock(@{@"errors": error.localizedDescription});
@@ -674,7 +680,7 @@ typedef NS_ENUM(NSInteger, PBMDataAPI) {
 - (void)suggestLocation:(NSDictionary *)locationData andCompletion:(APIComplete)completionBlock{
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     manager.requestSerializer = [AFJSONRequestSerializer serializer];
-    [manager POST:[NSString stringWithFormat:@"%@api/v1/locations/suggest.json",apiRootURL] parameters:locationData success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [manager POST:[PinballMapManager apiQueryWithLoginCredentials:[NSString stringWithFormat:@"%@api/v1/locations/suggest.json",apiRootURL]] parameters:locationData success:^(AFHTTPRequestOperation *operation, id responseObject) {
         completionBlock(responseObject);
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         completionBlock(@{@"errors": error.localizedDescription});
@@ -683,7 +689,7 @@ typedef NS_ENUM(NSInteger, PBMDataAPI) {
 - (void)confirmLocationInformation:(Location *)location andCompletion:(APIComplete)completionBlock{
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     manager.requestSerializer = [AFJSONRequestSerializer serializer];
-    [manager GET:[NSString stringWithFormat:@"%@api/v1/locations/%@.json",apiRootURL,location.locationId] parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [manager GET:[PinballMapManager apiQueryWithLoginCredentials:[NSString stringWithFormat:@"%@api/v1/locations/%@.json",apiRootURL,location.locationId]] parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
         completionBlock(responseObject);
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         completionBlock(@{@"errors": error.localizedDescription});
@@ -708,16 +714,16 @@ typedef NS_ENUM(NSInteger, PBMDataAPI) {
     
     switch (contactType) {
         case ContactTypeRegionContact:
-            contactRoute = [NSString stringWithFormat:@"%@api/v1/regions/contact.json",apiRootURL];
+            contactRoute = [PinballMapManager apiQueryWithLoginCredentials:[NSString stringWithFormat:@"%@api/v1/regions/contact.json",apiRootURL]];
             break;
         case ContactTypeRegionSuggest:
-            contactRoute = [NSString stringWithFormat:@"%@api/v1/regions/suggest.json",apiRootURL];
+            contactRoute = [PinballMapManager apiQueryWithLoginCredentials:[NSString stringWithFormat:@"%@api/v1/regions/suggest.json",apiRootURL]];
             break;
         case ContactTypeEvent:
-            contactRoute = [NSString stringWithFormat:@"%@api/v1/regions/contact.json",apiRootURL];
+            contactRoute = [PinballMapManager apiQueryWithLoginCredentials:[NSString stringWithFormat:@"%@api/v1/regions/contact.json",apiRootURL]];
             break;
         case ContactTypeAppFeedback:
-            contactRoute = [NSString stringWithFormat:@"%@api/v1/regions/app_comment.json",apiRootURL];
+            contactRoute = [PinballMapManager apiQueryWithLoginCredentials:[NSString stringWithFormat:@"%@api/v1/regions/app_comment.json",apiRootURL]];
             break;
         default:
             break;
@@ -737,7 +743,7 @@ typedef NS_ENUM(NSInteger, PBMDataAPI) {
     
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     manager.requestSerializer = [AFJSONRequestSerializer serializer];
-    NSString *loginRoute = [NSString stringWithFormat:@"%@api/v1/users/auth_details.json",apiRootURL];
+    NSString *loginRoute = [PinballMapManager apiQueryWithLoginCredentials:[NSString stringWithFormat:@"%@api/v1/users/auth_details.json",apiRootURL]];
     
     NSLog(@"%@",loginRoute);
     
