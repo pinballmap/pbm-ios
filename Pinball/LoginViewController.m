@@ -59,9 +59,6 @@
         return;
     }
     
-    NSLog(@"%@",self.loginField.text);
-    NSLog(@"%@",self.passwordField.text);
-    
     NSDictionary *loginData = @{
         @"login": self.loginField.text,
         @"password": self.passwordField.text,
