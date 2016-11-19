@@ -39,7 +39,6 @@
 }
 - (void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
-    NSLog(@"IN TAB CONTROLLER VIEW DID APPEAR");
     if (![[PinballMapManager sharedInstance] currentUser]){
         LoginViewController *loginViewController = [[UIStoryboard storyboardWithName:@"SecondaryControllers" bundle:nil] instantiateViewControllerWithIdentifier:@"LoginViewController"];
         UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:loginViewController];

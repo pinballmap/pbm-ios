@@ -43,8 +43,10 @@ typedef NS_ENUM(NSInteger, PBMDataAPI) {
 }
 
 + (NSString *)apiQueryWithLoginCredentials:(NSString *)query {
+    NSLog(@"ABOUT TO RUN QUERY: %@", query);
     User *currentUser = [[PinballMapManager sharedInstance] currentUser];
     
+    NSLog(@"MASSAGED QUERY: %@", [NSString stringWithFormat:@"%@?user_token=%@;user_email=%@", query, currentUser.token, currentUser.email]);
     return [NSString stringWithFormat:@"%@?user_token=%@;user_email=%@", query, currentUser.token, currentUser.email];
 }
 
@@ -84,6 +86,8 @@ typedef NS_ENUM(NSInteger, PBMDataAPI) {
         self.session = [NSURLSession sharedSession];
         [self migrateUserDefaults];
         _regionInfo = [[PinballMapManager userDefaultsForApp] objectForKey:@"CurrentRegion"];
+        _userInfo = [[PinballMapManager userDefaultsForApp] objectForKey:@"CurrentUser"];
+
         if (_regionInfo){
             NSFetchRequest *regionRequest = [NSFetchRequest fetchRequestWithEntityName:@"Region"];
             regionRequest.predicate = [NSPredicate predicateWithFormat:@"name = %@",_regionInfo[@"name"]];
@@ -96,8 +100,20 @@ typedef NS_ENUM(NSInteger, PBMDataAPI) {
                 _currentRegion = [self regionWithData:@{@"full_name":@"Seattle",@"id":@3,@"lat":@48,@"lon":@(-122),@"name":@"seattle",@"primary_email_contact":@"morganshilling@gmail.com"} shouldCreate:YES];
                 [self loadRegionData:_currentRegion];
             }
+            
+            NSFetchRequest *userRequest = [NSFetchRequest fetchRequestWithEntityName:@"User"];
+            userRequest.predicate = [NSPredicate predicateWithFormat:@"username = %@", _userInfo[@"username"]];
+            NSManagedObjectContext *userContext = [[CoreDataManager sharedInstance] managedObjectContext];
+            NSArray *userResults = [userContext executeFetchRequest:userRequest error:nil];
+            
+            if (userResults.count == 1) {
+                _currentUser = userResults[0];
+            } else {
+                _currentUser = nil;
+            }
         }else{
             _currentRegion = nil;
+            _userInfo = nil;
         }
     }
     return self;

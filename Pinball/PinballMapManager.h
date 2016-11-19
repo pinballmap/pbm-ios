@@ -24,6 +24,7 @@ typedef void (^APICompleteWithStatusCode)(NSDictionary *response,NSUInteger stat
 @interface PinballMapManager : NSObject
 
 @property (nonatomic) NSDictionary *regionInfo;
+@property (nonatomic) NSDictionary *userInfo;
 @property (nonatomic) Region *currentRegion;
 @property (nonatomic) User *currentUser;
 @property (nonatomic) CLLocation *userLocation;

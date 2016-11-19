@@ -129,7 +129,6 @@
 #pragma mark - Region Selection Delegate
 - (void)didSelectNewRegion:(Region *)region{
     [self.loadingAlert show];
-//    [self updateRegion];
 }
 #pragma mark - TableView Datasource/Delegate
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
