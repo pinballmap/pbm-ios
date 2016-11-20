@@ -8,6 +8,14 @@
 @property (nonatomic, retain) NSString * email;
 @property (nonatomic, retain) NSString * token;
 
+@property (nonatomic, retain) NSString * numMachinesAdded;
+@property (nonatomic, retain) NSString * numMachinesRemoved;
+@property (nonatomic, retain) NSString * numLocationsEdited;
+@property (nonatomic, retain) NSString * numLocationsSuggested;
+@property (nonatomic, retain) NSString * numCommentsLeft;
+
+@property (nonatomic, retain) NSString * createdAt;
+
 +(NSString *) guestUsername;
 
 @end

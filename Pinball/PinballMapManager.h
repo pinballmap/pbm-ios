@@ -36,6 +36,7 @@ typedef void (^APICompleteWithStatusCode)(NSDictionary *response,NSUInteger stat
 - (void)refreshAllRegions;
 - (void)loadRegionData:(Region *)region;
 - (void)loadUserData:(User *)user;
+- (void)loadUserProfileData:(User *)user andCompletion:(APIComplete)completionBlock;
 - (void)refreshRegion;
 - (BOOL)isLoggedInAsGuest;
 - (BOOL)shouldShowMessageOfDay;
