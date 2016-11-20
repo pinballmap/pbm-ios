@@ -18,6 +18,12 @@
     
     User *user = [[PinballMapManager sharedInstance] currentUser];
     self.usernameLabel.text = user.username;
+    self.numCommentsLeftLabel.text = user.numCommentsLeft;
+    self.numMachinesAddedLabel.text = user.numMachinesAdded;
+    self.numLocationsEditedLabel.text = user.numLocationsEdited;
+    self.numMachinesRemovedLabel.text = user.numMachinesRemoved;
+    self.numLocationsSuggestedLabel.text = user.numLocationsSuggested;
+    
 }
 - (void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];

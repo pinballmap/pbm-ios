@@ -350,6 +350,21 @@ typedef NS_ENUM(NSInteger, PBMDataAPI) {
     [[CoreDataManager sharedInstance] saveContext];
 }
 
+- (void)loadUserProfileData:(User *)user andCompletion:(APIComplete)completionBlock{
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"UpdatingUserProfileInfo" object:nil];
+    
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    manager.requestSerializer = [AFJSONRequestSerializer serializer];
+    
+    NSString *userProfileQuery = [PinballMapManager apiQueryWithLoginCredentials:[NSString stringWithFormat:@"%@api/v1/users/%@/profile_info.json",apiRootURL,[user.userId stringValue]]];
+    
+    [manager GET:userProfileQuery parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        completionBlock(responseObject);
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        completionBlock(@{@"errors": error.localizedDescription});
+    }];
+}
+
 - (void)recentlyAddedMachinesWithCompletion:(APIComplete)completionBlock{
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     manager.requestSerializer = [AFJSONRequestSerializer serializer];
@@ -754,9 +769,7 @@ typedef NS_ENUM(NSInteger, PBMDataAPI) {
 }
 
 #pragma mark - Login
-- (void)login:(NSDictionary *)loginData andCompletion:(APIComplete)completionBlock{
-    NSLog(@"ATTEMPTING TO LOGIN");
-    
+- (void)login:(NSDictionary *)loginData andCompletion:(APIComplete)completionBlock{    
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     manager.requestSerializer = [AFJSONRequestSerializer serializer];
     NSString *loginRoute = [PinballMapManager apiQueryWithLoginCredentials:[NSString stringWithFormat:@"%@api/v1/users/auth_details.json",apiRootURL]];
