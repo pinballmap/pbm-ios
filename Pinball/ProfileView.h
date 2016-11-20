@@ -3,5 +3,6 @@
 
 @interface ProfileView : UIViewController
 
-@end
+@property (strong, nonatomic) IBOutlet UILabel *usernameLabel;
 
+@end
