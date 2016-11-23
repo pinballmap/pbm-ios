@@ -68,7 +68,7 @@
     }
 }
 - (IBAction)sortOptions:(id)sender{
-    UIActionSheet *sortOptions = [[UIActionSheet alloc] initWithTitle:@"Machine Sort" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Manufacture",@"All", nil];
+    UIActionSheet *sortOptions = [[UIActionSheet alloc] initWithTitle:@"Machine Sort" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Manufacturer",@"All", nil];
     [sortOptions showFromTabBar:self.tabBarController.tabBar];
 }
 #pragma mark - Region Update
