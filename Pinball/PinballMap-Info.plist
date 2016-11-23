@@ -38,7 +38,7 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>25</string>
+	<string>26</string>
 	<key>LSApplicationCategoryType</key>
 	<string></string>
 	<key>LSRequiresIPhoneOS</key>
@@ -48,8 +48,10 @@
 		<key>NSAllowsArbitraryLoads</key>
 		<true/>
 	</dict>
+	<key>NSCalendarsUsageDescription</key>
+	<string>Pinball Map is asking for "Always" access so that the app can support region events.</string>
 	<key>NSLocationAlwaysUsageDescription</key>
-	<string>Pinball Map is asking for &quot;Always&quot; access so that the app can support the Apple Watch to find nearby locations.</string>
+	<string>Pinball Map is asking for "Always" access so that the app can support the Apple Watch to find nearby locations.</string>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>fetch</string>
