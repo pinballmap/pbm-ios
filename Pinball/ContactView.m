@@ -42,7 +42,7 @@
             self.navigationItem.title = @"Suggest Event";
             break;
         case ContactTypeRegionContact:
-            self.navigationItem.title = @"Region Contact";
+            self.navigationItem.title = @"Contact Admin";
             break;
         case ContactTypeRegionSuggest:
             self.navigationItem.title = @"Region Suggest";
