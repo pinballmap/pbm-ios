@@ -13,13 +13,25 @@
 @implementation MachineLocation (CellHelpers)
 
 - (NSString *)conditionWithUpdateDate{
-    return [NSString stringWithFormat:@"%@ (updated on %@)",self.condition,[self.conditionUpdate monthDayYearPretty:YES]];
+    NSString * usernameData = @"";
+    
+    if (![self.updatedByUsername isKindOfClass:[NSNull class]]) {
+        usernameData = [NSString stringWithFormat:@" by %@", self.updatedByUsername];
+    }
+    return [NSString stringWithFormat:@"%@ (updated on %@%@)",self.condition,[self.conditionUpdate monthDayYearPretty:YES], usernameData];
 }
 
 - (NSString *)pastConditionWithUpdateDate:(MachineCondition *)pastCondition{
-    if (pastCondition.conditionCreated){
-        return [NSString stringWithFormat:@"%@ (updated on %@)",pastCondition.comment,[pastCondition.conditionCreated monthDayYearPretty:YES]];
+    NSString * usernameData = @"";
+    
+    if (![pastCondition.createdByUsername isKindOfClass:[NSNull class]]) {
+        usernameData = [NSString stringWithFormat:@" by %@", pastCondition.createdByUsername];
     }
+    
+    if (pastCondition.conditionCreated){
+        return [NSString stringWithFormat:@"%@ (updated on %@%@)",pastCondition.comment,[pastCondition.conditionCreated monthDayYearPretty:YES], usernameData];
+    }
+    
     return [NSString stringWithFormat:@"%@",pastCondition.comment];
     
 }

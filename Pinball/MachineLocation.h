@@ -19,6 +19,7 @@
 @property (nonatomic, retain) Location *location;
 @property (nonatomic, retain) Machine *machine;
 @property (nonatomic, retain) NSSet * conditions;
+@property (nonatomic, retain) NSString * updatedByUsername;
 
 @end
 

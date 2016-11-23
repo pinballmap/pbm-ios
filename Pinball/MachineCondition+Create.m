@@ -32,6 +32,11 @@
         createdString = [createdString substringToIndex:[createdString rangeOfString:@"T"].location];
         newCondition.conditionCreated = [df dateFromString:createdString];
     }
+    
+    if (![data[@"username"] isKindOfClass:[NSNull class]]) {
+        newCondition.createdByUsername = data[@"username"];
+    }
+    
     newCondition.conditionId = data[@"id"];
     
     return newCondition;

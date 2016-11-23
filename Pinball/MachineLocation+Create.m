@@ -43,6 +43,11 @@
     }else{
         newMachine.conditionUpdate = [NSDate date];
     }
+    
+    if (![data[@"last_updated_by_username"] isKindOfClass:[NSNull class]]) {
+        newMachine.updatedByUsername = data[@"last_updated_by_username"];
+    }
+    
     return newMachine;
 }
 

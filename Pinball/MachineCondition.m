@@ -11,9 +11,6 @@
 
 @implementation MachineCondition
 
-@dynamic comment;
-@dynamic conditionCreated;
-@dynamic conditionId;
-@dynamic machineLocation;
+@dynamic comment, conditionCreated, conditionId, machineLocation, createdByUsername;
 
 @end
