@@ -133,7 +133,7 @@
 #pragma mark - TableView Datasource/Delegate
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     // 0->MOTD
-    // 1->Region contact
+    // 1->Contact Admin
     // 2->Local Stuff
     // 3->High Scores
     return self.regionLinks.count+3;
@@ -206,7 +206,7 @@
         cell.textLabel.numberOfLines = 0;
         cell.textLabel.text = self.regionMOTD;
     }else if (indexPath.section == 1){
-        cell.textLabel.text = @"Region Contact";
+        cell.textLabel.text = @"Contact Admin";
     }else if (indexPath.section > 1 && indexPath.section-1 <= self.regionLinks.count){
         RegionLink *link = [self.regionLinks[indexPath.section-2] objectAtIndex:indexPath.row];
         cell.detailTextLabel.numberOfLines = 0;
