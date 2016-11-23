@@ -10,14 +10,8 @@
 #import "Location.h"
 #import "Machine.h"
 
-
 @implementation MachineLocation
 
-@dynamic condition;
-@dynamic conditionUpdate;
-@dynamic machineLocationId;
-@dynamic location;
-@dynamic machine;
-@dynamic conditions;
+@dynamic condition, conditionUpdate, machineLocationId, location, machine, conditions, updatedByUsername;
 
 @end

@@ -17,5 +17,6 @@
 @property (nonatomic, retain) NSDate * conditionCreated;
 @property (nonatomic, retain) NSNumber * conditionId;
 @property (nonatomic, retain) MachineLocation *machineLocation;
+@property (nonatomic, retain) NSString * createdByUsername;
 
 @end
