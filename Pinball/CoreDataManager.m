@@ -134,7 +134,7 @@
     NSURL *docDirectory = [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject];
     docDirectory = [docDirectory URLByAppendingPathComponent:[NSString stringWithFormat:@"%@.sqlite",dataModel]];
     // Move the existing CoreData SQLite to the new security container, so it can be used for extensions.
-    NSURL *securityContainer = [[NSFileManager defaultManager] containerURLForSecurityApplicationGroupIdentifier:@"group.net.isaacruiz.ppm"];
+    NSURL *securityContainer = [[NSFileManager defaultManager] containerURLForSecurityApplicationGroupIdentifier:@"group.com.pbm"];
     if ([[NSFileManager defaultManager] fileExistsAtPath:docDirectory.path]){
         BOOL copyStatus = [[NSFileManager defaultManager] copyItemAtURL:docDirectory toURL:[securityContainer URLByAppendingPathComponent:[NSString stringWithFormat:@"%@.sqlite",dataModel]]  error:nil];
         if (copyStatus){
