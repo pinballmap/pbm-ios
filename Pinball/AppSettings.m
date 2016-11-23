@@ -12,7 +12,7 @@
 
 #import "AppSettings.h"
 
-NSString * const appGroupString = @"group.net.isaacruiz.ppm";
+NSString * const appGroupString = @"group.com.pbm";
 
 @implementation AppSettings
 

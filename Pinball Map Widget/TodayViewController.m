@@ -14,7 +14,7 @@
 #import "Event+CellHelpers.h"
 
 NSString * const apiRootURL = @"http://pinballmap.com/";
-NSString * const appGroup = @"group.net.isaacruiz.ppm";
+NSString * const appGroup = @"group.com.pbm";
 NSString * const etagKey = @"recentsEtag";
 
 @interface TodayViewController () <NCWidgetProviding>

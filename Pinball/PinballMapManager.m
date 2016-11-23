@@ -15,7 +15,7 @@ static const NSString *apiRootURL = @"http://pinballmapstaging.herokuapp.com/";
 
 NSString * const motdKey = @"motd";
 NSString * const motdRegionKey = @"region_id";
-NSString * const appGroup = @"group.net.isaacruiz.ppm";
+NSString * const appGroup = @"group.com.pbm";
 
 typedef NS_ENUM(NSInteger, PBMDataAPI) {
     PBMDataAPIRegions = 0,
