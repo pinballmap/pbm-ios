@@ -20,8 +20,6 @@
 @property (weak) IBOutlet UITextField *locationWebsite;
 @property (weak) IBOutlet UITextField *locationOperator;
 @property (weak) IBOutlet UILabel *machineLabel;
-@property (weak) IBOutlet UITextField *userName;
-@property (weak) IBOutlet UITextField *userEmail;
 // Location information
 @property (weak) IBOutlet UITextField *locationStreet;
 @property (weak) IBOutlet UITextField *locationCity;
@@ -84,9 +82,7 @@
                                          @"location_phone": self.locationPhone.text,
                                          @"location_website": self.locationWebsite.text,
                                          @"location_operator": self.locationOperator.text,
-                                         @"location_machines": pickedMachineNames,
-                                         @"submitter_name" : self.userName.text,
-                                         @"submitter_email": self.userEmail.text};
+                                         @"location_machines": pickedMachineNames};
         [[PinballMapManager sharedInstance] suggestLocation:suggestingInfo andCompletion:^(NSDictionary *status) {
             if (status[@"errors"]){
                 NSString *errors;
@@ -104,9 +100,6 @@
     }else{
         [UIAlertView simpleApplicationAlertWithMessage:@"You must enter a name and pick at least one machine." cancelButton:@"Ok"];
     }
-    
-
-
 }
 - (IBAction)cancelLocation:(id)sender{
     [self dismissViewControllerAnimated:YES completion:nil];
