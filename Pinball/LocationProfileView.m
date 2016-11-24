@@ -83,7 +83,9 @@ int const headerHeight = 90;
     [self.infoUpToDateButton addTarget:self action:@selector(informationUpToDate:) forControlEvents:UIControlEventTouchUpInside];
     [self.infoUpToDateButton setTitle:@"Tap to confirm machine line-up!" forState:UIControlStateNormal];
     [self.infoUpToDateButton setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
-    
+}
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
     
     if (_currentLocation){
         [self setupUI];
@@ -106,11 +108,17 @@ int const headerHeight = 90;
     [self.machinesFetch performFetch:nil];
     self.dataSetSeg.selectedSegmentIndex = 0;
     self.tableView.allowsSelectionDuringEditing = YES;
+    
     NSString *lastUpdateString;
     if (_currentLocation.lastUpdated == NULL){
         lastUpdateString = @"Last Update: Unknown";
     }else{
-        lastUpdateString = [NSString stringWithFormat:@"Last Update: %@",[_currentLocation.lastUpdated monthDayYearPretty:YES]];
+        NSString *usernameData = @"";
+        if (![_currentLocation.lastUpdatedByUsername isKindOfClass:[NSNull class]]){
+            usernameData = [NSString stringWithFormat:@" by %@", _currentLocation.lastUpdatedByUsername];
+        }
+        
+        lastUpdateString = [NSString stringWithFormat:@"Last Update: %@%@",[_currentLocation.lastUpdated monthDayYearPretty:YES], usernameData];
     }
     self.lastUpdateLabel.text = lastUpdateString;
     [self setupRightBarButton];
@@ -196,9 +204,31 @@ int const headerHeight = 90;
     [self.tableView reloadData];
 }
 - (IBAction)informationUpToDate:(id)sender{
-    // Code to update that information for the location
-    // is up to date.
-    
+    if ([[PinballMapManager sharedInstance] isLoggedInAsGuest]){
+        UINavigationController *navController = [[UIStoryboard storyboardWithName:@"SecondaryControllers" bundle:nil] instantiateViewControllerWithIdentifier:@"LoginViewController"];
+        navController.modalPresentationStyle = UIModalPresentationFormSheet;
+        [self.navigationController presentViewController:navController animated:YES completion:nil];
+    } else {
+        [[PinballMapManager sharedInstance] confirmLocation:self.currentLocation andCompletion:^(NSDictionary *status) {
+            if (status[@"errors"]) {
+                NSString *errors;
+                if ([status[@"errors"] isKindOfClass:[NSArray class]]){
+                    errors = [status[@"errors"] componentsJoinedByString:@","];
+                }else{
+                    errors = status[@"errors"];
+                }
+                [UIAlertView simpleApplicationAlertWithMessage:errors cancelButton:@"Ok"];
+            } else {
+                [UIAlertView simpleApplicationAlertWithMessage:@"Confirmed, thank you." cancelButton:@"Ok"];
+                
+                self.currentLocation.lastUpdatedByUsername = [[PinballMapManager sharedInstance] currentUser].username;
+                self.currentLocation.lastUpdated = [NSDate date];
+                
+                [[CoreDataManager sharedInstance] saveContext];
+                [self setupUI];
+            }
+        }];
+    }    
 }
 #pragma mark - TextEditor Delegate
 - (void)editorDidComplete:(NSString *)text{
@@ -251,9 +281,8 @@ int const headerHeight = 90;
     }];
     
 }
-- (void)editorDidCancel{
-    
-}
+- (void)editorDidCancel{}
+
 #pragma mark - Locaiton Type Delegate
 - (void)selectedLocationType:(LocationType *)type{
     if (type){
@@ -332,23 +361,6 @@ int const headerHeight = 90;
 }
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
     if (section == 1 || (section == 0 && !self.showMapSnapshot)){
-        
-        /* Code to hide the update location data button. Delete and replace with code below */
-        UIView *dataSegView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.frame.size.width, 50)];
-        [dataSegView addSubview:self.dataSetSeg];
-        [dataSegView addSubview:self.lastUpdateLabel];
-        if (self.dataSetSeg){
-            NSArray *verticalConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-(-5)-[seg]-(-5)-|" options:NSLayoutFormatAlignmentMask metrics:nil views:@{@"seg": self.dataSetSeg}];
-            [dataSegView addConstraints:verticalConstraints];
-        }
-        if (self.lastUpdateLabel){
-            NSArray *horzCon = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-(0)-[lastup]-(0)-|" options:NSLayoutFormatAlignmentMask metrics:nil views:@{@"lastup": self.lastUpdateLabel}];
-            NSArray *vertCon = [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-(30)-[lastup]-(0)-|" options:NSLayoutFormatAlignmentMask metrics:nil views:@{@"lastup": self.lastUpdateLabel}];
-            [dataSegView addConstraints:horzCon];
-            [dataSegView addConstraints:vertCon];
-        }
-        
-        /* Code to show an update button for confirming the location data is up to date
         UIView *dataSegView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.frame.size.width, headerHeight)];
         [dataSegView addSubview:self.dataSetSeg];
         [dataSegView addSubview:self.lastUpdateLabel];
@@ -369,7 +381,7 @@ int const headerHeight = 90;
             [dataSegView addConstraints:horzCon];
             [dataSegView addConstraints:vertCon];
         }
-         */
+
         [dataSegView setBackgroundColor:[UIColor whiteColor]];
 
         return dataSegView;

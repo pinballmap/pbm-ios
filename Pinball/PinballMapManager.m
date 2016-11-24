@@ -774,8 +774,6 @@ typedef NS_ENUM(NSInteger, PBMDataAPI) {
     manager.requestSerializer = [AFJSONRequestSerializer serializer];
     NSString *loginRoute = [PinballMapManager apiQueryWithLoginCredentials:[NSString stringWithFormat:@"%@api/v1/users/auth_details.json",apiRootURL]];
     
-    NSLog(@"%@",loginRoute);
-    
     [manager GET:loginRoute parameters:loginData success:^(AFHTTPRequestOperation *operation, id responseObject) {
         completionBlock(responseObject);
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -791,6 +789,18 @@ typedef NS_ENUM(NSInteger, PBMDataAPI) {
     } else {
         return false;
     }
+}
+
+- (void)confirmLocation:(Location *)location andCompletion:(APIComplete)completionBlock {
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    manager.requestSerializer = [AFJSONRequestSerializer serializer];
+    NSString *confirmLocationUrl = [PinballMapManager apiQueryWithLoginCredentials:[NSString stringWithFormat:@"%@api/v1/locations/%@/confirm.json",apiRootURL, [location.locationId stringValue]]];
+    
+    [manager PUT:confirmLocationUrl parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        completionBlock(responseObject);
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        completionBlock(@{@"errors": error.localizedDescription});
+    }];
 }
 
 @end

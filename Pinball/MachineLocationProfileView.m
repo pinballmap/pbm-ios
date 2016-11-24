@@ -241,6 +241,10 @@
         }else{
             _currentMachine.condition = text;
             _currentMachine.conditionUpdate = [NSDate date];
+            
+            _currentMachine.location.lastUpdatedByUsername = [[PinballMapManager sharedInstance] currentUser].username;
+            _currentMachine.location.lastUpdated = [NSDate date];
+            
             [[CoreDataManager sharedInstance] saveContext];
             [UIAlertView simpleApplicationAlertWithMessage:@"Updated condition" cancelButton:@"Ok"];
             [self.tableView reloadData];

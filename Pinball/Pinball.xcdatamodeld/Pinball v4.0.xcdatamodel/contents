@@ -16,6 +16,7 @@
     <entity name="Location" representedClassName="Location" syncable="YES">
         <attribute name="city" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="lastUpdated" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="lastUpdatedByUsername" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="latitude" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="locationDescription" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="locationDistance" optional="YES" attributeType="Float" defaultValueString="0.0" usesScalarValueType="NO" syncable="YES"/>
@@ -102,7 +103,7 @@
     </entity>
     <elements>
         <element name="Event" positionX="-2529" positionY="-720" width="128" height="208"/>
-        <element name="Location" positionX="-2250" positionY="-702" width="128" height="373"/>
+        <element name="Location" positionX="-2250" positionY="-702" width="128" height="390"/>
         <element name="LocationType" positionX="-2063" positionY="-619" width="128" height="88"/>
         <element name="Machine" positionX="-2531" positionY="-328" width="128" height="148"/>
         <element name="MachineCondition" positionX="-2691" positionY="-475" width="128" height="120"/>

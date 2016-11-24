@@ -16,6 +16,7 @@
 
 @property (nonatomic, retain) NSString * createdAt;
 
-+(NSString *) guestUsername;
++(NSString *)guestUsername;
+-(Boolean)isGuest;
 
 @end

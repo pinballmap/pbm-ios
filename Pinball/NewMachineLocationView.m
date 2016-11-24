@@ -97,6 +97,12 @@
                 }else{
                     [UIAlertView simpleApplicationAlertWithMessage:@"Updated Machine data" cancelButton:@"Ok"];
                 }
+                
+                _location.lastUpdatedByUsername = [[PinballMapManager sharedInstance] currentUser].username;
+                _location.lastUpdated = [NSDate date];
+                
+                [[CoreDataManager sharedInstance] saveContext];
+
                 [self dismissViewControllerAnimated:YES completion:nil];
             }
  

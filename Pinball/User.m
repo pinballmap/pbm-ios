@@ -6,4 +6,8 @@
 
 +(NSString *)guestUsername { return @"GUEST_USERNAME"; }
 
+-(Boolean)isGuest {
+    return [self.username isEqualToString:[User guestUsername]];
+}
+
 @end
