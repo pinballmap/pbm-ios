@@ -64,6 +64,10 @@
         }else{
             _currentMachine.condition = self.machineCondition.text;
             _currentMachine.conditionUpdate = [NSDate date];
+            
+            _currentMachine.location.lastUpdatedByUsername = [[PinballMapManager sharedInstance] currentUser].username;
+            _currentMachine.location.lastUpdated = [NSDate date];
+            
             [[CoreDataManager sharedInstance] saveContext];
             [self dismissViewControllerAnimated:YES completion:nil];
         }

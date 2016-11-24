@@ -62,5 +62,6 @@ typedef void (^APICompleteWithStatusCode)(NSDictionary *response,NSUInteger stat
 - (void)refreshBasicRegionData:(APIComplete)completionBlock;
 - (void)cancelAllLoadingOperations;
 - (void)login:(NSDictionary *)loginData andCompletion:(APIComplete)completionBlock;
+- (void)confirmLocation:(Location *)location andCompletion:(APIComplete)completionBlock;
 
 @end

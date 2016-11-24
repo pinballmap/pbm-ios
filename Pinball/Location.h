@@ -35,6 +35,7 @@
 @property (nonatomic, retain) NSSet *machines;
 @property (nonatomic, retain) Region *region;
 @property (nonatomic, retain) Zone *parentZone;
+@property (nonatomic, retain) NSString * lastUpdatedByUsername;
 @end
 
 @interface Location (CoreDataGeneratedAccessors)

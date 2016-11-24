@@ -13,30 +13,8 @@
 #import "Region.h"
 #import "Zone.h"
 
-
 @implementation Location
 
-@dynamic city;
-@dynamic lastUpdated;
-@dynamic latitude;
-@dynamic locationDescription;
-@dynamic locationDistance;
-@dynamic locationId;
-@dynamic locationZone;
-@dynamic longitude;
-@dynamic machineCount;
-@dynamic name;
-@dynamic neighborhood;
-@dynamic phone;
-@dynamic state;
-@dynamic street;
-@dynamic website;
-@dynamic zip;
-@dynamic zoneNo;
-@dynamic events;
-@dynamic locationType;
-@dynamic machines;
-@dynamic region;
-@dynamic parentZone;
+@dynamic city, lastUpdated, latitude, locationDescription, locationDistance, locationId, locationZone, longitude, machineCount, name, neighborhood, phone, state, street, website, zip, zoneNo, events, locationType, machines, region, parentZone, lastUpdatedByUsername;
 
 @end

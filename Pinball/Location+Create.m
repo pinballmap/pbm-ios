@@ -70,7 +70,10 @@
     }else{
         newLocation.lastUpdated = NULL;
     }
-
+    
+    if (![data[@"last_updated_by_username"] isKindOfClass:[NSNull class]]) {
+        newLocation.lastUpdatedByUsername = data[@"last_updated_by_username"];
+    }
     
     return newLocation;
 }
