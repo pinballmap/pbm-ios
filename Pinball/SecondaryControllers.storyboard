@@ -1118,8 +1118,8 @@
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="Itr-vW-B0P" firstAttribute="top" secondItem="S8H-6k-dBs" secondAttribute="topMargin" id="0nX-tv-BpA"/>
-                            <constraint firstItem="GIy-1L-pwF" firstAttribute="top" secondItem="Itr-vW-B0P" secondAttribute="bottom" id="Aej-1N-UEj"/>
                             <constraint firstAttribute="trailingMargin" secondItem="Itr-vW-B0P" secondAttribute="trailing" constant="-16" id="e0M-yg-Yg8"/>
+                            <constraint firstItem="GIy-1L-pwF" firstAttribute="top" secondItem="Itr-vW-B0P" secondAttribute="bottom" id="ee7-wu-t24"/>
                             <constraint firstItem="Itr-vW-B0P" firstAttribute="leading" secondItem="S8H-6k-dBs" secondAttribute="leadingMargin" constant="-16" id="efC-PF-8SM"/>
                         </constraints>
                     </view>

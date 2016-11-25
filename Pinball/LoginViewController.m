@@ -10,8 +10,6 @@
 @property (weak) IBOutlet UITextField *passwordField;
 @property (nonatomic) BOOL alreadyRefreshed;
 
-- (IBAction)loginButton:(id)sender;
-
 @end
 
 @implementation LoginViewController
