@@ -14,11 +14,6 @@
     self = [super init];
     if (self){
         self.score = scoreData[@"score"];
-        if (![scoreData[@"rank"] isKindOfClass:[NSNull class]]){
-            self.rank = [scoreData[@"rank"] stringValue];
-        }else{
-            self.rank = @"N/A";
-        }
         
         // Find Machine info
         NSFetchRequest *machineFetch = [NSFetchRequest fetchRequestWithEntityName:@"MachineLocation"];
@@ -29,6 +24,10 @@
             self.machine = [(MachineLocation *)[foundMachines firstObject] machine];
         }else{
             self.machine = nil;
+        }
+        
+        if (![scoreData[@"username"] isKindOfClass:[NSNull class]]) {
+            self.createdByUsername = scoreData[@"username"];
         }
     }
     return self;

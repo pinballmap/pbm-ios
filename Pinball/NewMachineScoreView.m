@@ -9,14 +9,8 @@
 #import "NewMachineScoreView.h"
 #import "UIAlertView+Application.h"
 
-@interface NewMachineScoreView () <UIPickerViewDataSource,UIPickerViewDelegate>
-
-@property (nonatomic) NSArray *ranks;
-@property (nonatomic) NSDictionary *pickedRank;
-@property (nonatomic) UIPickerView *rankPicker;
+@interface NewMachineScoreView ()
 @property (weak) IBOutlet UITextField *score;
-@property (weak) IBOutlet UITextField *initials;
-@property (weak) IBOutlet UITextField *rank;
 
 - (IBAction)saveScore:(id)sender;
 - (IBAction)cancelScore:(id)sender;
@@ -34,15 +28,6 @@
 }
 - (void)viewDidLoad{
     [super viewDidLoad];
-    _rankPicker = [[UIPickerView alloc] init];
-    _rankPicker.dataSource = self;
-    _rankPicker.delegate = self;
-    self.ranks = @[@{@"id": @1,@"name": @"GC"},
-              @{@"id": @2,@"name": @"1st"},
-              @{@"id": @3,@"name": @"2nd"},
-              @{@"id": @4,@"name": @"3rd"},
-              @{@"id": @5,@"name": @"4th"}];
-    _rank.inputView = _rankPicker;
 }
 - (void)didReceiveMemoryWarning{
     [super didReceiveMemoryWarning];
@@ -50,21 +35,11 @@
 }
 #pragma mark - Class Actions
 - (IBAction)saveScore:(id)sender{
-    NSString *rank;
-    if (self.pickedRank[@"id"] == nil){
-        rank = @"N/A";
-    }else{
-        rank = self.pickedRank[@"id"];
-    }
     if (self.score.text.length == 0){
         [UIAlertView simpleApplicationAlertWithMessage:@"You must enter a valid score" cancelButton:@"Ok"];
         return;
     }
-    if (self.initials.text.length == 0){
-        [UIAlertView simpleApplicationAlertWithMessage:@"You must enter valid initials" cancelButton:@"Ok"];
-        return;
-    }
-    NSDictionary *scoreData = @{@"location_machine_xref_id": _currentMachine.machineLocationId,@"score":_score.text,@"rank":rank,@"initials":_initials.text};
+    NSDictionary *scoreData = @{@"location_machine_xref_id": _currentMachine.machineLocationId,@"score":_score.text};
     [[PinballMapManager sharedInstance] addScore:scoreData forMachine:_currentMachine withCompletion:^(NSDictionary *status) {
         if (status[@"errors"]){
             NSString *errors;
@@ -78,6 +53,11 @@
             if (_delegate){
                 [_delegate didAddScore];
             }
+            _currentMachine.location.lastUpdatedByUsername = [[PinballMapManager sharedInstance] currentUser].username;
+            _currentMachine.location.lastUpdated = [NSDate date];
+            
+            [[CoreDataManager sharedInstance] saveContext];
+
             [UIAlertView simpleApplicationAlertWithMessage:status[@"msg"] cancelButton:@"Ok"];
             [self dismissViewControllerAnimated:YES completion:nil];
         }
@@ -85,20 +65,6 @@
 }
 - (IBAction)cancelScore:(id)sender{
     [self dismissViewControllerAnimated:YES completion:nil];
-}
-#pragma mark - Picker View DataSource/Delegate
-- (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView{
-    return 1;
-}
-- (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component{
-    return self.ranks.count;
-}
-- (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component{
-    return self.ranks[row][@"name"];
-}
-- (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component{
-    self.pickedRank = self.ranks[row];
-    _rank.text = self.pickedRank[@"name"];
 }
 
 @end

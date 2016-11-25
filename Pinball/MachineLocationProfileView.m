@@ -188,8 +188,11 @@
             cell.textLabel.textAlignment = NSTextAlignmentCenter;
         }else{
             MachineScore *score = self.machineScores[indexPath.row-1];
-            cell.textLabel.text = [NSString stringWithFormat:@"%@ (%@)",score.scoreString,score.initials];
-            cell.detailTextLabel.text = [NSString stringWithFormat:@"%@",[MachineScore wordingForRank:score.rank]];
+            NSString *usernameData = @"";
+            if (![score.createdByUsername isKindOfClass:[NSNull class]]) {
+                usernameData = [NSString stringWithFormat:@" (%@)", score.createdByUsername];
+            }
+            cell.textLabel.text = [NSString stringWithFormat:@"%@%@",score.scoreString,usernameData];
         }
     }else if (indexPath.section == 4){
         cell.textLabel.text = @"Remove Machine";
