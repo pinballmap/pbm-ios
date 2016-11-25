@@ -11,20 +11,8 @@
 #import "Location.h"
 #import "Zone.h"
 
-
 @implementation Region
 
-@dynamic eventsEtag;
-@dynamic fullName;
-@dynamic latitude;
-@dynamic locationDistance;
-@dynamic locationsEtag;
-@dynamic longitude;
-@dynamic name;
-@dynamic regionId;
-@dynamic zonesEtag;
-@dynamic events;
-@dynamic locations;
-@dynamic zones;
+@dynamic eventsEtag, fullName, latitude, locationDistance, locationsEtag, longitude, name, regionId, zonesEtag, events, locations, zones, operators, operatorsEtag;
 
 @end

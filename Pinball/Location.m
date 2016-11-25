@@ -15,6 +15,6 @@
 
 @implementation Location
 
-@dynamic city, lastUpdated, latitude, locationDescription, locationDistance, locationId, locationZone, longitude, machineCount, name, neighborhood, phone, state, street, website, zip, zoneNo, events, locationType, machines, region, parentZone, lastUpdatedByUsername;
+@dynamic city, lastUpdated, latitude, locationDescription, locationDistance, locationId, locationZone, longitude, machineCount, name, neighborhood, phone, state, street, website, zip, zoneNo, events, locationType, machines, region, parentZone, lastUpdatedByUsername, operatorId, operator;
 
 @end

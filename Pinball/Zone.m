@@ -13,10 +13,6 @@
 
 @implementation Zone
 
-@dynamic zoneId;
-@dynamic name;
-@dynamic shortName;
-@dynamic region;
-@dynamic locations;
+@dynamic zoneId, name, shortName, region, locations;
 
 @end

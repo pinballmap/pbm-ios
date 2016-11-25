@@ -35,22 +35,31 @@
     }else{
         newLocation.phone = @"N/A";
     }
+    
+    if (![data[@"operator_id"] isKindOfClass:[NSNull class]]) {
+        newLocation.operatorId = data[@"operator_id"];
+    }
+    
     if (![data[@"zone_id"] isKindOfClass:[NSNull class]]){
         newLocation.zoneNo = data[@"zone_id"];
     }else{
         newLocation.zoneNo = @(-1);
     }
+    
     if (![data[@"neighborhood"] isKindOfClass:[NSNull class]]){
         newLocation.neighborhood = data[@"neighborhood"];
     }else{
         newLocation.neighborhood = @"N/A";
     }
+    
     if (![data[@"zone"] isKindOfClass:[NSNull class]]){
         newLocation.locationZone = data[@"zone"];
     }else{
         newLocation.locationZone = @"N/A";
     }
+    
     newLocation.machineCount = @([(NSArray *)data[@"machines"] count]);
+    
     if (![data[@"description"] isKindOfClass:[NSNull class]] && [data[@"description"] length] > 0){
         newLocation.locationDescription = data[@"description"];
     }else{

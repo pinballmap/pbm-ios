@@ -27,3 +27,5 @@
 #import "User+Create.h"
 #import "Zone.h"
 #import "Zone+Create.h"
+#import "Operator.h"
+#import "Operator+Create.h"

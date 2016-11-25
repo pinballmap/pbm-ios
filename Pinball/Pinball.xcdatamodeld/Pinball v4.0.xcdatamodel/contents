@@ -26,6 +26,7 @@
         <attribute name="machineCount" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="neighborhood" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="operatorId" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="phone" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="state" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="street" optional="YES" attributeType="String" syncable="YES"/>
@@ -35,6 +36,7 @@
         <relationship name="events" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="Event" inverseName="location" inverseEntity="Event" syncable="YES"/>
         <relationship name="locationType" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="LocationType" inverseName="locations" inverseEntity="LocationType" syncable="YES"/>
         <relationship name="machines" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="MachineLocation" inverseName="location" inverseEntity="MachineLocation" syncable="YES"/>
+        <relationship name="operator" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Operator" inverseName="locations" inverseEntity="Operator" syncable="YES"/>
         <relationship name="parentZone" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Zone" inverseName="locations" inverseEntity="Zone" syncable="YES"/>
         <relationship name="region" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Region" inverseName="locations" inverseEntity="Region" syncable="YES"/>
     </entity>
@@ -68,6 +70,13 @@
         <relationship name="location" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Location" inverseName="machines" inverseEntity="Location" syncable="YES"/>
         <relationship name="machine" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Machine" inverseName="machineLocations" inverseEntity="Machine" syncable="YES"/>
     </entity>
+    <entity name="Operator" representedClassName="Operator" syncable="YES">
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="operatorId" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="regionId" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
+        <relationship name="locations" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Location" inverseName="operator" inverseEntity="Location" syncable="YES"/>
+        <relationship name="region" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Region" inverseName="operators" inverseEntity="Region" syncable="YES"/>
+    </entity>
     <entity name="Region" representedClassName="Region" syncable="YES">
         <attribute name="eventsEtag" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="fullName" optional="YES" attributeType="String" syncable="YES"/>
@@ -76,10 +85,12 @@
         <attribute name="locationsEtag" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="longitude" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="operatorsEtag" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="regionId" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="zonesEtag" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="events" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Event" inverseName="region" inverseEntity="Event" syncable="YES"/>
         <relationship name="locations" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Location" inverseName="region" inverseEntity="Location" syncable="YES"/>
+        <relationship name="operators" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Operator" inverseName="region" inverseEntity="Operator" syncable="YES"/>
         <relationship name="zones" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Zone" inverseName="region" inverseEntity="Zone" syncable="YES"/>
     </entity>
     <entity name="User" representedClassName="User" syncable="YES">
@@ -102,14 +113,15 @@
         <relationship name="region" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Region" inverseName="zones" inverseEntity="Region" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Event" positionX="-2529" positionY="-720" width="128" height="208"/>
-        <element name="Location" positionX="-2250" positionY="-702" width="128" height="390"/>
+        <element name="Event" positionX="-2691" positionY="-786" width="128" height="210"/>
+        <element name="Location" positionX="-2250" positionY="-702" width="128" height="420"/>
         <element name="LocationType" positionX="-2063" positionY="-619" width="128" height="88"/>
         <element name="Machine" positionX="-2531" positionY="-328" width="128" height="148"/>
         <element name="MachineCondition" positionX="-2691" positionY="-475" width="128" height="120"/>
         <element name="MachineLocation" positionX="-2504" positionY="-490" width="128" height="150"/>
-        <element name="Region" positionX="-2520" positionY="-949" width="128" height="223"/>
-        <element name="User" positionX="-2484" positionY="-801" width="128" height="195"/>
+        <element name="Operator" positionX="-2358" positionY="-984" width="128" height="118"/>
+        <element name="Region" positionX="-2520" positionY="-949" width="128" height="253"/>
+        <element name="User" positionX="-2331" positionY="-249" width="128" height="195"/>
         <element name="Zone" positionX="-2198" positionY="-877" width="128" height="118"/>
     </elements>
 </model>
