@@ -16,6 +16,7 @@
 #import "LocationCell.h"
 #import "UIAlertView+Application.h"
 #import "ZonesView.h"
+#import "OperatorsView.h"
 #import "LocationTypesView.h"
 #import "RecentlyAddedView.h"
 
@@ -142,6 +143,10 @@
         [self.filterSheet addButtonWithTitle:@"Zone"];
     }
     
+    if (currentRegion.operators.count > 0) {
+        [self.filterSheet addButtonWithTitle:@"Operator"];
+    }
+    
     if ([UIDevice iPad]){
         [self.filterSheet showFromTabBar:self.tabBarController.tabBar];
     }else{
@@ -180,6 +185,24 @@
     }
     return YES;
 }
+#pragma mark - Operator Select Delegate
+- (void)selectedOperator:(Operator *)operator{
+    self.navigationItem.title = operator.name;
+    
+    NSFetchRequest *fetchRequest = [NSFetchRequest fetchRequestWithEntityName:@"Location"];
+    fetchRequest.predicate = [NSPredicate predicateWithFormat:@"region.name = %@ AND operator.operatorId = %@",[[[PinballMapManager sharedInstance] currentRegion] name],operator.operatorId];
+    fetchRequest.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES]];
+    
+    self.fetchedResults = nil;
+    self.fetchedResults = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest
+                                                              managedObjectContext:self.managedContext
+                                                                sectionNameKeyPath:nil
+                                                                         cacheName:nil];
+    self.fetchedResults.delegate = self;
+    [self.fetchedResults performFetch:nil];
+    [self.tableView reloadData];
+}
+
 #pragma mark - Zone Select Delegate
 - (void)selectedZone:(Zone *)zone{
     self.navigationItem.title = zone.name;
@@ -271,6 +294,15 @@
                     [zoneSelect.parentViewController setModalPresentationStyle:UIModalPresentationFormSheet];
                 }
                 [self.navigationController presentViewController:zoneSelect.parentViewController animated:YES completion:nil];
+                return;
+            }else if ([buttonTitle isEqualToString:@"Operator"]){
+                OperatorsView *operatorSelect = (OperatorsView *) [[[UIStoryboard storyboardWithName:@"SecondaryControllers" bundle:nil] instantiateViewControllerWithIdentifier:@"OperatorsView"] navigationRootViewController];
+                operatorSelect.delegate = self;
+                if ([UIDevice iPad]){
+                    [operatorSelect.parentViewController setModalPresentationStyle:UIModalPresentationFormSheet];
+                }
+                [self.navigationController presentViewController:operatorSelect.parentViewController animated:YES completion:nil];
+                
                 return;
             }else if ([buttonTitle isEqualToString:@"Browse on Map"]){
                 [self browseLocations:nil];

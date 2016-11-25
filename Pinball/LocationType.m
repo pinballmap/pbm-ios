@@ -9,11 +9,8 @@
 #import "LocationType.h"
 #import "Location.h"
 
-
 @implementation LocationType
 
-@dynamic name;
-@dynamic locationTypeId;
-@dynamic locations;
+@dynamic name, locationTypeId, locations;
 
 @end

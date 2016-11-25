@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 
-@class Event, LocationType, MachineLocation, Region, Zone;
+@class Event, LocationType, MachineLocation, Region, Zone, Operator;
 
 @interface Location : NSManagedObject
 
@@ -36,6 +36,9 @@
 @property (nonatomic, retain) Region *region;
 @property (nonatomic, retain) Zone *parentZone;
 @property (nonatomic, retain) NSString * lastUpdatedByUsername;
+@property (nonatomic, retain) NSNumber * operatorId;
+@property (nonatomic, retain) Operator * operator;
+
 @end
 
 @interface Location (CoreDataGeneratedAccessors)

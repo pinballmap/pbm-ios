@@ -7,9 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8E1FD5241DE8B3CB00B82016 /* OperatorsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E1FD5231DE8B3CB00B82016 /* OperatorsView.m */; };
 		8E36953D1DC6746900BB7219 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E36953C1DC6746900BB7219 /* User.m */; };
 		8E3695401DC677A000BB7219 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E36953F1DC677A000BB7219 /* LoginViewController.m */; };
 		8E8D60AF1DDAD746000F828E /* ProfileView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E8D60AE1DDAD746000F828E /* ProfileView.m */; };
+		8EC0AF371DE7779B000F4048 /* Operator.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EC0AF361DE7779B000F4048 /* Operator.m */; };
+		8EC0AF3A1DE77A63000F4048 /* Operator+Create.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EC0AF391DE77A63000F4048 /* Operator+Create.m */; };
 		8EFDEC9A1DCE793F00AEB1BE /* User+Create.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EFDEC991DCE793F00AEB1BE /* User+Create.m */; };
 		8EFDECA01DCE80FD00AEB1BE /* Pinball.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 8EFDEC9B1DCE80FD00AEB1BE /* Pinball.xcdatamodeld */; };
 		CCA1EA9C1BD7D63C006CF91B /* MachineCondition.m in Sources */ = {isa = PBXBuildFile; fileRef = CCA1EA9B1BD7D63C006CF91B /* MachineCondition.m */; };
@@ -199,6 +202,8 @@
 
 /* Begin PBXFileReference section */
 		767AEE54A0274802B59CA4A5 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		8E1FD5221DE8B3B800B82016 /* OperatorsView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OperatorsView.h; sourceTree = "<group>"; };
+		8E1FD5231DE8B3CB00B82016 /* OperatorsView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OperatorsView.m; sourceTree = "<group>"; };
 		8E36953B1DC6741F00BB7219 /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
 		8E36953C1DC6746900BB7219 /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
 		8E36953E1DC6775D00BB7219 /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
@@ -206,6 +211,10 @@
 		8E8D60AD1DDAD731000F828E /* ProfileView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfileView.h; sourceTree = "<group>"; };
 		8E8D60AE1DDAD746000F828E /* ProfileView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfileView.m; sourceTree = "<group>"; };
 		8E8EA2DB1DE26F4600365BAC /* PinballMap WatchKit App.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "PinballMap WatchKit App.entitlements"; sourceTree = "<group>"; };
+		8EC0AF351DE77780000F4048 /* Operator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Operator.h; sourceTree = "<group>"; };
+		8EC0AF361DE7779B000F4048 /* Operator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Operator.m; sourceTree = "<group>"; };
+		8EC0AF381DE77A4A000F4048 /* Operator+Create.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Operator+Create.h"; sourceTree = "<group>"; };
+		8EC0AF391DE77A63000F4048 /* Operator+Create.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Operator+Create.m"; sourceTree = "<group>"; };
 		8EFDEC981DCE78F500AEB1BE /* User+Create.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "User+Create.h"; sourceTree = "<group>"; };
 		8EFDEC991DCE793F00AEB1BE /* User+Create.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "User+Create.m"; sourceTree = "<group>"; };
 		8EFDEC9C1DCE80FD00AEB1BE /* Pinball v3.1.0.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Pinball v3.1.0.xcdatamodel"; sourceTree = "<group>"; };
@@ -640,6 +649,8 @@
 			children = (
 				DBF06C6B18F97E6300F92912 /* LocationsView.h */,
 				DBF06C6C18F97E6300F92912 /* LocationsView.m */,
+				8E1FD5221DE8B3B800B82016 /* OperatorsView.h */,
+				8E1FD5231DE8B3CB00B82016 /* OperatorsView.m */,
 				DBB59CC818FAD9AC00F35BFD /* LocationProfileView.h */,
 				DBB59CC918FAD9AC00F35BFD /* LocationProfileView.m */,
 				DB6A6DC11945E1380097976C /* LocationProfileView-iPad.h */,
@@ -710,6 +721,8 @@
 				DB070BF0193202ED0018D521 /* Zone.m */,
 				DB070BE9193202ED0018D521 /* Location.h */,
 				DB070BEA193202ED0018D521 /* Location.m */,
+				8EC0AF351DE77780000F4048 /* Operator.h */,
+				8EC0AF361DE7779B000F4048 /* Operator.m */,
 				DBEAA1FB192A9E140096F2A9 /* LocationType.h */,
 				DBEAA1FC192A9E140096F2A9 /* LocationType.m */,
 				DBF711F0191E59B8008656EE /* Machine.h */,
@@ -1076,6 +1089,8 @@
 				CCA1EA9E1BD7D81F006CF91B /* MachineCondition+Create.m */,
 				8EFDEC981DCE78F500AEB1BE /* User+Create.h */,
 				8EFDEC991DCE793F00AEB1BE /* User+Create.m */,
+				8EC0AF381DE77A4A000F4048 /* Operator+Create.h */,
+				8EC0AF391DE77A63000F4048 /* Operator+Create.m */,
 			);
 			name = "Model Helpers";
 			sourceTree = "<group>";
@@ -1343,6 +1358,7 @@
 				DB070BF4193203200018D521 /* Zone+Create.m in Sources */,
 				DB1FB5D619BCB95A00E52B01 /* Region+UpdateDistance.m in Sources */,
 				DB2D132E1942687F0082B8F9 /* Event+CellHelpers.m in Sources */,
+				8EC0AF3A1DE77A63000F4048 /* Operator+Create.m in Sources */,
 				DBA96E4E1A5040BA007C73CD /* Region+Extensions.m in Sources */,
 				DBF06C1918F9749F00F92912 /* PinballMapManager.m in Sources */,
 				DBF06C0118F9703E00F92912 /* CoreDataManager.m in Sources */,
@@ -1357,6 +1373,7 @@
 				DB6F292F19E5870700AC87FF /* HighRollerProfileView.m in Sources */,
 				CCCF3BE61AAF2115002871A4 /* ThirdPartyKeys.m in Sources */,
 				DB5FFEA519C6209E004C424B /* RecentlyAddedView.m in Sources */,
+				8EC0AF371DE7779B000F4048 /* Operator.m in Sources */,
 				DB56E3FE1A7E607A007F22A7 /* NSDate+CupertinoYankee.m in Sources */,
 				DBEAA200192A9E4A0096F2A9 /* LocationType+Create.m in Sources */,
 				DB38DAA819E1CBE300E1B6D2 /* SafariActivity.m in Sources */,
@@ -1390,6 +1407,7 @@
 				DB38DA9419E1CBC400E1B6D2 /* AFHTTPRequestOperationManager.m in Sources */,
 				DB7B4C1719336717002AF484 /* NewMachineScoreView.m in Sources */,
 				DB8D1C1719B3A7970065E2C6 /* ContactView.m in Sources */,
+				8E1FD5241DE8B3CB00B82016 /* OperatorsView.m in Sources */,
 				DBBB4BF319338FB5004E433F /* UIDevice+ModelCheck.m in Sources */,
 				DB38DAAB19E1CBE300E1B6D2 /* UIDevice+Model.m in Sources */,
 				DB52D2E818FB06EC00BB56D8 /* Event+Create.m in Sources */,

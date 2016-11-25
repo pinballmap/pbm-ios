@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 
-@class Event, Location, Zone;
+@class Event, Location, Zone, Operator;
 
 @interface Region : NSManagedObject
 
@@ -22,9 +22,12 @@
 @property (nonatomic, retain) NSString * name;
 @property (nonatomic, retain) NSNumber * regionId;
 @property (nonatomic, retain) NSString * zonesEtag;
+@property (nonatomic, retain) NSString * operatorsEtag;
 @property (nonatomic, retain) NSSet *events;
 @property (nonatomic, retain) NSSet *locations;
 @property (nonatomic, retain) NSSet *zones;
+@property (nonatomic, retain) NSSet *operators;
+
 @end
 
 @interface Region (CoreDataGeneratedAccessors)
@@ -43,5 +46,10 @@
 - (void)removeZonesObject:(Zone *)value;
 - (void)addZones:(NSSet *)values;
 - (void)removeZones:(NSSet *)values;
+
+- (void)addOperatorsObject:(Operator *)value;
+- (void)removeOperatorsObject:(Operator *)value;
+- (void)addOperators:(NSSet *)values;
+- (void)removeOperators:(NSSet *)values;
 
 @end
