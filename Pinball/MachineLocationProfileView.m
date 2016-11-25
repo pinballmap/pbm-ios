@@ -124,7 +124,7 @@
     if (section == 0){
         return @"Location";
     }else if (section == 1){
-        return @"Machine Condition (tap to edit)";
+        return @"Machine Condition (tap to add new)";
     }else if (section == 2 && _currentMachine.conditions.count > 0){
         return @"Past Conditions";
     }else if (section == 3){
