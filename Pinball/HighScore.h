@@ -13,7 +13,7 @@
 
 @property (nonatomic) Machine *machine;
 @property (nonatomic) NSNumber *score;
-@property (nonatomic) NSString *rank;
+@property (nonatomic) NSString *createdByUsername;
 
 - (instancetype)initWithData:(NSDictionary *)scoreData;
 
