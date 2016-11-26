@@ -205,29 +205,50 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     if (indexPath.section == 1){
-        NSString *string = [NSString stringWithFormat:@"%@ at %@",_currentMachine.machine.name,_currentMachine.location.name];
-        TextEditorView *textEditor = [[TextEditorView alloc] initWithTitle:@"Machine Condition" andDelegate:self];
-        textEditor.editorPrompt = string;
-        UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:textEditor];
-        if ([UIDevice iPad]){
-            nav.modalPresentationStyle = UIModalPresentationFormSheet;
+        if ([[PinballMapManager sharedInstance] isLoggedInAsGuest]){
+            UINavigationController *navController = [[UIStoryboard storyboardWithName:@"SecondaryControllers" bundle:nil] instantiateViewControllerWithIdentifier:@"LoginViewController"];
+            
+            navController.modalPresentationStyle = UIModalPresentationFormSheet;
+            [self.navigationController presentViewController:navController animated:YES completion:nil];
+        } else {
+            NSString *string = [NSString stringWithFormat:@"%@ at %@",_currentMachine.machine.name,_currentMachine.location.name];
+            TextEditorView *textEditor = [[TextEditorView alloc] initWithTitle:@"Machine Condition" andDelegate:self];
+            textEditor.editorPrompt = string;
+            UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:textEditor];
+            if ([UIDevice iPad]){
+                nav.modalPresentationStyle = UIModalPresentationFormSheet;
+            }
+            [self presentViewController:nav animated:YES completion:nil];
+            return;
+            
+            MachineConditionView *vc = (MachineConditionView *)[[[[UIStoryboard storyboardWithName:@"SecondaryControllers" bundle:nil] instantiateViewControllerWithIdentifier:@"MachineCondition"] viewControllers] lastObject];
+            vc.currentMachine = _currentMachine;
+            [tableView setEditing:NO];
+            [self.navigationController presentViewController:vc.parentViewController animated:YES completion:nil];
         }
-        [self presentViewController:nav animated:YES completion:nil];
-        return;
-        
-        MachineConditionView *vc = (MachineConditionView *)[[[[UIStoryboard storyboardWithName:@"SecondaryControllers" bundle:nil] instantiateViewControllerWithIdentifier:@"MachineCondition"] viewControllers] lastObject];
-        vc.currentMachine = _currentMachine;
-        [tableView setEditing:NO];
-        [self.navigationController presentViewController:vc.parentViewController animated:YES completion:nil];
     }else if (indexPath.section == 3 && indexPath.row == 0){
-        NewMachineScoreView *scoreView = [[[[UIStoryboard storyboardWithName:@"SecondaryControllers" bundle:nil] instantiateViewControllerWithIdentifier:@"NewMachineScoreView"] viewControllers] lastObject];
-        scoreView.currentMachine = _currentMachine;
-        scoreView.delegate = self;
-        [self.navigationController presentViewController:scoreView.parentViewController animated:YES completion:nil];
+        if ([[PinballMapManager sharedInstance] isLoggedInAsGuest]){
+            UINavigationController *navController = [[UIStoryboard storyboardWithName:@"SecondaryControllers" bundle:nil] instantiateViewControllerWithIdentifier:@"LoginViewController"];
+            
+            navController.modalPresentationStyle = UIModalPresentationFormSheet;
+            [self.navigationController presentViewController:navController animated:YES completion:nil];
+        } else {
+            NewMachineScoreView *scoreView = [[[[UIStoryboard storyboardWithName:@"SecondaryControllers" bundle:nil] instantiateViewControllerWithIdentifier:@"NewMachineScoreView"] viewControllers] lastObject];
+            scoreView.currentMachine = _currentMachine;
+            scoreView.delegate = self;
+            [self.navigationController presentViewController:scoreView.parentViewController animated:YES completion:nil];
+        }
     }else if (indexPath.section == 4){
-        self.deletePath = indexPath;
-        self.deleteConfirm = [UIAlertView applicationAlertWithMessage:@"Are you sure you want to remove this machine." delegate:self cancelButton:@"No" otherButtons:@"Yes", nil];
-        [self.deleteConfirm show];
+        if ([[PinballMapManager sharedInstance] isLoggedInAsGuest]){
+            UINavigationController *navController = [[UIStoryboard storyboardWithName:@"SecondaryControllers" bundle:nil] instantiateViewControllerWithIdentifier:@"LoginViewController"];
+            
+            navController.modalPresentationStyle = UIModalPresentationFormSheet;
+            [self.navigationController presentViewController:navController animated:YES completion:nil];
+        } else {
+            self.deletePath = indexPath;
+            self.deleteConfirm = [UIAlertView applicationAlertWithMessage:@"Are you sure you want to remove this machine." delegate:self cancelButton:@"No" otherButtons:@"Yes", nil];
+            [self.deleteConfirm show];
+        }
     }
 }
 #pragma mark - TextEditor Delegate
