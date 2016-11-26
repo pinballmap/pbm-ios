@@ -194,14 +194,21 @@ int const headerHeight = 90;
     }
 }
 - (IBAction)editLocation:(id)sender{
-    [self.dataSetSeg setSelectedSegmentIndex:1];
-    BOOL editing = YES;
-    if (self.tableView.editing){
-        editing = NO;
+    if ([[PinballMapManager sharedInstance] isLoggedInAsGuest]){
+        UINavigationController *navController = [[UIStoryboard storyboardWithName:@"SecondaryControllers" bundle:nil] instantiateViewControllerWithIdentifier:@"LoginViewController"];
+        
+        navController.modalPresentationStyle = UIModalPresentationFormSheet;
+        [self.navigationController presentViewController:navController animated:YES completion:nil];
+    } else {
+        [self.dataSetSeg setSelectedSegmentIndex:1];
+        BOOL editing = YES;
+        if (self.tableView.editing){
+            editing = NO;
+        }
+        [self.tableView setEditing:editing];
+        [self setupRightBarButton];
+        [self.tableView reloadData];
     }
-    [self.tableView setEditing:editing];
-    [self setupRightBarButton];
-    [self.tableView reloadData];
 }
 - (IBAction)informationUpToDate:(id)sender{
     if ([[PinballMapManager sharedInstance] isLoggedInAsGuest]){
@@ -497,20 +504,13 @@ int const headerHeight = 90;
         [self showMap];
     }else{
         if (self.dataSetSeg.selectedSegmentIndex == 0){
-            if ([[PinballMapManager sharedInstance] isLoggedInAsGuest]){
-                UINavigationController *navController = [[UIStoryboard storyboardWithName:@"SecondaryControllers" bundle:nil] instantiateViewControllerWithIdentifier:@"LoginViewController"];
-                
-                navController.modalPresentationStyle = UIModalPresentationFormSheet;
-                [self.navigationController presentViewController:navController animated:YES completion:nil];
-            } else {
-                MachineLocationProfileView *vc = [[[[UIStoryboard storyboardWithName:@"SecondaryControllers" bundle:nil] instantiateViewControllerWithIdentifier:@"MachineLocationProfileView"] viewControllers] lastObject];
-                vc.currentMachine = [self.machinesFetch objectAtIndexPath:[NSIndexPath indexPathForRow:indexPath.row inSection:0]];
-                [tableView setEditing:NO];
-                if ([UIDevice currentModel] == ModelTypeiPad){
-                    [self.parentViewController presentViewController:vc.parentViewController animated:YES completion:nil];
-                }else{
-                    [self.navigationController presentViewController:vc.parentViewController animated:YES completion:nil];
-                }
+            MachineLocationProfileView *vc = [[[[UIStoryboard storyboardWithName:@"SecondaryControllers" bundle:nil] instantiateViewControllerWithIdentifier:@"MachineLocationProfileView"] viewControllers] lastObject];
+            vc.currentMachine = [self.machinesFetch objectAtIndexPath:[NSIndexPath indexPathForRow:indexPath.row inSection:0]];
+            [tableView setEditing:NO];
+            if ([UIDevice currentModel] == ModelTypeiPad){
+                [self.parentViewController presentViewController:vc.parentViewController animated:YES completion:nil];
+            }else{
+                [self.navigationController presentViewController:vc.parentViewController animated:YES completion:nil];
             }
         }else if (self.dataSetSeg.selectedSegmentIndex == 1){
             if (indexPath.row == 0){
@@ -540,17 +540,10 @@ int const headerHeight = 90;
                     }
                     self.editingType = LocationEditingTypePhone;
                     
-                    if ([[PinballMapManager sharedInstance] isLoggedInAsGuest]){
-                        UINavigationController *navController = [[UIStoryboard storyboardWithName:@"SecondaryControllers" bundle:nil] instantiateViewControllerWithIdentifier:@"LoginViewController"];
-                        
-                        navController.modalPresentationStyle = UIModalPresentationFormSheet;
-                        [self.navigationController presentViewController:navController animated:YES completion:nil];
-                    } else {
-                        if ([UIDevice currentModel] == ModelTypeiPad){
-                            [self.parentViewController.navigationController presentViewController:editor.parentViewController animated:YES completion:nil];
-                        }else{
-                            [self.navigationController presentViewController:editor.parentViewController animated:YES completion:nil];
-                        }
+                    if ([UIDevice currentModel] == ModelTypeiPad){
+                        [self.parentViewController.navigationController presentViewController:editor.parentViewController animated:YES completion:nil];
+                    }else{
+                        [self.navigationController presentViewController:editor.parentViewController animated:YES completion:nil];
                     }
                 }
             }else if (indexPath.row == 2){
@@ -574,41 +567,26 @@ int const headerHeight = 90;
             }
             else if (indexPath.row == 3){
                 // Type
-                if ([[PinballMapManager sharedInstance] isLoggedInAsGuest]){
-                    UINavigationController *navController = [[UIStoryboard storyboardWithName:@"SecondaryControllers" bundle:nil] instantiateViewControllerWithIdentifier:@"LoginViewController"];
-                    
-                    navController.modalPresentationStyle = UIModalPresentationFormSheet;
-                    [self.navigationController presentViewController:navController animated:YES completion:nil];
-                } else {
-                    LocationTypesView *typesView = (LocationTypesView *)[[[UIStoryboard storyboardWithName:@"SecondaryControllers" bundle:nil] instantiateViewControllerWithIdentifier:@"LocationTypesView"] navigationRootViewController];
-                    typesView.delegate = self;
-                    if ([UIDevice currentModel] == ModelTypeiPad){
-                        [self.parentViewController.navigationController presentViewController:typesView.parentViewController animated:YES completion:nil];
-                    }else{
-                        [self.navigationController presentViewController:typesView.parentViewController animated:YES completion:nil];
-                    }
+                LocationTypesView *typesView = (LocationTypesView *)[[[UIStoryboard storyboardWithName:@"SecondaryControllers" bundle:nil] instantiateViewControllerWithIdentifier:@"LocationTypesView"] navigationRootViewController];
+                typesView.delegate = self;
+                if ([UIDevice currentModel] == ModelTypeiPad){
+                    [self.parentViewController.navigationController presentViewController:typesView.parentViewController animated:YES completion:nil];
+                }else{
+                    [self.navigationController presentViewController:typesView.parentViewController animated:YES completion:nil];
                 }
             }else if (indexPath.row == 4){
                 // Description
-                
-                if ([[PinballMapManager sharedInstance] isLoggedInAsGuest]){
-                    UINavigationController *navController = [[UIStoryboard storyboardWithName:@"SecondaryControllers" bundle:nil] instantiateViewControllerWithIdentifier:@"LoginViewController"];
-                    
-                    navController.modalPresentationStyle = UIModalPresentationFormSheet;
-                    [self.navigationController presentViewController:navController animated:YES completion:nil];
-                } else {
-                    TextEditorView *editor = [[[[UIStoryboard storyboardWithName:@"SecondaryControllers" bundle:nil] instantiateViewControllerWithIdentifier:@"TextEditorView"] viewControllers] lastObject];
-                    editor.delegate = self;
-                    editor.editorTitle = @"Location Description";
-                    self.editingType = LocationEditingTypeDescription;
-                    if (![_currentLocation.locationDescription isEqualToString:@"Tap to edit"]){
-                        editor.textContent = _currentLocation.locationDescription;
-                    }
-                    if ([UIDevice currentModel] == ModelTypeiPad){
-                        [self.parentViewController.navigationController presentViewController:editor.parentViewController animated:YES completion:nil];
-                    }else{
-                        [self.navigationController presentViewController:editor.parentViewController animated:YES completion:nil];
-                    }
+                TextEditorView *editor = [[[[UIStoryboard storyboardWithName:@"SecondaryControllers" bundle:nil] instantiateViewControllerWithIdentifier:@"TextEditorView"] viewControllers] lastObject];
+                editor.delegate = self;
+                editor.editorTitle = @"Location Description";
+                self.editingType = LocationEditingTypeDescription;
+                if (![_currentLocation.locationDescription isEqualToString:@"Tap to edit"]){
+                    editor.textContent = _currentLocation.locationDescription;
+                }
+                if ([UIDevice currentModel] == ModelTypeiPad){
+                    [self.parentViewController.navigationController presentViewController:editor.parentViewController animated:YES completion:nil];
+                }else{
+                    [self.navigationController presentViewController:editor.parentViewController animated:YES completion:nil];
                 }
             }
         }
@@ -623,38 +601,31 @@ int const headerHeight = 90;
     return UITableViewCellEditingStyleDelete;
 }
 - (void)tableView:(UITableView *)tableView accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *)indexPath{
-    if ([[PinballMapManager sharedInstance] isLoggedInAsGuest]){
-        UINavigationController *navController = [[UIStoryboard storyboardWithName:@"SecondaryControllers" bundle:nil] instantiateViewControllerWithIdentifier:@"LoginViewController"];
-        
-        navController.modalPresentationStyle = UIModalPresentationFormSheet;
-        [self.navigationController presentViewController:navController animated:YES completion:nil];
-    } else {
-        MachineLocation *currentMachine = [self.machinesFetch objectAtIndexPath:[NSIndexPath indexPathForRow:indexPath.row inSection:0]];
+    MachineLocation *currentMachine = [self.machinesFetch objectAtIndexPath:[NSIndexPath indexPathForRow:indexPath.row inSection:0]];
 
-        if ((indexPath.section == 1 && [UIDevice currentModel] == ModelTypeiPhone) || (indexPath.section == 0 && [UIDevice currentModel] == ModelTypeiPad)){
-            if (currentMachine.machine != nil){
-                MachineProfileView *machineProfile = [[UIStoryboard storyboardWithName:@"SecondaryControllers" bundle:nil] instantiateViewControllerWithIdentifier:@"MachineProfile"];
-                machineProfile.currentMachine = currentMachine.machine;
-                if ([UIDevice currentModel] == ModelTypeiPad){
-                    machineProfile.isModal = YES;
-                    UINavigationController *machineNav = [[UINavigationController alloc] initWithRootViewController:machineProfile];
-                    machineNav.modalPresentationStyle = UIModalPresentationFormSheet;
-                    [self.parentViewController.navigationController presentViewController:machineNav animated:YES completion:nil];
-                }else{
-                    [self.navigationController pushViewController:machineProfile animated:YES];
-                }
-            }else{
-                [UIAlertView simpleApplicationAlertWithMessage:@"Invalid Machine Data. Try reloading your region data by going to the locations listing and pulling the list all the way down." cancelButton:@"Ok"];
-            }
-        }else{
+    if ((indexPath.section == 1 && [UIDevice currentModel] == ModelTypeiPhone) || (indexPath.section == 0 && [UIDevice currentModel] == ModelTypeiPad)){
+        if (currentMachine.machine != nil){
             MachineProfileView *machineProfile = [[UIStoryboard storyboardWithName:@"SecondaryControllers" bundle:nil] instantiateViewControllerWithIdentifier:@"MachineProfile"];
             machineProfile.currentMachine = currentMachine.machine;
             if ([UIDevice currentModel] == ModelTypeiPad){
                 machineProfile.isModal = YES;
                 UINavigationController *machineNav = [[UINavigationController alloc] initWithRootViewController:machineProfile];
                 machineNav.modalPresentationStyle = UIModalPresentationFormSheet;
-                [self.navigationController presentViewController:machineNav animated:YES completion:nil];
+                [self.parentViewController.navigationController presentViewController:machineNav animated:YES completion:nil];
+            }else{
+                [self.navigationController pushViewController:machineProfile animated:YES];
             }
+        }else{
+            [UIAlertView simpleApplicationAlertWithMessage:@"Invalid Machine Data. Try reloading your region data by going to the locations listing and pulling the list all the way down." cancelButton:@"Ok"];
+        }
+    }else{
+        MachineProfileView *machineProfile = [[UIStoryboard storyboardWithName:@"SecondaryControllers" bundle:nil] instantiateViewControllerWithIdentifier:@"MachineProfile"];
+        machineProfile.currentMachine = currentMachine.machine;
+        if ([UIDevice currentModel] == ModelTypeiPad){
+            machineProfile.isModal = YES;
+            UINavigationController *machineNav = [[UINavigationController alloc] initWithRootViewController:machineProfile];
+            machineNav.modalPresentationStyle = UIModalPresentationFormSheet;
+            [self.navigationController presentViewController:machineNav animated:YES completion:nil];
         }
     }
 }
