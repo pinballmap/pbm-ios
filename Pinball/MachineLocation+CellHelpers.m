@@ -12,28 +12,20 @@
 
 @implementation MachineLocation (CellHelpers)
 
-- (NSString *)conditionWithUpdateDate{
-    NSString * usernameData = @"";
+- (NSString *)formattedConditionDate:(BOOL)addBy conditionUpdate:(NSDate *)conditionUpdate{
+    NSString *updatedString = [NSString stringWithFormat:@"Updated on: %@",[conditionUpdate threeLetterMonthPretty]];
     
-    if (![self.updatedByUsername isKindOfClass:[NSNull class]]) {
-        usernameData = [NSString stringWithFormat:@" by %@", self.updatedByUsername];
+    if (addBy) {
+        updatedString = [NSString stringWithFormat:@"%@ by ", updatedString];
     }
-    return [NSString stringWithFormat:@"%@ (updated on %@%@)",self.condition,[self.conditionUpdate monthDayYearPretty:YES], usernameData];
+    
+    return updatedString;
 }
 
-- (NSString *)pastConditionWithUpdateDate:(MachineCondition *)pastCondition{
-    NSString * usernameData = @"";
-    
-    if (![pastCondition.createdByUsername isKindOfClass:[NSNull class]]) {
-        usernameData = [NSString stringWithFormat:@" by %@", pastCondition.createdByUsername];
-    }
-    
-    if (pastCondition.conditionCreated){
-        return [NSString stringWithFormat:@"%@ (updated on %@%@)",pastCondition.comment,[pastCondition.conditionCreated monthDayYearPretty:YES], usernameData];
-    }
-    
-    return [NSString stringWithFormat:@"%@",pastCondition.comment];
-    
+- (NSString *)pastConditionWithUpdateDate:(MachineCondition *)pastCondition {
+    BOOL addBy = [self.updatedByUsername isKindOfClass:[NSNull class]] ? NO : YES;
+
+    return [self formattedConditionDate:addBy conditionUpdate:pastCondition.conditionCreated];
 }
 
 @end

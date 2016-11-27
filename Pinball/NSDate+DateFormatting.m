@@ -28,6 +28,12 @@
     }
     return [df stringFromDate:self];
 }
+- (NSString *)threeLetterMonthPretty{
+    NSDateFormatter *df = [NSDateFormatter new];
+
+    [df setDateFormat:@"MMM dd, yyyy"];
+    return [df stringFromDate:self];
+}
 - (NSString *)yearMonthDay{
     NSDateFormatter *df = [NSDateFormatter new];
     [df setDateFormat:@"yyyy-MM-dd"];

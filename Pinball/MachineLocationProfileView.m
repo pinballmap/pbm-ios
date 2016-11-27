@@ -143,7 +143,9 @@
     if (indexPath.section == 0){
         cellText = _currentMachine.location.name;
     }else if (indexPath.section == 1){
-        cellText = _currentMachine.conditionWithUpdateDate;
+        BOOL addBy = [_currentMachine.updatedByUsername isKindOfClass:[NSNull class]] ? NO : YES;
+
+        cellText = [_currentMachine formattedConditionDate:addBy conditionUpdate:_currentMachine.conditionUpdate];
     }else if (indexPath.section == 2){
         MachineCondition *condition = self.machineConditionsArray[indexPath.row];
         cellText = condition.comment;
@@ -156,10 +158,40 @@
         return conditionHeight.size.height+10;
     }
 }
+- (UITableViewCell *)formatConditionCell:(UITableViewCell *)cell machineCondition:(MachineCondition *)oldMachineCondition {
+    NSString *condition = oldMachineCondition ? oldMachineCondition.comment : _currentMachine.condition;
+    
+    UILabel *conditionLabel = (UILabel *)[cell viewWithTag:100];
+    conditionLabel.text = condition;
+    [conditionLabel sizeToFit];
+    
+    NSString *username = oldMachineCondition ? oldMachineCondition.createdByUsername : _currentMachine.updatedByUsername;
+    NSDate *conditionDate = oldMachineCondition ? oldMachineCondition.conditionCreated : _currentMachine.conditionUpdate;
+    BOOL addBy = [username isKindOfClass:[NSNull class]] ? NO : YES;
+    NSString *conditionDateString = oldMachineCondition ? [_currentMachine pastConditionWithUpdateDate:oldMachineCondition] :[_currentMachine formattedConditionDate:addBy conditionUpdate:conditionDate];
+    UILabel *conditionDateLabel = (UILabel *)[cell viewWithTag:101];
+    conditionDateLabel.text = conditionDateString;
+    [conditionDateLabel sizeToFit];
+    
+    if (![username isKindOfClass:[NSNull class]]) {
+        UILabel *usernameLabel = (UILabel *)[cell viewWithTag:102];
+        usernameLabel.text = username;
+        [usernameLabel sizeToFit];
+        
+        CGRect conditionFrame = conditionDateLabel.frame;
+        CGRect frame = usernameLabel.frame;
+        frame.origin.x = conditionFrame.size.width + 10;
+        usernameLabel.frame = frame;
+    }
+    
+    return cell;
+}
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     UITableViewCell *cell;
-    if (indexPath.section == 0 || indexPath.section == 1 || indexPath.section == 2 || indexPath.section == 3){
+    if (indexPath.section == 0 || indexPath.section == 3){
         cell = [tableView dequeueReusableCellWithIdentifier:@"BasicCell"];
+    }else if (indexPath.section == 1 || indexPath.section == 2){
+        cell = [tableView dequeueReusableCellWithIdentifier:@"ConditionCell"];
     }else{
         if (indexPath.row == 0){
             cell = [tableView dequeueReusableCellWithIdentifier:@"BasicCell"];
@@ -176,12 +208,12 @@
         if ([_currentMachine.condition isEqualToString:@"N/A"]){
             cell.textLabel.text = @"Tap to edit";
         }else{
-            cell.textLabel.text = _currentMachine.conditionWithUpdateDate;
+            cell = [self formatConditionCell:cell machineCondition:nil];
         }
     }else if (indexPath.section == 2){
         MachineCondition *condition = self.machineConditionsArray[indexPath.row];
         
-        cell.textLabel.text = [_currentMachine pastConditionWithUpdateDate:condition];
+        [self formatConditionCell:cell machineCondition:condition];
     }else if (indexPath.section == 3){
         if (indexPath.row == 0){
             cell.textLabel.text = @"Add your score";
@@ -275,56 +307,6 @@
         }
     }];
 }
-- (void)editorDidCancel{
-    
-}
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
-}
-*/
-
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    } else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
-}
-*/
-
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
-{
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
+- (void)editorDidCancel{}
 
 @end
