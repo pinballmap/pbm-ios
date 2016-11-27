@@ -81,8 +81,9 @@ int const headerHeight = 90;
     self.infoUpToDateButton.translatesAutoresizingMaskIntoConstraints = NO;
     self.infoUpToDateButton.frame = CGRectMake(0, 50, self.view.frame.size.width, 20);
     [self.infoUpToDateButton addTarget:self action:@selector(informationUpToDate:) forControlEvents:UIControlEventTouchUpInside];
-    [self.infoUpToDateButton setTitle:@"Tap to confirm machine line-up!" forState:UIControlStateNormal];
-    [self.infoUpToDateButton setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
+    [self.infoUpToDateButton setTitle:@"Confirm machine list is up to date" forState:UIControlStateNormal];
+    [self.infoUpToDateButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    [self.infoUpToDateButton setBackgroundColor:[UIColor colorWithRed:0.83 green:0.93 blue:1.0 alpha:1.0]];
 }
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
@@ -111,7 +112,7 @@ int const headerHeight = 90;
     
     NSString *lastUpdateString;
     if (_currentLocation.lastUpdated == NULL){
-        lastUpdateString = @"Last Update: Unknown";
+        self.lastUpdateLabel.text = @"Last Update: Unknown";
     }else{
         NSString *usernameData = @"";
         if (![_currentLocation.lastUpdatedByUsername isKindOfClass:[NSNull class]]){
@@ -119,8 +120,18 @@ int const headerHeight = 90;
         }
         
         lastUpdateString = [NSString stringWithFormat:@"Last Update: %@%@",[_currentLocation.lastUpdated monthDayYearPretty:YES], usernameData];
+        
+        if (![_currentLocation.lastUpdatedByUsername isKindOfClass:[NSNull class]]){
+            NSMutableAttributedString *formattedUpdateString = [[NSMutableAttributedString alloc] initWithString:lastUpdateString];
+            NSRange boldRange = [lastUpdateString rangeOfString:_currentLocation.lastUpdatedByUsername];
+            [formattedUpdateString setAttributes:@{NSFontAttributeName:[UIFont boldSystemFontOfSize:self.lastUpdateLabel.font.pointSize]} range:boldRange];
+
+            self.lastUpdateLabel.attributedText = formattedUpdateString;
+        } else {
+            self.lastUpdateLabel.text = lastUpdateString;
+        }
     }
-    self.lastUpdateLabel.text = lastUpdateString;
+    
     [self setupRightBarButton];
     [self.tableView reloadData];
 }
@@ -226,7 +237,7 @@ int const headerHeight = 90;
                 }
                 [UIAlertView simpleApplicationAlertWithMessage:errors cancelButton:@"Ok"];
             } else {
-                [UIAlertView simpleApplicationAlertWithMessage:@"Confirmed, thank you." cancelButton:@"Ok"];
+                [UIAlertView simpleApplicationAlertWithMessage:@"Thanks for confirming this location" cancelButton:@"Ok"];
                 
                 self.currentLocation.lastUpdatedByUsername = [[PinballMapManager sharedInstance] currentUser].username;
                 self.currentLocation.lastUpdated = [NSDate date];
@@ -384,7 +395,7 @@ int const headerHeight = 90;
         }
         if (self.lastUpdateLabel){
             NSArray *horzCon = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-(0)-[lastup]-(0)-|" options:NSLayoutFormatAlignmentMask metrics:nil views:@{@"lastup": self.lastUpdateLabel}];
-            NSArray *vertCon = [NSLayoutConstraint constraintsWithVisualFormat:@"V:[lastup]-(0)-[upbutton]" options:NSLayoutFormatAlignAllLeft metrics:nil views:@{@"lastup": self.lastUpdateLabel,@"upbutton": self.infoUpToDateButton}];
+            NSArray *vertCon = [NSLayoutConstraint constraintsWithVisualFormat:@"V:[lastup]-(5)-[upbutton]" options:NSLayoutFormatAlignAllLeft metrics:nil views:@{@"lastup": self.lastUpdateLabel,@"upbutton": self.infoUpToDateButton}];
             [dataSegView addConstraints:horzCon];
             [dataSegView addConstraints:vertCon];
         }
@@ -403,7 +414,8 @@ int const headerHeight = 90;
         if (self.dataSetSeg.selectedSegmentIndex == 0){
             MachineLocation *currentMachine = [self.machinesFetch objectAtIndexPath:[NSIndexPath indexPathForRow:indexPath.row inSection:0]];
             CGRect titleLabel = [currentMachine.machine.machineTitle boundingRectWithSize:CGSizeMake(238, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin context:nil];
-            CGRect detailLabel = [currentMachine.conditionWithUpdateDate boundingRectWithSize:CGSizeMake(238, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName: [UIFont systemFontOfSize:12]} context:nil];
+            BOOL addBy = [currentMachine.updatedByUsername isKindOfClass:[NSNull class]] ? NO : YES;
+            CGRect detailLabel = [[currentMachine formattedConditionDate:addBy conditionUpdate:currentMachine.conditionUpdate] boundingRectWithSize:CGSizeMake(238, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName: [UIFont systemFontOfSize:12]} context:nil];
             if ([currentMachine.condition rangeOfString:@"N/A" options:NSCaseInsensitiveSearch].location != NSNotFound || currentMachine.condition == nil || currentMachine.condition.length == 0){
                 detailLabel = CGRectMake(0, 0, 0, 0);
             }
@@ -456,7 +468,22 @@ int const headerHeight = 90;
             cell.textLabel.attributedText = currentMachine.machine.machineTitle;
             cell.detailTextLabel.numberOfLines = 0;
             if (currentMachine.condition != nil && currentMachine.condition.length > 0 && [currentMachine.condition rangeOfString:@"N/A" options:NSCaseInsensitiveSearch].location == NSNotFound){
-                cell.detailTextLabel.text = currentMachine.conditionWithUpdateDate;
+                BOOL addBy = [currentMachine.updatedByUsername isKindOfClass:[NSNull class]] ? NO : YES;
+                NSString *unformattedDetail = [currentMachine formattedConditionDate:addBy conditionUpdate:currentMachine.conditionUpdate];
+                
+                if (addBy) {
+                    unformattedDetail = [NSString stringWithFormat:@"%@%@", unformattedDetail, currentMachine.updatedByUsername];
+                }
+                
+                NSMutableAttributedString *formattedDetail = [[NSMutableAttributedString alloc] initWithString:unformattedDetail];
+                
+                if (addBy) {
+                    NSRange boldRange = [unformattedDetail rangeOfString:currentMachine.updatedByUsername];
+
+                    [formattedDetail setAttributes:@{NSFontAttributeName:[UIFont boldSystemFontOfSize:cell.detailTextLabel.font.pointSize]} range:boldRange];
+                }
+
+                cell.detailTextLabel.attributedText = formattedDetail;
             }else{
                 cell.detailTextLabel.text = @"";
             }

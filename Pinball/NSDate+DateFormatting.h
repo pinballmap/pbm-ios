@@ -15,6 +15,7 @@
 // Converts a NSDate to a month-day-year format.
 // If pretty is true will return a word based date: September 10, 2014
 - (NSString *)monthDayYearPretty:(BOOL)pretty;
+- (NSString *)threeLetterMonthPretty;
 // Converts a NSDate to a NSString with a yyyy-mm-dd format.
 - (NSString *)yearMonthDay;
 // Creates a NSDate from either a 12 hour formatted time or 24 hour format. If no timezone is set will default to GMT

@@ -10,7 +10,7 @@
 
 @interface MachineLocation (CellHelpers)
 
-- (NSString *)conditionWithUpdateDate;
+- (NSString *)formattedConditionDate:(BOOL)addBy conditionUpdate:(NSDate *)conditionUpdate;
 - (NSString *)pastConditionWithUpdateDate:(MachineCondition *)pastCondition;
 
 @end

@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		8E1FD5241DE8B3CB00B82016 /* OperatorsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E1FD5231DE8B3CB00B82016 /* OperatorsView.m */; };
+		8E3237711DEAB0A0002309C2 /* MachineConditionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E3237701DEAB0A0002309C2 /* MachineConditionCell.m */; };
+		8E3237751DEAB231002309C2 /* MachineConditionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8E3237741DEAB231002309C2 /* MachineConditionCell.xib */; };
 		8E36953D1DC6746900BB7219 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E36953C1DC6746900BB7219 /* User.m */; };
 		8E3695401DC677A000BB7219 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E36953F1DC677A000BB7219 /* LoginViewController.m */; };
 		8E8D60AF1DDAD746000F828E /* ProfileView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E8D60AE1DDAD746000F828E /* ProfileView.m */; };
@@ -207,6 +209,9 @@
 		767AEE54A0274802B59CA4A5 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		8E1FD5221DE8B3B800B82016 /* OperatorsView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OperatorsView.h; sourceTree = "<group>"; };
 		8E1FD5231DE8B3CB00B82016 /* OperatorsView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OperatorsView.m; sourceTree = "<group>"; };
+		8E32376F1DEAB08E002309C2 /* MachineConditionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MachineConditionCell.h; sourceTree = "<group>"; };
+		8E3237701DEAB0A0002309C2 /* MachineConditionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MachineConditionCell.m; sourceTree = "<group>"; };
+		8E3237741DEAB231002309C2 /* MachineConditionCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MachineConditionCell.xib; sourceTree = "<group>"; };
 		8E36953B1DC6741F00BB7219 /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
 		8E36953C1DC6746900BB7219 /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
 		8E36953E1DC6775D00BB7219 /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
@@ -864,13 +869,16 @@
 			children = (
 				DBB59CD018FADF6D00F35BFD /* InformationCell.h */,
 				DBB59CD118FADF6D00F35BFD /* InformationCell.m */,
-				DB3F807A194B25100089F3D0 /* LocationCell.xib */,
 				DBB59CD318FADF7A00F35BFD /* LocationMapCell.h */,
 				DBB59CD418FADF7A00F35BFD /* LocationMapCell.m */,
 				DBA3B608190846D900ACBC69 /* InputCell.h */,
 				DBA3B609190846D900ACBC69 /* InputCell.m */,
 				DB314276194A10F80097B312 /* LocationCell.h */,
 				DB314277194A10F80097B312 /* LocationCell.m */,
+				DB3F807A194B25100089F3D0 /* LocationCell.xib */,
+				8E32376F1DEAB08E002309C2 /* MachineConditionCell.h */,
+				8E3237701DEAB0A0002309C2 /* MachineConditionCell.m */,
+				8E3237741DEAB231002309C2 /* MachineConditionCell.xib */,
 				DBC7516D1A670E5500D88975 /* MachineCell.h */,
 				DBC7516E1A670E5500D88975 /* MachineCell.m */,
 				DBC7516F1A670E5500D88975 /* MachineCell.xib */,
@@ -983,8 +991,8 @@
 				DBB71BB018FC5E77007907DE /* NSFileManager+DocumentsDirectory.m */,
 				DB52D30218FB0DCF00BB56D8 /* UIAlertView+Application.h */,
 				DB52D30318FB0DCF00BB56D8 /* UIAlertView+Application.m */,
-				DB52D2F818FB09AF00BB56D8 /* NSDate+DateFormatting.h */,
 				CCA2F2B21AAF22CE00C6C4F5 /* PinballMap-Prefix.pch */,
+				DB52D2F818FB09AF00BB56D8 /* NSDate+DateFormatting.h */,
 				DB52D2F918FB09AF00BB56D8 /* NSDate+DateFormatting.m */,
 				DBF06BD618F96FF500F92912 /* PinballMap-Info.plist */,
 				DBF06BD718F96FF500F92912 /* InfoPlist.strings */,
@@ -1287,6 +1295,7 @@
 			files = (
 				DBF06BFE18F9700F00F92912 /* Storyboard-iPhone.storyboard in Resources */,
 				DBC751711A670E5500D88975 /* MachineCell.xib in Resources */,
+				8E3237751DEAB231002309C2 /* MachineConditionCell.xib in Resources */,
 				DB403E931A961AD200E39A93 /* SecondaryControllers.storyboard in Resources */,
 				DBF06BD918F96FF500F92912 /* InfoPlist.strings in Resources */,
 				DB9A15F41A7D107C00819A1E /* about_page in Resources */,
@@ -1385,6 +1394,7 @@
 				DBF06C0118F9703E00F92912 /* CoreDataManager.m in Sources */,
 				DB52D2FD18FB0AD300BB56D8 /* EventProfileView.m in Sources */,
 				DB38DA9619E1CBC400E1B6D2 /* AFNetworkReachabilityManager.m in Sources */,
+				8E3237711DEAB0A0002309C2 /* MachineConditionCell.m in Sources */,
 				DB09D3F51AA35777008D74B9 /* AppSettings.m in Sources */,
 				DB9A15F71A7D17C400819A1E /* LoadingViewController.m in Sources */,
 				DB52D2FA18FB09AF00BB56D8 /* NSDate+DateFormatting.m in Sources */,
