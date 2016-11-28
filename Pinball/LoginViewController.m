@@ -23,7 +23,6 @@
 }
 - (void)viewDidLoad{
     [super viewDidLoad];
-    self.navigationItem.title = @"Login";
 }
 - (void)didReceiveMemoryWarning{
     [super didReceiveMemoryWarning];
