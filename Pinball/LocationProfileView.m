@@ -119,7 +119,7 @@ int const headerHeight = 90;
             usernameData = [NSString stringWithFormat:@" by %@", _currentLocation.lastUpdatedByUsername];
         }
         
-        lastUpdateString = [NSString stringWithFormat:@"Last Update: %@%@",[_currentLocation.lastUpdated monthDayYearPretty:YES], usernameData];
+        lastUpdateString = [NSString stringWithFormat:@"Last Update: %@%@",[_currentLocation.lastUpdated threeLetterMonthPretty], usernameData];
         
         if (![_currentLocation.lastUpdatedByUsername isKindOfClass:[NSNull class]]){
             NSMutableAttributedString *formattedUpdateString = [[NSMutableAttributedString alloc] initWithString:lastUpdateString];
