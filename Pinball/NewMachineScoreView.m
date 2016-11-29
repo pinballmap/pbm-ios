@@ -58,7 +58,7 @@
             
             [[CoreDataManager sharedInstance] saveContext];
 
-            [UIAlertView simpleApplicationAlertWithMessage:status[@"msg"] cancelButton:@"Ok"];
+            [UIAlertView simpleApplicationAlertWithMessage:@"High score added!" cancelButton:@"Ok"];
             [self dismissViewControllerAnimated:YES completion:nil];
         }
     }];
