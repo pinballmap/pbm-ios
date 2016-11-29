@@ -13,8 +13,6 @@
 
 @interface ContactView () <TextEditorDelegate>
 @property (nonatomic) NSString *messageContent;
-@property (weak) IBOutlet UITextField *nameField;
-@property (weak) IBOutlet UITextField *emailField;
 @property (weak) IBOutlet UILabel *messageLabel;
 @property (weak) IBOutlet UIView *messageCellView;
 @property (weak) IBOutlet UITableViewCell *regionNameCell;
@@ -69,19 +67,11 @@
     Region *currentRegion = [[PinballMapManager sharedInstance] currentRegion];
     
     if (self.contactType == ContactTypeRegionSuggest){
-        if (self.nameField.text.length == 0){
-            [UIAlertView simpleApplicationAlertWithMessage:@"You must enter a name" cancelButton:@"Ok"];
-            return;
-        }else if (self.emailField.text.length == 0){
-            [UIAlertView simpleApplicationAlertWithMessage:@"You must enter an email" cancelButton:@"Ok"];
-            return;
-        }else if (self.regionNameField.text.length == 0){
+        if (self.regionNameField.text.length == 0){
             [UIAlertView simpleApplicationAlertWithMessage:@"You must enter a region name" cancelButton:@"Ok"];
             return;
         }
         messageData = @{
-                        @"name": self.nameField.text,
-                        @"email": self.emailField.text,
                         @"region_name": self.regionNameField.text,
                         @"comments": self.messageContent
                         };
@@ -94,20 +84,16 @@
                                 @"device_type": [[UIDevice currentDevice] model],
                                 @"app_version": [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"],
                                 @"message": self.messageContent,
-                                @"name": self.nameField.text,
-                                @"email": self.emailField.text,
                                 @"region_id": [[[PinballMapManager sharedInstance] currentRegion] regionId]
                                 };
             }else{
                 messageData = @{
                                 @"region_id": currentRegion.regionId,
                                 @"message": self.messageContent,
-                                @"name": self.nameField.text,
-                                @"email": self.emailField.text
                                 };
             }
         }else{
-            [UIAlertView simpleApplicationAlertWithMessage:@"You must enter a meesage" cancelButton:@"Ok"];
+            [UIAlertView simpleApplicationAlertWithMessage:@"You must enter a message" cancelButton:@"Ok"];
             return;
         }
     }
@@ -142,9 +128,7 @@
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    [self.nameField resignFirstResponder];
-    [self.emailField resignFirstResponder];
-    if (indexPath.row == 2){
+    if (indexPath.row == 0){
         TextEditorView *editorView = [[TextEditorView alloc] initWithTitle:@"Message" andDelegate:self];
         editorView.textContent = self.messageContent;
         
@@ -158,13 +142,8 @@
     self.messageContent = text;
     self.messageLabel.text = text;
     
-    [self.nameField resignFirstResponder];
-    [self.emailField resignFirstResponder];
-    
     [self.tableView reloadData];
 }
-- (void)editorDidCancel{
-    
-}
+- (void)editorDidCancel{}
 
 @end
