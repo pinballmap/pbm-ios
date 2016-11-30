@@ -23,6 +23,8 @@
 }
 - (void)viewDidLoad{
     [super viewDidLoad];
+    
+    [self.tableView setContentInset:UIEdgeInsetsMake(50,0,0,0)];
 }
 - (void)didReceiveMemoryWarning{
     [super didReceiveMemoryWarning];
