@@ -13,6 +13,7 @@
 @property (nonatomic) NSNumber *score;
 @property (nonatomic) NSString *scoreString;
 @property (nonatomic) NSString *createdByUsername;
+@property (nonatomic) NSDate *dateCreated;
 
 - (id)initWithData:(NSDictionary *)data;
 

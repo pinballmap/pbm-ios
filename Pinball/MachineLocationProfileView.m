@@ -13,6 +13,7 @@
 #import "NewMachineScoreView.h"
 #import "MachineCondition.h"
 #import "TextEditorView.h"
+#import "NSDate+DateFormatting.h"
 
 @interface MachineLocationProfileView () <ScoreDelegate,TextEditorDelegate>
 
@@ -188,10 +189,16 @@
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     UITableViewCell *cell;
-    if (indexPath.section == 0 || indexPath.section == 3){
+    if (indexPath.section == 0){
         cell = [tableView dequeueReusableCellWithIdentifier:@"BasicCell"];
     }else if (indexPath.section == 1 || indexPath.section == 2){
         cell = [tableView dequeueReusableCellWithIdentifier:@"ConditionCell"];
+    }else if (indexPath.section == 3){
+        if (indexPath.row == 0){
+            cell = [tableView dequeueReusableCellWithIdentifier:@"BasicCell"];
+        }else{
+            cell = [tableView dequeueReusableCellWithIdentifier:@"ScoreCell"];
+        }
     }else{
         if (indexPath.row == 0){
             cell = [tableView dequeueReusableCellWithIdentifier:@"BasicCell"];
@@ -220,11 +227,29 @@
             cell.textLabel.textAlignment = NSTextAlignmentCenter;
         }else{
             MachineScore *score = self.machineScores[indexPath.row-1];
+            
+            UILabel *scoreLabel = (UILabel *)[cell viewWithTag:100];
+            scoreLabel.text = score.scoreString;
+            [scoreLabel sizeToFit];
+            
+            UILabel *scoreDetailLabel = (UILabel *)[cell viewWithTag:101];
+            
             NSString *usernameData = @"";
             if (![score.createdByUsername isKindOfClass:[NSNull class]]) {
-                usernameData = [NSString stringWithFormat:@" (%@)", score.createdByUsername];
+                usernameData = [NSString stringWithFormat:@" by %@", score.createdByUsername];
             }
-            cell.textLabel.text = [NSString stringWithFormat:@"%@%@",score.scoreString,usernameData];
+            
+            NSString *unformattedDetail = [NSString stringWithFormat:@"  Scored on: %@%@",[score.dateCreated threeLetterMonthPretty],usernameData];
+            NSMutableAttributedString *formattedDetail = [[NSMutableAttributedString alloc] initWithString:unformattedDetail];
+
+            if (![score.createdByUsername isKindOfClass:[NSNull class]]) {
+                NSRange boldRange = [unformattedDetail rangeOfString:score.createdByUsername];
+                
+                [formattedDetail setAttributes:@{NSFontAttributeName:[UIFont boldSystemFontOfSize:scoreDetailLabel.font.pointSize]} range:boldRange];
+            }
+            
+            scoreDetailLabel.attributedText = formattedDetail;
+            [scoreDetailLabel sizeToFit];
         }
     }else if (indexPath.section == 4){
         cell.textLabel.text = @"Remove Machine";
