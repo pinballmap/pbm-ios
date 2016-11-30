@@ -22,7 +22,19 @@
         if (![data[@"username"] isKindOfClass:[NSNull class]]) {
             self.createdByUsername = data[@"username"];
         }
+        
+        if (![data[@"created_at"] isKindOfClass:[NSNull class]]) {
+            NSDateFormatter *df = [[NSDateFormatter alloc] init];
+            [df setDateFormat:@"YYYY-MM-dd"];
+
+            NSString *createdString = data[@"created_at"];
+            createdString = [createdString substringToIndex:[createdString rangeOfString:@"T"].location];
+            self.dateCreated = [df dateFromString:createdString];            
+        } else {
+            self.dateCreated = NULL;
+        }
     }
+    
     return self;
 }
 
