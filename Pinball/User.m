@@ -2,7 +2,7 @@
 
 @implementation User
 
-@dynamic userId, username, email, token, numMachinesAdded, numMachinesRemoved, numLocationsEdited, numLocationsSuggested, numCommentsLeft, createdAt;
+@dynamic userId, username, email, token, numMachinesAdded, numMachinesRemoved, numLocationsEdited, numLocationsSuggested, numCommentsLeft, dateCreated;
 
 +(NSString *)guestUsername { return @"GUEST_USERNAME"; }
 

@@ -4,6 +4,7 @@
 @interface ProfileView : UIViewController
 
 @property (strong, nonatomic) IBOutlet UILabel *usernameLabel;
+@property (strong, nonatomic) IBOutlet UILabel *usernameDateCreatedLabel;
 @property (strong, nonatomic) IBOutlet UILabel *numMachinesAddedLabel;
 @property (strong, nonatomic) IBOutlet UILabel *numMachinesRemovedLabel;
 @property (strong, nonatomic) IBOutlet UILabel *numLocationsEditedLabel;

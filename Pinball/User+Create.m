@@ -12,7 +12,7 @@
     newUser.username = data[@"username"];
     newUser.email = data[@"email"];
     newUser.token = data[@"authentication_token"];
-    
+        
     return newUser;
 }
 
