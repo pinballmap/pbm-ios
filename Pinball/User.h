@@ -13,8 +13,8 @@
 @property (nonatomic, retain) NSString * numLocationsEdited;
 @property (nonatomic, retain) NSString * numLocationsSuggested;
 @property (nonatomic, retain) NSString * numCommentsLeft;
+@property (nonatomic, retain) NSDate * dateCreated;
 
-@property (nonatomic, retain) NSString * createdAt;
 
 +(NSString *)guestUsername;
 -(Boolean)isGuest;

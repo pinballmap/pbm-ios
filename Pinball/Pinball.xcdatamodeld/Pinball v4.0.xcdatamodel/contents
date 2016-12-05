@@ -94,7 +94,7 @@
         <relationship name="zones" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Zone" inverseName="region" inverseEntity="Zone" syncable="YES"/>
     </entity>
     <entity name="User" representedClassName="User" syncable="YES">
-        <attribute name="createdAt" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="dateCreated" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="email" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="numCommentsLeft" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="numLocationsEdited" optional="YES" attributeType="String" syncable="YES"/>

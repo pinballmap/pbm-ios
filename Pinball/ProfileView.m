@@ -1,5 +1,6 @@
 #import "ProfileView.h"
 #import "LoginViewController.h"
+#import "NSDate+DateFormatting.h"
 
 @interface ProfileView ()
 
@@ -25,6 +26,8 @@
         
         User *user = [[PinballMapManager sharedInstance] currentUser];
         self.usernameLabel.text = user.username;
+        
+        self.usernameDateCreatedLabel.text = [user.dateCreated threeLetterMonthPretty];
         self.numCommentsLeftLabel.text = user.numCommentsLeft;
         self.numMachinesAddedLabel.text = user.numMachinesAdded;
         self.numLocationsEditedLabel.text = user.numLocationsEdited;

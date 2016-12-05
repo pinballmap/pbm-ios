@@ -104,6 +104,15 @@
                     user.numMachinesAdded = [status[@"profile_info"][@"num_machines_added"] stringValue];
                     user.numCommentsLeft = [status[@"profile_info"][@"num_lmx_comments_left"] stringValue];
                     
+                    if (![status[@"profile_info"][@"created_at"] isKindOfClass:[NSNull class]]){
+                        NSDateFormatter *df = [[NSDateFormatter alloc] init];
+                        [df setDateFormat:@"YYYY-MM-dd"];
+                        
+                        NSString *createdString = status[@"profile_info"][@"created_at"];
+                        createdString = [createdString substringToIndex:[createdString rangeOfString:@"T"].location];
+                        user.dateCreated = [df dateFromString:createdString];
+                    }
+                    
                     [[PinballMapManager sharedInstance] loadUserData:user];
                     
                     [self dismissViewControllerAnimated:NO completion:^{}];
