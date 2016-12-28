@@ -44,7 +44,6 @@ typedef NS_ENUM(NSInteger, PBMDataAPI) {
 }
 
 + (NSString *)apiQueryWithLoginCredentials:(NSString *)query {
-    NSLog(@"ABOUT TO RUN QUERY: %@", query);
     User *currentUser = [[PinballMapManager sharedInstance] currentUser];
     
     NSLog(@"MASSAGED QUERY: %@", [NSString stringWithFormat:@"%@?user_token=%@;user_email=%@", query, currentUser.token, currentUser.email]);
@@ -530,7 +529,7 @@ typedef NS_ENUM(NSInteger, PBMDataAPI) {
     }
 }
 - (NSMutableSet *)importOperatorsWithRequest:(AFHTTPRequestOperation *)request{
-//    if (![_currentRegion.operatorsEtag isEqualToString:request.response.allHeaderFields[@"Etag"]]){
+    if (![_currentRegion.operatorsEtag isEqualToString:request.response.allHeaderFields[@"Etag"]]){
         CoreDataManager *cdManager = [CoreDataManager sharedInstance];
         // Clear existing
         [self clearData:PBMDataAPIOperators forRegion:_currentRegion];
@@ -547,14 +546,14 @@ typedef NS_ENUM(NSInteger, PBMDataAPI) {
         [cdManager saveContext];
         
         return allOperators;
-/*    }else{
+   }else{
         NSLog(@"Operators same Etag");
         NSFetchRequest *operatorsFetch = [NSFetchRequest fetchRequestWithEntityName:@"Operator"];
         operatorsFetch.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES]];
         
         NSMutableSet *operators = [[NSMutableSet alloc] initWithArray:[[[CoreDataManager sharedInstance] managedObjectContext] executeFetchRequest:operatorsFetch error:nil]];
         return operators;
-    }*/
+    }
 }
 
 - (NSMutableSet *)importLocationTypesWithRequest:(AFHTTPRequestOperation *)request{

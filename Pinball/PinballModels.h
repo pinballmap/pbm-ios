@@ -29,3 +29,5 @@
 #import "Zone+Create.h"
 #import "Operator.h"
 #import "Operator+Create.h"
+#import "UserProfileHighScore.h"
+#import "UserProfileEditedLocation.h"
