@@ -104,6 +104,24 @@
         <attribute name="token" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="userId" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="username" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="userProfileEditedLocations" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="UserProfileEditedLocation" inverseName="user" inverseEntity="UserProfileEditedLocation" syncable="YES"/>
+        <relationship name="userProfileHighScores" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="UserProfileHighScore" inverseName="user" inverseEntity="UserProfileHighScore" syncable="YES"/>
+    </entity>
+    <entity name="UserProfileEditedLocation" syncable="YES">
+        <attribute name="locationId" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="regionId" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="userId" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
+        <relationship name="location" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Location" syncable="YES"/>
+        <relationship name="region" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Region" syncable="YES"/>
+        <relationship name="user" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="User" inverseName="userProfileEditedLocations" inverseEntity="User" syncable="YES"/>
+    </entity>
+    <entity name="UserProfileHighScore" syncable="YES">
+        <attribute name="dateCreated" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="locationName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="machineName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="score" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="userId" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
+        <relationship name="user" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="User" inverseName="userProfileHighScores" inverseEntity="User" syncable="YES"/>
     </entity>
     <entity name="Zone" representedClassName="Zone" syncable="YES">
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
@@ -121,7 +139,9 @@
         <element name="MachineLocation" positionX="-2504" positionY="-490" width="128" height="150"/>
         <element name="Operator" positionX="-2358" positionY="-984" width="128" height="118"/>
         <element name="Region" positionX="-2520" positionY="-949" width="128" height="253"/>
-        <element name="User" positionX="-2331" positionY="-249" width="128" height="195"/>
+        <element name="User" positionX="-2331" positionY="-249" width="128" height="225"/>
         <element name="Zone" positionX="-2198" positionY="-877" width="128" height="118"/>
+        <element name="UserProfileHighScore" positionX="-2484" positionY="-828" width="128" height="135"/>
+        <element name="UserProfileEditedLocation" positionX="-2475" positionY="-819" width="128" height="135"/>
     </elements>
 </model>

@@ -17,6 +17,8 @@
 		8EC0AF3A1DE77A63000F4048 /* Operator+Create.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EC0AF391DE77A63000F4048 /* Operator+Create.m */; };
 		8ED0E53A1DE8CE95006212CD /* DonateView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8ED0E5391DE8CE95006212CD /* DonateView.m */; };
 		8ED0E53E1DE8D2A7006212CD /* donate.html in Resources */ = {isa = PBXBuildFile; fileRef = 8ED0E53D1DE8D2A7006212CD /* donate.html */; };
+		8ED7B50D1DF681A700C9843B /* UserProfileHighScore.m in Sources */ = {isa = PBXBuildFile; fileRef = 8ED7B50C1DF681A700C9843B /* UserProfileHighScore.m */; };
+		8ED7B50F1DF681BF00C9843B /* UserProfileEditedLocation.m in Sources */ = {isa = PBXBuildFile; fileRef = 8ED7B50E1DF681BF00C9843B /* UserProfileEditedLocation.m */; };
 		8EF307291DE9014D00CF97DE /* paypal-button.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 8EF307281DE9014D00CF97DE /* paypal-button.jpg */; };
 		8EFDEC9A1DCE793F00AEB1BE /* User+Create.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EFDEC991DCE793F00AEB1BE /* User+Create.m */; };
 		8EFDECA01DCE80FD00AEB1BE /* Pinball.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 8EFDEC9B1DCE80FD00AEB1BE /* Pinball.xcdatamodeld */; };
@@ -226,6 +228,10 @@
 		8ED0E5381DE8CE7D006212CD /* DonateView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DonateView.h; sourceTree = "<group>"; };
 		8ED0E5391DE8CE95006212CD /* DonateView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DonateView.m; path = ../DonateView.m; sourceTree = "<group>"; };
 		8ED0E53D1DE8D2A7006212CD /* donate.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = donate.html; sourceTree = "<group>"; };
+		8ED7B50A1DF6817300C9843B /* UserProfileHighScore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserProfileHighScore.h; sourceTree = "<group>"; };
+		8ED7B50B1DF6819500C9843B /* UserProfileEditedLocation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserProfileEditedLocation.h; sourceTree = "<group>"; };
+		8ED7B50C1DF681A700C9843B /* UserProfileHighScore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserProfileHighScore.m; sourceTree = "<group>"; };
+		8ED7B50E1DF681BF00C9843B /* UserProfileEditedLocation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserProfileEditedLocation.m; sourceTree = "<group>"; };
 		8EF307281DE9014D00CF97DE /* paypal-button.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "paypal-button.jpg"; sourceTree = "<group>"; };
 		8EFDEC981DCE78F500AEB1BE /* User+Create.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "User+Create.h"; sourceTree = "<group>"; };
 		8EFDEC991DCE793F00AEB1BE /* User+Create.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "User+Create.m"; sourceTree = "<group>"; };
@@ -750,6 +756,10 @@
 				DBEAA1FC192A9E140096F2A9 /* LocationType.m */,
 				DBF711F0191E59B8008656EE /* Machine.h */,
 				DBF711F1191E59B8008656EE /* Machine.m */,
+				8ED7B50A1DF6817300C9843B /* UserProfileHighScore.h */,
+				8ED7B50C1DF681A700C9843B /* UserProfileHighScore.m */,
+				8ED7B50B1DF6819500C9843B /* UserProfileEditedLocation.h */,
+				8ED7B50E1DF681BF00C9843B /* UserProfileEditedLocation.m */,
 				8E36953B1DC6741F00BB7219 /* User.h */,
 				8E36953C1DC6746900BB7219 /* User.m */,
 			);
@@ -1417,9 +1427,11 @@
 				DBF06BDF18F96FF500F92912 /* AppDelegate.m in Sources */,
 				DB38DAAA19E1CBE300E1B6D2 /* UIAlertView+Application.m in Sources */,
 				DB38DA9319E1CBC400E1B6D2 /* AFHTTPRequestOperation.m in Sources */,
+				8ED7B50F1DF681BF00C9843B /* UserProfileEditedLocation.m in Sources */,
 				DB38DA9819E1CBC400E1B6D2 /* AFURLConnectionOperation.m in Sources */,
 				DB52D2DE18FAEFC500BB56D8 /* MachineProfileView.m in Sources */,
 				DBF06BDB18F96FF500F92912 /* main.m in Sources */,
+				8ED7B50D1DF681A700C9843B /* UserProfileHighScore.m in Sources */,
 				DB5FFE9F19C618CA004C424B /* Region.m in Sources */,
 				8E8D60AF1DDAD746000F828E /* ProfileView.m in Sources */,
 				DB070BEB193202ED0018D521 /* Location.m in Sources */,

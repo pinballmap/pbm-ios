@@ -15,6 +15,8 @@
 @property (nonatomic, retain) NSString * numCommentsLeft;
 @property (nonatomic, retain) NSDate * dateCreated;
 
+@property (nonatomic, retain) NSSet *userProfileEditedLocations;
+@property (nonatomic, retain) NSSet *userProfileHighScores;
 
 +(NSString *)guestUsername;
 -(Boolean)isGuest;

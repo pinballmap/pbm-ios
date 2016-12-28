@@ -4,6 +4,7 @@
 #import "UIAlertView+Application.h"
 #import "RegionsView.h"
 #import "LoadingViewController.h"
+#import "NSDate+DateFormatting.h"
 
 @interface LoginViewController ()
 @property (weak) IBOutlet UITextField *loginField;
@@ -85,6 +86,10 @@
 
             user = [[PinballMapManager sharedInstance] currentUser];
             
+            
+            //###########################
+            // HEY WE NEED TO HAVE THIS HAPPEN WHEN SOMEONE CHANGES REGIONS TOO!!!!!!!
+            //###########################
             [[PinballMapManager sharedInstance] loadUserProfileData:user andCompletion:^(NSDictionary *status) {
                 if (status[@"errors"]) {
                     NSString *errors;
@@ -95,9 +100,6 @@
                     }
                     [UIAlertView simpleApplicationAlertWithMessage:errors cancelButton:@"Ok"];
                 } else {
-                    /*
-                    {"profile_info":{"id":78,"num_machines_added":11,"num_machines_removed":4,"num_locations_edited":25,"num_locations_suggested":2,"num_lmx_comments_left":9,"profile_list_of_edited_locations":[[2787,"Corrales Laundromat",21],[2788,"Launchpad",21],[2772,"Cinemark Movies West",21],[2360,"21st Avenue Bicycles",1],[1002,"45th Street Pub",1],[4715,"Alonso's",51],[888,"The Standard",1],[864,"Billy Ray's Neighborhood Dive",1],[941,"Bar of the Gods (BOG)",1],[2348,"Cinetopia Progress Ridge",1],[4000,"AMF Pro 300 Lanes",1],[4653,"3.99 Pizza Company",5],[1334,"AMF Mar Vista Lanes",5],[4502,"Alameda Coin Laundry",5],[3382,"Alex's Arcade",5],[3957,"Arlington Lanes",5],[2370,"Alpine Slide at Magic Mountain (Big Bear)",5],[1004,"52nd Avenue Sports Bar",1],[3628,"McMenamins Barley Mill Pub",1],[977,"Montavilla Station",1],[4282,"The Coin Jam",1],[4845,"Pins and Needles",5],[2834,"Golden Saddle Cyclery",5],[2290,"Eagle LA",5],[4465,"Game Over Arcade",1]],"profile_list_of_high_scores":[["45th Street Pub","AC/DC (LE)","62,000,500","Oct-11-2016"],["Pins and Needles","Black Knight 2000","12,584,600","Nov-19-2016"]],"created_at":"2016-08-13T21:41:07.291Z"}}*/
-                    
                     user.numLocationsSuggested = [status[@"profile_info"][@"num_locations_suggested"] stringValue];
                     user.numMachinesRemoved = [status[@"profile_info"][@"num_machines_removed"] stringValue];
                     user.numLocationsEdited = [status[@"profile_info"][@"num_locations_edited"] stringValue];
@@ -111,6 +113,55 @@
                         NSString *createdString = status[@"profile_info"][@"created_at"];
                         createdString = [createdString substringToIndex:[createdString rangeOfString:@"T"].location];
                         user.dateCreated = [df dateFromString:createdString];
+                    }
+                    
+                    NSArray *editedLocations = status[@"profile_info"][@"profile_list_of_edited_locations"];
+                    if (![editedLocations isKindOfClass:[NSNull class]]) {
+                        Region *currentRegion = [[PinballMapManager sharedInstance] currentRegion];
+                        for (int i = 0; i < [editedLocations count]; i++) {
+                            NSNumber *regionId = editedLocations[i][2];
+
+                            if (regionId == currentRegion.regionId) {
+                                UserProfileEditedLocation *location = [NSEntityDescription insertNewObjectForEntityForName:@"UserProfileEditedLocation" inManagedObjectContext:cdManager.managedObjectContext];
+                                
+                                NSNumber *locationId = editedLocations[i][0];
+                                NSFetchRequest *locationFetch = [NSFetchRequest fetchRequestWithEntityName:@"Location"];
+                                locationFetch.predicate = [NSPredicate predicateWithFormat:@"locationId = %@",locationId];
+                                locationFetch.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES]];
+                                NSArray *foundLocations = [[[CoreDataManager sharedInstance] managedObjectContext] executeFetchRequest:locationFetch error:nil];
+                                if (foundLocations.count == 1){
+                                    location.location = [foundLocations firstObject];
+                                }
+                            
+                                NSFetchRequest *regionFetch = [NSFetchRequest fetchRequestWithEntityName:@"Region"];
+                                regionFetch.predicate = [NSPredicate predicateWithFormat:@"regionId = %@",regionId];
+                                regionFetch.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES]];
+                                NSArray *foundRegions = [[[CoreDataManager sharedInstance] managedObjectContext] executeFetchRequest:regionFetch error:nil];
+                                if (foundRegions.count == 1){
+                                    location.region = [foundRegions firstObject];
+                                }
+
+                                location.locationId = locationId;
+                                location.regionId = regionId;
+                                location.userId = user.userId;
+                                location.user = user;
+                            }
+                        }
+                    }
+                    
+                    NSArray *highScores = status[@"profile_info"][@"profile_list_of_high_scores"];
+                    if (![highScores isKindOfClass:[NSNull class]]) {
+                        for (int i = 0; i < [highScores count]; i++) {
+                            UserProfileHighScore *score = [NSEntityDescription insertNewObjectForEntityForName:@"UserProfileHighScore" inManagedObjectContext:cdManager.managedObjectContext];
+                            score.locationName = highScores[i][0];
+                            score.machineName = highScores[i][1];
+                            score.score = highScores[i][2];
+                            
+                            NSDateFormatter* myFormatter = [[NSDateFormatter alloc] init];
+                            [myFormatter setDateFormat:@"MM-dd-yyyy"];
+                            score.dateCreated = [myFormatter dateFromString:highScores[i][3]];
+                            score.user = user;
+                        }
                     }
                     
                     [[PinballMapManager sharedInstance] loadUserData:user];
