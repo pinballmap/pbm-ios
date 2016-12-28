@@ -54,16 +54,16 @@
                                 </constraints>
                             </mapView>
                             <containerView contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="aeA-g0-D99" userLabel="Profile View">
-                                <rect key="frame" x="1024" y="0.0" width="320" height="655"/>
+                                <rect key="frame" x="1024" y="0.0" width="350" height="655"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="320" id="EC6-eV-6qP"/>
+                                    <constraint firstAttribute="width" constant="350" id="EC6-eV-6qP"/>
                                 </constraints>
                                 <connections>
                                     <segue destination="oFB-wf-omc" kind="embed" id="Gyt-CJ-oMK"/>
                                 </connections>
                             </containerView>
-                            <containerView contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="LDe-aJ-Ptl">
+                            <containerView contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="LDe-aJ-Ptl">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="655"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
@@ -79,7 +79,7 @@
                             <constraint firstItem="LDe-aJ-Ptl" firstAttribute="top" secondItem="aeA-g0-D99" secondAttribute="top" id="31E-jL-egU"/>
                             <constraint firstItem="LDe-aJ-Ptl" firstAttribute="bottom" secondItem="aeA-g0-D99" secondAttribute="bottom" id="I5T-dg-KrJ"/>
                             <constraint firstItem="LDe-aJ-Ptl" firstAttribute="centerY" secondItem="g9u-as-gqp" secondAttribute="centerY" id="Ih7-tA-7j6"/>
-                            <constraint firstAttribute="trailing" secondItem="aeA-g0-D99" secondAttribute="trailing" constant="-320" id="KEw-Ru-tIB"/>
+                            <constraint firstAttribute="trailing" secondItem="aeA-g0-D99" secondAttribute="trailing" constant="-350" id="KEw-Ru-tIB"/>
                             <constraint firstItem="g9u-as-gqp" firstAttribute="top" secondItem="aeA-g0-D99" secondAttribute="top" id="OVs-VQ-Wqq"/>
                             <constraint firstItem="g9u-as-gqp" firstAttribute="centerY" secondItem="Ajw-Ih-5RC" secondAttribute="centerY" id="X5a-PQ-tZ1"/>
                             <constraint firstItem="LDe-aJ-Ptl" firstAttribute="top" secondItem="Ajw-Ih-5RC" secondAttribute="top" id="ZEC-bR-YF3"/>
