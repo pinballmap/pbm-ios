@@ -35,7 +35,7 @@ typedef enum : NSUInteger {
 
 int const headerHeight = 90;
 
-@interface LocationProfileView () <TextEditorDelegate,NSFetchedResultsControllerDelegate,UIAlertViewDelegate,LocationTypeSelectDelegate>
+@interface LocationProfileView () <TextEditorDelegate,NSFetchedResultsControllerDelegate,UIAlertViewDelegate,LocationTypeSelectDelegate, NewMachineDelegate>
 
 @property (nonatomic) NSFetchedResultsController *machinesFetch;
 @property (nonatomic) UIImage *mapSnapshot;
@@ -192,7 +192,11 @@ int const headerHeight = 90;
     [self setupRightBarButton];
     [self.tableView reloadData];
 }
-- (IBAction)addNewMachine:(id)sender{    
+- (void)didAddMachine{
+    [self setupUI];
+    [self.tableView reloadData];
+}
+- (IBAction)addNewMachine:(id)sender{
     if ([[PinballMapManager sharedInstance] isLoggedInAsGuest]){
         UINavigationController *navController = [[UIStoryboard storyboardWithName:@"SecondaryControllers" bundle:nil] instantiateViewControllerWithIdentifier:@"LoginViewController"];
         
@@ -201,6 +205,7 @@ int const headerHeight = 90;
     } else {
         NewMachineLocationView *vc = (NewMachineLocationView *)[[[[UIStoryboard storyboardWithName:@"SecondaryControllers" bundle:nil] instantiateViewControllerWithIdentifier:@"NewMachineLocationView"] viewControllers] lastObject];
         vc.location = _currentLocation;
+        vc.delegate = self;
         [self.navigationController presentViewController:vc.parentViewController animated:YES completion:nil];
     }
 }
