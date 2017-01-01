@@ -9,8 +9,14 @@
 #import <UIKit/UIKit.h>
 #import "Location.h"
 
+@protocol NewMachineDelegate;
 @interface NewMachineLocationView : UITableViewController
 
+@property (nonatomic) id <NewMachineDelegate> delegate;
 @property (nonatomic)Location *location;
 
+@end
+
+@protocol NewMachineDelegate <NSObject>
+- (void)didAddMachine;
 @end

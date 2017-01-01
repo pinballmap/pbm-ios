@@ -85,7 +85,7 @@
 - (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex{
     if (buttonIndex != alertView.cancelButtonIndex){
         if (alertView == self.deleteConfirm){
-            MachineLocation *machine = _currentMachine;//[machinesFetch objectAtIndexPath:[NSIndexPath indexPathForItem:deletePath.row inSection:0]];
+            MachineLocation *machine = _currentMachine;
             [[PinballMapManager sharedInstance] removeMachine:machine withCompletion:^(NSDictionary *status) {
                 if (status[@"errors"]){
                     NSString *errors;
