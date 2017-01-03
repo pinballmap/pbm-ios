@@ -63,7 +63,7 @@
                                     <segue destination="oFB-wf-omc" kind="embed" id="Gyt-CJ-oMK"/>
                                 </connections>
                             </containerView>
-                            <containerView contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="LDe-aJ-Ptl">
+                            <containerView contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="LDe-aJ-Ptl">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="655"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
@@ -1107,6 +1107,9 @@
                                 <rect key="frame" x="20" y="472" width="728" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Logout"/>
+                                <connections>
+                                    <action selector="logout:" destination="zMi-q2-jSy" eventType="touchDown" id="Qr5-Wa-5uA"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

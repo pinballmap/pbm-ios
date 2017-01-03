@@ -142,11 +142,11 @@
     if (currentRegion.zones.count > 0){
         [self.filterSheet addButtonWithTitle:@"Zone"];
     }
-    
+
     if (currentRegion.operators.count > 0) {
         [self.filterSheet addButtonWithTitle:@"Operator"];
     }
-    
+
     if ([UIDevice iPad]){
         [self.filterSheet showFromTabBar:self.tabBarController.tabBar];
     }else{
@@ -302,7 +302,7 @@
                     [operatorSelect.parentViewController setModalPresentationStyle:UIModalPresentationFormSheet];
                 }
                 [self.navigationController presentViewController:operatorSelect.parentViewController animated:YES completion:nil];
-                
+
                 return;
             }else if ([buttonTitle isEqualToString:@"Browse on Map"]){
                 [self browseLocations:nil];

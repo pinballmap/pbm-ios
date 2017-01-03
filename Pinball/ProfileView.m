@@ -5,6 +5,7 @@
 #import "LocationProfileView.h"
 #import "LocationProfileView-iPad.h"
 #import "AppDelegate.h"
+#import "UIDevice+Model.h"
 
 @interface ProfileView ()
 
@@ -51,11 +52,16 @@
 }
 
 - (void)sendToRootAndLogin{
-    [self.navigationController popToRootViewControllerAnimated:YES];
-    
     LoginViewController *loginViewController = [[UIStoryboard storyboardWithName:@"SecondaryControllers" bundle:nil] instantiateViewControllerWithIdentifier:@"LoginViewController"];
     UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:loginViewController];
     nav.modalPresentationStyle = UIModalPresentationFormSheet;
+
+    if ([UIDevice currentModel] == ModelTypeiPad){
+        [self.tabBarController setSelectedIndex:0];
+    } else {
+        [self.navigationController popToRootViewControllerAnimated:YES];
+    }
+    
     [self presentViewController:nav animated:YES completion:nil];
 }
 
@@ -138,10 +144,9 @@
         UserProfileEditedLocation *currentEditedLocation = [[user.userProfileEditedLocations allObjects] objectAtIndex:indexPath.row];
         
         if ([UIDevice iPad]){
-            // THIS NEEDS TO SWITCH TABS AND SET THE LOCATION
-            LocationProfileView_iPad *locations = (LocationProfileView_iPad *)[[[[(AppDelegate*)[[UIApplication sharedApplication] delegate] window] rootViewController] childViewControllers] firstObject];
-            [self.parentViewController.navigationController presentViewController:locations animated:YES completion:nil];
-            //[locations setCurrentLocation:currentEditedLocation.location];
+            [self.tabBarController setSelectedIndex:0];
+            LocationProfileView_iPad *locationView = (LocationProfileView_iPad *)[[self.tabBarController.viewControllers firstObject] navigationRootViewController];
+            [locationView setCurrentLocation:currentEditedLocation.location];
         }else{
             LocationProfileView *profile = [self.storyboard instantiateViewControllerWithIdentifier:@"LocationProfileView"];
             profile.showMapSnapshot = true;
