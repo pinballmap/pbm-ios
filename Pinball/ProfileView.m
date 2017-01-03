@@ -13,7 +13,7 @@
 
 @implementation ProfileView
 
-@synthesize usernameLabel, highScoresTableView, editedLocationsTableView;
+@synthesize usernameLabel, highScoresTableView, editedLocationsTableView, locationsEditedInLabel;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -31,8 +31,10 @@
         [self.view setHidden:NO];
         
         User *user = [[PinballMapManager sharedInstance] currentUser];
+        Region *region = [[PinballMapManager sharedInstance] currentRegion];
         self.usernameLabel.text = user.username;
-        
+        self.locationsEditedInLabel.text = [NSString stringWithFormat:@"Locations Edited in %@:",region.fullName];
+                                       
         self.usernameDateCreatedLabel.text = [user.dateCreated threeLetterMonthPretty];
         self.numCommentsLeftLabel.text = user.numCommentsLeft;
         self.numMachinesAddedLabel.text = user.numMachinesAdded;
