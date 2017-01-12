@@ -208,6 +208,7 @@
         }
         return;
     }
+    
     if ([self.parentViewController isKindOfClass:[UINavigationController class]]){
         [self.navigationController popToRootViewControllerAnimated:YES];
     }
