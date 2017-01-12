@@ -50,7 +50,6 @@
     locationRequest.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"location.name" ascending:YES]];
     self.machineLocations = [[[CoreDataManager sharedInstance] managedObjectContext] executeFetchRequest:locationRequest error:nil];
     [self.tableView reloadData];
-    
 }
 - (void)setCurrentMachine:(Machine *)currentMachine{
     _currentMachine = currentMachine;
@@ -109,7 +108,7 @@
             MachineLocation *machine = self.machineLocations[indexPath.row-1];
             CGRect stringSize = [machine.location.name boundingRectWithSize:CGSizeMake(290, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName: [UIFont systemFontOfSize:18]} context:nil];
             
-            stringSize.size.height = stringSize.size.height+10;   // Take into account the 10 points of padding within a cell.
+            stringSize.size.height = stringSize.size.height+10;
             if (stringSize.size.height+10 < 44){
                 return 44;
             }else{

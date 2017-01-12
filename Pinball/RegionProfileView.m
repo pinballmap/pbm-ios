@@ -10,6 +10,8 @@
 #import "UIAlertView+Application.h"
 #import "RegionLink.h"
 #import "RegionsView.h"
+#import "MachineProfileView.h"
+#import "MachinesView.h"
 #import "AboutView.h"
 #import "HighRoller.h"
 #import "HighRollerProfileView.h"
@@ -129,6 +131,15 @@
 #pragma mark - Region Selection Delegate
 - (void)didSelectNewRegion:(Region *)region{
     [self.loadingAlert show];
+    
+    if (![UIDevice iPad]){
+        for(UIViewController *vc in self.tabBarController.viewControllers) {
+            if([vc isKindOfClass:[UINavigationController class]]) {
+                UINavigationController *nc = (UINavigationController*)vc;
+                [nc popToRootViewControllerAnimated:YES];
+            }
+        }
+    }
 }
 #pragma mark - TableView Datasource/Delegate
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
