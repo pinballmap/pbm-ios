@@ -69,6 +69,8 @@
             _currentMachine.location.lastUpdated = [NSDate date];
             
             [[CoreDataManager sharedInstance] saveContext];
+            
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"updatedMachine" object:nil];
             [self dismissViewControllerAnimated:YES completion:nil];
         }
     }];

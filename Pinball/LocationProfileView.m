@@ -110,6 +110,11 @@ int const headerHeight = 90;
     self.dataSetSeg.selectedSegmentIndex = 0;
     self.tableView.allowsSelectionDuringEditing = YES;
     
+    [self updateLastUpdated];
+    [self setupRightBarButton];
+    [self.tableView reloadData];
+}
+- (void)updateLastUpdated {
     NSString *lastUpdateString;
     if (_currentLocation.lastUpdated == NULL){
         self.lastUpdateLabel.text = @"Last Update: Unknown";
@@ -125,15 +130,12 @@ int const headerHeight = 90;
             NSMutableAttributedString *formattedUpdateString = [[NSMutableAttributedString alloc] initWithString:lastUpdateString];
             NSRange boldRange = [lastUpdateString rangeOfString:_currentLocation.lastUpdatedByUsername];
             [formattedUpdateString setAttributes:@{NSFontAttributeName:[UIFont boldSystemFontOfSize:self.lastUpdateLabel.font.pointSize]} range:boldRange];
-
+            
             self.lastUpdateLabel.attributedText = formattedUpdateString;
         } else {
             self.lastUpdateLabel.text = lastUpdateString;
         }
     }
-    
-    [self setupRightBarButton];
-    [self.tableView reloadData];
 }
 - (void)setupRightBarButton{
     if (_currentLocation){
@@ -206,6 +208,10 @@ int const headerHeight = 90;
         NewMachineLocationView *vc = (NewMachineLocationView *)[[[[UIStoryboard storyboardWithName:@"SecondaryControllers" bundle:nil] instantiateViewControllerWithIdentifier:@"NewMachineLocationView"] viewControllers] lastObject];
         vc.location = _currentLocation;
         vc.delegate = self;
+        
+        if ([UIDevice iPad]){
+            [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateLastUpdated) name:@"addedMachine" object:nil];
+        }
         [self.navigationController presentViewController:vc.parentViewController animated:YES completion:nil];
     }
 }
@@ -540,6 +546,9 @@ int const headerHeight = 90;
             vc.currentMachine = [self.machinesFetch objectAtIndexPath:[NSIndexPath indexPathForRow:indexPath.row inSection:0]];
             [tableView setEditing:NO];
             if ([UIDevice currentModel] == ModelTypeiPad){
+                [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateLastUpdated) name:@"removedMachine" object:nil];
+                [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateLastUpdated) name:@"updatedMachine" object:nil];
+                                
                 [self.parentViewController presentViewController:vc.parentViewController animated:YES completion:nil];
             }else{
                 [self.navigationController presentViewController:vc.parentViewController animated:YES completion:nil];

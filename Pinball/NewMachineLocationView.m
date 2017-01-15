@@ -107,6 +107,7 @@
                 
                 [[CoreDataManager sharedInstance] saveContext];
 
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"addedMachine" object:nil];
                 [self dismissViewControllerAnimated:YES completion:nil];
             }
  
