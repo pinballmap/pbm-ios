@@ -52,6 +52,12 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+- (void)loadFirstMachine{
+    Machine *firstMachine = [[self.fetchedResults fetchedObjects] firstObject];
+    
+    MachineProfileView *profileView = (MachineProfileView *)[[self.splitViewController detailViewForSplitView] navigationRootViewController];
+    [profileView setCurrentMachine:firstMachine];
+}
 #pragma mark - Class Actions
 - (IBAction)addMachine:(id)sender{
     if ([[PinballMapManager sharedInstance] isLoggedInAsGuest]){
@@ -85,6 +91,10 @@
     self.fetchedResults.delegate = self;
     [self.fetchedResults performFetch:nil];
     [self.tableView reloadData];
+    
+    if ([UIDevice iPad]){
+        [self loadFirstMachine];
+    }
 }
 #pragma mark - UIActionSheet Delegate
 - (void)actionSheet:(UIActionSheet *)actionSheet didDismissWithButtonIndex:(NSInteger)buttonIndex{
