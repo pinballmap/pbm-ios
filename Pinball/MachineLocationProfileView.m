@@ -97,9 +97,15 @@
                     [UIAlertView simpleApplicationAlertWithMessage:errors cancelButton:@"Ok"];
                 }else{
                     [[[CoreDataManager sharedInstance] managedObjectContext] deleteObject:machine];
+                    
+                    machine.location.lastUpdatedByUsername = [[PinballMapManager sharedInstance] currentUser].username;
+                    machine.location.lastUpdated = [NSDate date];
+                    
                     [[CoreDataManager sharedInstance] saveContext];
                     self.deletePath = nil;
                     [UIAlertView simpleApplicationAlertWithMessage:@"Removed machine!" cancelButton:@"Ok"];
+                    
+                    [[NSNotificationCenter defaultCenter] postNotificationName:@"removedMachine" object:nil];
                     [self dismissViewControllerAnimated:YES completion:nil];
                 }
             }];
@@ -325,6 +331,8 @@
             
             _currentMachine.location.lastUpdatedByUsername = [[PinballMapManager sharedInstance] currentUser].username;
             _currentMachine.location.lastUpdated = [NSDate date];
+            
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"updatedMachine" object:nil];
             
             [[CoreDataManager sharedInstance] saveContext];
             [UIAlertView simpleApplicationAlertWithMessage:@"Updated condition" cancelButton:@"Ok"];
