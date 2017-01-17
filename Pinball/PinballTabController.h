@@ -10,4 +10,6 @@
 
 @interface PinballTabController : UITabBarController
 
+- (void)setupUserAndRegion;
+
 @end

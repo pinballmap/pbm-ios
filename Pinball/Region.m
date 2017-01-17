@@ -15,4 +15,13 @@
 
 @dynamic eventsEtag, fullName, latitude, locationDistance, locationsEtag, longitude, name, regionId, zonesEtag, events, locations, zones, operators, operatorsEtag;
 
+- (NSMutableArray *)machineLocations {
+    NSMutableArray *machineLocations = [[NSMutableArray alloc] init];
+    for (Location *location in self.locations) {
+        [machineLocations addObjectsFromArray:[location.machines allObjects]];
+    }
+    
+    return machineLocations;
+}
+
 @end
