@@ -100,22 +100,20 @@ typedef NS_ENUM(NSInteger, PBMDataAPI) {
                 _currentRegion = [self regionWithData:@{@"full_name":@"Seattle",@"id":@3,@"lat":@48,@"lon":@(-122),@"name":@"seattle",@"primary_email_contact":@"morganshilling@gmail.com"} shouldCreate:YES];
                 [self loadRegionData:_currentRegion];
             }
-            
+        }
+        
+        if (_userInfo) {
             NSFetchRequest *userRequest = [NSFetchRequest fetchRequestWithEntityName:@"User"];
             userRequest.predicate = [NSPredicate predicateWithFormat:@"username = %@", _userInfo[@"username"]];
             NSManagedObjectContext *userContext = [[CoreDataManager sharedInstance] managedObjectContext];
             NSArray *userResults = [userContext executeFetchRequest:userRequest error:nil];
             
-            if (userResults.count == 1) {
+            if (userResults.count > 0) {
                 _currentUser = userResults[0];
-            } else {
-                _currentUser = nil;
             }
-        }else{
-            _currentRegion = nil;
-            _userInfo = nil;
         }
     }
+    
     return self;
 }
 - (void)getUserLocation{
@@ -186,9 +184,9 @@ typedef NS_ENUM(NSInteger, PBMDataAPI) {
 - (void)refreshAllRegions{
     NSArray *currentRegions = [self coreDataRegions];
 
-    NSMutableArray *regionIds = [NSMutableArray new];
+    NSMutableArray *regionNames = [NSMutableArray new];
     [currentRegions enumerateObjectsUsingBlock:^(Region *obj, NSUInteger idx, BOOL *stop) {
-        [regionIds addObject:obj.regionId];
+        [regionNames addObject:obj.name];
     }];
     currentRegions = nil;
     NSURLRequest *regionRequest = [NSURLRequest requestWithURL:[NSURL URLWithString:[PinballMapManager apiQueryWithLoginCredentials:[PinballMapManager apiQueryWithLoginCredentials:[NSString stringWithFormat:@"%@api/v1/regions.json",apiRootURL]]]]];
@@ -198,21 +196,21 @@ typedef NS_ENUM(NSInteger, PBMDataAPI) {
         NSArray *regions = operation.responseObject[@"regions"];
         
         for (NSDictionary *region in regions) {
-            if (![regionIds containsObject:region[@"id"]]){
+            if (![regionNames containsObject:region[@"name"]]){
                 [Region createRegionWithData:region andContext:[[CoreDataManager sharedInstance] managedObjectContext]];
             }else{
                 // Remove any existing IDs the server responded with
                 // so that once we are done we can remove any local regions that
                 // no longer exist on the server
-                [regionIds removeObject:region[@"id"]];
+                [regionNames removeObject:region[@"name"]];
             }
         }
         // Code to remove regions that still exist after
         // proccessing.
         NSArray *currentRegions = [self coreDataRegions];
-        for (NSNumber *regionID in regionIds) {
+        for (NSString *regionName in regionNames) {
             for (Region *existingRegion in currentRegions) {
-                if ([regionID isEqual:existingRegion.regionId]){
+                if ([regionName isEqual:existingRegion.name]){
                     // Region we shuold remove
                     [[[CoreDataManager sharedInstance] managedObjectContext] deleteObject:existingRegion];
                 }
@@ -299,15 +297,26 @@ typedef NS_ENUM(NSInteger, PBMDataAPI) {
          completionBlock(@{@"errors": error.localizedDescription});
      }];
 }
+- (void)deleteAllEntities:(NSString *)entityName{
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:entityName];
+    [fetchRequest setIncludesPropertyValues:NO];
+    
+    NSError *error;
+    NSArray *fetchedObjects = [[[CoreDataManager sharedInstance] managedObjectContext] executeFetchRequest:fetchRequest error:&error];
+    for (NSManagedObject *object in fetchedObjects) {
+        [[[CoreDataManager sharedInstance] managedObjectContext] deleteObject:object];
+    }
+    
+    [[CoreDataManager sharedInstance] saveContext];
+}
 - (void)loadRegionData:(Region *)region{
     [[NSNotificationCenter defaultCenter] postNotificationName:@"UpdatingRegion" object:nil];
 
     [[PinballMapManager userDefaultsForApp] setObject:@{@"name": region.name} forKey:@"CurrentRegion"];
     [[PinballMapManager userDefaultsForApp] synchronize];
     
-    // Find region.
     _currentRegion = region;
-
+    
     NSArray *apiOperations = @[[self requestForData:PBMDataAPIMachines],[self requestForData:PBMDataAPILocationTypes],[self requestForData:PBMDataAPIZones],[self requestForData:PBMDataAPIOperators],[self requestForData:PBMDataAPILocations],[self requestForData:PBMDataAPIEvents]];
     
     NSArray *api = [AFURLConnectionOperation batchOfRequestOperations:apiOperations progressBlock:^(NSUInteger numberOfFinishedOperations, NSUInteger totalNumberOfOperations) {
@@ -341,12 +350,98 @@ typedef NS_ENUM(NSInteger, PBMDataAPI) {
         dispatch_async(dispatch_get_main_queue(), ^{
             [[NSNotificationCenter defaultCenter] postNotificationName:@"RegionUpdate" object:nil];
         });
+
+        [self loadUserData:self.currentUser];
         NSLog(@"Finished proccessing");
     }];
     [[NSOperationQueue mainQueue] addOperations:api waitUntilFinished:NO];
 }
 - (void)loadUserData:(User *)user{
     [[NSNotificationCenter defaultCenter] postNotificationName:@"UpdatingUser" object:nil];
+
+    [[PinballMapManager sharedInstance] loadUserProfileData:user andCompletion:^(NSDictionary *status) {
+        if (status[@"errors"]) {
+            NSString *errors;
+            if ([status[@"errors"] isKindOfClass:[NSArray class]]){
+                errors = [status[@"errors"] componentsJoinedByString:@","];
+            }else{
+                errors = status[@"errors"];
+            }
+        } else {
+            CoreDataManager *cdManager = [CoreDataManager sharedInstance];
+
+            user.numLocationsSuggested = [status[@"profile_info"][@"num_locations_suggested"] stringValue];
+            user.numMachinesRemoved = [status[@"profile_info"][@"num_machines_removed"] stringValue];
+            user.numLocationsEdited = [status[@"profile_info"][@"num_locations_edited"] stringValue];
+            user.numMachinesAdded = [status[@"profile_info"][@"num_machines_added"] stringValue];
+            user.numCommentsLeft = [status[@"profile_info"][@"num_lmx_comments_left"] stringValue];
+            
+            if (![status[@"profile_info"][@"created_at"] isKindOfClass:[NSNull class]]){
+                NSDateFormatter *df = [[NSDateFormatter alloc] init];
+                [df setDateFormat:@"YYYY-MM-dd"];
+                
+                NSString *createdString = status[@"profile_info"][@"created_at"];
+                createdString = [createdString substringToIndex:[createdString rangeOfString:@"T"].location];
+                user.dateCreated = [df dateFromString:createdString];
+            }
+            
+            [self.currentUser.userProfileEditedLocations enumerateObjectsUsingBlock:^(UserProfileEditedLocation *obj, BOOL *stop) {
+                [cdManager.managedObjectContext deleteObject:obj];
+            }];
+            
+            [cdManager saveContext];
+            
+            NSArray *editedLocations = status[@"profile_info"][@"profile_list_of_edited_locations"];
+            if (![editedLocations isKindOfClass:[NSNull class]]) {
+                for (int i = 0; i < [editedLocations count]; i++) {
+                    NSNumber *regionId = editedLocations[i][2];
+                    
+                    if (regionId == self.currentRegion.regionId) {
+                        UserProfileEditedLocation *location = [NSEntityDescription insertNewObjectForEntityForName:@"UserProfileEditedLocation" inManagedObjectContext:cdManager.managedObjectContext];
+                        
+                        NSNumber *locationId = editedLocations[i][0];
+                        NSFetchRequest *locationFetch = [NSFetchRequest fetchRequestWithEntityName:@"Location"];
+                        locationFetch.predicate = [NSPredicate predicateWithFormat:@"locationId = %@",locationId];
+                        locationFetch.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES]];
+                        NSArray *foundLocations = [[[CoreDataManager sharedInstance] managedObjectContext] executeFetchRequest:locationFetch error:nil];
+                        if (foundLocations.count == 1){
+                            location.location = [foundLocations firstObject];
+                        }
+                        
+                        NSFetchRequest *regionFetch = [NSFetchRequest fetchRequestWithEntityName:@"Region"];
+                        regionFetch.predicate = [NSPredicate predicateWithFormat:@"regionId = %@",regionId];
+                        regionFetch.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES]];
+                        NSArray *foundRegions = [[[CoreDataManager sharedInstance] managedObjectContext] executeFetchRequest:regionFetch error:nil];
+                        if (foundRegions.count == 1){
+                            location.region = [foundRegions firstObject];
+                        }
+                        
+                        location.locationId = locationId;
+                        location.regionId = regionId;
+                        location.userId = user.userId;
+                        location.user = user;
+                    }
+                }
+            }
+            
+            NSArray *highScores = status[@"profile_info"][@"profile_list_of_high_scores"];
+            if (![highScores isKindOfClass:[NSNull class]]) {
+                for (int i = 0; i < [highScores count]; i++) {
+                    UserProfileHighScore *score = [NSEntityDescription insertNewObjectForEntityForName:@"UserProfileHighScore" inManagedObjectContext:cdManager.managedObjectContext];
+                    score.locationName = highScores[i][0];
+                    score.machineName = highScores[i][1];
+                    score.score = highScores[i][2];
+                    
+                    NSDateFormatter* myFormatter = [[NSDateFormatter alloc] init];
+                    [myFormatter setDateFormat:@"MM-dd-yyyy"];
+                    score.dateCreated = [myFormatter dateFromString:highScores[i][3]];
+                    score.user = user;
+                }
+            }
+            
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"LoggedIn" object:nil];
+        }
+    }];
     
     [[PinballMapManager userDefaultsForApp] setObject:@{@"username": user.username} forKey:@"CurrentUser"];
     [[PinballMapManager userDefaultsForApp] synchronize];
@@ -453,6 +548,7 @@ typedef NS_ENUM(NSInteger, PBMDataAPI) {
     }
     return foundRegion;
 }
+
 - (void)clearData:(PBMDataAPI)dataType forRegion:(Region *)region{
     CoreDataManager *cdManager = [CoreDataManager sharedInstance];
     if (dataType == PBMDataAPILocations){
@@ -736,6 +832,16 @@ typedef NS_ENUM(NSInteger, PBMDataAPI) {
         completionBlock(@{@"errors": error.localizedDescription});
     }];
 }
+- (void)checkIfCurrentRegionExistsWithCompletion:(APIComplete)completionBlock{
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    manager.requestSerializer = [AFJSONRequestSerializer serializer];
+    [manager GET:[NSString stringWithFormat:@"%@api/v1/regions/does_region_exist.json?name=%@",apiRootURL,self.currentRegion.name] parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        completionBlock(responseObject);
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        completionBlock(@{@"errors": error.localizedDescription});
+    }];
+}
+
 - (void)removeMachine:(MachineLocation *)machine withCompletion:(APIComplete)completionBlock{
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     manager.requestSerializer = [AFJSONRequestSerializer serializer];

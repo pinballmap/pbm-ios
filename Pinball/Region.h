@@ -13,16 +13,16 @@
 
 @interface Region : NSManagedObject
 
-@property (nonatomic, retain) NSString * eventsEtag;
-@property (nonatomic, retain) NSString * fullName;
-@property (nonatomic, retain) NSNumber * latitude;
-@property (nonatomic, retain) NSNumber * locationDistance;
-@property (nonatomic, retain) NSString * locationsEtag;
-@property (nonatomic, retain) NSNumber * longitude;
-@property (nonatomic, retain) NSString * name;
-@property (nonatomic, retain) NSNumber * regionId;
-@property (nonatomic, retain) NSString * zonesEtag;
-@property (nonatomic, retain) NSString * operatorsEtag;
+@property (nonatomic, retain) NSString *eventsEtag;
+@property (nonatomic, retain) NSString *fullName;
+@property (nonatomic, retain) NSNumber *latitude;
+@property (nonatomic, retain) NSNumber *locationDistance;
+@property (nonatomic, retain) NSString *locationsEtag;
+@property (nonatomic, retain) NSNumber *longitude;
+@property (nonatomic, retain) NSString *name;
+@property (nonatomic, retain) NSNumber *regionId;
+@property (nonatomic, retain) NSString *zonesEtag;
+@property (nonatomic, retain) NSString *operatorsEtag;
 @property (nonatomic, retain) NSSet *events;
 @property (nonatomic, retain) NSSet *locations;
 @property (nonatomic, retain) NSSet *zones;
@@ -31,6 +31,8 @@
 @end
 
 @interface Region (CoreDataGeneratedAccessors)
+
+- (NSMutableArray *)machineLocations;
 
 - (void)addEventsObject:(Event *)value;
 - (void)removeEventsObject:(Event *)value;

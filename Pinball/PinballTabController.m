@@ -39,15 +39,37 @@
 }
 - (void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
-    if (![[PinballMapManager sharedInstance] currentUser]){
+    [self setupUserAndRegion];
+}
+- (void)setupUserAndRegion {
+    User *currentUser = [[PinballMapManager sharedInstance] currentUser];
+    Region *currentRegion = [[PinballMapManager sharedInstance] currentRegion];
+    if (!currentUser){
+        if ([UIDevice iPad]){
+            [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(setupUserAndRegion) name:@"LoggedIn" object:nil];
+        }
+        
         LoginViewController *loginViewController = [[UIStoryboard storyboardWithName:@"SecondaryControllers" bundle:nil] instantiateViewControllerWithIdentifier:@"LoginViewController"];
         UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:loginViewController];
         nav.modalPresentationStyle = UIModalPresentationFormSheet;
         [self presentViewController:nav animated:YES completion:nil];
-    }else if (![[PinballMapManager sharedInstance] currentRegion]){
+    }else if (!currentRegion){
         [self showSelectRegionView];
     }else{
-        [self showMainMenuView];
+        [[PinballMapManager sharedInstance] checkIfCurrentRegionExistsWithCompletion:^(NSDictionary *response) {
+            if (response[@"errors"]){
+                CoreDataManager *cdManager = [CoreDataManager sharedInstance];
+                NSFetchRequest *request = [[NSFetchRequest alloc] initWithEntityName:@"MachineLocation"];
+                NSBatchDeleteRequest *delete = [[NSBatchDeleteRequest alloc] initWithFetchRequest:request];
+                
+                NSError *deleteError = nil;
+                [cdManager.managedObjectContext executeRequest:delete error:&deleteError];
+
+                [self showSelectRegionView];
+            } else {
+                [self showMainMenuView];
+            }
+        }];
     }
 }
 - (void)showSelectRegionView{
@@ -131,11 +153,10 @@
         }];
     }
 }
-- (void)updatingRegion{
-}
+- (void)updatingRegion{}
 - (void)updatingProgress:(NSNotification *)note{
     self.updatingAlert = [UIAlertView applicationAlertWithMessage:@"Updating Region" delegate:nil cancelButton:nil otherButtons:nil, nil];
-    self.updatingAlert.message = @"Updating local data";//[NSString stringWithFormat:@"%@ of %@ completed",progress[@"completed"],progress[@"total"]];
+    self.updatingAlert.message = @"Updating local data";
     [self.updatingAlert show];
 }
 - (IBAction)viewMessageOfDay:(id)sender{

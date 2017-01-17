@@ -17,6 +17,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadTables) name:@"LoggedIn" object:nil];
     self.navigationItem.title = @"Profile";
     [self.editedLocationsTableView registerNib:[UINib nibWithNibName:@"LocationCell" bundle:nil] forCellReuseIdentifier:@"LocationCell"];
 }
@@ -43,16 +44,11 @@
         self.numLocationsSuggestedLabel.text = user.numLocationsSuggested;
     }
 }
-- (void)viewDidAppear:(BOOL)animated{
-    [super viewDidAppear:animated];
-}
-- (void)viewDidDisappear:(BOOL)animated{
-    [super viewDidDisappear:animated];
-}
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-}
 
+- (void)reloadTables {
+    [self.highScoresTableView reloadData];
+    [self.editedLocationsTableView reloadData];
+}
 - (void)sendToRootAndLogin{
     LoginViewController *loginViewController = [[UIStoryboard storyboardWithName:@"SecondaryControllers" bundle:nil] instantiateViewControllerWithIdentifier:@"LoginViewController"];
     UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:loginViewController];
@@ -82,7 +78,6 @@
     
     return 0;
 }
-
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     User *user = [[PinballMapManager sharedInstance] currentUser];

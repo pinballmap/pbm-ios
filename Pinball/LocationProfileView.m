@@ -479,7 +479,12 @@ int const headerHeight = 90;
             cell.textLabel.attributedText = currentMachine.machine.machineTitle;
             cell.detailTextLabel.numberOfLines = 0;
             if (currentMachine.condition != nil && currentMachine.condition.length > 0 && [currentMachine.condition rangeOfString:@"N/A" options:NSCaseInsensitiveSearch].location == NSNotFound){
-                BOOL addBy = [currentMachine.updatedByUsername isKindOfClass:[NSNull class]] ? NO : YES;
+                BOOL addBy = YES;
+                
+                if ([currentMachine.updatedByUsername isKindOfClass:[NSNull class]] || ([currentMachine.updatedByUsername length] == 0)) {
+                    addBy = NO;
+                }
+                
                 NSString *unformattedDetail = [currentMachine formattedConditionDate:addBy conditionUpdate:currentMachine.conditionUpdate];
                 
                 if (addBy) {
@@ -491,7 +496,9 @@ int const headerHeight = 90;
                 if (addBy) {
                     NSRange boldRange = [unformattedDetail rangeOfString:currentMachine.updatedByUsername];
 
-                    [formattedDetail setAttributes:@{NSFontAttributeName:[UIFont boldSystemFontOfSize:cell.detailTextLabel.font.pointSize]} range:boldRange];
+                    if (boldRange.location != NSNotFound) {
+                        [formattedDetail setAttributes:@{NSFontAttributeName:[UIFont boldSystemFontOfSize:cell.detailTextLabel.font.pointSize]} range:boldRange];
+                    }
                 }
 
                 cell.detailTextLabel.attributedText = formattedDetail;
