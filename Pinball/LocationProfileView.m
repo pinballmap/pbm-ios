@@ -76,6 +76,7 @@ int const headerHeight = 90;
     self.lastUpdateLabel.font = [UIFont systemFontOfSize:15];
     self.lastUpdateLabel.textColor = [UIColor lightGrayColor];
     self.lastUpdateLabel.textAlignment = NSTextAlignmentCenter;
+    self.lastUpdateLabel.adjustsFontSizeToFitWidth = YES;
 
     self.infoUpToDateButton = [[UIButton alloc] init];
     self.infoUpToDateButton.translatesAutoresizingMaskIntoConstraints = NO;
