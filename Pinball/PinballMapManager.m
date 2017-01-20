@@ -469,7 +469,9 @@ typedef NS_ENUM(NSInteger, PBMDataAPI) {
 - (void)recentlyAddedMachinesWithCompletion:(APIComplete)completionBlock{
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     manager.requestSerializer = [AFJSONRequestSerializer serializer];
-    [manager GET:[PinballMapManager apiQueryWithLoginCredentials:[PinballMapManager apiQueryWithLoginCredentials:[NSString stringWithFormat:@"%@api/v1/region/%@/location_machine_xrefs.json?limit=10",apiRootURL,self.currentRegion.name]]]parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    NSDictionary *parameters = @{@"limit": @"25"};
+
+    [manager GET:[PinballMapManager apiQueryWithLoginCredentials:[PinballMapManager apiQueryWithLoginCredentials:[NSString stringWithFormat:@"%@api/v1/region/%@/location_machine_xrefs.json",apiRootURL,self.currentRegion.name]]] parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         completionBlock(responseObject);
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         completionBlock(@{@"errors": error.localizedDescription});
