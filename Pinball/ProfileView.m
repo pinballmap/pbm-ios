@@ -17,8 +17,15 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadTables) name:@"LoggedIn" object:nil];
     self.navigationItem.title = @"Profile";
+
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadLabelsAndTables) name:@"LoggedIn" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadUser) name:@"addedMachine" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadUser) name:@"removedMachine" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadUser) name:@"updatedMachine" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadUser) name:@"updatedLocation" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadUser) name:@"updatedConfirmed" object:nil];
+
     [self.editedLocationsTableView registerNib:[UINib nibWithNibName:@"LocationCell" bundle:nil] forCellReuseIdentifier:@"LocationCell"];
 }
 - (void)viewWillAppear:(BOOL)animated{
@@ -29,20 +36,33 @@
         
         [self sendToRootAndLogin];
     } else {
-        [self.view setHidden:NO];
-        
-        User *user = [[PinballMapManager sharedInstance] currentUser];
-        Region *region = [[PinballMapManager sharedInstance] currentRegion];
-        self.usernameLabel.text = user.username;
-        self.locationsEditedInLabel.text = [NSString stringWithFormat:@"Locations Edited in %@:",region.fullName];
-                                       
-        self.usernameDateCreatedLabel.text = [user.dateCreated threeLetterMonthPretty];
-        self.numCommentsLeftLabel.text = user.numCommentsLeft;
-        self.numMachinesAddedLabel.text = user.numMachinesAdded;
-        self.numLocationsEditedLabel.text = user.numLocationsEdited;
-        self.numMachinesRemovedLabel.text = user.numMachinesRemoved;
-        self.numLocationsSuggestedLabel.text = user.numLocationsSuggested;
+        [self reloadLabelsAndTables];
     }
+}
+
+- (void)reloadUser {
+    [[PinballMapManager sharedInstance] loadUserData:[[PinballMapManager sharedInstance] currentUser]];
+}
+
+- (void)reloadLabelsAndTables {
+    [self reloadLabels];
+    [self reloadTables];
+}
+
+- (void)reloadLabels {
+    [self.view setHidden:NO];
+    
+    User *user = [[PinballMapManager sharedInstance] currentUser];
+    Region *region = [[PinballMapManager sharedInstance] currentRegion];
+    self.usernameLabel.text = user.username;
+    self.locationsEditedInLabel.text = [NSString stringWithFormat:@"Locations Edited in %@:",region.fullName];
+    
+    self.usernameDateCreatedLabel.text = [user.dateCreated threeLetterMonthPretty];
+    self.numCommentsLeftLabel.text = user.numCommentsLeft;
+    self.numMachinesAddedLabel.text = user.numMachinesAdded;
+    self.numLocationsEditedLabel.text = user.numLocationsEdited;
+    self.numMachinesRemovedLabel.text = user.numMachinesRemoved;
+    self.numLocationsSuggestedLabel.text = user.numLocationsSuggested;
 }
 
 - (void)reloadTables {

@@ -859,6 +859,8 @@ typedef NS_ENUM(NSInteger, PBMDataAPI) {
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     manager.requestSerializer = [AFJSONRequestSerializer serializer];
     [manager PUT:[PinballMapManager apiQueryWithLoginCredentials:[NSString stringWithFormat:@"%@api/v1/locations/%@.json",apiRootURL,location.locationId]] parameters:locationData success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"updatedLocation" object:nil];
+
         completionBlock(responseObject);
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         completionBlock(@{@"errors": error.localizedDescription});
@@ -868,6 +870,8 @@ typedef NS_ENUM(NSInteger, PBMDataAPI) {
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     manager.requestSerializer = [AFJSONRequestSerializer serializer];
     [manager POST:[PinballMapManager apiQueryWithLoginCredentials:[NSString stringWithFormat:@"%@api/v1/locations/suggest.json",apiRootURL]] parameters:locationData success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"confirmedLocation" object:nil];
+
         completionBlock(responseObject);
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         completionBlock(@{@"errors": error.localizedDescription});
