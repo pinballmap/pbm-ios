@@ -62,7 +62,6 @@
     NSString *action = userInfo[@"action"];
     // Actions for Watch app
     if ([action isEqualToString:@"recent_machines"]){
-        // Find recently added machines
         [[PinballMapManager sharedInstance] recentlyAddedMachinesWithCompletion:^(NSDictionary *status) {
             dispatch_async(dispatch_get_main_queue(), ^{
                 if (status[@"errors"]){

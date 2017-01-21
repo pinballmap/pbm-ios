@@ -206,18 +206,19 @@ typedef NS_ENUM(NSInteger, PBMDataAPI) {
             }
         }
         // Code to remove regions that still exist after
-        // proccessing.
+        // processing.
         NSArray *currentRegions = [self coreDataRegions];
         for (NSString *regionName in regionNames) {
             for (Region *existingRegion in currentRegions) {
                 if ([regionName isEqual:existingRegion.name]){
-                    // Region we shuold remove
                     [[[CoreDataManager sharedInstance] managedObjectContext] deleteObject:existingRegion];
                 }
             }
         }
         
         [[CoreDataManager sharedInstance] saveContext];
+        
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"RefreshedRegions" object:nil];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"%@",error);
     }];

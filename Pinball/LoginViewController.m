@@ -53,6 +53,8 @@
     User *user = [User createUserWithData:guestLoginData andContext:cdManager.managedObjectContext];
     [[PinballMapManager sharedInstance] loadUserData:user];
     
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"LoggedIn" object:nil];
+    
     [self dismissViewControllerAnimated:NO completion:^{}];
 }
 
