@@ -16,7 +16,6 @@
 
 @end
 
-
 @protocol RegionSelectionDelegate <NSObject>
 
 - (void)didSelectNewRegion:(Region *)region;

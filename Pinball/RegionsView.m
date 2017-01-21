@@ -41,6 +41,8 @@
     self.searchResults = [NSMutableArray new];
     [[PinballMapManager sharedInstance] refreshAllRegions];
 
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateForUserLocation) name:@"RefreshedRegions" object:nil];
+    
     [self updateForUserLocation];
     
 }
@@ -57,19 +59,17 @@
     // Dispose of any resources that can be recreated.
 }
 - (void)updateForUserLocation{
-    
     NSFetchRequest *regionsFetch = [NSFetchRequest fetchRequestWithEntityName:@"Region"];
     
     if ([[PinballMapManager sharedInstance] userLocation]){
+        NSFetchRequest *regionRequest = [NSFetchRequest fetchRequestWithEntityName:@"Region"];
+        regionRequest.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"fullName" ascending:YES]];
         
-        NSFetchRequest *locationRequest = [NSFetchRequest fetchRequestWithEntityName:@"Region"];
-        locationRequest.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"fullName" ascending:YES]];
-        
-        NSArray *locations = [[[CoreDataManager sharedInstance] managedObjectContext] executeFetchRequest:locationRequest error:nil];
-        for (Region *location in locations) {
-            [location updateDistance];
+        NSArray *regions = [[[CoreDataManager sharedInstance] managedObjectContext] executeFetchRequest:regionRequest error:nil];
+        for (Region *region in regions) {
+            [region updateDistance];
+            // CHECK ON REGION STUFF
         }
-        locations = nil;
         regionsFetch.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"locationDistance" ascending:YES]];
     }else{
         regionsFetch.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"fullName" ascending:YES]];
@@ -82,8 +82,6 @@
     self.fetchedResults.delegate = self;
     [self.fetchedResults performFetch:nil];
     [self.tableView reloadData];
-    
-    
 }
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context{
     if ([keyPath isEqualToString:@"userLocation"]){
@@ -92,7 +90,6 @@
 }
 #pragma mark - Class actions
 - (IBAction)requestRegion:(id)sender{
-
     UIAlertView *regionAlert = [[UIAlertView alloc] initWithTitle:@"Pinball Map" message:@"When requesting that a map for your area be added, please describe WHY one should be added. Does your region have an active pinball scene? Leagues? How many locations have pinball machines? Are you keeping track of them already? Would you be willing to act as the regional administrator, to help curate your map's data? The more details you give us, the better your request sounds!" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"More Information",@"Request Region",nil];
     [regionAlert show];
     
@@ -221,8 +218,7 @@
   didChangeSection:(id <NSFetchedResultsSectionInfo>)sectionInfo
 		   atIndex:(NSUInteger)sectionIndex
 	 forChangeType:(NSFetchedResultsChangeType)type{
-    switch(type)
-    {
+    switch(type) {
         case NSFetchedResultsChangeInsert:
             [self.tableView insertSections:[NSIndexSet indexSetWithIndex:sectionIndex] withRowAnimation:UITableViewRowAnimationFade];
             break;
@@ -240,8 +236,7 @@
 	   atIndexPath:(NSIndexPath *)indexPath
 	 forChangeType:(NSFetchedResultsChangeType)type
 	  newIndexPath:(NSIndexPath *)newIndexPath{
-    switch(type)
-    {
+    switch(type) {
         case NSFetchedResultsChangeInsert:
             [self.tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:newIndexPath] withRowAnimation:UITableViewRowAnimationFade];
             break;
