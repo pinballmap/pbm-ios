@@ -77,7 +77,10 @@
     regions.isSelecting = YES;
     UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:regions];
     nav.modalPresentationStyle = UIModalPresentationFormSheet;
-    [self presentViewController:nav animated:YES completion:nil];
+    
+    dispatch_async(dispatch_get_main_queue(), ^ {
+        [self presentViewController:nav animated:YES completion:nil];
+    });
 }
 - (void)showMainMenuView{
     if (!self.alreadyRefreshed){

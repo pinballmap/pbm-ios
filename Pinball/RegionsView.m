@@ -68,7 +68,6 @@
         NSArray *regions = [[[CoreDataManager sharedInstance] managedObjectContext] executeFetchRequest:regionRequest error:nil];
         for (Region *region in regions) {
             [region updateDistance];
-            // CHECK ON REGION STUFF
         }
         regionsFetch.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"locationDistance" ascending:YES]];
     }else{
