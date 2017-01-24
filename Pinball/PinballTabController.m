@@ -35,7 +35,7 @@
     [super viewDidLoad];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateTabInfo) name:@"RegionUpdate" object:nil];
     self.alreadyRefreshed = false;
-    
+    self.customizableViewControllers = [NSArray arrayWithObjects:nil];
 }
 - (void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
