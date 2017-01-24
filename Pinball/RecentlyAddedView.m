@@ -10,6 +10,7 @@
 #import "UIAlertView+Application.h"
 #import "RecentMachine.h"
 #import "LocationProfileView.h"
+#import "NSDate+DateFormatting.h"
 
 @interface RecentlyAddedView ()
 
@@ -82,6 +83,9 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    NSDateFormatter *df = [[NSDateFormatter alloc] init];
+    [df setDateFormat:@"yyyy-MM-dd"];
+    
     static NSString *cellIdentifier = @"RecentMachineCell";
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
@@ -89,7 +93,10 @@
     RecentMachine *machine = [self.recentMachines objectAtIndex:indexPath.row];
     cell.textLabel.numberOfLines = 0;
     cell.textLabel.attributedText = machine.displayText;
-    cell.detailTextLabel.text = [NSString stringWithFormat:@"%@ (%@)",machine.location.name,machine.location.city];
+    cell.detailTextLabel.text = machine.createdOn;
+
+    NSString *yyyymmdd = [machine.createdOn substringToIndex:[machine.createdOn rangeOfString:@"T"].location];
+    cell.detailTextLabel.text = [[df dateFromString:yyyymmdd] monthDayYearPretty:YES];
 
     return cell;
 }
