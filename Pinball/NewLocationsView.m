@@ -14,23 +14,19 @@
 
 @interface NewLocationsView () <CLLocationManagerDelegate,PickingDelegate>
 
-// Basic Information
 @property (weak) IBOutlet UITextField *locationName;
 @property (weak) IBOutlet UITextField *locationPhone;
 @property (weak) IBOutlet UITextField *locationWebsite;
 @property (weak) IBOutlet UITextField *locationOperator;
-@property (weak) IBOutlet UILabel *machineLabel;
-// Location information
 @property (weak) IBOutlet UITextField *locationStreet;
 @property (weak) IBOutlet UITextField *locationCity;
 @property (weak) IBOutlet UITextField *locationState;
 @property (weak) IBOutlet UITextField *locationZip;
-
+@property (weak) IBOutlet UILabel *machineLabel;
 
 @property (nonatomic) CLLocationManager *locationManager;
 @property (nonatomic) CLGeocoder *geocoder;
 @property (nonatomic) NSMutableArray *pickedMachines;
-
 
 - (IBAction)saveLocation:(id)sender;
 - (IBAction)cancelLocation:(id)sender;
@@ -70,7 +66,6 @@
     [self.pickedMachines enumerateObjectsUsingBlock:^(Machine *obj, NSUInteger idx, BOOL *stop) {
         pickedMachineNames = [pickedMachineNames stringByAppendingString:[NSString stringWithFormat:@"%@-%@,",obj.name,obj.manufacturer]];
     }];
-    
     
     if (self.locationName.text.length > 0 && self.pickedMachines.count > 0){
         NSDictionary *suggestingInfo = @{@"region_id": [[[PinballMapManager sharedInstance] currentRegion] regionId],

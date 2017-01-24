@@ -202,7 +202,7 @@
     if (!_canPickMultiple){
         [self savePicked:nil];
     }else{
-        [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+        [self.tableView reloadData];
     }
 }
 @end

@@ -12,12 +12,11 @@
 
 @interface MachinePickingView : UITableViewController
 
-@property (nonatomic,assign) id delegate; // PickingDelegate
+@property (nonatomic,assign) id delegate;
 @property (nonatomic,assign) NSArray *existingPickedMachines;
 @property (nonatomic,assign) BOOL canPickMultiple;
 
 @end
-
 
 @protocol PickingDelegate <NSObject>
 
