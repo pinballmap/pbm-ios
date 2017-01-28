@@ -72,6 +72,15 @@
     self.navigationItem.leftBarButtonItem = nil;
     self.navigationItem.rightBarButtonItem = nil;
 }
+- (void)showLocation:(NSNotification*)notification{
+    if ([UIDevice iPad]){
+        LocationProfileView_iPad *profileView = (LocationProfileView_iPad *)self.parentViewController;
+        NSDictionary *userInfo = notification.userInfo;
+        Location *location = (Location *)userInfo[@"location"];
+        
+        [profileView setCurrentLocation:location];        
+    }
+}
 #pragma mark - Region Update
 - (void)updateRegion{
     [self.refreshControl endRefreshing];
@@ -284,6 +293,10 @@
                 [self.navigationController presentViewController:types.parentViewController animated:YES completion:nil];
                 return;
             }else if ([buttonTitle isEqualToString:@"Recently Added"]){
+                if ([UIDevice iPad]){
+                    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showLocation:) name:@"RecentlyAddedSelection" object:nil];
+                }
+                    
                 RecentlyAddedView *recentView = (RecentlyAddedView *)[[[UIStoryboard storyboardWithName:@"SecondaryControllers" bundle:nil] instantiateViewControllerWithIdentifier:@"RecentlyAddedView"] navigationRootViewController];
                 [self.navigationController presentViewController:recentView.parentViewController animated:YES completion:nil];
                 return;
