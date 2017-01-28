@@ -131,8 +131,7 @@
     Event *currentEvent = [self.fetchedResults objectAtIndexPath:indexPath];
     NSAttributedString *cellTitle = currentEvent.eventTitle;
 
-    CGRect stringSize = [cellTitle boundingRectWithSize:CGSizeMake(270, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin context:nil];//boundingRectWithSize:CGSizeMake(270, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName: [UIFont systemFontOfSize:18]} context:nil];
-
+    CGRect stringSize = [cellTitle boundingRectWithSize:CGSizeMake(270, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin context:nil];
     stringSize.size.height = stringSize.size.height+10;   // Take into account the 10 points of padding within a cell.
     if (stringSize.size.height+10 < 44){
         return 44;

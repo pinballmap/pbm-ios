@@ -11,6 +11,7 @@
 #import "RecentMachine.h"
 #import "LocationProfileView.h"
 #import "NSDate+DateFormatting.h"
+#import "LocationProfileView-iPad.h"
 
 @interface RecentlyAddedView ()
 
@@ -102,13 +103,20 @@
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    
     RecentMachine *machine = [self.recentMachines objectAtIndex:indexPath.row];
-    LocationProfileView *profileView = [[UIStoryboard storyboardWithName:@"SecondaryControllers" bundle:nil] instantiateViewControllerWithIdentifier:@"LocationProfileView"];
-    profileView.showMapSnapshot = true;
-    profileView.currentLocation = machine.location;
     
-    [self.navigationController pushViewController:profileView animated:YES];
+    if ([UIDevice iPad]){
+        [self dismissViewControllerAnimated:YES completion:nil];
+        NSDictionary *userInfo = @{@"location": machine.location};
+        
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"RecentlyAddedSelection" object:self userInfo:userInfo];
+    } else {
+        LocationProfileView *profileView = [[UIStoryboard storyboardWithName:@"SecondaryControllers" bundle:nil] instantiateViewControllerWithIdentifier:@"LocationProfileView"];
+        profileView.showMapSnapshot = true;
+        profileView.currentLocation = machine.location;
+        
+        [self.navigationController pushViewController:profileView animated:YES];
+    }
     
 }
 
