@@ -67,6 +67,7 @@
 
                 [self showSelectRegionView];
             } else {
+                [[PinballMapManager sharedInstance] loadUserData:[[PinballMapManager sharedInstance] currentUser]];
                 [self showMainMenuView];
             }
         }];
