@@ -150,7 +150,7 @@
     if (indexPath.section == 0){
         cellText = _currentMachine.location.name;
     }else if (indexPath.section == 1){
-        BOOL addBy = [_currentMachine.updatedByUsername isKindOfClass:[NSNull class]] ? NO : YES;
+        BOOL addBy = ([_currentMachine.updatedByUsername isKindOfClass:[NSNull class]] || [_currentMachine.updatedByUsername length] == 0) ? NO : YES;
 
         cellText = [_currentMachine formattedConditionDate:addBy conditionUpdate:_currentMachine.conditionUpdate];
     }else if (indexPath.section == 2){
@@ -166,6 +166,8 @@
     }
 }
 - (UITableViewCell *)formatConditionCell:(UITableViewCell *)cell machineCondition:(MachineCondition *)oldMachineCondition {
+    cell.textLabel.text = nil;
+    
     NSString *condition = oldMachineCondition ? oldMachineCondition.comment : _currentMachine.condition;
     
     UILabel *conditionLabel = (UILabel *)[cell viewWithTag:100];
@@ -174,13 +176,13 @@
     
     NSString *username = oldMachineCondition ? oldMachineCondition.createdByUsername : _currentMachine.updatedByUsername;
     NSDate *conditionDate = oldMachineCondition ? oldMachineCondition.conditionCreated : _currentMachine.conditionUpdate;
-    BOOL addBy = [username isKindOfClass:[NSNull class]] ? NO : YES;
+    BOOL addBy = ([username isKindOfClass:[NSNull class]] || [username length] == 0) ? NO : YES;
     NSString *conditionDateString = oldMachineCondition ? [_currentMachine pastConditionWithUpdateDate:oldMachineCondition] :[_currentMachine formattedConditionDate:addBy conditionUpdate:conditionDate];
     UILabel *conditionDateLabel = (UILabel *)[cell viewWithTag:101];
     conditionDateLabel.text = conditionDateString;
     [conditionDateLabel sizeToFit];
     
-    if (![username isKindOfClass:[NSNull class]]) {
+    if (addBy) {
         UILabel *usernameLabel = (UILabel *)[cell viewWithTag:102];
         usernameLabel.text = username;
         [usernameLabel sizeToFit];
@@ -218,7 +220,7 @@
     if (indexPath.section == 0){
         cell.textLabel.text = _currentMachine.location.name;
     }else if (indexPath.section == 1){
-        if ([_currentMachine.condition isEqualToString:@"N/A"]){
+        if ([_currentMachine.condition isEqualToString:@"N/A"] || [_currentMachine.condition isEqualToString:@""]){
             cell.textLabel.text = @"Tap to edit";
         }else{
             cell = [self formatConditionCell:cell machineCondition:nil];
@@ -241,14 +243,16 @@
             UILabel *scoreDetailLabel = (UILabel *)[cell viewWithTag:101];
             
             NSString *usernameData = @"";
-            if (![score.createdByUsername isKindOfClass:[NSNull class]]) {
+            BOOL usernameEntered = (![score.createdByUsername isKindOfClass:[NSNull class]] || [score.createdByUsername length] > 0);
+            
+            if (usernameEntered) {
                 usernameData = [NSString stringWithFormat:@" by %@", score.createdByUsername];
             }
             
             NSString *unformattedDetail = [NSString stringWithFormat:@"  Scored on: %@%@",[score.dateCreated threeLetterMonthPretty],usernameData];
             NSMutableAttributedString *formattedDetail = [[NSMutableAttributedString alloc] initWithString:unformattedDetail];
 
-            if (![score.createdByUsername isKindOfClass:[NSNull class]]) {
+            if (usernameEntered) {
                 NSRange boldRange = [unformattedDetail rangeOfString:score.createdByUsername];
                 
                 [formattedDetail setAttributes:@{NSFontAttributeName:[UIFont boldSystemFontOfSize:scoreDetailLabel.font.pointSize]} range:boldRange];
@@ -282,12 +286,8 @@
                 nav.modalPresentationStyle = UIModalPresentationFormSheet;
             }
             [self presentViewController:nav animated:YES completion:nil];
-            return;
             
-            MachineConditionView *vc = (MachineConditionView *)[[[[UIStoryboard storyboardWithName:@"SecondaryControllers" bundle:nil] instantiateViewControllerWithIdentifier:@"MachineCondition"] viewControllers] lastObject];
-            vc.currentMachine = _currentMachine;
-            [tableView setEditing:NO];
-            [self.navigationController presentViewController:vc.parentViewController animated:YES completion:nil];
+            return;
         }
     }else if (indexPath.section == 3 && indexPath.row == 0){
         if ([[PinballMapManager sharedInstance] isLoggedInAsGuest]){
@@ -329,13 +329,15 @@
             _currentMachine.condition = text;
             _currentMachine.conditionUpdate = [NSDate date];
             
-            _currentMachine.location.lastUpdatedByUsername = [[PinballMapManager sharedInstance] currentUser].username;
+            _currentMachine.location.lastUpdatedByUsername =  [status valueForKeyPath:@"location_machine.last_updated_by_username"];
+            _currentMachine.updatedByUsername = [status valueForKeyPath:@"location_machine.last_updated_by_username"];
             _currentMachine.location.lastUpdated = [NSDate date];
             
             [[NSNotificationCenter defaultCenter] postNotificationName:@"updatedMachine" object:nil];
             
             [[CoreDataManager sharedInstance] saveContext];
             [UIAlertView simpleApplicationAlertWithMessage:@"Updated condition" cancelButton:@"Ok"];
+
             [self.tableView reloadData];
         }
     }];
