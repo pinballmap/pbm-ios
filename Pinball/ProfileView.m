@@ -25,6 +25,7 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadUser) name:@"updatedMachine" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadUser) name:@"updatedLocation" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadUser) name:@"updatedConfirmed" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadUser) name:@"addedScore" object:nil];
 
     [self.editedLocationsTableView registerNib:[UINib nibWithNibName:@"LocationCell" bundle:nil] forCellReuseIdentifier:@"LocationCell"];
 }
