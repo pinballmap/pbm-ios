@@ -18,7 +18,7 @@
 @interface MachineLocationProfileView () <ScoreDelegate,TextEditorDelegate>
 
 @property (nonatomic) NSMutableArray *machineScores;
-@property (nonatomic) NSArray *machineConditionsArray;
+@property (nonatomic) NSMutableArray *machineConditionsArray;
 @property (nonatomic) UIAlertView *deleteConfirm;
 @property (nonatomic) NSIndexPath *deletePath;
 
@@ -41,7 +41,17 @@
     [super viewDidLoad];
     self.machineScores = [NSMutableArray new];
     self.navigationItem.title = _currentMachine.machine.name;
-    self.machineConditionsArray = _currentMachine.conditions.allObjects;
+    
+    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"conditionId" ascending:NO];
+    NSArray *sortDescriptors = [NSMutableArray arrayWithObject:sortDescriptor];
+    NSArray *sortedArray = [_currentMachine.conditions.allObjects sortedArrayUsingDescriptors:sortDescriptors];
+    
+    self.machineConditionsArray = [NSMutableArray arrayWithArray:sortedArray];
+    
+    if ([self.machineConditionsArray count] > 0) {
+        [self.machineConditionsArray removeObjectAtIndex:0]; //get rid of the "current" condition
+    }
+    
     NSLog(@"%@",self.machineConditionsArray);
     [self reloadScores];
 }
@@ -120,7 +130,7 @@
     if (section == 0 || section == 1){
         return 1;
     }else if (section == 2){
-        return _currentMachine.conditions.count;
+        return self.machineConditionsArray.count;
     }else if (section == 3){
         return self.machineScores.count+1;
     }else{
@@ -132,7 +142,7 @@
         return @"Location";
     }else if (section == 1){
         return @"Machine Condition (tap to add new)";
-    }else if (section == 2 && _currentMachine.conditions.count > 0){
+    }else if (section == 2 && self.machineConditionsArray.count > 0){
         return @"Past Conditions";
     }else if (section == 3){
         return @"Scores";
