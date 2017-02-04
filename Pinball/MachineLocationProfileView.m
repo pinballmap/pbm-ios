@@ -110,6 +110,7 @@
         self.machineScores = [NSMutableArray new];
     }
     [self.machineScores removeAllObjects];
+    
     [[PinballMapManager sharedInstance] allScoresForMachine:_currentMachine withCompletion:^(NSDictionary *status) {
         if (status[@"errors"]){
             NSString *errors;
@@ -119,11 +120,12 @@
                 errors = status[@"errors"];
             }
             [UIAlertView simpleApplicationAlertWithMessage:errors cancelButton:@"Ok"];
-        }else{
+        }else{            
             [status[@"machine_scores"] enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
                 MachineScore *score = [[MachineScore alloc] initWithData:obj];
                 [self.machineScores addObject:score];
             }];
+            
             [self.tableView reloadData];
         }
     }];

@@ -57,6 +57,8 @@
             _currentMachine.location.lastUpdated = [NSDate date];
             
             [[CoreDataManager sharedInstance] saveContext];
+            
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"addedScore" object:nil];
 
             [UIAlertView simpleApplicationAlertWithMessage:@"High score added!" cancelButton:@"Ok"];
             [self dismissViewControllerAnimated:YES completion:nil];

@@ -390,6 +390,10 @@ typedef NS_ENUM(NSInteger, PBMDataAPI) {
                 [cdManager.managedObjectContext deleteObject:obj];
             }];
             
+            [self.currentUser.userProfileHighScores enumerateObjectsUsingBlock:^(UserProfileHighScore *obj, BOOL * stop) {
+                [cdManager.managedObjectContext deleteObject:obj];
+            }];
+            
             [cdManager saveContext];
             
             NSArray *editedLocations = status[@"profile_info"][@"profile_list_of_edited_locations"];
