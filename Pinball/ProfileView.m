@@ -125,7 +125,11 @@
             cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"SimpleTableCell"];
         }
         
-        UserProfileHighScore *currentHighScore = [[user.userProfileHighScores allObjects] objectAtIndex:indexPath.row];
+        NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"dateCreated" ascending:NO];
+        NSArray *sortDescriptors = [NSMutableArray arrayWithObject:sortDescriptor];
+        NSArray *sortedArray = [[user.userProfileHighScores allObjects] sortedArrayUsingDescriptors:sortDescriptors];
+        
+        UserProfileHighScore *currentHighScore = [[NSMutableArray arrayWithArray:sortedArray] objectAtIndex:indexPath.row];
         
         NSString *highScore = [NSString stringWithFormat:@"%@\r%@\rat %@ on %@", currentHighScore.machineName, currentHighScore.locationName, currentHighScore.score, [currentHighScore.dateCreated threeLetterMonthPretty]];
         
