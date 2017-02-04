@@ -14,6 +14,7 @@
 #import "MachineCondition.h"
 #import "TextEditorView.h"
 #import "NSDate+DateFormatting.h"
+#import "MachineCondition+Create.h"
 
 @interface MachineLocationProfileView () <ScoreDelegate,TextEditorDelegate>
 
@@ -42,6 +43,14 @@
     self.machineScores = [NSMutableArray new];
     self.navigationItem.title = _currentMachine.machine.name;
     
+    [self reloadMachineConditionArray];
+    [self reloadScores];
+}
+- (void)didReceiveMemoryWarning{
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+- (void)reloadMachineConditionArray{
     NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"conditionId" ascending:NO];
     NSArray *sortDescriptors = [NSMutableArray arrayWithObject:sortDescriptor];
     NSArray *sortedArray = [_currentMachine.conditions.allObjects sortedArrayUsingDescriptors:sortDescriptors];
@@ -53,13 +62,49 @@
     }
     
     NSLog(@"%@",self.machineConditionsArray);
-    [self reloadScores];
 }
-- (void)didReceiveMemoryWarning{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
+
 #pragma mark - Class
+- (void)reloadPastConditions{
+    if (!self.machineConditionsArray){
+        self.machineConditionsArray = [NSMutableArray new];
+    }
+    [self.machineConditionsArray removeAllObjects];
+    
+    [[PinballMapManager sharedInstance] machineLocationInfo:_currentMachine withCompletion:^(NSDictionary *status) {
+        if (status[@"errors"]){
+            NSString *errors;
+            if ([status[@"errors"] isKindOfClass:[NSArray class]]){
+                errors = [status[@"errors"] componentsJoinedByString:@","];
+            }else{
+                errors = status[@"errors"];
+            }
+            [UIAlertView simpleApplicationAlertWithMessage:errors cancelButton:@"Ok"];
+        }else{
+            NSManagedObjectContext *context = [[CoreDataManager sharedInstance] managedObjectContext];
+
+            for (MachineCondition *condition in self.currentMachine.conditions) {
+                [context deleteObject:condition];
+            }
+            
+            NSArray *conditions = status[@"location_machine"][@"machine_conditions"];
+            if (conditions.count > 0){
+                for (NSDictionary *condition in conditions) {
+                    MachineCondition *machineCondition = [MachineCondition createMachineConditionWithData:condition andContext:context];
+                    if (machineCondition != nil){
+                        machineCondition.machineLocation = self.currentMachine;
+                        [self.currentMachine addConditionsObject:machineCondition];
+                        [self.machineConditionsArray addObject:machineCondition];
+                    }
+                }
+            }
+            
+            [[CoreDataManager sharedInstance] saveContext];
+            [self reloadMachineConditionArray];
+            [self.tableView reloadData];
+        }
+    }];
+}
 - (void)reloadScores{
     if (!self.machineScores){
         self.machineScores = [NSMutableArray new];
@@ -348,7 +393,7 @@
             [[CoreDataManager sharedInstance] saveContext];
             [UIAlertView simpleApplicationAlertWithMessage:@"Updated condition" cancelButton:@"Ok"];
 
-            [self.tableView reloadData];
+            [self reloadPastConditions];
         }
     }];
 }
