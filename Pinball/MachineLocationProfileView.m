@@ -15,6 +15,7 @@
 #import "TextEditorView.h"
 #import "NSDate+DateFormatting.h"
 #import "MachineCondition+Create.h"
+#import "MachineConditionCell.h"
 
 @interface MachineLocationProfileView () <ScoreDelegate,TextEditorDelegate>
 
@@ -40,6 +41,9 @@
 
 - (void)viewDidLoad{
     [super viewDidLoad];
+    self.tableView.estimatedRowHeight = 400.0;
+    self.tableView.rowHeight = UITableViewAutomaticDimension;
+
     self.machineScores = [NSMutableArray new];
     self.navigationItem.title = _currentMachine.machine.name;
     
@@ -198,29 +202,7 @@
     }
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    
-    if (indexPath.section == 3 || indexPath.section == 4){
-        return 44;
-    }
-    
-    NSString *cellText;
-    if (indexPath.section == 0){
-        cellText = _currentMachine.location.name;
-    }else if (indexPath.section == 1){
-        BOOL addBy = ([_currentMachine.updatedByUsername isKindOfClass:[NSNull class]] || [_currentMachine.updatedByUsername length] == 0) ? NO : YES;
-
-        cellText = [_currentMachine formattedConditionDate:addBy conditionUpdate:_currentMachine.conditionUpdate];
-    }else if (indexPath.section == 2){
-        MachineCondition *condition = self.machineConditionsArray[indexPath.row];
-        cellText = condition.comment;
-    }
-    
-    CGRect conditionHeight = [cellText boundingRectWithSize:CGSizeMake(290, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName: [UIFont systemFontOfSize:18]} context:nil];
-    if (conditionHeight.size.height+10 < 44){
-        return 44;
-    }else{
-        return conditionHeight.size.height+10;
-    }
+    return UITableViewAutomaticDimension;
 }
 - (UITableViewCell *)formatConditionCell:(UITableViewCell *)cell machineCondition:(MachineCondition *)oldMachineCondition {
     cell.textLabel.text = nil;
@@ -237,18 +219,19 @@
     NSString *conditionDateString = oldMachineCondition ? [_currentMachine pastConditionWithUpdateDate:oldMachineCondition] :[_currentMachine formattedConditionDate:addBy conditionUpdate:conditionDate];
     UILabel *conditionDateLabel = (UILabel *)[cell viewWithTag:101];
     conditionDateLabel.text = conditionDateString;
-    [conditionDateLabel sizeToFit];
     
     if (addBy) {
         UILabel *usernameLabel = (UILabel *)[cell viewWithTag:102];
+        usernameLabel.lineBreakMode = NSLineBreakByClipping;
         usernameLabel.text = username;
-        [usernameLabel sizeToFit];
-        
-        CGRect conditionFrame = conditionDateLabel.frame;
-        CGRect frame = usernameLabel.frame;
-        frame.origin.x = conditionFrame.size.width + 10;
-        usernameLabel.frame = frame;
     }
+    
+    UIView *dateView = (UIView *)[cell viewWithTag:10];
+    CGRect dateViewFrame = dateView.frame;
+    CGRect conditionFrame = conditionLabel.frame;
+
+    dateViewFrame.origin.y = conditionFrame.size.height + 5;
+    dateView.frame = dateViewFrame;
     
     return cell;
 }
@@ -272,6 +255,7 @@
         }
     }
     cell.textLabel.numberOfLines = 0;
+    cell.textLabel.lineBreakMode = NSLineBreakByWordWrapping;
     cell.textLabel.textAlignment = NSTextAlignmentLeft;
     cell.textLabel.textColor = [UIColor blackColor];
     if (indexPath.section == 0){
