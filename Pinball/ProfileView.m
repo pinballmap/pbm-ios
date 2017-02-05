@@ -19,6 +19,8 @@
     [super viewDidLoad];
     self.navigationItem.title = @"Profile";
 
+    [self reloadUser];
+    
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadLabelsAndTables) name:@"LoggedIn" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadUser) name:@"addedMachine" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadUser) name:@"removedMachine" object:nil];
@@ -46,6 +48,7 @@
 }
 
 - (void)reloadLabelsAndTables {
+    NSLog(@"RELOADING LABELS AND TABLES");
     [self reloadLabels];
     [self reloadTables];
 }
@@ -104,18 +107,23 @@
     User *user = [[PinballMapManager sharedInstance] currentUser];
 
     if (tableView == self.editedLocationsTableView){
-        LocationCell *cell = [tableView dequeueReusableCellWithIdentifier:@"LocationCell" forIndexPath:indexPath];
+        LocationCell *cell = [tableView dequeueReusableCellWithIdentifier:@"LocationCell"];
         
-        UserProfileEditedLocation *currentEditedLocation = [[user.userProfileEditedLocations allObjects] objectAtIndex:indexPath.row];
-        cell.locationName.text = currentEditedLocation.location.name;
+        NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"location.name" ascending:YES];
+        NSArray *sortDescriptors = [NSMutableArray arrayWithObject:sortDescriptor];
+        NSArray *sortedArray = [[user.userProfileEditedLocations allObjects] sortedArrayUsingDescriptors:sortDescriptors];
+
+        UserProfileEditedLocation *currentEditedLocation = [[NSMutableArray arrayWithArray:sortedArray] objectAtIndex:indexPath.row];
+        Location *location = currentEditedLocation.location;
+        cell.locationName.text = location.name;
         
-        if ([currentEditedLocation.location.locationDistance isEqual:@(0)]){
-            cell.locationDetail.text = [NSString stringWithFormat:@"%@, %@",currentEditedLocation.location.street,currentEditedLocation.location.city];
+        if ([location.locationDistance isEqual:@(0)]){
+            cell.locationDetail.text = [NSString stringWithFormat:@"%@, %@",location.street,location.city];
         }else{
-            cell.locationDetail.text = [NSString stringWithFormat:@"%.02f miles",[currentEditedLocation.location.locationDistance floatValue]];
+            cell.locationDetail.text = [NSString stringWithFormat:@"%.02f miles",[location.locationDistance floatValue]];
         }
         
-        cell.machineCount.text = [NSString stringWithFormat:@"%lu",(unsigned long)currentEditedLocation.location.machines.count];
+        cell.machineCount.text = [NSString stringWithFormat:@"%lu",(unsigned long)location.machines.count];
         
         cell.accessoryType = UITableViewCellAccessoryNone;
         
