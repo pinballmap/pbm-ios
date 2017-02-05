@@ -263,6 +263,10 @@
     }else if (indexPath.section == 1){
         if ([_currentMachine.condition isEqualToString:@"N/A"] || [_currentMachine.condition isEqualToString:@""]){
             cell.textLabel.text = @"Tap to edit";
+            
+            UILabel *conditionLabel = (UILabel *)[cell viewWithTag:100];
+            conditionLabel.text = @"                                       ";
+            [conditionLabel sizeToFit];
         }else{
             cell = [self formatConditionCell:cell machineCondition:nil];
         }
