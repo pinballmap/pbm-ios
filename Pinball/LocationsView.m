@@ -46,10 +46,13 @@
     if ([[PinballMapManager sharedInstance] currentRegion]){
         [self updateRegion];
     }
-    UIRefreshControl *refresh = [UIRefreshControl new];
-    [refresh addTarget:self action:@selector(refreshRegion) forControlEvents:UIControlEventValueChanged];
-    self.refreshControl = refresh;
     
+    if (![UIDevice iPad]){
+        UIRefreshControl *refresh = [UIRefreshControl new];
+        [refresh addTarget:self action:@selector(refreshRegion) forControlEvents:UIControlEventValueChanged];
+        self.refreshControl = refresh;
+    }
+        
     [self.tableView registerNib:[UINib nibWithNibName:@"LocationCell" bundle:nil] forCellReuseIdentifier:@"LocationCell"];
     [self.searchDisplayController.searchResultsTableView registerNib:[UINib nibWithNibName:@"LocationCell" bundle:nil] forCellReuseIdentifier:@"LocationCell"];
 }
