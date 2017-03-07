@@ -28,7 +28,6 @@
                         <segue destination="6BM-Nf-6dp" kind="relationship" relationship="viewControllers" id="mDf-VQ-YyY"/>
                         <segue destination="lU1-Uv-MxZ" kind="relationship" relationship="viewControllers" id="4WY-dO-f4V"/>
                         <segue destination="XhK-1d-51f" kind="relationship" relationship="viewControllers" id="7Cl-vy-h2f"/>
-                        <segue destination="9uL-TP-YqD" kind="relationship" relationship="viewControllers" id="0I5-jg-Bv3"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Thn-Cq-cL3" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1176,7 +1175,7 @@
             <objects>
                 <viewController id="eaA-Gt-u5S" customClass="DonateView" sceneMemberID="viewController">
                     <webView key="view" contentMode="scaleToFill" id="IGO-O3-nz2">
-                        <rect key="frame" x="0.0" y="0.0" width="1024" height="719"/>
+                        <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </webView>
