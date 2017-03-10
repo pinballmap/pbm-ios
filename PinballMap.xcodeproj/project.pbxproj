@@ -17,6 +17,7 @@
 		8EC0AF3A1DE77A63000F4048 /* Operator+Create.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EC0AF391DE77A63000F4048 /* Operator+Create.m */; };
 		8ED7B50D1DF681A700C9843B /* UserProfileHighScore.m in Sources */ = {isa = PBXBuildFile; fileRef = 8ED7B50C1DF681A700C9843B /* UserProfileHighScore.m */; };
 		8ED7B50F1DF681BF00C9843B /* UserProfileEditedLocation.m in Sources */ = {isa = PBXBuildFile; fileRef = 8ED7B50E1DF681BF00C9843B /* UserProfileEditedLocation.m */; };
+		8EE9ADBA1E72620500BEFCFF /* SafariServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8EE9ADB91E72620500BEFCFF /* SafariServices.framework */; };
 		8EFDEC9A1DCE793F00AEB1BE /* User+Create.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EFDEC991DCE793F00AEB1BE /* User+Create.m */; };
 		8EFDECA01DCE80FD00AEB1BE /* Pinball.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 8EFDEC9B1DCE80FD00AEB1BE /* Pinball.xcdatamodeld */; };
 		CCA1EA9C1BD7D63C006CF91B /* MachineCondition.m in Sources */ = {isa = PBXBuildFile; fileRef = CCA1EA9B1BD7D63C006CF91B /* MachineCondition.m */; };
@@ -226,6 +227,7 @@
 		8ED7B50B1DF6819500C9843B /* UserProfileEditedLocation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserProfileEditedLocation.h; sourceTree = "<group>"; };
 		8ED7B50C1DF681A700C9843B /* UserProfileHighScore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserProfileHighScore.m; sourceTree = "<group>"; };
 		8ED7B50E1DF681BF00C9843B /* UserProfileEditedLocation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserProfileEditedLocation.m; sourceTree = "<group>"; };
+		8EE9ADB91E72620500BEFCFF /* SafariServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SafariServices.framework; path = System/Library/Frameworks/SafariServices.framework; sourceTree = SDKROOT; };
 		8EFDEC981DCE78F500AEB1BE /* User+Create.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "User+Create.h"; sourceTree = "<group>"; };
 		8EFDEC991DCE793F00AEB1BE /* User+Create.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "User+Create.m"; sourceTree = "<group>"; };
 		8EFDEC9C1DCE80FD00AEB1BE /* Pinball v3.1.0.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Pinball v3.1.0.xcdatamodel"; sourceTree = "<group>"; };
@@ -507,6 +509,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8EE9ADBA1E72620500BEFCFF /* SafariServices.framework in Frameworks */,
 				DB338F5E19606FB8000D0366 /* libsqlite3.dylib in Frameworks */,
 				DB338F4C19606ED2000D0366 /* libz.dylib in Frameworks */,
 				DB338F4A19606E8D000D0366 /* AdSupport.framework in Frameworks */,
@@ -929,6 +932,7 @@
 		DBF06BCD18F96FF500F92912 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				8EE9ADB91E72620500BEFCFF /* SafariServices.framework */,
 				DB38DA9C19E1CBE300E1B6D2 /* FMSKit */,
 				DB38DA7F19E1CBC400E1B6D2 /* AFNetworking */,
 				DB38DAAC19E1CBFA00E1B6D2 /* CupertinoYankee */,

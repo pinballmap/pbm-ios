@@ -5,8 +5,9 @@
 #import "RegionsView.h"
 #import "LoadingViewController.h"
 #import "NSDate+DateFormatting.h"
+#import <SafariServices/SafariServices.h>
 
-@interface LoginViewController ()
+@interface LoginViewController () <SFSafariViewControllerDelegate>
 @property (weak) IBOutlet UITextField *loginField;
 @property (weak) IBOutlet UITextField *passwordField;
 @property (nonatomic) BOOL alreadyRefreshed;
@@ -33,7 +34,9 @@
 }
 
 - (IBAction)signUp:(id)sender {
-    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@users/join",[PinballMapManager getApiRootURL]]]];
+    SFSafariViewController *svc = [[SFSafariViewController alloc] initWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@users/join",[PinballMapManager getApiRootURL]]]];
+    svc.delegate = self;
+    [self presentViewController:svc animated:YES completion:nil];
 }
 
 - (IBAction)continueAsGuest:(id)sender{
@@ -89,6 +92,10 @@
             [self dismissViewControllerAnimated:NO completion:^{}];
         }
     }];
+}
+
+- (void)safariViewControllerDidFinish:(SFSafariViewController *)controller {
+    [self dismissViewControllerAnimated:true completion:nil];
 }
 
 @end
