@@ -1151,43 +1151,6 @@
             </objects>
             <point key="canvasLocation" x="-2708" y="-33"/>
         </scene>
-        <!--Donate-->
-        <scene sceneID="d2T-St-HhY">
-            <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="9uL-TP-YqD" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Donate" image="donate-icon" id="Ykg-nz-A4h"/>
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="B6E-1L-sFK">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="eaA-Gt-u5S" kind="relationship" relationship="rootViewController" id="U1u-aQ-ICp"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Pb1-6m-tmP" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-514" y="-1250"/>
-        </scene>
-        <!--Donate View-->
-        <scene sceneID="Tmu-JL-lhW">
-            <objects>
-                <viewController id="eaA-Gt-u5S" customClass="DonateView" sceneMemberID="viewController">
-                    <webView key="view" contentMode="scaleToFill" id="IGO-O3-nz2">
-                        <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                    </webView>
-                    <navigationItem key="navigationItem" id="C1U-Kw-PbJ"/>
-                    <connections>
-                        <outlet property="mainWebView" destination="IGO-O3-nz2" id="6mL-M0-bNz"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="2Mw-Rg-otP" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-1623" y="-1250"/>
-        </scene>
     </scenes>
     <resources>
         <image name="701-location" width="28" height="28"/>
@@ -1195,7 +1158,6 @@
         <image name="851-calendar" width="28" height="28"/>
         <image name="852-map" width="28" height="24"/>
         <image name="881-globe" width="28" height="28"/>
-        <image name="donate-icon" width="24" height="24"/>
         <image name="pinball" width="28" height="28"/>
         <image name="profile-icon" width="28" height="24"/>
     </resources>

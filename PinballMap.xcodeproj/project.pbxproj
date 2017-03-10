@@ -15,11 +15,8 @@
 		8E8D60AF1DDAD746000F828E /* ProfileView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E8D60AE1DDAD746000F828E /* ProfileView.m */; };
 		8EC0AF371DE7779B000F4048 /* Operator.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EC0AF361DE7779B000F4048 /* Operator.m */; };
 		8EC0AF3A1DE77A63000F4048 /* Operator+Create.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EC0AF391DE77A63000F4048 /* Operator+Create.m */; };
-		8ED0E53A1DE8CE95006212CD /* DonateView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8ED0E5391DE8CE95006212CD /* DonateView.m */; };
-		8ED0E53E1DE8D2A7006212CD /* donate.html in Resources */ = {isa = PBXBuildFile; fileRef = 8ED0E53D1DE8D2A7006212CD /* donate.html */; };
 		8ED7B50D1DF681A700C9843B /* UserProfileHighScore.m in Sources */ = {isa = PBXBuildFile; fileRef = 8ED7B50C1DF681A700C9843B /* UserProfileHighScore.m */; };
 		8ED7B50F1DF681BF00C9843B /* UserProfileEditedLocation.m in Sources */ = {isa = PBXBuildFile; fileRef = 8ED7B50E1DF681BF00C9843B /* UserProfileEditedLocation.m */; };
-		8EF307291DE9014D00CF97DE /* paypal-button.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 8EF307281DE9014D00CF97DE /* paypal-button.jpg */; };
 		8EFDEC9A1DCE793F00AEB1BE /* User+Create.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EFDEC991DCE793F00AEB1BE /* User+Create.m */; };
 		8EFDECA01DCE80FD00AEB1BE /* Pinball.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 8EFDEC9B1DCE80FD00AEB1BE /* Pinball.xcdatamodeld */; };
 		CCA1EA9C1BD7D63C006CF91B /* MachineCondition.m in Sources */ = {isa = PBXBuildFile; fileRef = CCA1EA9B1BD7D63C006CF91B /* MachineCondition.m */; };
@@ -225,14 +222,10 @@
 		8EC0AF361DE7779B000F4048 /* Operator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Operator.m; sourceTree = "<group>"; };
 		8EC0AF381DE77A4A000F4048 /* Operator+Create.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Operator+Create.h"; sourceTree = "<group>"; };
 		8EC0AF391DE77A63000F4048 /* Operator+Create.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Operator+Create.m"; sourceTree = "<group>"; };
-		8ED0E5381DE8CE7D006212CD /* DonateView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DonateView.h; sourceTree = "<group>"; };
-		8ED0E5391DE8CE95006212CD /* DonateView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DonateView.m; path = ../DonateView.m; sourceTree = "<group>"; };
-		8ED0E53D1DE8D2A7006212CD /* donate.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = donate.html; sourceTree = "<group>"; };
 		8ED7B50A1DF6817300C9843B /* UserProfileHighScore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserProfileHighScore.h; sourceTree = "<group>"; };
 		8ED7B50B1DF6819500C9843B /* UserProfileEditedLocation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserProfileEditedLocation.h; sourceTree = "<group>"; };
 		8ED7B50C1DF681A700C9843B /* UserProfileHighScore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserProfileHighScore.m; sourceTree = "<group>"; };
 		8ED7B50E1DF681BF00C9843B /* UserProfileEditedLocation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserProfileEditedLocation.m; sourceTree = "<group>"; };
-		8EF307281DE9014D00CF97DE /* paypal-button.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "paypal-button.jpg"; sourceTree = "<group>"; };
 		8EFDEC981DCE78F500AEB1BE /* User+Create.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "User+Create.h"; sourceTree = "<group>"; };
 		8EFDEC991DCE793F00AEB1BE /* User+Create.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "User+Create.m"; sourceTree = "<group>"; };
 		8EFDEC9C1DCE80FD00AEB1BE /* Pinball v3.1.0.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Pinball v3.1.0.xcdatamodel"; sourceTree = "<group>"; };
@@ -544,17 +537,6 @@
 				8E8D60AE1DDAD746000F828E /* ProfileView.m */,
 			);
 			name = Profile;
-			sourceTree = "<group>";
-		};
-		8EF307271DE9012500CF97DE /* Donate */ = {
-			isa = PBXGroup;
-			children = (
-				8EF307281DE9014D00CF97DE /* paypal-button.jpg */,
-				8ED0E53D1DE8D2A7006212CD /* donate.html */,
-				8ED0E5381DE8CE7D006212CD /* DonateView.h */,
-				8ED0E5391DE8CE95006212CD /* DonateView.m */,
-			);
-			name = Donate;
 			sourceTree = "<group>";
 		};
 		CCB75A841AAF23F2003ED05C /* PinballMap Tests */ = {
@@ -1066,7 +1048,6 @@
 				DB52D2E218FB009400BB56D8 /* Events */,
 				DB636D0A1903EEE000576521 /* About */,
 				DB2E9FC219E15D5D00B9D72F /* Region */,
-				8EF307271DE9012500CF97DE /* Donate */,
 				8E36953E1DC6775D00BB7219 /* LoginViewController.h */,
 				8E36953F1DC677A000BB7219 /* LoginViewController.m */,
 				DBBB4BEE19338A03004E433F /* UIViewController+Helpers.h */,
@@ -1312,8 +1293,6 @@
 				DBF06BE118F96FF500F92912 /* Images.xcassets in Resources */,
 				DB9330BC190D49AB0054C779 /* SeattleLocation.gpx in Resources */,
 				DB3F807B194B25100089F3D0 /* LocationCell.xib in Resources */,
-				8EF307291DE9014D00CF97DE /* paypal-button.jpg in Resources */,
-				8ED0E53E1DE8D2A7006212CD /* donate.html in Resources */,
 				DBFBED6119CF377700ADC964 /* Start Screen.storyboard in Resources */,
 				DBBB4BED193387AB004E433F /* Storyboard-iPad.storyboard in Resources */,
 			);
@@ -1421,7 +1400,6 @@
 				DB38DA9519E1CBC400E1B6D2 /* AFHTTPSessionManager.m in Sources */,
 				DB99C3B11906FA4100AFDF0F /* MachinePickingView.m in Sources */,
 				DBE712D91929134D0046DFA8 /* MachineLocation.m in Sources */,
-				8ED0E53A1DE8CE95006212CD /* DonateView.m in Sources */,
 				DB38DA9B19E1CBC400E1B6D2 /* AFURLSessionManager.m in Sources */,
 				DBF06C4318F9788900F92912 /* Location+Create.m in Sources */,
 				DBF06BDF18F96FF500F92912 /* AppDelegate.m in Sources */,
