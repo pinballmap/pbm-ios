@@ -23,8 +23,8 @@
     return count;
 }
 - (NSUInteger)numberOfLocalMachines{
-    NSFetchRequest *machinesCountFetch = [[NSFetchRequest alloc] initWithEntityName:@"Machine"];
-    machinesCountFetch.predicate = [NSPredicate predicateWithFormat:@"machineLocations.location.region CONTAINS %@",self];
+    NSFetchRequest *machinesCountFetch = [[NSFetchRequest alloc] initWithEntityName:@"MachineLocation"];
+    machinesCountFetch.predicate = [NSPredicate predicateWithFormat:@"location.region CONTAINS %@",self];
     machinesCountFetch.includesSubentities = false;
     
     NSError *error;
