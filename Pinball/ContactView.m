@@ -78,13 +78,17 @@
     }else{
         if (self.messageContent.length > 0 && ![self.messageContent isEqualToString:@"Message"]){
             if (self.contactType == ContactTypeAppFeedback){
+                User *user = [[PinballMapManager sharedInstance] currentUser];
+                
                 messageData = @{
                                 @"os": @"iOS",
                                 @"os_version": [[UIDevice currentDevice] systemVersion],
                                 @"device_type": [[UIDevice currentDevice] model],
                                 @"app_version": [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"],
                                 @"message": self.messageContent,
-                                @"region_id": [[[PinballMapManager sharedInstance] currentRegion] regionId]
+                                @"region_id": currentRegion.regionId,
+                                @"name": user.username,
+                                @"email": user.email
                                 };
             }else{
                 messageData = @{
