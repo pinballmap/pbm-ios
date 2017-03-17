@@ -424,19 +424,18 @@ int const headerHeight = 90;
     }else{
         if (self.dataSetSeg.selectedSegmentIndex == 0){
             MachineLocation *currentMachine = [self.machinesFetch objectAtIndexPath:[NSIndexPath indexPathForRow:indexPath.row inSection:0]];
+            
             CGRect titleLabel = [currentMachine.machine.machineTitle boundingRectWithSize:CGSizeMake(238, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin context:nil];
-            BOOL addBy = [currentMachine.updatedByUsername isKindOfClass:[NSNull class]] ? NO : YES;
-            CGRect detailLabel = [[currentMachine formattedConditionDate:addBy conditionUpdate:currentMachine.conditionUpdate] boundingRectWithSize:CGSizeMake(238, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName: [UIFont systemFontOfSize:12]} context:nil];
+            CGRect detailLabel = [currentMachine.condition boundingRectWithSize:CGSizeMake(238, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName: [UIFont systemFontOfSize:12]} context:nil];
             if ([currentMachine.condition rangeOfString:@"N/A" options:NSCaseInsensitiveSearch].location != NSNotFound || currentMachine.condition == nil || currentMachine.condition.length == 0){
                 detailLabel = CGRectMake(0, 0, 0, 0);
             }
-            // Add 6 pixel padding present in subtitle style.
-            CGRect stringSize = CGRectMake(0, 0, 238, titleLabel.size.height+detailLabel.size.height+6);
+            CGRect stringSize = CGRectMake(0, 0, 238, titleLabel.size.height+detailLabel.size.height+20);
 
             if (stringSize.size.height+10 < 44){
                 return 44;
             }else{
-                return stringSize.size.height+10;
+                return stringSize.size.height;
             }
         }else if (self.dataSetSeg.selectedSegmentIndex == 1){
             NSString *detailText;
@@ -501,7 +500,11 @@ int const headerHeight = 90;
                     }
                 }
 
-                cell.detailTextLabel.attributedText = formattedDetail;
+                NSMutableAttributedString *formattedCondition = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@\n", currentMachine.condition]];
+                [formattedCondition appendAttributedString:formattedDetail];
+                
+                cell.detailTextLabel.attributedText = formattedCondition;
+                cell.detailTextLabel.numberOfLines = 0;
             }else{
                 cell.detailTextLabel.text = @"";
             }
