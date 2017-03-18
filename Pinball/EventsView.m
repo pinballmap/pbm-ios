@@ -20,7 +20,6 @@
 
 @property (weak) IBOutlet UISegmentedControl *eventSorter;
 
-
 - (IBAction)suggestEvent:(id)sender;
 @end
 
@@ -37,13 +36,9 @@
     [super viewDidLoad];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateRegion) name:@"RegionUpdate" object:nil];
     self.managedContext = [[CoreDataManager sharedInstance] managedObjectContext];
-    [self.eventSorter setSelectedSegmentIndex:0];
     if ([[PinballMapManager sharedInstance] currentRegion]){
         [self updateRegion];
     }
-    UIRefreshControl *refresh = [UIRefreshControl new];
-    [refresh addTarget:self action:@selector(refreshRegion) forControlEvents:UIControlEventValueChanged];
-    self.refreshControl = refresh;
 }
 - (void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
@@ -81,30 +76,48 @@
     stackRequest.predicate = [NSPredicate predicateWithFormat:@"region.name = %@ AND (startDate >= %@ AND startDate <= %@)",[[[PinballMapManager sharedInstance] currentRegion] name],[[NSDate date] beginningOfDay],[[NSDate date] endOfDay]];
     stackRequest.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"startDate" ascending:NO]];
     NSArray *todayEvents = [[[CoreDataManager sharedInstance] managedObjectContext] executeFetchRequest:stackRequest error:nil];
-    if (todayEvents.count == 0){
-        // Remove the today segment since there are no events today.
-        [self.eventSorter removeAllSegments];
-        [self.eventSorter insertSegmentWithTitle:@"Upcoming" atIndex:0 animated:NO];
-        [self.eventSorter setSelectedSegmentIndex:0];
-        
-        // Upcoming events only
-        stackRequest.predicate = [NSPredicate predicateWithFormat:@"region.name = %@ AND startDate > %@",[[[PinballMapManager sharedInstance] currentRegion] name],[[NSDate date] endOfDay]];
-        stackRequest.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"startDate" ascending:YES]];
-    }else{
-        // Reload the segment control since we have some events today and autoselect it.
-        if (self.eventSorter.numberOfSegments == 1){
-            [self.eventSorter removeAllSegments];
-            [self.eventSorter insertSegmentWithTitle:@"Today" atIndex:0 animated:NO];
-            [self.eventSorter insertSegmentWithTitle:@"Upcoming" atIndex:1 animated:NO];
-            [self.eventSorter setSelectedSegmentIndex:0];
-        }
-        
-        if (self.eventSorter.selectedSegmentIndex == 1){
+    
+    NSFetchRequest *datelessEventsRequest = [NSFetchRequest fetchRequestWithEntityName:@"Event"];
+    datelessEventsRequest.predicate = [NSPredicate predicateWithFormat:@"region.name = %@ AND startDate = nil AND endDate = nil",[[[PinballMapManager sharedInstance] currentRegion] name]];
+    datelessEventsRequest.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"startDate" ascending:NO]];
+    NSArray *datelessEvents = [[[CoreDataManager sharedInstance] managedObjectContext] executeFetchRequest:datelessEventsRequest error:nil];
+
+    int selectedSegmentIndex = self.eventSorter.selectedSegmentIndex;
+    
+    [self.eventSorter removeAllSegments];
+    
+    int indexCount = 0;
+    if (todayEvents.count > 0){
+        [self.eventSorter insertSegmentWithTitle:@"Today" atIndex:indexCount animated:NO];
+        indexCount++;
+    }
+    
+    [self.eventSorter insertSegmentWithTitle:@"Upcoming" atIndex:indexCount animated:NO];
+    indexCount++;
+    
+    if (datelessEvents.count > 0) {
+        [self.eventSorter insertSegmentWithTitle:@"Ongoing" atIndex:indexCount animated:NO];
+    }
+    
+    [self.eventSorter setSelectedSegmentIndex:selectedSegmentIndex];
+    
+    if (todayEvents.count > 0) {
+        if (self.eventSorter.selectedSegmentIndex == 0){
+            stackRequest.predicate = [NSPredicate predicateWithFormat:@"region.name = %@ AND (startDate >= %@ AND startDate <= %@)",[[[PinballMapManager sharedInstance] currentRegion] name],[[NSDate date] beginningOfDay],[[NSDate date] endOfDay]];
+        } else if (self.eventSorter.selectedSegmentIndex == 1){
             stackRequest.predicate = [NSPredicate predicateWithFormat:@"region.name = %@ AND startDate > %@",[[[PinballMapManager sharedInstance] currentRegion] name],[[NSDate date] endOfDay]];
-            stackRequest.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"startDate" ascending:YES]];
+        } else if (self.eventSorter.selectedSegmentIndex == 2) {
+            stackRequest.predicate = [NSPredicate predicateWithFormat:@"region.name = %@ AND startDate = nil AND endDate = nil",[[[PinballMapManager sharedInstance] currentRegion] name],[[NSDate date] endOfDay]];
+        }
+    } else {
+        if (self.eventSorter.selectedSegmentIndex == 0){
+            stackRequest.predicate = [NSPredicate predicateWithFormat:@"region.name = %@ AND startDate > %@",[[[PinballMapManager sharedInstance] currentRegion] name],[[NSDate date] endOfDay]];
+        } else if (self.eventSorter.selectedSegmentIndex == 1) {
+            stackRequest.predicate = [NSPredicate predicateWithFormat:@"region.name = %@ AND startDate = nil AND endDate = nil",[[[PinballMapManager sharedInstance] currentRegion] name],[[NSDate date] endOfDay]];
         }
     }
     
+    stackRequest.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"startDate" ascending:YES]];
     
     self.fetchedResults = [[NSFetchedResultsController alloc] initWithFetchRequest:stackRequest
                                                          managedObjectContext:self.managedContext
