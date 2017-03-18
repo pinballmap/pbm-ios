@@ -23,6 +23,7 @@
 #import "ReuseWebView.h"
 #import "UIAlertView+Application.h"
 #import "LocationTypesView.h"
+#import "OperatorsView.h"
 #import "MachineLocationProfileView.h"
 #import "UIDevice+Model.h"
 #import "Location+Annotation.h"
@@ -35,7 +36,7 @@ typedef enum : NSUInteger {
 
 int const headerHeight = 90;
 
-@interface LocationProfileView () <TextEditorDelegate,NSFetchedResultsControllerDelegate,UIAlertViewDelegate,LocationTypeSelectDelegate, NewMachineDelegate>
+@interface LocationProfileView () <TextEditorDelegate,NSFetchedResultsControllerDelegate,UIAlertViewDelegate,LocationTypeSelectDelegate, NewMachineDelegate, OperatorSelectDelegate>
 
 @property (nonatomic) NSFetchedResultsController *machinesFetch;
 @property (nonatomic) UIImage *mapSnapshot;
@@ -312,6 +313,17 @@ int const headerHeight = 90;
 }
 - (void)editorDidCancel{}
 
+#pragma mark - Operator Delegate
+- (void)selectedOperator:(Operator *)operator{
+    if (operator){
+        [[PinballMapManager sharedInstance] updateLocation:_currentLocation withData:@{@"operator": operator.operatorId} andCompletion:^(NSDictionary *status) {
+            _currentLocation.operator = operator;
+            [[CoreDataManager sharedInstance] saveContext];
+            [self.tableView reloadData];
+        }];
+    }
+}
+
 #pragma mark - Locaiton Type Delegate
 - (void)selectedLocationType:(LocationType *)type{
     if (type){
@@ -535,6 +547,13 @@ int const headerHeight = 90;
                     cell.dataLabel.text = _currentLocation.locationType.name;
                 }
             }else  if (indexPath.row == 4){
+                cell.infoLabel.text = @"Operator";
+                if (!_currentLocation.operator) {
+                    cell.dataLabel.text = @"Tap To edit";
+                } else {
+                    cell.dataLabel.text = _currentLocation.operator.name;
+                }
+            }else  if (indexPath.row == 5){
                 cell.infoLabel.text = @"Description";
                 cell.dataLabel.text = _currentLocation.locationDescription;
             }
@@ -626,6 +645,15 @@ int const headerHeight = 90;
                     [self.navigationController presentViewController:typesView.parentViewController animated:YES completion:nil];
                 }
             }else if (indexPath.row == 4){
+                // Operator
+                OperatorsView *operatorsView = (OperatorsView *)[[[UIStoryboard storyboardWithName:@"SecondaryControllers" bundle:nil] instantiateViewControllerWithIdentifier:@"OperatorsView"] navigationRootViewController];
+                operatorsView.delegate = self;
+                if ([UIDevice currentModel] == ModelTypeiPad){
+                    [self.parentViewController.navigationController presentViewController:operatorsView.parentViewController animated:YES completion:nil];
+                }else{
+                    [self.navigationController presentViewController:operatorsView.parentViewController animated:YES completion:nil];
+                }
+            }else if (indexPath.row == 5){
                 // Description
                 TextEditorView *editor = [[[[UIStoryboard storyboardWithName:@"SecondaryControllers" bundle:nil] instantiateViewControllerWithIdentifier:@"TextEditorView"] viewControllers] lastObject];
                 editor.delegate = self;

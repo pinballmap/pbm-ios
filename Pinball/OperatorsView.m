@@ -112,6 +112,7 @@
         [self dismissViewControllerAnimated:YES completion:nil];
     }
 }
+
 #pragma mark - NSFetchedResultsControllerDelegate
 - (void)controllerWillChangeContent:(NSFetchedResultsController *)controller{
     [self.tableView beginUpdates];
