@@ -418,6 +418,7 @@
                                     <segments>
                                         <segment title="Today"/>
                                         <segment title="Upcoming"/>
+                                        <segment title="Ongoing"/>
                                     </segments>
                                     <connections>
                                         <action selector="changeEventSort:" destination="bze-IX-j3X" eventType="valueChanged" id="YZ7-WT-GG2"/>
