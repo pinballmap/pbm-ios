@@ -11,7 +11,7 @@
 
 typedef NS_ENUM(NSUInteger, SelectionType) {
     SelectionTypeAll = 0,       // All Location Types
-    SelectionTypeRegion         // Only Location Types that have locations attached to him
+    SelectionTypeRegion         // Only Location Types that have locations attached
 };
 
 @protocol LocationTypeSelectDelegate;
