@@ -49,9 +49,9 @@
 		<true/>
 	</dict>
 	<key>NSCalendarsUsageDescription</key>
-	<string>Pinball Map is asking for "Always" access so that the app can support region events.</string>
+	<string>Pinball Map is asking for &quot;Always&quot; access so that the app can support region events.</string>
 	<key>NSLocationAlwaysUsageDescription</key>
-	<string>Pinball Map is asking for "Always" access so that the app can support the Apple Watch to find nearby locations.</string>
+	<string>Pinball Map is asking for &quot;Always&quot; access so that the app can support the Apple Watch to find nearby locations.</string>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>fetch</string>
@@ -72,6 +72,8 @@
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
 	</array>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>Pinball Map is asking for &quot;In Use&quot; access so that nearby location features work.</string>
 	<key>UISupportedInterfaceOrientations~ipad</key>
 	<array>
 		<string>UIInterfaceOrientationLandscapeRight</string>
