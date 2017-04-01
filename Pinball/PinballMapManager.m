@@ -124,6 +124,11 @@ typedef NS_ENUM(NSInteger, PBMDataAPI) {
     if ([self.locationManager respondsToSelector:@selector(requestAlwaysAuthorization)] && [CLLocationManager authorizationStatus] != kCLAuthorizationStatusAuthorizedAlways){
         [self.locationManager requestAlwaysAuthorization];
     }
+    
+    if ([self.locationManager respondsToSelector:@selector(requestWhenInUseAuthorization)] && [CLLocationManager authorizationStatus] != kCLAuthorizationStatusAuthorizedWhenInUse) {
+        [self.locationManager requestWhenInUseAuthorization];
+    }
+    
     self.locationManager.delegate = self;
     self.locationManager.desiredAccuracy = kCLLocationAccuracyBest;
     self.locationManager.distanceFilter = 5;
