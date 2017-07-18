@@ -548,7 +548,7 @@ int const headerHeight = 90;
                 }
             }else  if (indexPath.row == 4){
                 cell.infoLabel.text = @"Operator";
-                if (!_currentLocation.operator) {
+                if (!_currentLocation.operator || [_currentLocation.operator.name isEqualToString:@"Unclassified"]) {
                     cell.dataLabel.text = @"Tap To edit";
                 } else {
                     cell.dataLabel.text = _currentLocation.operator.name;
