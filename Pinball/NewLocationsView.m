@@ -8,7 +8,7 @@
 
 #import "NewLocationsView.h"
 @import CoreLocation;
-@import AddressBook; // Do this so we can easily pull out the address keys from the geocoder.
+@import AddressBook;
 #import "UIAlertView+Application.h"
 #import "MachinePickingView.h"
 
@@ -64,7 +64,7 @@
 
     __block NSString *pickedMachineNames = @"";
     [self.pickedMachines enumerateObjectsUsingBlock:^(Machine *obj, NSUInteger idx, BOOL *stop) {
-        pickedMachineNames = [pickedMachineNames stringByAppendingString:[NSString stringWithFormat:@"%@-%@,",obj.name,obj.manufacturer]];
+        pickedMachineNames = [pickedMachineNames stringByAppendingString:[NSString stringWithFormat:@"%@ (%@, %@),",obj.name,obj.manufacturer,obj.year]];
     }];
     
     if (self.locationName.text.length > 0 && self.pickedMachines.count > 0){
