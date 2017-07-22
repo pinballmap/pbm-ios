@@ -210,6 +210,8 @@
     NSString *condition = oldMachineCondition ? oldMachineCondition.comment : _currentMachine.condition;
     
     UILabel *conditionLabel = (UILabel *)[cell viewWithTag:100];
+    conditionLabel.numberOfLines = 0;
+    conditionLabel.lineBreakMode = NSLineBreakByWordWrapping;
     conditionLabel.text = condition;
     [conditionLabel sizeToFit];
     
