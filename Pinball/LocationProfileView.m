@@ -388,7 +388,7 @@ int const headerHeight = 90;
             }
             return rows;
         }else if (self.dataSetSeg.selectedSegmentIndex == 1){
-            return 5;
+            return 6;
         }
     }
     return 0;
@@ -460,6 +460,8 @@ int const headerHeight = 90;
             }else if (indexPath.row == 3){
                 detailText = _currentLocation.locationType.name;
             }else if (indexPath.row == 4){
+                detailText = _currentLocation.operator.name;
+            }else if (indexPath.row == 5){
                 detailText = _currentLocation.locationDescription;
             }
             
