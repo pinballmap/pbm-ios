@@ -61,13 +61,14 @@
 }
 #pragma mark - Class Actions
 - (IBAction)saveLocation:(id)sender{
-
     __block NSString *pickedMachineNames = @"";
     [self.pickedMachines enumerateObjectsUsingBlock:^(Machine *obj, NSUInteger idx, BOOL *stop) {
         pickedMachineNames = [pickedMachineNames stringByAppendingString:[NSString stringWithFormat:@"%@ (%@, %@),",obj.name,obj.manufacturer,obj.year]];
     }];
     
     if (self.locationName.text.length > 0 && self.pickedMachines.count > 0){
+        self.navigationItem.rightBarButtonItem.enabled = NO;
+        
         NSDictionary *suggestingInfo = @{@"region_id": [[[PinballMapManager sharedInstance] currentRegion] regionId],
                                          @"location_name": self.locationName.text,
                                          @"location_street": self.locationStreet.text,
