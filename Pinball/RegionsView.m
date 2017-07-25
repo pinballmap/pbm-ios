@@ -18,7 +18,10 @@
 @property (nonatomic) NSFetchedResultsController *fetchedResults;
 @property (nonatomic) NSMutableArray *searchResults;
 
+@property (weak, nonatomic) IBOutlet UISegmentedControl *segmentedControl;
+
 - (IBAction)requestRegion:(id)sender;
+- (IBAction)segmentedAction:(id)sender;
 
 @end
 
@@ -33,8 +36,9 @@
 }
 - (void)viewDidLoad{
     [super viewDidLoad];
+    
     self.navigationItem.title = @"Regions";
-
+    
     UIBarButtonItem *cancelButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancelSelection:)];
     self.navigationItem.leftBarButtonItem = cancelButton;
     
@@ -44,7 +48,6 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateForUserLocation) name:@"RefreshedRegions" object:nil];
     
     [self updateForUserLocation];
-    
 }
 - (void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
@@ -58,7 +61,30 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-- (void)updateForUserLocation{
+
+- (IBAction)segmentedAction:(id)sender {
+    if (self.segmentedControl.selectedSegmentIndex == 0) {
+        [self updateForUserLocation];
+    } else if(self.segmentedControl.selectedSegmentIndex == 1) {
+        [self updateForAlpha];
+    }
+}
+
+- (void)updateForAlpha {
+    NSFetchRequest *regionsFetch = [NSFetchRequest fetchRequestWithEntityName:@"Region"];
+    regionsFetch.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"fullName" ascending:YES]];
+    
+    self.fetchedResults = nil;
+    self.fetchedResults = [[NSFetchedResultsController alloc] initWithFetchRequest:regionsFetch
+                                                              managedObjectContext:[[CoreDataManager sharedInstance] managedObjectContext]
+                                                                sectionNameKeyPath:nil
+                                                                         cacheName:nil];
+    self.fetchedResults.delegate = self;
+    [self.fetchedResults performFetch:nil];
+    [self.tableView reloadData];
+}
+
+- (void)updateForUserLocation {
     NSFetchRequest *regionsFetch = [NSFetchRequest fetchRequestWithEntityName:@"Region"];
     
     if ([[PinballMapManager sharedInstance] userLocation]){
@@ -70,7 +96,7 @@
             [region updateDistance];
         }
         regionsFetch.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"locationDistance" ascending:YES]];
-    }else{
+    } else {
         regionsFetch.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"fullName" ascending:YES]];
     }
     self.fetchedResults = nil;
@@ -114,6 +140,11 @@
     [self.searchResults addObjectsFromArray:[context executeFetchRequest:request error:nil]];
     return YES;
 }
+
+- (void)searchDisplayControllerDidEndSearch:(UISearchDisplayController *)controller {
+    self.searchDisplayController.searchBar.frame = CGRectMake(0, 31, self.tableView.bounds.size.width, 44);
+}
+
 #pragma mark - MFMailComposeDelegate
 - (void)mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error{
     if (result == MFMailComposeResultFailed){
