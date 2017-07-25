@@ -11,7 +11,7 @@
 #import "AFNetworking.h"
 #import "NSDate+CupertinoYankee.h"
 
-static const NSString *apiRootURL = @"https://pinballmapstaging.herokuapp.com/";
+static const NSString *apiRootURL = @"https://pinballmap.com/";
 
 NSString * const motdKey = @"motd";
 NSString * const motdRegionKey = @"region_id";
