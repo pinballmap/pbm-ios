@@ -58,10 +58,12 @@
     
     [self refreshRegionData];
 }
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
 - (void)refreshRegionData{
     [[PinballMapManager sharedInstance] refreshBasicRegionData:^(NSDictionary *status) {
         if (status[@"errors"]){
