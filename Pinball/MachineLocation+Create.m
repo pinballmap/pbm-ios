@@ -15,12 +15,12 @@
     if (!context){
         context = [[CoreDataManager sharedInstance] managedObjectContext];
     }
-    MachineLocation *newMachine = [NSEntityDescription insertNewObjectForEntityForName:@"MachineLocation" inManagedObjectContext:context];
-    newMachine.machineLocationId = data[@"id"];
+    MachineLocation *newMachineLocation = [NSEntityDescription insertNewObjectForEntityForName:@"MachineLocation" inManagedObjectContext:context];
+    newMachineLocation.machineLocationId = data[@"id"];
     if (![data[@"condition"] isKindOfClass:[NSNull class]]){
-        newMachine.condition = data[@"condition"];
+        newMachineLocation.condition = data[@"condition"];
     }else{
-        newMachine.condition = @"N/A";
+        newMachineLocation.condition = @"N/A";
     }
     
     NSArray *conditions = [data[@"machine_conditions"] isKindOfClass:[NSNull class]] ? @[] : data[@"machine_conditions"];
@@ -29,8 +29,8 @@
         for (NSDictionary *condition in conditions) {
             MachineCondition *machineCondition = [MachineCondition createMachineConditionWithData:condition andContext:context];
             if (machineCondition != nil){
-                machineCondition.machineLocation = newMachine;
-                [newMachine addConditionsObject:machineCondition];
+                machineCondition.machineLocation = newMachineLocation;
+                [newMachineLocation addConditionsObject:machineCondition];
             }
             machineCondition = nil;
         }
@@ -39,16 +39,16 @@
     if (![data[@"condition_date"] isKindOfClass:[NSNull class]]){
         NSDateFormatter *df = [[NSDateFormatter alloc] init];
         [df setDateFormat:@"YYYY-MM-dd"];
-        newMachine.conditionUpdate = [df dateFromString:data[@"condition_date"]];
+        newMachineLocation.conditionUpdate = [df dateFromString:data[@"condition_date"]];
     }else{
-        newMachine.conditionUpdate = [NSDate date];
+        newMachineLocation.conditionUpdate = [NSDate date];
     }
     
     if (![data[@"last_updated_by_username"] isKindOfClass:[NSNull class]]) {
-        newMachine.updatedByUsername = data[@"last_updated_by_username"];
+        newMachineLocation.updatedByUsername = data[@"last_updated_by_username"];
     }
     
-    return newMachine;
+    return newMachineLocation;
 }
 
 @end

@@ -121,7 +121,7 @@ int const headerHeight = 90;
         self.lastUpdateLabel.text = @"Last Update: Unknown";
     }else{
         NSString *usernameData = @"";
-        if (![_currentLocation.lastUpdatedByUsername isKindOfClass:[NSNull class]]){
+        if (![_currentLocation.lastUpdatedByUsername isKindOfClass:[NSNull class]] && [_currentLocation.lastUpdatedByUsername length] > 0){
             usernameData = [NSString stringWithFormat:@" by %@", _currentLocation.lastUpdatedByUsername];
         }
         
