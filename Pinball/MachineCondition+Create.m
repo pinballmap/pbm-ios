@@ -34,7 +34,7 @@
     }
     
     if (![data[@"username"] isKindOfClass:[NSNull class]]) {
-        newCondition.createdByUsername = data[@"createdByUsername"];
+        newCondition.createdByUsername = data[@"username"];
     }
     
     newCondition.conditionId = data[@"id"];
