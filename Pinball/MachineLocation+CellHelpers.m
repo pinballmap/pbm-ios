@@ -23,7 +23,8 @@
 }
 
 - (NSString *)pastConditionWithUpdateDate:(MachineCondition *)pastCondition {
-    BOOL addBy = ([self.updatedByUsername isKindOfClass:[NSNull class]] || [self.updatedByUsername length] == 0) ? NO : YES;
+    BOOL addBy = ([self.updatedByUsername isKindOfClass:[NSNull class]] || [self.updatedByUsername length] == 0) ||
+        ([pastCondition.createdByUsername isKindOfClass:[NSNull class]] || [pastCondition.createdByUsername length] == 0) ? NO : YES;
 
     return [self formattedConditionDate:addBy conditionUpdate:pastCondition.conditionCreated];
 }
