@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface NewLocationsView : UITableViewController
+@interface NewLocationsView : UITableViewController<UIPickerViewDataSource, UIPickerViewDelegate>
 
 @end

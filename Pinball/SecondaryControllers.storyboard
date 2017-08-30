@@ -1357,17 +1357,51 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Operator" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="vs3-EE-5ia">
-                                                    <rect key="frame" x="20" y="0.0" width="280" height="43"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Operator" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9od-yQ-XOE">
+                                                    <rect key="frame" x="20" y="11" width="73" height="21"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <textInputTraits key="textInputTraits"/>
-                                                </textField>
+                                                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
+                                                    <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <pickerView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kBV-eE-dgI">
+                                                    <rect key="frame" x="89" y="-1" width="278" height="44"/>
+                                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                                    <connections>
+                                                        <outlet property="dataSource" destination="IXm-gW-Fu1" id="MDz-Vy-vgL"/>
+                                                        <outlet property="delegate" destination="IXm-gW-Fu1" id="P07-I9-zoa"/>
+                                                    </connections>
+                                                </pickerView>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="igu-yb-iq2">
+                                        <rect key="frame" x="0.0" y="231.5" width="375" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="igu-yb-iq2" id="mOW-M7-Yfn">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Type" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZTA-M8-koW">
+                                                    <rect key="frame" x="20" y="11" width="73" height="21"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
+                                                    <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <pickerView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="FxB-4t-x0E">
+                                                    <rect key="frame" x="89" y="-1" width="278" height="44"/>
+                                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                                    <connections>
+                                                        <outlet property="dataSource" destination="IXm-gW-Fu1" id="t0w-6G-R1P"/>
+                                                        <outlet property="delegate" destination="IXm-gW-Fu1" id="Kvh-hx-diE"/>
+                                                    </connections>
+                                                </pickerView>
                                             </subviews>
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" textLabel="QvP-kT-jsb" style="IBUITableViewCellStyleDefault" id="QPi-PO-8eo">
-                                        <rect key="frame" x="0.0" y="231.5" width="375" height="44"/>
+                                        <rect key="frame" x="0.0" y="275.5" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="QPi-PO-8eo" id="xPe-KC-tRO">
                                             <rect key="frame" x="0.0" y="0.0" width="342" height="43.5"/>
@@ -1388,7 +1422,7 @@
                             <tableViewSection headerTitle="Address" id="KS8-sb-i1x">
                                 <cells>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="5Ra-dN-euy" style="IBUITableViewCellStyleDefault" id="pgd-dp-o7W">
-                                        <rect key="frame" x="0.0" y="323.5" width="375" height="44"/>
+                                        <rect key="frame" x="0.0" y="367.5" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="pgd-dp-o7W" id="fWk-Ni-OXX">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
@@ -1405,7 +1439,7 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="xnN-Hk-pKY">
-                                        <rect key="frame" x="0.0" y="367.5" width="375" height="44"/>
+                                        <rect key="frame" x="0.0" y="411.5" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="xnN-Hk-pKY" id="jJd-TE-4ob">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
@@ -1421,7 +1455,7 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="iTb-2N-M9g">
-                                        <rect key="frame" x="0.0" y="411.5" width="375" height="44"/>
+                                        <rect key="frame" x="0.0" y="455.5" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="iTb-2N-M9g" id="MIB-Ha-HYr">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
@@ -1437,7 +1471,7 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="SKf-HK-bs5">
-                                        <rect key="frame" x="0.0" y="455.5" width="375" height="44"/>
+                                        <rect key="frame" x="0.0" y="499.5" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="SKf-HK-bs5" id="Gcl-fs-OGV">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
@@ -1453,7 +1487,7 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="1E6-dG-mFv">
-                                        <rect key="frame" x="0.0" y="499.5" width="375" height="44"/>
+                                        <rect key="frame" x="0.0" y="543.5" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="1E6-dG-mFv" id="Ki5-bQ-sbi">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
@@ -1491,10 +1525,11 @@
                     <connections>
                         <outlet property="locationCity" destination="6pB-r4-UBb" id="WmY-bl-xlK"/>
                         <outlet property="locationName" destination="I6V-Ha-aUy" id="hXf-Gz-fPT"/>
-                        <outlet property="locationOperator" destination="vs3-EE-5ia" id="aih-Dq-Bkc"/>
+                        <outlet property="locationOperator" destination="kBV-eE-dgI" id="kj2-gB-8oG"/>
                         <outlet property="locationPhone" destination="7ww-AD-5NZ" id="3Um-iG-C7l"/>
                         <outlet property="locationState" destination="bBj-fd-vzr" id="9rV-Ba-LMG"/>
                         <outlet property="locationStreet" destination="afJ-gh-m4h" id="pqT-Uv-yHo"/>
+                        <outlet property="locationType" destination="FxB-4t-x0E" id="wUU-UE-ZS2"/>
                         <outlet property="locationWebsite" destination="VNa-Kw-T6p" id="mXW-w4-i6W"/>
                         <outlet property="locationZip" destination="Fvm-ZT-9go" id="Fj5-3f-wLK"/>
                         <outlet property="machineLabel" destination="QvP-kT-jsb" id="LZp-wx-LN8"/>
@@ -1502,7 +1537,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tBF-2k-eNe" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1695" y="-1322"/>
+            <point key="canvasLocation" x="1693.5999999999999" y="-1322.7886056971515"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Fe2-tQ-5x5">
