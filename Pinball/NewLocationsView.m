@@ -17,12 +17,19 @@
 @property (weak) IBOutlet UITextField *locationName;
 @property (weak) IBOutlet UITextField *locationPhone;
 @property (weak) IBOutlet UITextField *locationWebsite;
-@property (weak) IBOutlet UITextField *locationOperator;
+@property (weak, nonatomic) IBOutlet UIPickerView *locationOperator;
+@property (weak, nonatomic) IBOutlet UIPickerView *locationType;
 @property (weak) IBOutlet UITextField *locationStreet;
 @property (weak) IBOutlet UITextField *locationCity;
 @property (weak) IBOutlet UITextField *locationState;
 @property (weak) IBOutlet UITextField *locationZip;
 @property (weak) IBOutlet UILabel *machineLabel;
+
+@property (nonatomic) NSMutableArray *operatorDataSourceArray;
+@property (nonatomic) NSMutableArray *typeDataSourceArray;
+
+@property (nonatomic) NSMutableDictionary *operators;
+@property (nonatomic) NSMutableDictionary *types;
 
 @property (nonatomic) CLLocationManager *locationManager;
 @property (nonatomic) CLGeocoder *geocoder;
@@ -37,14 +44,64 @@
 
 - (id)initWithStyle:(UITableViewStyle)style{
     self = [super initWithStyle:style];
-    if (self) {
-        // Custom initialization
-    }
+    if (self) {}
     return self;
 }
 - (void)viewDidLoad{
     [super viewDidLoad];
     self.navigationItem.prompt = [[[PinballMapManager sharedInstance] currentRegion] fullName];
+    self.operators = [NSMutableDictionary dictionary];
+    self.types = [NSMutableDictionary dictionary];
+    
+    [self.operators setObject:@"" forKey:@"--Select--"];
+    [self.types setObject:@"" forKey:@"--Select--"];
+
+    NSFetchRequest *fetchRequest = [NSFetchRequest fetchRequestWithEntityName:@"Operator"];
+    [fetchRequest setPredicate:[NSPredicate predicateWithFormat:@"regionId == %@",[[[PinballMapManager sharedInstance] currentRegion] regionId]]];
+    
+    NSManagedObjectContext *context = [[CoreDataManager sharedInstance] managedObjectContext];
+    NSError *error = nil;
+    NSArray *fetchResults = [context executeFetchRequest:fetchRequest error:&error];
+    NSMutableArray *operatorNames = [NSMutableArray arrayWithCapacity:[fetchResults count]];
+    
+    if (!fetchResults) {
+        NSLog(@"Error fetching operator objects: %@\n%@", [error localizedDescription], [error userInfo]);
+    } else {
+        [fetchResults enumerateObjectsUsingBlock:^(id x, NSUInteger index, BOOL *stop) {
+            Operator *operator = fetchResults[index];
+            
+            [operatorNames addObject:operator.name];
+            [self.operators setObject:operator.operatorId forKey:operator.name];
+        }];
+    }
+    
+    [operatorNames sortUsingSelector:@selector(localizedCaseInsensitiveCompare:)];
+    [operatorNames insertObject:@"--Select--" atIndex:0];
+    
+    _operatorDataSourceArray = operatorNames;
+    
+    fetchRequest = [NSFetchRequest fetchRequestWithEntityName:@"LocationType"];
+    fetchResults = [context executeFetchRequest:fetchRequest error:&error];
+    NSMutableArray *typeNames = [NSMutableArray arrayWithCapacity:[fetchResults count]];
+    
+    if (!fetchResults) {
+        NSLog(@"Error fetching location type objects: %@\n%@", [error localizedDescription], [error userInfo]);
+    } else {
+        [fetchResults enumerateObjectsUsingBlock:^(id x, NSUInteger index, BOOL *stop) {
+            LocationType *type = fetchResults[index];
+            
+            [typeNames addObject:type.name];
+            [self.types setObject:type.locationTypeId forKey:type.name];
+        }];
+    }
+    
+    [typeNames sortUsingSelector:@selector(localizedCaseInsensitiveCompare:)];
+    [typeNames insertObject:@"--Select--" atIndex:0];
+    
+    _typeDataSourceArray = typeNames;
+    
+    [self.locationOperator reloadAllComponents];
+    [self.locationType reloadAllComponents];
 }
 - (void)didReceiveMemoryWarning{
     [super didReceiveMemoryWarning];
@@ -77,7 +134,8 @@
                                          @"location_zip": self.locationZip.text,
                                          @"location_phone": self.locationPhone.text,
                                          @"location_website": self.locationWebsite.text,
-                                         @"location_operator": self.locationOperator.text,
+                                         @"location_operator": [self.operators objectForKey:_operatorDataSourceArray[[self.locationOperator selectedRowInComponent:0]]],
+                                         @"location_type": [self.types objectForKey:_typeDataSourceArray[[self.locationType selectedRowInComponent:0]]],
                                          @"location_machines": pickedMachineNames};
         [[PinballMapManager sharedInstance] suggestLocation:suggestingInfo andCompletion:^(NSDictionary *status) {
             if (status[@"errors"]){
@@ -104,7 +162,7 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     if (indexPath.section == 0){
-        if (indexPath.row == 4){
+        if (indexPath.row == 5){
             MachinePickingView *pickingView = [[(UINavigationController *)[[UIStoryboard storyboardWithName:@"SecondaryControllers" bundle:nil] instantiateViewControllerWithIdentifier:@"MachinePickingView"] viewControllers] lastObject];
             pickingView.delegate = self;
             pickingView.canPickMultiple = YES;
@@ -161,4 +219,39 @@
         }
     }];
 }
+
+#pragma mark operator picker
+- (NSInteger)numberOfComponentsInPickerView: (UIPickerView *)pickerView {
+    return 1;
+}
+
+- (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component {
+    if (pickerView == self.locationOperator) {
+        return _operatorDataSourceArray.count;
+    } else {
+        return _typeDataSourceArray.count;
+    }
+}
+
+- (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component {
+    if (pickerView == self.locationOperator) {
+        return _operatorDataSourceArray[row];
+    } else {
+        return _typeDataSourceArray[row];
+    }
+}
+
+- (UIView *)pickerView:(UIPickerView *)pickerView viewForRow:(NSInteger)row forComponent:(NSInteger)component reusingView:(UIView *)view{
+    UILabel *label = [[UILabel alloc] init];
+    label.font = [label.font fontWithSize:14];
+    
+    if (pickerView == self.locationOperator) {
+        [label setText:[_operatorDataSourceArray objectAtIndex:row]];
+    } else {
+        [label setText:[_typeDataSourceArray objectAtIndex:row]];
+    }
+    
+    return label;
+}
+
 @end
