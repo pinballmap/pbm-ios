@@ -49,7 +49,6 @@ typedef NS_ENUM(NSUInteger, LayoutType) {
 - (void)viewDidLoad{
     [super viewDidLoad];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateRegion) name:@"RegionUpdate" object:nil];
-    // Do any additional setup after loading the view.
     if ([[PinballMapManager sharedInstance] currentRegion]){
         self.currentRegion = [[PinballMapManager sharedInstance] currentRegion];
         CLLocationCoordinate2D regionCoord = CLLocationCoordinate2DMake(self.currentRegion.latitude.doubleValue, self.currentRegion.longitude.doubleValue);
@@ -136,7 +135,7 @@ typedef NS_ENUM(NSUInteger, LayoutType) {
             [_mapView addAnnotation:locationPin];
         }];
         
-        _listingLeft.constant = -322;
+        _listingLeft.constant = -350;
         
         [UIView animateWithDuration:.3 animations:^{
             [self.view layoutIfNeeded];
@@ -186,7 +185,7 @@ typedef NS_ENUM(NSUInteger, LayoutType) {
     _currentLocation = nil;
     self.profileViewController.currentLocation = nil;
 
-    _profileLeft.constant = -320;
+    _profileLeft.constant = -350;
     _listingLeft.constant = 0;
 
     [UIView animateWithDuration:0.5 animations:^{
