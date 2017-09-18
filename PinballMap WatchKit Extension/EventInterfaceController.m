@@ -24,12 +24,12 @@
 
 - (void)awakeWithContext:(id)context {
     [super awakeWithContext:context];
-    
-    // Configure interface objects here.
-    Event *event = (Event *)context;
-    [self.eventTitle setAttributedText:event.eventTitle];
-    [self.eventDate setText:[event.startDate monthDayYearPretty:true]];
-    [self.eventDesc setText:event.eventDescription];
+
+    NSDictionary *eventInfo = context;
+
+    [self.eventTitle setText:eventInfo[@"name"]];
+    [self.eventDate setText:eventInfo[@"start_date"]];
+    [self.eventDesc setText:eventInfo[@"long_desc"]];
 }
 
 - (void)willActivate {

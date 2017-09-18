@@ -75,7 +75,6 @@
     NSDictionary *recentMachine = self.machines[rowIndex];
     
     [self pushControllerWithName:@"MachineController" context:recentMachine[@"location_machine_xref"]];
-    
 }
 
 @end

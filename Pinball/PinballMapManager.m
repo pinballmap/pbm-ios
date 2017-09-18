@@ -487,6 +487,17 @@ typedef NS_ENUM(NSInteger, PBMDataAPI) {
         completionBlock(@{@"errors": error.localizedDescription});
     }];
 }
+- (void)recentEventsWithCompletion:(APIComplete)completionBlock {
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    manager.requestSerializer = [AFJSONRequestSerializer serializer];
+    NSDictionary *parameters = @{};
+
+    [manager GET:[PinballMapManager apiQueryWithLoginCredentials:[PinballMapManager apiQueryWithLoginCredentials:[NSString stringWithFormat:@"%@api/v1/region/%@/events.json",apiRootURL,self.currentRegion.name]]] parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        completionBlock(responseObject);
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        completionBlock(@{@"errors": error.localizedDescription});
+    }];
+}
 - (void)nearestLocationWithLocation:(CLLocation *)location andCompletion:(APIComplete)completionBlock{
     CLLocation *userLocation;
     if (location == nil){
