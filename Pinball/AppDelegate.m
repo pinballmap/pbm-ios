@@ -12,6 +12,8 @@
 #import "PinballTabController.h"
 #import "UserLocationHelper.h"
 #import "User.h"
+#import "NSDate+DateFormatting.h"
+#import "NSDate+CupertinoYankee.h"
 
 @import MapKit;
 
@@ -59,8 +61,12 @@
         reply(responseDic);
         [application endBackgroundTask:backgroundTaskID];
     }];
+    
+    __block UIBackgroundTaskIdentifier watchKitHandler;
+    watchKitHandler = [[UIApplication sharedApplication] beginBackgroundTaskWithName:@"backgroundTask" expirationHandler:^{ watchKitHandler = UIBackgroundTaskInvalid;
+    }];
+
     NSString *action = userInfo[@"action"];
-    // Actions for Watch app
     if ([action isEqualToString:@"recent_machines"]){
         [[PinballMapManager sharedInstance] recentlyAddedMachinesWithCompletion:^(NSDictionary *status) {
             dispatch_async(dispatch_get_main_queue(), ^{
@@ -95,7 +101,39 @@
                 }
             });
         }];
-    }else if ([action isEqualToString:@"nearby_location"]){
+    } else if ([action isEqualToString:@"events"]) {
+        [[PinballMapManager sharedInstance] recentEventsWithCompletion:^(NSDictionary *status) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                if (status[@"errors"]){
+                    NSString *errors;
+                    if ([status[@"errors"] isKindOfClass:[NSArray class]]){
+                        errors = [status[@"errors"] componentsJoinedByString:@","];
+                    }else{
+                        errors = status[@"errors"];
+                    }
+                    NSDictionary *responseDic = @{@"status":@"fail",@"body":errors};
+                    reply(responseDic);
+                    [application endBackgroundTask:backgroundTaskID];
+                } else {
+                    NSArray *recentEvents = status[@"events"];
+                    NSMutableArray *recentEventsObj = [NSMutableArray new];
+                    [recentEvents enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+                        NSDictionary *event = @{
+                          @"event_date":obj[@"start_date"],
+                          @"event_title":obj[@"name"],
+                          @"event":obj
+                        };
+                        [recentEventsObj addObject:event];
+                    }];
+                    
+                    NSArray *foundEvents = [recentEventsObj sortedArrayUsingDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"event_date" ascending:NO]]];
+                    NSDictionary *responseDic = @{@"status":@"ok",@"body":foundEvents};
+                    reply(responseDic);
+                    [application endBackgroundTask:backgroundTaskID];
+                }
+            });
+        }];
+    } else if ([action isEqualToString:@"nearby_location"]){
         self.locationHelper = [[UserLocationHelper alloc] init];
         [self.locationHelper getUserLocationWithCompletion:^(CLLocation *location) {
             dispatch_async(dispatch_get_main_queue(), ^{
@@ -123,6 +161,10 @@
             });
         }];
     }
+    
+    dispatch_after( dispatch_time( DISPATCH_TIME_NOW, (int64_t)NSEC_PER_SEC * 1 ), dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0 ), ^{
+        [[UIApplication sharedApplication] endBackgroundTask:watchKitHandler];
+    } );
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application

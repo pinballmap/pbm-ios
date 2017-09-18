@@ -42,6 +42,7 @@ typedef void (^APICompleteWithStatusCode)(NSDictionary *response,NSUInteger stat
 - (BOOL)shouldShowMessageOfDay;
 - (void)showedMessageOfDay;
 - (void)recentlyAddedMachinesWithCompletion:(APIComplete)completionBlock;
+- (void)recentEventsWithCompletion:(APIComplete)completionBlock;
 // Machine Routes
 - (void)createNewMachine:(NSDictionary *)machineData withCompletion:(APIComplete)completionBlock;
 - (void)createNewMachineWithData:(NSDictionary *)machineData andParentMachine:(Machine *)machine forLocation:(Location *)location withCompletion:(APICompleteWithStatusCode)completionBlock;
